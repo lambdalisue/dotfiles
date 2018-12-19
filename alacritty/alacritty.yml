@@ -574,8 +574,9 @@ key_bindings:
   - { key: Backslash, mods: Alt,       chars: "\x1b\\"                      } # Alt + \
   - { key: Backslash, mods: Alt|Shift, chars: "\x1b|"                       } # Alt + |
   # Support macOS Yen (JIS)
-  - { key: Yen,                        chars: "\\"                          } # \
-  - { key: Yen,      mods: Control,    chars: "\x1c"                        } # Ctrl-\
+  - { key: Yen,                        chars: "\\"                          }
+  - { key: Yen,      mods: Shift,      chars: "|"                           }
+  - { key: Yen,      mods: Control,    chars: "\x1c"                        }
   # Until https://github.com/tomaka/winit/pull/739
   - { key: F20,                        chars: "\\"                          }
   - { key: F20,      mods: Shift,      chars: "|"                           }
