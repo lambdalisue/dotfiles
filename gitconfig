@@ -1,0 +1,43 @@
+[include]
+	path = ~/.gitconfig.local
+
+[user]
+	name  = lambdalisue
+	email = lambdalisue@hashnote.net
+	signingkey = B90A2400
+
+[core]
+        ignorecase = false
+	excludesfile = ~/.gitignore
+	quotepath = false
+
+[color]
+	ui = auto
+
+[push]
+	default = current
+
+[branch]
+	autosetupmerge = always
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[github]
+	user = lambdalisue
+
+[url "git@bitbucket.org:kompira"]
+        insteadOf = https://bitbucket.org/kompira
+
+[url "git@github.com:fixpoint"]
+        insteadOf = https://github.com/fixpoint
+
+[ghq]
+	root = ~/.ghq
+	root = ~/.go/src
+
+[commit]
+	gpgsign = true

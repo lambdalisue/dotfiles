@@ -1,0 +1,11 @@
+{
+  "alacritty": "~/.config/alacritty",
+  "jupyter": "~/.jupyter",
+  "lemonade.toml": "~/.config/lemonade.toml",
+  "vim": "~/.vim",
+  "nvim": "~/.config/nvim",
+  "powershell": "~/.config/powershell",
+  "themisrc": "~/.themisrc",
+  "gitconfig": "~/.gitconfig",
+  "gitignore": "~/.gitignore"
+}

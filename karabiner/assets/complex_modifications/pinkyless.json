@@ -1,0 +1,42 @@
+{
+  "title": "Pinkyless Mapping",
+  "rules": [
+    {
+      "description": "Pinkyless for Apple JIS",
+      "manipulators": [
+        {
+          "description": "Replace Space -> Ctrl/Space",
+          "conditions": [
+            {
+              "identifiers": [
+                {
+                  "product_id": 568,
+                  "vendor_id": 1452
+                },
+                {
+                  "product_id": 632,
+                  "vendor_id": 1452
+                }
+              ],
+              "type": "device_if"
+            }
+          ],
+          "from": {
+            "key_code": "spacebar"
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "spacebar"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

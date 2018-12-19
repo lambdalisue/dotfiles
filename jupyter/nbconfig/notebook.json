@@ -1,0 +1,29 @@
+{
+  "nbext_hide_incompat": true,
+  "load_extensions": {
+    "vim_binding/vim_binding.js": true,
+    "usability/comment-uncomment/main": true,
+    "usability/toggle_all_line_numbers/main": true,
+    "usability/execute_time/ExecuteTime": true,
+    "usability/toc2/main": true,
+    "usability/dragdrop/main": true,
+    "usability/skip-traceback/main": true,
+    "usability/python-markdown/main": true,
+    "usability/keyboard_shortcut_editor/main": true,
+    "config/config_menu/main": true,
+    "styling/zenmode/main": true,
+    "usability/ruler/main": true,
+    "vim_binding/vim_binding": true,
+    "usability/collapsible_headings/main": true,
+    "usability/notify/notify": true,
+    "usability/autoscroll/main": true,
+    "usability/hide_input_all/main": true,
+    "vim_binding": true,
+    "usability/codefolding/main": true,
+    "usability/runtools/main": true,
+    "nbextensions_configurator/config_menu/main": true
+  },
+  "collapsible_headings_add_button": false,
+  "autoscroll_set_on_load": true,
+  "zenmode_backgrounds": []
+}

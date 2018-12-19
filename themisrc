@@ -1,0 +1,8 @@
+if getcwd() !~# '\<vital\.vim\>'
+  call themis#option('runtimepath', expand('~/.cache/dein/repos/github.com/Shougo/vimproc.vim'))
+  if isdirectory(expand('~/.ghq/github.com/vim-jp/vital.vim/'))
+    call themis#option('runtimepath', expand('~/.ghq/github.com/vim-jp/vital.vim'))
+  else
+    call themis#option('runtimepath', expand('~/.cache/dein/repos/github.com/vim-jp/vital.vim'))
+  endif
+endif

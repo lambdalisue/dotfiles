@@ -1,0 +1,23 @@
+" vim -u ~/.vim/vimrc.min
+if has('vim_starting')
+  set nocompatible
+  " execute 'set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim'
+  execute 'set runtimepath^=~/Code/github.com/lambdalisue/gina.vim'
+endif
+
+set laststatus=2        " always shows statusline
+set statusline=%{gina#component#repo#preset()}
+
+" if dein#load_state('~/.cache/dein')
+"   call dein#begin('~/.cache/dein')
+"   call dein#add('Shougo/denite.nvim')
+"   call dein#end()
+"   call dein#save_state()
+" endif
+
+filetype plugin indent on
+syntax on
+
+" Personal preference
+nnoremap ; :
+nnoremap : ;

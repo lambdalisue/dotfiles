@@ -1,0 +1,34 @@
+{
+  "title": "Alacritty.app",
+  "rules": [
+    {
+      "description": "Replace Yen (international3) -> F20 in Alacritty",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^io\\.alacritty$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "international3",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f20"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

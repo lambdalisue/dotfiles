@@ -1,0 +1,54 @@
+*vim-XXXXX.txt*					DESCRIPTION
+
+Version: 0.1.0
+Author:  Alisue <lambdalisue@hashnote.net>
+Support: Vim 7.4 and above
+License: MIT license
+
+=============================================================================
+CONTENTS					*vim-XXXXX-contents*
+
+Introduction			|vim-XXXXX-introduction|
+Install				|vim-XXXXX-install|
+Usage				|vim-XXXXX-usage|
+Interface			|vim-XXXXX-interface|
+  Commands			|vim-XXXXX-commands|
+  Functions			|vim-XXXXX-functions|
+  Variables			|vim-XXXXX-variables|
+  Mappings			|vim-XXXXX-mappings|
+
+
+=============================================================================
+INTRODUCTION					*vim-XXXXX-introduction*
+
+<+CURSOR+>
+
+=============================================================================
+INSTALL						*vim-XXXXX-install*
+
+
+=============================================================================
+USAGE						*vim-XXXXX-usage*
+
+
+=============================================================================
+INTERFACE					*vim-XXXXX-interface*
+
+-----------------------------------------------------------------------------
+COMMANDS					*vim-XXXXX-commands*
+
+
+-----------------------------------------------------------------------------
+FUNCTIONS					*vim-XXXXX-functions*
+
+
+-----------------------------------------------------------------------------
+VARIABLES					*vim-XXXXX-variables*
+
+
+-----------------------------------------------------------------------------
+MAPPINGS					*vim-XXXXX-mappings*
+
+
+=============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl

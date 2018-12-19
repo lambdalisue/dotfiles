@@ -1,0 +1,6 @@
+{
+  "tmux": "~/.config/tmux",
+  "zsh": "~/.config/zsh",
+  "bashrc": "~/.bashrc",
+  "zshenv": "~/.zshenv"
+}
