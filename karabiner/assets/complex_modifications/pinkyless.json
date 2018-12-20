@@ -16,6 +16,10 @@
                 {
                   "product_id": 632,
                   "vendor_id": 1452
+                },
+                {
+                  "product_id": 515,
+                  "vendor_id": 1278
                 }
               ],
               "type": "device_if"

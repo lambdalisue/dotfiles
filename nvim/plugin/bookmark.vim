@@ -21,10 +21,9 @@ endfunction
 
 function! s:filter_bookmarks() abort
   let context = lista#context#new()
-  let accepted = lista#filter#start(context)
-  if accepted && context.cursor <= len(context.indices)
-    let index = context.indices[context.cursor - 1]
-    call cursor(index + 1, col('.'), 0)
+  let result = lista#start(context)
+  if result.index isnot# -1
+    call cursor(result.index + 1, col('.'), 0)
     normal! gf
   endif
 endfunction
