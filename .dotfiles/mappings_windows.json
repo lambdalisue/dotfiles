@@ -1,3 +1,5 @@
 {
+  "vim": "~/vimfiles",
+  "nvim": "~/AppData/Local/nvim",
   "hyper": "~/.hyper.js"
 }

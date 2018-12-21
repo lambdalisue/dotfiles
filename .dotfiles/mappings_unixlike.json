@@ -1,6 +1,8 @@
 {
   "tmux": "~/.config/tmux",
   "tmux.conf": "~/.tmux.conf",
+  "vim": "~/.vim",
+  "nvim": "~/.config/nvim",
   "zsh": "~/.config/zsh",
   "bashrc": "~/.bashrc",
   "zshenv": "~/.zshenv"
