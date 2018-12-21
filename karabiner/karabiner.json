@@ -10,7 +10,7 @@
                 "parameters": {
                     "basic.simultaneous_threshold_milliseconds": 50,
                     "basic.to_delayed_action_delay_milliseconds": 500,
-                    "basic.to_if_alone_timeout_milliseconds": 500,
+                    "basic.to_if_alone_timeout_milliseconds": 1000,
                     "basic.to_if_held_down_threshold_milliseconds": 500
                 },
                 "rules": [
@@ -51,57 +51,6 @@
                         ]
                     },
                     {
-                        "description": "Replace Eisuu/Kana (lang2/lang1) -> Ctrl+Shift+A/Z in VirtualBoxVM",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "lang2"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "a",
-                                        "modifiers": [
-                                            "left_shift",
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^org\\.virtualbox\\.app\\.VirtualBoxVM$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "lang1"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "z",
-                                        "modifiers": [
-                                            "left_shift",
-                                            "left_control"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Replace Yen (international3) -> F20 in Alacritty",
                         "manipulators": [
                             {
@@ -131,31 +80,54 @@
                         ]
                     },
                     {
-                        "description": "Pinkyless for Apple JIS",
+                        "description": "Enable SandS (Space and Shift)",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
                                         "identifiers": [
                                             {
-                                                "product_id": 568,
-                                                "vendor_id": 1452
-                                            },
-                                            {
-                                                "product_id": 632,
-                                                "vendor_id": 1452
-                                            },
-                                            {
-                                                "product_id": 515,
-                                                "vendor_id": 1278
+                                                "product_id": 4871,
+                                                "vendor_id": 65261
                                             }
                                         ],
-                                        "type": "device_if"
+                                        "type": "device_unless"
                                     }
                                 ],
-                                "description": "Replace Space -> Ctrl/Space",
                                 "from": {
                                     "key_code": "spacebar"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "spacebar"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Enable RandC (Return and Ctrl)",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 4871,
+                                                "vendor_id": 65261
+                                            }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "return_or_enter"
                                 },
                                 "to": [
                                     {
@@ -164,7 +136,95 @@
                                 ],
                                 "to_if_alone": [
                                     {
-                                        "key_code": "spacebar"
+                                        "key_code": "return_or_enter"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Enable 2andS (Lang2 and Shift)",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 4871,
+                                                "vendor_id": 65261
+                                            }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "lang2"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "lang2"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Enable 1andC (Lang1 and Ctrl)",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 4871,
+                                                "vendor_id": 65261
+                                            }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "lang1"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "lang1"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Replace Capslock -> Ctrl + Alt",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control",
+                                        "modifiers": [
+                                            "option"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -272,6 +332,19 @@
                     "ignore": false,
                     "manipulate_caps_lock_led": false,
                     "simple_modifications": []
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 50475,
+                        "vendor_id": 1133
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": []
                 }
             ],
             "fn_function_keys": [
@@ -372,30 +445,13 @@
                     }
                 }
             ],
-            "name": "Pinkyless (Apple JIS)",
+            "name": "Alisue",
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": {
-                        "key_code": "japanese_pc_nfer"
-                    },
-                    "to": {
-                        "key_code": "japanese_eisuu"
-                    }
-                },
-                {
-                    "from": {
-                        "key_code": "japanese_pc_xfer"
-                    },
-                    "to": {
-                        "key_code": "japanese_kana"
-                    }
-                }
-            ],
+            "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
                 "country_code": 0,
-                "keyboard_type": "ansi"
+                "keyboard_type": "jis"
             }
         }
     ]

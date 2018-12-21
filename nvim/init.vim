@@ -501,6 +501,10 @@ noremap <LocalLeader> <Nop>
 let g:mapleader = "\<Space>"
 let g:maplocalleader = '\'
 
+" JIS keyboard
+nmap <C-@> <Esc>
+nmap <C-6> <C-^>
+
 " Disable dengerous/annoying mappings
 " ZZ - save and close Vim
 " ZQ - close Vim
@@ -533,11 +537,6 @@ cnoremap <Down> <C-n>
 " Fix unreasonable mappings by historical reason
 nnoremap vv 0v$
 nnoremap Y y$
-
-" Use <Spacw>w as <C-w>
-nnoremap <Space>w <C-w>
-nnoremap <Space>wt :<C-u>tabnew<CR>
-nnoremap <Space>wq :<C-u>tabclose<CR>
 
 " Tab navigation
 nnoremap <silent> <C-w>t :<C-u>tabnew<CR>

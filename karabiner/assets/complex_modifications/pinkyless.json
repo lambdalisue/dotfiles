@@ -1,32 +1,55 @@
 {
-  "title": "Pinkyless Mapping",
+  "title": "Pinkyless",
   "rules": [
     {
-      "description": "Pinkyless for Apple JIS",
+      "description": "Enable SandS (Space and Shift)",
       "manipulators": [
         {
-          "description": "Replace Space -> Ctrl/Space",
           "conditions": [
             {
               "identifiers": [
                 {
-                  "product_id": 568,
-                  "vendor_id": 1452
-                },
-                {
-                  "product_id": 632,
-                  "vendor_id": 1452
-                },
-                {
-                  "product_id": 515,
-                  "vendor_id": 1278
+                  "product_id": 4871,
+                  "vendor_id": 65261
                 }
               ],
-              "type": "device_if"
+              "type": "device_unless"
             }
           ],
           "from": {
             "key_code": "spacebar"
+          },
+          "to": [
+            {
+              "key_code": "left_shift"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "spacebar"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Enable RandC (Return and Ctrl)",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "identifiers": [
+                {
+                  "product_id": 4871,
+                  "vendor_id": 65261
+                }
+              ],
+              "type": "device_unless"
+            }
+          ],
+          "from": {
+            "key_code": "return_or_enter"
           },
           "to": [
             {
@@ -35,7 +58,71 @@
           ],
           "to_if_alone": [
             {
-              "key_code": "spacebar"
+              "key_code": "return_or_enter"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Enable 2andS (Lang2 and Shift)",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "identifiers": [
+                {
+                  "product_id": 4871,
+                  "vendor_id": 65261
+                }
+              ],
+              "type": "device_unless"
+            }
+          ],
+          "from": {
+            "key_code": "lang2"
+          },
+          "to": [
+            {
+              "key_code": "left_shift"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "lang2"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Enable 1andC (Lang1 and Ctrl)",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "identifiers": [
+                {
+                  "product_id": 4871,
+                  "vendor_id": 65261
+                }
+              ],
+              "type": "device_unless"
+            }
+          ],
+          "from": {
+            "key_code": "lang1"
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "lang1"
             }
           ],
           "type": "basic"
