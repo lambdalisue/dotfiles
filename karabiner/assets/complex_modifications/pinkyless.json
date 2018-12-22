@@ -2,7 +2,7 @@
   "title": "Pinkyless",
   "rules": [
     {
-      "description": "Enable SandS (Space and Shift)",
+      "description": "Enable SandC (Space and Ctrl)",
       "manipulators": [
         {
           "conditions": [
@@ -21,7 +21,7 @@
           },
           "to": [
             {
-              "key_code": "left_shift"
+              "key_code": "left_control"
             }
           ],
           "to_if_alone": [
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "description": "Enable RandC (Return and Ctrl)",
+      "description": "Enable RandS (Return and Shift)",
       "manipulators": [
         {
           "conditions": [
@@ -53,7 +53,7 @@
           },
           "to": [
             {
-              "key_code": "left_control"
+              "key_code": "left_shift"
             }
           ],
           "to_if_alone": [
@@ -66,7 +66,7 @@
       ]
     },
     {
-      "description": "Enable 2andS (Lang2 and Shift)",
+      "description": "Enable 2andC (Lang2 and Ctrl)",
       "manipulators": [
         {
           "conditions": [
@@ -85,7 +85,7 @@
           },
           "to": [
             {
-              "key_code": "left_shift"
+              "key_code": "left_control"
             }
           ],
           "to_if_alone": [
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "description": "Enable 1andC (Lang1 and Ctrl)",
+      "description": "Enable 1andS (Lang1 and Shift)",
       "manipulators": [
         {
           "conditions": [
@@ -117,7 +117,7 @@
           },
           "to": [
             {
-              "key_code": "left_control"
+              "key_code": "left_shift"
             }
           ],
           "to_if_alone": [
