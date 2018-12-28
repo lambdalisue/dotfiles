@@ -1,5 +1,6 @@
 {
   "vim": "~/vimfiles",
   "nvim": "~/AppData/Local/nvim",
-  "hyper": "~/.hyper.js"
+  "hyper": "~/.hyper.js",
+  "powershell": "~/Documents/WindowsPowerShell"
 }
