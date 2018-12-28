@@ -682,7 +682,7 @@ function! s:transparent() abort
   highlight GitGutterDelete ctermbg=NONE guibg=NONE
 endfunction
 autocmd MyAutoCmd VimEnter *
-      \ if !exists('g:GuiLoaded') |
+      \ if !exists('g:GuiLoaded') && !has("gui") |
       \   call s:transparent() |
       \ endif
 

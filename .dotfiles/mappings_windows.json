@@ -1,6 +1,7 @@
 {
-  "vim": "~/vimfiles",
-  "nvim": "~/AppData/Local/nvim",
+  "nvim": "~/vimfiles",
+  "nvim/init.vim": "~/_vimrc",
+  "nvim/ginit.vim": "~/_gvimrc",
   "hyper": "~/.hyper.js",
   "powershell": "~/Documents/WindowsPowerShell"
 }
