@@ -1,4 +1,4 @@
-import { shallowMount } from '@/vue-test-utils';
+import { shallowMount } from '@vue/test-utils';
 import View from './view.vue';
 
 describe('View', () => {
