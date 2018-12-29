@@ -68,8 +68,9 @@ elseif has('gui_macvim')
   " Font size should be 2.0x
   silent! set guifont=Liberation\ Mono\ for\ Powerline:h14
 else
-  " Font size should be 1.5x
-  silent! set guifont=Liberation\ Mono\ for\ Powerline\ 14
+  " " Font size should be 1.5x
+  " silent! set guifont=Liberation\ Mono\ for\ Powerline\ 14
+  silent! set guifont=Consolas:h10:cANSI:qDRAFT
 endif
 
 if filereadable(expand('~/.gvimrc.local'))
