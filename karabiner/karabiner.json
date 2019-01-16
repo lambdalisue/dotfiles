@@ -517,16 +517,7 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": false,
-                    "simple_modifications": [
-                        {
-                            "from": {
-                                "pointing_button": "button5"
-                            },
-                            "to": {
-                                "pointing_button": "button3"
-                            }
-                        }
-                    ]
+                    "simple_modifications": []
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -539,7 +530,24 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": false,
-                    "simple_modifications": []
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "pointing_button": "button2"
+                            },
+                            "to": {
+                                "pointing_button": "button7"
+                            }
+                        },
+                        {
+                            "from": {
+                                "pointing_button": "button7"
+                            },
+                            "to": {
+                                "pointing_button": "button2"
+                            }
+                        }
+                    ]
                 }
             ],
             "fn_function_keys": [
