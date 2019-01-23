@@ -503,16 +503,6 @@ noremap <LocalLeader> <Nop>
 let g:mapleader = "\<Space>"
 let g:maplocalleader = '\'
 
-" JIS keyboard
-nmap <C-@> <Esc>
-nmap <C-6> <C-^>
-noremap ¥ \
-cnoremap ¥ \
-if has('nvim')
-  tnoremap ¥ \
-  tnoremap <C-_><C-n> <C-\><C-n>
-endif
-
 " Disable dengerous/annoying mappings
 " ZZ - save and close Vim
 " ZQ - close Vim

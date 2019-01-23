@@ -544,8 +544,6 @@ key_bindings:
   - { key: F11,      mods: Super,   chars: "\x1b[23;3~"                  }
   - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                  }
   - { key: NumpadEnter,             chars: "\n"                          }
-  # Ctrl-^
-  - { key: Key6,     mods: Control, chars: "\x1e"                        }
   # Use Option as Alt
   # https://github.com/jwilm/alacritty/issues/62
   - { key: A,         mods: Alt,       chars: "\x1ba"                    }
@@ -625,6 +623,10 @@ key_bindings:
   - { key: Backslash, mods: Alt|Shift, chars: "\x1b|"                    } # Alt + |
   # Spawn new instance
   - { key: N,         mods: Command,   action: SpawnNewInstance          }
+  # Support C-^ (US)
+  - { key: Key6,      mods: Control,   chars: "\x1e"                     }
+  # Support C-^ (JIS)
+  - { key: Equals,    mods: Control,   chars: "\x1e"                     }
   # Support macOS Yen (JIS)
   - { key: Yen,                        chars: "\\"                       }
   - { key: Yen,       mods: Shift,     chars: "|"                        }
