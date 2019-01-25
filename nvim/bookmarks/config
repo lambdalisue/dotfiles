@@ -44,8 +44,8 @@ $HOME/.config/zsh/rc.d/50_config_peco.zsh
 $HOME/.config/zsh/rc.d/50_config_fzf.zsh
 $HOME/.config/zsh/rc.d/50_extend_rsync.zsh
 $HOME/.config/zsh/rc.d/90_functions.zsh
+$HOME/.tmux.conf
 $HOME/.config/tmux/
-$HOME/.config/tmux/tmux.conf
 $HOME/.config/tmux/rc.d/00_keymap.conf
 $HOME/.config/tmux/rc.d/50_plugin.conf
 $HOME/.config/karabiner/karabiner.json
