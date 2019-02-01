@@ -196,6 +196,10 @@ if __rook::has 'pipenv'; then
   }
 fi
 
+if __rook::has 'direnv'; then
+  eval "$(direnv hook zsh)"
+fi
+
 # Homeshick
 if [[ -f "$HOME/.homesick/repos/homeshick/homeshick.sh" ]]; then
   homeshick() {

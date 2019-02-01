@@ -6,6 +6,8 @@
 # Email: lambdalisue@hashnote.net
 # URL: http://hashnote.net/
 #
+.bin
+.envrc
 .cache
 .venv
 .venv2

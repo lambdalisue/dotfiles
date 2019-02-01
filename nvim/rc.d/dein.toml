@@ -3,23 +3,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 't9md/vim-choosewin'
-hook_add = '''
-let g:choosewin_overlay_enable = 1
-'''
-
-[[plugins]]
-repo = 'lambdalisue/vim-amake'
-merge = 0
-
-[[plugins]]
-repo = 'vim-vital/vital-core'
-merge = 0
-
-[[plugins]]
-repo = 'lambdalisue/vim-protocol'
-
-[[plugins]]
 repo = 'lambdalisue/fila.vim'
 hook_add = '''
 nnoremap <silent> <Leader>EE :<C-u>FilaDrawer .<CR>
@@ -65,37 +48,10 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/altr.vim'))
 '''
 
 [[plugins]]
-repo = 'lambdalisue/session.vim'
-hook_add = '''
-let g:session_dir = expand('~/.cache/session.vim')
-nnoremap Sa :<C-u>SessionOpen last<CR>
-nnoremap Sl :<C-u>SessionList<CR>
-nnoremap So :<C-u>SessionOpen<CR>
-nnoremap Ss :<C-u>SessionSave
-'''
-hook_post_source = '''
-if exists('g:loaded_session')
-  call session#last#enable()
-endif
-'''
-
-[[plugins]]
-repo = 'lambdalisue/ake.vim'
-
-[[plugins]]
 repo = 'lambdalisue/vim-unified-diff'
 
 [[plugins]]
 repo = 'lambdalisue/readablefold.vim'
-
-[[plugins]]
-repo = 'lambdalisue/trashbin.vim'
-
-[[plugins]]
-repo = 'lambdalisue/smarttw.vim'
-
-# [[plugins]]
-# repo = 'lambdalisue/smartcl.vim'
 
 [[plugins]]
 repo = 'lambdalisue/compl-local-filename.vim'
@@ -111,7 +67,7 @@ cnoreabbrev w!! w suda://%
 repo = 'lambdalisue/trimmer.vim'
 hook_add = '''
 augroup trimmer
-  autocmd FileType perl,python,vim,vimspec,javascript,typescript,dosbatch,ps1,sh,iss,pascal Trimmer! enable
+  autocmd FileType yaml,perl,python,vim,vimspec,javascript,typescript,dosbatch,ps1,sh,iss,pascal Trimmer! enable
 augroup END
 '''
 
@@ -121,41 +77,6 @@ hook_add = '''
 set noshowmode
 set shortmess+=c
 let g:echodoc#enable_at_startup = 1
-'''
-
-# [[plugins]]
-# repo = 'rhysd/clever-f.vim'
-# hook_add = '''
-# let g:clever_f_across_no_line = 1
-# let g:clever_f_smart_case = 1
-# '''
-
-# [[plugins]]
-# repo = 'lambdalisue/smarthl.vim'
-# hook_add = '''
-# let g:smarthl_default_mappings = 0
-# nmap / <Plug>(smarthl-/)
-# nmap ? <Plug>(smarthl-?)
-# nmap * <Plug>(smarthl-*)
-# nmap n <Plug>(smarthl-n)zv
-# nmap N <Plug>(smarthl-N)zv
-# nmap g/ <Plug>(smarthl-g/)
-# nmap g? <Plug>(smarthl-g?)
-# nmap g* <Plug>(smarthl-g*)
-# '''
-
-[[plugins]]
-repo = 'haya14busa/vim-asterisk'
-on_map = '<Plug>'
-hook_add = '''
-map *   <Plug>(asterisk-*)
-" map #   <Plug>(asterisk-#)
-map g*  <Plug>(asterisk-g*)
-" map g#  <Plug>(asterisk-g#)
-map z*  <Plug>(asterisk-z*)
-map gz* <Plug>(asterisk-gz*)
-" map z#  <Plug>(asterisk-z#)
-" map gz# <Plug>(asterisk-gz#)
 '''
 
 [[plugins]]
@@ -230,12 +151,6 @@ repo = 'kana/vim-textobj-user'
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
-merged = 0
-hook_add = 'let g:vimproc#download_windows_dll = 1'
-
-[[plugins]]
 repo = 'lambdalisue/vim-rplugin'
 
 [[plugins]]
@@ -244,32 +159,8 @@ repo = 'tyru/current-func-info.vim'
 
 # App {{{
 [[plugins]]
-repo = 'rhysd/devdocs.vim'
-hook_add = '''
-nmap <F1> <Plug>(devdocs-under-cursor)
-'''
-
-[[plugins]]
-repo = 'koturn/vim-replica'
-on_cmd = ['Replica', 'ReplicaInternal']
-hook_add = '''
-let g:replica#prompt = '» '
-let g:replica#opener = 'botright vsplit'
-'''
-
-[[plugins]]
-repo = 'thinca/vim-ref'
-on_cmd = 'Ref'
-
-[[plugins]]
 repo = 'cocopon/colorswatch.vim'
 on_cmd = 'ColorSwatchGenerate'
-
-# [[plugins]]
-# repo = 'tpope/vim-fugitive'
-
-# [[plugins]]
-# repo = 'lambdalisue/vim-gita'
 
 [[plugins]]
 repo = 'lambdalisue/gina.vim'
@@ -300,10 +191,6 @@ on_cmd = 'Gista'
 hook_add = '''
 let g:gista#client#default_username = 'lambdalisue'
 '''
-
-# [[plugins]]
-# merged = 0
-# repo = 'lambdalisue/filta.vim'
 
 [[plugins]]
 repo = 'junegunn/goyo.vim'
@@ -400,40 +287,6 @@ autocmd MyAutoCmd FileType vimfiler call s:configure_vimfiler()
 " autocmd MyAutoCmd BufWinEnter * call s:force_nofixwidth()
 '''
 
-# [[plugins]]
-# # repo = 'cocopon/vaffle.vim'
-# repo = 'lambdalisue/vaffle.vim'
-# hook_add = '''
-# let g:vaffle_use_default_mappings = 0
-#
-# function! s:my_vaffle() abort
-#   " Toggle
-#   nmap <buffer> <silent> <C-j>      <Plug>(vaffle-toggle-current)
-#   nmap <buffer> <silent> .          <Plug>(vaffle-toggle-hidden)
-#   nmap <buffer> <silent> *          <Plug>(vaffle-toggle-all)
-#   vmap <buffer> <silent> <C-j>      <Plug>(vaffle-toggle-current)
-#   " Operations for selected items
-#   nmap <buffer> <nowait> <silent> d <Plug>(vaffle-delete-selected)
-#   nmap <buffer> <silent> x          <Plug>(vaffle-fill-cmdline)
-#   nmap <buffer> <silent> m          <Plug>(vaffle-move-selected)
-#   nmap <buffer> <silent> <CR>       <Plug>(vaffle-open-selected)
-#   nmap <buffer> <silent> r          <Plug>(vaffle-rename-selected)
-#   " Operations for a item on cursor
-#   nmap <buffer> <silent> l          <Plug>(vaffle-open-current)
-#   " Misc
-#   nmap <buffer> <silent> o          <Plug>(vaffle-mkdir)
-#   nmap <buffer> <silent> i          <Plug>(vaffle-new-file)
-#   nmap <buffer> <silent> ~          <Plug>(vaffle-open-home)
-#   nmap <buffer> <silent> h          <Plug>(vaffle-open-parent)
-#   nmap <buffer> <silent> q          <Plug>(vaffle-quit)
-#   nmap <buffer> <silent> R          <Plug>(vaffle-refresh)
-# endfunction
-# autocmd MyAutoCmd FileType vaffle call s:my_vaffle()
-#
-# nnoremap <silent> <Leader>ee :<C-u>Vaffle <C-r>=empty(expand('%')) ? '' : expand('%:h')<CR><CR>
-# nnoremap <silent> <Leader>EE :<C-u>Vaffle<CR>
-# '''
-
 [[plugins]]
 repo = 'mbbill/undotree'
 on_cmd = 'UndotreeToggle'
@@ -479,36 +332,6 @@ nnoremap z# :<C-u>ListaCursorWord<CR>
 # }}}
 
 # Visualize {{{
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-hook_add = '''
-let g:gitgutter_map_keys = 0
-
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
-omap ih <Plug>GitGutterTextObjectInnerPending
-omap ah <Plug>GitGutterTextObjectOuterPending
-xmap ih <Plug>GitGutterTextObjectInnerVisual
-xmap ah <Plug>GitGutterTextObjectOuterVisual
-'''
-hook_post_source = '''
-function! s:silently_process_gitgutter() abort
-  let bufnr = bufnr('%')
-  if bufnr isnot# -1
-    silent! call gitgutter#process_buffer(bufnr, 0)
-  endif
-endfunction
-
-if exists('g:loaded_gitgutter')
-  silent! call timer_stop(s:gitgutter_timer)
-  let s:gitgutter_timer = timer_start(
-        \ 100,
-        \ { -> s:silently_process_gitgutter() },
-        \ { 'repeat': -1 }
-        \)
-endif
-'''
-
 [[plugins]]
 repo = 'lambdalisue/battery.vim'
 hook_add = '''
@@ -565,7 +388,7 @@ nmap <C-g><C-m> <Plug>(my-toggle-parenmatch)
 [[plugins]]
 repo = 'itchyny/vim-cursorword'
 hook_add = '''
-let g:cursorword = 0
+let g:cursorword = 1
 
 function! s:toggle_vim_cursorword() abort
   let g:cursorword = g:cursorword ? 0 : 1
@@ -632,23 +455,6 @@ nmap gco  <Plug>(caw:jump:comment-next)
 nmap gcO  <Plug>(caw:jump:comment-prev)
 '''
 
-# [[plugins]]
-# repo = 'LeafCage/yankround.vim'
-# on_map = '<Plug>'
-# hook_add = '''
-# nmap p     <Plug>(yankround-p)
-# nmap P     <Plug>(yankround-P)
-# nmap gp    <Plug>(yankround-gp)
-# nmap gP    <Plug>(yankround-gP)
-# nmap <expr><C-k> yankround#is_active()
-#       \ ? "\<Plug>(yankround-prev)"
-#       \ : "\<C-k>"
-# nmap <expr><C-j> yankround#is_active()
-#       \ ? "\<Plug>(yankround-next)"
-#       \ : "\<C-j>"
-# let g:yankround_use_region_hl = 1
-# '''
-
 [[plugins]]
 repo = 'AndrewRadev/switch.vim'
 on_cmd = 'Switch'
@@ -692,15 +498,6 @@ hook_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/quickrun.vim'))
 '''
 
-# [[plugins]]
-# if = "!(has('win32') || has('win64'))"
-# repo = 'neomake/neomake'
-# hook_source = '''
-# if has('nvim')
-#   execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/neomake.vim'))
-# endif
-# '''
-
 # }}}
 
 # Lint {{{
@@ -717,56 +514,15 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/ale.vim'))
 '''
 # }}}
 
-# Language client protocol {{{
-# [[plugins]]
-# repo = 'autozimu/LanguageClient-neovim'
-# hook_add = '''
-# let g:LanguageClient_autoStart = 1
-# execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lsp.vim'))
-# '''
+# Complete {{{
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
+repo = 'prabirshrestha/asyncomplete.vim'
 hook_add = '''
-augroup my-lsp
-  autocmd! *
-  if executable('typescript-language-server')
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'typescript-language-server',
-          \ 'cmd': { si -> [&shell, &shellcmdflag, 'typescript-language-server --stdio'] },
-          \ 'root_uri': { si -> lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json')) },
-          \ 'whitelist': ['javascript', 'typescript'],
-          \ 'priority': 5,
-          \})
-    autocmd FileType javascript call s:configure_lsp()
-    autocmd FileType typescript call s:configure_lsp()
-  endif
-
-  if executable('pyls')
-     autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'pyls',
-          \ 'cmd': { si -> ['pyls'] },
-          \ 'whitelist': ['python'],
-          \ 'priority': 5,
-          \})
-    autocmd FileType python call s:configure_lsp()
-  endif
-augroup END
-
-function! s:configure_lsp() abort
-  nnoremap <buffer> gd :<C-u>LspDefinition<CR>
-  nnoremap <buffer> gD :<C-u>LspReferences<CR>
-  nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
-  nnoremap <buffer> gS :<C-u>LspWorkspaceSymbol<CR>
-  nnoremap <buffer> gQ :<C-u>LspDocumentFormat<CR>
-  vnoremap <buffer> gQ :LspDocumentRangeFormat<CR>
-  nnoremap <buffer> K :<C-u>LspHover<CR>
-  nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
-  nnoremap <buffer> <F2> :<C-u>LspRename<CR>
-endfunction
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_auto_popup = 1
+imap <C-x><C-u> <Plug>(asyncomplete_force_refresh)
 '''
-
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
@@ -791,152 +547,17 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
     \ 'completor': function('asyncomplete#sources#file#completor')
     \ }))
 '''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-gocode.vim'
-hook_add = '''
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#gocode#get_source_options({
-    \ 'name': 'gocode',
-    \ 'whitelist': ['go'],
-    \ 'completor': function('asyncomplete#sources#gocode#completor'),
-    \ 'config': {
-    \    'gocode_path': expand('~/go/bin/gocode')
-    \  },
-    \ 'priority': 10,
-    \ }))
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-hook_add = '''
-let g:asyncomplete_remove_duplicates = 1
-let g:asyncomplete_smart_completion = 1
-let g:asyncomplete_auto_popup = 1
-imap <C-x><C-u> <Plug>(asyncomplete_force_refresh)
-'''
-
 # }}}
 
-# Deoplete {{{
-# [[plugins]]
-# if = '!has("nvim")'
-# repo = 'roxma/nvim-yarp'
-#
-# [[plugins]]
-# if = '!has("nvim")'
-# repo = 'roxma/vim-hug-neovim-rpc'
+# Language client protocol {{{
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
 
-# [[plugins]]
-# repo = 'Shougo/deoplete.nvim'
-# hook_add = '''
-# let g:deoplete#enable_at_startup = 1
-# let g:deoplete#file#enable_buffer_path = 1
-# '''
-# hook_post_source = '''
-# call deoplete#custom#source('omni', 'is_silent', 1)
-# '''
-#
-# [[plugins]]
-# repo = 'Shougo/neco-vim'
-# depends = 'deoplete.nvim'
-#
-# [[plugins]]
-# repo = 'Shougo/neco-syntax'
-# depends = 'deoplete.nvim'
-#
-# [[plugins]]
-# repo = 'fszymanski/deoplete-emoji'
-# depends = 'deoplete.nvim'
-#
-# [[plugins]]
-# repo = 'zchee/deoplete-go'
-# build = 'make'
-# depends = 'deoplete.nvim'
-# hook_add = '''
-# let g:deoplete#sources#go#gocode_binary = expand('$GOPATH/bin/gocode')
-# let g:deoplete#sources#go#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-# '''
-# hook_post_update = '''
-# if !executable('gocode')
-#   echohl ErrorMsg
-#   echomsg '"gocode" is not found. Install it via "go get -u github.com/nsf/gocode" to enable deoplete-go.'
-#   echohl None
-# endif
-# '''
-#
-# [[plugins]]
-# repo = 'zchee/deoplete-jedi'
-# depends = 'deoplete.nvim'
-#
-# [[plugins]]
-# repo = 'zchee/deoplete-zsh'
-# depends = 'deoplete.nvim'
-#
-# [[plugins]]
-# repo = 'mhartington/nvim-typescript'
-# build = './install.sh'
-# hook_add = '''
-# let g:nvim_typescript#javascript_support = 0
-# let g:nvim_typescript#vue_support = 0
-# let g:nvim_typescript#type_info_on_hold = 0
-# let g:nvim_typescript#default_mappings = 0
-# let g:nvim_typescript#signature_complete = 1
-#
-# function! s:configure_typescript() abort
-#   nnoremap <silent><buffer> <Plug>(typescript-goto-definitions) :<C-u>TSTypeDef<CR>
-#   nnoremap <silent><buffer> <Plug>(typescript-goto-assignments) :<C-u>TSDef<CR>
-#   nnoremap <silent><buffer> <Plug>(typescript-rename) :<C-u>TSRename<CR>
-#   nnoremap <silent><buffer> <Plug>(typescript-usages) :<C-u>TSRefs<CR>
-#   nnoremap <silent><buffer> <Plug>(typescript-import) :<C-u>TSImport<CR>
-#   nnoremap <silent><buffer> <Plug>(typescript-show-documentation) :<C-u>TSDoc<CR>
-#   nnoremap <silent><buffer> <Plug>(typescript-echo-type) :<C-u>TSType<CR>
-#   vnoremap <silent><buffer> <Plug>(typescript-goto-definitions) :TSTypeDef<CR>
-#   vnoremap <silent><buffer> <Plug>(typescript-goto-assignments) :TSDef<CR>
-#   vnoremap <silent><buffer> <Plug>(typescript-rename) :TSRename<CR>
-#   vnoremap <silent><buffer> <Plug>(typescript-usages) :TSRefs<CR>
-#   vnoremap <silent><buffer> <Plug>(typescript-import) :TSImport<CR>
-#   vnoremap <silent><buffer> <Plug>(typescript-show-documentation) :TSDoc<CR>
-#   vnoremap <silent><buffer> <Plug>(typescript-echo-type) :TSType<CR>
-#
-#   nmap <buffer> gd <Plug>(typescript-goto-definitions)
-#   nmap <buffer> gs <Plug>(typescript-goto-assignments)
-#   nmap <buffer> gu <Plug>(typescript-usages)
-#   nmap <buffer> K <Plug>(typescript-show-documentation)
-#   nmap <buffer> <C-k> <Plug>(typescript-echo-type)
-#   nmap <buffer> <F2> <Plug>(typescript-rename)
-#   nmap <buffer> <F3> <Plug>(typescript-import)
-# endfunction
-#
-# augroup my_typescript
-#   autocmd! *
-#   autocmd FileType typescript call s:configure_typescript()
-# augroup END
-# '''
-# }}}
-
-# Denite {{{
-# [[plugins]]
-# repo = 'Shougo/denite.nvim'
-# hook_add = '''
-# nnoremap <silent> g<Leader><Leader> :<C-u>Denite -resume<CR>
-# nnoremap <silent> <Leader><Leader>f :<C-u>Denite file_rec<CR>
-# nnoremap <silent> <Leader><Leader>d :<C-u>Denite directory_rec<CR>
-# nnoremap <silent> <Leader><Leader>h :<C-u>Denite help<CR>
-# nnoremap <silent> <Leader><Leader>g :<C-u>Denite grep<CR>
-# nnoremap <silent> <Leader><Leader>j :<C-u>Denite jump<CR>
-# nnoremap <silent> <Leader><Leader>i :<C-u>Denite menu:shortcut<CR>
-# nnoremap <silent> <Leader><Leader>s :<C-u>Denite session<CR>
-# nnoremap <silent> <Leader><Leader>q :<C-u>Denite -default-action=cd ghq<CR>
-# nnoremap <silent> <Leader><Leader>o :<C-u>Denite file_old<CR>
-# nnoremap <silent> <Leader><Leader>w :<C-u>Denite buffer<CR>
-# '''
-# hook_post_source = '''
-# execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/denite.vim'))
-# '''
-#
-# [[plugins]]
-# repo = 'Jagua/vim-denite-ghq'
-# on_source = 'denite.nvim'
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_post_source = '''
+execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lsp.vim'))
+'''
 # }}}
 
 # Textobj {{{
@@ -1140,9 +761,11 @@ repo = 'jdkanani/vim-material-theme'
 [[plugins]]
 repo = 'PProvost/vim-ps1'
 
-# [[plugins]]
-# repo = 'posva/vim-vue'
-# repo = 'darthmall/vim-vue'
+[[plugins]]
+repo = 'vim-scripts/python_match.vim'
+
+[[plugins]]
+repo = 'hynek/vim-python-pep8-indent'
 
 [[plugins]]
 repo = 'othree/html5.vim'
@@ -1151,28 +774,13 @@ repo = 'othree/html5.vim'
 repo = 'zplug/vim-zplug'
 
 [[plugins]]
-repo = 'vimperator/vimperator.vim'
-
-[[plugins]]
 repo = 'cespare/vim-toml'
 
 [[plugins]]
 repo = 'hail2u/vim-css3-syntax'
 
 [[plugins]]
-repo = 'groenewege/vim-less'
-
-[[plugins]]
-repo = 'cakebaker/scss-syntax.vim'
-
-[[plugins]]
-repo = 'kchmck/vim-coffee-script'
-
-[[plugins]]
 repo = 'elzr/vim-json'
-
-[[plugins]]
-repo = 'vim-scripts/jQuery'
 
 [[plugins]]
 repo = 'othree/yajs.vim'
@@ -1188,112 +796,6 @@ repo = 'othree/es.next.syntax.vim'
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
-
-# [[plugins]]
-# repo = 'HerringtonDarkholme/yats.vim'
-
-[[plugins]]
-repo = 'vim-scripts/applescript.vim'
-
-[[plugins]]
-repo = 'vim-perl/vim-perl'
-
-[[plugins]]
-#repo = 'motemen/xslate-vim'
-repo = 'lambdalisue/xslate-vim'
-
-[[plugins]]
-repo = 'lambdalisue/vim-cython-syntax'
-
-[[plugins]]
-repo = 'hotchpotch/perldoc-vim'
-
-[[plugins]]
-repo = 'c9s/perlomni.vim'
-
-[[plugins]]
-repo = 'lambdalisue/vim-riot'
-
-[[plugins]]
-repo = 'fatih/vim-go'
-
-# }}}
-
-# Python development {{{
-[[plugins]]
-repo = 'lambdalisue/pyvenv.vim'
-
-# [[plugins]]
-# repo = 'davidhalter/jedi-vim'
-# build = 'pip install jedi'
-# hook_add = '''
-# let g:jedi#auto_initialization = 0
-# let g:jedi#auto_vim_configuration = 0
-# let g:jedi#show_call_signatures = 0
-# let g:jedi#show_call_signatures_delay = 0
-# let g:jedi#completions_enabled = 0
-# let g:jedi#force_py_version = 3
-# let g:jedi#smart_auto_mappings = 0
-# '''
-# hook_post_source = '''
-# function! s:configure_jedi() abort
-#   nnoremap <buffer><silent> <Plug>(jedi-goto-definitions) :<C-u>call jedi#goto()<CR>
-#   nnoremap <buffer><silent> <Plug>(jedi-goto-assignments) :<C-u>call jedi#goto_assignments()<CR>
-#   nnoremap <buffer><silent> <Plug>(jedi-rename) :<C-u>call jedi#rename()<CR>
-#   nnoremap <buffer><silent> <Plug>(jedi-usages) :<C-u>call jedi#usages()<CR>
-#   nnoremap <buffer><silent> <Plug>(jedi-show-documentation) :<C-u>call jedi#show_documentation()<CR>
-#   nmap <buffer> gs <Plug>(jedi-usages)
-#   nmap <buffer> gd <Plug>(jedi-goto-definitions)
-#   nmap <buffer> gD <Plug>(jedi-goto-assignments)
-#   nmap <buffer> K <Plug>(jedi-show-documentation)
-#   nmap <buffer> <F2> <Plug>(jedi-rename)
-#   setlocal omnifunc=jedi#completions
-# endfunction
-#
-# augroup my_jedi
-#   autocmd! *
-#   autocmd FileType python,python3 call s:configure_jedi()
-# augroup END
-# '''
-
-[[plugins]]
-repo = 'lambdalisue/doctest.vim'
-on_cmd = 'Doctest'
-hook_add = '''
-nnoremap <silent> <F8> :<C-u>Doctest<CR>
-'''
-
-[[plugins]]
-repo = 'lambdalisue/ake.vim'
-on_cmd = ['Ake', 'Cake', 'Lake']
-
-# [[plugins]]
-# repo = 'tell-k/vim-autopep8'
-# build = 'pip install autopep8'
-
-[[plugins]]
-repo = 'vim-scripts/python_match.vim'
-
-[[plugins]]
-repo = 'hynek/vim-python-pep8-indent'
-
-[[plugins]]
-repo = 'tweekmonster/impsort.vim'
-hook_add = '''
-let g:impsort_method_group = ['alpha', 'length']
-let g:impsort_method_module = ['alpha', 'length', 'depth']
-let g:impsort_method_imports = ['alpha', 'length']
-let g:impsort_textwidth = 78
-'''
-
-# }}}
-
-# HTML development {{{
-[[plugins]]
-repo = 'mattn/emmet-vim'
-hook_add = '''
-let g:user_emmet_leader_key = '<C-y>'
-'''
 
 # }}}
 
@@ -1329,29 +831,6 @@ repo = 'vim-jp/vital-complete'
 hook_add = '''
 autocmd MyAutoCmd FileType vim,vimspec setlocal omnifunc=vital_complete#complete
 '''
-
-# External Vital modules {{{
-[[plugins]]
-repo = 'lambdalisue/vital-Whisky'
-
-[[plugins]]
-repo = 'lambdalisue/vital-ArgumentParser'
-
-[[plugins]]
-repo = 'lambdalisue/vital-ProgressBar'
-
-[[plugins]]
-repo = 'lambdalisue/vital-Vim-Validate'
-
-[[plugins]]
-repo = 'lambdalisue/vital-Vim-Lua-String'
-
-[[plugins]]
-repo = 'lambdalisue/vital-Data-Dict-Option'
-
-[[plugins]]
-repo = 'lambdalisue/vital-Data-String-Formatter'
-# }}}
 
 # }}}
 
