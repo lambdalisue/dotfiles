@@ -48,6 +48,10 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/altr.vim'))
 '''
 
 [[plugins]]
+repo = 'lambdalisue/qfloc.vim'
+merge = 0
+
+[[plugins]]
 repo = 'lambdalisue/vim-unified-diff'
 
 [[plugins]]

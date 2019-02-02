@@ -549,44 +549,6 @@ nnoremap <C-p> gT
 " Revert with ":iunmap <C-u>".
 inoremap <C-u> <C-g>u<C-u>
 
-" Jump to next/previous errors
-nnoremap <silent><expr> ]c &diff ? ']c' : ":\<C-u>cnext\<CR>"
-nnoremap <silent><expr> [c &diff ? ']c' : ":\<C-u>cprevious\<CR>"
-nnoremap <silent> ]l :\<C-u>lnext<CR>
-nnoremap <silent> [l :\<C-u>lprevious<CR>
-
-" Toggle quickfix window with Q {{{
-function! s:toggle_qf() abort
-  let nwin = winnr('$')
-  cclose
-  if nwin == winnr('$')
-    botright copen
-  endif
-endfunction
-nnoremap <silent> <Plug>(my-toggle-quickfix)
-      \ :<C-u>call <SID>toggle_qf()<CR>
-nmap Q <Plug>(my-toggle-quickfix)
-" }}}
-
-" Toggle location list window with L {{{
-function! s:toggle_ll() abort
-  try
-    let nwin = winnr('$')
-    lclose
-    if nwin == winnr('$')
-      botright lopen
-    endif
-  catch /^Vim\%((\a\+)\)\=:E776/
-    echohl WarningMsg
-    redraw | echo 'No location list'
-    echohl None
-  endtry
-endfunction
-nnoremap <silent> <Plug>(my-toggle-locationlist)
-      \ :<C-u>call <SID>toggle_ll()<CR>
-nmap L <Plug>(my-toggle-locationlist)
-" }}}
-
 " Source Vim script file with <Leader>ss {{{
 if !exists('*s:source_script')
   function s:source_script(path) abort
