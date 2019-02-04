@@ -54,14 +54,18 @@ augroup my-lsp
 augroup END
 
 function! s:configure_lsp() abort
-  nnoremap <buffer> gd :<C-u>LspDefinition<CR>
-  nnoremap <buffer> gD :<C-u>LspReferences<CR>
-  nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
-  nnoremap <buffer> gS :<C-u>LspWorkspaceSymbol<CR>
-  nnoremap <buffer> gQ :<C-u>LspDocumentFormat<CR>
-  vnoremap <buffer> gQ :LspDocumentRangeFormat<CR>
-  nnoremap <buffer> K :<C-u>LspHover<CR>
-  nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
-  nnoremap <buffer> <F2> :<C-u>LspRename<CR>
+  nmap <buffer> gd <Plug>(lsp-definition)
+  nmap <buffer> gD <Plug>(lsp-type-definition)
+  nmap <buffer> gs <Plug>(lsp-document-symbol)
+  nmap <buffer> gS <Plug>(lsp-workspace-symbol)
+  nmap <buffer> gQ <Plug>(lsp-document-format)
+  vmap <buffer> gQ <Plug>(lsp-document-format)
+  nmap <buffer> gr <Plug>(lsp-references)
+  nmap <buffer> gR <Plug>(lsp-declaration)
+  nmap <buffer> [p <Plug>(lsp-previous-error)
+  nmap <buffer> ]p <Plug>(lsp-next-error)
+  nmap <buffer> K  <Plug>(lsp-hover)
+  nmap <buffer> <F1> <Plug>(lsp-implementation)
+  nmap <buffer> <F2> <Plug>(lsp-rename)
   setlocal omnifunc=lsp#complete
 endfunction
