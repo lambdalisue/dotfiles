@@ -34,10 +34,10 @@ augroup my-lsp
     autocmd FileType python call s:configure_lsp()
   endif
 
-  if executable('golsp')
+  if executable('gopls')
      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'golsp',
-          \ 'cmd': { si -> ['golsp', '-mode', 'stdio'] },
+          \ 'name': 'gopls',
+          \ 'cmd': { si -> ['gopls', '-mode', 'stdio'] },
           \ 'whitelist': ['go'],
           \ 'priority': 5,
           \})
