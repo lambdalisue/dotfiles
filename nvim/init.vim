@@ -549,6 +549,20 @@ nnoremap <C-p> gT
 " Revert with ":iunmap <C-u>".
 inoremap <C-u> <C-g>u<C-u>
 
+" Grep with <Leader>gg {{{
+function! s:grep(bang, query) abort
+  let query = empty(a:query) ? input('grep: ') : a:query
+  if empty(query)
+    redraw
+    return
+  endif
+  execute printf('silent grep%s %s .', a:bang, escape(query, ' '))
+endfunction
+nnoremap <silent> <Leader>gg :<C-u>call <SID>grep('', '')<CR>
+command! -nargs=* -bang Grep call s:grep(<q-bang>, <q-args>)
+
+" }}}
+
 " Source Vim script file with <Leader>ss {{{
 if !exists('*s:source_script')
   function s:source_script(path) abort

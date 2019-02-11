@@ -1,4 +1,10 @@
 let g:lsp_async_completion = 1
+" let g:lsp_signs_enabled = 1
+" let g:lsp_diagnostics_echo_cursor = 1
+
+function Hello()
+  let count = 2
+endfunction
 
 augroup my-lsp
   autocmd! *
@@ -50,6 +56,17 @@ augroup my-lsp
           \ 'priority': 5,
           \})
     autocmd FileType go call s:configure_lsp()
+  endif
+
+  if executable('efm-langserver')
+    if executable('vint')
+      autocmd User lsp_setup call lsp#register_server({
+            \ 'name': 'efm-langserver-vint',
+            \ 'cmd': { si -> ['efm-langserver', '-stdin', &shell, &shellcmdflag, 'vint -'] },
+            \ 'whitelist': ['vim'],
+            \})
+      autocmd FileType vim call s:configure_lsp()
+    endif
   endif
 augroup END
 
