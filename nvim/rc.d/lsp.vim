@@ -37,18 +37,18 @@ augroup my-lsp
     autocmd FileType python call s:configure_lsp()
   endif
 
-  if executable('gopls')
+  if executable('bingo')
      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'gopls',
-          \ 'cmd': { si -> ['gopls', '-mode', 'stdio'] },
+          \ 'name': 'bingo',
+          \ 'cmd': { si -> ['bingo', '-mode', 'stdio'] },
           \ 'whitelist': ['go'],
           \ 'priority': 5,
           \})
     autocmd FileType go call s:configure_lsp()
-  elseif executable('bingo')
+  elseif executable('gopls')
      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'bingo',
-          \ 'cmd': { si -> ['bingo', '-mode', 'stdio'] },
+          \ 'name': 'gopls',
+          \ 'cmd': { si -> ['gopls', '-mode', 'stdio'] },
           \ 'whitelist': ['go'],
           \ 'priority': 5,
           \})
@@ -79,7 +79,7 @@ function! s:configure_lsp() abort
   nmap <buffer> [p <Plug>(lsp-previous-error)
   nmap <buffer> ]p <Plug>(lsp-next-error)
   nmap <buffer> K  <Plug>(lsp-hover)
-  nmap <buffer> <F1> <Plug>(lsp-implementation)
-  nmap <buffer> <F2> <Plug>(lsp-rename)
+  nmap <buffer> <F1> :<C-u>LspImpelementation<CR>
+  nmap <buffer> <F2> :<C-u>LspRename<CR>
   setlocal omnifunc=lsp#complete
 endfunction
