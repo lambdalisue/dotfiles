@@ -6,10 +6,6 @@ call gina#custom#command#option(
       \ '-u|--untracked-files'
       \)
 call gina#custom#command#option(
-      \ '/\%(status\|changes\)',
-      \ '--ignore-submodules'
-      \)
-call gina#custom#command#option(
       \ 'status',
       \ '-b|--branch'
       \)

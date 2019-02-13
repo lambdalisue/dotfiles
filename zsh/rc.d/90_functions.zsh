@@ -47,6 +47,16 @@ install::anyenv() {
   mkdir -p ~/.anyenv/envs
 }
 
+install::gotools() {
+  go get -v golang.org/x/tools/cmd/vet
+  go get -v golang.org/x/tools/cmd/godoc
+  go get -v golang.org/x/tools/cmd/goimports
+  go get -v golang.org/x/tools/cmd/gopls
+  go get -v golang.org/x/tools/cmd/gorename
+  go get -v golang.org/x/tools/cmd/stringer
+  go get -v golang.org/x/lint/golint
+}
+
 zsh::reload-rc() {
   source ${ZDOTDIR}/.zshrc
 }

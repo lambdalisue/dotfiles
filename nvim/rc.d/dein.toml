@@ -49,6 +49,7 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/altr.vim'))
 
 [[plugins]]
 repo = 'lambdalisue/qfloc.vim'
+merge = 0
 
 [[plugins]]
 repo = 'lambdalisue/grea.vim'
@@ -841,6 +842,10 @@ merged = 0
 
 [[plugins]]
 repo = 'lambdalisue/vital-Whisky'
+merged = 0
+
+[[plugins]]
+repo = 'lambdalisue/vital-Data-String-Formatter'
 merged = 0
 
 [[plugins]]
