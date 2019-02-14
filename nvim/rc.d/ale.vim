@@ -39,7 +39,7 @@ let g:ale_fixers = {
       \ ],
       \}
 
-let g:ale_open_list = 1
+let g:ale_open_list = 0
 
 " Disable signs for  performance and open list instead
 let g:ale_set_signs = 0
