@@ -16,6 +16,10 @@ if has('vim_starting')
       let &t_8b = "\e[48;2;%lu;%lu;%lum"
     endif
     set termguicolors       " use truecolor in term
+
+    if exists('&pumblend')
+      set pumblend=20
+    endif
   endif
 
   " Disable annoying bells
@@ -242,6 +246,7 @@ set matchpairs&         " reset matchparis
 set wildmenu
 set wildmode=list:longest,full
 set wildoptions=tagfile
+
 " }}}
 
 " Behavior {{{
