@@ -4,6 +4,7 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'lambdalisue/fila.vim'
+merge = 0
 hook_add = '''
 nnoremap <silent> <Leader>EE :<C-u>FilaDrawer .<CR>
 nnoremap <silent> <Leader>ee :<C-u>Fila<CR>

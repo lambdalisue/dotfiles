@@ -211,6 +211,7 @@ endif
 " }}}
 
 " Interface {{{
+set mouse=nvr
 set foldcolumn=0        " do not show foldcolumn
 set signcolumn=yes      " always shows signcolumn
 set noshowcmd           " do not display incomplete commands on the last line
