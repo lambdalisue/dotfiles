@@ -12,6 +12,7 @@ $MYVIM_HOME/filetype.vim
 $MYVIM_HOME/rc.d/ale.vim
 $MYVIM_HOME/rc.d/altr.vim
 $MYVIM_HOME/rc.d/dein.toml
+$MYVIM_HOME/rc.d/fila.vim
 $MYVIM_HOME/rc.d/gina.vim
 $MYVIM_HOME/rc.d/lexima.vim
 $MYVIM_HOME/rc.d/lightline.vim

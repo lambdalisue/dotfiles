@@ -6,34 +6,11 @@ repo = 'Shougo/dein.vim'
 repo = 'lambdalisue/fila.vim'
 merge = 0
 hook_add = '''
-nnoremap <silent> <Leader>EE :<C-u>FilaDrawer .<CR>
+nnoremap <silent> <Leader>EE :<C-u>Fila -drawer .<CR>
 nnoremap <silent> <Leader>ee :<C-u>Fila<CR>
-
-function! s:fila_viewer_init() abort
-  nmap <buffer><expr> <Plug>(fila-custom-smart-enter) fila#drawer#is_drawer(win_getid())
-        \ ? "\<Plug>(fila-action-enter-or-open)\<Plug>(fila-action-tcd)"
-        \ : "\<Plug>(fila-action-enter-or-open)"
-  nmap <buffer><expr> <Plug>(fila-custom-smart-leave) fila#drawer#is_drawer(win_getid())
-        \ ? "\<Plug>(fila-action-leave)\<Plug>(fila-action-tcd)"
-        \ : "\<Plug>(fila-action-leave)"
-
-  nmap <buffer><nowait> <Enter> <Plug>(fila-custom-smart-enter)
-  nmap <buffer><nowait> <C-m> <Plug>(fila-custom-smart-enter)
-  nmap <buffer><nowait> <Backspace> <Plug>(fila-custom-smart-leave)
-  nmap <buffer><nowait> <C-h> <Plug>(fila-custom-smart-leave)
-
-  nmap <buffer><nowait> s <Plug>(fila-action-open-select)
-  nmap <buffer><nowait> p <Plug>(fila-action-open-pedit)
-  nmap <buffer><nowait> <C-j> <Plug>(fila-action-mark-toggle)j
-  nmap <buffer><nowait> <C-k> <Plug>(fila-action-mark-toggle)k
-  nmap <buffer><nowait> N  <Plug>(fila-action-new-file)
-  nmap <buffer><nowait> K  <Plug>(fila-action-new-directory)
-  nmap <buffer><nowait> m  <Plug>(fila-action-move)
-  nmap <buffer><nowait> c  <Plug>(fila-action-copy)
-  nmap <buffer><nowait> p  <Plug>(fila-action-paste)
-  nmap <buffer><nowait> d  <Plug>(fila-action-delete)
-endfunction
-autocmd MyAutoCmd User FilaViewerInit call s:fila_viewer_init()
+'''
+hook_post_source = '''
+execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/fila.vim'))
 '''
 
 [[plugins]]
