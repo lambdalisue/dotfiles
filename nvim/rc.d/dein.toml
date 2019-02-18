@@ -155,6 +155,10 @@ repo = 'tyru/current-func-info.vim'
 
 # App {{{
 [[plugins]]
+repo = 'rhysd/reply.vim'
+on_cmd = ['Repl', 'ReplAuto']
+
+[[plugins]]
 repo = 'cocopon/colorswatch.vim'
 on_cmd = 'ColorSwatchGenerate'
 
