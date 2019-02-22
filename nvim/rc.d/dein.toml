@@ -4,7 +4,7 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'lambdalisue/fila.vim'
-merge = 0
+merged = 0
 hook_add = '''
 nnoremap <silent> <Leader>EE :<C-u>Fila -drawer .<CR>
 nnoremap <silent> <Leader>ee :<C-u>Fila<CR>
@@ -27,7 +27,7 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/altr.vim'))
 
 [[plugins]]
 repo = 'lambdalisue/qfloc.vim'
-merge = 0
+merged = 0
 
 [[plugins]]
 repo = 'lambdalisue/grea.vim'
@@ -78,6 +78,9 @@ let g:echodoc#enable_at_startup = 1
 [[plugins]]
 repo = 'Shougo/junkfile.vim'
 on_cmd = 'JunkfileOpen'
+hook_add = '''
+let g:junkfile#directory = expand("~/Documents/junkfiles")
+'''
 
 [[plugins]]
 repo = 'haya14busa/dein-command.vim'
@@ -551,10 +554,14 @@ au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#source
 
 # Language client protocol {{{
 [[plugins]]
-repo = 'prabirshrestha/async.vim'
+# repo = 'prabirshrestha/async.vim'
+repo = 'lambdalisue/async.vim'
+rev = 'nvim'
+merged = 0
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
+merged = 0
 hook_post_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lsp.vim'))
 '''

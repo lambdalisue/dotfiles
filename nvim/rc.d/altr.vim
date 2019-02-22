@@ -13,3 +13,14 @@ call altr#define(
       \ 'tests/unit/%/view.vue.test.js',
       \)
 
+" Vim
+call altr#define(
+      \ 'autoload/%.vim',
+      \ 'plugin/%.vim',
+      \ 'syntax/%.vim',
+      \ 'ftplugin/%.vim',
+      \ 'doc/%.txt',
+      \ 'test/%.vim',
+      \ 'test/%.vimspec',
+      \)
+
