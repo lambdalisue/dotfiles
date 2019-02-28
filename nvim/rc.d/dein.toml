@@ -1,3 +1,15 @@
+# Reference {{{
+# [[plugins]]
+# repo = 'scrooloose/nerdtree'
+#
+# [[plugins]]
+# repo = 'Shougo/vimfiler.vim'
+#
+# [[plugins]]
+# repo = 'justinmk/vim-dirvish'
+
+# }}}
+
 # Fundemental {{{
 [[plugins]]
 repo = 'Shougo/dein.vim'
@@ -5,10 +17,6 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'lambdalisue/fila.vim'
 merged = 0
-hook_add = '''
-nnoremap <silent> <Leader>EE :<C-u>Fila -drawer .<CR>
-nnoremap <silent> <Leader>ee :<C-u>Fila<CR>
-'''
 hook_post_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/fila.vim'))
 '''

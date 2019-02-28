@@ -25,3 +25,6 @@ function! s:fila_viewer_init() abort
 endfunction
 
 autocmd MyAutoCmd User FilaViewerInit call s:fila_viewer_init()
+
+nnoremap <silent> <Leader>EE :<C-u>Fila . -reveal=% -drawer<CR>
+nnoremap <silent> <Leader>ee :<C-u>Fila . -reveal=%<CR>
