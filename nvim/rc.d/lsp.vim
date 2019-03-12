@@ -1,7 +1,5 @@
-let g:lsp_async_completion = 1
-let g:lsp_use_event_queue = 1
-" let g:lsp_signs_enabled = 1
-" let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_signs_enabled = 0
+let g:lsp_virtual_text_enabled = 0
 
 augroup my-lsp
   autocmd! *
