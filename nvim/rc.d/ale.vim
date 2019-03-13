@@ -37,6 +37,21 @@ let g:ale_fixers = {
       \   'remove_trailing_lines',
       \   'trim_whitespace',
       \ ],
+      \ 'vue': [
+      \   'prettier',
+      \   'remove_trailing_lines',
+      \   'trim_whitespace',
+      \ ],
+      \ 'css': [
+      \   'prettier',
+      \   'remove_trailing_lines',
+      \   'trim_whitespace',
+      \ ],
+      \ 'html': [
+      \   'prettier',
+      \   'remove_trailing_lines',
+      \   'trim_whitespace',
+      \ ],
       \}
 
 let g:ale_open_list = 0

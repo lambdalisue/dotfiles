@@ -8,6 +8,9 @@
 # [[plugins]]
 # repo = 'justinmk/vim-dirvish'
 
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+merged = 0
 # }}}
 
 # Fundemental {{{
