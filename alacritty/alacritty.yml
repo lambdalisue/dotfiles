@@ -634,6 +634,7 @@ key_bindings:
   - { key: Yen,                        chars: "\\"                       }
   - { key: Yen,       mods: Shift,     chars: "|"                        }
   - { key: Yen,       mods: Control,   chars: "\x1c"                     }
+  - { key: Backslash, mods: Control,   chars: "\x1c"                     }
   # Support FontSize (JIS)
   - { key: Key0,      mods: Command,   action: ResetFontSize             }
   - { key: Minus,     mods: Command,   action: DecreaseFontSize          }
