@@ -10,6 +10,9 @@ let g:ale_linters_ignore = {
       \ 'python': ['pylint'],
       \ 'typescript': ['tslint'],
       \}
+let g:ale_linters = {
+      \ 'haskell': ['stack-build'],
+      \}
 
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {

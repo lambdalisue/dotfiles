@@ -1,6 +1,9 @@
 let g:lsp_signs_enabled = 0
 let g:lsp_virtual_text_enabled = 0
 
+" let g:lsp_log_file = expand('~/lsp.txt')
+" let g:lsp_log_verbose = 1
+
 augroup my-lsp
   autocmd! *
   if executable('typescript-language-server')
@@ -63,6 +66,16 @@ augroup my-lsp
       autocmd FileType vim call s:configure_lsp()
     endif
   endif
+
+  if executable('hie-wrapper')
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'hie',
+          \ 'cmd': { si -> ['hie-wrapper']},
+          \ 'whitelist': ['haskell'],
+          \ 'priority': 5,
+          \})
+    autocmd FileType haskell call s:configure_lsp()
+  endif
 augroup END
 
 function! s:configure_lsp() abort
@@ -77,7 +90,7 @@ function! s:configure_lsp() abort
   nmap <buffer> [p <Plug>(lsp-previous-error)
   nmap <buffer> ]p <Plug>(lsp-next-error)
   nmap <buffer> K  <Plug>(lsp-hover)
-  nmap <buffer> <F1> :<C-u>LspImpelementation<CR>
+  nmap <buffer> <F1> :<C-u>LspImplementation<CR>
   nmap <buffer> <F2> :<C-u>LspRename<CR>
   setlocal omnifunc=lsp#complete
 endfunction

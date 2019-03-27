@@ -26,5 +26,5 @@ endfunction
 
 autocmd MyAutoCmd User FilaViewerInit call s:fila_viewer_init()
 
-nnoremap <silent> <Leader>EE :<C-u>Fila . -reveal=<C-r>=expand('%')<CR> -drawer<CR>
-nnoremap <silent> <Leader>ee :<C-u>Fila . -reveal=<C-r>=expand('%')<CR><CR>
+nnoremap <silent> <Leader>EE :<C-u>Fila . -drawer -reveal=<C-r>=expand('%')<CR><CR>
+nnoremap <silent> <Leader>ee :<C-u>Fila<CR>

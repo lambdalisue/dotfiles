@@ -777,6 +777,9 @@ repo = 'jdkanani/vim-material-theme'
 
 # Filetype {{{
 [[plugins]]
+repo = 'neovimhaskell/haskell-vim'
+
+[[plugins]]
 repo = 'PProvost/vim-ps1'
 
 [[plugins]]
