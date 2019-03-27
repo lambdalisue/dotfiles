@@ -37,6 +37,12 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/altr.vim'))
 '''
 
 [[plugins]]
+repo = 'kana/vim-submode'
+hook_post_source = '''
+execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/submode.vim'))
+'''
+
+[[plugins]]
 repo = 'lambdalisue/qfloc.vim'
 merged = 0
 

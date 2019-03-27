@@ -1,8 +1,8 @@
 let g:lsp_signs_enabled = 0
 let g:lsp_virtual_text_enabled = 0
 
-" let g:lsp_log_file = expand('~/lsp.txt')
-" let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/lsp.txt')
+let g:lsp_log_verbose = 1
 
 augroup my-lsp
   autocmd! *
@@ -70,7 +70,7 @@ augroup my-lsp
   if executable('hie-wrapper')
     autocmd User lsp_setup call lsp#register_server({
           \ 'name': 'hie',
-          \ 'cmd': { si -> ['hie-wrapper']},
+          \ 'cmd': { si -> ['stack', 'exec', '--', 'hie-wrapper']},
           \ 'whitelist': ['haskell'],
           \ 'priority': 5,
           \})
