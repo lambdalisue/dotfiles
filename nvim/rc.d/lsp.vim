@@ -70,9 +70,14 @@ augroup my-lsp
   if executable('hie-wrapper')
     autocmd User lsp_setup call lsp#register_server({
           \ 'name': 'hie',
-          \ 'cmd': { si -> ['stack', 'exec', '--', 'hie-wrapper']},
+          \ 'cmd': { si -> ['hie-wrapper']},
           \ 'whitelist': ['haskell'],
           \ 'priority': 5,
+          \ 'workspace_config': {
+          \   'languageServerHaskell': {
+          \     'hlintOn': v:false,
+          \   },
+          \ },
           \})
     autocmd FileType haskell call s:configure_lsp()
   endif

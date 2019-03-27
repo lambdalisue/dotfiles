@@ -18,6 +18,18 @@ merged = 0
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'mattn/webapi-vim'
+
+[[plugins]]
+repo = 'mattn/wwwrenderer-vim'
+
+[[plugins]]
+repo = 'thinca/vim-ref'
+hook_post_source = '''
+execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/ref.vim'))
+'''
+
+[[plugins]]
 repo = 'lambdalisue/fila.vim'
 merged = 0
 hook_post_source = '''
@@ -174,6 +186,12 @@ repo = 'tyru/current-func-info.vim'
 # }}}
 
 # App {{{
+[[plugins]]
+repo = 'godlygeek/tabular'
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+
 [[plugins]]
 repo = 'rhysd/reply.vim'
 on_cmd = ['Repl', 'ReplAuto']
