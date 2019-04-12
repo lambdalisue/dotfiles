@@ -189,8 +189,8 @@ repo = 'tyru/current-func-info.vim'
 [[plugins]]
 repo = 'godlygeek/tabular'
 
-[[plugins]]
-repo = 'plasticboy/vim-markdown'
+# [[plugins]]
+# repo = 'plasticboy/vim-markdown'
 
 [[plugins]]
 repo = 'rhysd/reply.vim'
