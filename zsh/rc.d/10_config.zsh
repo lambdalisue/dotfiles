@@ -88,6 +88,8 @@ if __rook::has 'anyenv'; then
     unset -f nodenv
     unset -f goenv
     eval "$(anyenv init -)"
+    # https://github.com/pyenv/pyenv/issues/1219
+    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv'
     nodenv "$@"
   }
   goenv() {
@@ -95,6 +97,8 @@ if __rook::has 'anyenv'; then
     unset -f nodenv
     unset -f goenv
     eval "$(anyenv init -)"
+    # https://github.com/pyenv/pyenv/issues/1219
+    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv'
     goenv "$@"
   }
 else
