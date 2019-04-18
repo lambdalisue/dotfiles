@@ -76,74 +76,51 @@ fi
 if __rook::has 'anyenv'; then
   pyenv() {
     unset -f pyenv
-    unset -f ndenv
-    unset -f plenv
-    unset -f rbenv
-    eval "$(anyenv init - zsh)"
+    unset -f nodenv
+    unset -f goenv
+    eval "$(anyenv init -)"
+    # https://github.com/pyenv/pyenv/issues/1219
+    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv'
     pyenv "$@"
   }
-  ndenv() {
+  nodenv() {
     unset -f pyenv
-    unset -f ndenv
-    unset -f plenv
-    unset -f rbenv
-    eval "$(anyenv init - zsh)"
-    ndenv "$@"
+    unset -f nodenv
+    unset -f goenv
+    eval "$(anyenv init -)"
+    nodenv "$@"
   }
-  plenv() {
+  goenv() {
     unset -f pyenv
-    unset -f ndenv
-    unset -f plenv
-    unset -f rbenv
-    eval "$(anyenv init - zsh)"
-    plenv "$@"
-  }
-  rbenv() {
-    unset -f pyenv
-    unset -f ndenv
-    unset -f plenv
-    unset -f rbenv
-    eval "$(anyenv init - zsh)"
-    rbenv "$@"
+    unset -f nodenv
+    unset -f goenv
+    eval "$(anyenv init -)"
+    goenv "$@"
   }
 else
   if __rook::has 'pyenv'; then
     pyenv() {
       unset -f pyenv
       eval "$(pyenv init - zsh)"
+      # https://github.com/pyenv/pyenv/issues/1219
+      alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv'
       pyenv "$@"
     }
   fi
-  if __rook::has 'ndenv'; then
-    ndenv() {
-      unset -f ndenv
-      eval "$(ndenv init - zsh)"
+  if __rook::has 'nodenv'; then
+    nodenv() {
+      unset -f nodenv
+      eval "$(nodenv init - zsh)"
       ndenv "$@"
     }
   fi
-  if __rook::has 'plenv'; then
-    plenv() {
-      unset -f plenv
-      eval "$(plenv init - zsh)"
-      plenv "$@"
+  if __rook::has 'goenv'; then
+    goenv() {
+      unset -f goenv
+      eval "$(goenv init - zsh)"
+      goenv "$@"
     }
   fi
-  if __rook::has 'rbenv'; then
-    rbenv() {
-      unset -f rbenv
-      eval "$(rbenv init - zsh)"
-      rbenv "$@"
-    }
-  fi
-fi
-
-# gulp
-if __rook::has 'gulp'; then
-  gulp() {
-    unset -f gulp
-    eval "$(gulp --completion=zsh)"
-    gulp "$@"
-  }
 fi
 
 # go
@@ -157,12 +134,6 @@ if __rook::has 'ghq'; then
   )
 fi
 
-# Amber
-if [[ -d "$HOME/amber14/" ]]; then
-    export AMBERHOME="$HOME/amber14"
-    source $AMBERHOME/amber.sh
-fi
-
 # pip
 if __rook::has 'pip'; then
   pip() {
@@ -171,7 +142,6 @@ if __rook::has 'pip'; then
     pip "$@"
   }
 fi
-
 if __rook::has 'pip2'; then
   pip2() {
     unset -f pip2
@@ -179,7 +149,6 @@ if __rook::has 'pip2'; then
     pip2 "$@"
   }
 fi
-
 if __rook::has 'pip3'; then
   pip3() {
     unset -f pip3
@@ -188,6 +157,7 @@ if __rook::has 'pip3'; then
   }
 fi
 
+# pipenv
 if __rook::has 'pipenv'; then
   pipenv() {
     unset -f pipenv
@@ -196,17 +166,9 @@ if __rook::has 'pipenv'; then
   }
 fi
 
+# direnv
 if __rook::has 'direnv'; then
   eval "$(direnv hook zsh)"
-fi
-
-# Homeshick
-if [[ -f "$HOME/.homesick/repos/homeshick/homeshick.sh" ]]; then
-  homeshick() {
-    unset -f homeshick
-    source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-    homeshick "$@"
-  }
 fi
 
 # GPG
