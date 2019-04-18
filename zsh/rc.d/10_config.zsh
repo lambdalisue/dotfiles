@@ -74,33 +74,36 @@ fi
 
 # anyenv
 if __rook::has 'anyenv'; then
-  pyenv() {
-    unset -f pyenv
-    unset -f nodenv
-    unset -f goenv
-    eval "$(anyenv init -)"
-    # https://github.com/pyenv/pyenv/issues/1219
-    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
-    pyenv "$@"
-  }
-  nodenv() {
-    unset -f pyenv
-    unset -f nodenv
-    unset -f goenv
-    eval "$(anyenv init -)"
-    # https://github.com/pyenv/pyenv/issues/1219
-    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
-    nodenv "$@"
-  }
-  goenv() {
-    unset -f pyenv
-    unset -f nodenv
-    unset -f goenv
-    eval "$(anyenv init -)"
-    # https://github.com/pyenv/pyenv/issues/1219
-    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
-    goenv "$@"
-  }
+  eval "$(anyenv init -)"
+  # https://github.com/pyenv/pyenv/issues/1219
+  alias pyenv="CFLAGS='-I$(xcrun --show-sdk-path)/usr/include' pyenv"
+  # pyenv() {
+  #   unset -f pyenv
+  #   unset -f nodenv
+  #   unset -f goenv
+  #   eval "$(anyenv init -)"
+  #   # https://github.com/pyenv/pyenv/issues/1219
+  #   alias pyenv="CFLAGS='-I$(xcrun --show-sdk-path)/usr/include' pyenv"
+  #   pyenv "$@"
+  # }
+  # nodenv() {
+  #   unset -f pyenv
+  #   unset -f nodenv
+  #   unset -f goenv
+  #   eval "$(anyenv init -)"
+  #   # https://github.com/pyenv/pyenv/issues/1219
+  #   alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
+  #   nodenv "$@"
+  # }
+  # goenv() {
+  #   unset -f pyenv
+  #   unset -f nodenv
+  #   unset -f goenv
+  #   eval "$(anyenv init -)"
+  #   # https://github.com/pyenv/pyenv/issues/1219
+  #   alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
+  #   goenv "$@"
+  # }
 else
   if __rook::has 'pyenv'; then
     pyenv() {
@@ -169,6 +172,15 @@ if __rook::has 'pipenv'; then
     pipenv "$@"
   }
 fi
+
+# poetry
+# if __rook::has 'poetry'; then
+#   poetry() {
+#     unset -f poetry
+#     eval "$(poetry --completion)"
+#     poetry "$@"
+#   }
+# fi
 
 # direnv
 if __rook::has 'direnv'; then
