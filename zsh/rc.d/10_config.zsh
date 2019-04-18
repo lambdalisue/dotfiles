@@ -80,7 +80,7 @@ if __rook::has 'anyenv'; then
     unset -f goenv
     eval "$(anyenv init -)"
     # https://github.com/pyenv/pyenv/issues/1219
-    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv'
+    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
     pyenv "$@"
   }
   nodenv() {
@@ -89,7 +89,7 @@ if __rook::has 'anyenv'; then
     unset -f goenv
     eval "$(anyenv init -)"
     # https://github.com/pyenv/pyenv/issues/1219
-    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv'
+    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
     nodenv "$@"
   }
   goenv() {
@@ -98,7 +98,7 @@ if __rook::has 'anyenv'; then
     unset -f goenv
     eval "$(anyenv init -)"
     # https://github.com/pyenv/pyenv/issues/1219
-    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv'
+    alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
     goenv "$@"
   }
 else
@@ -107,7 +107,7 @@ else
       unset -f pyenv
       eval "$(pyenv init - zsh)"
       # https://github.com/pyenv/pyenv/issues/1219
-      alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv'
+      alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
       pyenv "$@"
     }
   fi
