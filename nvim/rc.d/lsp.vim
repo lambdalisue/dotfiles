@@ -1,8 +1,5 @@
-let g:lsp_signs_enabled = 0
-let g:lsp_virtual_text_enabled = 0
-
-let g:lsp_log_file = expand('~/lsp.txt')
-let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/lsp.txt')
+" let g:lsp_log_verbose = 1
 
 augroup my-lsp
   autocmd! *

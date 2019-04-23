@@ -1,19 +1,10 @@
-# Reference {{{
-# [[plugins]]
-# repo = 'scrooloose/nerdtree'
-#
-# [[plugins]]
-# repo = 'Shougo/vimfiler.vim'
-#
-# [[plugins]]
-# repo = 'justinmk/vim-dirvish'
-
-[[plugins]]
-repo = 'lambdalisue/fern.vim'
-merged = 0
-# }}}
-
 # Fundemental {{{
+[[plugins]]
+repo = 'ncm2/float-preview.nvim'
+hook_add = '''
+let g:float_preview#docked = 1
+'''
+
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
@@ -54,9 +45,9 @@ hook_post_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/submode.vim'))
 '''
 
-[[plugins]]
-repo = 'lambdalisue/qfloc.vim'
-merged = 0
+# [[plugins]]
+# repo = 'lambdalisue/qfloc.vim'
+# merged = 0
 
 [[plugins]]
 repo = 'lambdalisue/grea.vim'
@@ -554,44 +545,53 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/ale.vim'))
 
 # Complete {{{
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
+repo = 'Shougo/echodoc.vim'
 hook_add = '''
-let g:asyncomplete_remove_duplicates = 1
-let g:asyncomplete_smart_completion = 1
-let g:asyncomplete_auto_popup = 1
-imap <C-x><C-u> <Plug>(asyncomplete_force_refresh)
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = has('nvim') ? 'virtual' : 'echo'
 '''
 
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-emoji.vim'
+repo = 'junegunn/vim-emoji'
 hook_add = '''
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
-    \ 'name': 'emoji',
-    \ 'whitelist': ['markdown', 'gitcommit', 'gina-commit'],
-    \ 'completor': function('asyncomplete#sources#emoji#completor'),
-    \ }))
+augroup vim-emoji-local
+  autocmd! *
+  autocmd FileType markdown,gitcommit,gina-commit setlocal completefunc=emoji#complete
+augroup END
 '''
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-file.vim'
-hook_add = '''
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-    \ 'name': 'file',
-    \ 'whitelist': ['*'],
-    \ 'priority': 10,
-    \ 'completor': function('asyncomplete#sources#file#completor')
-    \ }))
-'''
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete.vim'
+# hook_add = '''
+# imap <C-x><C-u> <Plug>(asyncomplete_force_refresh)
+# '''
+#
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete-emoji.vim'
+# hook_add = '''
+# au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
+#     \ 'name': 'emoji',
+#     \ 'whitelist': ['markdown', 'gitcommit', 'gina-commit'],
+#     \ 'completor': function('asyncomplete#sources#emoji#completor'),
+#     \ }))
+# '''
+#
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete-file.vim'
+# hook_add = '''
+# au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+#     \ 'name': 'file',
+#     \ 'whitelist': ['*'],
+#     \ 'priority': 10,
+#     \ 'completor': function('asyncomplete#sources#file#completor')
+#     \ }))
+# '''
 # }}}
 
 # Language client protocol {{{
 [[plugins]]
 # repo = 'prabirshrestha/async.vim'
 repo = 'lambdalisue/async.vim'
-rev = 'nvim'
 merged = 0
 
 [[plugins]]
