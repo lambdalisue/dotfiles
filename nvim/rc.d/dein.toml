@@ -45,9 +45,9 @@ hook_post_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/submode.vim'))
 '''
 
-# [[plugins]]
-# repo = 'lambdalisue/qfloc.vim'
-# merged = 0
+[[plugins]]
+repo = 'lambdalisue/qfloc.vim'
+merged = 0
 
 [[plugins]]
 repo = 'lambdalisue/grea.vim'

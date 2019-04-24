@@ -13,8 +13,6 @@ let g:ale_linters_ignore = {
 let g:ale_linters = {
       \ 'haskell': ['stack-build'],
       \}
-
-let g:ale_fix_on_save = 0
 let g:ale_fixers = {
       \ 'go': [
       \   'gofmt',
@@ -56,9 +54,8 @@ let g:ale_fixers = {
       \   'trim_whitespace',
       \ ],
       \}
+let g:ale_fix_on_save = 1
 
-let g:ale_open_list = 0
-
-" Disable signs for  performance and open list instead
+" Disable signs for performance
 let g:ale_set_signs = 0
 let g:ale_echo_cursor = 0
