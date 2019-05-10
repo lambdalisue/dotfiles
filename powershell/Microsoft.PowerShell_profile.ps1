@@ -13,8 +13,9 @@ Set-PSReadlineKeyHandler -Chord 'Ctrl+r' -ScriptBlock {
   [Microsoft.PowerShell.PSConsoleReadline]::AcceptLine()
 }
 Set-PSReadlineKeyHandler -Key 'Ctrl+l' -ScriptBlock {
-  Clear-Host
   [Microsoft.PowerShell.PSConsoleReadline]::RevertLine()
+  [Microsoft.PowerShell.PSConsoleReadline]::AcceptLine()
+  Clear-Host
 }
 
 # Mimic posix like commands
