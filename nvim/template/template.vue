@@ -13,4 +13,3 @@ export default class View extends Vue {}
 
 <style scoped>
 </style>
-
