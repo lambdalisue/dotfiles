@@ -48,6 +48,11 @@ let g:ale_fixers = {
       \   'remove_trailing_lines',
       \   'trim_whitespace',
       \ ],
+      \ 'scss': [
+      \   'prettier',
+      \   'remove_trailing_lines',
+      \   'trim_whitespace',
+      \ ],
       \ 'html': [
       \   'prettier',
       \   'remove_trailing_lines',

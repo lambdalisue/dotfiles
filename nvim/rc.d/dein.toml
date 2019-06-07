@@ -437,6 +437,12 @@ nmap <C-g><C-c> <Plug>(my-toggle-cursorword)
 
 # Editing {{{
 [[plugins]]
+repo = 'alvan/vim-closetag'
+hook_add = '''
+let g:closetag_filetypes = 'html,xhtml,phtml,vue'
+'''
+
+[[plugins]]
 repo = 'thinca/vim-template'
 hook_add = '''
 autocmd User plugin-template-loaded call s:template_keywords()
