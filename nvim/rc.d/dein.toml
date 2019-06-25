@@ -599,16 +599,24 @@ augroup END
 
 # Language client protocol {{{
 [[plugins]]
-# repo = 'prabirshrestha/async.vim'
-repo = 'lambdalisue/async.vim'
-merged = 0
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-merged = 0
+repo = 'neoclide/coc.nvim'
+rev = 'release'
 hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lsp.vim'))
+execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/coc.vim'))
 '''
+
+
+# [[plugins]]
+# # repo = 'prabirshrestha/async.vim'
+# repo = 'lambdalisue/async.vim'
+# merged = 0
+#
+# [[plugins]]
+# repo = 'prabirshrestha/vim-lsp'
+# merged = 0
+# hook_post_source = '''
+# execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lsp.vim'))
+# '''
 # }}}
 
 # Textobj {{{
@@ -729,10 +737,10 @@ repo = 'sgur/vim-textobj-parameter'
 depends = 'vim-textobj-user'
 hook_add = '''
 let g:textobj_parameter_no_default_key_mappings = 1
-omap aP <Plug>(textobj-parameter-a)
-omap iP <Plug>(textobj-parameter-i)
-xmap aP <Plug>(textobj-parameter-a)
-xmap iP <Plug>(textobj-parameter-i)
+omap a, <Plug>(textobj-parameter-a)
+omap i, <Plug>(textobj-parameter-i)
+xmap a, <Plug>(textobj-parameter-a)
+xmap i, <Plug>(textobj-parameter-i)
 '''
 
 [[plugins]]
@@ -809,6 +817,9 @@ repo = 'jdkanani/vim-material-theme'
 # }}}
 
 # Filetype {{{
+[[plugins]]
+repo = 'iloginow/vim-stylus'
+
 [[plugins]]
 repo = 'neovimhaskell/haskell-vim'
 
