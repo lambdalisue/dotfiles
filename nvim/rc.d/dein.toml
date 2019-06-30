@@ -818,6 +818,12 @@ repo = 'jdkanani/vim-material-theme'
 
 # Filetype {{{
 [[plugins]]
+repo = 'posva/vim-vue'
+hook_add = '''
+autocmd MyAutoCmd FileType vue syntax sync fromstart
+'''
+
+[[plugins]]
 repo = 'iloginow/vim-stylus'
 
 [[plugins]]
