@@ -1,5 +1,6 @@
 {
   "karabiner": "~/.config/karabiner",
+  "kitty": "~/Library/Preferences/kitty",
   "gnupg/gpg-agent.mac.conf": "~/.gnupg/gpg-agent.conf"
 }
 
