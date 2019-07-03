@@ -74,4 +74,5 @@ $HOME/.gitconfig.local
 $HOME/.gitconfig
 $HOME/.gitignore
 $HOME/.ghq/github.com/lambdalisue
+$HOME/Library/Preferences/kitty/kitty.conf
 $HOME/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1
