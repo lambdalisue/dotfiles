@@ -62,48 +62,41 @@ fi
 
 # circlip
 if __rook::has 'circlip'; then
-  # Overwrite default zsh mappings
-  eval "$(circlip init)"
+  circlip() {
+    unset -f circlip
+    eval "$(circlip init)"
+    circlip "$@"
+  }
 fi
 
-# lemonade
-if ! __rook::is_ssh_running && __rook::has 'lemonade' && ! __rook::is_process_running 'lemonade server'; then
-  # Start lemonade server (&! := background & disown)
-  lemonade server > /dev/null 2>&1 &!
-fi
+# # lemonade
+# if ! __rook::is_ssh_running && __rook::has 'lemonade' && ! __rook::is_process_running 'lemonade server'; then
+#   # Start lemonade server (&! := background & disown)
+#   lemonade server > /dev/null 2>&1 &!
+# fi
 
 # anyenv
 if __rook::has 'anyenv'; then
-  eval "$(anyenv init -)"
-  # https://github.com/pyenv/pyenv/issues/1219
-  alias pyenv="CFLAGS='-I$(xcrun --show-sdk-path)/usr/include' pyenv"
-  # pyenv() {
-  #   unset -f pyenv
-  #   unset -f nodenv
-  #   unset -f goenv
-  #   eval "$(anyenv init -)"
-  #   # https://github.com/pyenv/pyenv/issues/1219
-  #   alias pyenv="CFLAGS='-I$(xcrun --show-sdk-path)/usr/include' pyenv"
-  #   pyenv "$@"
-  # }
-  # nodenv() {
-  #   unset -f pyenv
-  #   unset -f nodenv
-  #   unset -f goenv
-  #   eval "$(anyenv init -)"
-  #   # https://github.com/pyenv/pyenv/issues/1219
-  #   alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
-  #   nodenv "$@"
-  # }
-  # goenv() {
-  #   unset -f pyenv
-  #   unset -f nodenv
-  #   unset -f goenv
-  #   eval "$(anyenv init -)"
-  #   # https://github.com/pyenv/pyenv/issues/1219
-  #   alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
-  #   goenv "$@"
-  # }
+  anyenv::init() {
+    unset -f pyenv
+    unset -f nodenv
+    unset -f goenv
+    eval "$(anyenv init - --no-rehash)"
+  }
+  pyenv() {
+    anyenv::init
+    # https://github.com/pyenv/pyenv/issues/1219
+    alias pyenv="CFLAGS='-I$(xcrun --show-sdk-path)/usr/include' pyenv"
+    pyenv "$@"
+  }
+  nodenv() {
+    anyenv::init
+    nodenv "$@"
+  }
+  goenv() {
+    anyenv::init
+    goenv "$@"
+  }
 else
   if __rook::has 'pyenv'; then
     pyenv() {
@@ -143,48 +136,43 @@ fi
 
 # pip
 if __rook::has 'pip'; then
-  pip() {
-    unset -f pip
-    eval "$(pip completion --zsh)"
-    pip "$@"
+  pip::cache() {
+    mkdir ~/.cache/pip
+    pip completion --zsh > ~/.cache/pip/init.zsh
   }
+  __rook::source ~/.cache/pip/init.zsh
 fi
 if __rook::has 'pip2'; then
-  pip2() {
-    unset -f pip2
-    eval "$(pip2 completion --zsh)"
-    pip2 "$@"
+  pip2::cache() {
+    mkdir ~/.cache/pip2
+    pip2 completion --zsh > ~/.cache/pip2/init.zsh
   }
+  __rook::source ~/.cache/pip2/init.zsh
 fi
 if __rook::has 'pip3'; then
-  pip3() {
-    unset -f pip3
-    eval "$(pip3 completion --zsh)"
-    pip3 "$@"
+  pip3::cache() {
+    mkdir ~/.cache/pip3
+    pip3 completion --zsh > ~/.cache/pip3/init.zsh
   }
+  __rook::source ~/.cache/pip3/init.zsh
 fi
 
 # pipenv
 if __rook::has 'pipenv'; then
-  pipenv() {
-    unset -f pipenv
-    eval "$(pipenv --completion)"
-    pipenv "$@"
+  pipenv::cache() {
+    mkdir ~/.cache/pipenv
+    pipenv --completion > ~/.cache/pipenv/init.zsh
   }
+  __rook::source ~/.cache/pipenv/init.zsh
 fi
-
-# poetry
-# if __rook::has 'poetry'; then
-#   poetry() {
-#     unset -f poetry
-#     eval "$(poetry --completion)"
-#     poetry "$@"
-#   }
-# fi
 
 # direnv
 if __rook::has 'direnv'; then
-  eval "$(direnv hook zsh)"
+  direnv::cache() {
+    mkdir ~/.cache/direnv
+    direnv hook zsh > ~/.cache/direnv/init.zsh
+  }
+  __rook::source ~/.cache/direnv/init.zsh
 fi
 
 # GPG

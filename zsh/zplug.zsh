@@ -6,12 +6,6 @@ fi
 zplug "zplug/zplug", \
   hook-build: 'zplug --self-manage'
 
-# The platinum searcher: pt
-zplug "monochromegane/the_platinum_searcher", \
-  as:command, \
-  from:gh-r, \
-  rename-to:pt
-
 # Remote utility tool over TCP
 zplug "pocke/lemonade", \
   as:command, \
