@@ -1,10 +1,10 @@
 # Fundemental {{{
-[[plugins]]
-repo = 'ncm2/float-preview.nvim'
-if = 'has("nvim")'
-hook_add = '''
-let g:float_preview#docked = 1
-'''
+# [[plugins]]
+# repo = 'ncm2/float-preview.nvim'
+# if = 'has("nvim")'
+# hook_add = '''
+# let g:float_preview#docked = 1
+# '''
 
 [[plugins]]
 repo = 'Shougo/dein.vim'
