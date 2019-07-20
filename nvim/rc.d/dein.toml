@@ -1,7 +1,11 @@
+[[plugins]]
+repo = 'lambdalisue/vim-backet'
+merged = 0
+
 # Fundemental {{{
 [[plugins]]
 repo = 'ncm2/float-preview.nvim'
-if = 'has("nvim")'
+if = 'has("nvim-0.4.0")'
 hook_add = '''
 let g:float_preview#docked = 1
 '''
@@ -376,11 +380,11 @@ hook_add = '''
 let g:wifi#update_tabline = 1
 '''
 
-[[plugins]]
-repo = 'itchyny/lightline.vim'
-hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lightline.vim'))
-'''
+# [[plugins]]
+# repo = 'itchyny/lightline.vim'
+# hook_post_source = '''
+# execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lightline.vim'))
+# '''
 
 [[plugins]]
 repo = 'powerman/vim-plugin-AnsiEsc'
@@ -823,8 +827,8 @@ hook_add = '''
 autocmd MyAutoCmd FileType vue syntax sync fromstart
 '''
 
-[[plugins]]
-repo = 'iloginow/vim-stylus'
+# [[plugins]]
+# repo = 'iloginow/vim-stylus'
 
 [[plugins]]
 repo = 'neovimhaskell/haskell-vim'

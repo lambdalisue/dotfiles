@@ -499,6 +499,16 @@ if has('vim_starting') && !has('gui_running') && !has('nvim')
   let &t_RV .= "\e[?6;69h\e[1;3s\e[3;9H\e[6n\e[0;0s\e[?6;69l"
 endif
 " }}}
+"
+" Register {
+function! s:clear_register() abort
+  let rs = split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
+  for r in rs
+    call setreg(r, [])
+  endfor
+endfunction
+command! ClearRegister call s:clear_register()
+" }
 " }}}
 
 " Mapping {{{
