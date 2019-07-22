@@ -824,9 +824,6 @@ autocmd MyAutoCmd FileType vue syntax sync fromstart
 '''
 
 [[plugins]]
-repo = 'iloginow/vim-stylus'
-
-[[plugins]]
 repo = 'neovimhaskell/haskell-vim'
 
 [[plugins]]
