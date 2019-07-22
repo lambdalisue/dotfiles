@@ -1,10 +1,10 @@
 # Fundemental {{{
-# [[plugins]]
-# repo = 'ncm2/float-preview.nvim'
-# if = 'has("nvim")'
-# hook_add = '''
-# let g:float_preview#docked = 1
-# '''
+[[plugins]]
+repo = 'ncm2/float-preview.nvim'
+if = 'has("nvim-0.4.0")'
+hook_add = '''
+let g:float_preview#docked = 1
+'''
 
 [[plugins]]
 repo = 'Shougo/dein.vim'
@@ -376,11 +376,11 @@ hook_add = '''
 let g:wifi#update_tabline = 1
 '''
 
-[[plugins]]
-repo = 'itchyny/lightline.vim'
-hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lightline.vim'))
-'''
+# [[plugins]]
+# repo = 'itchyny/lightline.vim'
+# hook_post_source = '''
+# execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lightline.vim'))
+# '''
 
 [[plugins]]
 repo = 'powerman/vim-plugin-AnsiEsc'
