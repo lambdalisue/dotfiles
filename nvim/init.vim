@@ -652,6 +652,8 @@ endif
 syntax on
 filetype indent plugin on
 
+execute 'source' fnameescape(expand('$MYVIM_HOME/conf.d/statusline.vim'))
+
 silent! colorscheme slate
 silent! colorscheme iceberg
 
