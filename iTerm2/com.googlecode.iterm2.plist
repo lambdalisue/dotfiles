@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AllowClipboardAccess</key>
-	<false/>
+	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>AppleScrollAnimationEnabled</key>
@@ -365,11 +365,11 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>1610 1328 620 392 0 0 3840 2137 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1484 360 918 452 0 0 2560 1417 </string>
+	<string>1484 360 796 486 0 0 2560 1417 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 833 592 584 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2557 377 1692 1108 2560 -1465 1692 2985 </string>
+	<string>533 45 1692 1318 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1270 170 1161 1077 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1837,7 +1837,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-07-19T00:13:45Z</date>
+	<date>2019-07-25T13:08:21Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowNewOutputIndicator</key>

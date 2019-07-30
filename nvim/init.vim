@@ -565,6 +565,11 @@ nnoremap <C-p> gT
 " Revert with ":iunmap <C-u>".
 inoremap <C-u> <C-g>u<C-u>
 
+" CTRL-L to fix syntax highlight
+nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))
+      \ ? "\<C-l>"
+      \ : "\<C-l>:syntax sync fromstart\<CR>"
+
 " Grep with <Leader>gg {{{
 function! s:grep(bang, query) abort
   let query = empty(a:query) ? input('grep: ') : a:query
