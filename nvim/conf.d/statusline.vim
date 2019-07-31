@@ -31,17 +31,3 @@ endfunction
 
 let &statusline = printf('%%!%s()', get(function('s:statusline'), 'name'))
 let &tabline = printf('%%!%s()', get(function('s:tabline'), 'name'))
-
-function! s:set_highlight() abort
-  highlight! link StatusLine   Comment
-  highlight! link StatusLineNC NonText
-  highlight! link TabLine      NonText
-  highlight! link TabLineSel   Title
-  highlight! link TabLineFill  Comment
-endfunction
-
-augroup my_statusline
-  autocmd! *
-  autocmd ColorScheme * call s:set_highlight()
-augroup END
-call s:set_highlight()
