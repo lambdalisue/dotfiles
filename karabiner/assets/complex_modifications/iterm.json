@@ -1,0 +1,38 @@
+{
+  "title": "iTerm2.app",
+  "rules": [
+    {
+      "description": "Replace Ctrl+\\ to Ctrl+Shift+\\",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.googlecode\\.iterm2$"
+              ]
+            }
+          ],
+          "from": {
+            "key_code": "international3",
+            "modifiers": {
+              "mandatory": [
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "international3",
+              "modifiers": [
+                "control",
+                "shift"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
