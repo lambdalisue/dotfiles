@@ -64,3 +64,6 @@ let g:ale_fix_on_save = 1
 " Disable signs for performance
 let g:ale_set_signs = 0
 let g:ale_echo_cursor = 0
+
+command! ALEFixerEnable let g:ale_fix_on_save = 1
+command! ALEFixerDisable let g:ale_fix_on_save = 0
