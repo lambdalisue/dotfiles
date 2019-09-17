@@ -1,3 +1,6 @@
 {
-  "coc.source.emoji.filetypes": ["markdown", "gitcommit", "gina-commit"]
+  "coc.source.emoji.filetypes": ["markdown", "gitcommit", "gina-commit"],
+  "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "css", "html", "markdown", "vue"],
+  "eslint.autoFixOnSave": true,
+  "prettier.disableLanguages": []
 }

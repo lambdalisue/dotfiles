@@ -533,17 +533,17 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/quickrun.vim'))
 # }}}
 
 # Lint {{{
-[[plugins]]
-repo = 'w0rp/ale'
-hook_add = '''
-let g:ale_fix_on_save = 1
-" let g:ale_virtualtext_cursor = exists('*nvim_buf_set_virtual_text')
-nmap <C-k> <Plug>(ale_previous_wrap)
-nmap <C-j> <Plug>(ale_next_wrap)
-'''
-hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/ale.vim'))
-'''
+# [[plugins]]
+# repo = 'w0rp/ale'
+# hook_add = '''
+# let g:ale_fix_on_save = 1
+# " let g:ale_virtualtext_cursor = exists('*nvim_buf_set_virtual_text')
+# nmap <C-k> <Plug>(ale_previous_wrap)
+# nmap <C-j> <Plug>(ale_next_wrap)
+# '''
+# hook_post_source = '''
+# execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/ale.vim'))
+# '''
 # }}}
 
 # Complete {{{
