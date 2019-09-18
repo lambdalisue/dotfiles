@@ -1,4 +1,8 @@
 {
+  "list.insertMappings": {
+    "<C-n>": "normal:j",
+    "<C-p>": "normal:k"
+  },
   "coc.source.emoji.filetypes": ["markdown", "gitcommit", "gina-commit"],
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "css", "html", "markdown", "vue"],
   "eslint.autoFixOnSave": true,

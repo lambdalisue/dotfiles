@@ -22,6 +22,28 @@
           "type": "basic"
         }
       ]
+    },
+    {
+      "description": "Replace Capslock -> Alt + Shift",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_shift",
+              "modifiers": ["option"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
     }
   ]
 }
