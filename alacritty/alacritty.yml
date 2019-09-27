@@ -339,6 +339,10 @@ live_config_reload: true
 #  program: /bin/bash
 #  args:
 #    - --login
+shell:
+  program: /usr/local/bin/zsh
+  args:
+    - --login
 
 # Startup directory
 #

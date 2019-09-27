@@ -90,9 +90,6 @@ else
   __rook::compile ${ZDOTDIR}/.zcompdump
 fi
 
-# source homeshick
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-
 # }}}
 
 # Movement {{{

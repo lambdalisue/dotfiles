@@ -79,8 +79,12 @@ fi
 if __rook::has 'anyenv'; then
   anyenv::init() {
     unset -f pyenv
+    unset -f python
     unset -f nodenv
+    unset -f node
+    unset -f npm
     unset -f goenv
+    unset -f go
     eval "$(anyenv init - --no-rehash)"
   }
   pyenv() {
@@ -89,13 +93,29 @@ if __rook::has 'anyenv'; then
     alias pyenv="CFLAGS='-I$(xcrun --show-sdk-path)/usr/include' pyenv"
     pyenv "$@"
   }
+  python() {
+    anyenv::init
+    python "$@"
+  }
   nodenv() {
     anyenv::init
     nodenv "$@"
   }
+  node() {
+    anyenv::init
+    node "$@"
+  }
+  npm() {
+    anyenv::init
+    npm "$@"
+  }
   goenv() {
     anyenv::init
     goenv "$@"
+  }
+  go() {
+    anyenv::init
+    go "$@"
   }
 else
   if __rook::has 'pyenv'; then
