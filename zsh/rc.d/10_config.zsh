@@ -44,8 +44,8 @@ if __rook::has 'nvim'; then
 fi
 
 # hub
-if __rook::has 'hub' && [[ -z __hub::initialized ]]; then
-  __hub::initialized=1
+if __rook::has 'hub' && [[ ! -v __hub_initialized ]]; then
+  __hub_initialized=1
   hub() {
     unset -f hub
     eval "$(hub alias -s)"
@@ -62,8 +62,8 @@ if __rook::has 'xdg-open'; then
 fi
 
 # circlip
-if __rook::has 'circlip' && [[ -z __circlip::initialized ]]; then
-  __circlip::initialized=1
+if __rook::has 'circlip' && [[ ! -v __circlip_initialized ]]; then
+  __circlip_initialized=1
   circlip() {
     unset -f circlip
     eval "$(circlip init)"
@@ -78,8 +78,8 @@ fi
 # fi
 
 # anyenv
-if __rook::has 'anyenv' && [[ -z __anyenv::initialized ]]; then
-  __anyenv::initialized=1
+if __rook::has 'anyenv' && [[ ! -v __anyenv_initialized ]]; then
+  __anyenv_initialized=1
   __anyenv::init() {
     unset -f pyenv
     unset -f python
