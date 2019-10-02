@@ -44,7 +44,8 @@ if __rook::has 'nvim'; then
 fi
 
 # hub
-if __rook::has 'hub'; then
+if __rook::has 'hub' && [[ -z __hub::initialized ]]; then
+  __hub::initialized=1
   hub() {
     unset -f hub
     eval "$(hub alias -s)"
@@ -61,7 +62,8 @@ if __rook::has 'xdg-open'; then
 fi
 
 # circlip
-if __rook::has 'circlip'; then
+if __rook::has 'circlip' && [[ -z __circlip::initialized ]]; then
+  __circlip::initialized=1
   circlip() {
     unset -f circlip
     eval "$(circlip init)"
@@ -76,8 +78,9 @@ fi
 # fi
 
 # anyenv
-if __rook::has 'anyenv'; then
-  anyenv::init() {
+if __rook::has 'anyenv' && [[ -z __anyenv::initialized ]]; then
+  __anyenv::initialized=1
+  __anyenv::init() {
     unset -f pyenv
     unset -f python
     unset -f nodenv
@@ -88,59 +91,35 @@ if __rook::has 'anyenv'; then
     eval "$(anyenv init - --no-rehash)"
   }
   pyenv() {
-    anyenv::init
+    __anyenv::init
     # https://github.com/pyenv/pyenv/issues/1219
     alias pyenv="CFLAGS='-I$(xcrun --show-sdk-path)/usr/include' pyenv"
     pyenv "$@"
   }
   python() {
-    anyenv::init
+    __anyenv::init
     python "$@"
   }
   nodenv() {
-    anyenv::init
+    __anyenv::init
     nodenv "$@"
   }
   node() {
-    anyenv::init
+    __anyenv::init
     node "$@"
   }
   npm() {
-    anyenv::init
+    __anyenv::init
     npm "$@"
   }
   goenv() {
-    anyenv::init
+    __anyenv::init
     goenv "$@"
   }
   go() {
-    anyenv::init
+    __anyenv::init
     go "$@"
   }
-else
-  if __rook::has 'pyenv'; then
-    pyenv() {
-      unset -f pyenv
-      eval "$(pyenv init - zsh)"
-      # https://github.com/pyenv/pyenv/issues/1219
-      alias pyenv='CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv '
-      pyenv "$@"
-    }
-  fi
-  if __rook::has 'nodenv'; then
-    nodenv() {
-      unset -f nodenv
-      eval "$(nodenv init - zsh)"
-      ndenv "$@"
-    }
-  fi
-  if __rook::has 'goenv'; then
-    goenv() {
-      unset -f goenv
-      eval "$(goenv init - zsh)"
-      goenv "$@"
-    }
-  fi
 fi
 
 # go
@@ -160,6 +139,9 @@ if __rook::has 'pip'; then
     mkdir ~/.cache/pip
     pip completion --zsh > ~/.cache/pip/init.zsh
   }
+  if [[ ! -f ~/.cache/pip/init.zsh ]]; then
+    pip::cache
+  fi
   __rook::source ~/.cache/pip/init.zsh
 fi
 if __rook::has 'pip2'; then
@@ -167,6 +149,9 @@ if __rook::has 'pip2'; then
     mkdir ~/.cache/pip2
     pip2 completion --zsh > ~/.cache/pip2/init.zsh
   }
+  if [[ ! -f ~/.cache/pip2/init.zsh ]]; then
+    pip2::cache
+  fi
   __rook::source ~/.cache/pip2/init.zsh
 fi
 if __rook::has 'pip3'; then
@@ -174,6 +159,9 @@ if __rook::has 'pip3'; then
     mkdir ~/.cache/pip3
     pip3 completion --zsh > ~/.cache/pip3/init.zsh
   }
+  if [[ ! -f ~/.cache/pip3/init.zsh ]]; then
+    pip3::cache
+  fi
   __rook::source ~/.cache/pip3/init.zsh
 fi
 
@@ -183,6 +171,9 @@ if __rook::has 'pipenv'; then
     mkdir ~/.cache/pipenv
     pipenv --completion > ~/.cache/pipenv/init.zsh
   }
+  if [[ ! -f ~/.cache/pipenv/init.zsh ]]; then
+    pipenv::cache
+  fi
   __rook::source ~/.cache/pipenv/init.zsh
 fi
 
@@ -197,6 +188,9 @@ if __rook::has 'direnv'; then
     mkdir ~/.cache/direnv
     direnv hook zsh > ~/.cache/direnv/init.zsh
   }
+  if [[ ! -f ~/.cache/direnv/init.zsh ]]; then
+    direnv::cache
+  fi
   __rook::source ~/.cache/direnv/init.zsh
 fi
 
