@@ -213,7 +213,7 @@
                         ]
                     },
                     {
-                        "description": "Replace Capslock -> Alt + Shift",
+                        "description": "Replace Capslock -> Ctrl + Alt",
                         "manipulators": [
                             {
                                 "from": {
@@ -226,7 +226,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_shift",
+                                        "key_code": "left_control",
                                         "modifiers": [
                                             "option"
                                         ]
