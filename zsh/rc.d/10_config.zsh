@@ -45,7 +45,7 @@ fi
 
 # hub
 if __rook::has 'hub' && [[ ! -v __hub_initialized ]]; then
-  __hub_initialized=1
+  export __hub_initialized=1
   hub() {
     unset -f hub
     eval "$(hub alias -s)"
@@ -63,7 +63,7 @@ fi
 
 # circlip
 if __rook::has 'circlip' && [[ ! -v __circlip_initialized ]]; then
-  __circlip_initialized=1
+  export __circlip_initialized=1
   circlip() {
     unset -f circlip
     eval "$(circlip init)"
@@ -79,7 +79,7 @@ fi
 
 # anyenv
 if __rook::has 'anyenv' && [[ ! -v __anyenv_initialized ]]; then
-  __anyenv_initialized=1
+  export __anyenv_initialized=1
   __anyenv::init() {
     unset -f pyenv
     unset -f python
