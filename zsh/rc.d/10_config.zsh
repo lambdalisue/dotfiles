@@ -186,6 +186,11 @@ if __rook::has 'pipenv'; then
   __rook::source ~/.cache/pipenv/init.zsh
 fi
 
+# poetry
+if [ -f ~/.poetry/env ]; then
+  __rook::source ~/.poetry/env
+fi
+
 # direnv
 if __rook::has 'direnv'; then
   direnv::cache() {
