@@ -790,6 +790,14 @@ nmap s <Nop>
 xmap s <Nop>
 '''
 
+[[plugins]]
+repo = 'lambdalisue/vim-operator-breakline'
+depends = 'vim-operator-user'
+hook_add = '''
+map Gq <Plug>(operator-breakline-textwidth)
+map GQ <Plug>(operator-breakline-manual)
+'''
+
 # }}}
 
 # Colorscheme {{{
