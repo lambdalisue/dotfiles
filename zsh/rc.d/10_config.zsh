@@ -32,14 +32,10 @@ fi
 
 # vim
 if __rook::has 'vim'; then
-  export EDITOR=vim
-  export MANPAGER="vim -c MANPAGER -"
   alias vimm="vim -u ~/.vim/vimrc.min -i NONE"
 fi
 
 if __rook::has 'nvim'; then
-  export EDITOR=nvim
-  export MANPAGER="nvim -c MANPAGER -"
   alias nvimm="nvim -u ~/.vim/vimrc.min -i NONE"
 fi
 
@@ -88,6 +84,9 @@ if __rook::has 'anyenv' && [[ ! -v __anyenv_initialized ]]; then
     unset -f npm
     unset -f goenv
     unset -f go
+    unset -f rbenv
+    unset -f ruby
+    unset -f gem
     eval "$(anyenv init - --no-rehash)"
   }
   pyenv() {
@@ -119,6 +118,18 @@ if __rook::has 'anyenv' && [[ ! -v __anyenv_initialized ]]; then
   go() {
     __anyenv::init
     go "$@"
+  }
+  rbenv() {
+    __anyenv::init
+    rbenv "$@"
+  }
+  ruby() {
+    __anyenv::init
+    ruby "$@"
+  }
+  gem() {
+    __anyenv::init
+    gem "$@"
   }
 fi
 

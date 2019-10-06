@@ -1,3 +1,11 @@
+# [[plugins]]
+# repo = 'lambdalisue/attorney.vim'
+# merged = 0
+
+[[plugins]]
+repo = 'lambdalisue/gi.vim'
+merged = 0
+
 # Fundemental {{{
 [[plugins]]
 repo = 'ncm2/float-preview.nvim'
