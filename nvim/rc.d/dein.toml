@@ -794,8 +794,10 @@ xmap s <Nop>
 repo = 'lambdalisue/vim-operator-breakline'
 depends = 'vim-operator-user'
 hook_add = '''
-map Gq <Plug>(operator-breakline-textwidth)
-map GQ <Plug>(operator-breakline-manual)
+nmap ggq <Plug>(operator-breakline-textwidth)
+xmap ggq <Plug>(operator-breakline-textwidth)
+nmap ggQ <Plug>(operator-breakline-manual)
+xmap ggQ <Plug>(operator-breakline-manual)
 '''
 
 # }}}
