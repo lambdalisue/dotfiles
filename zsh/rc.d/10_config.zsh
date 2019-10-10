@@ -74,64 +74,65 @@ fi
 # fi
 
 # anyenv
-if __rook::has 'anyenv' && [[ ! -v __anyenv_initialized ]]; then
-  export __anyenv_initialized=1
-  __anyenv::init() {
-    unset -f pyenv
-    unset -f python
-    unset -f nodenv
-    unset -f node
-    unset -f npm
-    unset -f goenv
-    unset -f go
-    unset -f rbenv
-    unset -f ruby
-    unset -f gem
-    eval "$(anyenv init - --no-rehash)"
-  }
-  pyenv() {
-    __anyenv::init
-    # https://github.com/pyenv/pyenv/issues/1219
-    alias pyenv="CFLAGS='-I$(xcrun --show-sdk-path)/usr/include' pyenv"
-    pyenv "$@"
-  }
-  python() {
-    __anyenv::init
-    python "$@"
-  }
-  nodenv() {
-    __anyenv::init
-    nodenv "$@"
-  }
-  node() {
-    __anyenv::init
-    node "$@"
-  }
-  npm() {
-    __anyenv::init
-    npm "$@"
-  }
-  goenv() {
-    __anyenv::init
-    goenv "$@"
-  }
-  go() {
-    __anyenv::init
-    go "$@"
-  }
-  rbenv() {
-    __anyenv::init
-    rbenv "$@"
-  }
-  ruby() {
-    __anyenv::init
-    ruby "$@"
-  }
-  gem() {
-    __anyenv::init
-    gem "$@"
-  }
+if __rook::has 'anyenv'; then
+  eval "$(anyenv init -)"
 fi
+# if __rook::has 'anyenv' && [[ ! -v __anyenv_initialized ]]; then
+#   __anyenv_initialized=1
+#   __anyenv::init() {
+#     unset -f pyenv
+#     unset -f python
+#     unset -f nodenv
+#     unset -f node
+#     unset -f npm
+#     unset -f goenv
+#     unset -f go
+#     unset -f rbenv
+#     unset -f ruby
+#     unset -f gem
+#     eval "$(anyenv init - --no-rehash)"
+#   }
+#   pyenv() {
+#     __anyenv::init
+#     pyenv "$@"
+#   }
+#   python() {
+#     __anyenv::init
+#     python "$@"
+#   }
+#   nodenv() {
+#     __anyenv::init
+#     nodenv "$@"
+#   }
+#   node() {
+#     __anyenv::init
+#     node "$@"
+#   }
+#   npm() {
+#     __anyenv::init
+#     npm "$@"
+#   }
+#   goenv() {
+#     __anyenv::init
+#     goenv "$@"
+#   }
+#   go() {
+#     __anyenv::init
+#     go "$@"
+#   }
+#   rbenv() {
+#     __anyenv::init
+#     rbenv "$@"
+#   }
+#   ruby() {
+#     __anyenv::init
+#     ruby "$@"
+#   }
+#   gem() {
+#     __anyenv::init
+#     gem "$@"
+#   }
+# fi
 
 # go
 export GOPATH="$HOME/.go"
