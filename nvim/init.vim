@@ -234,9 +234,11 @@ set list
 set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%,eol:$
 
 " vertically split buffers for vimdiff
-set diffopt&
-      \ diffopt+=vertical
-      \ diffopt+=hiddenoff
+if has('vim-8.0.1361')
+  set diffopt&
+        \ diffopt+=vertical
+        \ diffopt+=hiddenoff
+endif
 
 " Show bracket matches
 set showmatch           " highlight a partner of cursor character (matchparen is not used)
