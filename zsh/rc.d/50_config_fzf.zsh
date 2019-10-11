@@ -10,45 +10,6 @@ if type fd 1>/dev/null 2>&1; then
     export FZF_DEFAULT_COMMAND='fd --type f'
 fi
 
-# ffd (file) {{{
-ffd::print() {
-    local s=$(fzf --query "$1" --preview 'head -100 {}')
-    [[ -n $s ]] && print "$s"
-}
-
-ffd() {
-    print -z $(ffd::print $@)
-}
-
-ffd::zle() {
-    [[ "x$BUFFER" != "x" ]] && BUFFER="$BUFFER "
-    CURSOR=$#BUFFER
-    BUFFER="$BUFFER$(ffd::print)"
-    zle redisplay
-    zle zle-line-init
-}
-zle -N ffd::zle
-# }}}
-
-# fcdf (directory of file) {{{
-fcdf::print() {
-    local s=$(fzf --query "$1" --preview 'head -100 {}')
-    [[ -n $s ]] && print "cd $(dirname "$s")"
-}
-
-fcdf() {
-    local c=$(fcdf::print $@)
-    [[ -n $c ]] && eval $c
-}
-
-fcdf::zle() {
-  BUFFER=$(fcdf::print $BUFFER)
-  [[ -n $BUFFER ]] && zle accept-line
-  zle clear-screen
-}
-zle -N fcdf::zle
-# }}}
-
 # fcdr (recent directory) {{{
 fcdr::print() {
     if ! which cdr 1>/dev/null 2>&1; then
@@ -161,36 +122,6 @@ fbindkey::zle() {
 zle -N fbindkey::zle
 # }}}
 
-# fhomeshick {{{
-fhomeshick::print() {
-    if ! which homeshick 1>/dev/null 2>&1; then
-        echo 'A "homeshick" command is not found.'
-        return 1
-    fi
-    if ! which perl 1>/dev/null 2>&1; then
-        echo 'A "perl" command is not found.'
-        return 1
-    fi
-    local s=$(homeshick list \
-        | perl -pe 's/\x1b\[[0-9;]*[a-zA-Z]//g' \
-        | fzf --tac -q "$1" \
-        )
-    [[ -n $s ]] && print "homeshick cd $(echo $s | perl -lanE 'say $F[0]')"
-}
-
-fhomeshick() {
-    local c=$(fhomeshick::print $@)
-    [[ -n $c ]] && eval $c
-}
-
-fhomeshick::zle() {
-    BUFFER=$(fhomeshick::print $BUFFER)
-    [[ -n $BUFFER ]] && zle accept-line
-    zle clear-screen
-}
-zle -N fhomeshick::zle
-# # }}}
-
 # fghq {{{
 fghq::print() {
     local s="$(ghq list --full-path | fzf -q "$1")"
@@ -210,14 +141,10 @@ fghq::zle() {
 zle -N fghq::zle
 # }}}
 
-bindkey '^T' ffd::zle
 bindkey '^R' ffc::zle
-bindkey '^X^F' fcdf::zle
 bindkey '^X^D' fcdr::zle
 bindkey '^X^B' fbindkey::zle
 bindkey '^X^K' fkill::zle
-bindkey '^X^H' fhomeshick::zle
-bindkey '^X^?' fhomeshick::zle
 bindkey '^X^G' fghq::zle
 
 # # vim: foldmethod=marker

@@ -3,7 +3,6 @@ case $(uname) in
   'Linux') export PLATFORM='linux';;
 esac
 
-
 #-----------------------------------------------------------------------------
 # Utility {{{
 __rook::has() {
@@ -71,25 +70,15 @@ TRAPWINCH() {
     zle && { zle reset-prompt; zle -R }
 }
 
-# Enable 'zrecompile'
+# https://gist.github.com/ctechols/ca1035271ad134841284
 autoload -U zrecompile
-
-# NOTE: https://carlosbecker.com/posts/speeding-up-zsh/
 autoload -Uz compinit
-if [ ! -f "${ZDOTDIR}/.zcompdump" ]; then
+if [[ -n ${ZDOTDIR}/.zcompdump(#gN.mh+24) ]]; then
   compinit
-  __rook::compile ${ZDOTDIR}/.zcompdump
-elif __rook::is_linux && [[ $(date +'%j') > $(date +'%j' -r "${ZDOTDIR}/.zcompdump") ]]; then
-  compinit
-  __rook::compile ${ZDOTDIR}/.zcompdump
-elif __rook::is_osx && [[ $(date +'%j') > $(stat -f '%Sm' -t '%j' "${ZDOTDIR}/.zcompdump") ]]; then
-  compinit
-  __rook::compile ${ZDOTDIR}/.zcompdump
+  zrecompile ${ZDOTDIR}/.zcompdump
 else
   compinit -C
-  __rook::compile ${ZDOTDIR}/.zcompdump
 fi
-
 # }}}
 
 # Movement {{{
@@ -183,33 +172,34 @@ zstyle ':completion:*' completer \
     _prefix
 #}}}
 
-# Plugin {{{
-if [[ -z $ZPLUG_LOADFILE ]]; then
-  if [[ -f $HOME/.zplug/init.zsh ]]; then
-    export ZPLUG_LOADFILE="${ZDOTDIR}/zplug.zsh"
-    __rook::source ${HOME}/.zplug/init.zsh
-    zplug load
-  else
-    echo "A zplug has not installed yet. Execute the following to install it."
-    echo
-    echo "  $ install::zplug"
-    echo
-  fi
-else
-  __rook::source ${HOME}/.zplug/init.zsh
-  zplug load
-fi
-# }}}
+# Emacs keybinding
+bindkey -e
 
-# Load rc.d {{{
+# Cycle history search with C-p/C-n
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+
+# Select completion menu with hjkl
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+
+# Plugin
+source "${ZDOTDIR}/plugin.zsh"
+source "${ZDOTDIR}/colon.zsh"
+
 for filename in ${ZDOTDIR}/rc.d/*.zsh; do
-  __rook::source ${filename}
+  source ${filename}
 done
-# }}}
 
 # compile zshenv/zshrc
-__rook::compile ${HOME}/.zshenv
-__rook::compile ${ZDOTDIR}/.zshrc
+zrecompile ${HOME}/.zshenv
+zrecompile ${ZDOTDIR}/.zshrc
 
 # Profiling {{{
 if __rook::has 'zprof'; then

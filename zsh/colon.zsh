@@ -1,9 +1,9 @@
 # Colon
 # Author:  lambdalisue
 # License: MIT
-if __rook::has 'timeout'; then
+if type timeout >/dev/null 2>&1; then
   __colon::util::timeout() { timeout "$@" }
-elif __rook::has 'gtimeout'; then
+elif type gtimeout >/dev/null 2>&1; then
   __colon::util::timeout() { gtimeout "$@" }
 else
   __colon::util::timeout() {
@@ -59,19 +59,8 @@ __colon::get_host() {
 
 __colon::get_time() {
   local fcolor=245
-  local date="%D{%H:%M}"
+  local date="%D{%H:%M:%S}"
   __colon::get_segment "$date" $fcolor
-}
-
-__colon::get_vimode() {
-  local fcolor_insert='yellow'
-  local fcolor_normal='blue'
-  # http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
-  # http://qiita.com/b4b4r07/items/8db0257d2e6f6b19ecb9
-  case $KEYMAP in
-    vicmd) __colon::get_segment "NORMAL" $fcolor_normal;;
-    *)     __colon::get_segment "INSERT" $fcolor_insert;;
-  esac
 }
 
 __colon::get_symbol() {
@@ -215,20 +204,6 @@ __colon::configure_vcsstyles() {
     fi
 }
 
-__colon::configure_vimode() {
-  # NOTE: 'visual' keymap could not be detected.
-  # http://www.zsh.org/mla/users/2016/msg00188.html
-  __colon::overwrite_prompt_with_vimode() {
-  }
-  function zle-line-init zle-line-finish zle-keymap-select {
-    __colon_vimode=$(__colon::get_vimode)
-    zle reset-prompt
-  }
-  zle -N zle-line-init
-  zle -N zle-line-finish
-  zle -N zle-keymap-select
-}
-
 __colon::configure_prompt() {
   __colon::prompt_precmd() {
     local exitstatus=$?
@@ -249,11 +224,10 @@ __colon::configure_prompt() {
     # Array to String
     __colon_prompt_1st_bits=${(j: :)__colon_prompt_1st_bits}
     __colon_prompt_2nd_bits=${(j: :)__colon_prompt_2nd_bits}
-    __colon_vimode=$(__colon::get_vimode)
   }
   add-zsh-hook precmd __colon::prompt_precmd
 
-  PROMPT="\$__colon_vimode \$__colon_prompt_1st_bits "
+  PROMPT="\$__colon_prompt_1st_bits "
   RPROMPT=" \$__colon_prompt_2nd_bits"
 }
 
@@ -266,7 +240,6 @@ __colon::configure_prompt() {
   # enable variable extraction in prompt
   setopt prompt_subst
   __colon::configure_prompt
-  __colon::configure_vimode
   __colon::configure_vcsstyles
 }
 # vim: ft=zsh

@@ -18,40 +18,19 @@ typeset -U path
 #  -: follow the symbol links
 #  /: ignore files
 path=(
-    $HOME/.zplug/bin(N-/)
     $HOME/.go/bin(N-/)
     $HOME/.cabal/bin(N-/)
     $HOME/.cargo/bin(N-/)
-    $HOME/.phantomjs/bin(N-/)
-    $HOME/.anyenv/bin(N-/)
-    $HOME/.anyenv/envs/pyenv/bin(N-/)
-    $HOME/.anyenv/envs/nodenv/bin(N-/)
-    $HOME/.anyenv/envs/goenv/bin(N-/)
-    $HOME/.anyenv/envs/rbenv/bin(N-/)
-    $HOME/.anyenv/envs/pyenv/shims(N-/)
-    $HOME/.anyenv/envs/nodenv/shims(N-/)
-    $HOME/.anyenv/envs/goenv/shims(N-/)
-    $HOME/.anyenv/envs/rbenv/shims(N-/)
     $HOME/.poetry/bin(N-/)
-    $HOME/.cache/dein/repos/github.com/thinca/vim-themis/bin(N-/)
+    $HOME/.anyenv/bin(N-/)
     $HOME/.local/bin(N-/)
-    $HOME/miniconda/bin(N-/)
-    $HOME/miniconda3/bin(N-/)
-    $HOME/miniconda2/bin(N-/)
-    /usr/local/texlive/2017basic/bin/x86_64-darwin(N-/)
-    /usr/local/texlive/2014/bin/i386-linux(N-/)
-    /usr/local/texlive/2014/bin/i386-darwin(N-/)
-    /usr/local/texlive/2014/bin/x86_64-linux(N-/)
-    /usr/local/texlive/2014/bin/x86_64-darwin(N-/)
-    /opt/local/bin(N-/)
+    $HOME/.cache/dein/repos/github.com/thinca/vim-themis/bin(N-/)
     /usr/local/bin(N-/)
     /usr/bin(N-/)
     /bin(N-/)
-    /opt/local/sbin(N-/)
     /usr/local/sbin(N-/)
     /usr/sbin(N-/)
     /sbin(N-/)
-    /usr/X11/bin(N-/)
     $path
 )
 
@@ -61,7 +40,6 @@ typeset -xT SUDO_PATH sudo_path
 typeset -U sudo_path
 sudo_path=(
     $sudo_path
-    /opt/local/sbin(N-/)
     /usr/local/sbin(N-/)
     /usr/sbin(N-/)
     /sbin(N-/)
@@ -78,8 +56,6 @@ typeset -U manpath
 manpath=(
     $HOME/.local/share/man(N-/)
     $manpath
-    /usr/local/texlive/texmf-dist/doc/man(N-/)
-    /opt/local/share/man(N-/)
     /usr/local/share/man(N-/)
     /usr/share/man(N-/)
 )
