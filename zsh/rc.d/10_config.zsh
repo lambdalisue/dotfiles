@@ -1,3 +1,7 @@
+export LANGUAGE="en_US:en"
+export LANG="en_US.UTF-8"
+export LC_ALL=en_US.UTF-8
+
 alias ls="ls -G -w"
 alias la="ls -lhAFG"
 
@@ -62,7 +66,7 @@ fi
 # pip
 if type pip >/dev/null 2>&1; then
   pip::cache() {
-    mkdir ~/.cache/pip
+    mkdir -p ~/.cache/pip
     pip completion --zsh > ~/.cache/pip/init.zsh
     zcompile ~/.cache/pip/init.zsh
   }
@@ -73,7 +77,7 @@ if type pip >/dev/null 2>&1; then
 fi
 if type pip2 >/dev/null 2>&1; then
   pip2::cache() {
-    mkdir ~/.cache/pip2
+    mkdir -p ~/.cache/pip2
     pip2 completion --zsh > ~/.cache/pip2/init.zsh
     zcompile ~/.cache/pip2/init.zsh
   }
@@ -84,7 +88,7 @@ if type pip2 >/dev/null 2>&1; then
 fi
 if type pip3 >/dev/null 2>&1; then
   pip3::cache() {
-    mkdir ~/.cache/pip3
+    mkdir -p ~/.cache/pip3
     pip3 completion --zsh > ~/.cache/pip3/init.zsh
     zcompile ~/.cache/pip3/init.zsh
   }

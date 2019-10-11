@@ -1,43 +1,3 @@
-case $(uname) in
-  'Darwin') export PLATFORM='darwin';;
-  'Linux') export PLATFORM='linux';;
-esac
-
-#-----------------------------------------------------------------------------
-# Utility {{{
-__rook::has() {
-  which "$1" >/dev/null 2>&1
-}
-
-__rook::is_process_running() {
-  ps | grep "$1" | grep -v grep >/dev/null 2>&1
-}
-
-__rook::is_ssh_running() {
-  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ]
-}
-
-__rook::is_osx() {
-  [[ $PLATFORM = "darwin" ]]
-}
-
-__rook::is_linux() {
-  [[ $PLATFORM = "linux" ]]
-}
-
-__rook::compile() {
-  local filename="$1"
-  zrecompile "${filename}"
-}
-
-__rook::source() {
-  __rook::compile "$1"
-  source "$1"
-}
-
-# }}}
-
-# Prelude {{{
 # disable promptcr to display last line without newline
 unsetopt promptcr
 
@@ -50,26 +10,6 @@ stty stop undef
 # print character as eight bit to prevent mojibake
 setopt print_eight_bit
 
-# use ASCII in linux server
-if [[ "${TERM}" = "linux" ]]; then
-  export LANG=C
-else
-  export LANGUAGE="en_US:en"
-  export LANG="en_US.UTF-8"
-  export LC_ALL=en_US.UTF-8
-fi
-
-# report time when the process takes over 3 seconds
-REPORTTIME=3
-
-# enable completion in --prefix=~/local or whatever
-setopt magic_equal_subst
-
-# Ensure that the prompt is redrawn when the terminal size changes.
-TRAPWINCH() {
-    zle && { zle reset-prompt; zle -R }
-}
-
 # https://gist.github.com/ctechols/ca1035271ad134841284
 autoload -U zrecompile
 autoload -Uz compinit
@@ -79,7 +19,6 @@ if [[ -n ${ZDOTDIR}/.zcompdump(#gN.mh+24) ]]; then
 else
   compinit -C
 fi
-# }}}
 
 # Movement {{{
 WORDCHARS=${WORDCHARS:s,/,,} # Exclude / so you can delete path with ^W
@@ -120,6 +59,7 @@ setopt no_flow_control       # do not use C-s/C-q
 #}}}
 
 # Completion {{{
+setopt magic_equal_subst     # enable completion in --prefix=~/local or whatever
 setopt complete_in_word      # complete at carret position
 setopt glob_complete         # complete without expanding glob
 setopt hist_expand           # expand history when complete
@@ -201,14 +141,12 @@ done
 zrecompile ${HOME}/.zshenv
 zrecompile ${ZDOTDIR}/.zshrc
 
-# Profiling {{{
-if __rook::has 'zprof'; then
+# Profiling
+if type zprof >/dev/null 2>&1; then
   zprof > $HOME/zsh-startup.$$.log
 fi
 
 # Make exitcode success
 true
-# }}}
-
 #-----------------------------------------------------------------------------
 # vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker

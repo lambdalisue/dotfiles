@@ -23,13 +23,13 @@ zsh::profile-rc() {
 }
 
 zsh::build-cache() {
-  for filename in $(command find "${ZDOTDIR}" -regex ".*\.zsh$"); do
-    zcompile $filename > /dev/null 2>&1
+  for filename in $(command find "${ZDOTDIR}" -follow -name "*.zsh"); do
+    zcompile $filename
   done
 }
 
 zsh::remove-cache() {
-  for filename in $(command find "${ZDOTDIR}" -regex ".*\.zwc$"); do
+  for filename in $(command find "${ZDOTDIR}" -follow -name "*.zwc"); do
     command rm -f $filename
   done
 }
