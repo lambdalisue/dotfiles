@@ -352,10 +352,7 @@ function! s:toggle_vim_parenmatch() abort
   call parenmatch#update()
 endfunction
 
-nnoremap <silent> <Plug>(my-toggle-parenmatch)
-      \ :<C-u>call <SID>toggle_vim_parenmatch()<CR>
-nmap <C-g>m     <Plug>(my-toggle-parenmatch)
-nmap <C-g><C-m> <Plug>(my-toggle-parenmatch)
+nnoremap <silent> :<C-u>call <SID>toggle_vim_parenmatch()<CR>
 '''
 
 [[plugins]]
@@ -368,10 +365,7 @@ function! s:toggle_vim_cursorword() abort
   call cursorword#matchadd()
 endfunction
 
-nnoremap <silent> <Plug>(my-toggle-cursorword)
-      \ :<C-u>call <SID>toggle_vim_cursorword()<CR>
-nmap <C-g>c     <Plug>(my-toggle-cursorword)
-nmap <C-g><C-c> <Plug>(my-toggle-cursorword)
+nnoremap <silent> <C-g>c :<C-u>call <SID>toggle_vim_cursorword()<CR>
 '''
 
 # }}}
@@ -733,10 +727,10 @@ xmap s <Nop>
 repo = 'lambdalisue/vim-operator-breakline'
 depends = 'vim-operator-user'
 hook_add = '''
-nmap ggq <Plug>(operator-breakline-textwidth)
-xmap ggq <Plug>(operator-breakline-textwidth)
-nmap ggQ <Plug>(operator-breakline-manual)
-xmap ggQ <Plug>(operator-breakline-manual)
+nmap <C-g>q <Plug>(operator-breakline-textwidth)
+xmap <C-g>q <Plug>(operator-breakline-textwidth)
+nmap <C-g>Q <Plug>(operator-breakline-manual)
+xmap <C-g>Q <Plug>(operator-breakline-manual)
 '''
 
 # }}}
