@@ -52,8 +52,7 @@ $HOME/.themisrc
 $HOME/.zshenv
 $HOME/.config/zsh/
 $HOME/.config/zsh/.zshrc
-$HOME/.config/zsh/colon.zsh
-$HOME/.config/zsh/zplug.zsh
+$HOME/.config/zsh/plugin.zsh
 $HOME/.config/zsh/rc.d/
 $HOME/.config/zsh/rc.d/10_config.zsh
 $HOME/.config/zsh/rc.d/50_config_fzf.zsh

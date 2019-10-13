@@ -48,6 +48,7 @@ sudo_path=(
 # Add completion path
 fpath=(
     $HOME/.zfunc(N-/)
+    $ZDOTDIR/zfunc(N-/)
     $fpath
     /usr/local/share/zsh/site-functions(N-/)
 )

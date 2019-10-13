@@ -131,11 +131,14 @@ bindkey -M menuselect 'l' vi-forward-char
 
 # Plugin
 source "${ZDOTDIR}/plugin.zsh"
-source "${ZDOTDIR}/colon.zsh"
 
 for filename in ${ZDOTDIR}/rc.d/*.zsh; do
   source ${filename}
 done
+
+# Prompt 
+autoload -U promptinit; promptinit
+prompt collon
 
 # compile zshenv/zshrc
 zrecompile ${HOME}/.zshenv
@@ -145,8 +148,3 @@ zrecompile ${ZDOTDIR}/.zshrc
 if type zprof >/dev/null 2>&1; then
   zprof > $HOME/zsh-startup.$$.log
 fi
-
-# Make exitcode success
-true
-#-----------------------------------------------------------------------------
-# vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker
