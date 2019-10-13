@@ -352,7 +352,7 @@ function! s:toggle_vim_parenmatch() abort
   call parenmatch#update()
 endfunction
 
-nnoremap <silent> :<C-u>call <SID>toggle_vim_parenmatch()<CR>
+nnoremap <silent> <C-g>m <:<C-u>call <SID>toggle_vim_parenmatch()<CR>
 '''
 
 [[plugins]]
