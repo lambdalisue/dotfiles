@@ -1,19 +1,4 @@
-# [[plugins]]
-# repo = 'lambdalisue/attorney.vim'
-# merged = 0
-
-[[plugins]]
-repo = 'lambdalisue/gi.vim'
-merged = 0
-
 # Fundemental {{{
-[[plugins]]
-repo = 'ncm2/float-preview.nvim'
-if = 'has("nvim-0.4.0")'
-hook_add = '''
-let g:float_preview#docked = 1
-'''
-
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
@@ -21,37 +6,10 @@ repo = 'Shougo/dein.vim'
 repo = 'mattn/webapi-vim'
 
 [[plugins]]
-repo = 'mattn/wwwrenderer-vim'
-
-[[plugins]]
-repo = 'thinca/vim-ref'
-hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/ref.vim'))
-'''
-
-[[plugins]]
 repo = 'lambdalisue/fila.vim'
 merged = 0
 hook_post_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/fila.vim'))
-'''
-
-[[plugins]]
-repo = 'kana/vim-altr'
-hook_add = '''
-nmap <C-a>n <Plug>(altr-forward)
-nmap <C-a>p <Plug>(altr-back)
-nmap <C-a><C-n> <Plug>(altr-forward)
-nmap <C-a><C-p> <Plug>(altr-back)
-'''
-hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/altr.vim'))
-'''
-
-[[plugins]]
-repo = 'kana/vim-submode'
-hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/submode.vim'))
 '''
 
 [[plugins]]
@@ -71,9 +29,6 @@ function! s:grea(bang, query) abort
 endfunction
 nnoremap <silent> <Leader>gg :<C-u>call <SID>grea('', '')<CR>
 '''
-
-[[plugins]]
-repo = 'lambdalisue/vim-unified-diff'
 
 [[plugins]]
 repo = 'lambdalisue/readablefold.vim'
@@ -99,14 +54,6 @@ augroup END
 '''
 
 [[plugins]]
-repo = 'Shougo/echodoc.vim'
-hook_add = '''
-set noshowmode
-set shortmess+=c
-let g:echodoc#enable_at_startup = 1
-'''
-
-[[plugins]]
 repo = 'Shougo/junkfile.vim'
 on_cmd = 'JunkfileOpen'
 hook_add = '''
@@ -116,9 +63,6 @@ let g:junkfile#directory = expand("~/Documents/junkfiles")
 [[plugins]]
 repo = 'haya14busa/dein-command.vim'
 on_cmd = 'Dein'
-
-[[plugins]]
-repo = 'thinca/vim-localrc'
 
 [[plugins]]
 repo = 'lambdalisue/vim-marron'
@@ -181,23 +125,10 @@ repo = 'kana/vim-textobj-user'
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
-repo = 'lambdalisue/vim-rplugin'
-
-[[plugins]]
 repo = 'tyru/current-func-info.vim'
 # }}}
 
 # App {{{
-[[plugins]]
-repo = 'godlygeek/tabular'
-
-# [[plugins]]
-# repo = 'plasticboy/vim-markdown'
-
-[[plugins]]
-repo = 'rhysd/reply.vim'
-on_cmd = ['Repl', 'ReplAuto']
-
 [[plugins]]
 repo = 'cocopon/colorswatch.vim'
 on_cmd = 'ColorSwatchGenerate'
@@ -233,57 +164,11 @@ let g:gista#client#default_username = 'lambdalisue'
 '''
 
 [[plugins]]
-repo = 'junegunn/goyo.vim'
-on_cmd = 'Goyo'
-hook_add = '''
-function! s:goyo_enter() abort
-  silent !tmux set status off
-  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  setlocal nolist
-  highlight EndOfBuffer ctermfg=bg guifg=bg
-endfunction
-
-function! s:goyo_leave() abort
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-endfunction
-
-augroup my_goyo_config
-  autocmd! *
-  autocmd User GoyoEnter nested call s:goyo_enter()
-  autocmd User GoyoLeave nested call s:goyo_leave()
-augroup END
-'''
-
-[[plugins]]
-repo = 'junegunn/limelight.vim'
-on_cmd = 'Limelight'
-
-[[plugins]]
-repo = 'Shougo/unite.vim'
-
-[[plugins]]
-repo = 'Shougo/vimfiler.vim'
-depends = 'unite.vim'
-
-[[plugins]]
 repo = 'mbbill/undotree'
 on_cmd = 'UndotreeToggle'
 hook_add = '''
 nnoremap <silent> <Leader>uu :<C-u>UndotreeToggle<CR>
 '''
-
-[[plugins]]
-repo = 'majutsushi/tagbar'
-on_cmd = [
-  'Tagbar',
-  'TagbarOpen',
-  'TagbarToggle',
-]
-hook_add = '''
-nnoremap <silent> <Leader>tt :<C-u>TagbarToggle<CR>
-'''
-
 
 [[plugins]]
 repo = 'lambdalisue/lista.vim'
@@ -292,21 +177,6 @@ nnoremap #  :<C-u>Lista<CR>
 nnoremap g# :<C-u>ListaResume<CR>
 nnoremap z# :<C-u>ListaCursorWord<CR>
 '''
-
-# [[plugins]]
-# repo = 'lambdalisue/lista.nvim'
-# hook_add = '''
-# let g:lista#custom_mappings = [
-#       \ ['<C-b>', '<Left>'],
-#       \ ['<C-f>', '<Right>'],
-#       \ ['<C-a>', '<Home>'],
-#       \ ['<C-e>', '<End>'],
-#       \ ['<C-d>', '<Del>'],
-#       \]
-# nnoremap #  :<C-u>Lista<CR>
-# nnoremap g# :<C-u>ListaResume<CR>
-# nnoremap z# :<C-u>ListaCursorWord<CR>
-# '''
 
 # }}}
 
@@ -322,10 +192,6 @@ repo = 'lambdalisue/wifi.vim'
 hook_add = '''
 let g:wifi#update_tabline = 1
 '''
-
-[[plugins]]
-repo = 'powerman/vim-plugin-AnsiEsc'
-on_cmd = 'AnsiEsc'
 
 [[plugins]]
 repo = 'kannokanno/previm'
@@ -429,24 +295,8 @@ nmap gcO  <Plug>(caw:jump:comment-prev)
 '''
 
 [[plugins]]
-repo = 'AndrewRadev/switch.vim'
-on_cmd = 'Switch'
-hook_add = '''
-let g:switch_mapping = ''
-nnoremap <silent> ss :<C-u>Switch<CR>
-'''
-
-[[plugins]]
 repo = 'AndrewRadev/linediff.vim'
 on_cmd = 'Linediff'
-
-[[plugins]]
-repo = 'junegunn/vim-easy-align'
-on_map = '<Plug>(EasyAlign)'
-hook_add = '''
-vmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-'''
 
 [[plugins]]
 repo = 'lambdalisue/vim-findent'
@@ -473,64 +323,12 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/quickrun.vim'))
 
 # }}}
 
-# Lint {{{
-# [[plugins]]
-# repo = 'w0rp/ale'
-# hook_add = '''
-# let g:ale_fix_on_save = 1
-# " let g:ale_virtualtext_cursor = exists('*nvim_buf_set_virtual_text')
-# nmap <C-k> <Plug>(ale_previous_wrap)
-# nmap <C-j> <Plug>(ale_next_wrap)
-# '''
-# hook_post_source = '''
-# execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/ale.vim'))
-# '''
-# }}}
-
 # Complete {{{
-[[plugins]]
-repo = 'Shougo/echodoc.vim'
-hook_add = '''
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = has('nvim') ? 'virtual' : 'echo'
-'''
-
 [[plugins]]
 repo = 'junegunn/vim-emoji'
 hook_add = '''
-augroup vim-emoji-local
-  autocmd! *
-  autocmd FileType markdown,gitcommit,gina-commit setlocal completefunc=emoji#complete
-augroup END
+set completefunc=emoji#complete
 '''
-
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete.vim'
-# hook_add = '''
-# imap <C-x><C-u> <Plug>(asyncomplete_force_refresh)
-# '''
-#
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete-emoji.vim'
-# hook_add = '''
-# au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
-#     \ 'name': 'emoji',
-#     \ 'whitelist': ['markdown', 'gitcommit', 'gina-commit'],
-#     \ 'completor': function('asyncomplete#sources#emoji#completor'),
-#     \ }))
-# '''
-#
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete-file.vim'
-# hook_add = '''
-# au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-#     \ 'name': 'file',
-#     \ 'whitelist': ['*'],
-#     \ 'priority': 10,
-#     \ 'completor': function('asyncomplete#sources#file#completor')
-#     \ }))
-# '''
-# }}}
 
 # Language client protocol {{{
 [[plugins]]
@@ -540,32 +338,7 @@ hook_post_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/coc.vim'))
 '''
 
-
-# [[plugins]]
-# # repo = 'prabirshrestha/async.vim'
-# repo = 'lambdalisue/async.vim'
-# merged = 0
-#
-# [[plugins]]
-# repo = 'prabirshrestha/vim-lsp'
-# merged = 0
-# hook_post_source = '''
-# execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lsp.vim'))
-# '''
-# }}}
-
 # Textobj {{{
-[[plugins]]
-repo = 'kana/vim-textobj-entire'
-depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_entire_no_default_key_mappings = 1
-omap ae <Plug>(textobj-entire-a)
-omap ie <Plug>(textobj-entire-i)
-xmap ae <Plug>(textobj-entire-a)
-xmap ie <Plug>(textobj-entire-i)
-'''
-
 [[plugins]]
 repo = 'kana/vim-textobj-line'
 depends = 'vim-textobj-user'
@@ -615,17 +388,6 @@ xmap id <Plug>(textobj-datetime-auto)
 '''
 
 [[plugins]]
-repo = 'thinca/vim-textobj-comment'
-depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_comment_no_default_key_mappings = 1
-omap ac <Plug>(textobj-comment-a)
-omap ic <Plug>(textobj-comment-i)
-xmap ac <Plug>(textobj-comment-a)
-xmap ic <Plug>(textobj-comment-i)
-'''
-
-[[plugins]]
 repo = 'kana/vim-textobj-fold'
 depends = 'vim-textobj-user'
 hook_add = '''
@@ -646,26 +408,6 @@ omap iu <Plug>(textobj-url-i)
 xmap au <Plug>(textobj-url-a)
 xmap iu <Plug>(textobj-url-i)
 '''
-
-[[plugins]]
-repo = 'kana/vim-textobj-function'
-depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_function_no_default_key_mappings = 1
-omap af <Plug>(textobj-function-a)
-omap if <Plug>(textobj-function-i)
-xmap af <Plug>(textobj-function-a)
-xmap if <Plug>(textobj-function-i)
-
-omap aF <Plug>(textobj-function-A)
-omap iF <Plug>(textobj-function-I)
-xmap aF <Plug>(textobj-function-A)
-xmap iF <Plug>(textobj-function-I)
-'''
-
-[[plugins]]
-repo = 'haya14busa/vim-textobj-function-syntax'
-depends = 'vim-textobj-function'
 
 [[plugins]]
 repo = 'sgur/vim-textobj-parameter'
@@ -738,30 +480,12 @@ xmap <C-g>Q <Plug>(operator-breakline-manual)
 # Colorscheme {{{
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
-
-[[plugins]]
-repo = 'w0ng/vim-hybrid'
-
-[[plugins]]
-repo = 'jacoborus/tender.vim'
-
-[[plugins]]
-repo = 'jonathanfilip/vim-lucius'
-
-[[plugins]]
-repo = 'tomasr/molokai'
-
-[[plugins]]
-repo = 'gosukiwi/vim-atom-dark'
-
-[[plugins]]
-repo = 'raphamorim/lucario'
-
-[[plugins]]
-repo = 'jdkanani/vim-material-theme'
 # }}}
 
 # Filetype {{{
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+
 [[plugins]]
 repo = 'posva/vim-vue'
 hook_add = '''
@@ -782,9 +506,6 @@ repo = 'hynek/vim-python-pep8-indent'
 
 [[plugins]]
 repo = 'othree/html5.vim'
-
-[[plugins]]
-repo = 'zplug/vim-zplug'
 
 [[plugins]]
 repo = 'cespare/vim-toml'

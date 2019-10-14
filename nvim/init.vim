@@ -338,7 +338,7 @@ set complete&
       \ complete+=d
       \ complete+=t
 set completeopt&
-      \ completeopt-=preview
+      \ completeopt+=preview
       \ completeopt+=menu
       \ completeopt+=longest
 set showfulltag         " show both the tag name and the search pattern
