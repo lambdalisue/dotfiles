@@ -5,7 +5,7 @@ if [[ ! -d "$ADDON" ]]; then
   mkdir -p "$ADDON"
 fi
 
-clone_or_pull() {
+__zsh_addon::clone_or_pull() {
   local repo="$1"
   if [[ ! -d "$ADDON/$repo" ]]; then
     command git clone \
@@ -21,10 +21,10 @@ clone_or_pull() {
 
 # zsh-users/zsh-completions
 () {
-  zsh::addon::zsh-completions::update() {
+  __zsh_addon::zsh-completions::update() {
     local repo="zsh-users/zsh-completions"
     echo "$repo ..."
-    clone_or_pull $repo
+    __zsh_addon::clone_or_pull $repo
     zcompileall "$ADDON/$repo"
   }
   local repo="zsh-users/zsh-completions"
@@ -38,10 +38,10 @@ clone_or_pull() {
 
 # zsh-users/zsh-autosuggestions
 () {
-  zsh::addon::zsh-autosuggestions::update() {
+  __zsh_addon::zsh-autosuggestions::update() {
     local repo="zsh-users/zsh-autosuggestions"
     echo "$repo ..."
-    clone_or_pull $repo
+    __zsh_addon::clone_or_pull $repo
     zcompileall "$ADDON/$repo"
   }
   local repo="zsh-users/zsh-autosuggestions"
@@ -52,10 +52,10 @@ clone_or_pull() {
 
 # zdharma/fast-syntax-highlighting
 () {
-  zsh::addon::fast-syntax-highlighting::update() {
+  __zsh_addon::fast-syntax-highlighting::update() {
     local repo="zdharma/fast-syntax-highlighting"
     echo "$repo ..."
-    clone_or_pull $repo
+    __zsh_addon::clone_or_pull $repo
     zcompileall "$ADDON/$repo"
   }
   local repo="zdharma/fast-syntax-highlighting"
@@ -66,10 +66,10 @@ clone_or_pull() {
 
 # robbyrussel/oh-my-zsh
 () {
-  zsh::addon::oh-my-zsh::update() {
+  __zsh_addon::oh-my-zsh::update() {
     local repo="robbyrussell/oh-my-zsh"
     echo "$repo ..."
-    clone_or_pull $repo
+    __zsh_addon::clone_or_pull $repo
     zcompileall "$ADDON/$repo"
   }
   local repo="robbyrussell/oh-my-zsh"
@@ -80,10 +80,10 @@ clone_or_pull() {
 
 # lambdalisue/collon.zsh
 () {
-  zsh::addon::collon::update() {
+  __zsh_addon::collon::update() {
     local repo="lambdalisue/collon.zsh"
     echo "$repo ..."
-    clone_or_pull $repo
+    __zsh_addon::clone_or_pull $repo
     zcompileall "$ADDON/$repo"
   }
   local repo="lambdalisue/collon.zsh"
@@ -95,10 +95,10 @@ clone_or_pull() {
   fi
 }
 
-zsh::addon::update() {
-  zsh::addon::zsh-completions::update
-  zsh::addon::zsh-autosuggestions::update
-  zsh::addon::fast-syntax-highlighting::update
-  zsh::addon::oh-my-zsh::update
-  zsh::addon::collon::update
+zsh_addon_update() {
+  __zsh_addon::zsh-completions::update
+  __zsh_addon::zsh-autosuggestions::update
+  __zsh_addon::fast-syntax-highlighting::update
+  __zsh_addon::oh-my-zsh::update
+  __zsh_addon::collon::update
 }
