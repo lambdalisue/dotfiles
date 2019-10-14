@@ -1,8 +1,3 @@
-for filename in $(command find "${ZDOTDIR}" -follow -name "*.zsh"); do
+for filename in $(command find "${ZDOTDIR}" -follow -name "*.zsh" -type f); do
   zcompile $filename
 done
-if [[ -n $ZPLUGIN ]]; then
-  for filename in $(command find "${ZPLUGIN}" -follow -name "*.zsh"); do
-    zcompile $filename
-  done
-fi
