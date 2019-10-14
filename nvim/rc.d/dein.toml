@@ -314,6 +314,7 @@ nmap <Leader>ff <Plug>(foldround-forward)
 # Execution {{{
 [[plugins]]
 repo = 'thinca/vim-quickrun'
+depends = 'vim-quickrun-neovim-job'
 on_map = '<Plug>'
 on_cmd = 'QuickRun'
 hook_add = 'nmap <Leader>rr <Plug>(quickrun)'
@@ -321,6 +322,8 @@ hook_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/quickrun.vim'))
 '''
 
+[[plugins]]
+repo = 'lambdalisue/vim-quickrun-neovim-job'
 # }}}
 
 # Complete {{{
@@ -484,7 +487,15 @@ repo = 'cocopon/iceberg.vim'
 
 # Filetype {{{
 [[plugins]]
-repo = 'rust-lang/rust.vim'
+#repo = 'rust-lang/rust.vim'
+#hook_add = '''
+#if executable('rustfmt')
+#  let g:rustfmt_autosave = 1
+#else
+#  echomsg "rustfmt is not installed. invoke :RustFmtInstall"
+#endif
+#command RustFmtInstall :terminal rustup component add rustfmt
+#'''
 
 [[plugins]]
 repo = 'posva/vim-vue'

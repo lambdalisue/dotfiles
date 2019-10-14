@@ -19,6 +19,20 @@ __zsh_addon::clone_or_pull() {
   fi
 }
 
+# b4b4r07/enhancd
+__zsh_addon::enhancd::update() {
+  local repo="b4b4r07/enhancd"
+  echo "$repo ..."
+  __zsh_addon::clone_or_pull $repo
+  zcompileall "$ADDON/$repo"
+}
+() {
+  local repo="b4b4r07/enhancd"
+  if [[ -d "$ADDON/$repo" ]]; then
+    source "$ADDON/$repo/init.sh"
+  fi
+}
+
 # zsh-users/zsh-completions
 __zsh_addon::zsh-completions::update() {
   local repo="zsh-users/zsh-completions"
@@ -96,6 +110,7 @@ __zsh_addon::collon::update() {
 }
 
 zsh_addon_update() {
+  __zsh_addon::enhancd::update
   __zsh_addon::zsh-completions::update
   __zsh_addon::zsh-autosuggestions::update
   __zsh_addon::fast-syntax-highlighting::update

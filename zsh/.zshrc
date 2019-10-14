@@ -34,6 +34,21 @@ setopt inc_append_history    # immidiately append history to history file
 setopt share_history         # share history in zsh processes
 setopt no_flow_control       # do not use C-s/C-q
 
+# cdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+
+zstyle ':completion:*:*:cdr:*:*' menu selection
+zstyle ':completion:*' recent-dirs-insert both
+zstyle ':chpwd:*' recent-dirs-max 500
+zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':chpwd:*' recent-dirs-file "${XDG_CACHE_HOME}/zsh/chpwd-recent-dirs"
+zstyle ':chpwd:*' recent-dirs-pushd true
+
+if [[ ! -d "${XDG_CACHE_HOME}/zsh/" ]]; then
+  mkdir -p "${XDG_CACHE_HOME}/zsh/"
+fi
+
 # Completion
 autoload -Uz fastcompinit && fastcompinit
 autoload -Uz bashcompinit && bashcompinit
