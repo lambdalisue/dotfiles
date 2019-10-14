@@ -116,11 +116,11 @@ autoload -Uz test_truecolor
 
 # User custom
 source "${ZDOTDIR}/init.zsh"
-source "${ZDOTDIR}/plugin.zsh"
+source "${ZDOTDIR}/addon.zsh"
 
 # Prompt 
 autoload -Uz promptinit; promptinit
-prompt collon 2>/dev/null
+prompt collon >/dev/null 2>&1
 
 autoload -Uz zrecompile
 zrecompile ${HOME}/.zshenv

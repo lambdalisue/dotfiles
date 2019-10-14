@@ -1,0 +1,3 @@
+for f in $(find $1 -name "*.zsh"); do
+  zcompile $f
+done
