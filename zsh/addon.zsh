@@ -20,13 +20,13 @@ __zsh_addon::clone_or_pull() {
 }
 
 # zsh-users/zsh-completions
+__zsh_addon::zsh-completions::update() {
+  local repo="zsh-users/zsh-completions"
+  echo "$repo ..."
+  __zsh_addon::clone_or_pull $repo
+  zcompileall "$ADDON/$repo"
+}
 () {
-  __zsh_addon::zsh-completions::update() {
-    local repo="zsh-users/zsh-completions"
-    echo "$repo ..."
-    __zsh_addon::clone_or_pull $repo
-    zcompileall "$ADDON/$repo"
-  }
   local repo="zsh-users/zsh-completions"
   if [[ -d "$ADDON/$repo" ]]; then
     fpath=(
@@ -37,13 +37,13 @@ __zsh_addon::clone_or_pull() {
 }
 
 # zsh-users/zsh-autosuggestions
+__zsh_addon::zsh-autosuggestions::update() {
+  local repo="zsh-users/zsh-autosuggestions"
+  echo "$repo ..."
+  __zsh_addon::clone_or_pull $repo
+  zcompileall "$ADDON/$repo"
+}
 () {
-  __zsh_addon::zsh-autosuggestions::update() {
-    local repo="zsh-users/zsh-autosuggestions"
-    echo "$repo ..."
-    __zsh_addon::clone_or_pull $repo
-    zcompileall "$ADDON/$repo"
-  }
   local repo="zsh-users/zsh-autosuggestions"
   if [[ -d "$ADDON/$repo" ]]; then
     source "$ADDON/$repo/zsh-autosuggestions.zsh"
@@ -51,13 +51,13 @@ __zsh_addon::clone_or_pull() {
 }
 
 # zdharma/fast-syntax-highlighting
+__zsh_addon::fast-syntax-highlighting::update() {
+  local repo="zdharma/fast-syntax-highlighting"
+  echo "$repo ..."
+  __zsh_addon::clone_or_pull $repo
+  zcompileall "$ADDON/$repo"
+}
 () {
-  __zsh_addon::fast-syntax-highlighting::update() {
-    local repo="zdharma/fast-syntax-highlighting"
-    echo "$repo ..."
-    __zsh_addon::clone_or_pull $repo
-    zcompileall "$ADDON/$repo"
-  }
   local repo="zdharma/fast-syntax-highlighting"
   if [[ -d "$ADDON/$repo" ]]; then
     source "$ADDON/$repo/fast-syntax-highlighting.plugin.zsh"
@@ -65,13 +65,13 @@ __zsh_addon::clone_or_pull() {
 }
 
 # robbyrussel/oh-my-zsh
+__zsh_addon::oh-my-zsh::update() {
+  local repo="robbyrussell/oh-my-zsh"
+  echo "$repo ..."
+  __zsh_addon::clone_or_pull $repo
+  zcompileall "$ADDON/$repo"
+}
 () {
-  __zsh_addon::oh-my-zsh::update() {
-    local repo="robbyrussell/oh-my-zsh"
-    echo "$repo ..."
-    __zsh_addon::clone_or_pull $repo
-    zcompileall "$ADDON/$repo"
-  }
   local repo="robbyrussell/oh-my-zsh"
   if [[ -d "$ADDON/$repo" ]]; then
     source "$ADDON/$repo/plugins/extract/extract.plugin.zsh"
@@ -79,13 +79,13 @@ __zsh_addon::clone_or_pull() {
 }
 
 # lambdalisue/collon.zsh
+__zsh_addon::collon::update() {
+  local repo="lambdalisue/collon.zsh"
+  echo "$repo ..."
+  __zsh_addon::clone_or_pull $repo
+  zcompileall "$ADDON/$repo"
+}
 () {
-  __zsh_addon::collon::update() {
-    local repo="lambdalisue/collon.zsh"
-    echo "$repo ..."
-    __zsh_addon::clone_or_pull $repo
-    zcompileall "$ADDON/$repo"
-  }
   local repo="lambdalisue/collon.zsh"
   if [[ -d "$ADDON/$repo" ]]; then
     fpath=(
