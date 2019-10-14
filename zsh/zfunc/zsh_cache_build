@@ -1,0 +1,3 @@
+for filename in $(command find "${ZDOTDIR}" -follow -name "*.zsh"); do
+  zcompile $filename
+done

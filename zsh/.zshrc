@@ -1,3 +1,6 @@
+# Add extra fpath
+fpath+=($ZDOTDIR/zfunc(N-/))
+
 # disable promptcr to display last line without newline
 unsetopt promptcr
 
@@ -10,17 +13,7 @@ stty stop undef
 # print character as eight bit to prevent mojibake
 setopt print_eight_bit
 
-# https://gist.github.com/ctechols/ca1035271ad134841284
-autoload -U zrecompile
-autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#gN.mh+24) ]]; then
-  compinit
-  zrecompile ${ZDOTDIR}/.zcompdump
-else
-  compinit -C
-fi
-
-# Movement {{{
+# Movement
 WORDCHARS=${WORDCHARS:s,/,,} # Exclude / so you can delete path with ^W
 setopt auto_cd               # Automatically change directory when path has input
 setopt auto_pushd            # Automatically push previous directory to stack
@@ -28,23 +21,7 @@ setopt auto_pushd            # Automatically push previous directory to stack
                              # or select from list with `cd <tab>`
 setopt pushd_ignore_dups     # Ignore duplicate directory in pushd
 
-if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]]; then
-  autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-  add-zsh-hook chpwd chpwd_recent_dirs
-  zstyle ':completion:*:*:cdr:*:*' menu selection
-  zstyle ':completion:*' recent-dirs-insert both
-  zstyle ':chpwd:*' recent-dirs-max 500
-  zstyle ':chpwd:*' recent-dirs-default true
-  zstyle ':chpwd:*' recent-dirs-file "${XDG_CACHE_HOME}/zsh/chpwd-recent-dirs"
-  zstyle ':chpwd:*' recent-dirs-pushd true
-
-  if [[ ! -d "${XDG_CACHE_HOME}/zsh/" ]]; then
-    mkdir -p "${XDG_CACHE_HOME}/zsh/"
-  fi
-fi
-#}}}
-
-# History {{{
+# History
 HISTFILE=${XDG_CACHE_HOME}/zsh/history
 HISTSIZE=10000000
 SAVEHIST=$HISTSIZE
@@ -56,9 +33,11 @@ setopt hist_ignore_space     # ignore commands which stars with space
 setopt inc_append_history    # immidiately append history to history file
 setopt share_history         # share history in zsh processes
 setopt no_flow_control       # do not use C-s/C-q
-#}}}
 
-# Completion {{{
+# Completion
+autoload -Uz fastcompinit && fastcompinit
+autoload -Uz bashcompinit && bashcompinit
+
 setopt magic_equal_subst     # enable completion in --prefix=~/local or whatever
 setopt complete_in_word      # complete at carret position
 setopt glob_complete         # complete without expanding glob
@@ -67,9 +46,6 @@ setopt correct               # show suggestion list when user type wrong command
 setopt list_packed           # show completion list smaller (pack)
 setopt nolistbeep            # stop beep.
 setopt noautoremoveslash     # do not remove postfix slash of command line
-
-# enable bash complete
-autoload -Uz bashcompinit && bashcompinit
 
 # ambiguous completion search when no match found
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} r:|[._-]=*'
@@ -110,17 +86,16 @@ zstyle ':completion:*' completer \
     _history \
     _ignored \
     _prefix
-#}}}
 
-# Emacs keybinding
+# Binding
 bindkey -e
 
 # Cycle history search with C-p/C-n
-autoload history-search-end
+autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
+zle -N history-beginning-search-forward-end  history-search-end
+bindkey '^P' history-beginning-search-backward-end
+bindkey '^N' history-beginning-search-forward-end
 
 # Select completion menu with hjkl
 zmodload zsh/complist
@@ -129,18 +104,25 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 
-# Plugin
+# User defined functions
+autoload -Uz brew_cask_upgrade
+autoload -Uz zsh_profile
+autoload -Uz zsh_profile_plain
+autoload -Uz zsh_cache_build
+autoload -Uz zsh_cache_clear
+autoload -Uz test_ecma48
+autoload -Uz test_256color
+autoload -Uz test_truecolor
+
+# User custom
+source "${ZDOTDIR}/init.zsh"
 source "${ZDOTDIR}/plugin.zsh"
 
-for filename in ${ZDOTDIR}/rc.d/*.zsh; do
-  source ${filename}
-done
-
 # Prompt 
-autoload -U promptinit; promptinit
-prompt collon
+autoload -Uz promptinit; promptinit
+prompt collon 2>/dev/null
 
-# compile zshenv/zshrc
+autoload -Uz zrecompile
 zrecompile ${HOME}/.zshenv
 zrecompile ${ZDOTDIR}/.zshrc
 

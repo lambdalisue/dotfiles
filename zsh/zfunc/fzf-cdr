@@ -1,0 +1,19 @@
+fcdr::print() {
+    if ! which cdr 1>/dev/null 2>&1; then
+        echo 'A "cdr" command is not found.'
+        return 1
+    fi
+    if ! which perl 1>/dev/null 2>&1; then
+        echo 'A "perl" command is not found.'
+        return 1
+    fi
+    local s=$(cdr -l \
+        | perl -pe 's/^\d+\s+//' \
+        | fzf --query "$1" --preview 'eval echo {} | xargs ls | head -100' \
+        )
+    [[ -n $s ]] && print "cd $s"
+}
+
+BUFFER=$(fcdr::print $BUFFER)
+[[ -n $BUFFER ]] && zle accept-line
+zle clear-screen

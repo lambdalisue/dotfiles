@@ -1,0 +1,7 @@
+fzf-ghq::print() {
+    local s="$(ghq list --full-path | fzf -q "$1")"
+    [[ -n $s ]] && print "cd $(echo $s | perl -lanE 'say $F[0]')"
+}
+BUFFER=$(fzf-ghq::print $BUFFER)
+[[ -n $BUFFER ]] && zle accept-line
+zle clear-screen

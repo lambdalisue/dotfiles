@@ -1,0 +1,3 @@
+for filename in $(command find "${ZDOTDIR}" -follow -name "*.zwc"); do
+  command rm -f $filename
+done

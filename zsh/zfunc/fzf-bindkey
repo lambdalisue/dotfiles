@@ -1,0 +1,17 @@
+fzf-bindkey::print() {
+    if ! which bindkey 1>/dev/null 2>&1; then
+        echo 'A "bindkey" command is not found.'
+        return 1
+    fi
+    if ! which perl 1>/dev/null 2>&1; then
+        echo 'A "perl" command is not found.'
+        return 1
+    fi
+    local s=$(bindkey -L | fzf --query "$1")
+    [[ -n $s ]] && print "$s"
+}
+
+[[ "x$BUFFER" != "x" ]] && BUFFER="$BUFFER "
+BUFFER="$BUFFER$(fzf-bindkey::print)"
+CURSOR=$#BUFFER
+zle redisplay
