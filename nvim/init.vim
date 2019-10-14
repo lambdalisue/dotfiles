@@ -135,10 +135,7 @@ if s:is_windows
         \])
 
   " Neovim
-  let g:python_host_prog = s:pick_executable([
-        \ 'C:\Python27\python.exe',
-        \ 'C:\Python26\python.exe',
-        \])
+  let g:loaded_python_provider = 0
   let g:python3_host_prog = s:pick_executable([
         \ 'C:\Python36\python.exe',
         \ 'C:\Program Files\Python36\python.exe',
@@ -169,11 +166,7 @@ else
   let $PYENV_ROOT = s:pick_directory(['~/.anyenv/envs/pyenv'])
 
   " Neovim
-  let g:python_host_prog = s:pick_executable([
-        \ '/usr/local/bin/python2',
-        \ '/usr/bin/python2',
-        \ '/bin/python2',
-        \])
+  let g:loaded_python_provider = 0
   let g:python3_host_prog = s:pick_executable([
         \ '/usr/local/bin/python3',
         \ '/usr/bin/python3',

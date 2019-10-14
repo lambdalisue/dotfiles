@@ -1,6 +1,5 @@
 let g:quickrun_config = extend(get(g:, 'quickrun_config', {}), {
       \ '_': {
-      \   'runner/job/interval': 200,
       \   'outputter/buffer/split': ':botright 8sp',
       \   'outputter/buffer/close_on_empty': 1,
       \   'hook/time/enable': 1,
@@ -14,12 +13,13 @@ let g:quickrun_config = extend(get(g:, 'quickrun_config', {}), {
       \   'exec': '%c exec perl %o %s',
       \ },
       \ 'ps1': {
-      \   'runner': 'system',
       \   'command': 'powershell',
       \ }
       \})
 
-if exists('*ch_close_in')
+if has('nvim')
+  let g:quickrun_config._.runner = 'neovim_job'
+elseif exists('*ch_close_in')
   let g:quickrun_config._.runner = 'job'
 endif
 
