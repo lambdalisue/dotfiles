@@ -17,18 +17,29 @@ brew-cask-upgrade() {
 }
 
 # https://carlosbecker.com/posts/speeding-up-zsh/
-zsh::profile-rc() {
+zsh::profile() {
   local n=$1
-  for i in $(command seq 1 ${n:-5}); do time zsh -i -c exit; done
+  for i in $(command seq 1 ${n:-5}); do
+    time zsh -i -c exit
+  done
 }
 
-zsh::build-cache() {
+zsh::profile::raw() {
+  mkdir -p /tmp/zsh_profile_raw
+  echo "" > /tmp/zsh_profile_raw/.zshrc
+  local n=$1
+  for i in $(command seq 1 ${n:-5}); do
+    time (ZDOTDIR=/tmp/zsh_profile_raw zsh -i -c exit)
+  done
+}
+
+zsh::cache::build() {
   for filename in $(command find "${ZDOTDIR}" -follow -name "*.zsh"); do
     zcompile $filename
   done
 }
 
-zsh::remove-cache() {
+zsh::cache::clear() {
   for filename in $(command find "${ZDOTDIR}" -follow -name "*.zwc"); do
     command rm -f $filename
   done
