@@ -67,7 +67,7 @@ if [[ -n "$SSH_CONNECTION" ]]; then
     export PINENTRY_USER_DATA="USE_CURSES=1"
 fi
 
-# Specify GOPATH
+# go
 export GOPATH="$HOME/.go"
 
 # ghq
@@ -89,7 +89,7 @@ if type anyenv >/dev/null 2>&1; then
     mkdir -p ~/.cache/anyenv
     anyenv init - --no-rehash > ~/.cache/anyenv/init.zsh
     # XXX:: Remove 'goenv rehash --only-manage-paths' which tooks long
-    # sed -i -e "/goenv rehash --only-manage-paths/d" ~/.cache/anyenv/init.zsh
+    sed -i -e "/goenv rehash --only-manage-paths/d" ~/.cache/anyenv/init.zsh
     zcompile ~/.cache/anyenv/init.zsh
   }
   if [[ ! -f ~/.cache/anyenv/init.zsh ]]; then
@@ -97,15 +97,6 @@ if type anyenv >/dev/null 2>&1; then
   fi
   source ~/.cache/anyenv/init.zsh
 fi
-
-# Configure GOROOT/GOPATH
-# This must be AFTER anyenv
-# https://github.com/syndbg/goenv/blob/master/INSTALL.md
-path=(
-  $GOROOT/bin(N-/)
-  $path
-  $GOPATH/bin(N-/)
-)
 
 # pip
 if type pip >/dev/null 2>&1; then
