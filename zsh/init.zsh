@@ -1,9 +1,15 @@
 export LANGUAGE="en_US:en"
 export LANG="en_US.UTF-8"
 export LC_ALL=en_US.UTF-8
+export PLATFORM="$(uname)"
 
-alias ls="ls -G -w"
-alias la="ls -lhAFG"
+if [[ $PLATFORM == "Darwin" ]]; then
+  alias ls="ls -G -w"
+  alias la="ls -lhAFG"
+else
+  alias ls="ls --color=always"
+  alias la="ls -lhAF"
+fi
 
 # fzf
 if type fzf >/dev/null 2>&1; then
