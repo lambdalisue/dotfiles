@@ -61,7 +61,6 @@ __zsh_addon::zsh-autosuggestions::update() {
   local repo="zsh-users/zsh-autosuggestions"
   if [[ -d "$ADDON/$repo" ]]; then
     source "$ADDON/$repo/zsh-autosuggestions.zsh"
-    bindkey '^M' autosuggest-execute
   fi
 }
 
