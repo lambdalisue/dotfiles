@@ -152,3 +152,17 @@ if type direnv >/dev/null 2>&1; then
   fi
   source ~/.cache/direnv/init.zsh
 fi
+
+# docker
+if [[ -d /Applications/Docker.app ]]; then
+  docker::cache() {
+    local src="/Applications/Docker.app/Contents/Resources/etc"
+    local dst="$HOME/.zfunc"
+    mkdir -p "$dst"
+    ln -sf "$src/docker.zsh-completion" "$dst/_docker"
+    ln -sf "$src/docker-compose.zsh-completion" "$dst/_docker-compose"
+  }
+  if [[ ! -f $HOME/.zfunc/_docker ]]; then
+    docker::cache
+  fi
+fi

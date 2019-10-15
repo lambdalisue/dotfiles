@@ -50,9 +50,6 @@ if [[ ! -d "${XDG_CACHE_HOME}/zsh/" ]]; then
 fi
 
 # Completion
-autoload -Uz fastcompinit && fastcompinit
-autoload -Uz bashcompinit && bashcompinit
-
 setopt magic_equal_subst     # enable completion in --prefix=~/local or whatever
 setopt complete_in_word      # complete at carret position
 setopt glob_complete         # complete without expanding glob
@@ -102,8 +99,11 @@ zstyle ':completion:*' completer \
     _ignored \
     _prefix
 
-# Binding
+# Use emacs binding as base
 bindkey -e
+
+# Complete word with C-k
+bindkey '^K' forward-word
 
 # Cycle history search with C-p/C-n
 autoload -Uz history-search-end
@@ -119,6 +119,7 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 
+
 # User defined functions
 autoload -Uz brew_cask_upgrade
 autoload -Uz zsh_profile
@@ -132,6 +133,10 @@ autoload -Uz test_truecolor
 # User custom
 source "${ZDOTDIR}/init.zsh"
 source "${ZDOTDIR}/addon.zsh"
+
+# Compinit
+autoload -Uz fastcompinit && fastcompinit
+autoload -Uz bashcompinit && bashcompinit
 
 # Prompt 
 autoload -Uz promptinit; promptinit

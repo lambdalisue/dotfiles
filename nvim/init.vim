@@ -533,6 +533,18 @@ noremap! <C-f> <Right>
 noremap! <C-b> <Left>
 noremap! <C-d> <Del>
 
+" Use <C-k> to move next word in Insert/Command
+" Note that this mapping overwrite default mapping for digraph
+noremap! <C-k> <C-Right>
+
+" Do NOT yank with x/s
+nnoremap x "_x
+nnoremap s "_s
+
+" Do NOT rewrite register after paste
+" http://baqamore.hatenablog.com/entry/2016/07/07/201856
+xnoremap <expr> p printf('pgv"%sygv<esc>', v:register)
+
 " Use Ctrl-f/b in Normal as well
 noremap <C-f> <Right>
 noremap <C-b> <Left>
