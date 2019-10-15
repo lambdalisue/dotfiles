@@ -242,9 +242,9 @@ nmap <C-g>c     <Plug>(my-toggle-cursorword)
 
 # Editing {{{
 [[plugins]]
-repo = 'alvan/vim-closetag'
+repo = 'mattn/emmet-vim'
 hook_add = '''
-let g:closetag_filetypes = 'html,xhtml,phtml,vue'
+let g:user_emmet_leader_key = '<C-y>'
 '''
 
 [[plugins]]
