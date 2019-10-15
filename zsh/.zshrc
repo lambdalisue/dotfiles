@@ -124,6 +124,7 @@ bindkey -M menuselect 'l' vi-forward-char
 
 
 # User defined functions
+autoload -Uz install_anyenv
 autoload -Uz brew_cask_upgrade
 autoload -Uz zsh_profile
 autoload -Uz zsh_profile_plain
