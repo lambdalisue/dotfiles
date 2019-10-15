@@ -504,6 +504,21 @@ function! s:clear_register() abort
 endfunction
 command! ClearRegister call s:clear_register()
 " }
+
+function! s:invoke(cmd, callback) abort
+  let Process = vital#vital#import('Async.Promise.Process')
+  let temp = tempname()
+  let args = [
+        \ &shell,
+        \ &shellcmdflag,
+        \ join([a:cmd, &shellpipe, temp]),
+        \]
+  call Process.start(args)
+        \.then({ r -> a:callback(temp) })
+        \.catch({ e -> execute('echomsg string(e)', '') })
+endfunction
+command! -nargs=* Qinvoke call s:invoke(<q-args>, { v -> execute('cfile ' . fnameescape(v), '') })
+command! -nargs=* Linvoke call s:invoke(<q-args>, { v -> execute('lfile ' . fnameescape(v), '') })
 " }}}
 
 " Mapping {{{
