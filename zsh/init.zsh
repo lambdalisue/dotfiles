@@ -69,6 +69,7 @@ fi
 
 # go
 export GOPATH="$HOME/.go"
+export GOENV_DISABLE_GOPATH=1
 
 # ghq
 if type ghq >/dev/null 2>&1; then
