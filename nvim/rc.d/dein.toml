@@ -218,7 +218,9 @@ function! s:toggle_vim_parenmatch() abort
   call parenmatch#update()
 endfunction
 
-nnoremap <silent> <C-g>m <:<C-u>call <SID>toggle_vim_parenmatch()<CR>
+nnoremap <silent> <Plug>(my-toggle-parenmatch)
+      \ :<C-u>call <SID>toggle_vim_parenmatch()<CR>
+nmap <C-g>m     <Plug>(my-toggle-parenmatch)
 '''
 
 [[plugins]]
@@ -231,7 +233,9 @@ function! s:toggle_vim_cursorword() abort
   call cursorword#matchadd()
 endfunction
 
-nnoremap <silent> <C-g>c :<C-u>call <SID>toggle_vim_cursorword()<CR>
+nnoremap <silent> <Plug>(my-toggle-cursorword)
+      \ :<C-u>call <SID>toggle_vim_cursorword()<CR>
+nmap <C-g>c     <Plug>(my-toggle-cursorword)
 '''
 
 # }}}
@@ -324,6 +328,7 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/quickrun.vim'))
 
 [[plugins]]
 repo = 'lambdalisue/vim-quickrun-neovim-job'
+
 # }}}
 
 # Complete {{{
@@ -332,6 +337,7 @@ repo = 'junegunn/vim-emoji'
 hook_add = '''
 set completefunc=emoji#complete
 '''
+# }}}
 
 # Language client protocol {{{
 [[plugins]]
@@ -340,6 +346,7 @@ rev = 'release'
 hook_post_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/coc.vim'))
 '''
+# }}}
 
 # Textobj {{{
 [[plugins]]
@@ -487,17 +494,6 @@ repo = 'cocopon/iceberg.vim'
 
 # Filetype {{{
 [[plugins]]
-#repo = 'rust-lang/rust.vim'
-#hook_add = '''
-#if executable('rustfmt')
-#  let g:rustfmt_autosave = 1
-#else
-#  echomsg "rustfmt is not installed. invoke :RustFmtInstall"
-#endif
-#command RustFmtInstall :terminal rustup component add rustfmt
-#'''
-
-[[plugins]]
 repo = 'posva/vim-vue'
 hook_add = '''
 autocmd MyAutoCmd FileType vue syntax sync fromstart
@@ -541,6 +537,18 @@ repo = 'othree/es.next.syntax.vim'
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+hook_add = '''
+let g:rustfmt_autosave = 1
+if !executable('rustfmt')
+  command RustFmtInstall :terminal rustup component add rustfmt
+  echohl WarningMsg
+  echomsg "rustfmt is not installed. invoke :RustFmtInstall"
+  echohl None
+endif
+'''
 
 # }}}
 
