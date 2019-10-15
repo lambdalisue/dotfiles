@@ -50,6 +50,9 @@ if [[ ! -d "${XDG_CACHE_HOME}/zsh/" ]]; then
 fi
 
 # Completion
+autoload -Uz fastcompinit && fastcompinit
+autoload -Uz bashcompinit && bashcompinit
+
 setopt magic_equal_subst     # enable completion in --prefix=~/local or whatever
 setopt complete_in_word      # complete at carret position
 setopt glob_complete         # complete without expanding glob
@@ -133,10 +136,6 @@ autoload -Uz test_truecolor
 # User custom
 source "${ZDOTDIR}/init.zsh"
 source "${ZDOTDIR}/addon.zsh"
-
-# Compinit
-autoload -Uz fastcompinit && fastcompinit
-autoload -Uz bashcompinit && bashcompinit
 
 # Prompt 
 autoload -Uz promptinit; promptinit
