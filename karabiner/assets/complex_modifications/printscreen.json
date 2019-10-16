@@ -1,0 +1,105 @@
+{
+  "title": "PrintScreen",
+  "rules": [
+    {
+      "description": "PrintScreen to shift + command + 1",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "print_screen"
+          },
+          "to": [
+            {
+              "key_code": "4",
+              "modifiers": [
+                "shift",
+                "command"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "PrintScreen to shift + command + 2",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "print_screen"
+          },
+          "to": [
+            {
+              "key_code": "4",
+              "modifiers": [
+                "shift",
+                "command"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "PrintScreen to shift + command + 3",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "print_screen"
+          },
+          "to": [
+            {
+              "key_code": "4",
+              "modifiers": [
+                "shift",
+                "command"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "PrintScreen to shift + command + 4",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "print_screen"
+          },
+          "to": [
+            {
+              "key_code": "4",
+              "modifiers": [
+                "shift",
+                "command"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "PrintScreen to shift + command + 5",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "print_screen"
+          },
+          "to": [
+            {
+              "key_code": "5",
+              "modifiers": [
+                "shift",
+                "command"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
