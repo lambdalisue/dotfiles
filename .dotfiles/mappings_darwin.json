@@ -2,6 +2,7 @@
   "karabiner": "~/.config/karabiner",
   "kitty": "~/Library/Preferences/kitty",
   "iTerm2": "~/Library/Preferences/iTerm2",
-  "gnupg/gpg-agent.mac.conf": "~/.gnupg/gpg-agent.conf"
+  "gnupg/gpg-agent.mac.conf": "~/.gnupg/gpg-agent.conf",
+  "ssh/config.mac": "~/.ssh/config"
 }
 
