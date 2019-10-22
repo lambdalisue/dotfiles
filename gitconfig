@@ -10,6 +10,7 @@
         ignorecase = false
 	excludesfile = ~/.gitignore
 	quotepath = false
+	editor = nvim
 
 [color]
 	ui = auto

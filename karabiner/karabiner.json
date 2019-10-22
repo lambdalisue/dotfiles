@@ -237,7 +237,7 @@
                         ]
                     },
                     {
-                        "description": "PrintScreen to shift + command + 5",
+                        "description": "PrintScreen to shift + command + 4",
                         "manipulators": [
                             {
                                 "from": {
@@ -245,7 +245,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "5",
+                                        "key_code": "4",
                                         "modifiers": [
                                             "shift",
                                             "command"

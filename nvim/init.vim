@@ -227,7 +227,7 @@ set list
 set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%,eol:$
 
 " vertically split buffers for vimdiff
-if has('vim-8.0.1361')
+if has('vim-8.0.1361') || has('nvim')
   set diffopt&
         \ diffopt+=vertical
         \ diffopt+=hiddenoff
