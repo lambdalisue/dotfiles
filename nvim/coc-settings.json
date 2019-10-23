@@ -7,5 +7,6 @@
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "css", "html", "markdown", "vue"],
   "eslint.autoFixOnSave": true,
   "prettier.disableLanguages": [],
+  "tsserver.organizeImportOnSave": true,
   "python.jediEnabled": false
 }
