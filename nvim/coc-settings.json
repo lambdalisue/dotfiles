@@ -7,5 +7,8 @@
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "css", "html", "markdown", "vue"],
   "eslint.autoFixOnSave": true,
   "prettier.disableLanguages": [],
+  "python.linting.pylintEnabled": false,
+  "python.formatting.provider": "black",
+  "python.autoComplete.extraPaths": ["./src"],
   "python.jediEnabled": false
 }
