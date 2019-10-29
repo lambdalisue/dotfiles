@@ -142,21 +142,10 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 
-
-# User defined functions
-autoload -Uz install_anyenv
-autoload -Uz brew_cask_upgrade
-autoload -Uz zsh_profile
-autoload -Uz zsh_profile_plain
-autoload -Uz zsh_cache_build
-autoload -Uz zsh_cache_clear
-autoload -Uz test_ecma48
-autoload -Uz test_256color
-autoload -Uz test_truecolor
-
 # User custom
 source "${ZDOTDIR}/init.zsh"
 source "${ZDOTDIR}/addon.zsh"
+source "${ZDOTDIR}/function.zsh"
 
 # Prompt 
 autoload -Uz promptinit; promptinit

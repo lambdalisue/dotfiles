@@ -109,6 +109,23 @@ __zsh_addon::collon::update() {
   fi
 }
 
+# docker/cli
+__zsh_addon::docker::update() {
+  local repo="docker/cli"
+  echo "$repo ..."
+  __zsh_addon::clone_or_pull $repo
+  zcompileall "$ADDON/$repo/contrib/completion/zsh"
+}
+() {
+  local repo="docker/cli"
+  if [[ -d "$ADDON/$repo" ]]; then
+    fpath=(
+      $ADDON/$repo/contrib/completion/zsh(N-/)
+      $fpath
+    )
+  fi
+}
+
 zsh_addon_update() {
   __zsh_addon::enhancd::update
   __zsh_addon::zsh-completions::update
@@ -116,4 +133,5 @@ zsh_addon_update() {
   __zsh_addon::fast-syntax-highlighting::update
   __zsh_addon::oh-my-zsh::update
   __zsh_addon::collon::update
+  __zsh_addon::docker::update
 }

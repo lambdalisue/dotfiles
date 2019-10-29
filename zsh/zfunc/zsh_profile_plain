@@ -1,6 +1,0 @@
-mkdir -p /tmp/zsh_profile_raw
-echo "" > /tmp/zsh_profile_raw/.zshrc
-local n=$1
-for i in $(command seq 1 ${n:-5}); do
-  time (ZDOTDIR=/tmp/zsh_profile_raw zsh -i -c exit)
-done

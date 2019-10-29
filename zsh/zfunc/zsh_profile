@@ -1,4 +1,0 @@
-local n=$1
-for i in $(command seq 1 ${n:-5}); do
-  time zsh -i -c exit
-done

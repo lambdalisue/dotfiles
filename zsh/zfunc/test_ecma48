@@ -1,5 +1,0 @@
-echo "\x1b[1mbold\e[0m"
-echo "\x1b[3mitalic\e[0m"
-echo "\x1b[4munderline\e[0m"
-echo "\x1b[9mstrikethrough\e[0m"
-echo "\x1b[31mred\e[0m"
