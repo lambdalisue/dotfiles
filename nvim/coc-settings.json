@@ -10,5 +10,9 @@
   "python.linting.pylintEnabled": false,
   "python.formatting.provider": "black",
   "python.autoComplete.extraPaths": ["./src"],
-  "python.jediEnabled": false
+  "python.jediEnabled": false,
+  "go.goplsOptions": {
+    "completeUnimported": true,
+    "completionDocumentation": true
+  }
 }
