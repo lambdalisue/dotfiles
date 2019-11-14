@@ -67,18 +67,6 @@ if [[ -n "$SSH_CONNECTION" ]]; then
     export PINENTRY_USER_DATA="USE_CURSES=1"
 fi
 
-# go
-export GOPATH="$HOME/.go"
-export GOENV_DISABLE_GOPATH=1
-
-# ghq
-if type ghq >/dev/null 2>&1; then
-  fpath=(
-      $GOPATH/src/github.com/motemen/ghq/zsh/_ghq(N-/)
-      $fpath
-  )
-fi
-
 # poetry
 if [ -f ~/.poetry/env ]; then
   source ~/.poetry/env
@@ -89,14 +77,29 @@ if type anyenv >/dev/null 2>&1; then
   anyenv::cache() {
     mkdir -p ~/.cache/anyenv
     anyenv init - --no-rehash > ~/.cache/anyenv/init.zsh
-    # XXX:: Remove 'goenv rehash --only-manage-paths' which tooks long
-    sed -i -e "/goenv rehash --only-manage-paths/d" ~/.cache/anyenv/init.zsh
+    # # XXX:: Remove 'goenv rehash --only-manage-paths' which tooks long
+    # sed -i -e "/goenv rehash --only-manage-paths/d" ~/.cache/anyenv/init.zsh
     zcompile ~/.cache/anyenv/init.zsh
   }
   if [[ ! -f ~/.cache/anyenv/init.zsh ]]; then
     anyenv::cache
   fi
   source ~/.cache/anyenv/init.zsh
+fi
+
+# Go
+path=(
+  $GOROOT/bin(N-/)
+  $path
+  $GOPATH/bin(N-/)
+)
+
+# ghq
+if type ghq >/dev/null 2>&1; then
+  fpath=(
+      $GOPATH/src/github.com/motemen/ghq/zsh/_ghq(N-/)
+      $fpath
+  )
 fi
 
 # pip

@@ -41,9 +41,6 @@ augroup my-coc
   " Setup formatexpr specified filetype
   autocmd FileType typescript,json setlocal formatexpr=CocAction('formatSelected')
 
-  " Automatically add missing imports on save
-  autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup END

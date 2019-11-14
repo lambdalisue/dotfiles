@@ -493,6 +493,15 @@ repo = 'cocopon/iceberg.vim'
 # }}}
 
 # Filetype {{{
+# [[plugins]]
+# repo = 'fatih/vim-go'
+# hook_add = '''
+# let g:go_code_completion_enabled = 0
+# let g:go_fmt_command = "goimports"
+# let g:go_metalinter_autosave = 1
+# let g:go_metalinter_autosave_enabled = ['vet']
+# '''
+
 [[plugins]]
 repo = 'posva/vim-vue'
 hook_add = '''
@@ -542,12 +551,12 @@ repo = 'leafgarland/typescript-vim'
 repo = 'rust-lang/rust.vim'
 hook_add = '''
 let g:rustfmt_autosave = 1
-if !executable('rustfmt')
-  command RustFmtInstall :terminal rustup component add rustfmt
-  echohl WarningMsg
-  echomsg "rustfmt is not installed. invoke :RustFmtInstall"
-  echohl None
-endif
+" if !executable('rustfmt')
+"   command RustFmtInstall :terminal rustup component add rustfmt
+"   echohl WarningMsg
+"   echomsg "rustfmt is not installed. invoke :RustFmtInstall"
+"   echohl None
+" endif
 '''
 
 # }}}
