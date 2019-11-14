@@ -3,6 +3,9 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
 repo = 'mattn/webapi-vim'
 
 [[plugins]]
