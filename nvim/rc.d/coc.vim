@@ -22,12 +22,24 @@ xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
+imap <silent> <C-l> <Plug>(coc-snippets-expand)
+imap <silent> <C-j> <Plug>(coc-snippets-expand-jump)
+vmap <silent> <C-j> <Plug>(coc-snippets-select)
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
+
 " Use K to show documentation in preview window
 nnoremap <silent> K :<C-u>call <SID>show_documentation()<CR>
 
 function! s:show_documentation() abort
   if &filetype =~# '^\%(vim\|help\)$'
-    execute 'help' expand('<cword>')
+    try
+      execute 'help' expand('<cword>')
+    catch
+      echohl Error
+      echo v:exception
+      echohl None
+    endtry
   else
     call CocAction('doHover')
   endif
@@ -54,22 +66,42 @@ command! -nargs=? CocFold call CocAction('fold', <f-args>)
 " use `:OR` for organize import of current buffer
 command! -nargs=0 CocOr call CocAction('runCommand', 'editor.action.organizeImport')
 
-" Using CocList
-" Show all diagnostics
-nnoremap <silent> <space>ca  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>ce  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>cm  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>co  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>cs  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>cj  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>ck  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>cc  :<C-u>CocListResume<CR>
+function! s:install_extensions() abort
+  " Fundemental
+  CocInstall coc-tabnine
+  CocInstall coc-yank
+  CocInstall coc-word
+  CocInstall coc-snippets
+  CocInstall coc-emmet
 
+  " Filetype
+  CocInstall coc-prettier
+  CocInstall coc-eslint
+  CocInstall coc-css
+  CocInstall coc-html
+  CocInstall coc-tsserver
+  CocInstall coc-vetur
+  CocInstall coc-yaml
+  CocInstall coc-python
+  CocInstall coc-pyright
+  CocInstall coc-json
+  CocInstall coc-xml
+  CocInstall coc-go
+  CocInstall coc-rls
+  CocInstall coc-rust-analyzer
+  CocInstall coc-vimlsp
+  CocInstall coc-highlight
 
+  " Experimental
+  CocInstall coc-powershell
+  CocInstall coc-omnisharp
+  CocInstall coc-jest
+  CocInstall coc-sql
+  CocInstall coc-sh
+  CocInstall coc-lua
+  CocInstall coc-powershell
+  CocInstall coc-gitignore
+  CocInstall coc-webpack
+endfunction
+
+command! -nargs=0 CocInstallExtensions call s:install_extensions()

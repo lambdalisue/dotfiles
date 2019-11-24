@@ -1,16 +1,28 @@
 {
-  "list.insertMappings": {
-    "<C-n>": "normal:j",
-    "<C-p>": "normal:k"
-  },
-  "coc.source.emoji.filetypes": ["markdown", "gitcommit", "gina-commit"],
-  "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript", "css", "html", "markdown", "vue"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python",
+    "rust",
+    "go",
+    "typescript",
+    "javascript",
+    "css",
+    "html",
+    "vue",
+    "markdown"
+  ],
+  "list.maxHeight": 30,
+  "list.autoResize": false,
+  "list.nextKeymap": "<C-n>",
+  "list.previousKeymap": "<C-p>",
+  "html.format.enable": true,
   "eslint.autoFixOnSave": true,
-  "prettier.disableLanguages": [],
   "python.linting.pylintEnabled": false,
   "python.formatting.provider": "black",
   "python.autoComplete.extraPaths": ["./src"],
   "python.jediEnabled": false,
+  "rust.racer_completion": false,
+  "rust.clippy_preference": "on",
+  "rust-analyzer.enableCargoWatchOnStartup": "enabled",
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true
