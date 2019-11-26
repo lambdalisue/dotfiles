@@ -48,6 +48,9 @@ if type nvim >/dev/null 2>&1; then
   EDITOR=nvim
 fi
 
+# PostgreSQL (Hit \e on psql)
+export PSQL_EDITOR='nvim +"setfiletype sql" '
+
 # hub
 if type hub >/dev/null 2>&1; then
   alias git=hub
