@@ -1,3 +1,36 @@
+sandbox-alpine() {
+  if [[ ! $(docker ps -qa -f name=sandbox-alpine) ]]; then
+    docker run -d -v $HOME:/mnt/host:ro -it --name sandbox-alpine alpine /bin/sh
+  fi
+  docker exec -it sandbox-alpine /bin/sh
+}
+
+sandbox-ubuntu() {
+  if [[ ! $(docker ps -qa -f name=sandbox-ubuntu) ]]; then
+    docker run -d -v $HOME:/mnt/host:ro -it --name sandbox-ubuntu ubuntu /bin/bash
+  fi
+  docker exec -it sandbox-ubuntu /bin/bash
+}
+
+sandbox-centos() {
+  if [[ ! $(docker ps -qa -f name=sandbox-centos) ]]; then
+    docker run -d -v $HOME:/mnt/host:ro -it --name sandbox-centos centos /bin/bash
+  fi
+  docker exec -it sandbox-centos /bin/bash
+}
+
+kill-sandbox-alpine() {
+  docker rm --force sandbox-alpine
+}
+
+kill-sandbox-ubuntu() {
+  docker rm --force sandbox-ubuntu
+}
+
+kill-sandbox-centos() {
+  docker rm --force sandbox-centos
+}
+
 brew-cask-upgrade() {
   for app in $(brew cask list); do
     local latest="$(brew cask info "${app}" | awk 'NR==1{print $2}')"

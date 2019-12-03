@@ -52,8 +52,9 @@ $HOME/.themisrc
 $HOME/.zshenv
 $HOME/.config/zsh/
 $HOME/.config/zsh/.zshrc
-$HOME/.config/zsh/init.zsh
 $HOME/.config/zsh/addon.zsh
+$HOME/.config/zsh/function.zsh
+$HOME/.config/zsh/init.zsh
 $HOME/.config/zsh/zfunc
 $HOME/.config/zsh/zfunc/fastcompinit
 $HOME/.config/zsh/zfunc/fzf-cdr
@@ -61,14 +62,6 @@ $HOME/.config/zsh/zfunc/fzf-history
 $HOME/.config/zsh/zfunc/fzf-kill
 $HOME/.config/zsh/zfunc/fzf-bindkey
 $HOME/.config/zsh/zfunc/fzf-ghq
-$HOME/.config/zsh/zfunc/brew_cask_upgrade
-$HOME/.config/zsh/zfunc/zsh_profile
-$HOME/.config/zsh/zfunc/zsh_profile_raw
-$HOME/.config/zsh/zfunc/zsh_cache_build
-$HOME/.config/zsh/zfunc/zsh_cache_clear
-$HOME/.config/zsh/zfunc/test_ecma48
-$HOME/.config/zsh/zfunc/test_256color
-$HOME/.config/zsh/zfunc/test_truecolor
 $HOME/.tmux.conf
 $HOME/.config/karabiner/karabiner.json
 $HOME/.config/karabiner/assets/complex_modifications/pinkyless.json

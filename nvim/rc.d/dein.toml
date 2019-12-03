@@ -250,12 +250,6 @@ nmap <C-g>c     <Plug>(my-toggle-cursorword)
 
 # Editing {{{
 [[plugins]]
-repo = 'mattn/emmet-vim'
-hook_add = '''
-let g:user_emmet_leader_key = '<C-y>'
-'''
-
-[[plugins]]
 repo = 'thinca/vim-template'
 hook_add = '''
 autocmd User plugin-template-loaded call s:template_keywords()
@@ -558,13 +552,10 @@ repo = 'leafgarland/typescript-vim'
 [[plugins]]
 repo = 'rust-lang/rust.vim'
 hook_add = '''
-let g:rustfmt_autosave = 1
-" if !executable('rustfmt')
-"   command RustFmtInstall :terminal rustup component add rustfmt
-"   echohl WarningMsg
-"   echomsg "rustfmt is not installed. invoke :RustFmtInstall"
-"   echohl None
-" endif
+let g:rust_fold = 2
+let g:rust_clip_command = 'pbcopy'
+let g:rustfmt_autosave = 0  " using coc-rls to auto format
+let g:rustfmt_options = '--edition 2018'
 '''
 
 # }}}
