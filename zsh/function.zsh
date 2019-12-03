@@ -1,20 +1,20 @@
 sandbox-alpine() {
   if [[ ! $(docker ps -qa -f name=sandbox-alpine) ]]; then
-    docker run -d -it --name sandbox-alpine alpine /bin/sh
+    docker run -d -v $HOME:/mnt/host:ro -it --name sandbox-alpine alpine /bin/sh
   fi
   docker exec -it sandbox-alpine /bin/sh
 }
 
 sandbox-ubuntu() {
   if [[ ! $(docker ps -qa -f name=sandbox-ubuntu) ]]; then
-    docker run -d -it --name sandbox-ubuntu ubuntu /bin/bash
+    docker run -d -v $HOME:/mnt/host:ro -it --name sandbox-ubuntu ubuntu /bin/bash
   fi
   docker exec -it sandbox-ubuntu /bin/bash
 }
 
 sandbox-centos() {
   if [[ ! $(docker ps -qa -f name=sandbox-centos) ]]; then
-    docker run -d -it --name sandbox-centos centos /bin/bash
+    docker run -d -v $HOME:/mnt/host:ro -it --name sandbox-centos centos /bin/bash
   fi
   docker exec -it sandbox-centos /bin/bash
 }
