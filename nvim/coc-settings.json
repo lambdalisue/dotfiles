@@ -15,7 +15,6 @@
   "list.nextKeymap": "<C-n>",
   "list.previousKeymap": "<C-p>",
   "html.format.enable": true,
-  "eslint.autoFixOnSave": true,
   "vetur.format.defaultFormatter.html": "prettier",
   "python.linting.pylintEnabled": false,
   "python.formatting.provider": "black",
