@@ -44,3 +44,6 @@
 	gpgsign = true
 [diff]
 	algorithm = patience
+
+[alias]
+	rewrite = rebase -x 'git commit --amend -C HEAD --date=\"$(date -R)\" && sleep 1.05'
