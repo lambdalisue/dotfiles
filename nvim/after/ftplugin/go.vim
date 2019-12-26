@@ -8,19 +8,3 @@ function! s:godoc(query) abort
 endfunction
 
 command! -buffer -nargs=+ GoDoc call s:godoc(<q-args>)
-
-if !exists("*s:goimports")
-  function! s:goimports() abort
-    if !&modifiable || &readonly || &modified || !empty(&buftype)
-      return
-    endif
-    silent execute printf("!goimports -w %s", shellescape(expand("%")))
-    silent edit
-  endfunction
-endif
-
-command! -buffer GoImports call s:goimports()
-"
-" if executable("goimports")
-"   autocmd MyAutoCmd BufWritePost *.go call s:goimports()
-" endif

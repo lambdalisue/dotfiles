@@ -503,6 +503,8 @@ repo = 'cocopon/iceberg.vim'
 # let g:go_metalinter_autosave = 1
 # let g:go_metalinter_autosave_enabled = ['vet']
 # '''
+[[plugins]]
+repo = 'mattn/vim-goimports'
 
 [[plugins]]
 repo = 'posva/vim-vue'
