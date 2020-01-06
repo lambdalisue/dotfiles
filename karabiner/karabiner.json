@@ -550,6 +550,22 @@
                     "to": {
                         "key_code": "fn"
                     }
+                },
+                {
+                    "from": {
+                        "key_code": "japanese_pc_nfer"
+                    },
+                    "to": {
+                        "key_code": "japanese_eisuu"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "japanese_pc_xfer"
+                    },
+                    "to": {
+                        "key_code": "japanese_kana"
+                    }
                 }
             ],
             "virtual_hid_keyboard": {
