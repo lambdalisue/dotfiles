@@ -421,7 +421,7 @@
                         "product_id": 305,
                         "vendor_id": 1390
                     },
-                    "ignore": false,
+                    "ignore": true,
                     "manipulate_caps_lock_led": false,
                     "simple_modifications": []
                 },
@@ -545,14 +545,6 @@
             "simple_modifications": [
                 {
                     "from": {
-                        "key_code": "right_alt"
-                    },
-                    "to": {
-                        "key_code": "fn"
-                    }
-                },
-                {
-                    "from": {
                         "key_code": "japanese_pc_nfer"
                     },
                     "to": {
@@ -565,6 +557,14 @@
                     },
                     "to": {
                         "key_code": "japanese_kana"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "right_alt"
+                    },
+                    "to": {
+                        "key_code": "fn"
                     }
                 }
             ],
