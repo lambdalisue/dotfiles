@@ -1,7 +1,3 @@
-[[plugins]]
-repo = 'lambdalisue/trea.vim'
-merge = 0
-
 # Fundemental {{{
 [[plugins]]
 repo = 'Shougo/dein.vim'
@@ -18,11 +14,15 @@ nmap [h <Plug>(GitGutterPrevHunk)
 repo = 'mattn/webapi-vim'
 
 [[plugins]]
-repo = 'lambdalisue/fila.vim'
-merged = 0
+repo = 'lambdalisue/fern.vim'
+merge = 0
 hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/fila.vim'))
+execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/fern.vim'))
 '''
+
+[[plugins]]
+repo = 'lambdalisue/fern-bookmark.vim'
+merge = 0
 
 [[plugins]]
 repo = 'lambdalisue/qfloc.vim'
@@ -208,7 +208,7 @@ let g:wifi#update_tabline = 1
 '''
 
 [[plugins]]
-repo = 'kannokanno/previm'
+repo = 'previm/previm'
 depends = 'open-browser.vim'
 hook_add = 'let g:previm_show_header = 0'
 
