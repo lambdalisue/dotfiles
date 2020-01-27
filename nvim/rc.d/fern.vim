@@ -1,6 +1,6 @@
 nnoremap <silent> <Leader>oo :<C-u>Fern bookmark:<CR>
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR><CR>
-nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -reveal=%<CR>
+nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -toggle -reveal=%<CR>
 
 function! s:fern_init() abort
   nmap <buffer><expr>
