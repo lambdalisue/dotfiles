@@ -20,6 +20,7 @@
   "python.formatting.provider": "black",
   "python.autoComplete.extraPaths": ["./src"],
   "python.jediEnabled": false,
+  "pyright.useLibraryCodeForTypes": true,
   "rust.racer_completion": false,
   "rust.clippy_preference": "on",
   "rust-analyzer.enableCargoWatchOnStartup": "enabled",
