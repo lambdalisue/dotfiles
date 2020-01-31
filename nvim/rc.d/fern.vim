@@ -1,4 +1,3 @@
-nnoremap <silent> <Leader>oo :<C-u>Fern bookmark:///<CR>
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR><CR>
 nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -toggle -reveal=%<CR>
 
@@ -20,20 +19,13 @@ function! s:fern_init() abort
   nmap <buffer><nowait> <C-m> <Plug>(fern-my-open-or-enter)
   nmap <buffer><nowait> <C-h> <Plug>(fern-my-leave)
 
-  " nmap <buffer><expr>
-  "      \ <Plug>(fern-my-expand-or-enter)
-  "      \ fern#smart#drawer(
-  "      \   "\<Plug>(fern-open-or-expand)",
-  "      \   "\<Plug>(fern-open-or-enter)",
-  "      \ )
-  " nmap <buffer><expr>
-  "      \ <Plug>(fern-my-collapse-or-leave)
-  "      \ fern#smart#drawer(
-  "      \   "\<Plug>(fern-action-collapse)",
-  "      \   "\<Plug>(fern-action-leave)",
-  "      \ )
-  " nmap <buffer><nowait> l <Plug>(fern-my-expand-or-enter)
-  " nmap <buffer><nowait> h <Plug>(fern-my-collapse-or-leave)
+  " XXX: Simplify the way to find scheme
+  let scheme = fern#fri#parse(fern#fri#parse(bufname('%')).path).scheme
+  if scheme ==# 'bookmark'
+    echomsg "This is bookmark tree"
+  else
+    nnoremap <buffer><silent> <C-^> :<C-u>Fern bookmark:///<CR>
+  endif
 endfunction
 
 function! s:smart_path() abort
