@@ -3,6 +3,9 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
 let g:gitgutter_map_keys = 0
@@ -15,18 +18,29 @@ repo = 'mattn/webapi-vim'
 
 [[plugins]]
 repo = 'lambdalisue/fern.vim'
-merge = 0
+merged = 0
 hook_post_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/fern.vim'))
 '''
 
 [[plugins]]
 repo = 'lambdalisue/fern-bookmark.vim'
-merge = 0
+merged = 0
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-devicons.vim'
+merged = 0
+
+[[plugins]]
+repo = 'lambdalisue/fern-comparator-lexical.vim'
+merged = 0
+
+[[plugins]]
+repo = 'lambdalisue/fern-mapping-project-top.vim'
+merged = 0
 
 [[plugins]]
 repo = 'lambdalisue/qfloc.vim'
-merged = 0
 
 [[plugins]]
 repo = 'lambdalisue/grea.vim'

@@ -80,8 +80,6 @@ if type anyenv >/dev/null 2>&1; then
   anyenv::cache() {
     mkdir -p ~/.cache/anyenv
     anyenv init - --no-rehash > ~/.cache/anyenv/init.zsh
-    # # XXX:: Remove 'goenv rehash --only-manage-paths' which tooks long
-    # sed -i -e "/goenv rehash --only-manage-paths/d" ~/.cache/anyenv/init.zsh
     zcompile ~/.cache/anyenv/init.zsh
   }
   if [[ ! -f ~/.cache/anyenv/init.zsh ]]; then
@@ -91,10 +89,10 @@ if type anyenv >/dev/null 2>&1; then
 fi
 
 # Go
+export GOPATH=$HOME/.go
 path=(
-  $GOROOT/bin(N-/)
-  $path
   $GOPATH/bin(N-/)
+  $path
 )
 
 # ghq

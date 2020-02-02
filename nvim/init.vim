@@ -51,10 +51,10 @@ if has('vim_starting')
   let g:loaded_man               = 1
   " NOTE:
   " The Netrw is use to download a missing spellfile
-  " let g:loaded_netrw             = 1
-  " let g:loaded_netrwPlugin       = 1
-  " let g:loaded_netrwSettings     = 1
-  " let g:loaded_netrwFileHandlers = 1
+  let g:loaded_netrw             = 1
+  let g:loaded_netrwPlugin       = 1
+  let g:loaded_netrwSettings     = 1
+  let g:loaded_netrwFileHandlers = 1
 endif
 
 " }}}
@@ -547,10 +547,6 @@ noremap! <C-e> <End>
 noremap! <C-f> <Right>
 noremap! <C-b> <Left>
 noremap! <C-d> <Del>
-
-" Use <C-k> to move next word in Insert/Command
-" Note that this mapping overwrite default mapping for digraph
-noremap! <C-k> <C-Right>
 
 " Do NOT yank with x/s
 nnoremap x "_x

@@ -1,9 +1,15 @@
+function! s:smart_path() abort
+  if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
+    return fnamemodify('.', ':p')
+  endif
+  return fnamemodify(expand('%'), ':p:h')
+endfunctio
+
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR><CR>
 nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -toggle -reveal=%<CR>
 
 function! s:fern_init() abort
-  let scheme = s:find_scheme()
-
+  " Call "tcd" as well on project drawer
   nmap <buffer><expr>
         \ <Plug>(fern-my-open-or-enter)
         \ fern#smart#drawer(
@@ -21,39 +27,36 @@ function! s:fern_init() abort
   nmap <buffer><nowait> <C-m> <Plug>(fern-my-open-or-enter)
   nmap <buffer><nowait> <C-h> <Plug>(fern-my-leave)
 
-  " Find and enter project root
-  if scheme ==# 'file'
-    nnoremap <buffer><silent>
-          \ <Plug>(fern-action-enter-project-root)
-          \ :<C-u>call fern#helper#call(funcref("<SID>map_enter_project_root"))<CR>
-    nmap <buffer><nowait> ^ <Plug>(fern-action-enter-project-root)
-  endif
-
-  if scheme ==# 'bookmark'
-    echomsg "This is bookmark tree"
-  else
-    nnoremap <buffer><silent> <C-^> :<C-u>Fern bookmark:///<CR>
-  endif
+  " Open bookmark:///
+  nnoremap <buffer><silent>
+        \ <Plug>(fern-my-enter-bookmark)
+        \ :<C-u>Fern bookmark:///<CR>
+  nmap <buffer><expr><silent>
+        \ <C-^>
+        \ fern#smart#scheme(
+        \   "\<Plug>(fern-my-enter-bookmark)",
+        \   {
+        \     'bookmark': "\<C-^>",
+        \   },
+        \ )
 endfunction
 
-" XXX: Provide similar function officially in fern.vim ?
-function! s:find_scheme() abort
-  return fern#fri#parse(fern#fri#parse(bufname('%')).path).scheme
-endfunction
+augroup my-fern
+  autocmd! *
+  autocmd FileType fern call s:fern_init()
+augroup END
 
-function! s:smart_path() abort
-  if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
-    return fnamemodify('.', ':p')
+let g:fern#renderer = 'devicons'
+
+augroup my-fern-hijack
+  autocmd!
+  autocmd BufEnter * nested call s:hijack_directory()
+augroup END
+
+function! s:hijack_directory() abort
+  let path = expand('%')
+  if !isdirectory(path)
+    return
   endif
-  return fnamemodify(expand('%'), ':p:h')
-endfunctio
-
-function! s:map_enter_project_root(helper) abort
-  " NOTE: require 'file' scheme
-  let root = a:helper.get_root_node()
-  let path = root._path
-  let path = finddir('.git/..', path . ';')
-  execute printf('Fern %s', fnameescape(path))
+  execute 'Fern %'
 endfunction
-
-autocmd MyAutoCmd FileType fern call s:fern_init()
