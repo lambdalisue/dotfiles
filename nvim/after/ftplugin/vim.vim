@@ -11,3 +11,5 @@ setl smartindent
 setl foldmethod=syntax
 
 setl keywordprg=:help
+
+command! Vint cexpr system('vint .')

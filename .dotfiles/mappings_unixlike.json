@@ -1,4 +1,5 @@
 {
+  "efm-langserver": "~/.config/efm-langserver",
   "tmux": "~/.config/tmux",
   "tmux.conf": "~/.tmux.conf",
   "vim": "~/.vim",

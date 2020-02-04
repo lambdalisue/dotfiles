@@ -27,5 +27,12 @@
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true
+  },
+  "languageserver": {
+    "efm": {
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["vim", "markdown", "yaml"]
+    }
   }
 }
