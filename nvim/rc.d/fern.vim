@@ -27,6 +27,8 @@ function! s:fern_init() abort
   nmap <buffer><nowait> <C-m> <Plug>(fern-my-open-or-enter)
   nmap <buffer><nowait> <C-h> <Plug>(fern-my-leave)
 
+  nmap <buffer><nowait> <Plug>(fern-action-open-and-stay) <Plug>(fern-action-open)<C-w><C-p>
+
   " Open bookmark:///
   nnoremap <buffer><silent>
         \ <Plug>(fern-my-enter-bookmark)

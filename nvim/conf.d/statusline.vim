@@ -19,7 +19,9 @@ endfunction
 function! s:tabline() abort
   return join([
         \ '%{fnamemodify(".", ":p:~")}',
+        \ '|',
         \ join(map(range(1, tabpagenr('$')), { -> s:tab(v:val) })),
+        \ '|',
         \ '%=',
         \ '%{gina#component#repo#preset("fancy")}',
         \ '%{gina#component#status#preset("fancy")}',
