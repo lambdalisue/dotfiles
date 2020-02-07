@@ -680,26 +680,26 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/conf.d/statusline.vim'))
 silent! colorscheme slate
 silent! colorscheme iceberg
 
-" Transparent background
-function! s:transparent() abort
-  highlight Normal ctermbg=NONE guibg=NONE
-  highlight NonText ctermbg=NONE guibg=NONE
-  highlight EndOfBuffer ctermbg=NONE guibg=NONE
-  highlight Folded ctermbg=NONE guibg=NONE
-  highlight LineNr ctermbg=NONE guibg=NONE
-  highlight CursorLineNr ctermbg=NONE guibg=NONE
-  highlight SpecialKey ctermbg=NONE guibg=NONE
-  highlight ALEErrorSign ctermbg=NONE guibg=NONE
-  highlight ALEWarningSign ctermbg=NONE guibg=NONE
-  highlight GitGutterAdd ctermbg=NONE guibg=NONE
-  highlight GitGutterChange ctermbg=NONE guibg=NONE
-  highlight GitGutterChangeDelete ctermbg=NONE guibg=NONE
-  highlight GitGutterDelete ctermbg=NONE guibg=NONE
-endfunction
-autocmd MyAutoCmd VimEnter *
-      \ if !exists('g:GuiLoaded') && !has("gui") |
-      \   call s:transparent() |
-      \ endif
+" " Transparent background
+" function! s:transparent() abort
+"   highlight Normal ctermbg=NONE guibg=NONE
+"   highlight NonText ctermbg=NONE guibg=NONE
+"   highlight EndOfBuffer ctermbg=NONE guibg=NONE
+"   highlight Folded ctermbg=NONE guibg=NONE
+"   highlight LineNr ctermbg=NONE guibg=NONE
+"   highlight CursorLineNr ctermbg=NONE guibg=NONE
+"   highlight SpecialKey ctermbg=NONE guibg=NONE
+"   highlight ALEErrorSign ctermbg=NONE guibg=NONE
+"   highlight ALEWarningSign ctermbg=NONE guibg=NONE
+"   highlight GitGutterAdd ctermbg=NONE guibg=NONE
+"   highlight GitGutterChange ctermbg=NONE guibg=NONE
+"   highlight GitGutterChangeDelete ctermbg=NONE guibg=NONE
+"   highlight GitGutterDelete ctermbg=NONE guibg=NONE
+" endfunction
+" autocmd MyAutoCmd VimEnter *
+"      \ if !exists('g:GuiLoaded') && !has("gui") |
+"      \   call s:transparent() |
+"      \ endif
 
 set secure
 " }}}
