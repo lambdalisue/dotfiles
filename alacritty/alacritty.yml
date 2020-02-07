@@ -83,10 +83,6 @@ scrolling:
   # Specifying '0' will disable scrolling.
   history: 10000
 
-  # Number of lines the viewport will move for every line scrolled when
-  # scrollback is enabled (history > 0).
-  multiplier: 3
-
   # Faux Scrolling
   #
   # The `faux_multiplier` setting controls the number of lines the terminal
@@ -95,9 +91,6 @@ scrolling:
   #
   # Specifying `0` will disable faux scrolling.
   multiplier: 3
-
-  # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: false
 
 # Spaces per Tab (changes require restart)
 #
