@@ -39,14 +39,14 @@ if type fzf >/dev/null 2>&1; then
 fi
 
 # vim
-if type vim >/dev/null 2>&1; then
-  alias mvim="vim -u ~/.vim/vimrc.min -i NONE"
-  EDITOR=vim
-fi
-if type nvim >/dev/null 2>&1; then
-  alias mnvim="nvim -u ~/.vim/vimrc.min -i NONE"
-  EDITOR=nvim
-fi
+# if type vim >/dev/null 2>&1; then
+#   alias mvim="vim -u ~/.vim/vimrc.min -i NONE"
+#   EDITOR=vim
+# fi
+# if type nvim >/dev/null 2>&1; then
+#   alias mnvim="nvim -u ~/.vim/vimrc.min -i NONE"
+#   EDITOR=nvim
+# fi
 
 # PostgreSQL (Hit \e on psql)
 export PSQL_EDITOR='nvim +"setfiletype sql" '

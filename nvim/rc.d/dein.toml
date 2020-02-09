@@ -17,6 +17,10 @@ nmap [h <Plug>(GitGutterPrevHunk)
 repo = 'mattn/webapi-vim'
 
 [[plugins]]
+repo = 'lambdalisue/edita.vim'
+merged = 0
+
+[[plugins]]
 repo = 'lambdalisue/fern.vim'
 merged = 0
 hook_post_source = '''
@@ -588,6 +592,9 @@ repo = 'thinca/vim-themis'
 
 [[plugins]]
 repo = 'lambdalisue/vim-backslash'
+
+[[plugins]]
+repo = 'rbtnn/vim-vimscript_lasterror'
 
 [[plugins]]
 repo = 'tweekmonster/helpful.vim'

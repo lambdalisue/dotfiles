@@ -32,17 +32,17 @@ function! s:fern_init() abort
   nmap <buffer><nowait> ~ :<C-u>Fern ~<CR>
 
   " Open bookmark:///
-  nnoremap <buffer><silent>
-        \ <Plug>(fern-my-enter-bookmark)
-        \ :<C-u>Fern bookmark:///<CR>
-  nmap <buffer><expr><silent>
-        \ <C-^>
-        \ fern#smart#scheme(
-        \   "\<Plug>(fern-my-enter-bookmark)",
-        \   {
-        \     'bookmark': "\<C-^>",
-        \   },
-        \ )
+  " nnoremap <buffer><silent>
+  "      \ <Plug>(fern-my-enter-bookmark)
+  "      \ :<C-u>Fern bookmark:///<CR>
+  " nmap <buffer><expr><silent>
+  "      \ <C-^>
+  "      \ fern#smart#scheme(
+  "      \   "\<Plug>(fern-my-enter-bookmark)",
+  "      \   {
+  "      \     'bookmark': "\<C-^>",
+  "      \   },
+  "      \ )
 endfunction
 
 augroup my-fern
@@ -62,5 +62,6 @@ function! s:hijack_directory() abort
   if !isdirectory(path)
     return
   endif
+  bwipeout %
   execute 'Fern %'
 endfunction
