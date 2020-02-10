@@ -50,8 +50,6 @@ augroup my-fern
   autocmd FileType fern call s:fern_init()
 augroup END
 
-let g:fern#renderer = 'devicons'
-
 augroup my-fern-hijack
   autocmd!
   autocmd BufEnter * nested call s:hijack_directory()
@@ -65,3 +63,7 @@ function! s:hijack_directory() abort
   bwipeout %
   execute 'Fern %'
 endfunction
+
+if has('mac') && has('nvim')
+  let g:fern#renderer = 'devicons'
+endif

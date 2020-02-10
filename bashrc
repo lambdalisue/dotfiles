@@ -9,3 +9,7 @@ if [[ -d "$HOME/.pyenv" ]]; then
   export PATH="$HOME/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
 fi
+
+if [[ -d "$HOME/.poetry" ]]; then
+  export PATH="$HOME/.poetry/bin:$PATH"
+fi
