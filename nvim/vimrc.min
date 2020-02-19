@@ -3,5 +3,7 @@ if has('vim_starting')
   set nocompatible
 endif
 
+set runtimepath+=~/.ghq/github.com/lambdalisue/fern.vim
+
 filetype plugin indent on
 syntax on

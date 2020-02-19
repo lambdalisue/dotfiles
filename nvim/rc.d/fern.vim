@@ -5,23 +5,24 @@ function! s:smart_path() abort
   return fnamemodify(expand('%'), ':p:h')
 endfunctio
 
+nnoremap <silent> <Leader>bb :<C-u>Fern bookmark:///<CR><CR>
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR><CR>
 nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -toggle -reveal=%<CR>
 
 function! s:fern_init() abort
   " Call "tcd" as well on project drawer
   nmap <buffer><expr>
-        \ <Plug>(fern-my-open-or-enter)
-        \ fern#smart#drawer(
-        \   "\<Plug>(fern-open-or-enter)\<Plug>(fern-action-tcd)",
-        \   "\<Plug>(fern-open-or-enter)",
-        \ )
+       \ <Plug>(fern-my-open-or-enter)
+       \ fern#smart#drawer(
+       \   "\<Plug>(fern-open-or-enter)\<Plug>(fern-action-tcd)",
+       \   "\<Plug>(fern-open-or-enter)",
+       \ )
   nmap <buffer><expr>
-        \ <Plug>(fern-my-leave)
-        \ fern#smart#drawer(
-        \   "\<Plug>(fern-action-leave)\<Plug>(fern-action-tcd)",
-        \   "\<Plug>(fern-action-leave)",
-        \ )
+       \ <Plug>(fern-my-leave)
+       \ fern#smart#drawer(
+       \   "\<Plug>(fern-action-leave)\<Plug>(fern-action-tcd)",
+       \   "\<Plug>(fern-action-leave)",
+       \ )
   nmap <buffer><nowait> <Return> <Plug>(fern-my-open-or-enter)
   nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
   nmap <buffer><nowait> <C-m> <Plug>(fern-my-open-or-enter)
@@ -32,17 +33,17 @@ function! s:fern_init() abort
   nmap <buffer><nowait> ~ :<C-u>Fern ~<CR>
 
   " Open bookmark:///
-  " nnoremap <buffer><silent>
-  "      \ <Plug>(fern-my-enter-bookmark)
-  "      \ :<C-u>Fern bookmark:///<CR>
-  " nmap <buffer><expr><silent>
-  "      \ <C-^>
-  "      \ fern#smart#scheme(
-  "      \   "\<Plug>(fern-my-enter-bookmark)",
-  "      \   {
-  "      \     'bookmark': "\<C-^>",
-  "      \   },
-  "      \ )
+  nnoremap <buffer><silent>
+       \ <Plug>(fern-my-enter-bookmark)
+       \ :<C-u>Fern bookmark:///<CR>
+  nmap <buffer><expr><silent>
+       \ <C-n>
+       \ fern#smart#scheme(
+       \   "\<Plug>(fern-my-enter-bookmark)",
+       \   {
+       \     'bookmark': "\<C-^>",
+       \   },
+       \ )
 endfunction
 
 augroup my-fern
@@ -64,6 +65,8 @@ function! s:hijack_directory() abort
   execute 'Fern %'
 endfunction
 
-if has('mac') && has('nvim')
+if has('mac') && has('nvim') && !exists('$SSH_CONNECTION')
   let g:fern#renderer = 'devicons'
 endif
+
+let g:fern#keepalt_on_edit = 1

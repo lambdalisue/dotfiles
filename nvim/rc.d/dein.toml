@@ -1,3 +1,11 @@
+[[plugins]]
+repo = 'lambdalisue/gilt.vim'
+merged = 0
+
+[[plugins]]
+repo = 'lambdalisue/cactus.vim'
+merged = 0
+
 # Fundemental {{{
 [[plugins]]
 repo = 'Shougo/dein.vim'
@@ -45,6 +53,7 @@ merged = 0
 
 [[plugins]]
 repo = 'lambdalisue/qfloc.vim'
+merged = 0
 
 [[plugins]]
 repo = 'lambdalisue/grea.vim'
