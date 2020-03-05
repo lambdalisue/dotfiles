@@ -697,7 +697,7 @@ function! s:transparent() abort
   highlight GitGutterDelete ctermbg=NONE guibg=NONE
 endfunction
 autocmd MyAutoCmd VimEnter *
-     \ if !exists('g:GuiLoaded') && !has("gui") && exists('$SSH_CONNECTION') |
+     \ if !exists('g:GuiLoaded') && !has("gui") && !exists('$SSH_CONNECTION') |
      \   call s:transparent() |
      \ endif
 
