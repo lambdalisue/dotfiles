@@ -1,5 +1,5 @@
 [[plugins]]
-repo = 'lambdalisue/gilt.vim'
+repo = 'lambdalisue/glanca.vim'
 merged = 0
 
 [[plugins]]
