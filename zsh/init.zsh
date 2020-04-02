@@ -4,7 +4,7 @@ export LC_ALL=en_US.UTF-8
 export PLATFORM="$(uname)"
 
 # cache profile
-export CACHE_PROFILE="~/.cache/profile"
+export CACHE_PROFILE="${XDG_CACHE_HOME}/zsh/profile"
 mkdir -p ${CACHE_PROFILE}
 
 # ls/la
@@ -20,10 +20,12 @@ fi
 export PSQL_EDITOR='nvim +"setfiletype sql" '
 
 # brew
-if type brew >/dev/null; then
+if type brew &>/dev/null; then
   brew::cache() {
-    echo "export HOMEBREW_PREFIX='$(brew --prefix)'" > ${CACHE_PROFILE}/brew.zsh
-    echo "export FPATH='$(brew --prefix)/share/zsh/site-functions:$FPATH'" >> ${CACHE_PROFILE}/brew.zsh
+    cat <<EOF > ${CACHE_PROFILE}/brew.zsh
+export HOMEBREW_PREFIX="$(brew --prefix)"
+export FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+EOF
     zcompile ${CACHE_PROFILE}/brew.zsh
   }
   if [[ ! -f ${CACHE_PROFILE}/brew.zsh ]]; then
@@ -33,7 +35,7 @@ if type brew >/dev/null; then
 fi
 
 # fzf
-if type fzf >/dev/null 2>&1; then
+if type fzf &>/dev/null; then
   export FZF_DEFAULT_OPTS='
       --exact
       --border
@@ -42,7 +44,7 @@ if type fzf >/dev/null 2>&1; then
       --bind=ctrl-t:up,ctrl-g:down
       '
 
-  if type fd 1>/dev/null 2>&1; then
+  if type fd &>/dev/null; then
       export FZF_DEFAULT_COMMAND='fd --type f'
   fi
 
@@ -60,9 +62,9 @@ if type fzf >/dev/null 2>&1; then
 fi
 
 # xdg-open
-if type xdg-open >/dev/null 2>&1; then
+if type xdg-open &>/dev/null; then
   open() {
-    xdg-open $@ >/dev/null 2>&1
+    xdg-open $@ &>/dev/null
   }
 fi
 
@@ -74,20 +76,20 @@ if [[ -n "$SSH_CONNECTION" ]]; then
 fi
 
 # vim
-if type vim >/dev/null 2>&1; then
+if type vim &>/dev/null; then
   alias vim-m="vim -u ~/.vim/vimrc.min -i NONE"
   EDITOR=vim
 fi
-if type nvim >/dev/null 2>&1; then
+if type nvim &>/dev/null; then
   alias nvim-m="nvim -u ~/.vim/vimrc.min -i NONE"
   EDITOR=nvim
 fi
 
 # asdf
-if type asdf >/dev/null 2>&1; then
+if type asdf &>/dev/null; then
   asdf::cache() {
     echo ". $(brew --prefix asdf)/asdf.sh" > ${CACHE_PROFILE}/asdf.zsh
-    zcompile ~/.cache/asdf/init.zsh
+    zcompile ${CACHE_PROFILE}/asdf.zsh
   }
   if [[ ! -f ${CACHE_PROFILE}/asdf.zsh ]]; then
     asdf::cache
@@ -96,7 +98,7 @@ if type asdf >/dev/null 2>&1; then
 fi
 
 # pip
-if type pip >/dev/null 2>&1; then
+if type pip &>/dev/null; then
   pip::cache() {
     pip completion --zsh > ${CACHE_PROFILE}/pip.zsh
     zcompile ${CACHE_PROFILE}/pip.zsh
@@ -106,7 +108,7 @@ if type pip >/dev/null 2>&1; then
   fi
   source ${CACHE_PROFILE}/pip.zsh
 fi
-if type pip2 >/dev/null 2>&1; then
+if type pip2 &>/dev/null; then
   pip2::cache() {
     pip2 completion --zsh > ${CACHE_PROFILE}/pip2.zsh
     zcompile ${CACHE_PROFILE}/pip2.zsh
@@ -116,7 +118,7 @@ if type pip2 >/dev/null 2>&1; then
   fi
   source ${CACHE_PROFILE}/pip2.zsh
 fi
-if type pip3 >/dev/null 2>&1; then
+if type pip3 &>/dev/null; then
   pip3::cache() {
     pip3 completion --zsh > ${CACHE_PROFILE}/pip3.zsh
     zcompile ${CACHE_PROFILE}/pip3.zsh
@@ -128,7 +130,7 @@ if type pip3 >/dev/null 2>&1; then
 fi
 
 # pipenv
-if type pipenv >/dev/null 2>&1; then
+if type pipenv &>/dev/null; then
   pipenv::cache() {
     pipenv --completion > ${CACHE_PROFILE}/pipenv.zsh
     zcompile ${CACHE_PROFILE}/pipenv.zsh
@@ -145,7 +147,7 @@ if [ -f ~/.poetry/env ]; then
 fi
 
 # direnv
-if type direnv >/dev/null 2>&1; then
+if type direnv &>/dev/null; then
   direnv::cache() {
     direnv hook zsh > ${CACHE_PROFILE}/direnv.zsh
     zcompile ${CACHE_PROFILE}/direnv.zsh
