@@ -3,12 +3,33 @@ export LANG="en_US.UTF-8"
 export LC_ALL=en_US.UTF-8
 export PLATFORM="$(uname)"
 
+# cache profile
+export CACHE_PROFILE="~/.cache/profile"
+mkdir -p ${CACHE_PROFILE}
+
+# ls/la
 if [[ $PLATFORM == "Darwin" ]]; then
   alias ls="ls -G -w"
   alias la="ls -lhAFG"
 else
   alias ls="ls --color=always"
   alias la="ls -lhAF"
+fi
+
+# PostgreSQL (Hit \e on psql)
+export PSQL_EDITOR='nvim +"setfiletype sql" '
+
+# brew
+if type brew >/dev/null; then
+  brew::cache() {
+    echo "export HOMEBREW_PREFIX='$(brew --prefix)'" > ${CACHE_PROFILE}/brew.zsh
+    echo "export FPATH='$(brew --prefix)/share/zsh/site-functions:$FPATH'" >> ${CACHE_PROFILE}/brew.zsh
+    zcompile ${CACHE_PROFILE}/brew.zsh
+  }
+  if [[ ! -f ${CACHE_PROFILE}/brew.zsh ]]; then
+    brew::cache
+  fi
+  source ${CACHE_PROFILE}/brew.zsh
 fi
 
 # fzf
@@ -38,9 +59,6 @@ if type fzf >/dev/null 2>&1; then
   abindkey '^X^G' fzf-ghq
 fi
 
-# PostgreSQL (Hit \e on psql)
-export PSQL_EDITOR='nvim +"setfiletype sql" '
-
 # xdg-open
 if type xdg-open >/dev/null 2>&1; then
   open() {
@@ -68,62 +86,57 @@ fi
 # asdf
 if type asdf >/dev/null 2>&1; then
   asdf::cache() {
-    mkdir -p ~/.cache/asdf
-    echo ". $(brew --prefix asdf)/asdf.sh" > ~/.cache/asdf/init.zsh
+    echo ". $(brew --prefix asdf)/asdf.sh" > ${CACHE_PROFILE}/asdf.zsh
     zcompile ~/.cache/asdf/init.zsh
   }
-  if [[ ! -f ~/.cache/asdf/init.zsh ]]; then
+  if [[ ! -f ${CACHE_PROFILE}/asdf.zsh ]]; then
     asdf::cache
   fi
-  source ~/.cache/asdf/init.zsh
+  source ${CACHE_PROFILE}/asdf.zsh
 fi
 
 # pip
 if type pip >/dev/null 2>&1; then
   pip::cache() {
-    mkdir -p ~/.cache/pip
-    pip completion --zsh > ~/.cache/pip/init.zsh
-    zcompile ~/.cache/pip/init.zsh
+    pip completion --zsh > ${CACHE_PROFILE}/pip.zsh
+    zcompile ${CACHE_PROFILE}/pip.zsh
   }
-  if [[ ! -f ~/.cache/pip/init.zsh ]]; then
+  if [[ ! -f ${CACHE_PROFILE}/pip.zsh ]]; then
     pip::cache
   fi
-  source ~/.cache/pip/init.zsh
+  source ${CACHE_PROFILE}/pip.zsh
 fi
 if type pip2 >/dev/null 2>&1; then
   pip2::cache() {
-    mkdir -p ~/.cache/pip2
-    pip2 completion --zsh > ~/.cache/pip2/init.zsh
-    zcompile ~/.cache/pip2/init.zsh
+    pip2 completion --zsh > ${CACHE_PROFILE}/pip2.zsh
+    zcompile ${CACHE_PROFILE}/pip2.zsh
   }
-  if [[ ! -f ~/.cache/pip2/init.zsh ]]; then
+  if [[ ! -f ${CACHE_PROFILE}/pip2.zsh ]]; then
     pip2::cache
   fi
-  source ~/.cache/pip2/init.zsh
+  source ${CACHE_PROFILE}/pip2.zsh
 fi
 if type pip3 >/dev/null 2>&1; then
   pip3::cache() {
-    mkdir -p ~/.cache/pip3
-    pip3 completion --zsh > ~/.cache/pip3/init.zsh
-    zcompile ~/.cache/pip3/init.zsh
+    pip3 completion --zsh > ${CACHE_PROFILE}/pip3.zsh
+    zcompile ${CACHE_PROFILE}/pip3.zsh
   }
-  if [[ ! -f ~/.cache/pip3/init.zsh ]]; then
+  if [[ ! -f ${CACHE_PROFILE}/pip3.zsh ]]; then
     pip3::cache
   fi
-  source ~/.cache/pip3/init.zsh
+  source ${CACHE_PROFILE}/pip3.zsh
 fi
 
 # pipenv
 if type pipenv >/dev/null 2>&1; then
   pipenv::cache() {
-    mkdir -p ~/.cache/pipenv
-    pipenv --completion > ~/.cache/pipenv/init.zsh
-    zcompile ~/.cache/pipenv/init.zsh
+    pipenv --completion > ${CACHE_PROFILE}/pipenv.zsh
+    zcompile ${CACHE_PROFILE}/pipenv.zsh
   }
-  if [[ ! -f ~/.cache/pipenv/init.zsh ]]; then
+  if [[ ! -f ${CACHE_PROFILE}/pipenv.zsh ]]; then
     pipenv::cache
   fi
-  source ~/.cache/pipenv/init.zsh
+  source ${CACHE_PROFILE}/pipenv.zsh
 fi
 
 # poetry
@@ -134,14 +147,13 @@ fi
 # direnv
 if type direnv >/dev/null 2>&1; then
   direnv::cache() {
-    mkdir -p ~/.cache/direnv
-    direnv hook zsh > ~/.cache/direnv/init.zsh
-    zcompile ~/.cache/direnv/init.zsh
+    direnv hook zsh > ${CACHE_PROFILE}/direnv.zsh
+    zcompile ${CACHE_PROFILE}/direnv.zsh
   }
-  if [[ ! -f ~/.cache/direnv/init.zsh ]]; then
+  if [[ ! -f ${CACHE_PROFILE}/direnv.zsh ]]; then
     direnv::cache
   fi
-  source ~/.cache/direnv/init.zsh
+  source ${CACHE_PROFILE}/direnv.zsh
 fi
 
 # docker
