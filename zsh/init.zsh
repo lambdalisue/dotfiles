@@ -38,23 +38,8 @@ if type fzf >/dev/null 2>&1; then
   abindkey '^X^G' fzf-ghq
 fi
 
-# vim
-# if type vim >/dev/null 2>&1; then
-#   alias mvim="vim -u ~/.vim/vimrc.min -i NONE"
-#   EDITOR=vim
-# fi
-# if type nvim >/dev/null 2>&1; then
-#   alias mnvim="nvim -u ~/.vim/vimrc.min -i NONE"
-#   EDITOR=nvim
-# fi
-
 # PostgreSQL (Hit \e on psql)
 export PSQL_EDITOR='nvim +"setfiletype sql" '
-
-# hub
-if type hub >/dev/null 2>&1; then
-  alias git=hub
-fi
 
 # xdg-open
 if type xdg-open >/dev/null 2>&1; then
@@ -70,37 +55,27 @@ if [[ -n "$SSH_CONNECTION" ]]; then
     export PINENTRY_USER_DATA="USE_CURSES=1"
 fi
 
-# poetry
-if [ -f ~/.poetry/env ]; then
-  source ~/.poetry/env
+# vim
+if type vim >/dev/null 2>&1; then
+  alias vim-m="vim -u ~/.vim/vimrc.min -i NONE"
+  EDITOR=vim
+fi
+if type nvim >/dev/null 2>&1; then
+  alias nvim-m="nvim -u ~/.vim/vimrc.min -i NONE"
+  EDITOR=nvim
 fi
 
-# anyenv
-if type anyenv >/dev/null 2>&1; then
-  anyenv::cache() {
-    mkdir -p ~/.cache/anyenv
-    anyenv init - --no-rehash > ~/.cache/anyenv/init.zsh
-    zcompile ~/.cache/anyenv/init.zsh
+# asdf
+if type asdf >/dev/null 2>&1; then
+  asdf::cache() {
+    mkdir -p ~/.cache/asdf
+    echo ". $(brew --prefix asdf)/asdf.sh" > ~/.cache/asdf/init.zsh
+    zcompile ~/.cache/asdf/init.zsh
   }
-  if [[ ! -f ~/.cache/anyenv/init.zsh ]]; then
-    anyenv::cache
+  if [[ ! -f ~/.cache/asdf/init.zsh ]]; then
+    asdf::cache
   fi
-  source ~/.cache/anyenv/init.zsh
-fi
-
-# Go
-export GOPATH=$HOME/.go
-path=(
-  $GOPATH/bin(N-/)
-  $path
-)
-
-# ghq
-if type ghq >/dev/null 2>&1; then
-  fpath=(
-      $GOPATH/src/github.com/motemen/ghq/zsh/_ghq(N-/)
-      $fpath
-  )
+  source ~/.cache/asdf/init.zsh
 fi
 
 # pip
@@ -149,6 +124,11 @@ if type pipenv >/dev/null 2>&1; then
     pipenv::cache
   fi
   source ~/.cache/pipenv/init.zsh
+fi
+
+# poetry
+if [ -f ~/.poetry/env ]; then
+  source ~/.poetry/env
 fi
 
 # direnv

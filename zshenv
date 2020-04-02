@@ -22,7 +22,6 @@ path=(
     $HOME/.cabal/bin(N-/)
     $HOME/.cargo/bin(N-/)
     $HOME/.poetry/bin(N-/)
-    $HOME/.anyenv/bin(N-/)
     $HOME/.local/bin(N-/)
     $HOME/.cache/dein/repos/github.com/thinca/vim-themis/bin(N-/)
     /usr/local/bin(N-/)
