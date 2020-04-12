@@ -1,8 +1,8 @@
 {
-  "title": "Swap ¥ and \\ always on JIS Keyboards",
+  "title": "JIS Keyboard",
   "rules": [
     {
-      "description": "Change ¥ to Alt+¥",
+      "description": "Change ¥ to Option+¥",
       "manipulators": [
         {
           "from": {
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "description": "Change Alt+¥ to ¥",
+      "description": "Change Option+¥ to ¥",
       "manipulators": [
         {
           "from": {

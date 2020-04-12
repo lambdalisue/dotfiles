@@ -78,11 +78,15 @@ fi
 # vim
 if type vim &>/dev/null; then
   alias vim-m="vim -u ~/.vim/vimrc.min -i NONE"
-  EDITOR=vim
+  if [[ -z "$EDITOR" ]]; then
+    EDITOR=vim
+  fi
 fi
 if type nvim &>/dev/null; then
   alias nvim-m="nvim -u ~/.vim/vimrc.min -i NONE"
-  EDITOR=nvim
+  if [[ -z "$EDITOR" ]]; then
+    EDITOR=nvim
+  fi
 fi
 
 # asdf
