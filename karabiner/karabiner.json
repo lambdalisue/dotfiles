@@ -781,6 +781,25 @@
                                 "from": {
                                     "key_code": "international3",
                                     "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "backslash",
+                                        "modifiers": [
+                                            "control"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "international3",
+                                    "modifiers": {
                                         "optional": [
                                             "any"
                                         ]
