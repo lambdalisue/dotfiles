@@ -74,6 +74,90 @@
           "type": "basic"
         }
       ]
+    },
+    {
+      "description": "Send ctrl/lang2 on left command",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "left_gui"
+          },
+          "to": [
+            {
+              "key_code": "left_ctrl"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "lang2"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send ctrl/lang2 on left option",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "left_option"
+          },
+          "to": [
+            {
+              "key_code": "left_ctrl"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "lang2"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send shift/lang1 on right command",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "right_gui"
+          },
+          "to": [
+            {
+              "key_code": "right_shift"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "lang1"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send shift/lang1 on kana",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "international2"
+          },
+          "to": [
+            {
+              "key_code": "right_shift"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "lang1"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
     }
   ]
 }

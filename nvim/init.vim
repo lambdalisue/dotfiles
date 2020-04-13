@@ -541,16 +541,18 @@ noremap <2-MiddleMouse> <Nop>
 noremap <3-MiddleMouse> <Nop>
 noremap <4-MiddleMouse> <Nop>
 
-" Swap ; and : for US layout
-nnoremap ; :
-nnoremap : ;
-
 " Emacs like movement in Insert/Command
 noremap! <C-a> <Home>
 noremap! <C-e> <End>
 noremap! <C-f> <Right>
 noremap! <C-b> <Left>
 noremap! <C-d> <Del>
+
+" Swap ; and : in normal/visual mode
+nnoremap ; :
+xnoremap ; :
+nnoremap : ;
+xnoremap : ;
 
 " Do NOT yank with x/s
 nnoremap x "_x

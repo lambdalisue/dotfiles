@@ -573,7 +573,7 @@
                         ]
                     },
                     {
-                        "description": "Send command/lang1 on kana",
+                        "description": "Send shift/lang1 on kana",
                         "manipulators": [
                             {
                                 "from": {
@@ -581,7 +581,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "right_gui"
+                                        "key_code": "right_shift"
                                     }
                                 ],
                                 "to_if_alone": [
