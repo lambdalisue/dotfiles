@@ -357,6 +357,38 @@
         },
         {
           "from": {
+            "key_code": "left_gui",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_alt"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "left_alt",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_gui"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
             "key_code": "lang2",
             "modifiers": {
               "optional": [
@@ -367,6 +399,22 @@
           "to": [
             {
               "key_code": "spacebar"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "international2",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_gui"
             }
           ],
           "type": "basic"

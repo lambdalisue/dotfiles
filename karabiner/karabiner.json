@@ -552,23 +552,41 @@
                         ]
                     },
                     {
-                        "description": "Replace Capslock -> Ctrl + Alt",
+                        "description": "Send command/lang2 on left option",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "key_code": "left_option"
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_control",
-                                        "modifiers": [
-                                            "option"
-                                        ]
+                                        "key_code": "left_gui"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "lang2"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Send command/lang1 on kana",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "international2"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_gui"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "lang1"
                                     }
                                 ],
                                 "type": "basic"
@@ -931,6 +949,38 @@
                             },
                             {
                                 "from": {
+                                    "key_code": "left_gui",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_alt"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "left_alt",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_gui"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
                                     "key_code": "lang2",
                                     "modifiers": {
                                         "optional": [
@@ -947,6 +997,22 @@
                             },
                             {
                                 "from": {
+                                    "key_code": "international2",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_gui"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
                                     "key_code": "lang1",
                                     "modifiers": {
                                         "optional": [
@@ -957,38 +1023,6 @@
                                 "to": [
                                     {
                                         "key_code": "spacebar"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Send lang2 on left command if alone",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "left_gui"
-                                },
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "lang2"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Send lang1 on right command if alone",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "right_gui"
-                                },
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "lang1"
                                     }
                                 ],
                                 "type": "basic"
@@ -1130,14 +1164,6 @@
                     },
                     "to": {
                         "key_code": "japanese_kana"
-                    }
-                },
-                {
-                    "from": {
-                        "key_code": "right_alt"
-                    },
-                    "to": {
-                        "key_code": "fn"
                     }
                 }
             ],
