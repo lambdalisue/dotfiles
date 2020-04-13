@@ -196,7 +196,7 @@
           },
           "to": [
             {
-              "key_code": "backslash",
+              "key_code": "international3",
               "modifiers": [
                 "control"
               ]
