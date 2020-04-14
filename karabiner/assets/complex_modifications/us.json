@@ -6,8 +6,18 @@
       "manipulators": [
         {
           "from": {
-            "key_code": "left_gui"
+            "key_code": "left_gui",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
           },
+          "to": [
+            {
+              "key_code": "left_gui"
+            }
+          ],
           "to_if_alone": [
             {
               "key_code": "lang2"
@@ -43,8 +53,18 @@
       "manipulators": [
         {
           "from": {
-            "key_code": "right_gui"
+            "key_code": "right_gui",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
           },
+          "to": [
+            {
+              "key_code": "right_gui"
+            }
+          ],
           "to_if_alone": [
             {
               "key_code": "lang1"
