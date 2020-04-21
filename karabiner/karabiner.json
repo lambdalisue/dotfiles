@@ -1223,49 +1223,18 @@
                         ]
                     },
                     {
-                        "description": "Replace Capslock -> Ctrl + Alt",
+                        "description": "Send lang2 (japanese_eisuu) and escape on escape",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "key_code": "escape"
                                 },
                                 "to": [
-                                    {
-                                        "key_code": "left_control",
-                                        "modifiers": [
-                                            "option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Send command/lang2 on left command",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "left_gui",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_gui"
-                                    }
-                                ],
-                                "to_if_alone": [
                                     {
                                         "key_code": "lang2"
+                                    },
+                                    {
+                                        "key_code": "escape"
                                     }
                                 ],
                                 "type": "basic"
@@ -1273,25 +1242,26 @@
                         ]
                     },
                     {
-                        "description": "Send command/lang1 on right command",
+                        "description": "Send lang2 (japanese_eisuu) and Ctrl+[ on Ctrl+[",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "right_gui",
+                                    "key_code": "open_bracket",
                                     "modifiers": {
-                                        "optional": [
-                                            "any"
+                                        "mandatory": [
+                                            "control"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "key_code": "right_gui"
-                                    }
-                                ],
-                                "to_if_alone": [
+                                        "key_code": "lang2"
+                                    },
                                     {
-                                        "key_code": "lang1"
+                                        "key_code": "open_bracket",
+                                        "modifiers": [
+                                            "control"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -1419,6 +1389,14 @@
                     },
                     "to": {
                         "key_code": "japanese_kana"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "keypad_num_lock"
+                    },
+                    "to": {
+                        "key_code": "fn"
                     }
                 }
             ],

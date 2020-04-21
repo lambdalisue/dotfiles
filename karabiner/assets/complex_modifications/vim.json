@@ -1,0 +1,52 @@
+{
+  "title": "Vim",
+  "rules": [
+    {
+      "description": "Send lang2 (japanese_eisuu) and escape on escape",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "escape"
+          },
+          "to": [
+            {
+              "key_code": "lang2"
+            },
+            {
+              "key_code": "escape"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send lang2 (japanese_eisuu) and Ctrl+[ on Ctrl+[",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "open_bracket",
+            "modifiers": {
+              "mandatory": [
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "lang2"
+            },
+            {
+              "key_code": "open_bracket",
+              "modifiers": [
+                "control"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
+
