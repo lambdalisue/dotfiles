@@ -1,5 +1,5 @@
 {
-  "title": "Ctrl",
+  "title": "Emacs",
   "rules": [
     {
       "description": "Send return_or_enter on Ctrl+M",
@@ -128,6 +128,209 @@
           "to": [
             {
               "key_code": "end"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send return_or_enter on Ctrl+M unless Terminal",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "m",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "return_or_enter"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "com.apple.Terminal",
+                "com.googlecode.iterm2",
+                "io.alacritty"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send delete_or_backspace on Ctrl+H unless Terminal",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_or_backspace"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "com.apple.Terminal",
+                "com.googlecode.iterm2",
+                "io.alacritty"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send delete_forward on Ctrl+D unless Terminal",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "d",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_forward"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "com.apple.Terminal",
+                "com.googlecode.iterm2",
+                "io.alacritty"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send right_arrow on Ctrl+F unless Terminal",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "com.apple.Terminal",
+                "com.googlecode.iterm2",
+                "io.alacritty"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send left_arrow on Ctrl+B unless Terminal",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "b",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "com.apple.Terminal",
+                "com.googlecode.iterm2",
+                "io.alacritty"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send home on Ctrl+A unless Terminal",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "a",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "home"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "com.apple.Terminal",
+                "com.googlecode.iterm2",
+                "io.alacritty"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Send end on Ctrl+E unless Terminal",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "e",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "end"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "com.apple.Terminal",
+                "com.googlecode.iterm2",
+                "io.alacritty"
+              ]
             }
           ],
           "type": "basic"
