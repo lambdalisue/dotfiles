@@ -175,3 +175,15 @@ if [[ -d /Applications/Docker.app ]]; then
     docker::cache
   fi
 fi
+
+# kubectl
+if type kubectl &>/dev/null; then
+  kubectl::cache() {
+    local dst="$HOME/.zfunc"
+    mkdir -p "$dst"
+    kubectl completion zsh > "$dst/_kubectl"
+  }
+  if [[ ! -f $HOME/.zfunc/_kubectl ]]; then
+    kubectl::cache
+  fi
+fi
