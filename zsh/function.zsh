@@ -96,7 +96,7 @@ test-truecolor() {
 
 zsh-comp-refresh() {
   rm -f "${ZDOTDIR}/.zcompdump*"
-  zcompinit
+  compinit
 }
 
 zsh-cache-build() {
