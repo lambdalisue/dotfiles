@@ -3,8 +3,7 @@ fzf-history::print() {
         echo 'A "fc" command is not found.'
         return 1
     fi
-    local s=$(fc -ln 1 \
-        | fzf --query "$1")
+    local s=$(fc -ln 1 | fzf --query "$1")
     [[ -n $s ]] && print "$s"
 }
 
