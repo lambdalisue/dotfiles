@@ -1,14 +1,8 @@
+autoload -Uz fzf-kubectl-pods
+
 fzf-kubectl-exec::print() {
-    if ! which kubectl 1>/dev/null 2>&1; then
-        echo 'A "kubectl" command is not found.'
-        return 1
-    fi
-    if ! which perl 1>/dev/null 2>&1; then
-        echo 'A "perl" command is not found.'
-        return 1
-    fi
-    local s=$(kubectl get po | tail -n +2 | fzf --query "$1")
-    [[ -n $s ]] && print "kubectl exec -it $(echo $s | perl -lanE 'say $F[0]') -- /bin/sh"
+    local s=$(fzf-kubectl-pods)
+    [[ -n $s ]] && print "kubectl exec -it $s -- /bin/sh"
 }
 
 [[ "x$BUFFER" != "x" ]] && BUFFER="$BUFFER "

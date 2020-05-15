@@ -59,8 +59,8 @@ if type fzf &>/dev/null; then
   abindkey '^X^B' fzf-bindkey
   abindkey '^X^K' fzf-kill
   abindkey '^X^G' fzf-ghq
-  abindkey '^X^L' fzf-kubectl-logs
-  abindkey '^X^E' fzf-kubectl-exec
+  abindkey '^X^U^L' fzf-kubectl-logs
+  abindkey '^X^U^E' fzf-kubectl-exec
 fi
 
 # xdg-open
