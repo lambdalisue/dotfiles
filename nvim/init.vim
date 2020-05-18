@@ -594,6 +594,14 @@ nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))
       \ ? "\<C-l>"
       \ : "\<C-l>:syntax sync fromstart\<CR>"
 
+" Insert UUID by <F2>
+function! s:uuid() abort
+  let r = system('uuidgen')
+  let r = substitute(r, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')
+  return r
+endfunction
+inoremap <silent> <F2> <C-r>=<SID>uuid()<CR>
+
 " Grep with <Leader>gg {{{
 function! s:grep(bang, query) abort
   let query = empty(a:query) ? input('grep: ') : a:query

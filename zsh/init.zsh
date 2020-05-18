@@ -3,6 +3,8 @@ export LANG="en_US.UTF-8"
 export LC_ALL=en_US.UTF-8
 export PLATFORM="$(uname)"
 
+export GOPRIVATE="github.com/fixpoint/*"
+
 # cache profile
 export CACHE_PROFILE="${XDG_CACHE_HOME}/zsh/profile"
 mkdir -p ${CACHE_PROFILE}
