@@ -49,7 +49,16 @@ augroup filetypedetect
   autocmd BufNewFile,BufRead *.pyi setfiletype python
 
   " Docker
+  function! s:filetype_dockerfile() abort
+    if expand('%:p:g?\\?/?') =~# 'dockerfiles/[^/]\+$' && getline(1) =~# '^FROM '
+      setfiletype Dockerfile
+    endif
+  endfunction
   autocmd BufNewFile,BufRead Dockerfile.* setfiletype Dockerfile
+  autocmd BufWinEnter *
+        \ if &filetype ==# 'conf' |
+        \   call s:filetype_dockerfile() |
+        \ endif
 
   " InnoSetup
   autocmd BufNewFile,BufRead *.pp setfiletype pascal
