@@ -51,7 +51,7 @@ augroup my-coc
   autocmd CursorHold * silent call CocActionAsync('highlight')
 
   " Setup formatexpr specified filetype
-  autocmd FileType typescript,json setlocal formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,json,rust setlocal formatexpr=CocAction('formatSelected')
 
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
@@ -93,13 +93,11 @@ function! s:install_extensions() abort
   CocInstall coc-highlight
 
   " Experimental
-  CocInstall coc-powershell
   CocInstall coc-omnisharp
   CocInstall coc-jest
   CocInstall coc-sql
   CocInstall coc-sh
   CocInstall coc-lua
-  CocInstall coc-powershell
   CocInstall coc-gitignore
   CocInstall coc-webpack
 endfunction
