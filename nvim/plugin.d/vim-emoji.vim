@@ -1,0 +1,2 @@
+set completefunc=emoji#complete
+

@@ -39,7 +39,7 @@ function! s:fern_init() abort
   nnoremap <buffer><silent>
        \ <Plug>(fern-my-enter-bookmark)
        \ :<C-u>Fern bookmark:///<CR>
-  nmap <buffer><expr><silent> B
+  nmap <buffer><expr><silent> b
        \ fern#smart#scheme(
        \   "\<Plug>(fern-my-enter-bookmark)",
        \   {
