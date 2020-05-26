@@ -266,9 +266,9 @@ if exists('&inccommand')
   set inccommand=nosplit
 endif
 
+set grepformat=%f:%l:%c:%m,%f:%l:%m,%f:%l%m,%f\ %l%m
 if executable('rg')
   set grepprg=rg\ --vimgrep
-  set grepformat=%f:%l:%c:%m,%f:%l:%m,%f:%l%m,%f\ %l%m
 endif
 " }}}
 

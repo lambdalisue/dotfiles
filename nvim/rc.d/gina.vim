@@ -1,3 +1,20 @@
+nnoremap <silent> <Leader>aa :<C-u>Gina status<CR>
+nnoremap <silent> <Leader>aA :<C-u>Gina changes HEAD<CR>
+nnoremap <silent> <Leader>ac :<C-u>Gina commit<CR>
+nnoremap <silent> <Leader>aC :<C-u>Gina commit --amend<CR>
+nnoremap <silent> <Leader>ab :<C-u>Gina branch -av<CR>
+nnoremap <silent> <Leader>at :<C-u>Gina tag<CR>
+nnoremap <silent> <Leader>ag :<C-u>Gina grep<CR>
+nnoremap <silent> <Leader>aq :<C-u>Gina qrep<CR>
+nnoremap <silent> <Leader>ad :<C-u>Gina changes origin/HEAD...<CR>
+nnoremap <silent> <Leader>ah :<C-u>Gina log --graph<CR>
+nnoremap <silent> <Leader>aH :<C-u>Gina log --graph --all<CR>
+nnoremap <silent> <Leader>al :<C-u>Gina log<CR>
+nnoremap <silent> <Leader>aL :<C-u>Gina log :%<CR>
+nnoremap <silent> <Leader>af :<C-u>Gina ls<CR>
+nnoremap <silent> <Leader>ars :<C-u>Gina show <C-r><C-w><CR>
+nnoremap <silent> <Leader>arc :<C-u>Gina changes <C-r><C-w><CR>
+
 call gina#custom#command#option(
       \ 'commit', '-v|--verbose'
       \)

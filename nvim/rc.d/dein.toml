@@ -1,14 +1,9 @@
-[[plugins]]
-repo = 'lambdalisue/loupe.vim'
-merged = 0
-
-[[plugins]]
-repo = 'lambdalisue/cactus.vim'
-merged = 0
-
 # Fundemental {{{
 [[plugins]]
 repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
@@ -79,7 +74,6 @@ repo = 'lambdalisue/compl-local-filename.vim'
 repo = 'lambdalisue/suda.vim'
 hook_add = '''
 let g:suda_smart_edit = 1
-
 cnoreabbrev e!! e suda://%
 cnoreabbrev w!! w suda://%
 '''
@@ -87,7 +81,8 @@ cnoreabbrev w!! w suda://%
 [[plugins]]
 repo = 'lambdalisue/trimmer.vim'
 hook_add = '''
-augroup trimmer
+augroup my-trimmer
+  autocmd! *
   autocmd FileType yaml,perl,python,vim,vimspec,javascript,typescript,dosbatch,ps1,sh,iss,pascal Trimmer! enable
 augroup END
 '''
@@ -112,7 +107,6 @@ nmap <F9> <Plug>(marron-reload-vimrc)<Plug>(marron-reload-gvimrc)
 
 [[plugins]]
 repo = 'lambdalisue/vim-manpager'
-on_cmd = ['MANPAGER', 'Man']
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
@@ -125,25 +119,9 @@ xmap gx <Plug>(openbrowser-smart-search)
 
 [[plugins]]
 repo = 'Konfekt/FastFold'
-hook_add = '''
-let g:fastfold_savehook = 1
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
-nmap zuz <Plug>(FastFoldUpdate)
-xnoremap iz :<C-u>FastFoldUpdate<CR><Esc>:<C-u>normal! ]zv[z<CR>
-xnoremap az :<C-u>FastFoldUpdate<CR><Esc>:<C-u>normal! ]zV[z<CR>
-'''
 
 [[plugins]]
 repo = 'kana/vim-repeat'
-hook_add = '''
-nmap .     <Plug>(repeat-.)
-nmap u     <Plug>(repeat-u)
-nmap U     <Plug>(repeat-U)
-nmap <C-r> <Plug>(repeat-<C-r>)
-nmap g-    <Plug>(repeat-g-)
-nmap g+    <Plug>(repeat-g+)
-'''
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
@@ -152,6 +130,14 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lexima.vim'))
 '''
 
 # }}}
+hook_add = '''
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+nmap zuz <Plug>(FastFoldUpdate)
+xnoremap iz :<C-u>FastFoldUpdate<CR><Esc>:<C-u>normal! ]zv[z<CR>
+xnoremap az :<C-u>FastFoldUpdate<CR><Esc>:<C-u>normal! ]zV[z<CR>
+'''
 
 # Dependency {{{
 [[plugins]]
@@ -175,24 +161,6 @@ on_cmd = 'ColorSwatchGenerate'
 [[plugins]]
 repo = 'lambdalisue/gina.vim'
 merged = 0
-hook_add = '''
-nnoremap <silent> <Leader>aa :<C-u>Gina status<CR>
-nnoremap <silent> <Leader>aA :<C-u>Gina changes HEAD<CR>
-nnoremap <silent> <Leader>ac :<C-u>Gina commit<CR>
-nnoremap <silent> <Leader>aC :<C-u>Gina commit --amend<CR>
-nnoremap <silent> <Leader>ab :<C-u>Gina branch -av<CR>
-nnoremap <silent> <Leader>at :<C-u>Gina tag<CR>
-nnoremap <silent> <Leader>ag :<C-u>Gina grep<CR>
-nnoremap <silent> <Leader>aq :<C-u>Gina qrep<CR>
-nnoremap <silent> <Leader>ad :<C-u>Gina changes origin/HEAD...<CR>
-nnoremap <silent> <Leader>ah :<C-u>Gina log --graph<CR>
-nnoremap <silent> <Leader>aH :<C-u>Gina log --graph --all<CR>
-nnoremap <silent> <Leader>al :<C-u>Gina log<CR>
-nnoremap <silent> <Leader>aL :<C-u>Gina log :%<CR>
-nnoremap <silent> <Leader>af :<C-u>Gina ls<CR>
-nnoremap <silent> <Leader>ars :<C-u>Gina show <C-r><C-w><CR>
-nnoremap <silent> <Leader>arc :<C-u>Gina changes <C-r><C-w><CR>
-'''
 hook_post_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/gina.vim'))
 '''
@@ -242,7 +210,9 @@ hook_add = 'let g:previm_show_header = 0'
 [[plugins]]
 repo = 't9md/vim-quickhl'
 depends = 'vim-operator-user'
-hook_add = 'map H <Plug>(operator-quickhl-manual-this-motion)'
+hook_add = '''
+map H <Plug>(operator-quickhl-manual-this-motion)
+'''
 
 [[plugins]]
 repo = 'thinca/vim-zenspace'
@@ -252,13 +222,11 @@ repo = 'itchyny/vim-parenmatch'
 hook_add = '''
 let g:loaded_matchparen = 1
 let g:parenmatch = 1
-
 function! s:toggle_vim_parenmatch() abort
   silent! call matchdelete(w:parenmatch)
   let g:parenmatch = g:parenmatch ? 0 : 1
   call parenmatch#update()
 endfunction
-
 nnoremap <silent> <Plug>(my-toggle-parenmatch)
       \ :<C-u>call <SID>toggle_vim_parenmatch()<CR>
 nmap <C-g>m     <Plug>(my-toggle-parenmatch)
@@ -268,12 +236,10 @@ nmap <C-g>m     <Plug>(my-toggle-parenmatch)
 repo = 'itchyny/vim-cursorword'
 hook_add = '''
 let g:cursorword = 1
-
 function! s:toggle_vim_cursorword() abort
   let g:cursorword = g:cursorword ? 0 : 1
   call cursorword#matchadd()
 endfunction
-
 nnoremap <silent> <Plug>(my-toggle-cursorword)
       \ :<C-u>call <SID>toggle_vim_cursorword()<CR>
 nmap <C-g>c     <Plug>(my-toggle-cursorword)
@@ -307,31 +273,6 @@ depends = [
   'vim-repeat',
   'context_filetype.vim',
 ]
-hook_add = '''
-let g:caw_no_default_keymappings = 1
-nmap gc   <Plug>(caw:prefix)
-nmap gcc  <Plug>(caw:hatpos:toggle)
-nmap gci  <Plug>(caw:hatpos:comment)
-nmap gcui <Plug>(caw:hatpos:uncomment)
-nmap gcI  <Plug>(caw:zeropos:comment)
-nmap gcuI <Plug>(caw:zeropos:uncomment)
-nmap gca  <Plug>(caw:dollarpos:comment)
-nmap gcua <Plug>(caw:dollarpos:uncomment)
-nmap gcw  <Plug>(caw:wrap:toggle)
-nmap gcb  <Plug>(caw:box:comment)
-xmap gc   <Plug>(caw:prefix)
-xmap gcc  <Plug>(caw:hatpos:toggle)
-xmap gci  <Plug>(caw:hatpos:comment)
-xmap gcui <Plug>(caw:hatpos:uncomment)
-xmap gcI  <Plug>(caw:zeropos:comment)
-xmap gcuI <Plug>(caw:zeropos:uncomment)
-xmap gca  <Plug>(caw:dollarpos:comment)
-xmap gcua <Plug>(caw:dollarpos:uncomment)
-xmap gcw  <Plug>(caw:wrap:toggle)
-xmap gcb  <Plug>(caw:box:comment)
-nmap gco  <Plug>(caw:jump:comment-next)
-nmap gcO  <Plug>(caw:jump:comment-prev)
-'''
 
 [[plugins]]
 repo = 'AndrewRadev/linediff.vim'
@@ -354,9 +295,6 @@ nmap <Leader>ff <Plug>(foldround-forward)
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 depends = 'vim-quickrun-neovim-job'
-on_map = '<Plug>'
-on_cmd = 'QuickRun'
-hook_add = 'nmap <Leader>rr <Plug>(quickrun)'
 hook_source = '''
 execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/quickrun.vim'))
 '''
@@ -387,110 +325,29 @@ execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/coc.vim'))
 [[plugins]]
 repo = 'kana/vim-textobj-line'
 depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_line_no_default_key_mappings = 1
-omap al <Plug>(textobj-line-a)
-omap il <Plug>(textobj-line-i)
-xmap al <Plug>(textobj-line-a)
-xmap il <Plug>(textobj-line-i)
-'''
-
-[[plugins]]
-repo = 'kana/vim-textobj-syntax'
-depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_syntax_no_default_key_mappings = 1
-omap ay <Plug>(textobj-syntax-a)
-omap iy <Plug>(textobj-syntax-i)
-xmap ay <Plug>(textobj-syntax-a)
-xmap iy <Plug>(textobj-syntax-i)
-'''
 
 [[plugins]]
 repo = 'kana/vim-textobj-indent'
 depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_indent_no_default_key_mappings = 1
-omap ai <Plug>(textobj-indent-a)
-omap ii <Plug>(textobj-indent-i)
-xmap ai <Plug>(textobj-indent-a)
-xmap ii <Plug>(textobj-indent-i)
-omap aI <Plug>(textobj-indent-same-a)
-omap iI <Plug>(textobj-indent-same-i)
-xmap aI <Plug>(textobj-indent-same-a)
-xmap iI <Plug>(textobj-indent-same-i)
-'''
-
-[[plugins]]
-repo = 'kana/vim-textobj-datetime'
-depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_datetime_no_default_key_mappings = 1
-omap ad <Plug>(textobj-datetime-auto)
-omap id <Plug>(textobj-datetime-auto)
-xmap ad <Plug>(textobj-datetime-auto)
-xmap id <Plug>(textobj-datetime-auto)
-'''
-
-[[plugins]]
-repo = 'kana/vim-textobj-fold'
-depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_fold_no_default_key_mappings = 1
-omap az <Plug>(textobj-fold-a)
-omap iz <Plug>(textobj-fold-i)
-xmap az <Plug>(textobj-fold-a)
-xmap iz <Plug>(textobj-fold-i)
-'''
 
 [[plugins]]
 repo = 'mattn/vim-textobj-url'
 depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_url_no_default_key_mappings = 1
-omap au <Plug>(textobj-url-a)
-omap iu <Plug>(textobj-url-i)
-xmap au <Plug>(textobj-url-a)
-xmap iu <Plug>(textobj-url-i)
-'''
 
 [[plugins]]
 repo = 'sgur/vim-textobj-parameter'
 depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_parameter_no_default_key_mappings = 1
-omap a, <Plug>(textobj-parameter-a)
-omap i, <Plug>(textobj-parameter-i)
-xmap a, <Plug>(textobj-parameter-a)
-xmap i, <Plug>(textobj-parameter-i)
-'''
 
 [[plugins]]
 repo = 'osyo-manga/vim-textobj-multiblock'
 depends = 'vim-textobj-user'
 hook_add = '''
-let g:textobj_multiblock_no_default_key_mappings = 1
 omap ab <Plug>(textobj-multiblock-a)
 omap ib <Plug>(textobj-multiblock-i)
 xmap ab <Plug>(textobj-multiblock-a)
 xmap ib <Plug>(textobj-multiblock-i)
 '''
 
-[[plugins]]
-repo = 'rhysd/vim-textobj-word-column'
-depends = 'vim-textobj-user'
-hook_add = '''
-let g:textobj_wordcolumn_no_default_key_mappings = 1
-omap av <Plug>(textobj-wordcolumn-w-a)
-omap iv <Plug>(textobj-wordcolumn-w-i)
-xmap av <Plug>(textobj-wordcolumn-w-a)
-xmap iv <Plug>(textobj-wordcolumn-w-i)
-
-omap aV <Plug>(textobj-wordcolumn-W-a)
-omap iV <Plug>(textobj-wordcolumn-W-i)
-xmap aV <Plug>(textobj-wordcolumn-W-a)
-xmap iV <Plug>(textobj-wordcolumn-W-i)
-'''
 # }}}
 
 # Operator {{{
@@ -498,8 +355,7 @@ xmap iV <Plug>(textobj-wordcolumn-W-i)
 repo = 'kana/vim-operator-replace'
 depends = 'vim-operator-user'
 hook_add = '''
-nmap R <Plug>(operator-replace)
-xmap R <Plug>(operator-replace)
+map _ <Plug>(operator-replace)
 '''
 
 [[plugins]]
@@ -522,20 +378,7 @@ xmap <C-g>Q <Plug>(operator-breakline-manual)
 
 # }}}
 
-# Colorscheme {{{
-[[plugins]]
-repo = 'cocopon/iceberg.vim'
-# }}}
-
 # Filetype {{{
-# [[plugins]]
-# repo = 'fatih/vim-go'
-# hook_add = '''
-# let g:go_code_completion_enabled = 0
-# let g:go_fmt_command = "goimports"
-# let g:go_metalinter_autosave = 1
-# let g:go_metalinter_autosave_enabled = ['vet']
-# '''
 [[plugins]]
 repo = 'mattn/vim-goimports'
 
