@@ -26,9 +26,6 @@ merged = 0
 [[plugins]]
 repo = 'lambdalisue/fern.vim'
 merged = 0
-hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/fern.vim'))
-'''
 
 [[plugins]]
 repo = 'lambdalisue/fern-bookmark.vim'
@@ -125,9 +122,6 @@ repo = 'kana/vim-repeat'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
-hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/lexima.vim'))
-'''
 
 # }}}
 hook_add = '''
@@ -161,9 +155,6 @@ on_cmd = 'ColorSwatchGenerate'
 [[plugins]]
 repo = 'lambdalisue/gina.vim'
 merged = 0
-hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/gina.vim'))
-'''
 
 [[plugins]]
 repo = 'lambdalisue/vim-gista'
@@ -295,9 +286,6 @@ nmap <Leader>ff <Plug>(foldround-forward)
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 depends = 'vim-quickrun-neovim-job'
-hook_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/quickrun.vim'))
-'''
 
 [[plugins]]
 repo = 'lambdalisue/vim-quickrun-neovim-job'
@@ -316,9 +304,6 @@ set completefunc=emoji#complete
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
-hook_post_source = '''
-execute 'source' fnameescape(expand('$MYVIM_HOME/rc.d/coc.vim'))
-'''
 # }}}
 
 # Textobj {{{

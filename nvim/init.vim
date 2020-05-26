@@ -1,3 +1,4 @@
+let $VIMHOME = expand('<sfile>:p:h')
 let s:is_windows = has('win32') || has('win64')
 
 " Prelude {{{
@@ -494,8 +495,8 @@ if has('vim_starting') && !has('gui_running') && !has('nvim')
   let &t_RV .= "\e[?6;69h\e[1;3s\e[3;9H\e[6n\e[0;0s\e[?6;69l"
 endif
 " }}}
-"
-" Register {
+
+" Register {{{
 function! s:clear_register() abort
   let rs = split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
   for r in rs
@@ -503,8 +504,9 @@ function! s:clear_register() abort
   endfor
 endfunction
 command! ClearRegister call s:clear_register()
-" }
+" }}}
 
+" Qinvoke/Linvoke {{{
 function! s:invoke(cmd, callback) abort
   let Process = vital#vital#import('Async.Promise.Process')
   let temp = tempname()
@@ -519,6 +521,32 @@ function! s:invoke(cmd, callback) abort
 endfunction
 command! -nargs=* Qinvoke call s:invoke(<q-args>, { v -> execute('cfile ' . fnameescape(v), '') })
 command! -nargs=* Linvoke call s:invoke(<q-args>, { v -> execute('lfile ' . fnameescape(v), '') })
+" }}}
+
+" GetChar {{{
+function! s:getchar() abort
+  redraw | echo 'Press any key: '
+  let c = getchar()
+  while c ==# "\<CursorHold>"
+    redraw | echo 'Press any key: '
+    let c = getchar()
+  endwhile
+  redraw | echo printf('Raw: "%s" | Char: "%s"', c, nr2char(c))
+endfunction
+command! GetChar call s:getchar()
+" }}}
+
+" Timeit {{{
+function! s:timeit(command) abort
+  let start = reltime()
+  execute a:command
+  let delta = reltime(start)
+  echomsg '[timeit]' a:command
+  echomsg '[timeit]' reltimestr(delta)
+endfunction
+command! -nargs=* Timeit call s:timeit(<q-args>)
+" }}}
+
 " }}}
 
 " Mapping {{{
@@ -653,43 +681,21 @@ nmap <C-w><C-z> <Plug>(my-zoom-window)
 
 " }}}
 
-" Plugin {{{
-let $MYVIM_HOME = s:is_windows
-      \ ? expand('$LOCALAPPDATA/nvim')
-      \ : expand('~/.config/nvim')
-let s:bundle_root = expand('~/.cache/dein')
-let s:bundle_dein = s:bundle_root . '/repos/github.com/Shougo/dein.vim'
-if isdirectory(s:bundle_dein)
-  if has('vim_starting')
-    execute 'set runtimepath^=' . fnameescape(s:bundle_dein)
-  endif
-  if dein#load_state(s:bundle_root)
-    call dein#begin(s:bundle_root, [
-          \ expand('$MYVIM_HOME/init.vim'),
-          \ expand('$MYVIM_HOME/rc.d/dein.toml'),
-          \])
-    call dein#load_toml(expand('$MYVIM_HOME/rc.d/dein.toml'))
-    call dein#local(expand('~/.ghq/github.com/lambdalisue'))
-    call dein#local(expand('~/.ghq/github.com/vim-jp'))
-    call dein#local(expand('~/.ghq/github.com/vim-vital'))
-    call dein#end()
-    call dein#save_state()
-  endif
-  if has('vim_starting')
-    call dein#call_hook('source')
-    autocmd MyAutoCmd VimEnter * call dein#call_hook('post_source')
-  else
-    call dein#call_hook('source')
-    call dein#call_hook('post_source')
-  endif
-endif
-" }}}
-
 " Postludium {{{
+
+" Plugin
+source $VIMHOME/minpack.vim
+
 syntax on
 filetype indent plugin on
 
-execute 'source' fnameescape(expand('$MYVIM_HOME/conf.d/statusline.vim'))
+" Load conf.d/*.vim
+function! s:load_configurations() abort
+  for path in glob('$VIMHOME/conf.d/*.vim', 1, 1, 1)
+    execute printf('source %s', fnameescape(path))
+  endfor
+endfunction
+call s:load_configurations()
 
 silent! colorscheme slate
 silent! colorscheme iceberg
