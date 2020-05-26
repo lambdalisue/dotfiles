@@ -21,6 +21,7 @@ endfunction
 function! s:statusline() abort
   return join([
         \ '%f',
+        \ '%{exists("w:quickfix_title") ? w:quickfix_title : ""}',
         \ '%=',
         \ '%m%r%h%w',
         \])
