@@ -38,7 +38,6 @@ if exists('*minpac#init')
   call minpac#add('lambdalisue/lista.vim')
   call minpac#add('lambdalisue/qfloc.vim')
   call minpac#add('lambdalisue/readablefold.vim')
-  call minpac#add('lambdalisue/seethrough.vim')
   call minpac#add('lambdalisue/suda.vim')
   call minpac#add('lambdalisue/trimmer.vim')
   call minpac#add('lambdalisue/vim-backslash')
@@ -84,10 +83,15 @@ if exists('*minpac#init')
   call minpac#add('tyru/current-func-info.vim')
   call minpac#add('tyru/open-browser.vim')
   call minpac#add('vim-jp/syntax-vim-ex')
-  call minpac#add('vim-jp/vimdoc-ja', {'type': 'opt'})
+  call minpac#add('vim-jp/vimdoc-ja')
   call minpac#add('vim-jp/vital-complete')
   call minpac#add('vim-jp/vital.vim')
   call minpac#add('vim-scripts/python_match.vim')
+
+  " Optional
+  call minpac#add('itchyny/lightline.vim', {'type': 'opt'})
+  call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
+  call minpac#add('lambdalisue/seethrough.vim', {'type': 'opt'})
 endif
 packloadall
 
