@@ -9,9 +9,11 @@ nmap <silent> [[ <Plug>(coc-diagnostic-prev)
 nmap <silent> ]] <Plug>(coc-diagnostic-next)
 
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gD <Plug>(coc-declaration)
 nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gR <Plug>(coc-refactor)
 nmap <silent> gQ <Plug>(coc-format-selected)
 vmap <silent> gQ <Plug>(coc-format-selected)
 
@@ -21,12 +23,6 @@ xmap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
-
-imap <silent> <C-l> <Plug>(coc-snippets-expand)
-imap <silent> <C-j> <Plug>(coc-snippets-expand-jump)
-vmap <silent> <C-j> <Plug>(coc-snippets-select)
-let g:coc_snippet_next = '<c-j>'
-let g:coc_snippet_prev = '<c-k>'
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :<C-u>call <SID>show_documentation()<CR>

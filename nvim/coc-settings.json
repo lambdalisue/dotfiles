@@ -1,4 +1,5 @@
 {
+  "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "python",
     "rust",
@@ -10,10 +11,6 @@
     "vue",
     "markdown"
   ],
-  "list.maxHeight": 30,
-  "list.autoResize": false,
-  "list.nextKeymap": "<C-n>",
-  "list.previousKeymap": "<C-p>",
   "html.format.enable": true,
   "vimlsp.diagnostic.enable" : false,
   "vetur.format.defaultFormatter.html": "prettier",
@@ -21,8 +18,10 @@
   "python.autoComplete.extraPaths": ["./src"],
   "python.jediEnabled": false,
   "pyright.useLibraryCodeForTypes": true,
-  "rust.racer_completion": false,
   "rust.clippy_preference": "on",
+  "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.completion.postfix.enable": false,
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true
