@@ -58,18 +58,24 @@ augroup my-fern
   autocmd FileType fern call s:fern_init()
 augroup END
 
+" Disable netrw
+let g:loaded_netrw             = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_netrwSettings     = 1
+let g:loaded_netrwFileHandlers = 1
+
 augroup my-fern-hijack
   autocmd!
-  autocmd BufEnter * nested call s:hijack_directory()
+  autocmd BufEnter * ++nested call s:hijack_directory()
 augroup END
 
 function! s:hijack_directory() abort
-  let path = expand('%')
+  let path = expand('%:p')
   if !isdirectory(path)
     return
   endif
   bwipeout %
-  execute 'Fern %'
+  execute printf('Fern %s', fnameescape(path))
 endfunction
 
 if has('mac') && has('nvim') && !exists('$SSH_CONNECTION')
