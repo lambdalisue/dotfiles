@@ -5,6 +5,7 @@ if exists('*minpac#init')
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   call minpac#add('AndrewRadev/linediff.vim')
+  call minpac#add('Bakudankun/BackAndForward.vim')
   call minpac#add('Konfekt/FastFold')
   call minpac#add('PProvost/vim-ps1')
   call minpac#add('Shougo/context_filetype.vim')
