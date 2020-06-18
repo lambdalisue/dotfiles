@@ -13,19 +13,41 @@ nnoremap <silent> <Leader>jj :<C-u>Fern <C-r>=expand(g:junkfile#directory)<CR> -
 nnoremap <silent> <Space><Space>i :<C-u>Fern -wait bookmark:///<CR>:<C-u>Lista<CR>
 
 function! s:fern_init() abort
-  " Call "tcd" as well on project drawer
+  " nnoremap <buffer><silent>
+  "     \ <Plug>(fern-my-tcd:root-ready)
+  "     \ :<C-u>call fern#smart#ready("\<Plug>(fern-action-tcd:root)")<CR>
+  " nmap <buffer>
+  "      \ <Plug>(fern-my-enter-and-tcd)
+  "      \ <Plug>(fern-action-enter)<Plug>(fern-my-tcd:root-ready)
+  " nmap <buffer>
+  "      \ <Plug>(fern-my-leave-and-tcd)
+  "      \ <Plug>(fern-action-leave)<Plug>(fern-my-tcd:root-ready)
+  nmap <buffer>
+        \ <Plug>(fern-my-enter-and-tcd)
+        \ <Plug>(fern-action-enter)<Plug>(fern-wait)<Plug>(fern-action-tcd:root)
+  nmap <buffer>
+        \ <Plug>(fern-my-leave-and-tcd)
+        \ <Plug>(fern-action-leave)<Plug>(fern-wait)<Plug>(fern-action-tcd:root)
+
   nmap <buffer><expr>
-       \ <Plug>(fern-my-open-or-enter)
-       \ fern#smart#drawer(
-       \   "\<Plug>(fern-open-or-enter)\<Plug>(fern-action-tcd)",
-       \   "\<Plug>(fern-open-or-enter)",
-       \ )
+        \ <Plug>(fern-my-open-or-enter-and-tcd)
+        \ fern#smart#leaf(
+        \   "\<Plug>(fern-action-open)",
+        \   "\<Plug>(fern-my-enter-and-tcd)",
+        \ )
+
   nmap <buffer><expr>
-       \ <Plug>(fern-my-leave)
-       \ fern#smart#drawer(
-       \   "\<Plug>(fern-action-leave)\<Plug>(fern-action-tcd)",
-       \   "\<Plug>(fern-action-leave)",
-       \ )
+        \ <Plug>(fern-my-open-or-enter)
+        \ fern#smart#drawer(
+        \   "\<Plug>(fern-my-open-or-enter-and-tcd)",
+        \   "\<Plug>(fern-open-or-enter)",
+        \ )
+  nmap <buffer><expr>
+        \ <Plug>(fern-my-leave)
+        \ fern#smart#drawer(
+        \   "\<Plug>(fern-my-leave-and-tcd)",
+        \   "\<Plug>(fern-action-leave)",
+        \ )
   nmap <buffer><nowait> <Return> <Plug>(fern-my-open-or-enter)
   nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
   nmap <buffer><nowait> <C-m> <Plug>(fern-my-open-or-enter)

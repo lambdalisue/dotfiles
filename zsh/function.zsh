@@ -31,6 +31,10 @@ kill-sandbox-centos() {
   docker rm --force sandbox-centos
 }
 
+kill-dns() {
+  sudo killall -HUP mDNSResponder
+}
+
 brew-cask-upgrade() {
   for app in $(brew cask list); do
     local latest="$(brew cask info "${app}" | awk 'NR==1{print $2}')"
