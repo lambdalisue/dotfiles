@@ -1,5 +1,5 @@
 let $VIMHOME = expand('<sfile>:p:h')
-let s:is_windows = has('win32') || has('win64')
+let s:is_windows = has('win32')
 
 " Prelude {{{
 if has('vim_starting')
