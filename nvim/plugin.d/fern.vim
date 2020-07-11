@@ -3,7 +3,7 @@ function! s:smart_path() abort
     return fnamemodify('.', ':p')
   endif
   return fnamemodify(expand('%'), ':p:h')
-endfunctio
+endfunction
 
 nnoremap <silent> <Leader>bb :<C-u>Fern bookmark:///<CR>
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%<CR>
