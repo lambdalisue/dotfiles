@@ -599,7 +599,6 @@ cnoremap <Up>   <C-p>
 cnoremap <Down> <C-n>
 
 " Fix unreasonable mappings by historical reason
-nnoremap vv 0v$
 nnoremap Y y$
 
 " Tab navigation
