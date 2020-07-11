@@ -552,8 +552,6 @@ command! -nargs=* Timeit call s:timeit(<q-args>)
 " Mapping {{{
 
 " define <Leader> and <LocalLeader>
-noremap <Leader>      <Nop>
-noremap <LocalLeader> <Nop>
 let g:mapleader = "\<Space>"
 let g:maplocalleader = '\'
 
