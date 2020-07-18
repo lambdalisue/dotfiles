@@ -1,3 +1,7 @@
+if &runtimepath !~# 'gina.vim'
+  finish
+endif
+
 nnoremap <silent> <Leader>aa :<C-u>Gina status<CR>
 nnoremap <silent> <Leader>aA :<C-u>Gina changes HEAD<CR>
 nnoremap <silent> <Leader>ac :<C-u>Gina commit<CR>

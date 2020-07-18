@@ -1,3 +1,7 @@
+if &runtimepath !~# 'vim-altr'
+  finish
+endif
+
 nmap g<C-n> <Plug>(altr-forward)
 nmap g<C-p> <Plug>(altr-back)
 
