@@ -6,7 +6,6 @@ if exists('*minpac#init')
 
   call minpac#add('AndrewRadev/linediff.vim')
   call minpac#add('Bakudankun/BackAndForward.vim')
-  call minpac#add('Konfekt/FastFold')
   call minpac#add('PProvost/vim-ps1')
   call minpac#add('Shougo/context_filetype.vim')
   call minpac#add('Shougo/junkfile.vim')
@@ -96,12 +95,6 @@ if exists('*minpac#init')
   call minpac#add('vim-jp/vital-complete')
   call minpac#add('vim-jp/vital.vim')
   call minpac#add('vim-scripts/python_match.vim')
-
-  " Optional
-  call minpac#add('itchyny/lightline.vim', {'type': 'opt'})
-  call minpac#add('itchyny/vim-gitbranch', {'type': 'opt'})
-  call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
-  call minpac#add('lambdalisue/seethrough.vim', {'type': 'opt'})
 endif
 packloadall
 
