@@ -1,7 +1,7 @@
 " Use system (homebrew) node
 let g:coc_node_path = '/usr/local/bin/node'
 
-set updatetime=1000
+set updatetime=300
 
 " Use <C-x><C-x> to trigger completion
 inoremap <silent><expr> <C-x><C-x> coc#refresh()
@@ -66,3 +66,5 @@ augroup my-coc
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup END
+
+command! CocSnippet CocCommand snippets.editSnippets

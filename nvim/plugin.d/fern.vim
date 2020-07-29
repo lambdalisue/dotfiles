@@ -101,7 +101,7 @@ function! s:hijack_directory() abort
 endfunction
 
 if has('mac') && has('nvim') && !exists('$SSH_CONNECTION')
-  let g:fern#renderer = 'devicons'
+  let g:fern#renderer = 'nerdfont'
 endif
 
 let g:fern#keepalt_on_edit = 1
