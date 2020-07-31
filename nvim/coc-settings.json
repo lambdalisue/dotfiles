@@ -7,7 +7,6 @@
   "python.formatting.provider": "black",
   "python.autoComplete.extraPaths": ["./src"],
   "python.jediEnabled": false,
-  "pyright.useLibraryCodeForTypes": true,
   "rust.clippy_preference": "on",
   "rust-analyzer.cargo.loadOutDirsFromCheck": true,
   "rust-analyzer.procMacro.enable": true,
@@ -15,12 +14,5 @@
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true
-  },
-  "languageserver": {
-    "efm": {
-      "command": "efm-langserver",
-      "args": [],
-      "filetypes": ["vim", "markdown", "yaml"]
-    }
   }
 }

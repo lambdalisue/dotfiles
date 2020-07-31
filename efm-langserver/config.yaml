@@ -1,18 +1,12 @@
+version: 2
+
+tools:
+  golangci-lint: &golangci-lint
+    lint-command: "golangci-lint --color never run --out-format line-number --build-tags gomoduleredigo"
+    lint-formats:
+      - "%f:%l:%c: %m"
+      - "%f:%l: %m"
+
 languages:
-  vim:
-    lint-command: 'vint -'
-    lint-stdin: true
-
-  markdown:
-    lint-command: 'markdownlint -s'
-    lint-stdin: true
-    lint-formats:
-      - '%f:%l %m'
-
-  yaml:
-    lint-command: 'yamllint -f parsable -'
-    lint-stdin: true
-    lint-formats:
-      - '%f:%l:%c: %m'
-    env:
-      - 'PYTHONIOENCODING=UTF-8'
+  go:
+    - <<: *golangci-lint

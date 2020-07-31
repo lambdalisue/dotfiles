@@ -1355,7 +1355,7 @@
                         "product_id": 3354,
                         "vendor_id": 5840
                     },
-                    "ignore": false,
+                    "ignore": true,
                     "manipulate_caps_lock_led": false,
                     "simple_modifications": []
                 },
@@ -1475,7 +1475,7 @@
             "parameters": {
                 "delay_milliseconds_before_open_device": 1000
             },
-            "selected": false,
+            "selected": true,
             "simple_modifications": [
                 {
                     "from": {
@@ -1720,7 +1720,7 @@
                         "product_id": 3354,
                         "vendor_id": 5840
                     },
-                    "ignore": false,
+                    "ignore": true,
                     "manipulate_caps_lock_led": false,
                     "simple_modifications": []
                 }
@@ -1827,7 +1827,7 @@
             "parameters": {
                 "delay_milliseconds_before_open_device": 1000
             },
-            "selected": true,
+            "selected": false,
             "simple_modifications": [
                 {
                     "from": {

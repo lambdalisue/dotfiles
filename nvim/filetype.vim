@@ -56,7 +56,7 @@ augroup filetypedetect
   endfunction
   autocmd BufNewFile,BufRead Dockerfile.* setfiletype Dockerfile
   autocmd BufWinEnter *
-        \ if &filetype ==# 'conf' |
+        \ if &filetype ==# 'conf' || &filetype ==# '' |
         \   call s:filetype_dockerfile() |
         \ endif
 
