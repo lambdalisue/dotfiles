@@ -63,6 +63,7 @@ if type fzf &>/dev/null; then
   abindkey '^X^G' fzf-ghq
   abindkey '^X^U^L' fzf-kubectl-logs
   abindkey '^X^U^E' fzf-kubectl-exec
+  abindkey '^X^U^D' fzf-kubectl-describe
 fi
 
 # xdg-open

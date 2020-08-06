@@ -4,7 +4,8 @@ if exists('*minpac#init')
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  call minpac#add('lambdalisue/fern-git.vim')
+  " call minpac#add('itchyny/vim-cursorword')
+  " call minpac#add('itchyny/vim-parenmatch')
 
   call minpac#add('AndrewRadev/linediff.vim')
   call minpac#add('Bakudankun/BackAndForward.vim')
@@ -19,8 +20,6 @@ if exists('*minpac#init')
   call minpac#add('elzr/vim-json')
   call minpac#add('hail2u/vim-css3-syntax')
   call minpac#add('hynek/vim-python-pep8-indent')
-  call minpac#add('itchyny/vim-cursorword')
-  call minpac#add('itchyny/vim-parenmatch')
   call minpac#add('junegunn/vim-emoji')
   call minpac#add('jxnblk/vim-mdx-js')
   call minpac#add('kana/vim-altr')
@@ -44,7 +43,7 @@ if exists('*minpac#init')
   call minpac#add('lambdalisue/grea.vim')
   call minpac#add('lambdalisue/lista.vim')
   call minpac#add('lambdalisue/mr.vim')
-  call minpac#add('lambdalisue/nerdfont-palette.vim')
+  call minpac#add('lambdalisue/glyph-palette.vim')
   call minpac#add('lambdalisue/nerdfont.vim')
   call minpac#add('lambdalisue/qfloc.vim')
   call minpac#add('lambdalisue/readablefold.vim')
@@ -105,7 +104,6 @@ if exists('*minpac#init')
   " call minpac#add('mattn/vim-lsp-settings')
   " call minpac#add('tsuyoshicho/vim-efm-langserver-settings')
 endif
-packloadall
 
 " Load plugin.d/*.vim
 function! s:load_configurations() abort
@@ -114,6 +112,9 @@ function! s:load_configurations() abort
   endfor
 endfunction
 call s:load_configurations()
+
+" Load plugins
+packloadall
 
 " Define user commands for updating/cleaning the plugins.
 " Each of them loads minpac, reloads .vimrc to register the

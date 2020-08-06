@@ -3,50 +3,11 @@ if has('vim_starting')
   set nocompatible
 endif
 
-set undofile
-
 nnoremap ; :
 nnoremap : ;
 
 set packpath=
-" set runtimepath+=~/.config/nvim/pack/minpac/opt/lightline.vim
-set runtimepath+=~/.config/nvim/pack/minpac/start/iceberg.vim
-set runtimepath+=~/.config/nvim/pack/minpac/start/gina.vim
-set runtimepath+=~/.config/nvim/pack/minpac/start/wifi.vim
-set runtimepath+=~/.config/nvim/pack/minpac/start/battery.vim
-set runtimepath+=~/.config/nvim/pack/minpac/start/undotree
-
-if !has('gui_running')
-  set t_Co=256
-endif
-set noshowmode      " モードメッセージを非表示
-set laststatus=2    " 常にステータスラインを表示
-set showtabline=2   " 常にタブラインを表示
-
-let g:lightline = {
-      \ 'colorscheme': 'iceberg',
-      \ 'tabline': {
-      \   'left': [
-      \     ['cwd'],
-      \     ['tabs'],
-      \   ],
-      \   'right': [
-      \     ['close'],
-      \     ['git_branch', 'wifi', 'battery'],
-      \   ],
-      \ },
-      \ 'component_function': {
-      \   'cwd': 'getcwd',
-      \   'git_branch': 'gina#component#repo#preset',
-      \   'wifi': 'wifi#component',
-      \   'battery': 'battery#component',
-      \ },
-      \}
-let g:battery#update_tabline = 1
-let g:wifi#update_tabline = 1
+set runtimepath+=~/.config/nvim/pack/minpac/start/fern.vim
 
 filetype plugin indent on
 syntax on
-
-colorscheme iceberg
-set background=light

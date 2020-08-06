@@ -100,8 +100,9 @@ function! s:hijack_directory() abort
   execute printf('Fern %s', fnameescape(path))
 endfunction
 
-if has('mac') && has('nvim') && !exists('$SSH_CONNECTION')
+if has('mac') && !exists('$SSH_CONNECTION')
   let g:fern#renderer = 'nerdfont'
 endif
+let g:fern#grantor = 'git'
 
 let g:fern#keepalt_on_edit = 1
