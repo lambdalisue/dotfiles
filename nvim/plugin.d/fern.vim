@@ -15,7 +15,7 @@ function! s:fern_init() abort
     let g:fern#renderer = 'nerdfont'
   endif
   let g:fern#keepalt_on_edit = 1
-  " let g:fern#loglevel = 0
+  let g:fern#loglevel = g:fern#DEBUG
 endfunction
 
 function! s:fern_local_init() abort
