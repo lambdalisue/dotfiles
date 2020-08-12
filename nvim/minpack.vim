@@ -38,6 +38,7 @@ if exists('*minpac#init')
   call minpac#add('lambdalisue/fern-git-status.vim')
   call minpac#add('lambdalisue/fern-mapping-git.vim')
   call minpac#add('lambdalisue/fern-mapping-project-top.vim')
+  call minpac#add('lambdalisue/fern-mapping-quickfix.vim')
   call minpac#add('lambdalisue/fern-renderer-nerdfont.vim')
   call minpac#add('lambdalisue/fern.vim')
   call minpac#add('lambdalisue/gina.vim')
@@ -105,6 +106,8 @@ if exists('*minpac#init')
   " call minpac#add('prabirshrestha/vim-lsp')
   " call minpac#add('mattn/vim-lsp-settings')
   " call minpac#add('tsuyoshicho/vim-efm-langserver-settings')
+  " call minpac#add('ryanoasis/vim-devicons')
+  " call minpac#add('lambdalisue/fern-renderer-devicons.vim')
 endif
 
 " Load plugin.d/*.vim
