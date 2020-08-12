@@ -7,8 +7,9 @@ endfunction
 
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%<CR>
 nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -toggle -reveal=%<CR>
-nnoremap <silent> <Leader>jj :<C-u>Fern <C-r>=expand(g:junkfile#directory)<CR> -drawer -toggle -reveal=%<CR>
 nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:///<CR>
+nnoremap <silent> <Leader>JJ :<C-u>Fern <C-r>=expand(g:junkfile#directory)<CR> -wait<CR>:<C-u>execute "normal fa"<CR>
+nnoremap <silent> <Leader>KK :<C-u>Fern . -wait<CR>:<C-u>execute "normal fa"<CR>
 
 function! s:fern_init() abort
   if has('mac') && !exists('$SSH_CONNECTION')

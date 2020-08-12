@@ -6,6 +6,10 @@ if exists('*minpac#init')
 
   " call minpac#add('itchyny/vim-cursorword')
   " call minpac#add('itchyny/vim-parenmatch')
+  call minpac#add('junegunn/fzf', {
+        \ 'do': { -> fzf#install() },
+        \})
+  call minpac#add('LumaKernel/fern-mapping-fzf.vim')
 
   call minpac#add('AndrewRadev/linediff.vim')
   call minpac#add('Bakudankun/BackAndForward.vim')
