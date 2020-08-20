@@ -7,8 +7,8 @@ set updatetime=300
 inoremap <silent><expr> <C-x><C-x> coc#refresh()
 
 " Use [[ and ]]  to navigate diagnostics
-nmap <silent> [[ <Plug>(coc-diagnostic-prev)
-nmap <silent> ]] <Plug>(coc-diagnostic-next)
+nmap <silent> [[ <Plug>(coc-diagnostic-prev)zv
+nmap <silent> ]] <Plug>(coc-diagnostic-next)zv
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD <Plug>(coc-declaration)
