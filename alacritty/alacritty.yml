@@ -36,9 +36,13 @@ window:
   #padding:
   #  x: 0
   #  y: 0
+  padding:
+    x: 2
+    y: 2
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   #
@@ -100,28 +104,26 @@ font:
     #style: Regular
 
   # Bold font face
-  bold:
-    # Font family
-    #
-    # If the bold family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: Cica
-    family: FiraCode Nerd Font
+  # bold:
+  # Font family
+  #
+  # If the bold family is not specified, it will fall back to the
+  # value specified for the normal font.
+  #family: Cica
 
-    # The `style` can be specified to pick a specific face.
-    #style: Bold
+  # The `style` can be specified to pick a specific face.
+  #style: Bold
 
   # Italic font face
-  italic:
-    # Font family
-    #
-    # If the italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: Cica
-    family: FiraCode Nerd Font
+  # italic:
+  # Font family
+  #
+  # If the italic family is not specified, it will fall back to the
+  # value specified for the normal font.
+  #family: Cica
 
-    # The `style` can be specified to pick a specific face.
-    #style: Italic
+  # The `style` can be specified to pick a specific face.
+  #style: Italic
 
   # Bold italic font face
   #bold_italic:
@@ -272,7 +274,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.97
+background_opacity: 0.9
 
 #selection:
 #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"

@@ -696,6 +696,7 @@ call s:load_configurations()
 
 silent! colorscheme slate
 silent! colorscheme iceberg
+highlight! CursorLine guibg=#444444
 
 set secure
 " }}}
