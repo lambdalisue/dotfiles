@@ -1,3 +1,5 @@
+finish
+
 if exists('g:loaded_guideline')
   finish
 endif

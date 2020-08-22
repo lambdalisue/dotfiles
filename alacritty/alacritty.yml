@@ -97,44 +97,43 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    #family: Cica
     family: FiraCode Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    style: Light
 
-  # Bold font face
+  # # Bold font face
   # bold:
-  # Font family
+  #   # Font family
+  #   #
+  #   # If the bold family is not specified, it will fall back to the
+  #   # value specified for the normal font.
+  #   family: Monoid Nerd Font
   #
-  # If the bold family is not specified, it will fall back to the
-  # value specified for the normal font.
-  #family: Cica
-
-  # The `style` can be specified to pick a specific face.
-  #style: Bold
-
-  # Italic font face
+  #   # The `style` can be specified to pick a specific face.
+  #   style: Bold
+  #
+  # # Italic font face
   # italic:
-  # Font family
+  #   # Font family
+  #   #
+  #   # If the italic family is not specified, it will fall back to the
+  #   # value specified for the normal font.
+  #   family: Monoid Nerd Font
   #
-  # If the italic family is not specified, it will fall back to the
-  # value specified for the normal font.
-  #family: Cica
-
-  # The `style` can be specified to pick a specific face.
-  #style: Italic
-
-  # Bold italic font face
-  #bold_italic:
-  # Font family
+  #   # The `style` can be specified to pick a specific face.
+  #   style: Italic
   #
-  # If the bold italic family is not specified, it will fall back to the
-  # value specified for the normal font.
-  #family: monospace
-
-  # The `style` can be specified to pick a specific face.
-  #style: Bold Italic
+  # # Bold italic font face
+  # bold_italic:
+  #   # Font family
+  #   #
+  #   # If the bold italic family is not specified, it will fall back to the
+  #   # value specified for the normal font.
+  #   family: Monoid Nerd Font
+  #
+  #   # The `style` can be specified to pick a specific face.
+  #   style: Bold Italic
 
   # Point size
   size: 14.0
