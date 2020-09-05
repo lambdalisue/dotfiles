@@ -13,10 +13,31 @@ nnoremap <silent> <Leader>KK :<C-u>Fern . -wait<CR>:<C-u>execute "normal fa"<CR>
 
 function! s:fern_init() abort
   if has('mac') && !exists('$SSH_CONNECTION')
-    let g:fern#renderer = 'nerdfont'
+    " let g:fern#renderer = 'nerdfont'
   endif
   let g:fern#keepalt_on_edit = 1
   let g:fern#loglevel = g:fern#DEBUG
+
+  let g:fern#renderer#default#leading = "│"
+  let g:fern#renderer#default#root_symbol = "┬ "
+  let g:fern#renderer#default#leaf_symbol = "├─ "
+  let g:fern#renderer#default#collapsed_symbol = "├─ "
+  let g:fern#renderer#default#expanded_symbol = "├┬ "
+
+  call fern#hook#add(
+        \ 'core:update_visible_nodes',
+        \ funcref('s:update_root'),
+        \)
+endfunction
+
+function! s:update_root(nodes) abort
+  if empty(a:nodes)
+    return
+  endif
+  let root = a:nodes[0]
+  let root.label = has_key(root, '_path')
+        \ ? fnamemodify(root._path, ':~')
+        \ : root.label
 endfunction
 
 function! s:fern_local_init() abort

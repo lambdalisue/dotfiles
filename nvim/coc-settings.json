@@ -14,5 +14,17 @@
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true
+  },
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls-root", "compile_commands.json"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls-cache"
+        }
+      }
+    }
   }
 }

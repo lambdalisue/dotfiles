@@ -130,3 +130,22 @@ zsh-profiling-plain() {
     time (ZDOTDIR=/tmp/zsh_profile_raw zsh -i -c exit)
   done
 }
+
+minpac-path() {
+  local name="$(basename $(pwd))"
+  echo -n "$HOME/.vim/pack/minpac/start/$name"
+}
+
+minpac-remove() {
+  local target="$(minpac-path)"
+  if [[ -d "$target" ]]; then
+    rm -rf "$target"
+  elif [[ -f "$target" ]]; then
+    rm -f "$target"
+  fi
+}
+
+minpac-develop() {
+  minpac-remove
+  ln -s "$(pwd)" "$(minpac-path)"
+}
