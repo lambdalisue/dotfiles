@@ -29,18 +29,21 @@
 [github]
 	user = lambdalisue
 
+[url "git@github.com:lambdalisue"]
+        insteadOf = https://github.com/lambdalisue
+
+[url "git@github.com:vim-jp"]
+        insteadOf = https://github.com/vim-jp
+
 [url "git@bitbucket.org:kompira"]
         insteadOf = https://bitbucket.org/kompira
 
 [url "git@github.com:fixpoint"]
         insteadOf = https://github.com/fixpoint
 
-[ghq]
-	root = ~/.ghq
-	root = ~/.go/src
-
 [commit]
 	gpgsign = true
+
 [diff]
 	algorithm = patience
 

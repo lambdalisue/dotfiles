@@ -13,21 +13,10 @@ nnoremap <silent> <Leader>KK :<C-u>Fern . -wait<CR>:<C-u>execute "normal fa"<CR>
 
 function! s:fern_init() abort
   if has('mac') && !exists('$SSH_CONNECTION')
-    " let g:fern#renderer = 'nerdfont'
+    let g:fern#renderer = 'nerdfont'
   endif
   let g:fern#keepalt_on_edit = 1
-  let g:fern#loglevel = g:fern#DEBUG
-
-  let g:fern#renderer#default#leading = "│"
-  let g:fern#renderer#default#root_symbol = "┬ "
-  let g:fern#renderer#default#leaf_symbol = "├─ "
-  let g:fern#renderer#default#collapsed_symbol = "├─ "
-  let g:fern#renderer#default#expanded_symbol = "├┬ "
-
-  call fern#hook#add(
-        \ 'core:update_visible_nodes',
-        \ funcref('s:update_root'),
-        \)
+  " let g:fern#loglevel = g:fern#DEBUG
 endfunction
 
 function! s:update_root(nodes) abort
@@ -70,13 +59,13 @@ function! s:fern_local_init() abort
   nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
   nmap <buffer><nowait> <C-h>       <Plug>(fern-my-leave)
 
-  nmap <buffer><nowait> ~ :<C-u>Fern ~<CR>
+  nnoremap <buffer><nowait> ~ :<C-u>Fern ~<CR>
 endfunction
 
 augroup my-fern
   autocmd! *
   autocmd FileType fern call s:fern_local_init()
-  autocmd VimEnter * call s:fern_init()
+  autocmd VimEnter * silent! call s:fern_init()
 augroup END
 
 " Replace Netrw {{{

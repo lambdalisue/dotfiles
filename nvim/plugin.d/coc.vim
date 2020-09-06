@@ -58,10 +58,10 @@ augroup my-coc
   autocmd! *
 
   " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+  autocmd CursorHold * silent! call CocActionAsync('highlight')
 
   " Format prior to save
-  autocmd BufWritePre * silent call CocAction('format')
+  autocmd BufWritePre * silent! call CocAction('format')
 
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
