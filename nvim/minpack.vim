@@ -1,9 +1,12 @@
 let s:script = expand('<sfile>')
 
-if exists('*minpac#init')
+function! PackInit() abort
+  packadd minpac
+
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
-  call minpac#add('thinca/vim-themis', {'type': 'opt'})
+
+  call minpac#add('wfxr/minimap.vim')
 
   call minpac#add('AndrewRadev/linediff.vim')
   call minpac#add('Bakudankun/BackAndForward.vim')
@@ -35,6 +38,7 @@ if exists('*minpac#init')
   call minpac#add('lambdalisue/compl-local-filename.vim')
   call minpac#add('lambdalisue/edita.vim')
   call minpac#add('lambdalisue/fern-bookmark.vim')
+  call minpac#add('lambdalisue/fern-hijack.vim')
   call minpac#add('lambdalisue/fern-comparator-lexical.vim')
   call minpac#add('lambdalisue/fern-git-status.vim')
   call minpac#add('lambdalisue/fern-mapping-git.vim')
@@ -47,7 +51,7 @@ if exists('*minpac#init')
   call minpac#add('lambdalisue/glyph-palette.vim')
   call minpac#add('lambdalisue/golangci-lint.vim')
   call minpac#add('lambdalisue/grea.vim')
-  call minpac#add('lambdalisue/lista.vim')
+  call minpac#add('lambdalisue/fin.vim')
   call minpac#add('lambdalisue/mr.vim')
   call minpac#add('lambdalisue/nerdfont.vim')
   call minpac#add('lambdalisue/qfloc.vim')
@@ -92,6 +96,7 @@ if exists('*minpac#init')
   call minpac#add('thinca/vim-qfreplace')
   call minpac#add('thinca/vim-quickrun')
   call minpac#add('thinca/vim-template')
+  call minpac#add('thinca/vim-themis')
   call minpac#add('thinca/vim-zenspace')
   call minpac#add('tsuyoshicho/vim-efm-langserver-settings')
   call minpac#add('tweekmonster/helpful.vim')
@@ -110,7 +115,13 @@ if exists('*minpac#init')
   " call minpac#add('tsuyoshicho/vim-efm-langserver-settings')
   " call minpac#add('ryanoasis/vim-devicons')
   " call minpac#add('lambdalisue/fern-renderer-devicons.vim')
-endif
+
+  " call minpac#add('justinmk/vim-dirvish')
+  " call minpac#add('cocopon/vaffle.vim')
+  " call minpac#add('preservim/nerdtree')
+  " call minpac#add('ms-jpq/chadtree')
+  " call minpac#add('Shougo/defx.nvim')
+endfunction
 
 " Load plugin.d/*.vim
 function! s:load_configurations() abort
@@ -120,18 +131,6 @@ function! s:load_configurations() abort
 endfunction
 call s:load_configurations()
 
-" Load plugins
-packloadall
-
-" Define user commands for updating/cleaning the plugins.
-" Each of them loads minpac, reloads .vimrc to register the
-" information of plugins, then performs the task.
-if !exists('*s:init')
-  function! s:init() abort
-    packadd minpac
-    execute 'source' fnameescape(s:script)
-  endfunction
-endif
-command! PackUpdate call s:init() | call minpac#update('', {'do': 'call minpac#status()'})
-command! PackClean  call s:init() | call minpac#clean()
-command! PackStatus call s:init() | call minpac#status()
+command! PackUpdate call PackInit() | call minpac#update()
+command! PackClean  call PackInit() | call minpac#clean()
+command! PackStatus packadd minpac | call minpac#status()

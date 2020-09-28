@@ -52,10 +52,10 @@ if has('vim_starting')
   let g:loaded_man               = 1
   " NOTE:
   " The Netrw is use to download a missing spellfile
-  let g:loaded_netrw             = 1
-  let g:loaded_netrwPlugin       = 1
-  let g:loaded_netrwSettings     = 1
-  let g:loaded_netrwFileHandlers = 1
+  " let g:loaded_netrw             = 1
+  " let g:loaded_netrwPlugin       = 1
+  " let g:loaded_netrwSettings     = 1
+  " let g:loaded_netrwFileHandlers = 1
 endif
 
 " }}}
@@ -137,10 +137,10 @@ if s:is_windows
 
   " Neovim
   let g:loaded_python_provider = 0
-  let g:python3_host_prog = s:pick_executable([
-        \ 'C:\Python36\python.exe',
-        \ 'C:\Program Files\Python36\python.exe',
-        \])
+  " let g:python3_host_prog = s:pick_executable([
+  "      \ 'C:\Python36\python.exe',
+  "      \ 'C:\Program Files\Python36\python.exe',
+  "      \])
 else
   call s:configure_path('$PATH', [
         \ '/usr/local/bin',
@@ -168,11 +168,11 @@ else
 
   " Neovim
   let g:loaded_python_provider = 0
-  let g:python3_host_prog = s:pick_executable([
-        \ '/usr/local/bin/python3',
-        \ '/usr/bin/python3',
-        \ '/bin/python3',
-        \])
+  " let g:python3_host_prog = s:pick_executable([
+  "      \ '/usr/local/bin/python3',
+  "      \ '/usr/bin/python3',
+  "      \ '/bin/python3',
+  "      \])
 endif
 " }}}
 

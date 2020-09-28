@@ -35,16 +35,6 @@ augroup filetypedetect
   autocmd BufNewFile,BufRead *.scpt        setfiletype applescript
   autocmd BufNewFile,BufRead *.applescript setfiletype applescript
 
-  " mdu2
-  autocmd BufNewFile,BufRead *.mdu2        setfiletype sh
-  autocmd BufNewFile,BufRead *.mdu2script  setfiletype sh
-  autocmd BufNewFile,BufRead skeleton.in   setfiletype fortran
-  autocmd BufNewFile,BufRead mm*.in        setfiletype fortran
-  autocmd BufNewFile,BufRead me*.in        setfiletype fortran
-  autocmd BufNewFile,BufRead md*.in        setfiletype fortran
-  autocmd BufNewFile,BufRead mdin          setfiletype fortran
-  autocmd BufNewFile,BufRead mdin.*        setfiletype fortran
-
   " python stub file
   autocmd BufNewFile,BufRead *.pyi setfiletype python
 

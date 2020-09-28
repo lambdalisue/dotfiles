@@ -51,6 +51,9 @@ set visualbell t_vb=
 " Disable cursor blinking in any mode
 set guicursor+=a:blinkon0
 
+" Use FiraCode Nerd Font
+set guifont=FiraCodeNerdFontComplete-Regular:h14
+
 " Use antialias if possible
 if exists('antialias')
   set antialias

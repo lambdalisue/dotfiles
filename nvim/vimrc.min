@@ -1,5 +1,4 @@
-" vim -u ~/.vim/vimrc.min
-if has('vim_starting')
+if exists('+compatible') && &compatible
   set nocompatible
 endif
 
@@ -7,7 +6,7 @@ nnoremap ; :
 nnoremap : ;
 
 set packpath=
-set runtimepath+=~/.config/nvim/pack/minpac/start/fern.vim
+set runtimepath^=~/ghq/github.com/lambdalisue/fern.vim
 
 filetype plugin indent on
 syntax on
