@@ -7,7 +7,7 @@ endfunction
 
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%<CR>
 nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -toggle -reveal=%<CR>
-nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:/// -wait<BAR>FinCR<CR>
+nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:/// -wait<CR>
 nnoremap <silent> <Leader>JJ :<C-u>Fern <C-r>=expand(g:junkfile#directory)<CR> -wait<CR>:<C-u>execute "normal fa"<CR>
 nnoremap <silent> <Leader>KK :<C-u>Fern . -wait<CR>:<C-u>execute "normal fa"<CR>
 
@@ -49,7 +49,6 @@ function! s:fern_local_init() abort
   nmap <buffer><nowait> <C-h> <Backspace>
   nmap <buffer><nowait> <Return>    <Plug>(fern-my-open-or-enter)
   nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
-  nnoremap <buffer><nowait> # :<C-u>FinCR<CR>
   nnoremap <buffer><nowait> ~ :<C-u>Fern ~<CR>
 endfunction
 
