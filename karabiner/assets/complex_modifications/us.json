@@ -2,15 +2,37 @@
   "title": "US Keyboard",
   "rules": [
     {
+      "description": "Send shift/lang2 on left shift",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "left_shift",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_shift"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "lang2"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
       "description": "Send command/lang2 on left command",
       "manipulators": [
         {
           "from": {
             "key_code": "left_gui",
             "modifiers": {
-              "optional": [
-                "any"
-              ]
+              "optional": ["any"]
             }
           },
           "to": [
@@ -49,15 +71,37 @@
       ]
     },
     {
+      "description": "Send shift/lang1 on right shift",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "right_shift",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_shift"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "lang1"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
       "description": "Send command/lang1 on right command",
       "manipulators": [
         {
           "from": {
             "key_code": "right_gui",
             "modifiers": {
-              "optional": [
-                "any"
-              ]
+              "optional": ["any"]
             }
           },
           "to": [
