@@ -6,7 +6,7 @@ function! PackInit() abort
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  call minpac#add('wfxr/minimap.vim')
+  call minpac#add('hrsh7th/vim-eft')
 
   call minpac#add('AndrewRadev/linediff.vim')
   call minpac#add('Bakudankun/BackAndForward.vim')
