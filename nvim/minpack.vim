@@ -47,6 +47,7 @@ function! PackInit() abort
   call minpac#add('lambdalisue/fern-renderer-nerdfont.vim')
   call minpac#add('lambdalisue/fern.vim')
   call minpac#add('lambdalisue/fin.vim')
+  call minpac#add('lambdalisue/fin-quickfix.vim')
   call minpac#add('lambdalisue/gina.vim')
   call minpac#add('lambdalisue/glyph-palette.vim')
   call minpac#add('lambdalisue/golangci-lint.vim')
