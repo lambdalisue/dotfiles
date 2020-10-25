@@ -1,24 +1,10 @@
-function! s:smart_path() abort
-  if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
-    return fnamemodify('.', ':p')
-  endif
-  return fnamemodify(expand('%'), ':p:h')
-endfunction
-
-nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%<CR>
-nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -toggle -reveal=%<CR>
-nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:/// -wait<CR>
-nnoremap <silent> <Leader>JJ :<C-u>Fern <C-r>=expand(g:junkfile#directory)<CR> -wait<CR>:<C-u>execute "normal fa"<CR>
-nnoremap <silent> <Leader>KK :<C-u>Fern . -wait<CR>:<C-u>execute "normal fa"<CR>
-
-function! s:fern_init() abort
-  if has('mac') && !exists('$SSH_CONNECTION')
-    let g:fern#renderer = 'nerdfont'
-  endif
-  let g:fern#keepalt_on_edit = 1
-  let g:fern#smart_cursor = has('nvim-0.5.0') ? 'hide' : 'stick'
-  let g:fern#loglevel = g:fern#DEBUG
-endfunction
+if has('mac') && !exists('$SSH_CONNECTION')
+  let g:fern#renderer = 'nerdfont'
+endif
+let g:fern#keepalt_on_edit = 1
+let g:fern#smart_cursor = has('nvim-0.5.0') ? 'hide' : 'stick'
+let g:fern#scheme#bookmark#store#file = expand('~/Documents/fern/bookmark.json')
+" let g:fern#loglevel = g:fern#DEBUG
 
 function! s:fern_local_init() abort
   nmap <buffer>
@@ -55,5 +41,17 @@ endfunction
 augroup my-fern
   autocmd! *
   autocmd FileType fern call s:fern_local_init()
-  autocmd VimEnter * silent! call s:fern_init()
 augroup END
+
+function! s:smart_path() abort
+  if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
+    return fnamemodify('.', ':p')
+  endif
+  return fnamemodify(expand('%'), ':p:h')
+endfunction
+
+nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%<CR>
+nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -toggle -reveal=%<CR>
+nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:/// -wait<CR><BAR>:Fin<CR>
+nnoremap <silent> <Leader>JJ :<C-u>Fern <C-r>=expand(g:junkfile#directory)<CR> -wait<CR>:<C-u>execute "normal fa"<CR>
+nnoremap <silent> <Leader>KK :<C-u>Fern . -wait<CR>:<C-u>execute "normal fa"<CR>
