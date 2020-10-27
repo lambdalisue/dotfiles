@@ -627,6 +627,20 @@ function! s:uuid() abort
 endfunction
 inoremap <silent> <F2> <C-r>=<SID>uuid()<CR>
 
+" Yank Base64 encoded/decoded text of the selected text
+function! s:encode_base64() abort
+  normal! gvy
+  let @@ = system('base64', @@)
+  let @@ = substitute(@@, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')
+endfunction
+function! s:decode_base64() abort
+  normal! gvy
+  let @@ = system('base64 -d', @@)
+  let @@ = substitute(@@, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')
+endfunction
+vnoremap <silent> <F3> :call <SID>encode_base64()<CR>
+vnoremap <silent> <F4> :call <SID>decode_base64()<CR>
+
 " Grep with <Leader>gg {{{
 function! s:grep(bang, query) abort
   let query = empty(a:query) ? input('grep: ') : a:query
