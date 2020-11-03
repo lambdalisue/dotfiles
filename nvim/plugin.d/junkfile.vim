@@ -1,2 +1,2 @@
-let g:junkfile#directory = expand("~/Documents/junkfiles")
+let g:junkfile#directory = expand("~/Documents/vim/junkfiles")
 

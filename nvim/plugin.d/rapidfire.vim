@@ -7,4 +7,4 @@ nnoremap <S-Down> :<C-u>Rapidfire Down<CR>
 nnoremap <S-Left> :<C-u>Rapidfire Left<CR>
 nnoremap <S-Right> :<C-u>Rapidfire Right<CR>
 
-let g:rapidfire#persistent_filename = '~/.cache/rapidfire/commands.json'
+let g:rapidfire#persistent_filename = expand('~/Documents/vim/rapidfire/commands.json')

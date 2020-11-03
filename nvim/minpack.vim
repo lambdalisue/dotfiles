@@ -1,5 +1,3 @@
-let s:script = expand('<sfile>')
-
 function! PackInit() abort
   packadd minpac
 
@@ -46,12 +44,13 @@ function! PackInit() abort
   call minpac#add('lambdalisue/fern-mapping-quickfix.vim')
   call minpac#add('lambdalisue/fern-renderer-nerdfont.vim')
   call minpac#add('lambdalisue/fern.vim')
-  call minpac#add('lambdalisue/fin.vim')
   call minpac#add('lambdalisue/fin-quickfix.vim')
+  call minpac#add('lambdalisue/fin.vim')
   call minpac#add('lambdalisue/gina.vim')
   call minpac#add('lambdalisue/glyph-palette.vim')
   call minpac#add('lambdalisue/golangci-lint.vim')
   call minpac#add('lambdalisue/grea.vim')
+  call minpac#add('lambdalisue/mr-quickfix')
   call minpac#add('lambdalisue/mr.vim')
   call minpac#add('lambdalisue/nerdfont.vim')
   call minpac#add('lambdalisue/qfloc.vim')
@@ -73,7 +72,7 @@ function! PackInit() abort
   call minpac#add('lambdalisue/wifi.vim')
   call minpac#add('leafgarland/typescript-vim')
   call minpac#add('machakann/vim-sandwich')
-  call minpac#add('mattn/vim-goimports')
+  " call minpac#add('mattn/vim-goimports')
   call minpac#add('mattn/vim-lexiv')
   call minpac#add('mattn/vim-textobj-url')
   call minpac#add('mattn/webapi-vim')
@@ -116,7 +115,6 @@ function! PackInit() abort
   " call minpac#add('tsuyoshicho/vim-efm-langserver-settings')
   " call minpac#add('ryanoasis/vim-devicons')
   " call minpac#add('lambdalisue/fern-renderer-devicons.vim')
-
   " call minpac#add('justinmk/vim-dirvish')
   " call minpac#add('cocopon/vaffle.vim')
   " call minpac#add('preservim/nerdtree')
@@ -134,4 +132,3 @@ call s:load_configurations()
 
 command! PackUpdate call PackInit() | call minpac#update()
 command! PackClean  call PackInit() | call minpac#clean()
-command! PackStatus packadd minpac | call minpac#status()

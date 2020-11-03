@@ -6,8 +6,8 @@ function! s:template_keywords() abort
     execute 'normal! "_da>'
   endif
 endfunction
+
 augroup my-vim-template
   autocmd! *
   autocmd User plugin-template-loaded call s:template_keywords()
 augroup END
-

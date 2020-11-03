@@ -13,3 +13,6 @@ setl foldmethod=syntax
 setl keywordprg=:help
 
 command! Vint cexpr system('vint .')
+
+imap <buffer><expr> <CR> pumvisible() ? "<C-y>" : "\<Plug>(vim-backslash-CR)"
+

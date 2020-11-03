@@ -1,7 +1,3 @@
-if &runtimepath !~# 'vim-altr'
-  finish
-endif
-
 nmap g<C-n> <Plug>(altr-forward)
 nmap g<C-p> <Plug>(altr-back)
 
@@ -16,4 +12,7 @@ function! s:init_altr() abort
         \)
 endfunction
 
-call s:init_altr()
+augroup my-altr
+  autocmd!
+  autocmd VimEnter * silent! call s:init_altr()
+augroup END
