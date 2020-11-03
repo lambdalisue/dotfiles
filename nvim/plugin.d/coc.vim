@@ -101,10 +101,7 @@ augroup my-coc
 augroup END
 
 " coc-actions
-function! s:actions_open(type) abort
-  execute 'CocCommand actions.open' a:type
-endfunction
-xnoremap <silent><nowait> <C-k> :<C-u>call <SID>actions_open(visualmode())<CR>
+xnoremap <silent><nowait> <C-k> :<C-u>CocCommand actions.open <C-r>=visualmode()<CR><CR>
 nnoremap <silent><nowait> <C-k> :<C-u>CocCommand actions.open<CR>
 
 " coc-git
