@@ -1,3 +1,13 @@
+history-all() {
+  history -E 1
+}
+
+history-edit() {
+  fc -W
+  $EDITOR $HISTFILE
+  fc -R
+}
+
 sandbox-alpine() {
   if [[ ! $(docker ps -qa -f name=sandbox-alpine) ]]; then
     docker run -d -v $HOME:/mnt/host:ro -it --name sandbox-alpine alpine /bin/sh
