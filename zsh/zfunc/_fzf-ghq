@@ -1,4 +1,4 @@
-fzf-ghq::print() {
+fzf-ghq() {
     if ! which ghq 1>/dev/null 2>&1; then
         echo 'A "ghq" command is not found.'
         return 1
@@ -10,6 +10,6 @@ fzf-ghq::print() {
     local s="$(ghq list --full-path | fzf -q "$1")"
     [[ -n $s ]] && print "cd $(echo $s | perl -lanE 'say $F[0]')"
 }
-BUFFER=$(fzf-ghq::print $BUFFER)
+BUFFER=$(fzf-ghq $BUFFER)
 [[ -n $BUFFER ]] && zle accept-line
 zle clear-screen

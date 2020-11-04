@@ -1,4 +1,4 @@
-fzf-kill::print() {
+fzf-kill() {
     if ! which ps 1>/dev/null 2>&1; then
         echo 'A "ps" command is not found.'
         return 1
@@ -13,6 +13,6 @@ fzf-kill::print() {
 }
 
 [[ "x$BUFFER" != "x" ]] && BUFFER="$BUFFER "
-BUFFER="$BUFFER$(fzf-kill::print)"
+BUFFER="$BUFFER$(fzf-kill)"
 CURSOR=$#BUFFER
 zle redisplay

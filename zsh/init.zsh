@@ -56,12 +56,12 @@ if type fzf &>/dev/null; then
     autoload -Uz $func && zle -N $func && bindkey "$bind" $func
   }
 
-  abindkey '^R'   fzf-history
-  abindkey '^X^D' fzf-cdr
-  abindkey '^X^B' fzf-bindkey
-  abindkey '^X^K' fzf-kill
-  abindkey '^X^G' fzf-ghq
-  abindkey '^X^P' fzf-k8s-pods
+  abindkey '^R'   _fzf-history
+  abindkey '^X^D' _fzf-cdr
+  abindkey '^X^B' _fzf-bindkey
+  abindkey '^X^K' _fzf-kill
+  abindkey '^X^G' _fzf-ghq
+  abindkey '^X^P' _fzf-k8s-pods
 fi
 
 # xdg-open
