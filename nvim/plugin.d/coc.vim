@@ -80,18 +80,11 @@ function! s:show_documentation() abort
 endfunction
 nnoremap <silent> K :<C-u>call <SID>show_documentation()<CR>
 
-function! s:format() abort
-  redraw | echo "[coc] formatting content..."
-  silent! call CocAction('format')
-  silent! CocCommand editor.action.organizeImport
-  redraw | echo ""
-endfunction
-
 augroup my-coc
   autocmd!
 
   " Format prior to save
-  autocmd BufWritePre * call s:format()
+  autocmd BufWritePre * silent! call CocAction('format')
 
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent! call CocActionAsync('highlight')
