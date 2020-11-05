@@ -1,6 +1,12 @@
+function! s:start_project(path) abort
+  tabnew
+  execute printf('tcd %s', fnameescape(a:path))
+  Fern .
+endfunction
+
 command! FzfMrr call fzf#run({
       \ 'source': mr#mrr#list(),
-      \ 'sink': 'tcd',
+      \ 'sink': funcref('s:start_project'),
       \ 'options': '-m -x +s',
       \ 'down': '40%',
       \})
@@ -12,8 +18,5 @@ command! FzfMru call fzf#run({
       \ 'down': '40%',
       \})
 
-nnoremap <Leader>mm :<C-u>Mru . <BAR> FinQf<CR>
-nnoremap <Leader>mu :<C-u>Mru . <BAR> FinQf<CR>
-nnoremap <Leader>mw :<C-u>Mrw . <BAR> FinQf<CR>
-
-nnoremap <C-x><C-g> :<C-u>FzfMrr<CR>
+nnoremap <Leader>mu :<C-u>FzfMru<CR>
+nnoremap <Leader>mr :<C-u>FzfMrr<CR>
