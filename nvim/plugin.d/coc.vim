@@ -29,29 +29,31 @@ set updatetime=300
 inoremap <silent><expr> <C-x><C-x> coc#refresh()
 
 " Use [[ and ]]  to navigate diagnostics
-nmap <silent> [[ <Plug>(coc-diagnostic-prev)zv
-nmap <silent> ]] <Plug>(coc-diagnostic-next)zv
+nmap <nowait> [[ <Plug>(coc-diagnostic-prev)zv
+nmap <nowait> ]] <Plug>(coc-diagnostic-next)zv
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gD <Plug>(coc-declaration)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gR <Plug>(coc-refactor)
-nmap <silent> gq <Plug>(coc-format)
-nmap <silent> gQ <Plug>(coc-format-selected)
-vmap <silent> gQ <Plug>(coc-format-selected)
-nmap <silent> qf <Plug>(coc-fix-current)
-nmap <silent> qr <Plug>(coc-rename)
+nmap <nowait> gd <Plug>(coc-definition)
+nmap <nowait> gD <Plug>(coc-declaration)
+nmap <nowait> gi <Plug>(coc-implementation)
+nmap <nowait> gy <Plug>(coc-type-definition)
+nmap <nowait> gr <Plug>(coc-references)
+nmap <nowait> gR <Plug>(coc-refactor)
+nmap <nowait> gq <Plug>(coc-format)
+nmap <nowait> gQ <Plug>(coc-format-selected)
+vmap <nowait> gQ <Plug>(coc-format-selected)
+nmap <nowait> qf <Plug>(coc-fix-current)
+nmap <nowait> qr <Plug>(coc-rename)
+" nmap <nowait> <C-k> <Plug>(coc-codeaction-line)
+" vmap <nowait> <C-k> <Plug>(coc-codeaction-selected)
 
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ic <Plug>(coc-classobj-i)
-omap ac <Plug>(coc-classobj-a)
+xmap <nowait> if <Plug>(coc-funcobj-i)
+xmap <nowait> af <Plug>(coc-funcobj-a)
+omap <nowait> if <Plug>(coc-funcobj-i)
+omap <nowait> af <Plug>(coc-funcobj-a)
+xmap <nowait> ic <Plug>(coc-classobj-i)
+xmap <nowait> ac <Plug>(coc-classobj-a)
+omap <nowait> ic <Plug>(coc-classobj-i)
+omap <nowait> ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 " Note coc#float#scroll works on neovim >= 0.4.3 or vim >= 8.2.0750
