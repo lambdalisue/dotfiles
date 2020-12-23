@@ -159,3 +159,16 @@ minpac-develop() {
   minpac-remove
   ln -s "$(pwd)" "$(minpac-path)"
 }
+
+fzf-k8s-pods() {
+  if ! which kubectl 1>/dev/null 2>&1; then
+    echo 'A "kubectl" command is not found.'
+    return 1
+  fi
+  kubectl get pods $@ \
+    | fzf \
+        --height 100% \
+        --header-lines 1 \
+        --preview $'kubectl describe "pods/$(echo {} | awk \'{print $1}\')"' \
+    | awk '{print $1}'
+}

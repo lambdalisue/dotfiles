@@ -6,8 +6,8 @@ setl shiftwidth=4     " width of Indent
 setl smarttab         " use 'shiftwidth' and 'softtabstop' for indentation
 setl expandtab        " use continuous spaces as TAB
 
-setl textwidth=88
-setl colorcolumn=+1
+setl textwidth&
+setl colorcolumn&
 
 " Indent rules should be overwritten by plugin
 " https://github.com/hynek/vim-python-pep8-indent

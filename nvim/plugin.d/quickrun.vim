@@ -15,6 +15,16 @@ let g:quickrun_config = extend(get(g:, 'quickrun_config', {}), {
       \ 'ps1': {
       \   'command': 'powershell',
       \ },
+      \ 'javascript': {
+      \   'command': 'deno',
+      \   'cmdopt': '--allow-all --unstable',
+      \   'exec': 'NO_COLOR=1 %c run %o %s',
+      \ },
+      \ 'typescript': {
+      \   'command': 'deno',
+      \   'cmdopt': '--allow-all --unstable',
+      \   'exec': 'NO_COLOR=1 %c run %o %s',
+      \ },
       \})
 
 if has('nvim')

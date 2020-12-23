@@ -2,7 +2,7 @@
 	path = ~/.gitconfig.local
 
 [user]
-	name  = lambdalisue
+	name  = Alisue
 	email = lambdalisue@hashnote.net
 	signingkey = B90A2400
 

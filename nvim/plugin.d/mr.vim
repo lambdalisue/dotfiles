@@ -18,5 +18,13 @@ command! FzfMru call fzf#run({
       \ 'down': '40%',
       \})
 
-nnoremap <Leader>mu :<C-u>FzfMru<CR>
+command! FzfMruLocal call fzf#run({
+      \ 'source': mr#filter(mr#mru#list(), getcwd()),
+      \ 'sink': 'e',
+      \ 'options': '-m -x +s',
+      \ 'down': '40%',
+      \})
+
+nnoremap <Leader>mm :<C-u>FzfMruLocal<CR>
+nnoremap <Leader>mM :<C-u>FzfMru<CR>
 nnoremap <Leader>mr :<C-u>FzfMrr<CR>

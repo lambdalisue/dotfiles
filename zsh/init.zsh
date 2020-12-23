@@ -102,6 +102,13 @@ if type asdf &>/dev/null; then
     asdf::cache
   fi
   source ${CACHE_PROFILE}/asdf.zsh
+
+  asdf() {
+    # https://github.com/pyenv/pyenv/wiki/Common-build-problems#error-the-python-ssl-extension-was-not-compiled-missing-the-openssl-lib
+    export CFLAGS="-I$(brew --prefix openssl)/include"
+    export LDFLAGS="-L$(brew --prefix openssl)/lib"
+    command asdf $@
+  }
 fi
 
 # pip

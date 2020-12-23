@@ -168,11 +168,11 @@ else
 
   " Neovim
   let g:loaded_python_provider = 0
-  " let g:python3_host_prog = s:pick_executable([
-  "      \ '/usr/local/bin/python3',
-  "      \ '/usr/bin/python3',
-  "      \ '/bin/python3',
-  "      \])
+  let g:python3_host_prog = s:pick_executable([
+       \ '/usr/local/bin/python3',
+       \ '/usr/bin/python3',
+       \ '/bin/python3',
+       \])
 endif
 " }}}
 
@@ -343,6 +343,9 @@ set keywordprg&
 
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
+
+" Do NOT restart search on bottom
+set nowrapscan
 " }}}
 
 " Macros {{{
