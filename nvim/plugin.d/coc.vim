@@ -86,7 +86,7 @@ augroup my-coc
   autocmd!
 
   " Format prior to save
-  autocmd BufWritePre * silent! call CocAction('runCommand', 'editor.action.organizeImport')
+  " autocmd BufWritePre * silent! call CocAction('runCommand', 'editor.action.organizeImport')
   autocmd BufWritePre * silent! call CocAction('format')
 
   " Highlight symbol under cursor on CursorHold
