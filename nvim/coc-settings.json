@@ -2,6 +2,7 @@
   "suggest.asciiCharactersOnly": true,
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.bracketEnterImprove": false,
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
   "vetur.format.defaultFormatter.html": "prettier",
   "python.jediEnabled": false,
   "python.linting.enabled": true,

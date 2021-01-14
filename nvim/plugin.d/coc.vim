@@ -84,17 +84,10 @@ nnoremap <silent> K :<C-u>call <SID>show_documentation()<CR>
 
 augroup my-coc
   autocmd!
-
-  " Format prior to save
-  " autocmd BufWritePre * silent! call CocAction('runCommand', 'editor.action.organizeImport')
-  autocmd BufWritePre * silent! call CocAction('format')
-
   " Highlight symbol under cursor on CursorHold
   autocmd CursorHold * silent! call CocActionAsync('highlight')
-
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
 augroup END
 
 " coc-actions
