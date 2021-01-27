@@ -103,6 +103,7 @@ function! PackInit() abort
   call minpac#add('tyru/caw.vim')
   call minpac#add('tyru/current-func-info.vim')
   call minpac#add('tyru/open-browser.vim')
+  call minpac#add('uarun/vim-protobuf')
   call minpac#add('vim-jp/syntax-vim-ex')
   call minpac#add('vim-jp/vimdoc-ja')
   call minpac#add('vim-jp/vital-complete')

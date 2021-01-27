@@ -3,7 +3,6 @@ let g:coc_node_path = '/usr/local/bin/node'
 
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
-      \ 'coc-actions',
       \ 'coc-diagnostic',
       \ 'coc-eslint',
       \ 'coc-git',
@@ -43,8 +42,8 @@ nmap <nowait> gQ <Plug>(coc-format-selected)
 vmap <nowait> gQ <Plug>(coc-format-selected)
 nmap <nowait> qf <Plug>(coc-fix-current)
 nmap <nowait> qr <Plug>(coc-rename)
-" nmap <nowait> <C-k> <Plug>(coc-codeaction-line)
-" vmap <nowait> <C-k> <Plug>(coc-codeaction-selected)
+nmap <nowait> <C-k> <Plug>(coc-codeaction-line)
+vmap <nowait> <C-k> <Plug>(coc-codeaction-selected)
 
 xmap <nowait> if <Plug>(coc-funcobj-i)
 xmap <nowait> af <Plug>(coc-funcobj-a)
@@ -91,8 +90,8 @@ augroup my-coc
 augroup END
 
 " coc-actions
-xnoremap <silent><nowait> <C-k> :<C-u>CocCommand actions.open <C-r>=visualmode()<CR><CR>
-nnoremap <silent><nowait> <C-k> :<C-u>CocCommand actions.open<CR>
+" xnoremap <silent><nowait> <C-k> :<C-u>CocCommand actions.open <C-r>=visualmode()<CR><CR>
+" nnoremap <silent><nowait> <C-k> :<C-u>CocCommand actions.open<CR>
 
 " coc-git
 nmap <silent> gs <Plug>(coc-git-chunkinfo)

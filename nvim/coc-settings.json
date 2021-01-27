@@ -8,8 +8,6 @@
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
-  "rust-analyzer.cargo.loadOutDirsFromCheck": true,
-  "rust-analyzer.procMacro.enable": true,
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true

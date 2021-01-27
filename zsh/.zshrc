@@ -1,20 +1,25 @@
-# TMUX
-# https://qiita.com/ssh0/items/a9956a74bff8254a606a
-if [[ ! -n $TMUX && $- == *l* ]]; then
-  # get the IDs
-  ID="`tmux list-sessions`"
-  if [[ -z "$ID" ]]; then
-    tmux -u new-session
-  fi
-  create_new_session="Create New Session"
-  ID="$ID\n${create_new_session}:"
-  ID="`echo $ID | fzf | cut -d: -f1`"
-  if [[ "$ID" = "${create_new_session}" ]]; then
-    tmux -u new-session
-  elif [[ -n "$ID" ]]; then
-    tmux attach-session -t "$ID"
-  else
-    :  # Start terminal normally
+# # TMUX
+# # https://qiita.com/ssh0/items/a9956a74bff8254a606a
+# if [[ ! -n $TMUX && $- == *l* ]]; then
+#   # get the IDs
+#   ID="`tmux list-sessions`"
+#   if [[ -z "$ID" ]]; then
+#     tmux -u new-session
+#   fi
+#   create_new_session="Create New Session"
+#   ID="$ID\n${create_new_session}:"
+#   ID="`echo $ID | fzf | cut -d: -f1`"
+#   if [[ "$ID" = "${create_new_session}" ]]; then
+#     tmux -u new-session
+#   elif [[ -n "$ID" ]]; then
+#     tmux attach-session -t "$ID"
+#   else
+#     :  # Start terminal normally
+#   fi
+# fi
+if [[ ! -n $NVIM_LISTEN_ADDRESS ]]; then
+  if type nvim > /dev/null; then
+    nvim -c 'Fern %'
   fi
 fi
 
