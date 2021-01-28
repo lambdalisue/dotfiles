@@ -612,6 +612,9 @@ nnoremap <silent> <C-w><C-q> :<C-u>tabclose<CR>
 nnoremap <C-n> gt
 nnoremap <C-p> gT
 
+" Open terminal
+nnoremap <Leader>tt :<C-u>tabnew<CR><BAR>:terminal<CR>
+
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 " Revert with ":iunmap <C-u>".

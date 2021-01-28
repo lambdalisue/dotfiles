@@ -2,12 +2,9 @@ scriptencoding utf-8
 
 function! s:tab(n) abort
   let hi = a:n is# tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-  let bufnrs = tabpagebuflist(a:n)
-  let bufnr = bufnrs[tabpagewinnr(a:n) - 1]
-  let bufname = fnamemodify(bufname(bufnr), ':t')
-  let bufname = empty(bufname) ? '[No name]' : bufname
-  let modified = len(filter(bufnrs[:], { -> getbufvar(v:val, '&modified') })) ? '+' : ''
-  return printf('%%%dT%s%s%s%%T%%#TabLineFill#', a:n, hi, bufname, modified)
+  let label = getcwd(0, a:n)
+  let label = fnamemodify(label, ':t')
+  return printf('%%%dT%s%s%%T%%#TabLineFill#', a:n, hi, label)
 endfunction
 
 function! s:safe(expr) abort
@@ -20,16 +17,17 @@ endfunction
 
 function! s:statusline() abort
   return join([
-        \ '%f',
+        \ '%f%m%r%h%w',
         \ '%{exists("w:quickfix_title") ? w:quickfix_title : ""}',
         \ '%=',
-        \ '%m%r%h%w',
+        \ '%{&filetype}',
+        \ '%{&fileformat}',
+        \ '%{&fileencoding}',
         \])
 endfunction
 
 function! s:tabline() abort
   let lhs = [
-        \ '%{fnamemodify(".", ":p:~")}',
         \ join(map(range(1, tabpagenr('$')), { -> s:tab(v:val) }), ' ┆ '),
         \]
   let rhs = [
@@ -38,6 +36,7 @@ function! s:tabline() abort
         \ s:safe('gina#component#traffic#preset("fancy")'),
         \ s:safe('wifi#component()'),
         \ s:safe('battery#component()'),
+        \ '%{fnamemodify(".", ":p:~")}',
         \]
   call map(lhs, { _, v -> substitute(v, '^\s*\|\s*$', '', 'g') })
   call map(rhs, { _, v -> substitute(v, '^\s*\|\s*$', '', 'g') })
