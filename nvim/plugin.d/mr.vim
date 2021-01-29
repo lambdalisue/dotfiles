@@ -1,5 +1,4 @@
 function! s:start_project(path) abort
-  tabnew
   execute printf('tcd %s', fnameescape(a:path))
   Fern .
 endfunction
@@ -27,4 +26,4 @@ command! FzfMruLocal call fzf#run({
 
 nnoremap <Leader>mm :<C-u>FzfMruLocal<CR>
 nnoremap <Leader>mM :<C-u>FzfMru<CR>
-nnoremap <Leader>mr :<C-u>FzfMrr<CR>
+nnoremap <Leader>II :<C-u>FzfMrr<CR>

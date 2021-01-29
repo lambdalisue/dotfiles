@@ -40,6 +40,7 @@ function! s:fern_local_init() abort
   nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
   nmap <buffer><nowait> T <Plug>(fern-action-terminal)
   nnoremap <buffer><nowait> ~ :<C-u>Fern ~<CR>
+  nnoremap <buffer><nowait> I :<C-u>FzfMrr<CR>
 endfunction
 
 augroup my-fern
