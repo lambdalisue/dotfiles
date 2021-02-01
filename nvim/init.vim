@@ -224,7 +224,7 @@ set scrolloff=5
 set sidescroll=1
 
 " Show invisible characters
-set list
+set nolist
 set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%,eol:$
 
 " vertically split buffers for vimdiff
