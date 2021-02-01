@@ -33,7 +33,6 @@ function! PackInit() abort
   call minpac#add('koron/vim-monochromenote')
   call minpac#add('lambdalisue/battery.vim')
   call minpac#add('lambdalisue/compl-local-filename.vim')
-  call minpac#add('lambdalisue/edita.vim')
   call minpac#add('lambdalisue/fern-bookmark.vim')
   call minpac#add('lambdalisue/fern-comparator-lexical.vim')
   call minpac#add('lambdalisue/fern-git-status.vim')
@@ -50,6 +49,7 @@ function! PackInit() abort
   call minpac#add('lambdalisue/glyph-palette.vim')
   call minpac#add('lambdalisue/golangci-lint.vim')
   call minpac#add('lambdalisue/grea.vim')
+  call minpac#add('lambdalisue/inside.vim')
   call minpac#add('lambdalisue/mr-quickfix.vim')
   call minpac#add('lambdalisue/mr.vim')
   call minpac#add('lambdalisue/nerdfont.vim')
@@ -90,6 +90,7 @@ function! PackInit() abort
   call minpac#add('rhysd/vim-gfm-syntax')
   call minpac#add('rust-lang/rust.vim')
   call minpac#add('sgur/vim-textobj-parameter')
+  call minpac#add('sheerun/vim-polyglot')
   call minpac#add('t9md/vim-quickhl')
   call minpac#add('thinca/vim-prettyprint')
   call minpac#add('thinca/vim-qfreplace')
@@ -110,6 +111,10 @@ function! PackInit() abort
   call minpac#add('vim-jp/vital.vim')
   call minpac#add('vim-scripts/python_match.vim')
 
+  if has('nvim')
+    call minpac#add('nvim-treesitter/nvim-treesitter', {'type': 'opt', 'do': { -> execute('TSUpdate') }})
+  endif
+
   " call minpac#add('prabirshrestha/vim-lsp')
   " call minpac#add('mattn/vim-lsp-settings')
   " call minpac#add('tsuyoshicho/vim-efm-langserver-settings')
@@ -122,6 +127,10 @@ function! PackInit() abort
   " call minpac#add('Shougo/defx.nvim')
 endfunction
 
+if has('nvim')
+  packadd! nvim-treesitter
+endif
+
 " Load plugin.d/*.vim
 function! s:load_configurations() abort
   for path in glob('$VIMHOME/plugin.d/*.vim', 1, 1, 1)
@@ -129,6 +138,16 @@ function! s:load_configurations() abort
   endfor
 endfunction
 call s:load_configurations()
+
+" Load plugin.d/*.lua
+if has('nvim')
+  function! s:load_lua_configurations() abort
+    for path in glob('$VIMHOME/plugin.d/*.lua', 1, 1, 1)
+      execute printf('luafile %s', fnameescape(path))
+    endfor
+  endfunction
+  call s:load_lua_configurations()
+endif
 
 command! PackUpdate call PackInit() | call minpac#update()
 command! PackClean  call PackInit() | call minpac#clean()

@@ -1,28 +1,3 @@
-# # TMUX
-# # https://qiita.com/ssh0/items/a9956a74bff8254a606a
-# if [[ ! -n $TMUX && $- == *l* ]]; then
-#   # get the IDs
-#   ID="`tmux list-sessions`"
-#   if [[ -z "$ID" ]]; then
-#     tmux -u new-session
-#   fi
-#   create_new_session="Create New Session"
-#   ID="$ID\n${create_new_session}:"
-#   ID="`echo $ID | fzf | cut -d: -f1`"
-#   if [[ "$ID" = "${create_new_session}" ]]; then
-#     tmux -u new-session
-#   elif [[ -n "$ID" ]]; then
-#     tmux attach-session -t "$ID"
-#   else
-#     :  # Start terminal normally
-#   fi
-# fi
-if [[ ! -n $NVIM_LISTEN_ADDRESS ]]; then
-  if type nvim > /dev/null; then
-    nvim -c 'Fern %'
-  fi
-fi
-
 # Add extra fpath
 fpath+=($ZDOTDIR/zfunc(N-/))
 
@@ -142,6 +117,11 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
+
+# Use C-x C-e to edit command line with EDITOR
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
 
 # User custom
 source "${ZDOTDIR}/init.zsh"
