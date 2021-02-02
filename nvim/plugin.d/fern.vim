@@ -22,10 +22,22 @@ function! s:fern_local_init() abort
         \   "\<Plug>(fern-action-open)",
         \   "\<Plug>(fern-my-enter-and-tcd)",
         \ )
+  nmap <buffer><expr>
+        \ <Plug>(fern-my-open-or-enter)
+        \ fern#smart#drawer(
+        \   "\<Plug>(fern-my-open-or-enter-and-tcd)",
+        \   "\<Plug>(fern-action-open-or-enter)",
+        \ )
+  nmap <buffer><expr>
+        \ <Plug>(fern-my-leave)
+        \ fern#smart#drawer(
+        \   "\<Plug>(fern-my-leave-and-tcd)",
+        \   "\<Plug>(fern-action-leave)",
+        \ )
   nmap <buffer><nowait> <C-m> <Return>
   nmap <buffer><nowait> <C-h> <Backspace>
-  nmap <buffer><nowait> <Return>    <Plug>(fern-my-open-or-enter-and-tcd)
-  nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave-and-tcd)
+  nmap <buffer><nowait> <Return>    <Plug>(fern-my-open-or-enter)
+  nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
   nmap <buffer><nowait> T <Plug>(fern-action-terminal)
   nnoremap <buffer><nowait> ~ :<C-u>Fern ~<CR>
   nnoremap <buffer><nowait> I :<C-u>FzfMrr<CR>
