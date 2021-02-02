@@ -1,3 +1,9 @@
+if [[ ! -n $NVIM_LISTEN_ADDRESS ]] && [[ ! -n $VIM_TERMINAL ]]; then
+  if type nvim > /dev/null; then
+    nvim -c 'Fern -wait %'
+  fi
+fi
+
 # Add extra fpath
 fpath+=($ZDOTDIR/zfunc(N-/))
 

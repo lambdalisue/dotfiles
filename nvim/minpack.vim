@@ -97,7 +97,7 @@ function! PackInit() abort
   call minpac#add('cocopon/iceberg.vim')
   call minpac#add('koron/vim-monochromenote')
 
-  " Filetype plugins may be omittable due to the tree-sitter
+  " Filetype
   call minpac#add('PProvost/vim-ps1')
   call minpac#add('cespare/vim-toml')
   call minpac#add('elzr/vim-json')
@@ -114,15 +114,7 @@ function! PackInit() abort
   call minpac#add('posva/vim-vue')
   call minpac#add('rhysd/vim-gfm-syntax')
   call minpac#add('vim-jp/syntax-vim-ex')
-
-  if has('nvim')
-    call minpac#add('nvim-treesitter/nvim-treesitter', {'type': 'opt', 'do': { -> execute('TSUpdate') }})
-  endif
 endfunction
-
-if has('nvim')
-  packadd! nvim-treesitter
-endif
 
 " Load plugin.d/*.vim
 function! s:load_configurations() abort
