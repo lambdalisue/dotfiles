@@ -509,6 +509,9 @@ endfunction
 command! ClearRegister call s:clear_register()
 " }}}
 
+" Qbuffers
+command! Qbuffers call setqflist(map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), '{"bufnr":v:val}'))
+
 " Qinvoke/Linvoke {{{
 function! s:invoke(cmd, callback) abort
   let Process = vital#vital#import('Async.Promise.Process')
@@ -646,6 +649,26 @@ function! s:decode_base64() abort
 endfunction
 vnoremap <silent> <F3> :call <SID>encode_base64()<CR>
 vnoremap <silent> <F4> :call <SID>decode_base64()<CR>
+
+" Focus floating window with <C-w><C-w> {{{
+if has('nvim')
+  function! s:focus_floating() abort
+    if !empty(nvim_win_get_config(win_getid()).relative)
+      wincmd p
+      return
+    endif
+    for winnr in range(1, winnr('$'))
+      let winid = win_getid(winnr)
+      let conf = nvim_win_get_config(winid)
+      if conf.focusable && !empty(conf.relative)
+        call win_gotoid(winid)
+        return
+      endif
+    endfor
+  endfunction
+  nnoremap <silent> <C-w><C-w> :<C-u>call <SID>focus_floating()<CR>
+endif
+" }}}
 
 " Grep with <Leader>gg {{{
 function! s:grep(bang, query) abort
