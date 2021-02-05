@@ -42,8 +42,8 @@ nmap <nowait> gQ <Plug>(coc-format-selected)
 vmap <nowait> gQ <Plug>(coc-format-selected)
 nmap <nowait> qf <Plug>(coc-fix-current)
 nmap <nowait> qr <Plug>(coc-rename)
-nmap <nowait> <C-k> <Plug>(coc-codeaction-line)
-vmap <nowait> <C-k> <Plug>(coc-codeaction-selected)
+nmap <silent><nowait> <C-k> <Plug>(coc-codeaction-line)
+vmap <silent><nowait> <C-k> <Plug>(coc-codeaction-selected)
 
 xmap <nowait> if <Plug>(coc-funcobj-i)
 xmap <nowait> af <Plug>(coc-funcobj-a)
@@ -88,10 +88,6 @@ augroup my-coc
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup END
-
-" coc-actions
-" xnoremap <silent><nowait> <C-k> :<C-u>CocCommand actions.open <C-r>=visualmode()<CR><CR>
-" nnoremap <silent><nowait> <C-k> :<C-u>CocCommand actions.open<CR>
 
 " coc-git
 nmap <silent> gs <Plug>(coc-git-chunkinfo)
