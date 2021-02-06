@@ -102,3 +102,21 @@ vmap <C-j> <Plug>(coc-snippets-select)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 xmap <C-s> <Plug>(coc-convert-snippet)
 command! CocSnippet CocCommand snippets.editSnippets
+
+
+function! s:switch_coc_deno() abort
+  if exists('g:coc_deno')
+    return
+  endif
+  let path = empty(expand('%')) ? '.' : '%:p:h'
+  if empty(finddir("node_modules", path . ';'))
+    call coc#config('deno.enable', v:true)
+    call coc#config('tsserver.enable', v:false)
+  else
+    call coc#config('deno.enable', v:false)
+    call coc#config('tsserver.enable', v:true)
+  endif
+endfunction
+augroup my-coc-deno
+  autocmd BufRead,BufNewFile *.ts ++once call s:switch_coc_deno()
+augroup END
