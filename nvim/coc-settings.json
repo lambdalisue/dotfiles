@@ -8,6 +8,7 @@
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
+  "prettier.onlyUseLocalVersion": true,
   "rust-analyzer.cargo.loadOutDirsFromCheck": true,
   "rust-analyzer.procMacro.enable": true,
   "rust-analyzer.diagnostics.disabled": ["macro-error"],
