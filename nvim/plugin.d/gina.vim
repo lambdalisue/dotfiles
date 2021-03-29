@@ -113,5 +113,5 @@ endfunction
 
 augroup my-gina
   autocmd!
-  autocmd VimEnter * call s:init()
+  autocmd VimEnter * silent! call s:init()
 augroup END
