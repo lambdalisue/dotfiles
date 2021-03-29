@@ -22,6 +22,7 @@ path=(
     $HOME/.cabal/bin(N-/)
     $HOME/.cargo/bin(N-/)
     $HOME/.poetry/bin(N-/)
+    $HOME/.krew/bin(N-/)
     $HOME/.local/bin(N-/)
     $HOME/.config/nvim/pack/minpac/start/vim-themis/bin(N-/)
     $HOME/.config/nvim/pack/minpac/opt/vim-themis/bin(N-/)
