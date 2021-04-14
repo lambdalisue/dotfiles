@@ -123,13 +123,13 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-# User custom
-source "${ZDOTDIR}/init.zsh"
-source "${ZDOTDIR}/function.zsh"
-
 # Completion
 autoload -Uz fastcompinit && fastcompinit
 autoload -Uz bashcompinit && bashcompinit
+
+# User custom
+source "${ZDOTDIR}/init.zsh"
+source "${ZDOTDIR}/function.zsh"
 
 # Addon
 source "${ZDOTDIR}/addon.zsh"

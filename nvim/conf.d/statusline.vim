@@ -1,5 +1,6 @@
 scriptencoding utf-8
 
+
 function! s:tab(n) abort
   let hi = a:n is# tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
   let label = getcwd(0, a:n)
@@ -20,6 +21,7 @@ function! s:statusline() abort
         \ '%f%m%r%h%w',
         \ '%{exists("w:quickfix_title") ? w:quickfix_title : ""}',
         \ '%=',
+        \ s:safe('coc#status()'),
         \ '%{&filetype}',
         \ '%{&fileformat}',
         \ '%{&fileencoding}',

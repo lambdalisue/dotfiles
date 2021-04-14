@@ -27,6 +27,7 @@ function! PackInit() abort
   call minpac#add('kana/vim-textobj-user')
   call minpac#add('lambdalisue/battery.vim')
   call minpac#add('lambdalisue/compl-local-filename.vim')
+  call minpac#add('lambdalisue/edita.vim')
   call minpac#add('lambdalisue/fern-bookmark.vim')
   call minpac#add('lambdalisue/fern-comparator-lexical.vim')
   call minpac#add('lambdalisue/fern-git-status.vim')

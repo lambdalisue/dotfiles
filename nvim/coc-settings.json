@@ -2,16 +2,18 @@
   "suggest.asciiCharactersOnly": true,
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.bracketEnterImprove": false,
-  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "*"
+  ],
   "vetur.format.defaultFormatter.html": "prettier",
   "python.jediEnabled": false,
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
   "prettier.onlyUseLocalVersion": true,
+  "rust-analyzer.cargo.allFeatures": true,
   "rust-analyzer.cargo.loadOutDirsFromCheck": true,
   "rust-analyzer.procMacro.enable": true,
-  "rust-analyzer.diagnostics.disabled": ["macro-error"],
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true
@@ -19,8 +21,17 @@
   "languageserver": {
     "ccls": {
       "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "compile_commands.json"],
+      "filetypes": [
+        "c",
+        "cpp",
+        "cuda",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls-root",
+        "compile_commands.json"
+      ],
       "initializationOptions": {
         "cache": {
           "directory": "/tmp/ccls-cache"

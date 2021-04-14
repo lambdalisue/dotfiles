@@ -52,3 +52,5 @@
 
 [alias]
 	rewrite = rebase -x 'git commit --amend -C HEAD --date=\"$(date -R)\" && sleep 1.05'
+[init]
+	defaultBranch = main

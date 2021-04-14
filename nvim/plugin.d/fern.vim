@@ -1,13 +1,10 @@
-function! s:fern_init() abort
-  if has('mac') && !exists('$SSH_CONNECTION')
-    let g:fern#renderer = 'nerdfont'
-  endif
-  let g:fern#keepalt_on_edit = 1
-  let g:fern#smart_cursor = has('nvim-0.5.0') ? 'hide' : 'stick'
-  let g:fern#scheme#bookmark#store#file = expand('~/Documents/vim/fern/bookmark.json')
-  "let g:fern#disable_drawer_distinguish_tabpage = 1
-  "let g:fern#loglevel = g:fern#DEBUG
-endfunction
+if has('mac') && !exists('$SSH_CONNECTION')
+  let g:fern#renderer = 'nerdfont'
+endif
+
+let g:fern#hide_cursor = 1
+let g:fern#keepalt_on_edit = 1
+let g:fern#scheme#bookmark#store#file = expand('~/Documents/vim/fern/bookmark.json')
 
 function! s:fern_local_init() abort
   nmap <buffer>
@@ -45,7 +42,6 @@ endfunction
 
 augroup my-fern
   autocmd! *
-  autocmd VimEnter * call s:fern_init()
   autocmd FileType fern call s:fern_local_init()
 augroup END
 
