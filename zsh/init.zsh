@@ -93,7 +93,10 @@ if type nvim &>/dev/null; then
 fi
 
 # asdf
-if type asdf &>/dev/null; then
+if [[ -f ~/.asdf/asdf.sh ]]; then
+  source ~/.asdf/asdf.sh
+fi
+if type brew &>/dev/null && type asdf &>/dev/null; then
   asdf::cache() {
     echo ". $(brew --prefix asdf)/asdf.sh" > ${CACHE_PROFILE}/asdf.zsh
     zcompile ${CACHE_PROFILE}/asdf.zsh

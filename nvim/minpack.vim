@@ -1,4 +1,4 @@
-function! PackInit() abort
+function! s:init() abort
   packadd minpac
 
   call minpac#init()
@@ -118,6 +118,17 @@ function! PackInit() abort
   call minpac#add('vim-jp/syntax-vim-ex')
 endfunction
 
+function! s:install() abort
+  let path = has('win32')
+        \ ? '%LOCALAPPDATA%\nvim\pack\minpac\opt\minpac'
+        \ : '~/.config/nvim/pack/minpac/opt/minpac'
+  let path = expand(path)
+  if isdirectory(path)
+    call delete(path, 'rf')
+  endif
+  call system(printf('git clone https://github.com/k-takata/minpac.git %s', path))
+endfunction
+
 " Load plugin.d/*.vim
 function! s:load_configurations() abort
   for path in glob('$VIMHOME/plugin.d/*.vim', 1, 1, 1)
@@ -136,5 +147,6 @@ if has('nvim')
   call s:load_lua_configurations()
 endif
 
-command! PackUpdate call PackInit() | call minpac#update()
-command! PackClean  call PackInit() | call minpac#clean()
+command! PackInstall call s:install()
+command! PackUpdate call s:init() | call minpac#update()
+command! PackClean  call s:init() | call minpac#clean()
