@@ -48,6 +48,7 @@ function! s:init() abort
   call minpac#add('lambdalisue/mr-quickfix.vim')
   call minpac#add('lambdalisue/mr.vim')
   call minpac#add('lambdalisue/nerdfont.vim')
+  call minpac#add('lambdalisue/pastefix.vim')
   call minpac#add('lambdalisue/qfloc.vim')
   call minpac#add('lambdalisue/readablefold.vim')
   call minpac#add('lambdalisue/reword.vim')

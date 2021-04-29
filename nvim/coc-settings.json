@@ -12,8 +12,13 @@
   "python.formatting.provider": "black",
   "prettier.onlyUseLocalVersion": true,
   "rust-analyzer.cargo.allFeatures": true,
-  "rust-analyzer.cargo.loadOutDirsFromCheck": true,
   "rust-analyzer.procMacro.enable": true,
+  "deno.codeLens.implementations": true,
+  "deno.codeLens.references": true,
+  "deno.codeLens.referencesAllFunctions": true,
+  "deno.suggest.imports.hosts": {
+    "https://deno.land": true
+  },
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true

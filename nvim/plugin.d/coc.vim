@@ -3,6 +3,7 @@ let g:coc_node_path = '/usr/local/bin/node'
 
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
+      \ 'coc-deno',
       \ 'coc-diagnostic',
       \ 'coc-eslint',
       \ 'coc-git',

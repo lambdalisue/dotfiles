@@ -4,7 +4,7 @@
 [user]
 	name  = Alisue
 	email = lambdalisue@hashnote.net
-	signingkey = B90A2400
+	signingkey = B11731DAB90A2400
 
 [core]
         ignorecase = false

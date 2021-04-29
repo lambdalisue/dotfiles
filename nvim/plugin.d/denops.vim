@@ -1,1 +1,5 @@
-let g:denops#script#typecheck = 1
+let g:denops#server#service#deno_args = [
+     \ '-q',
+     \ '--unstable',
+     \ '-A',
+     \]
