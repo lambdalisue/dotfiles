@@ -44,7 +44,6 @@ function! s:init() abort
   call minpac#add('lambdalisue/glyph-palette.vim')
   call minpac#add('lambdalisue/golangci-lint.vim')
   call minpac#add('lambdalisue/grea.vim')
-  call minpac#add('lambdalisue/inside.vim')
   call minpac#add('lambdalisue/mr-quickfix.vim')
   call minpac#add('lambdalisue/mr.vim')
   call minpac#add('lambdalisue/nerdfont.vim')
