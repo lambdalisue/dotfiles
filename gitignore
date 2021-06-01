@@ -128,3 +128,6 @@ Desktop.ini
 :
 :w
 :w:
+
+# coc.nvim
+.vim/coc-settings.json

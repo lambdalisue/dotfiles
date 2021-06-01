@@ -18,6 +18,7 @@ typeset -U path
 #  -: follow the symbol links
 #  /: ignore files
 path=(
+    $HOME/.deno/bin(N-/)
     $HOME/.go/bin(N-/)
     $HOME/.cabal/bin(N-/)
     $HOME/.cargo/bin(N-/)

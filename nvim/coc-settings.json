@@ -5,12 +5,9 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "*"
   ],
-  "vetur.format.defaultFormatter.html": "prettier",
-  "python.jediEnabled": false,
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
-  "prettier.onlyUseLocalVersion": true,
   "rust-analyzer.cargo.allFeatures": true,
   "rust-analyzer.procMacro.enable": true,
   "deno.codeLens.implementations": true,
@@ -19,29 +16,10 @@
   "deno.suggest.imports.hosts": {
     "https://deno.land": true
   },
+  "vetur.format.defaultFormatter.html": "prettier",
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true
   },
-  "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": [
-        "c",
-        "cpp",
-        "cuda",
-        "objc",
-        "objcpp"
-      ],
-      "rootPatterns": [
-        ".ccls-root",
-        "compile_commands.json"
-      ],
-      "initializationOptions": {
-        "cache": {
-          "directory": "/tmp/ccls-cache"
-        }
-      }
-    }
-  }
+  "python.pythonPath": "/Users/alisue/Library/Caches/pypoetry/virtualenvs/kcbehavior-P2J5P7TE-py3.7/bin/python"
 }

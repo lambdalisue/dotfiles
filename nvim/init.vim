@@ -118,9 +118,14 @@ endfunction
 " }}}
 
 " Environment {{{
-set viewdir=~/.cache/nvim/view
-set undodir=~/.cache/nvim/undo
 set spellfile=~/.cache/nvim/spell/spellfile.utf-8.add
+set viewdir=~/.cache/nvim/view
+if has('nvim')
+  " NOTE: Neovim change undo file format
+  set undodir=~/.cache/nvim/undo
+else
+  set undodir=~/.cache/vim/undo
+endif
 
 " Make sure required directories exist
 call s:mkdir(&viewdir, 'p')

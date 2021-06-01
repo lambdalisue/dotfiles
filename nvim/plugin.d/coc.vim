@@ -4,24 +4,25 @@ let g:coc_node_path = '/usr/local/bin/node'
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
       \ 'coc-deno',
-      \ 'coc-diagnostic',
       \ 'coc-eslint',
       \ 'coc-git',
       \ 'coc-go',
       \ 'coc-jest',
       \ 'coc-json',
       \ 'coc-prettier',
-      \ 'coc-python',
+      \ 'coc-pyright',
       \ 'coc-rust-analyzer',
       \ 'coc-sh',
-      \ 'coc-snippets',
-      \ 'coc-solargraph',
-      \ 'coc-tailwindcss',
       \ 'coc-tsserver',
       \ 'coc-vimlsp',
       \ 'coc-word',
       \ 'coc-yaml',
       \]
+      "\ '@yaegassy/coc-nginx',
+      "\ 'coc-diagnostic',
+      "\ 'coc-snippets',
+      "\ 'coc-solargraph',
+      "\ 'coc-tailwindcss',
 
 set updatetime=300
 
@@ -113,6 +114,7 @@ function! s:switch_coc_deno() abort
   if empty(finddir("node_modules", path . ';'))
     call coc#config('deno.enable', v:true)
     call coc#config('tsserver.enable', v:false)
+    call coc#config('prettier.onlyUseLocalVersion', v:true)
   else
     call coc#config('deno.enable', v:false)
     call coc#config('tsserver.enable', v:true)
