@@ -6,6 +6,9 @@ if exists('did_load_filetypes')
 endif
 
 augroup filetypedetect
+  autocmd BufNewFile,BufRead .env       setfiletype sh
+  autocmd BufNewFile,BufRead .envrc     setfiletype sh
+
   autocmd BufNewFile,BufRead *.txt      setfiletype markdown
   autocmd BufNewFile,BufRead *.md       setfiletype markdown
   autocmd BufNewFile,BufRead *.mkd      setfiletype markdown

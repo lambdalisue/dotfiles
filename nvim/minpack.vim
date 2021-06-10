@@ -10,6 +10,7 @@ function! s:init() abort
   call minpac#add('Shougo/context_filetype.vim')
   call minpac#add('Shougo/junkfile.vim')
   call minpac#add('airblade/vim-gitgutter')
+  call minpac#add('aiya000/aho-bakaup.vim')
   call minpac#add('aklt/plantuml-syntax')
   call minpac#add('bluz71/vim-nightfly-guicolors')
   call minpac#add('c000/rapidfire.vim')
