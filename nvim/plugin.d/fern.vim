@@ -38,6 +38,8 @@ function! s:fern_local_init() abort
   nmap <buffer><nowait> T <Plug>(fern-action-terminal)
   nnoremap <buffer><nowait> ~ :<C-u>Fern ~<CR>
   nnoremap <buffer><nowait> I :<C-u>FzfMrr<CR>
+
+  nmap <buffer> <Plug>(fern-action-dirdiff) <Plug>(fern-action-ex=)DirDiff<CR>
 endfunction
 
 augroup my-fern
@@ -47,12 +49,12 @@ augroup END
 
 function! s:smart_path() abort
   if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
-    return fnamemodify('.', ':p')
+    return fnameescape(fnamemodify('.', ':p'))
   endif
-  return fnamemodify(expand('%'), ':p:h')
+  return fnameescape(fnamemodify(expand('%'), ':p:h'))
 endfunction
 
-nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%<CR>
+nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%:p<CR>
 nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -toggle -reveal=%<CR>
 nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:/// -wait<CR><BAR>:Fin -after=\\<lt>CR><CR>
 nnoremap <silent> <Leader>JJ :<C-u>Fern <C-r>=expand(g:junkfile#directory)<CR> -wait<CR>

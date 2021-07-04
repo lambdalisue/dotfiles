@@ -1,5 +1,1 @@
-let g:denops#server#service#deno_args = [
-     \ '-q',
-     \ '--unstable',
-     \ '-A',
-     \]
+let g:denops#debug = 1

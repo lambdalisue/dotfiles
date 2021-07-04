@@ -4,6 +4,7 @@ function! s:init() abort
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
+  " call minpac#add('rhysd/vim-healthcheck')
   call minpac#add('AndrewRadev/linediff.vim')
   call minpac#add('Bakudankun/BackAndForward.vim')
   call minpac#add('LumaKernel/fern-mapping-fzf.vim')
@@ -91,11 +92,13 @@ function! s:init() abort
   call minpac#add('tyru/current-func-info.vim')
   call minpac#add('tyru/open-browser.vim')
   call minpac#add('uarun/vim-protobuf')
+  call minpac#add('vim-denops/denops-helloworld.vim')
   call minpac#add('vim-denops/denops.vim')
   call minpac#add('vim-jp/vimdoc-ja')
   call minpac#add('vim-jp/vital-complete')
   call minpac#add('vim-jp/vital.vim')
   call minpac#add('vim-scripts/python_match.vim')
+  call minpac#add('will133/vim-dirdiff')
   call minpac#add('yuki-yano/fern-preview.vim')
 
   " Colorscheme
