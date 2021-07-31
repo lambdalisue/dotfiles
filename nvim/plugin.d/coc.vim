@@ -1,3 +1,5 @@
+" let g:coc_start_at_startup = 0
+
 " Use system (homebrew) node
 let g:coc_node_path = '/usr/local/bin/node'
 
@@ -30,8 +32,9 @@ set updatetime=300
 inoremap <silent><expr> <C-x><C-x> coc#refresh()
 
 " Use [[ and ]]  to navigate diagnostics
-nmap <nowait> [[ <Plug>(coc-diagnostic-prev)zv
-nmap <nowait> ]] <Plug>(coc-diagnostic-next)zv
+nnoremap <silent> <Plug>(my-zv) :<C-u>call timer_start(10, { -> feedkeys("zv", "nx") })<CR>
+nmap <nowait> [[ <Plug>(coc-diagnostic-prev)<Plug>(my-zv)
+nmap <nowait> ]] <Plug>(coc-diagnostic-next)<Plug>(my-zv)
 
 nmap <nowait> gd <Plug>(coc-definition)
 nmap <nowait> gD <Plug>(coc-declaration)

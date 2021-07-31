@@ -1,1 +1,1 @@
-let g:denops#debug = 1
+" let g:denops#debug = 1
