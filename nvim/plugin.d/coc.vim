@@ -1,5 +1,3 @@
-" let g:coc_start_at_startup = 0
-
 " Use system (homebrew) node
 let g:coc_node_path = '/usr/local/bin/node'
 
