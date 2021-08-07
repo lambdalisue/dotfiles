@@ -648,21 +648,26 @@ function! s:uuid() abort
   let r = substitute(r, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')
   return r
 endfunction
-inoremap <silent> <F2> <C-r>=<SID>uuid()<CR>
+inoremap <silent> <Plug>(my-insert-uuid) <C-r>=<SID>uuid()<CR>
+imap <F2> <Plug>(my-insert-uuid)
 
 " Yank Base64 encoded/decoded text of the selected text
 function! s:encode_base64() abort
   normal! gvy
   let @@ = system('base64', @@)
   let @@ = substitute(@@, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')
+  normal! gvp
 endfunction
 function! s:decode_base64() abort
   normal! gvy
   let @@ = system('base64 -d', @@)
   let @@ = substitute(@@, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')
+  normal! gvp
 endfunction
-vnoremap <silent> <F3> :call <SID>encode_base64()<CR>
-vnoremap <silent> <F4> :call <SID>decode_base64()<CR>
+vnoremap <silent> <Plug>(my-decode-base64) :call <SID>encode_base64()<CR>
+vnoremap <silent> <Plug>(my-encode-base64) :call <SID>decode_base64()<CR>
+vmap <F3> <Plug>(my-decode-base64)
+vmap <F4> <Plug>(my-encode-base64)
 
 " Focus floating window with <C-w><C-w> {{{
 if has('nvim')
