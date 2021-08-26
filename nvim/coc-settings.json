@@ -2,14 +2,13 @@
   "suggest.asciiCharactersOnly": true,
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.bracketEnterImprove": false,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "*"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
   "rust-analyzer.cargo.allFeatures": true,
   "rust-analyzer.procMacro.enable": true,
+  "deno.unstable": true,
   "deno.codeLens.implementations": true,
   "deno.codeLens.references": true,
   "deno.codeLens.referencesAllFunctions": true,

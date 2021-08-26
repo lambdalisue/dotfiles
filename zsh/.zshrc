@@ -138,6 +138,10 @@ source "${ZDOTDIR}/addon.zsh"
 autoload -Uz promptinit; promptinit
 prompt collon >/dev/null 2>&1
 
+# https://michimani.net/post/develop-zsh-prompt-remove-last-line/
+setopt prompt_cr
+setopt prompt_sp
+
 autoload -Uz zrecompile
 zrecompile ${HOME}/.zshenv
 zrecompile ${ZDOTDIR}/.zshrc

@@ -16,7 +16,5 @@ syntax on
 nnoremap ; :
 nnoremap : ;
 
-" Add extra settings here to reproduce the issue...
-
 "----------------------------------------------------------------
 echomsg "Custom minimal vimrc has loaded"

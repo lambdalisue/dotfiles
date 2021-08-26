@@ -4,13 +4,18 @@ function! s:init() abort
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  " call minpac#add('rhysd/vim-healthcheck')
+  call minpac#add('Shougo/ddc.vim')
+  call minpac#add('Shougo/ddc-around')
+  call minpac#add('Shougo/ddc-matcher_head')
+  call minpac#add('Shougo/ddc-sorter_rank')
+
+  call minpac#add('nvim-treesitter/nvim-treesitter', {'type': 'opt', 'do': { -> execute('TSUpdate') }})
+
   call minpac#add('AndrewRadev/linediff.vim')
   call minpac#add('Bakudankun/BackAndForward.vim')
   call minpac#add('LumaKernel/fern-mapping-fzf.vim')
   call minpac#add('Shougo/context_filetype.vim')
   call minpac#add('Shougo/junkfile.vim')
-  call minpac#add('Shougo/ddc.vim')
   call minpac#add('airblade/vim-gitgutter')
   call minpac#add('aiya000/aho-bakaup.vim')
   call minpac#add('aklt/plantuml-syntax')
@@ -32,7 +37,9 @@ function! s:init() abort
   call minpac#add('kuuote/gina-preview.vim')
   call minpac#add('lambdalisue/battery.vim')
   call minpac#add('lambdalisue/compl-local-filename.vim')
-  call minpac#add('lambdalisue/edita.vim')
+  call minpac#add('lambdalisue/guise.vim')
+  call minpac#add('lambdalisue/gin.vim')
+  " call minpac#add('lambdalisue/edita.vim')
   call minpac#add('lambdalisue/fern-bookmark.vim')
   call minpac#add('lambdalisue/fern-comparator-lexical.vim')
   call minpac#add('lambdalisue/fern-git-status.vim')
@@ -95,6 +102,7 @@ function! s:init() abort
   call minpac#add('tyru/open-browser.vim')
   call minpac#add('uarun/vim-protobuf')
   call minpac#add('vim-denops/denops-helloworld.vim')
+  call minpac#add('vim-denops/denops-benchmark')
   call minpac#add('vim-denops/denops.vim')
   call minpac#add('vim-jp/vimdoc-ja')
   call minpac#add('vim-jp/vital-complete')
@@ -124,6 +132,8 @@ function! s:init() abort
   call minpac#add('posva/vim-vue')
   call minpac#add('rhysd/vim-gfm-syntax')
   call minpac#add('vim-jp/syntax-vim-ex')
+
+  call minpac#add('rhysd/vim-healthcheck', {'type': 'opt'})
 endfunction
 
 function! s:install() abort
