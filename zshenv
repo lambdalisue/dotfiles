@@ -27,6 +27,7 @@ path=(
     $HOME/.local/bin(N-/)
     $HOME/.config/nvim/pack/minpac/start/vim-themis/bin(N-/)
     $HOME/.config/nvim/pack/minpac/opt/vim-themis/bin(N-/)
+    /Applications/Wireshark.app/Contents/MacOS(N-/)
     /usr/local/bin(N-/)
     /usr/bin(N-/)
     /bin(N-/)

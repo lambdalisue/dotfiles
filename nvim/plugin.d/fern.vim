@@ -39,6 +39,9 @@ function! s:fern_local_init() abort
   nnoremap <buffer><nowait> ~ :<C-u>Fern ~<CR>
   nnoremap <buffer><nowait> I :<C-u>FzfMrr<CR>
 
+  nmap <buffer> K <Nop>
+  nmap <buffer> N <Plug>(fern-action-new-path)
+
   nmap <buffer> <Plug>(fern-action-dirdiff) <Plug>(fern-action-ex=)DirDiff<CR>
 endfunction
 
