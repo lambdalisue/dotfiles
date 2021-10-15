@@ -232,6 +232,8 @@ set sidescroll=1
 set nolist
 set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%,eol:$
 
+set fillchars=diff:/
+
 " vertically split buffers for vimdiff
 if has('vim-8.0.1361') || has('nvim')
   set diffopt&
@@ -590,6 +592,13 @@ nnoremap ; :
 xnoremap ; :
 nnoremap : ;
 xnoremap : ;
+
+" Prefer gF
+nnoremap gf gFzv
+nnoremap gF gfzv
+nnoremap <C-w>f <C-w>Fzv
+nnoremap <C-w><C-f> <C-w>Fzv
+nnoremap <C-w>F <C-w>fzv
 
 " Do NOT yank with x/s
 nnoremap x "_x

@@ -30,7 +30,7 @@ set updatetime=300
 inoremap <silent><expr> <C-x><C-x> coc#refresh()
 
 " Use [[ and ]]  to navigate diagnostics
-nnoremap <silent> <Plug>(my-zv) :<C-u>call timer_start(10, { -> feedkeys("zv", "nx") })<CR>
+nnoremap <silent> <Plug>(my-zv) <Cmd>call timer_start(10, { -> feedkeys("zv", "nx") })<CR>
 nmap <nowait> [[ <Plug>(coc-diagnostic-prev)<Plug>(my-zv)
 nmap <nowait> ]] <Plug>(coc-diagnostic-next)<Plug>(my-zv)
 
@@ -82,7 +82,9 @@ function! s:show_documentation() abort
     execute printf('!%s', &keywordprg) expand('<cword>')
   endif
 endfunction
-nnoremap <silent> K :<C-u>call <SID>show_documentation()<CR>
+nnoremap <silent> K <Cmd>call <SID>show_documentation()<CR>
+vnoremap <silent> K <Cmd>call CocActionAsync('doHover')<CR>
+
 
 augroup my-coc
   autocmd!

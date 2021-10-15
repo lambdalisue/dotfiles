@@ -44,7 +44,7 @@ augroup filetypedetect
 
   " Docker
   function! s:filetype_dockerfile() abort
-    if expand('%:p:g?\\?/?') =~# 'dockerfiles/[^/]\+$' && getline(1) =~# '^FROM '
+    if expand('%:p:g?\\?/?') =~# 'dockerfiles/[^/]\+$' && getline(1) =~# '\%(^FROM \|docker\)'
       setfiletype Dockerfile
     endif
   endfunction
