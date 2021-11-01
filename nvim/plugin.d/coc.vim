@@ -7,8 +7,8 @@ let g:coc_global_extensions = [
       \ 'coc-eslint',
       \ 'coc-git',
       \ 'coc-go',
-      \ 'coc-jest',
       \ 'coc-json',
+      \ 'coc-jest',
       \ 'coc-prettier',
       \ 'coc-pyright',
       \ 'coc-rust-analyzer',
@@ -107,7 +107,6 @@ vmap <C-j> <Plug>(coc-snippets-select)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 xmap <C-s> <Plug>(coc-convert-snippet)
 command! CocSnippet CocCommand snippets.editSnippets
-
 
 function! s:switch_coc_deno() abort
   if exists('g:coc_deno')

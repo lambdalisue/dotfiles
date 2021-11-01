@@ -19,6 +19,5 @@
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true
-  },
-  "python.pythonPath": "/Users/alisue/Library/Caches/pypoetry/virtualenvs/kcbehavior-P2J5P7TE-py3.7/bin/python"
+  }
 }
