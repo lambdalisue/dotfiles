@@ -5,7 +5,7 @@ endif
 let g:fern#hide_cursor = 1
 let g:fern#keepalt_on_edit = 1
 let g:fern#default_hidden = 1
-let g:fern#scheme#bookmark#store#file = expand('~/Documents/vim/fern/bookmark.json')
+let g:fern#scheme#bookmark#store#file = expand('$VIMHOME/bookmark.json')
 
 function! s:fern_local_init() abort
   nmap <buffer>

@@ -1,5 +1,9 @@
 " Use system (homebrew) node
-let g:coc_node_path = '/usr/local/bin/node'
+if executable('/usr/local/bin/node')
+  let g:coc_node_path = '/usr/local/bin/node'
+elseif executable('/opt/homebrew/bin/node')
+  let g:coc_node_path = '/opt/homebrew/bin/node'
+endif
 
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
