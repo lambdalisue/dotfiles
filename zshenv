@@ -18,8 +18,8 @@ typeset -U path
 #  -: follow the symbol links
 #  /: ignore files
 path=(
+    $HOME/go/bin(N-/)
     $HOME/.deno/bin(N-/)
-    $HOME/.go/bin(N-/)
     $HOME/.cabal/bin(N-/)
     $HOME/.cargo/bin(N-/)
     $HOME/.poetry/bin(N-/)
@@ -28,6 +28,7 @@ path=(
     $HOME/.config/nvim/pack/minpac/start/vim-themis/bin(N-/)
     $HOME/.config/nvim/pack/minpac/opt/vim-themis/bin(N-/)
     /Applications/Wireshark.app/Contents/MacOS(N-/)
+    /opt/homebrew/bin(N-/)
     /usr/local/bin(N-/)
     /usr/bin(N-/)
     /bin(N-/)
