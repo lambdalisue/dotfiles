@@ -66,13 +66,13 @@ __zsh_addon::zsh-autosuggestions::update() {
 
 # zdharma/fast-syntax-highlighting
 __zsh_addon::fast-syntax-highlighting::update() {
-  local repo="zdharma/fast-syntax-highlighting"
+  local repo="zdharma-continuum/fast-syntax-highlighting"
   echo "$repo ..."
   __zsh_addon::clone_or_pull $repo
   zcompileall "$ADDON/$repo"
 }
 () {
-  local repo="zdharma/fast-syntax-highlighting"
+  local repo="zdharma-continuum/fast-syntax-highlighting"
   if [[ -d "$ADDON/$repo" ]]; then
     source "$ADDON/$repo/fast-syntax-highlighting.plugin.zsh"
   fi
