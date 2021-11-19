@@ -79,16 +79,16 @@ if [[ -n "$SSH_CONNECTION" ]]; then
 fi
 
 # vim
-if type vim &>/dev/null; then
-  alias vim-m="vim -u ~/.vim/vimrc.min -i NONE"
+if type nvim &>/dev/null; then
+  alias m-nvim="nvim -u ~/.vim/vimrc.min -i NONE"
   if [[ -z "$EDITOR" ]]; then
-    EDITOR=vim
+    export EDITOR=nvim
   fi
 fi
-if type nvim &>/dev/null; then
-  alias nvim-m="nvim -u ~/.vim/vimrc.min -i NONE"
+if type vim &>/dev/null; then
+  alias m-vim="vim -u ~/.vim/vimrc.min -i NONE"
   if [[ -z "$EDITOR" ]]; then
-    EDITOR=nvim
+    export EDITOR=vim
   fi
 fi
 
