@@ -3,8 +3,8 @@ setl autoindent
 setl textwidth=0
 setl colorcolumn=80
 setl expandtab
-setl softtabstop=4
-setl shiftwidth=4
+setl softtabstop=2
+setl shiftwidth=2
 setl formatoptions&
 setl formatoptions+=tqn
 setl formatlistpat=^\\s*\\(\\d\\+\\\|[a-z]\\)[\\].)]\\s*

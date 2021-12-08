@@ -7,17 +7,19 @@ endif
 
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
+      \ '@yaegassy/coc-nginx',
       \ 'coc-deno',
       \ 'coc-eslint',
       \ 'coc-git',
       \ 'coc-go',
-      \ 'coc-json',
       \ 'coc-jest',
+      \ 'coc-json',
       \ 'coc-prettier',
       \ 'coc-pyright',
       \ 'coc-rust-analyzer',
       \ 'coc-sh',
       \ 'coc-tsserver',
+      \ 'coc-vetur',
       \ 'coc-vimlsp',
       \ 'coc-word',
       \ 'coc-yaml',
