@@ -143,7 +143,7 @@ zsh-profiling-plain() {
 
 minpac-path() {
   local name="$(basename $(pwd))"
-  echo -n "$HOME/.vim/pack/minpac/start/$name"
+  echo -n "$HOME/.config/nvim/pack/minpac/start/$name"
 }
 
 minpac-remove() {

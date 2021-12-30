@@ -32,6 +32,7 @@ path=(
     /usr/local/bin(N-/)
     /usr/bin(N-/)
     /bin(N-/)
+    /opt/homebrew/sbin(N-/)
     /usr/local/sbin(N-/)
     /usr/sbin(N-/)
     /sbin(N-/)
@@ -44,6 +45,7 @@ typeset -xT SUDO_PATH sudo_path
 typeset -U sudo_path
 sudo_path=(
     $sudo_path
+    /opt/homebrew/sbin(N-/)
     /usr/local/sbin(N-/)
     /usr/sbin(N-/)
     /sbin(N-/)
@@ -60,6 +62,7 @@ typeset -U manpath
 manpath=(
     $HOME/.local/share/man(N-/)
     $manpath
+    /opt/homebrew/share/man(N-/)
     /usr/local/share/man(N-/)
     /usr/share/man(N-/)
 )
