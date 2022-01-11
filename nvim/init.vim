@@ -36,13 +36,13 @@ if has('vim_starting')
   set ttimeoutlen=100
 
   " Disable unnecessary default plugins
-  " let g:loaded_gzip              = 1
-  " let g:loaded_tar               = 1
-  " let g:loaded_tarPlugin         = 1
-  " let g:loaded_zip               = 1
-  " let g:loaded_zipPlugin         = 1
+  let g:loaded_gzip              = 1
+  let g:loaded_tar               = 1
+  let g:loaded_tarPlugin         = 1
+  let g:loaded_zip               = 1
+  let g:loaded_zipPlugin         = 1
   let g:loaded_rrhelper          = 1
-  " let g:loaded_2html_plugin      = 1
+  let g:loaded_2html_plugin      = 1
   let g:loaded_vimball           = 1
   let g:loaded_vimballPlugin     = 1
   let g:loaded_getscript         = 1
@@ -52,10 +52,10 @@ if has('vim_starting')
   let g:loaded_man               = 1
   " NOTE:
   " The Netrw is use to download a missing spellfile
-  " let g:loaded_netrw             = 1
-  " let g:loaded_netrwPlugin       = 1
-  " let g:loaded_netrwSettings     = 1
-  " let g:loaded_netrwFileHandlers = 1
+  let g:loaded_netrw             = 1
+  let g:loaded_netrwPlugin       = 1
+  let g:loaded_netrwSettings     = 1
+  let g:loaded_netrwFileHandlers = 1
 endif
 
 " }}}
@@ -132,48 +132,10 @@ call s:mkdir(&viewdir, 'p')
 call s:mkdir(&undodir, 'p')
 call s:mkdir(fnamemodify(&spellfile, ':p:h'), 'p')
 
-if s:is_windows
-  call s:configure_path('$PATH', [
-        \ 'C:\Python27',
-        \ 'C:\Python26',
-        \ 'C:\Python36',
-        \ 'C:\Program Files\Python36',
-        \])
-
-  " Neovim
-  let g:loaded_python_provider = 0
-  " let g:python3_host_prog = s:pick_executable([
-  "      \ 'C:\Python36\python.exe',
-  "      \ 'C:\Program Files\Python36\python.exe',
-  "      \])
-else
-  call s:configure_path('$PATH', [
-        \ '/usr/local/bin',
-        \ '~/.zplug/bin',
-        \ '~/.anyenv/envs/pyenv/bin',
-        \ '~/.anyenv/envs/plenv/bin',
-        \ '~/.anyenv/envs/rbenv/bin',
-        \ '~/.anyenv/envs/ndenv/bin',
-        \ '~/.anyenv/envs/pyenv/shims',
-        \ '~/.anyenv/envs/plenv/shims',
-        \ '~/.anyenv/envs/rbenv/shims',
-        \ '~/.anyenv/envs/ndenv/shims',
-        \ '~/.go/bin',
-        \ '~/.cabal/bin',
-        \ '~/.cache/dein/repos/github.com/thinca/vim-themis/bin',
-        \ '/usr/local/texlive/2017basic/bin/x86_64-darwin',
-        \])
-  call s:configure_path('$MANPATH', [
-        \ '/usr/local/share/man/',
-        \ '/usr/share/man/',
-        \ '/Applications/Xcode.app/Contents/Developer/usr/share/man',
-        \ '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man',
-        \])
-  let $PYENV_ROOT = s:pick_directory(['~/.anyenv/envs/pyenv'])
-
-  " Neovim
+if !s:is_windows && has('nvim')
   let g:loaded_python_provider = 0
   let g:python3_host_prog = s:pick_executable([
+       \ '/opt/homebrew/bin/python3',
        \ '/usr/local/bin/python3',
        \ '/usr/bin/python3',
        \ '/bin/python3',
