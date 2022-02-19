@@ -46,6 +46,7 @@
 
 [commit]
 	gpgsign = true
+	verbose = true
 
 [diff]
 	algorithm = patience

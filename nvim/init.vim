@@ -478,6 +478,10 @@ endfunction
 command! ClearRegister call s:clear_register()
 " }}}
 
+" Grep {{{
+command! -nargs=+ Grep execute 'silent grep! <args>' | copen
+" }}}
+
 " Qbuffers
 command! Qbuffers call setqflist(map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), '{"bufnr":v:val}'))
 

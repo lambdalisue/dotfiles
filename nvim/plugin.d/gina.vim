@@ -1,5 +1,5 @@
-nnoremap <silent> <Leader>aa :<C-u>Gina status<CR>
-" nnoremap <silent> <Leader>aa :<C-u>GinaPreview<CR>
+"nnoremap <silent> <Leader>aa :<C-u>Gina status<CR>
+"nnoremap <silent> <Leader>aa :<C-u>GinaPreview<CR>
 nnoremap <silent> <Leader>aA :<C-u>Gina changes HEAD<CR>
 nnoremap <silent> <Leader>ac :<C-u>Gina commit<CR>
 nnoremap <silent> <Leader>aC :<C-u>Gina commit --amend<CR>

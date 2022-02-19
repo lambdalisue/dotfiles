@@ -7,8 +7,7 @@ set packpath=
 
 " Clone https://github.com/lambdalisue/fern.vim in somewhere
 " and specify that directory to the below
-"set runtimepath^=~/ghq/github.com/lambdalisue/fern.vim
-set runtimepath^=~/ghq/github.com/vim-denops/denops.vim
+set runtimepath^=~/ghq/github.com/lambdalisue/fern.vim
 
 filetype plugin indent on
 syntax on
