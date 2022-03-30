@@ -6,6 +6,7 @@ let g:fern#hide_cursor = 1
 let g:fern#keepalt_on_edit = 1
 let g:fern#default_hidden = 1
 let g:fern#scheme#bookmark#store#file = expand('$VIMHOME/bookmark.json')
+let g:fern#disable_drawer_universal = 0
 
 function! s:fern_local_init() abort
   nmap <buffer>
@@ -59,6 +60,6 @@ function! s:smart_path() abort
 endfunction
 
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%:p<CR>
-nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -toggle -reveal=%<CR>
+nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -reveal=%<CR>
 nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:/// -wait<CR><BAR>:Fin -after=\\<lt>CR><CR>
 nnoremap <silent> <Leader>JJ :<C-u>Fern <C-r>=expand(g:junkfile#directory)<CR> -wait<CR>

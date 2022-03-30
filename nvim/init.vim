@@ -731,9 +731,23 @@ function! s:load_configurations() abort
 endfunction
 call s:load_configurations()
 
+function! s:highlight() abort
+  highlight CursorLine guibg=#444444
+  highlight Tabline ctermfg=1 guifg=#aaaaaa
+  highlight TablineSel ctermfg=1 guifg=#aaaaaa
+  highlight TablineFill ctermfg=1 guifg=#aaaaaa
+endfunction
+augroup my
+  autocmd! *
+  autocmd ColorScheme * call s:highlight()
+augroup END
+
 silent! colorscheme slate
 silent! colorscheme iceberg
-highlight! CursorLine guibg=#444444
+
+if has('nvim')
+  set laststatus=3        " always shows statusline
+endif
 
 set secure
 " }}}

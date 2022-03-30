@@ -6,15 +6,17 @@
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
+  "prettier.formatterPriority": -1,
   "rust-analyzer.cargo.allFeatures": true,
   "rust-analyzer.procMacro.enable": true,
-  "deno.unstable": true,
   "deno.codeLens.implementations": true,
   "deno.codeLens.references": true,
   "deno.codeLens.referencesAllFunctions": true,
+  "deno.lint": true,
   "deno.suggest.imports.hosts": {
     "https://deno.land": true
   },
+  "deno.unstable": true,
   "vetur.format.defaultFormatter.html": "prettier",
   "go.goplsOptions": {
     "completeUnimported": true,

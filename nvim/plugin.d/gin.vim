@@ -1,26 +1,24 @@
-nnoremap <silent> <Leader>aa :<C-u>GinStatus ++worktree=<C-r>=<SID>smart_worktree()<CR><CR>
-
-function! s:smart_worktree() abort
-  let dir = expand("%:p:h")
-  if isdirectory(dir)
-    return dir
-  endif
-  return getcwd()
-endfunction
+nnoremap <silent> <Leader>aa <Cmd>GinStatus<CR>
+nnoremap <silent> <Leader>ab <Cmd>GinBranch --all<CR>
 
 function! s:my_gitcommit() abort
-  nmap <buffer><nowait> <C-^> <Cmd>GinStatus<CR>
+  nnoremap <buffer><nowait> <C-^> <Cmd>GinStatus<CR>
+
+  if winnr('$') is# 1
+    let winid = win_getid()
+    botright vsplit | Gin! ++buffer diff --cached
+    leftabove 10split | Gin! ++buffer diff --cached --stat
+    call win_gotoid(winid)
+    augroup my_gitcommit_internal
+      autocmd! * <buffer>
+      autocmd BufDelete <buffer> call timer_start(0, { -> execute('tabclose') })
+    augroup END
+  endif
 endfunction
 
 function! s:my_gin_status() abort
-  nmap <buffer><nowait> <C-^> <Cmd>Gin commit -v<CR>
-  map <buffer><nowait> !! <Plug>(gin-action-chaperon)
-  map <buffer><nowait> pp <Plug>(gin-action-patch)
-  map <buffer><nowait> dd <Plug>(gin-action-diff:smart)
-  map <buffer><nowait> == <Plug>(gin-action-stash)
-  map <buffer><nowait> << <Plug>(gin-action-stage)
-  map <buffer><nowait> >> <Plug>(gin-action-unstage)
-  map <buffer><nowait> <Return> <Plug>(gin-action-edit)
+  nnoremap <buffer><nowait> <C-^> <Cmd>Gin commit -v<CR>
+  nmap <buffer><nowait> g<CR> <Plug>(gin-action-edit:HEAD)
 endfunction
 
 augroup my-gin
