@@ -12,8 +12,6 @@ function! s:init() abort
 
   call minpac#add('lambdalisue/askpass.vim')
   call minpac#add('lambdalisue/gin.vim')
-  " call minpac#add('lambdalisue/guise.vim')
-  " call minpac#add('tennashi/gitsign.vim')
   call minpac#add('vim-denops/denops.vim')
   call minpac#add('yuki-yano/fuzzy-motion.vim')
 
@@ -22,9 +20,7 @@ function! s:init() abort
   call minpac#add('LumaKernel/fern-mapping-fzf.vim')
   call minpac#add('Shougo/context_filetype.vim')
   call minpac#add('Shougo/junkfile.vim')
-  "call minpac#add('airblade/vim-gitgutter')
   call minpac#add('aiya000/aho-bakaup.vim')
-  call minpac#add('aklt/plantuml-syntax')
   call minpac#add('bluz71/vim-nightfly-guicolors')
   call minpac#add('c000/rapidfire.vim')
   call minpac#add('cocopon/colorswatch.vim')
@@ -89,7 +85,6 @@ function! s:init() abort
   call minpac#add('powerman/vim-plugin-AnsiEsc')
   call minpac#add('previm/previm')
   call minpac#add('rbtnn/vim-vimscript_lasterror')
-  call minpac#add('rust-lang/rust.vim')
   call minpac#add('sgur/vim-textobj-parameter')
   call minpac#add('t9md/vim-quickhl')
   call minpac#add('thinca/vim-prettyprint')
@@ -103,38 +98,18 @@ function! s:init() abort
   call minpac#add('tyru/caw.vim')
   call minpac#add('tyru/current-func-info.vim')
   call minpac#add('tyru/open-browser.vim')
-  call minpac#add('uarun/vim-protobuf')
   call minpac#add('vim-jp/vimdoc-ja')
   call minpac#add('vim-jp/vital-complete')
   call minpac#add('vim-jp/vital.vim')
-  call minpac#add('vim-scripts/python_match.vim')
   call minpac#add('will133/vim-dirdiff')
   call minpac#add('yuki-yano/fern-preview.vim')
 
   " Colorscheme
   call minpac#add('cocopon/iceberg.vim')
-  call minpac#add('koron/vim-monochromenote')
-  call minpac#add('frenzyexists/aquarium-vim')
 
-  " Filetype
-  call minpac#add('PProvost/vim-ps1')
-  call minpac#add('cespare/vim-toml')
-  call minpac#add('elzr/vim-json')
-  call minpac#add('hail2u/vim-css3-syntax')
-  call minpac#add('hynek/vim-python-pep8-indent')
-  call minpac#add('jxnblk/vim-mdx-js')
-  call minpac#add('leafgarland/typescript-vim')
-  call minpac#add('neovimhaskell/haskell-vim')
-  call minpac#add('othree/es.next.syntax.vim')
-  call minpac#add('othree/html5.vim')
-  call minpac#add('othree/javascript-libraries-syntax.vim')
-  call minpac#add('othree/yajs.vim')
-  call minpac#add('peitalin/vim-jsx-typescript')
-  call minpac#add('posva/vim-vue')
-  call minpac#add('rhysd/vim-gfm-syntax')
-  call minpac#add('vim-jp/syntax-vim-ex')
-
+  " Optional
   call minpac#add('rhysd/vim-healthcheck', {'type': 'opt'})
+  call minpac#add('nvim-treesitter/nvim-treesitter', {'type': 'opt'})
 endfunction
 
 function! s:install() abort
@@ -147,6 +122,12 @@ function! s:install() abort
   endif
   call system(printf('git clone https://github.com/k-takata/minpac.git %s', path))
 endfunction
+
+ if has('nvim')
+  packadd nvim-treesitter
+else
+  packadd vim-healthcheck
+endif
 
 " Load plugin.d/*.vim
 function! s:load_configurations() abort

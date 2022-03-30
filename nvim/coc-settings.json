@@ -2,7 +2,9 @@
   "suggest.asciiCharactersOnly": true,
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.bracketEnterImprove": false,
-  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "*"
+  ],
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
@@ -21,5 +23,19 @@
   "go.goplsOptions": {
     "completeUnimported": true,
     "completionDocumentation": true
+  },
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": [
+        "serve"
+      ],
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
+      "initializationOptions": {},
+      "settings": {}
+    }
   }
 }
