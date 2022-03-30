@@ -33,9 +33,9 @@ function! s:tabline() abort
         \ join(map(range(1, tabpagenr('$')), { -> s:tab(v:val) }), ' ┆ '),
         \]
   let rhs = [
-        \ s:safe('gina#component#repo#preset("fancy")'),
-        \ s:safe('gina#component#status#preset("fancy")'),
-        \ s:safe('gina#component#traffic#preset("fancy")'),
+        \ s:safe('gin#component#worktree#name()'),
+        \ s:safe('gin#component#branch#unicode()'),
+        \ s:safe('gin#component#traffic#unicode()'),
         \ s:safe('wifi#component()'),
         \ s:safe('battery#component()'),
         \ '%{fnamemodify(".", ":p:~")}',
