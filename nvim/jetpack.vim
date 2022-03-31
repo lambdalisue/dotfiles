@@ -112,6 +112,14 @@ function! s:init() abort
   call jetpack#end()
 endfunction
 
+function! s:local() abort
+  for path in glob('~/ghq/github.com/*/*', 1, 1, 1)
+    if isdirectory(path . '/autoload') || isdirectory(path . '/plugin')
+      execute printf('set runtimepath^=%s', fnameescape(path))
+    endif
+  endfor
+endfunction
+
 function! s:configure() abort
   if has('nvim')
     silent packadd nvim-treesitter
@@ -148,4 +156,5 @@ function! s:load_lua_configurations() abort
 endfunction
 
 call s:init()
+call s:local()
 call s:configure()
