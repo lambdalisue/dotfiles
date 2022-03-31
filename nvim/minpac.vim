@@ -1,5 +1,7 @@
+let s:script = expand("<sfile>")
+
 function! s:init() abort
-  packadd minpac
+  call s:ensure_minpac()
 
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
@@ -112,41 +114,42 @@ function! s:init() abort
   call minpac#add('nvim-treesitter/nvim-treesitter', {'type': 'opt'})
 endfunction
 
-function! s:install() abort
-  let path = has('win32')
-        \ ? '%LOCALAPPDATA%\nvim\pack\minpac\opt\minpac'
-        \ : '~/.config/nvim/pack/minpac/opt/minpac'
-  let path = expand(path)
-  if isdirectory(path)
-    call delete(path, 'rf')
+function! s:configure() abort
+  if has('nvim')
+    silent packadd nvim-treesitter
+  else
+    silent packadd vim-healthcheck
   endif
-  call system(printf('git clone https://github.com/k-takata/minpac.git %s', path))
+
+  " Load plugin configurations
+  call s:load_configurations()
+  if has('nvim')
+    call s:load_lua_configurations()
+  endif
 endfunction
 
- if has('nvim')
-  packadd nvim-treesitter
-else
-  packadd vim-healthcheck
-endif
+function! s:ensure_minpac() abort
+  let url = 'https://github.com/k-takata/minpac'
+  let dir = expand('$VIMHOME/pack/minpac/opt/minpac')
+  if !isdirectory(dir)
+    silent execute printf('!git clone --depth 1 %s %s', url, dir)
+  endif
+  packadd minpac
+endfunction
 
-" Load plugin.d/*.vim
 function! s:load_configurations() abort
   for path in glob('$VIMHOME/plugin.d/*.vim', 1, 1, 1)
     execute printf('source %s', fnameescape(path))
   endfor
 endfunction
-call s:load_configurations()
 
-" Load plugin.d/*.lua
-if has('nvim')
-  function! s:load_lua_configurations() abort
-    for path in glob('$VIMHOME/plugin.d/*.lua', 1, 1, 1)
-      execute printf('luafile %s', fnameescape(path))
-    endfor
-  endfunction
-  call s:load_lua_configurations()
-endif
+function! s:load_lua_configurations() abort
+  for path in glob('$VIMHOME/plugin.d/*.lua', 1, 1, 1)
+    execute printf('luafile %s', fnameescape(path))
+  endfor
+endfunction
 
-command! PackInstall call s:install()
+call s:configure()
 command! PackUpdate call s:init() | call minpac#update()
 command! PackClean  call s:init() | call minpac#clean()
+command! PackStatus packadd minpac | call minpac#status()

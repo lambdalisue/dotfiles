@@ -718,7 +718,7 @@ nmap <C-w><C-z> <Plug>(my-zoom-window)
 " Postludium {{{
 
 " Plugin
-source $VIMHOME/minpack.vim
+source $VIMHOME/minpac.vim
 
 syntax on
 filetype indent plugin on
