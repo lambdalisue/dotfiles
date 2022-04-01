@@ -25,5 +25,4 @@ augroup my-gin
   autocmd!
   autocmd FileType gitcommit silent! call s:my_gitcommit()
   autocmd FileType gin-status silent! call s:my_gin_status()
-  autocmd BufEnter * ++nested redrawtabline
 augroup END

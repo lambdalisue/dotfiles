@@ -733,6 +733,7 @@ call s:load_configurations()
 
 function! s:highlight() abort
   highlight CursorLine guibg=#444444
+  highlight VertSplit ctermfg=1 guifg=#aaaaaa
   highlight Tabline ctermfg=1 guifg=#aaaaaa
   highlight TablineSel ctermfg=1 guifg=#aaaaaa
   highlight TablineFill ctermfg=1 guifg=#aaaaaa

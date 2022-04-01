@@ -1,6 +1,5 @@
 scriptencoding utf-8
 
-
 function! s:tab(n) abort
   let hi = a:n is# tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
   let label = getcwd(0, a:n)

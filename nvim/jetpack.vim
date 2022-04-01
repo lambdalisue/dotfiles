@@ -7,10 +7,12 @@ function! s:init() abort
   call jetpack#add('Shougo/ddu-ui-ff')
   call jetpack#add('Shougo/ddu-kind-file')
   call jetpack#add('Shougo/ddu-filter-matcher_substring')
+  call jetpack#add('Shougo/ddu-source-file_rec')
   call jetpack#add('kuuote/ddu-source-mr')
 
   call jetpack#add('lambdalisue/askpass.vim')
   call jetpack#add('lambdalisue/gin.vim')
+  call jetpack#add('lambdalisue/guise.vim')
   call jetpack#add('vim-denops/denops.vim')
   call jetpack#add('yuki-yano/fuzzy-motion.vim')
 
