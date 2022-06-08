@@ -211,3 +211,16 @@ export CC_aarch64_unknown_linux_gnu=aarch64-unknown-linux-gnu-gcc
 export CXX_aarch64_unknown_linux_gnu=aarch64-unknown-linux-gnu-g++
 export AR_aarch64_unknown_linux_gnu=aarch64-unknown-linux-gnu-ar
 export CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-unknown-linux-gnu-gcc
+
+# Run Shared server of denops.vim
+DENOPS_HOME="$HOME/ghq/github.com/vim-denops/denops.vim"
+if [[ -d "${DENOPS_HOME}" ]]; then
+  # https://superuser.com/a/1334617
+  silent-background() {
+    setopt local_options no_notify no_monitor
+    "$@" &
+    disown &>/dev/null  # Close STD{OUT,ERR} to pre
+  }
+  silent-background deno run -A --no-check \
+    "${DENOPS_HOME}/denops/@denops-private/cli.ts" &>/dev/null
+fi

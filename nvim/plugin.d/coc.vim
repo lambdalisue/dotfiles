@@ -9,6 +9,7 @@ endif
 let g:coc_global_extensions = [
       \ '@yaegassy/coc-nginx',
       \ 'coc-deno',
+      \ 'coc-diagnostic',
       \ 'coc-eslint',
       \ 'coc-git',
       \ 'coc-go',
@@ -18,17 +19,15 @@ let g:coc_global_extensions = [
       \ 'coc-pyright',
       \ 'coc-rust-analyzer',
       \ 'coc-sh',
+      \ 'coc-snippets',
+      \ 'coc-solargraph',
+      \ 'coc-tailwindcss',
       \ 'coc-tsserver',
       \ 'coc-vetur',
       \ 'coc-vimlsp',
       \ 'coc-word',
       \ 'coc-yaml',
       \]
-      "\ '@yaegassy/coc-nginx',
-      "\ 'coc-diagnostic',
-      "\ 'coc-snippets',
-      "\ 'coc-solargraph',
-      "\ 'coc-tailwindcss',
 
 set updatetime=300
 
@@ -51,8 +50,10 @@ nmap <nowait> gQ <Plug>(coc-format-selected)
 vmap <nowait> gQ <Plug>(coc-format-selected)
 nmap <nowait> qf <Plug>(coc-fix-current)
 nmap <nowait> qr <Plug>(coc-rename)
-nmap <silent><nowait> <C-k> <Plug>(coc-codeaction-line)
-vmap <silent><nowait> <C-k> <Plug>(coc-codeaction-selected)
+nmap <silent><nowait> <C-k> <Plug>(coc-codeaction-cursor)
+vmap <silent><nowait><expr> <C-k> mode() ==# 'V'
+      \ ? "\<Plug>(coc-codeaction-line)"
+      \ : "\<Plug>(coc-codeaction-selected)"
 
 xmap <nowait> if <Plug>(coc-funcobj-i)
 xmap <nowait> af <Plug>(coc-funcobj-a)
@@ -90,7 +91,6 @@ function! s:show_documentation() abort
 endfunction
 nnoremap <silent> K <Cmd>call <SID>show_documentation()<CR>
 vnoremap <silent> K <Cmd>call CocActionAsync('doHover')<CR>
-
 
 augroup my-coc
   autocmd!

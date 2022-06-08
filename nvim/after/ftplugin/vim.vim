@@ -8,10 +8,15 @@ setl expandtab
 
 setl autoindent
 setl smartindent
-setl foldmethod=syntax
+if has('nvim')
+  setl foldmethod=expr
+  setl foldexpr=nvim_treesitter#foldexpr()
+else
+  setl foldmethod=syntax
+endif
 
 setl keywordprg=:help
 
-command! Vint cexpr system('vint .')
-
-imap <buffer><expr> <CR> pumvisible() ? "<C-y>" : "\<Plug>(vim-backslash-CR)"
+imap <buffer><expr> <CR> pumvisible()
+      \ ? "<C-y>"
+      \ : "\<Plug>(vim-backslash-CR)"

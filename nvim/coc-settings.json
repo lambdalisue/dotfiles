@@ -9,8 +9,6 @@
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
   "prettier.formatterPriority": -1,
-  "rust-analyzer.cargo.allFeatures": true,
-  "rust-analyzer.procMacro.enable": true,
   "deno.codeLens.implementations": true,
   "deno.codeLens.references": true,
   "deno.codeLens.referencesAllFunctions": true,

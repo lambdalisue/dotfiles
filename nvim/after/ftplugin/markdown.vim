@@ -3,8 +3,8 @@ setl autoindent
 setl textwidth=0
 setl colorcolumn=80
 setl expandtab
-setl softtabstop=2
-setl shiftwidth=2
+setl softtabstop=4
+setl shiftwidth=4
 setl formatoptions&
 setl formatoptions+=tqn
 setl formatlistpat=^\\s*\\(\\d\\+\\\|[a-z]\\)[\\].)]\\s*
@@ -13,3 +13,10 @@ setl formatlistpat=^\\s*\\(\\d\\+\\\|[a-z]\\)[\\].)]\\s*
 silent! unlet! b:current_syntax
 syntax include @Yaml syntax/yaml.vim
 syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
+
+if has('nvim')
+  setlocal foldmethod=expr
+  setlocal foldexpr=nvim_treesitter#foldexpr()
+else
+  setlocal foldmethod=syntax
+endif

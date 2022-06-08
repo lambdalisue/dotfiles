@@ -6,5 +6,11 @@ setl expandtab
 
 setl autoindent
 setl smartindent
-setl foldmethod=indent
 setl spell
+
+if has('nvim')
+  setlocal foldmethod=expr
+  setlocal foldexpr=nvim_treesitter#foldexpr()
+else
+  setlocal foldmethod=syntax
+endif

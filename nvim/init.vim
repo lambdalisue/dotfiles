@@ -246,7 +246,7 @@ endif
 set smarttab        " insert blanks according to shiftwidth
 set expandtab       " use spaces instead of TAB
 set softtabstop=-1  " the number of spaces that a TAB counts for
-set shiftwidth=4    " the number of spaces of an indent
+set shiftwidth=2    " the number of spaces of an indent
 set shiftround      " round indent to multiple of shiftwidth with > and <
 set textwidth=0     " do not automatically wrap text
 
@@ -733,10 +733,10 @@ call s:load_configurations()
 
 function! s:highlight() abort
   highlight CursorLine guibg=#444444
-  highlight VertSplit ctermfg=1 guifg=#aaaaaa
-  highlight Tabline ctermfg=1 guifg=#aaaaaa
-  highlight TablineSel ctermfg=1 guifg=#aaaaaa
-  highlight TablineFill ctermfg=1 guifg=#aaaaaa
+  " highlight VertSplit ctermfg=1 guifg=#aaaaaa
+  " highlight Tabline ctermfg=1 guifg=#aaaaaa
+  " highlight TablineSel ctermfg=1 guifg=#aaaaaa
+  " highlight TablineFill ctermfg=1 guifg=#aaaaaa
 endfunction
 augroup my
   autocmd! *
@@ -746,7 +746,7 @@ augroup END
 silent! colorscheme slate
 silent! colorscheme iceberg
 
-if has('nvim')
+if has('nvim-0.7.0')
   set laststatus=3        " always shows statusline
 endif
 

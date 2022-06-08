@@ -6,7 +6,8 @@ let g:fern#hide_cursor = 1
 let g:fern#keepalt_on_edit = 1
 let g:fern#default_hidden = 1
 let g:fern#scheme#bookmark#store#file = expand('$VIMHOME/bookmark.json')
-let g:fern#disable_drawer_universal = 0
+let g:fern#disable_drawer_smart_quit = 1
+
 
 function! s:fern_local_init() abort
   nmap <buffer>

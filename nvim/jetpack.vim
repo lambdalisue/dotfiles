@@ -1,3 +1,5 @@
+let g:jetpack#copy_method = 'symlink'
+
 function! s:init() abort
   call s:ensure_jetpack()
   call jetpack#begin(expand('$VIMHOME'))
@@ -12,20 +14,29 @@ function! s:init() abort
 
   call jetpack#add('lambdalisue/askpass.vim')
   call jetpack#add('lambdalisue/gin.vim')
+  call jetpack#add('lambdalisue/gin-gitrebase-supplement.vim')
+  call jetpack#add('lambdalisue/gin-gitcommit-supplement.vim')
+  call jetpack#add('lambdalisue/gin-status-supplement.vim')
+  call jetpack#add('lambdalisue/gin-branch-supplement.vim')
   call jetpack#add('lambdalisue/guise.vim')
   call jetpack#add('vim-denops/denops.vim')
   call jetpack#add('yuki-yano/fuzzy-motion.vim')
 
+  " call jetpack#add('lambdalisue/vital-Data-String-Formatter')
+  " call jetpack#add('lambdalisue/vital-Whisky')
+  " call jetpack#add('vim-jp/vital.vim')
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
   call jetpack#add('LumaKernel/fern-mapping-fzf.vim')
   call jetpack#add('Shougo/context_filetype.vim')
   call jetpack#add('Shougo/junkfile.vim')
+  call jetpack#add('Vimjas/vim-python-pep8-indent')
   call jetpack#add('aiya000/aho-bakaup.vim')
   call jetpack#add('bluz71/vim-nightfly-guicolors')
   call jetpack#add('c000/rapidfire.vim')
   call jetpack#add('cocopon/colorswatch.vim')
   call jetpack#add('hrsh7th/vim-eft')
+  call jetpack#add('iamcco/markdown-preview.nvim', {'do': 'cd app && yarn install'})
   call jetpack#add('itchyny/vim-parenmatch')
   call jetpack#add('junegunn/fzf', {'do': { -> fzf#install() }})
   call jetpack#add('junegunn/vim-emoji')
@@ -62,7 +73,6 @@ function! s:init() abort
   call jetpack#add('lambdalisue/qfloc.vim')
   call jetpack#add('lambdalisue/readablefold.vim')
   call jetpack#add('lambdalisue/reword.vim')
-  call jetpack#add('lambdalisue/seethrough.vim')
   call jetpack#add('lambdalisue/suda.vim')
   call jetpack#add('lambdalisue/trimmer.vim')
   call jetpack#add('lambdalisue/vim-backslash')
@@ -73,8 +83,6 @@ function! s:init() abort
   call jetpack#add('lambdalisue/vim-marron')
   call jetpack#add('lambdalisue/vim-operator-breakline')
   call jetpack#add('lambdalisue/vim-quickrun-neovim-job')
-  call jetpack#add('lambdalisue/vital-Data-String-Formatter')
-  call jetpack#add('lambdalisue/vital-Whisky')
   call jetpack#add('lambdalisue/wifi.vim')
   call jetpack#add('machakann/vim-sandwich')
   call jetpack#add('mattn/vim-lexiv')
@@ -101,24 +109,30 @@ function! s:init() abort
   call jetpack#add('tyru/open-browser.vim')
   call jetpack#add('vim-jp/vimdoc-ja')
   call jetpack#add('vim-jp/vital-complete')
-  call jetpack#add('vim-jp/vital.vim')
   call jetpack#add('will133/vim-dirdiff')
   call jetpack#add('yuki-yano/fern-preview.vim')
 
   " Colorscheme
   call jetpack#add('cocopon/iceberg.vim')
 
-  " Optional
+  " Vim
   call jetpack#add('rhysd/vim-healthcheck', {'opt': 1 })
+
+  " Neovim
   call jetpack#add('nvim-treesitter/nvim-treesitter', {'opt': 1 })
+
   call jetpack#end()
 endfunction
 
 function! s:local() abort
+  let proves = ['/autoload', '/plugin', '/ftplugin', '/denops']
   for path in glob('~/ghq/github.com/*/*', 1, 1, 1)
-    if isdirectory(path . '/autoload') || isdirectory(path . '/plugin')
-      execute printf('set runtimepath^=%s', fnameescape(path))
-    endif
+    for prove in proves
+      if isdirectory(path . prove)
+        execute printf('set runtimepath^=%s', fnameescape(path))
+        break
+      endif
+    endfor
   endfor
 endfunction
 

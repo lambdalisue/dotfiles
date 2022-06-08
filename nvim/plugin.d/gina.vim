@@ -1,3 +1,4 @@
+let g:gina_gitrebase_support_mappings = 0
 "nnoremap <silent> <Leader>aa :<C-u>Gina status<CR>
 "nnoremap <silent> <Leader>aa :<C-u>GinaPreview<CR>
 " nnoremap <silent> <Leader>aA :<C-u>Gina changes HEAD<CR>
