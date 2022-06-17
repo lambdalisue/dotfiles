@@ -1,6 +1,3 @@
-# Add extra fpath
-fpath+=($ZDOTDIR/zfunc(N-/))
-
 # disable promptcr to display last line without newline
 unsetopt promptcr
 

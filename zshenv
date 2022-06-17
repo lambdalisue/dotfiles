@@ -57,6 +57,10 @@ fpath=(
     $HOME/.zfunc(N-/)
     $ZDOTDIR/zfunc(N-/)
     $fpath
+    /opt/homebrew/share/zsh/site-functions(N-/)
+    /opt/homebrew/share/zsh/functions(N-/)
+    /usr/local/share/zsh/site-functions(N-/)
+    /usr/local/share/zsh/functions(N-/)
 )
 
 typeset -U manpath

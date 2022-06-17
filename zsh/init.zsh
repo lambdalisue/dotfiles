@@ -21,21 +21,6 @@ fi
 # PostgreSQL (Hit \e on psql)
 export PSQL_EDITOR='nvim +"setfiletype sql" '
 
-# brew
-if type brew &>/dev/null; then
-  brew::cache() {
-    cat <<EOF > ${CACHE_PROFILE}/brew.zsh
-export HOMEBREW_PREFIX="$(brew --prefix)"
-export FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
-EOF
-    zcompile ${CACHE_PROFILE}/brew.zsh
-  }
-  if [[ ! -f ${CACHE_PROFILE}/brew.zsh ]]; then
-    brew::cache
-  fi
-  source ${CACHE_PROFILE}/brew.zsh
-fi
-
 # fzf
 if type fzf &>/dev/null; then
   export FZF_DEFAULT_OPTS='
@@ -80,13 +65,13 @@ fi
 
 # vim
 if type nvim &>/dev/null; then
-  alias m-nvim="nvim -u ~/.vim/vimrc.min -i NONE"
+  alias nvimm="nvim -u ~/.vim/vimrc.min -i NONE"
   if [[ -z "$EDITOR" ]]; then
     export EDITOR=nvim
   fi
 fi
 if type vim &>/dev/null; then
-  alias m-vim="vim -u ~/.vim/vimrc.min -i NONE"
+  alias vimm="vim -u ~/.vim/vimrc.min -i NONE"
   if [[ -z "$EDITOR" ]]; then
     export EDITOR=vim
   fi
@@ -211,16 +196,3 @@ export CC_aarch64_unknown_linux_gnu=aarch64-unknown-linux-gnu-gcc
 export CXX_aarch64_unknown_linux_gnu=aarch64-unknown-linux-gnu-g++
 export AR_aarch64_unknown_linux_gnu=aarch64-unknown-linux-gnu-ar
 export CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-unknown-linux-gnu-gcc
-
-# Run Shared server of denops.vim
-DENOPS_HOME="$HOME/ghq/github.com/vim-denops/denops.vim"
-if [[ -d "${DENOPS_HOME}" ]]; then
-  # https://superuser.com/a/1334617
-  silent-background() {
-    setopt local_options no_notify no_monitor
-    "$@" &
-    disown &>/dev/null  # Close STD{OUT,ERR} to pre
-  }
-  silent-background deno run -A --no-check \
-    "${DENOPS_HOME}/denops/@denops-private/cli.ts" &>/dev/null
-fi

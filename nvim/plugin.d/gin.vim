@@ -19,4 +19,4 @@ augroup END
 let g:loaded_gin_status_supplement = 1
 let g:loaded_gin_branch_supplement = 1
 let g:loaded_gin_gitcommit_supplement = 1
-" let g:loaded_gin_gitrebase_supplement = 1
+let g:loaded_gin_gitrebase_supplement = 1

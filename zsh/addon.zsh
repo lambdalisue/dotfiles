@@ -126,7 +126,7 @@ __zsh_addon::docker::update() {
   fi
 }
 
-zsh_addon_update() {
+zsh-addon-update() {
   __zsh_addon::enhancd::update
   __zsh_addon::zsh-completions::update
   __zsh_addon::zsh-autosuggestions::update

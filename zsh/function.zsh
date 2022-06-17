@@ -8,59 +8,8 @@ history-edit() {
   fc -R
 }
 
-sandbox-alpine() {
-  if [[ ! $(docker ps -qa -f name=sandbox-alpine) ]]; then
-    docker run -d -v $HOME:/mnt/host:ro -it --name sandbox-alpine alpine /bin/sh
-  fi
-  docker exec -it sandbox-alpine /bin/sh
-}
-
-sandbox-ubuntu() {
-  if [[ ! $(docker ps -qa -f name=sandbox-ubuntu) ]]; then
-    docker run -d -v $HOME:/mnt/host:ro -it --name sandbox-ubuntu ubuntu /bin/bash
-  fi
-  docker exec -it sandbox-ubuntu /bin/bash
-}
-
-sandbox-centos() {
-  if [[ ! $(docker ps -qa -f name=sandbox-centos) ]]; then
-    docker run -d -v $HOME:/mnt/host:ro -it --name sandbox-centos centos /bin/bash
-  fi
-  docker exec -it sandbox-centos /bin/bash
-}
-
-kill-sandbox-alpine() {
-  docker rm --force sandbox-alpine
-}
-
-kill-sandbox-ubuntu() {
-  docker rm --force sandbox-ubuntu
-}
-
-kill-sandbox-centos() {
-  docker rm --force sandbox-centos
-}
-
 kill-dns() {
   sudo killall -HUP mDNSResponder
-}
-
-brew-cask-upgrade() {
-  for app in $(brew cask list); do
-    local latest="$(brew cask info "${app}" | awk 'NR==1{print $2}')"
-    local versions=($(ls -1 "/usr/local/Caskroom/${app}/.metadata/"))
-    local current=$(echo ${versions} | awk '{print $NF}')
-    if [[ "${latest}" = "latest" ]]; then
-      echo "[!] ${app}: ${current} == ${latest}"
-      [[ "$1" = "-f" ]] && brew cask install "${app}" --force
-      continue
-    elif [[ "${current}" = "${latest}" ]]; then
-      continue
-    fi
-    echo "[+] ${app}: ${current} -> ${latest}"
-    brew cask uninstall "${app}" --force
-    brew cask install "${app}"
-  done
 }
 
 docker-for-mac() {
@@ -139,25 +88,6 @@ zsh-profiling-plain() {
   for i in $(command seq 1 ${n:-5}); do
     time (ZDOTDIR=/tmp/zsh_profile_raw zsh -i -c exit)
   done
-}
-
-minpac-path() {
-  local name="$(basename $(pwd))"
-  echo -n "$HOME/.config/nvim/pack/minpac/start/$name"
-}
-
-minpac-remove() {
-  local target="$(minpac-path)"
-  if [[ -d "$target" ]]; then
-    rm -rf "$target"
-  elif [[ -f "$target" ]]; then
-    rm -f "$target"
-  fi
-}
-
-minpac-develop() {
-  minpac-remove
-  ln -s "$(pwd)" "$(minpac-path)"
 }
 
 fzf-k8s-pods() {
