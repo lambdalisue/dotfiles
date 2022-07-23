@@ -8,7 +8,7 @@
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
-  "prettier.formatterPriority": -1,
+  "prettier.formatterPriority": 1,
   "deno.codeLens.implementations": true,
   "deno.codeLens.references": true,
   "deno.codeLens.referencesAllFunctions": true,

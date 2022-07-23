@@ -8,6 +8,10 @@ export GOPRIVATE="github.com/fixpoint/*"
 # cache profile
 export CACHE_PROFILE="${XDG_CACHE_HOME}/zsh/profile"
 mkdir -p ${CACHE_PROFILE}
+cache::clear() {
+  rm -rf ${CACHE_PROFILE}
+  mkdir -p ${CACHE_PROFILE}
+}
 
 # ls/la
 if [[ $PLATFORM == "Darwin" ]]; then
@@ -82,12 +86,12 @@ if [[ -f ~/.asdf/asdf.sh ]]; then
   source ~/.asdf/asdf.sh
 fi
 if type brew &>/dev/null && type asdf &>/dev/null; then
-  asdf::cache() {
+  cache::asdf() {
     echo ". $(brew --prefix asdf)/asdf.sh" > ${CACHE_PROFILE}/asdf.zsh
     zcompile ${CACHE_PROFILE}/asdf.zsh
   }
   if [[ ! -f ${CACHE_PROFILE}/asdf.zsh ]]; then
-    asdf::cache
+    cache::asdf
   fi
   source ${CACHE_PROFILE}/asdf.zsh
 
@@ -101,44 +105,44 @@ fi
 
 # pip
 if type pip &>/dev/null; then
-  pip::cache() {
+  cache::pip() {
     pip completion --zsh > ${CACHE_PROFILE}/pip.zsh
     zcompile ${CACHE_PROFILE}/pip.zsh
   }
   if [[ ! -f ${CACHE_PROFILE}/pip.zsh ]]; then
-    pip::cache
+    cache::pip
   fi
   source ${CACHE_PROFILE}/pip.zsh
 fi
 if type pip2 &>/dev/null; then
-  pip2::cache() {
+  cache::pip2() {
     pip2 completion --zsh > ${CACHE_PROFILE}/pip2.zsh
     zcompile ${CACHE_PROFILE}/pip2.zsh
   }
   if [[ ! -f ${CACHE_PROFILE}/pip2.zsh ]]; then
-    pip2::cache
+    cache::pip2
   fi
   source ${CACHE_PROFILE}/pip2.zsh
 fi
 if type pip3 &>/dev/null; then
-  pip3::cache() {
+  cache::pip3() {
     pip3 completion --zsh > ${CACHE_PROFILE}/pip3.zsh
     zcompile ${CACHE_PROFILE}/pip3.zsh
   }
   if [[ ! -f ${CACHE_PROFILE}/pip3.zsh ]]; then
-    pip3::cache
+    cache::pip3
   fi
   source ${CACHE_PROFILE}/pip3.zsh
 fi
 
 # pipenv
 if type pipenv &>/dev/null; then
-  pipenv::cache() {
+  cache::pipenv() {
     pipenv --completion > ${CACHE_PROFILE}/pipenv.zsh
     zcompile ${CACHE_PROFILE}/pipenv.zsh
   }
   if [[ ! -f ${CACHE_PROFILE}/pipenv.zsh ]]; then
-    pipenv::cache
+    cache::pipenv
   fi
   source ${CACHE_PROFILE}/pipenv.zsh
 fi
@@ -150,19 +154,19 @@ fi
 
 # direnv
 if type direnv &>/dev/null; then
-  direnv::cache() {
+  cache::direnv() {
     direnv hook zsh > ${CACHE_PROFILE}/direnv.zsh
     zcompile ${CACHE_PROFILE}/direnv.zsh
   }
   if [[ ! -f ${CACHE_PROFILE}/direnv.zsh ]]; then
-    direnv::cache
+    cache::direnv
   fi
   source ${CACHE_PROFILE}/direnv.zsh
 fi
 
 # docker
 if [[ -d /Applications/Docker.app ]]; then
-  docker::cache() {
+  cache::docker() {
     local src="/Applications/Docker.app/Contents/Resources/etc"
     local dst="$HOME/.zfunc"
     mkdir -p "$dst"
@@ -170,29 +174,18 @@ if [[ -d /Applications/Docker.app ]]; then
     ln -sf "$src/docker-compose.zsh-completion" "$dst/_docker-compose"
   }
   if [[ ! -f $HOME/.zfunc/_docker ]]; then
-    docker::cache
+    cache::docker
   fi
 fi
 
 # kubectl
 if type kubectl &>/dev/null; then
-  kubectl::cache() {
+  cache::kubectl() {
     local dst="$HOME/.zfunc"
     mkdir -p "$dst"
     kubectl completion zsh > "$dst/_kubectl"
   }
   if [[ ! -f $HOME/.zfunc/_kubectl ]]; then
-    kubectl::cache
+    cache::kubectl
   fi
 fi
-
-# rust
-# https://github.com/messense/homebrew-macos-cross-toolchains
-export CC_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-gcc
-export CXX_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-g++
-export AR_x86_64_unknown_linux_gnu=x86_64-unknown-linux-gnu-ar
-export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-unknown-linux-gnu-gcc
-export CC_aarch64_unknown_linux_gnu=aarch64-unknown-linux-gnu-gcc
-export CXX_aarch64_unknown_linux_gnu=aarch64-unknown-linux-gnu-g++
-export AR_aarch64_unknown_linux_gnu=aarch64-unknown-linux-gnu-ar
-export CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-unknown-linux-gnu-gcc

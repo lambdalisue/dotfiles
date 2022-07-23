@@ -1,3 +1,6 @@
+# Configure path
+source "${ZDOTDIR}/path.zsh"
+
 # disable promptcr to display last line without newline
 unsetopt promptcr
 
