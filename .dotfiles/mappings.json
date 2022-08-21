@@ -1,10 +1,4 @@
 {
-  "alacritty": "~/.config/alacritty",
-  "jupyter": "~/.jupyter",
-  "lemonade.toml": "~/.config/lemonade.toml",
-  "powershell": "~/.config/powershell",
-  "psqlrc": "~/.psqlrc",
-  "themisrc": "~/.themisrc",
   "gitconfig": "~/.gitconfig",
-  "gitignore": "~/.gitignore"
+  "git": "~/.config/git"
 }

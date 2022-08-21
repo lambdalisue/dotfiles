@@ -2,3 +2,4 @@
 .zcompcache
 .addons
 .zsh_sessions
+*.zwc

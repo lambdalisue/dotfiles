@@ -1,8 +1,3 @@
 {
-  "efm-langserver": "%APPDATA%/efm-langserver/config.yaml",
-  "nvim": "~/vimfiles",
-  "nvim/init.vim": "~/_vimrc",
-  "nvim/ginit.vim": "~/_gvimrc",
-  "hyper": "~/.hyper.js",
-  "powershell": "~/Documents/WindowsPowerShell"
+  "nvim": "~/AppData/Local/nvim"
 }
