@@ -52,7 +52,7 @@ set visualbell t_vb=
 set guicursor+=a:blinkon0
 
 " Use FiraCode Nerd Font
-set guifont=FiraCodeNerdFontComplete-Regular:h14
+set guifont=FiraCode\ Nerd\ Font\ Mono:h14:l
 
 " Use antialias if possible
 if exists('antialias')
