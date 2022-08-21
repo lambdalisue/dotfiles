@@ -7,7 +7,6 @@ endif
 
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
-      \ '@yaegassy/coc-nginx',
       \ 'coc-deno',
       \ 'coc-diagnostic',
       \ 'coc-eslint',
@@ -19,9 +18,6 @@ let g:coc_global_extensions = [
       \ 'coc-pyright',
       \ 'coc-rust-analyzer',
       \ 'coc-sh',
-      \ 'coc-snippets',
-      \ 'coc-solargraph',
-      \ 'coc-tailwindcss',
       \ 'coc-tsserver',
       \ 'coc-vetur',
       \ 'coc-vimlsp',
@@ -64,7 +60,7 @@ xmap <nowait> ac <Plug>(coc-classobj-a)
 omap <nowait> ic <Plug>(coc-classobj-i)
 omap <nowait> ac <Plug>(coc-classobj-a)
 
-inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+inoremap <expr> <cr> SafePumVisible() ? coc#_select_confirm() : "\<CR>"
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 " Note coc#float#scroll works on neovim >= 0.4.3 or vim >= 8.2.0750
@@ -106,20 +102,6 @@ augroup END
 nmap <silent> gs <Plug>(coc-git-chunkinfo)
 nmap <silent> gp <Plug>(coc-git-prevchunk)
 nmap <silent> gn <Plug>(coc-git-nextchunk)
-
-" coc-snippets
-let g:coc_snippet_next = '<C-j>'
-let g:coc_snippet_prev = '<C-k>'
-imap <C-l> <Plug>(coc-snippets-expand)
-vmap <C-j> <Plug>(coc-snippets-select)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-xmap <C-s> <Plug>(coc-convert-snippet)
-command! CocSnippet CocCommand snippets.editSnippets
-
-" coc-deepl
-" require: COC_DEEPL_API_KEY
-nmap <silent> gt <Plug>(coc-deepl)
-vmap <silent> gt <Plug>(coc-deepl-selected)
 
 function! s:enable_deno() abort
   call coc#config('deno.enable', v:true)

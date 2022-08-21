@@ -1,4 +1,4 @@
-if has('mac') && !exists('$SSH_CONNECTION')
+if !exists('$SSH_CONNECTION')
   let g:fern#renderer = 'nerdfont'
 endif
 
@@ -6,8 +6,6 @@ let g:fern#hide_cursor = 1
 let g:fern#keepalt_on_edit = 1
 let g:fern#default_hidden = 1
 let g:fern#scheme#bookmark#store#file = expand('$VIMHOME/bookmark.json')
-let g:fern#disable_drawer_smart_quit = 1
-
 
 function! s:fern_local_init() abort
   nmap <buffer>
@@ -40,7 +38,6 @@ function! s:fern_local_init() abort
   nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
   nmap <buffer><nowait> T <Plug>(fern-action-terminal)
   nnoremap <buffer><nowait> ~ :<C-u>Fern ~<CR>
-  nnoremap <buffer><nowait> I :<C-u>FzfMrr<CR>
 
   nmap <buffer> K <Nop>
   nmap <buffer> N <Plug>(fern-action-new-path)
@@ -62,5 +59,5 @@ endfunction
 
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%:p<CR>
 nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -reveal=%<CR>
-nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:/// -wait<CR><BAR>:Fin -after=\\<lt>CR><CR>
+nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:/// -wait<CR>
 nnoremap <silent> <Leader>JJ :<C-u>Fern <C-r>=expand(g:junkfile#directory)<CR> -wait<CR>

@@ -1,2 +1,0 @@
-set completefunc=emoji#complete
-

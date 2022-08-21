@@ -17,6 +17,6 @@ endif
 
 setl keywordprg=:help
 
-imap <buffer><expr> <CR> pumvisible()
+imap <buffer><expr> <CR> coc#pum#visible()
       \ ? "<C-y>"
       \ : "\<Plug>(vim-backslash-CR)"

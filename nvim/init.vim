@@ -60,87 +60,19 @@ endif
 
 " }}}
 
-" Utility {{{
-if has('nvim')
-  let s:mkdir = function('mkdir')
-else
-  function! s:mkdir(...) abort
-    if isdirectory(a:1)
-      return
-    endif
-    return call('mkdir', a:000)
-  endfunction
-endif
-
-function! s:configure_path(name, pathlist) abort
-  let path_separator = s:is_windows ? ';' : ':'
-  let pathlist = split(expand(a:name), path_separator)
-  for path in map(filter(a:pathlist, '!empty(v:val)'), 'expand(v:val)')
-    if isdirectory(path) && index(pathlist, path) == -1
-      call insert(pathlist, path, 0)
-    endif
-  endfor
-  execute printf('let %s = join(pathlist, ''%s'')', a:name, path_separator)
-endfunction
-
-function! s:pick_file(pathspecs) abort
-  for pathspec in filter(a:pathspecs, '!empty(v:val)')
-    for path in reverse(glob(pathspec, 0, 1))
-      if filereadable(path)
-        return path
-      endif
-    endfor
-  endfor
-  return ''
-endfunction
-
-function! s:pick_directory(pathspecs) abort
-  for pathspec in filter(a:pathspecs, '!empty(v:val)')
-    for path in reverse(glob(pathspec, 0, 1))
-      if isdirectory(path)
-        return path
-      endif
-    endfor
-  endfor
-  return ''
-endfunction
-
-function! s:pick_executable(pathspecs) abort
-  for pathspec in filter(a:pathspecs, '!empty(v:val)')
-    for path in reverse(glob(pathspec, 0, 1))
-      if executable(path)
-        return path
-      endif
-    endfor
-  endfor
-  return ''
-endfunction
-" }}}
-
 " Environment {{{
-set spellfile=~/.cache/nvim/spell/spellfile.utf-8.add
-set viewdir=~/.cache/nvim/view
 if has('nvim')
-  " NOTE: Neovim change undo file format
   set undodir=~/.cache/nvim/undo
+  set viewdir=~/.cache/nvim/view
+  set spellfile=~/.cache/nvim/spell/spellfile.utf-8.add
 else
   set undodir=~/.cache/vim/undo
 endif
 
 " Make sure required directories exist
-call s:mkdir(&viewdir, 'p')
-call s:mkdir(&undodir, 'p')
-call s:mkdir(fnamemodify(&spellfile, ':p:h'), 'p')
-
-if !s:is_windows && has('nvim')
-  let g:loaded_python_provider = 0
-  let g:python3_host_prog = s:pick_executable([
-       \ '/opt/homebrew/bin/python3',
-       \ '/usr/local/bin/python3',
-       \ '/usr/bin/python3',
-       \ '/bin/python3',
-       \])
-endif
+call mkdir(&viewdir, 'p')
+call mkdir(&undodir, 'p')
+call mkdir(fnamemodify(&spellfile, ':p:h'), 'p')
 " }}}
 
 " Language {{{
@@ -317,6 +249,16 @@ set backspace=indent,eol,start
 set nowrapscan
 " }}}
 
+" Functions {{{
+function! SafePumVisible() abort
+  try
+    return coc#pum#visible()
+  catch
+    return pumvisible()
+  endtry
+endfunction
+" }}}
+
 " Macros {{{
 augroup MyAutoCmd
   autocmd!
@@ -360,37 +302,6 @@ autocmd MyAutoCmd BufReadPost *
       \ endif
 " }}}
 
-" Automatically restore 'view' {{{
-" function! s:is_view_available() abort
-"   if &buftype =~# '^\%(help\|nofile\|quickfix\|terminal\)$'
-"     return 0
-"   endif
-"   return &buflisted && filereadable(expand('<afile>'))
-" endfunction
-" autocmd MyAutoCmd BufWinLeave * if s:is_view_available() | silent mkview! | endif
-" autocmd MyAutoCmd BufWinEnter * if s:is_view_available() | silent! loadview | endif
-" }}}
-
-" Delete view {{{
-function! s:delete_view(bang) abort
-  if &modified && a:bang !=# '!'
-    echohl WarningMsg
-    echo 'Use bang to forcedly remove view file on modified buffer'
-    echohl None
-    return
-  endif
-  let path = substitute(expand('%:p:~'), '=', '==', 'g')
-  let path = substitute(path, '/', '=+', 'g') . '='
-  let path = printf('%s/%s', &viewdir, path)
-  if filewritable(path)
-    call delete(path)
-    silent edit! %
-    echo 'View file has removed: ' . path
-  endif
-endfunction
-command! -bang Delview call s:delete_view(<q-bang>)
-" }}}
-
 " Automatically create missing directories {{{
 function! s:auto_mkdir(dir, force) abort
   if empty(a:dir) || a:dir =~# '^\w\+://' || isdirectory(a:dir) || a:dir =~# '^suda:'
@@ -418,112 +329,6 @@ function! s:auto_mkdir(dir, force) abort
 endfunction
 autocmd MyAutoCmd BufWritePre *
       \ call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
-" }}}
-
-" Automatically change working directory on vim enter {{{
-function! s:workon(dir, bang) abort
-  let dir = (a:dir ==# '' ? expand('%') : a:dir)
-  " convert filename to directory if required
-  if filereadable(dir)
-    let dir = fnamemodify(expand(dir),':p:h')
-  else
-    let dir = fnamemodify(dir, ':p')
-  endif
-  " change directory to specified directory
-  if isdirectory(dir)
-    silent execute 'cd ' . fnameescape(dir)
-    if a:bang ==# ''
-      redraw | echo 'Working on: '.dir
-      doautocmd <nomodeline> MyAutoCmd User my-workon-post
-    endif
-  endif
-endfunction
-autocmd MyAutoCmd VimEnter * call s:workon(expand('<afile>'), 1)
-command! -nargs=? -complete=dir -bang Workon call s:workon('<args>', '<bang>')
-" }}}
-
-" Enhance performance of scroll in vsplit mode via DECSLRM {{{
-" NOTE: Neovim (libvterm) already support it but Vim
-" Ref: http://qiita.com/kefir_/items/c725731d33de4d8fb096
-" Ref: https://github.com/neovim/libvterm/commit/04781d37ce5af3f580376dc721bd3b89c434966b
-" Ref: https://twitter.com/kefir_/status/541959767002849283
-if has('vim_starting') && !has('gui_running') && !has('nvim')
-  " Enable origin mode and left/right margins
-  function! s:enable_vsplit_mode() abort
-    let &t_CS = 'y'
-    let &t_ti = &t_ti . "\e[?6;69h"
-    let &t_te = "\e[?6;69l\e[999H" . &t_te
-    let &t_CV = "\e[%i%p1%d;%p2%ds"
-    call writefile(["\e[?6;69h"], '/dev/tty', 'a')
-  endfunction
-
-  " Old vim does not ignore CPR
-  map <special> <Esc>[3;9R <Nop>
-
-  " New vim can't handle CPR with direct mapping
-  " map <expr> ^[[3;3R <SID>enable_vsplit_mode()
-  set t_F9=[3;3R
-  map <expr> <t_F9> <SID>enable_vsplit_mode()
-  let &t_RV .= "\e[?6;69h\e[1;3s\e[3;9H\e[6n\e[0;0s\e[?6;69l"
-endif
-" }}}
-
-" Register {{{
-function! s:clear_register() abort
-  let rs = split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
-  for r in rs
-    call setreg(r, [])
-  endfor
-endfunction
-command! ClearRegister call s:clear_register()
-" }}}
-
-" Grep {{{
-command! -nargs=+ Grep execute 'silent grep! <args>' | copen
-" }}}
-
-" Qbuffers
-command! Qbuffers call setqflist(map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), '{"bufnr":v:val}'))
-
-" Qinvoke/Linvoke {{{
-function! s:invoke(cmd, callback) abort
-  let Process = vital#vital#import('Async.Promise.Process')
-  let temp = tempname()
-  let args = [
-        \ &shell,
-        \ &shellcmdflag,
-        \ join([a:cmd, &shellpipe, temp]),
-        \]
-  call Process.start(args)
-        \.then({ r -> a:callback(temp) })
-        \.catch({ e -> execute('echomsg string(e)', '') })
-endfunction
-command! -nargs=* Qinvoke call s:invoke(<q-args>, { v -> execute('cfile ' . fnameescape(v), '') })
-command! -nargs=* Linvoke call s:invoke(<q-args>, { v -> execute('lfile ' . fnameescape(v), '') })
-" }}}
-
-" GetChar {{{
-function! s:getchar() abort
-  redraw | echo 'Press any key: '
-  let c = getchar()
-  while c ==# "\<CursorHold>"
-    redraw | echo 'Press any key: '
-    let c = getchar()
-  endwhile
-  redraw | echo printf('Raw: "%s" | Char: "%s"', c, nr2char(c))
-endfunction
-command! GetChar call s:getchar()
-" }}}
-
-" Timeit {{{
-function! s:timeit(command) abort
-  let start = reltime()
-  execute a:command
-  let delta = reltime(start)
-  echomsg '[timeit]' a:command
-  echomsg '[timeit]' reltimestr(delta)
-endfunction
-command! -nargs=* Timeit call s:timeit(<q-args>)
 " }}}
 
 " }}}
@@ -587,15 +392,6 @@ cnoremap <Down> <C-n>
 " Fix unreasonable mappings by historical reason
 nnoremap Y y$
 
-function! s:yank_without_indent() abort
-  normal! gvy
-  let content = split(@@, '\n')
-  let leading = min(map(copy(content), { _, v -> len(matchstr(v, '^\s*')) }))
-  call map(content, { _, v -> v[leading:] })
-  let @@ = join(content, "\n")
-endfunction
-vnoremap gy <Esc>:<C-u>call <SID>yank_without_indent()<CR>
-
 " Tab navigation
 nnoremap <silent> <C-w>t :<C-u>tabnew<CR>
 nnoremap <silent> <C-w><C-t> :<C-u>tabnew<CR>
@@ -616,103 +412,6 @@ inoremap <C-u> <C-g>u<C-u>
 nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))
       \ ? "\<C-l>"
       \ : "\<C-l>:syntax sync fromstart\<CR>"
-
-" Insert UUID by <F2>
-function! s:uuid() abort
-  let r = system('uuidgen')
-  let r = substitute(r, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')
-  return r
-endfunction
-inoremap <silent> <Plug>(my-insert-uuid) <C-r>=<SID>uuid()<CR>
-imap <F2> <Plug>(my-insert-uuid)
-
-" Yank Base64 encoded/decoded text of the selected text
-function! s:encode_base64() abort
-  normal! gvy
-  let @@ = system('base64', @@)
-  let @@ = substitute(@@, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')
-  normal! gvp
-endfunction
-function! s:decode_base64() abort
-  normal! gvy
-  let @@ = system('base64 -d', @@)
-  let @@ = substitute(@@, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')
-  normal! gvp
-endfunction
-vnoremap <silent> <Plug>(my-decode-base64) :call <SID>encode_base64()<CR>
-vnoremap <silent> <Plug>(my-encode-base64) :call <SID>decode_base64()<CR>
-vmap <F3> <Plug>(my-decode-base64)
-vmap <F4> <Plug>(my-encode-base64)
-
-" Focus floating window with <C-w><C-w> {{{
-if has('nvim')
-  function! s:focus_floating() abort
-    if !empty(nvim_win_get_config(win_getid()).relative)
-      wincmd p
-      return
-    endif
-    for winnr in range(1, winnr('$'))
-      let winid = win_getid(winnr)
-      let conf = nvim_win_get_config(winid)
-      if conf.focusable && !empty(conf.relative)
-        call win_gotoid(winid)
-        return
-      endif
-    endfor
-  endfunction
-  nnoremap <silent> <C-w><C-w> :<C-u>call <SID>focus_floating()<CR>
-endif
-" }}}
-
-" Grep with <Leader>gg {{{
-function! s:grep(bang, query) abort
-  let query = empty(a:query) ? input('grep: ') : a:query
-  if empty(query)
-    redraw
-    return
-  endif
-  execute printf('silent grep%s %s .', a:bang, escape(query, ' '))
-endfunction
-nnoremap <silent> <Leader>gg :<C-u>call <SID>grep('', '')<CR>
-command! -nargs=* -bang Grep call s:grep(<q-bang>, <q-args>)
-
-" }}}
-
-" Source Vim script file with <Leader>ss {{{
-if !exists('*s:source_script')
-  function s:source_script(path) abort
-    let path = expand(a:path)
-    if !filereadable(path) || getbufvar(a:path, '&filetype') !=# 'vim'
-      return
-    endif
-    execute 'source' fnameescape(path)
-    echo printf(
-          \ '"%s" has sourced (%s)',
-          \ simplify(fnamemodify(path, ':~:.')),
-          \ strftime('%c'),
-          \)
-  endfunction
-endif
-nnoremap <F10> :<C-u>call <SID>source_script('%')<CR>
-" }}}
-
-" Zoom widnow temporary with <C-w>z {{{
-function! s:toggle_window_zoom() abort
-    if exists('t:zoom_winrestcmd')
-        execute t:zoom_winrestcmd
-        unlet t:zoom_winrestcmd
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-    endif
-endfunction
-nnoremap <silent> <Plug>(my-zoom-window)
-      \ :<C-u>call <SID>toggle_window_zoom()<CR>
-nmap <C-w>z <Plug>(my-zoom-window)
-nmap <C-w><C-z> <Plug>(my-zoom-window)
-" }}}
-
 " }}}
 
 " Postludium {{{
@@ -730,18 +429,6 @@ function! s:load_configurations() abort
   endfor
 endfunction
 call s:load_configurations()
-
-function! s:highlight() abort
-  " highlight CursorLine guibg=#444444
-  " highlight VertSplit ctermfg=1 guifg=#aaaaaa
-  " highlight Tabline ctermfg=1 guifg=#aaaaaa
-  " highlight TablineSel ctermfg=1 guifg=#aaaaaa
-  " highlight TablineFill ctermfg=1 guifg=#aaaaaa
-endfunction
-augroup my
-  autocmd! *
-  autocmd ColorScheme * call s:highlight()
-augroup END
 
 silent! colorscheme slate
 silent! colorscheme iceberg

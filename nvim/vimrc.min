@@ -16,18 +16,5 @@ syntax on
 nnoremap ; :
 nnoremap : ;
 
-let g:fern#disable_default_mappings = 1
-let g:fern#disable_drawer_smart_quit = 1
-
-function! s:my_fern() abort
-  nmap <buffer> <CR> <Plug>(fern-action-open:edit)
-  nmap <buffer> s <Plug>(fern-action-open:vsplit)
-endfunction
-
-augroup my_fern
-  autocmd!
-  autocmd FileType fern call s:my_fern()
-augroup END
-
 "----------------------------------------------------------------
 echomsg "Custom minimal vimrc has loaded"

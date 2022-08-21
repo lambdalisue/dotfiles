@@ -7,4 +7,3 @@ function! s:grea(bang, query) abort
   execute printf('Grea%s %s .', a:bang, escape(query, ' '))
 endfunction
 nnoremap <silent> <Leader>gg :<C-u>call <SID>grea('', '')<CR>
-
