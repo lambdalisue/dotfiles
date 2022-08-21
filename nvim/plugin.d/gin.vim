@@ -20,3 +20,7 @@ let g:loaded_gin_status_supplement = 1
 let g:loaded_gin_branch_supplement = 1
 let g:loaded_gin_gitcommit_supplement = 1
 let g:loaded_gin_gitrebase_supplement = 1
+
+let g:gin_diff_default_args = [
+      \ '++processor=delta --diff-highlight --keep-plus-minus-markers',
+      \]

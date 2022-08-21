@@ -1,62 +1,66 @@
 [include]
-    path = ~/.gitconfig.local
+  path = ~/.gitconfig.local
 
 [user]
-    name  = Alisue
-    email = lambdalisue@gmail.com
-    signingkey = 74D5B4A7F3E1B28C
+  name  = Alisue
+  email = lambdalisue@gmail.com
+  signingkey = 74D5B4A7F3E1B28C
+
+[rerere]
+  enabled = true
 
 [core]
-    ignorecase = false
-    excludesfile = ~/.gitignore
-    quotepath = false
+  ignorecase = false
+  excludesfile = ~/.gitignore
+  quotepath = false
 
 [color]
-    ui = auto
+  ui = auto
 
 [push]
-    default = current
+  default = current
 
 [branch]
-    autosetupmerge = always
+  autosetupmerge = always
 
 [filter "lfs"]
-    required = true
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
 
 [github]
-    user = lambdalisue
+  user = lambdalisue
 
 [url "git@github.com:lambdalisue"]
-    insteadOf = https://github.com/lambdalisue
+  insteadOf = https://github.com/lambdalisue
 
 [url "git@github.com:vim-jp"]
-    insteadOf = https://github.com/vim-jp
+  insteadOf = https://github.com/vim-jp
 
 [url "git@github.com:vim-denops"]
-    insteadOf = https://github.com/vim-denops
+  insteadOf = https://github.com/vim-denops
 
 [url "git@bitbucket.org:kompira"]
-    insteadOf = https://bitbucket.org/kompira
+  insteadOf = https://bitbucket.org/kompira
 
 [url "git@github.com:fixpoint"]
-    insteadOf = https://github.com/fixpoint
+  insteadOf = https://github.com/fixpoint
 
 [commit]
-    gpgsign = true
-    verbose = true
+  gpgsign = true
+  verbose = true
 
 [diff]
-    algorithm = patience
+  algorithm = patience
+  colormoved = dimmed-zebra
 
 [alias]
-    push-f = push --force-with-lease
-    graph = log --graph --oneline --pretty=format:'%C(yellow)%h%Creset %s%C(auto)%d%Creset %C(green)%cr%Creset %C(magenta)<%an>%Creset'
+  push-f = push --force-with-lease
+  graph = log --graph --oneline --pretty=format:'%C(yellow)%h%Creset %s%C(auto)%d%Creset %C(green)%cr%Creset %C(magenta)<%an>%Creset'
 
 [init]
-    defaultBranch = main
+  defaultBranch = main
 
 [fetch]
-    prune = true
+  prune = true

@@ -732,7 +732,7 @@ endfunction
 call s:load_configurations()
 
 function! s:highlight() abort
-  highlight CursorLine guibg=#444444
+  " highlight CursorLine guibg=#444444
   " highlight VertSplit ctermfg=1 guifg=#aaaaaa
   " highlight Tabline ctermfg=1 guifg=#aaaaaa
   " highlight TablineSel ctermfg=1 guifg=#aaaaaa
@@ -746,8 +746,8 @@ augroup END
 silent! colorscheme slate
 silent! colorscheme iceberg
 
-if has('nvim-0.7.0')
-  set laststatus=3        " always shows statusline
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
 endif
 
 set secure

@@ -1,5 +1,3 @@
-set laststatus=3
-
 if has('mac') && !exists('$SSH_CONNECTION')
   let g:fern#renderer = 'nerdfont'
 endif

@@ -64,6 +64,8 @@ xmap <nowait> ac <Plug>(coc-classobj-a)
 omap <nowait> ic <Plug>(coc-classobj-i)
 omap <nowait> ac <Plug>(coc-classobj-a)
 
+inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 " Note coc#float#scroll works on neovim >= 0.4.3 or vim >= 8.2.0750
 if has('nvim-0.4.3') || has('patch-8.2.0750')
@@ -113,6 +115,11 @@ vmap <C-j> <Plug>(coc-snippets-select)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 xmap <C-s> <Plug>(coc-convert-snippet)
 command! CocSnippet CocCommand snippets.editSnippets
+
+" coc-deepl
+" require: COC_DEEPL_API_KEY
+nmap <silent> gt <Plug>(coc-deepl)
+vmap <silent> gt <Plug>(coc-deepl-selected)
 
 function! s:enable_deno() abort
   call coc#config('deno.enable', v:true)

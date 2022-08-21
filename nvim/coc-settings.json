@@ -1,14 +1,21 @@
 {
   "suggest.asciiCharactersOnly": true,
+  "suggest.noselect": true,
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.bracketEnterImprove": false,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "*"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
   "prettier.formatterPriority": 1,
+  "rust-analyzer.cargo.allFeatures": true,
+  "rust-analyzer.imports.granularity.enforce": true,
+  "rust-analyzer.inlayHints.bindingModeHints.enable": true,
+  "rust-analyzer.inlayHints.closureReturnTypeHints.enable": true,
+  "rust-analyzer.lens.references.adt.enable": true,
+  "rust-analyzer.lens.references.enumVariant.enable": true,
+  "rust-analyzer.lens.references.method.enable": true,
+  "rust-analyzer.lens.references.trait.enable": true,
   "deno.codeLens.implementations": true,
   "deno.codeLens.references": true,
   "deno.codeLens.referencesAllFunctions": true,
@@ -25,13 +32,8 @@
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
-      "args": [
-        "serve"
-      ],
-      "filetypes": [
-        "terraform",
-        "tf"
-      ],
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
       "initializationOptions": {},
       "settings": {}
     }
