@@ -12,3 +12,6 @@ Desktop.ini
 # Vim
 .*.sw[a-z]
 *.un~
+
+# direnv
+.envrc
