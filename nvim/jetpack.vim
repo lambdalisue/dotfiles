@@ -33,7 +33,6 @@ function! s:init() abort
   call jetpack#add('kana/vim-textobj-user')
   call jetpack#add('lambdalisue/battery.vim')
   call jetpack#add('lambdalisue/compl-local-filename.vim')
-  call jetpack#add('lambdalisue/fern-bookmark.vim')
   call jetpack#add('lambdalisue/fern-git-status.vim')
   call jetpack#add('lambdalisue/fern-hijack.vim')
   call jetpack#add('lambdalisue/fern-mapping-git.vim')
