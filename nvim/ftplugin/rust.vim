@@ -12,6 +12,8 @@ setl expandtab
 setl autoindent
 setl smartindent
 
+setl comments=s1:/*,mb:*,ex:*/,s0:/*,mb:\ ,ex:*/,:///,://!,://
+
 if has('nvim')
   setlocal foldmethod=expr
   setlocal foldexpr=nvim_treesitter#foldexpr()
