@@ -10,6 +10,7 @@ function! s:init() abort
   call jetpack#add('lambdalisue/gin.vim')
   call jetpack#add('lambdalisue/guise.vim')
   call jetpack#add('vim-denops/denops.vim')
+  call jetpack#add('vim-denops/denops-shared-server.vim')
   call jetpack#add('yuki-yano/fuzzy-motion.vim')
 
   call jetpack#add('AndrewRadev/linediff.vim')
