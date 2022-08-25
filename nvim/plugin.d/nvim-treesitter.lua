@@ -50,7 +50,6 @@ require'nvim-treesitter.configs'.setup {
     "regex",
     "rego",
     "rst",
-    "ruby",
     "rust",
     "scala",
     "scss",

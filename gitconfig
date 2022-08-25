@@ -49,18 +49,3 @@
 
 [fetch]
   prune = true
-
-[url "git@github.com:lambdalisue"]
-  insteadOf = https://github.com/lambdalisue
-
-[url "git@github.com:vim-jp"]
-  insteadOf = https://github.com/vim-jp
-
-[url "git@github.com:vim-denops"]
-  insteadOf = https://github.com/vim-denops
-
-[url "git@bitbucket.org:kompira"]
-  insteadOf = https://bitbucket.org/kompira
-
-[url "git@github.com:fixpoint"]
-  insteadOf = https://github.com/fixpoint

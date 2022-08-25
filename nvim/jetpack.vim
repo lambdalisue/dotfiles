@@ -107,9 +107,9 @@ endfunction
 
 function! s:configure() abort
   if has('nvim')
-    silent packadd nvim-treesitter
+    silent! packadd nvim-treesitter
   else
-    silent packadd vim-healthcheck
+    silent! packadd vim-healthcheck
   endif
 
   " Load plugin configurations
