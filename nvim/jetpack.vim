@@ -15,6 +15,7 @@ function! s:init() abort
 
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
+  call jetpack#add('EdenEast/nightfox.nvim')
   call jetpack#add('Shougo/context_filetype.vim')
   call jetpack#add('Shougo/junkfile.vim')
   call jetpack#add('Vimjas/vim-python-pep8-indent')
@@ -87,7 +88,7 @@ function! s:init() abort
   call jetpack#add('rhysd/vim-healthcheck', {'opt': 1 })
 
   " Neovim
-  call jetpack#add('nvim-treesitter/nvim-treesitter', {'opt': 1 })
+  call jetpack#add('nvim-treesitter/nvim-treesitter', {'opt': 1})
 
   call jetpack#end()
 endfunction

@@ -155,6 +155,9 @@ set wildmenu
 set wildmode=list:longest,full
 set wildoptions=tagfile
 
+silent! set laststatus=3
+silent! set cmdheight=0
+
 " }}}
 
 " Behavior {{{
@@ -267,6 +270,15 @@ function! SafePumVisible() abort
     return pumvisible()
   endtry
 endfunction
+
+function! s:revise_colorscheme() abort
+  if system('defaults read -g AppleInterfaceStyle') ==# "Dark\n"
+    silent! colorscheme nordfox
+  else
+    silent! colorscheme dawnfox
+  endif
+endfunction
+command! ReviseColorscheme call s:revise_colorscheme()
 " }}}
 
 " Macros {{{
@@ -442,6 +454,7 @@ call s:load_configurations()
 
 silent! colorscheme slate
 silent! colorscheme iceberg
+silent! ReviseColorscheme
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
