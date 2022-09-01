@@ -5,7 +5,7 @@ endif
 let g:fern#hide_cursor = 1
 let g:fern#keepalt_on_edit = 1
 let g:fern#default_hidden = 1
-let g:fern#default_exclude = '\.DS_Store'
+let g:fern#default_exclude = '\%(\.DS_Store\|__pycache__\)'
 
 function! s:fern_local_init() abort
   nmap <buffer>

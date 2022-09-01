@@ -67,7 +67,6 @@ function! s:init() abort
   call jetpack#add('rbtnn/vim-vimscript_lasterror')
   call jetpack#add('sgur/vim-textobj-parameter')
   call jetpack#add('t9md/vim-quickhl')
-  call jetpack#add('tani/glance-vim')
   call jetpack#add('thinca/vim-prettyprint')
   call jetpack#add('thinca/vim-qfreplace')
   call jetpack#add('thinca/vim-quickrun')

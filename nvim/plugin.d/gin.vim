@@ -3,10 +3,12 @@ nnoremap <silent> <Leader>ab <Cmd>GinBranch --all<CR>
 
 function! s:my_gitcommit() abort
   nnoremap <buffer><nowait> <C-^> <Cmd>GinStatus<CR>
+  nnoremap <buffer><nowait> <C-6> <Cmd>GinStatus<CR>
 endfunction
 
 function! s:my_gin_status() abort
   nnoremap <buffer><nowait> <C-^> <Cmd>Gin commit -v<CR>
+  nnoremap <buffer><nowait> <C-6> <Cmd>Gin commit -v<CR>
   nmap <buffer><nowait> g<CR> <Plug>(gin-action-edit:HEAD)
 endfunction
 
