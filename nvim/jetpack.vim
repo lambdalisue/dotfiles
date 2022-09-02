@@ -5,6 +5,14 @@ function! s:init() abort
   call jetpack#begin(expand('$VIMHOME'))
   call jetpack#add('tani/vim-jetpack', { 'opt': 1 })
 
+  " ddu
+  call jetpack#add('Shougo/ddu.vim')
+  call jetpack#add('Shougo/ddu-ui-ff')
+  call jetpack#add('Shougo/ddu-source-action')
+  call jetpack#add('Shougo/ddu-source-file_rec')
+  call jetpack#add('Shougo/ddu-filter-matcher_substring')
+  call jetpack#add('Shougo/ddu-kind-file')
+
   " Denops
   call jetpack#add('lambdalisue/askpass.vim')
   call jetpack#add('lambdalisue/gin.vim')

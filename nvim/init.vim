@@ -156,7 +156,7 @@ set wildmode=list:longest,full
 set wildoptions=tagfile
 
 silent! set laststatus=3
-silent! set cmdheight=0
+"silent! set cmdheight=0
 
 " }}}
 
