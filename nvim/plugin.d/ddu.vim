@@ -27,35 +27,42 @@ call ddu#custom#patch_global({
       \ },
       \})
 
+function! s:execute(expr) abort
+  if !exists('g:ddu#ui#ff#_filter_parent_winid')
+    return
+  endif
+  call win_execute(g:ddu#ui#ff#_filter_parent_winid, a:expr)
+endfunction
+
 function! s:my_ddu_ff() abort
-  nnoremap <buffer><silent> <CR>
+  nnoremap <nowait><buffer><silent> <CR>
         \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-  nnoremap <buffer><silent> p
+  nnoremap <nowait><buffer><silent> p
         \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
-  nnoremap <buffer><silent> i
+  nnoremap <nowait><buffer><silent> i
         \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
-  nnoremap <buffer><silent> <Esc>
+  nnoremap <nowait><buffer><silent> <Esc>
         \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
 
   " Mark
-  nnoremap <buffer><silent> -
+  nnoremap <nowait><buffer><silent> -
         \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
-  nnoremap <buffer><silent> <C-j>
+  nnoremap <nowait><buffer><silent> <C-j>
         \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>j
-  nnoremap <buffer><silent> <C-k>
+  nnoremap <nowait><buffer><silent> <C-k>
         \ k<Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
 endfunction
 
 function! s:my_ddu_ff_filter() abort
-  inoremap <buffer><silent> <CR> <Esc><Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-  nnoremap <buffer><silent> <CR> <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-  inoremap <buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#ff#close()<CR>
-  nnoremap <buffer><silent> <Esc> <Cmd>call ddu#ui#ff#close()<CR>
+  inoremap <nowait><buffer><silent> <CR> <Esc><Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+  nnoremap <nowait><buffer><silent> <CR> <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+  inoremap <nowait><buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#ff#close()<CR>
+  nnoremap <nowait><buffer><silent> <Esc> <Cmd>call ddu#ui#ff#close()<CR>
 
-  inoremap <buffer><silent> <C-n>
-	  \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')+1,0)")<CR>
-  inoremap <buffer><silent> <C-p>
-	  \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)")<CR>
+  inoremap <nowait><buffer><silent> <C-n> <Cmd>call <SID>execute('normal! j')<CR>
+  inoremap <nowait><buffer><silent> <C-p> <Cmd>call <SID>execute('normal! k')<CR>
+  inoremap <nowait><buffer><silent> <C-d> <Cmd>call <SID>execute("normal! \<C-d>")<CR>
+  inoremap <nowait><buffer><silent> <C-u> <Cmd>call <SID>execute("normal! \<C-u>")<CR>
 endfunction
 
 augroup my-ddu
@@ -73,12 +80,14 @@ nnoremap <silent> <Leader>dd <Cmd>call ddu#start({
       \ 'sources': [{
       \   'name': 'file_rec',
       \   'params': {
-      \     'path': <SID>ghq_root() . '/github.com/lambdalisue/dotfiles',
       \     'ignoredDirectories': [
       \       '.git',
       \       '.addons',
       \       'pack',
       \     ],
+      \   },
+      \   'options': {
+      \     'path': <SID>ghq_root() . '/github.com/lambdalisue/dotfiles',
       \   },
       \ }],
       \})<CR>
