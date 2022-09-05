@@ -23,6 +23,12 @@ call ddu#custom#patch_global({
       \     'split': 'floating',
       \     'startFilter': v:true,
       \     'prompt': '> ',
+      \     'floatingBorder': 'single',
+      \   },
+      \ },
+      \ 'filterParams': {
+      \   'matcher_substring': {
+      \     'highlightMatched': 'Search',
       \   },
       \ },
       \})
@@ -88,6 +94,20 @@ nnoremap <silent> <Leader>dd <Cmd>call ddu#start({
       \   },
       \   'options': {
       \     'path': <SID>ghq_root() . '/github.com/lambdalisue/dotfiles',
+      \   },
+      \ }],
+      \})<CR>
+nnoremap <silent> <Leader>jj <Cmd>call ddu#start({
+      \ 'name': 'junkfiles',
+      \ 'sources': [{
+      \   'name': 'file_rec',
+      \   'params': {
+      \     'ignoredDirectories': [
+      \       '.git',
+      \     ],
+      \   },
+      \   'options': {
+      \     'path': expand(g:junkfile#directory),
       \   },
       \ }],
       \})<CR>
