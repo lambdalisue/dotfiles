@@ -14,16 +14,21 @@ call ddu#custom#patch_global({
       \   },
       \ },
       \ 'kindOptions': {
+      \   'action': {
+      \     'defaultAction': 'do',
+      \   },
       \   'file': {
       \     'defaultAction': 'open',
       \   },
       \ },
       \ 'uiParams': {
       \   'ff': {
-      \     'split': 'floating',
-      \     'startFilter': v:true,
       \     'prompt': '> ',
+      \     'startFilter': v:true,
+      \     'split': 'floating',
       \     'floatingBorder': 'single',
+      \     'previewFloating': v:true,
+      \     'previewFloatingBorder': 'single',
       \   },
       \ },
       \ 'filterParams': {
@@ -43,6 +48,8 @@ endfunction
 function! s:my_ddu_ff() abort
   nnoremap <nowait><buffer><silent> <CR>
         \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+  nnoremap <nowait><buffer><silent> a
+        \ <Cmd>call ddu#ui#ff#do_action('chooseAction')<CR>
   nnoremap <nowait><buffer><silent> p
         \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
   nnoremap <nowait><buffer><silent> i
@@ -67,6 +74,8 @@ function! s:my_ddu_ff_filter() abort
 
   inoremap <nowait><buffer><silent> <C-n> <Cmd>call <SID>execute('normal! j')<CR>
   inoremap <nowait><buffer><silent> <C-p> <Cmd>call <SID>execute('normal! k')<CR>
+  inoremap <nowait><buffer><silent> <C-g> <Cmd>call <SID>execute('normal! j')<CR>
+  inoremap <nowait><buffer><silent> <C-t> <Cmd>call <SID>execute('normal! k')<CR>
   inoremap <nowait><buffer><silent> <C-d> <Cmd>call <SID>execute("normal! \<C-d>")<CR>
   inoremap <nowait><buffer><silent> <C-u> <Cmd>call <SID>execute("normal! \<C-u>")<CR>
 endfunction
@@ -101,11 +110,6 @@ nnoremap <silent> <Leader>jj <Cmd>call ddu#start({
       \ 'name': 'junkfiles',
       \ 'sources': [{
       \   'name': 'file_rec',
-      \   'params': {
-      \     'ignoredDirectories': [
-      \       '.git',
-      \     ],
-      \   },
       \   'options': {
       \     'path': expand(g:junkfile#directory),
       \   },
