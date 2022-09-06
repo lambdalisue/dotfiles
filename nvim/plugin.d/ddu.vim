@@ -72,6 +72,7 @@ function! s:my_ddu_ff_filter() abort
   inoremap <nowait><buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#ff#close()<CR>
   nnoremap <nowait><buffer><silent> <Esc> <Cmd>call ddu#ui#ff#close()<CR>
 
+  inoremap <nowait><buffer><silent> <C-a> <Esc><Cmd>call ddu#ui#ff#do_action('chooseAction')<CR>
   inoremap <nowait><buffer><silent> <C-n> <Cmd>call <SID>execute('normal! j')<CR>
   inoremap <nowait><buffer><silent> <C-p> <Cmd>call <SID>execute('normal! k')<CR>
   inoremap <nowait><buffer><silent> <C-g> <Cmd>call <SID>execute('normal! j')<CR>
