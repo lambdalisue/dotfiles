@@ -1,4 +1,6 @@
-let g:jetpack#copy_method = 'symlink'
+if has('nvim') && !has('win32')
+  let g:jetpack#copy_method = 'symlink'
+endif
 
 function! s:init() abort
   call s:ensure_jetpack()
@@ -23,7 +25,6 @@ function! s:init() abort
 
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
-  call jetpack#add('EdenEast/nightfox.nvim')
   call jetpack#add('Shougo/context_filetype.vim')
   call jetpack#add('Shougo/junkfile.vim')
   call jetpack#add('Vimjas/vim-python-pep8-indent')
@@ -32,7 +33,6 @@ function! s:init() abort
   call jetpack#add('c000/rapidfire.vim')
   call jetpack#add('cocopon/colorswatch.vim')
   call jetpack#add('hrsh7th/vim-eft')
-  call jetpack#add('iamcco/markdown-preview.nvim', {'do': 'cd app && yarn install'})
   call jetpack#add('itchyny/vim-parenmatch')
   call jetpack#add('junegunn/fzf', {'do': { -> fzf#install() }})
   call jetpack#add('kana/vim-operator-replace')
@@ -53,9 +53,7 @@ function! s:init() abort
   call jetpack#add('lambdalisue/fern.vim')
   call jetpack#add('lambdalisue/gina.vim')
   call jetpack#add('lambdalisue/glyph-palette.vim')
-  call jetpack#add('lambdalisue/grea.vim')
   call jetpack#add('lambdalisue/nerdfont.vim')
-  call jetpack#add('lambdalisue/qfloc.vim')
   call jetpack#add('lambdalisue/readablefold.vim')
   call jetpack#add('lambdalisue/suda.vim')
   call jetpack#add('lambdalisue/trimmer.vim')
@@ -76,7 +74,6 @@ function! s:init() abort
   call jetpack#add('rbtnn/vim-vimscript_lasterror')
   call jetpack#add('sgur/vim-textobj-parameter')
   call jetpack#add('t9md/vim-quickhl')
-  call jetpack#add('thinca/vim-prettyprint')
   call jetpack#add('thinca/vim-qfreplace')
   call jetpack#add('thinca/vim-quickrun')
   call jetpack#add('thinca/vim-template')
@@ -91,12 +88,16 @@ function! s:init() abort
 
   " Colorscheme
   call jetpack#add('cocopon/iceberg.vim')
+  call jetpack#add('EdenEast/nightfox.nvim')
 
   " Vim
   call jetpack#add('rhysd/vim-healthcheck', {'opt': 1 })
 
   " Neovim
-  call jetpack#add('nvim-treesitter/nvim-treesitter', {'opt': 1})
+  call jetpack#add('nvim-treesitter/nvim-treesitter', {
+        \ 'opt': 1,
+        \ 'do': { -> execute('TSUpdate') },
+        \})
 
   call jetpack#end()
 endfunction
