@@ -1,6 +1,7 @@
 {
   "suggest.asciiCharactersOnly": true,
   "suggest.noselect": true,
+  "suggest.enablePreselect": false,
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.bracketEnterImprove": false,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
