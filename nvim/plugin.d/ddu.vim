@@ -91,6 +91,15 @@ function! s:ghq_root() abort
   return substitute(system("ghq root"), '\r\?\n$', '', '')
 endfunction
 
+nnoremap <silent> <Leader>mm <Cmd>call ddu#start({
+      \ 'name': 'mrw',
+      \ 'sources': [{
+      \   'name': 'mr',
+      \   'params': {
+      \     'kind': 'mrw',
+      \   },
+      \ }],
+      \})<CR>
 nnoremap <silent> <Leader>dd <Cmd>call ddu#start({
       \ 'name': 'dotfiles',
       \ 'sources': [{

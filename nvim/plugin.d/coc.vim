@@ -103,35 +103,3 @@ augroup END
 nmap <silent> gs <Plug>(coc-git-chunkinfo)
 nmap <silent> gp <Plug>(coc-git-prevchunk)
 nmap <silent> gn <Plug>(coc-git-nextchunk)
-
-function! s:enable_deno() abort
-  call coc#config('deno.enable', v:true)
-  call coc#config('tsserver.enable', v:false)
-  call coc#config('prettier.enable', v:false)
-  CocRestart
-endfunction
-
-function! s:enable_tsserver() abort
-  call coc#config('deno.enable', v:false)
-  call coc#config('tsserver.enable', v:true)
-  call coc#config('prettier.enable', v:true)
-  CocRestart
-endfunction
-
-function! s:switch_coc_deno() abort
-  if exists('g:coc_deno')
-    return
-  endif
-  let path = empty(expand('%')) ? '.' : '%:p:h'
-  if empty(finddir("node_modules", path . ';'))
-    call s:enable_deno()
-  else
-    call s:enable_tsserver()
-  endif
-endfunction
-augroup my-coc-deno
-  autocmd BufRead,BufNewFile *.ts ++once call s:switch_coc_deno()
-augroup END
-
-command! CocEnableDeno call s:enable_deno()
-command! CocEnableTsserver call s:enable_tsserver()

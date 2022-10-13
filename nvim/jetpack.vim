@@ -8,12 +8,13 @@ function! s:init() abort
   call jetpack#add('tani/vim-jetpack', { 'opt': 1 })
 
   " ddu
-  call jetpack#add('Shougo/ddu.vim')
-  call jetpack#add('Shougo/ddu-ui-ff')
-  call jetpack#add('Shougo/ddu-source-action')
-  call jetpack#add('Shougo/ddu-source-file_rec')
   call jetpack#add('Shougo/ddu-filter-matcher_substring')
   call jetpack#add('Shougo/ddu-kind-file')
+  call jetpack#add('Shougo/ddu-source-action')
+  call jetpack#add('Shougo/ddu-source-file_rec')
+  call jetpack#add('Shougo/ddu-ui-ff')
+  call jetpack#add('Shougo/ddu.vim')
+  call jetpack#add('kuuote/ddu-source-mr')
 
   " Denops
   call jetpack#add('lambdalisue/askpass.vim')
@@ -53,6 +54,7 @@ function! s:init() abort
   call jetpack#add('lambdalisue/fern.vim')
   call jetpack#add('lambdalisue/gina.vim')
   call jetpack#add('lambdalisue/glyph-palette.vim')
+  call jetpack#add('lambdalisue/mr.vim')
   call jetpack#add('lambdalisue/nerdfont.vim')
   call jetpack#add('lambdalisue/readablefold.vim')
   call jetpack#add('lambdalisue/suda.vim')
