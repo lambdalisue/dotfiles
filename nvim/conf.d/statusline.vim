@@ -36,7 +36,7 @@ function! s:tabline() abort
         \ s:safe('gin#component#branch#unicode()'),
         \ s:safe('gin#component#traffic#unicode()'),
         \ s:safe('wifi#component()'),
-        \ s:safe('battery#component()'),
+        \ s:safe('battery#component_escaped()'),
         \ '%{fnamemodify(".", ":p:~")}',
         \]
   call map(lhs, { _, v -> substitute(v, '^\s*\|\s*$', '', 'g') })
