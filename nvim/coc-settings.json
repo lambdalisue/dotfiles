@@ -4,13 +4,14 @@
   "suggest.enablePreselect": false,
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.bracketEnterImprove": false,
-  "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "coc.preferences.formatOnSave": true,
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
   "prettier.formatterPriority": 1,
   "rust-analyzer.imports.granularity.enforce": true,
   "rust-analyzer.inlayHints.bindingModeHints.enable": true,
+  "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "with_block",
   "rust-analyzer.lens.references.adt.enable": true,
   "rust-analyzer.lens.references.enumVariant.enable": true,
   "rust-analyzer.lens.references.method.enable": true,
@@ -23,6 +24,7 @@
     "https://deno.land": true
   },
   "deno.unstable": true,
+  "sumneko-lua.enableNvimLuaDev": true,
   "vetur.format.defaultFormatter.html": "prettier",
   "go.goplsOptions": {
     "completeUnimported": true,
@@ -36,5 +38,6 @@
       "initializationOptions": {},
       "settings": {}
     }
-  }
+  },
+  "Lua.telemetry.enable": true
 }

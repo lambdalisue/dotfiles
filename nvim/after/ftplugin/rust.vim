@@ -1,4 +1,4 @@
-if has('nvim')
+if exists('g:loaded_nvim_treesitter')
   setlocal foldmethod=expr
   setlocal foldexpr=nvim_treesitter#foldexpr()
 else

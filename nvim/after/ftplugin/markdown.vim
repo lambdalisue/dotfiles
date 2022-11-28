@@ -1,3 +1,10 @@
+if exists('g:loaded_nvim_treesitter')
+  setlocal foldmethod=expr
+  setlocal foldexpr=nvim_treesitter#foldexpr()
+else
+  setlocal foldmethod=syntax
+endif
+
 setl spell
 setl autoindent
 setl textwidth=0
@@ -13,10 +20,3 @@ setl formatlistpat=^\\s*\\(\\d\\+\\\|[a-z]\\)[\\].)]\\s*
 silent! unlet! b:current_syntax
 syntax include @Yaml syntax/yaml.vim
 syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
-
-if has('nvim')
-  setlocal foldmethod=expr
-  setlocal foldexpr=nvim_treesitter#foldexpr()
-else
-  setlocal foldmethod=syntax
-endif

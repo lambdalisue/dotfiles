@@ -5,6 +5,10 @@ elseif executable('/opt/homebrew/bin/node')
   let g:coc_node_path = '/opt/homebrew/bin/node'
 endif
 
+" It seems 'longest' break behavior for empty completion
+" https://github.com/neoclide/coc.nvim/issues/4398
+set completeopt-=longest
+
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
       \ 'coc-deno',
@@ -19,6 +23,7 @@ let g:coc_global_extensions = [
       \ 'coc-pyright',
       \ 'coc-rust-analyzer',
       \ 'coc-sh',
+      \ 'coc-sumneko-lua',
       \ 'coc-tsserver',
       \ 'coc-vetur',
       \ 'coc-vimlsp',
@@ -26,10 +31,9 @@ let g:coc_global_extensions = [
       \ 'coc-yaml',
       \]
 
-set updatetime=300
-
 " Use <C-x><C-x> to trigger completion
 inoremap <silent><expr> <C-x><C-x> coc#refresh()
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Use [[ and ]]  to navigate diagnostics
 nnoremap <silent> <Plug>(my-zv) <Cmd>call timer_start(10, { -> feedkeys("zv", "nx") })<CR>
@@ -47,7 +51,7 @@ nmap <nowait> gQ <Plug>(coc-format-selected)
 vmap <nowait> gQ <Plug>(coc-format-selected)
 nmap <nowait> qf <Plug>(coc-fix-current)
 nmap <nowait> qr <Plug>(coc-rename)
-nmap <silent><nowait> <C-k> <Plug>(coc-codeaction-cursor)
+nmap <nowait> <C-k> <Plug>(coc-codeaction-cursor)
 vmap <silent><nowait><expr> <C-k> mode() ==# 'V'
       \ ? "\<Plug>(coc-codeaction-line)"
       \ : "\<Plug>(coc-codeaction-selected)"
@@ -60,8 +64,6 @@ xmap <nowait> ic <Plug>(coc-classobj-i)
 xmap <nowait> ac <Plug>(coc-classobj-a)
 omap <nowait> ic <Plug>(coc-classobj-i)
 omap <nowait> ac <Plug>(coc-classobj-a)
-
-inoremap <expr> <cr> SafePumVisible() ? coc#_select_confirm() : "\<CR>"
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 " Note coc#float#scroll works on neovim >= 0.4.3 or vim >= 8.2.0750

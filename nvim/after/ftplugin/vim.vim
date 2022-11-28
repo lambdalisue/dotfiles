@@ -1,3 +1,10 @@
+if exists('g:loaded_nvim_treesitter')
+  setlocal foldmethod=expr
+  setlocal foldexpr=nvim_treesitter#foldexpr()
+else
+  setlocal foldmethod=syntax
+endif
+
 let g:vimsyn_folding='af'
 
 setl tabstop=8
@@ -8,15 +15,8 @@ setl expandtab
 
 setl autoindent
 setl smartindent
-if has('nvim')
-  setl foldmethod=expr
-  setl foldexpr=nvim_treesitter#foldexpr()
-else
-  setl foldmethod=syntax
-endif
-
 setl keywordprg=:help
 
 imap <buffer><expr> <CR> coc#pum#visible()
-      \ ? "<C-y>"
+      \ ? coc#pum#confirm()
       \ : "\<Plug>(vim-backslash-CR)"

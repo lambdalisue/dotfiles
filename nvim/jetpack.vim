@@ -97,10 +97,10 @@ function! s:init() abort
   call jetpack#add('rhysd/vim-healthcheck', {'opt': 1 })
 
   " Neovim
-  call jetpack#add('nvim-treesitter/nvim-treesitter', {
-        \ 'opt': 1,
-        \ 'do': { -> execute('TSUpdate') },
-        \})
+  " call jetpack#add('nvim-treesitter/nvim-treesitter', {
+  "      \ 'opt': 1,
+  "      \ 'do': { -> execute('TSUpdate') },
+  "      \})
 
   call jetpack#end()
 endfunction

@@ -1,9 +1,14 @@
+if exists('g:loaded_nvim_treesitter')
+  setlocal foldmethod=expr
+  setlocal foldexpr=nvim_treesitter#foldexpr()
+else
+  setlocal foldmethod=syntax
+endif
+
 setl tabstop=8
 setl softtabstop=8
 setl shiftwidth=8
 setl noexpandtab
-
-setlocal foldmethod=syntax
 
 function! s:insertNewLines() abort
   if search('(', 'c', line('.')) is# 0

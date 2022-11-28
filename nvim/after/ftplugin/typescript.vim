@@ -1,12 +1,12 @@
-" Automatically indent dot chained method calls
-setlocal indentkeys+=0.
-
-if has('nvim')
+if exists('g:loaded_nvim_treesitter')
   setlocal foldmethod=expr
   setlocal foldexpr=nvim_treesitter#foldexpr()
 else
   setlocal foldmethod=syntax
 endif
+
+" Automatically indent dot chained method calls
+setlocal indentkeys+=0.
 
 function! s:enable_deno() abort
   call coc#config('deno.enable', v:true)
