@@ -8,7 +8,6 @@ endif
 " Disable vim-lexiv on ' while rust use ' as a lifetime marker
 inoremap <buffer> ' '
 
-nnoremap <buffer><silent> J <Cmd>CocCommand rust-analyzer.joinLines<CR>
 nnoremap <buffer><silent> % <Cmd>CocCommand rust-analyzer.matchingBrace<CR>
 nnoremap <buffer><silent> gK <Cmd>CocRustAnalyzerOpenDocs<CR>
 nnoremap <buffer><silent> g<C-^> <Cmd>CocRustAnalyzerParentModule<CR>

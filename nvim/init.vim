@@ -188,6 +188,7 @@ endif
 " }}}
 
 " Editing {{{
+set noswapfile
 set smarttab        " insert blanks according to shiftwidth
 set expandtab       " use spaces instead of TAB
 set softtabstop=-1  " the number of spaces that a TAB counts for

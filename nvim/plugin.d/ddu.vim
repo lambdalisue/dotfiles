@@ -25,7 +25,7 @@ call ddu#custom#patch_global({
       \   'ff': {
       \     'prompt': '> ',
       \     'startFilter': v:true,
-      \     'split': 'floating',
+      \     'split': has('nvim') ? 'floating' : 'horizontal',
       \     'floatingBorder': 'single',
       \     'previewFloating': v:true,
       \     'previewFloatingBorder': 'single',
@@ -46,6 +46,8 @@ function! s:execute(expr) abort
 endfunction
 
 function! s:my_ddu_ff() abort
+  let b:coc_suggest_disable = 1
+
   nnoremap <nowait><buffer><silent> <CR>
         \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
   nnoremap <nowait><buffer><silent> a
@@ -67,6 +69,8 @@ function! s:my_ddu_ff() abort
 endfunction
 
 function! s:my_ddu_ff_filter() abort
+  let b:coc_suggest_disable = 1
+
   inoremap <nowait><buffer><silent> <CR> <Esc><Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
   nnoremap <nowait><buffer><silent> <CR> <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
   inoremap <nowait><buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#ff#close()<CR>
