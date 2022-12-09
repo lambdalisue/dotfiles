@@ -17,12 +17,12 @@ function! s:init() abort
   call jetpack#add('kuuote/ddu-source-mr')
 
   " Denops
+  " call jetpack#add('vim-denops/denops-benchmark')
   call jetpack#add('lambdalisue/askpass.vim')
   call jetpack#add('lambdalisue/gin.vim')
   call jetpack#add('lambdalisue/guise.vim')
-  call jetpack#add('vim-denops/denops.vim')
-  " call jetpack#add('vim-denops/denops-benchmark')
   call jetpack#add('vim-denops/denops-shared-server.vim')
+  call jetpack#add('vim-denops/denops.vim')
   call jetpack#add('yuki-yano/fuzzy-motion.vim')
 
   call jetpack#add('AndrewRadev/linediff.vim')
@@ -34,6 +34,7 @@ function! s:init() abort
   call jetpack#add('bluz71/vim-nightfly-guicolors')
   call jetpack#add('c000/rapidfire.vim')
   call jetpack#add('cocopon/colorswatch.vim')
+  call jetpack#add('dstein64/vim-startuptime')
   call jetpack#add('hrsh7th/vim-eft')
   call jetpack#add('itchyny/vim-parenmatch')
   call jetpack#add('junegunn/fzf', {'do': { -> fzf#install() }})

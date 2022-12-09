@@ -35,11 +35,6 @@ let g:coc_global_extensions = [
 inoremap <silent><expr> <C-x><C-x> coc#refresh()
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
-" Use [[ and ]]  to navigate diagnostics
-nnoremap <silent> <Plug>(my-zv) <Cmd>call timer_start(10, { -> feedkeys("zv", "nx") })<CR>
-nmap <nowait> [[ <Plug>(coc-diagnostic-prev)<Plug>(my-zv)
-nmap <nowait> ]] <Plug>(coc-diagnostic-next)<Plug>(my-zv)
-
 nmap <nowait> gd <Plug>(coc-definition)
 nmap <nowait> gD <Plug>(coc-declaration)
 nmap <nowait> gi <Plug>(coc-implementation)
@@ -55,6 +50,12 @@ nmap <nowait> <C-k> <Plug>(coc-codeaction-cursor)
 vmap <silent><nowait><expr> <C-k> mode() ==# 'V'
       \ ? "\<Plug>(coc-codeaction-line)"
       \ : "\<Plug>(coc-codeaction-selected)"
+
+" Use [[ and ]]  to navigate diagnostics
+nnoremap <silent> <Plug>(my-zv) <Cmd>call timer_start(10, { -> feedkeys("zv", "nx") })<CR>
+nmap <nowait> [[ <Plug>(coc-diagnostic-prev)<Plug>(my-zv)
+nmap <nowait> ]] <Plug>(coc-diagnostic-next)<Plug>(my-zv)
+nmap <nowait><silent> qd <Cmd>call CocAction('diagnosticToggle')<CR>
 
 xmap <nowait> if <Plug>(coc-funcobj-i)
 xmap <nowait> af <Plug>(coc-funcobj-a)
