@@ -444,7 +444,7 @@ nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))
 " Postludium {{{
 
 " Plugin
-source $VIMHOME/jetpack.vim
+source $VIMHOME/minpac.vim
 
 syntax on
 filetype indent plugin on
@@ -459,6 +459,7 @@ call s:load_configurations()
 
 " silent! colorscheme slate
 silent! colorscheme iceberg
+silent! colorscheme edge
 " silent! colorscheme dawnfox
 "silent! ReviseColorscheme
 set background=light
