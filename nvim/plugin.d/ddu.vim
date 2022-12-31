@@ -29,6 +29,9 @@ call ddu#custom#patch_global({
       \     'floatingBorder': 'single',
       \     'previewFloating': v:true,
       \     'previewFloatingBorder': 'single',
+      \     'highlights': {
+      \       'floating': 'Normal',
+      \     },
       \   },
       \ },
       \ 'filterParams': {
@@ -47,6 +50,8 @@ endfunction
 
 function! s:my_ddu_ff() abort
   let b:coc_suggest_disable = 1
+
+  setlocal cursorline
 
   nnoremap <nowait><buffer><silent> <CR>
         \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>

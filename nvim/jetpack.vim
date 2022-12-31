@@ -37,7 +37,6 @@ function! s:init() abort
   call jetpack#add('dstein64/vim-startuptime')
   call jetpack#add('hrsh7th/vim-eft')
   call jetpack#add('itchyny/vim-parenmatch')
-  call jetpack#add('junegunn/fzf', {'do': { -> fzf#install() }})
   call jetpack#add('kana/vim-operator-replace')
   call jetpack#add('kana/vim-operator-user')
   call jetpack#add('kana/vim-repeat')
@@ -93,6 +92,7 @@ function! s:init() abort
   " Colorscheme
   call jetpack#add('cocopon/iceberg.vim')
   call jetpack#add('EdenEast/nightfox.nvim')
+  "call jetpack#add('sainnhe/edge')
 
   " Vim
   call jetpack#add('rhysd/vim-healthcheck', {'opt': 1 })

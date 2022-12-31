@@ -155,8 +155,12 @@ set wildmenu
 set wildmode=list:longest,full
 set wildoptions=tagfile
 
-silent! set laststatus=3
-"silent! set cmdheight=0
+if has('nvim')
+  silent! set laststatus=3
+else
+  silent! set laststatus=1
+endif
+silent! set cmdheight=0
 
 " }}}
 
@@ -453,10 +457,11 @@ function! s:load_configurations() abort
 endfunction
 call s:load_configurations()
 
-silent! colorscheme slate
+" silent! colorscheme slate
 silent! colorscheme iceberg
-silent! colorscheme dawnfox
+" silent! colorscheme dawnfox
 "silent! ReviseColorscheme
+set background=light
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
