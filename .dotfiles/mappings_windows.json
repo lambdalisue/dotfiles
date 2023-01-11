@@ -1,4 +1,5 @@
 {
+  "goneovim": "~/.goneovim",
   "nvim": "~/AppData/Local/nvim",
   "Microsoft.PowerShell_profile.ps1": "~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1"
 }

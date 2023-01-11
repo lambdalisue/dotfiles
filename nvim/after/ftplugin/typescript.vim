@@ -37,4 +37,12 @@ function! s:switch_coc_typescript(bufname) abort
     call s:enable_tsserver()
   endif
 endfunction
+
+if has('vim_starting')
+  augroup my_coc
+    autocmd!
+    autocmd User CocNvimInit call s:switch_coc_typescript()
+  augroup END
+else
 call s:switch_coc_typescript(expand('%'))
+endif

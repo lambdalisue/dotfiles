@@ -19,6 +19,7 @@
 
 [push]
   default = current
+  useForceIfIncludes = true
 
 [branch]
   autosetupmerge = always

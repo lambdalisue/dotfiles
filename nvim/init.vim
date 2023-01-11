@@ -460,9 +460,7 @@ call s:load_configurations()
 " silent! colorscheme slate
 silent! colorscheme iceberg
 silent! colorscheme edge
-" silent! colorscheme dawnfox
-"silent! ReviseColorscheme
-set background=light
+set background=dark
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local

@@ -1,4 +1,5 @@
 {
+  "goneovim": "~/.config/goneovim",
   "nvim": "~/.config/nvim",
   "zsh": "~/.config/zsh",
   "zshenv": "~/.zshenv"

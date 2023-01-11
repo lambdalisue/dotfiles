@@ -87,7 +87,7 @@ if [[ -f ~/.asdf/asdf.sh ]]; then
 fi
 if type brew &>/dev/null && type asdf &>/dev/null; then
   cache::asdf() {
-    echo ". $(brew --prefix asdf)/asdf.sh" > ${CACHE_PROFILE}/asdf.zsh
+    echo ". $(brew --prefix asdf)/libexec/asdf.sh" > ${CACHE_PROFILE}/asdf.zsh
     zcompile ${CACHE_PROFILE}/asdf.zsh
   }
   if [[ ! -f ${CACHE_PROFILE}/asdf.zsh ]]; then
