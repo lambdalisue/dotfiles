@@ -286,29 +286,56 @@ endfunction
 command! ReviseColorscheme call s:revise_colorscheme()
 " }}}
 
+" Quickfix {{{
+function! s:quickfixtextfunc_fname(bufnr) abort
+  let l:fname = bufname(a:bufnr)
+  if l:fname ==# ''
+    return '[No name]'
+  endif
+  return fnamemodify(l:fname, ':~:.')
+endfunction
+
+function! s:quickfixtextfunc(info) abort
+  let l:items = a:info.quickfix
+        \ ? getqflist({ 'id': a:info.id, 'items': v:true }).items
+        \ : getloclist(a:info.winid, { 'id': a:info.id, 'items': v:true }).items
+  let l:items = map(l:items, { _, v -> {
+        \ 'text': v.text,
+        \ 'valid': v.valid,
+        \ 'bufnr': v.bufnr,
+        \ 'fname': v.bufnr ? s:quickfixtextfunc_fname(v.bufnr) : '',
+        \ 'type': v.type ==# '' ? '' : (' ' .. toupper(v.type)),
+        \ 'lnum': v.lnum > 99999 ? -1 : v.lnum,
+        \ 'col': v.col > 999 ? -1 : v.col,
+        \}})
+  let l:n = max(map(copy(l:items), { -> len(v:val.fname) }))
+  let l:lines = map(l:items, { _, v -> !v.valid ? v.text : printf(
+        \ printf('%%-%dS |%%5d:%%-3d|%%s %%s', l:n),
+        \ v.fname,
+        \ v.lnum,
+        \ v.col,
+        \ v.type,
+        \ v.text,
+        \)})
+  return l:lines
+endfunction
+set quickfixtextfunc=funcref('s:quickfixtextfunc')
+
+" Automatically open quickfix/locationlist
+augroup my_quickfix
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* nested cwindow
+  autocmd QuickFixCmdPost l* nested lwindow
+augroup END
+
+" Quick grep
+cnoreabbrev g silent grep!
+" }}}
+
 " Macros {{{
 augroup MyAutoCmd
   autocmd!
 augroup END
-
-function! s:cwindow() abort
-  let winid = win_getid()
-  cwindow
-  if win_getid() != winid
-    call win_gotoid(winid)
-  endif
-endfunction
-
-function! s:lwindow() abort
-  let winid = win_getid()
-  lwindow
-  if win_getid() != winid
-    call win_gotoid(winid)
-  endif
-endfunction
-
-autocmd MyAutoCmd QuickFixCmdPost [^l]* nested call s:cwindow()
-autocmd MyAutoCmd QuickFixCmdPost l* nested call s:lwindow()
 
 " Automatically re-assign filetype {{{
 autocmd MyAutoCmd BufWritePost *

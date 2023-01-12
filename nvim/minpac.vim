@@ -13,10 +13,10 @@ function! s:init() abort
   call minpac#add('kuuote/ddu-source-mr')
 
   " Denops
-  " call minpac#add('vim-denops/denops-benchmark')
   call minpac#add('lambdalisue/askpass.vim')
   call minpac#add('lambdalisue/gin.vim')
   call minpac#add('lambdalisue/guise.vim')
+  call minpac#add('skanehira/denops-translate.vim')
   call minpac#add('vim-denops/denops-shared-server.vim')
   call minpac#add('vim-denops/denops.vim')
   call minpac#add('yuki-yano/fuzzy-motion.vim')
@@ -39,6 +39,7 @@ function! s:init() abort
   call minpac#add('kana/vim-textobj-indent')
   call minpac#add('kana/vim-textobj-line')
   call minpac#add('kana/vim-textobj-user')
+  call minpac#add('kevinhwang91/nvim-bqf')
   call minpac#add('lambdalisue/battery.vim')
   call minpac#add('lambdalisue/compl-local-filename.vim')
   call minpac#add('lambdalisue/fern-git-status.vim')

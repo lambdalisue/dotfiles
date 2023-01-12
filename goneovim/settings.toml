@@ -2,6 +2,9 @@
 ## All of the following commented configuration items have default values.
 
 [Editor]
+## https://github.com/akiyosi/goneovim/issues/407#issuecomment-1242145817
+HideMouseWhenTyping = true
+
 ## Makes the application window frameless.
 # BorderlessWindow = false
 

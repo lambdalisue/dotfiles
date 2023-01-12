@@ -8,9 +8,9 @@
 #
 # All imports must either be absolute paths starting with `/`, or paths relative
 # to the user's home directory starting with `~/`.
-import:
-  - ~/.config/nvim/pack/jetpack/src/github.com/EdenEast/nightfox.nvim/extra/dawnfox/nightfox_alacritty.yml
-  # - ~/.config/nvim/pack/jetpack/src/github.com/EdenEast/nightfox.nvim/extra/nordfox/nightfox_alacritty.yml
+#import:
+#- ~/.config/nvim/pack/jetpack/src/github.com/EdenEast/nightfox.nvim/extra/dawnfox/nightfox_alacritty.yml
+# - ~/.config/nvim/pack/jetpack/src/github.com/EdenEast/nightfox.nvim/extra/nordfox/nightfox_alacritty.yml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -455,7 +455,7 @@ shell:
 # Offer IPC using `alacritty msg` (unix only)
 #ipc_socket: true
 
-#mouse:
+mouse:
   # Click settings
   #
   # The `double_click` and `triple_click` settings control the time
@@ -465,7 +465,7 @@ shell:
   #triple_click: { threshold: 300 }
 
   # If this is `true`, the cursor is temporarily hidden when typing.
-  #hide_when_typing: true
+  hide_when_typing: true
 # Hints
 #
 # Terminal hints can be used to find text or hyperlink in the visible part of
@@ -893,4 +893,3 @@ key_bindings:
 
 # Highlight window damage information.
 #highlight_damage: false
-
