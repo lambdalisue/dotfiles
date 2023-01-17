@@ -116,7 +116,6 @@ nnoremap <silent> <Leader>mm <Cmd>call ddu#start({
       \ 'uiOptions': {
       \   'ff': {
       \     'defaultAction': 'cd',
-      \     'autoAction': {'name': 'preview'},
       \   },
       \ },
       \})<CR>
@@ -131,7 +130,6 @@ nnoremap <silent> <Leader>mr <Cmd>call ddu#start({
       \ 'uiOptions': {
       \   'ff': {
       \     'defaultAction': 'cd',
-      \     'autoAction': {'name': 'preview'},
       \   },
       \ },
       \})<CR>
@@ -156,11 +154,6 @@ nnoremap <silent> <Leader>dd <Cmd>call ddu#start({
       \     'path': <SID>ghq_root() . '/github.com/lambdalisue/dotfiles',
       \   },
       \ }],
-      \ 'uiParams': {
-      \   'ff': {
-      \     'autoAction': {'name': 'preview'},
-      \   },
-      \ },
       \})<CR>
 nnoremap <silent> <Leader>jj <Cmd>call ddu#start({
       \ 'name': 'junkfiles',
@@ -170,6 +163,11 @@ nnoremap <silent> <Leader>jj <Cmd>call ddu#start({
       \     'path': expand(g:junkfile#directory),
       \   },
       \ }],
+      \ 'sourceOptions': {
+      \   '_': {
+      \     'sorters': ['sorter_alpha'],
+      \   },
+      \ },
       \})<CR>
 nnoremap <silent> <Leader>df <Cmd>call ddu#start({
       \ 'sources': [{

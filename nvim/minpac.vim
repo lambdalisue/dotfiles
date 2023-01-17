@@ -8,6 +8,7 @@ function! s:init() abort
   call minpac#add('Shougo/ddu-column-filename')
   call minpac#add('Shougo/ddu-commands.vim')
   call minpac#add('Shougo/ddu-filter-matcher_substring')
+  call minpac#add('Shougo/ddu-filter-sorter_alpha')
   call minpac#add('Shougo/ddu-kind-file')
   call minpac#add('Shougo/ddu-kind-word')
   call minpac#add('Shougo/ddu-source-action')
