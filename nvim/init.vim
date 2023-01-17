@@ -329,7 +329,7 @@ augroup my_quickfix
 augroup END
 
 " Quick grep
-cnoreabbrev g silent grep!
+cnoreabbrev grep silent grep!
 " }}}
 
 " Macros {{{

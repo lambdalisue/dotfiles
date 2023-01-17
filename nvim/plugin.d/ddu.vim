@@ -10,7 +10,7 @@ call ddu#custom#patch_global({
       \ ],
       \ 'sourceOptions': {
       \   '_': {
-      \     'matchers': ['matcher_substring'],
+      \     'matchers': ['matcher_kensaku'],
       \   },
       \ },
       \ 'kindOptions': {
@@ -20,11 +20,13 @@ call ddu#custom#patch_global({
       \   'file': {
       \     'defaultAction': 'open',
       \   },
+      \   'ui_select': {
+      \     'defaultAction': 'select',
+      \   },
       \ },
       \ 'uiParams': {
       \   'ff': {
       \     'prompt': '> ',
-      \     'startFilter': v:true,
       \     'split': has('nvim') ? 'floating' : 'horizontal',
       \     'floatingBorder': 'single',
       \     'previewFloating': v:true,
@@ -36,6 +38,9 @@ call ddu#custom#patch_global({
       \ },
       \ 'filterParams': {
       \   'matcher_substring': {
+      \     'highlightMatched': 'Search',
+      \   },
+      \   'matcher_kensaku': {
       \     'highlightMatched': 'Search',
       \   },
       \ },
@@ -108,6 +113,33 @@ nnoremap <silent> <Leader>mm <Cmd>call ddu#start({
       \     'kind': 'mrw',
       \   },
       \ }],
+      \ 'uiOptions': {
+      \   'ff': {
+      \     'defaultAction': 'cd',
+      \     'autoAction': {'name': 'preview'},
+      \   },
+      \ },
+      \})<CR>
+nnoremap <silent> <Leader>mr <Cmd>call ddu#start({
+      \ 'name': 'mrr',
+      \ 'sources': [{
+      \   'name': 'mr',
+      \   'params': {
+      \     'kind': 'mrr',
+      \   },
+      \ }],
+      \ 'uiOptions': {
+      \   'ff': {
+      \     'defaultAction': 'cd',
+      \     'autoAction': {'name': 'preview'},
+      \   },
+      \ },
+      \})<CR>
+nnoremap <silent> <Leader>ll <Cmd>call ddu#start({
+      \ 'name': 'line',
+      \ 'sources': [{
+      \   'name': 'line',
+      \ }],
       \})<CR>
 nnoremap <silent> <Leader>dd <Cmd>call ddu#start({
       \ 'name': 'dotfiles',
@@ -124,6 +156,11 @@ nnoremap <silent> <Leader>dd <Cmd>call ddu#start({
       \     'path': <SID>ghq_root() . '/github.com/lambdalisue/dotfiles',
       \   },
       \ }],
+      \ 'uiParams': {
+      \   'ff': {
+      \     'autoAction': {'name': 'preview'},
+      \   },
+      \ },
       \})<CR>
 nnoremap <silent> <Leader>jj <Cmd>call ddu#start({
       \ 'name': 'junkfiles',

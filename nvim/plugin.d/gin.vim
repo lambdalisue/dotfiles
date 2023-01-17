@@ -22,9 +22,9 @@ augroup END
 let g:gin_diff_default_args = [
       \ '++processor=delta --diff-highlight --keep-plus-minus-markers',
       \]
-let g:gin_log_default_args = [
-      \ '--pretty=%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)',
-      \]
+" let g:gin_log_default_args = [
+"      \ '--pretty=%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)',
+"      \]
 
 let g:loaded_gin_status_supplement = 1
 let g:loaded_gin_branch_supplement = 1

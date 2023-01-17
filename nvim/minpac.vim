@@ -4,13 +4,23 @@ function! s:init() abort
   call minpac#add('k-takata/minpac', { 'type': 'opt' })
 
   " ddu
+  call minpac#add('Milly/ddu-filter-kensaku')
+  call minpac#add('Shougo/ddu-column-filename')
+  call minpac#add('Shougo/ddu-commands.vim')
   call minpac#add('Shougo/ddu-filter-matcher_substring')
   call minpac#add('Shougo/ddu-kind-file')
+  call minpac#add('Shougo/ddu-kind-word')
   call minpac#add('Shougo/ddu-source-action')
+  call minpac#add('Shougo/ddu-source-file')
   call minpac#add('Shougo/ddu-source-file_rec')
+  call minpac#add('Shougo/ddu-source-line')
+  call minpac#add('Shougo/ddu-source-register')
   call minpac#add('Shougo/ddu-ui-ff')
   call minpac#add('Shougo/ddu.vim')
   call minpac#add('kuuote/ddu-source-mr')
+  call minpac#add('matsui54/ddu-source-command_history')
+  call minpac#add('matsui54/ddu-vim-ui-select')
+  call minpac#add('mikanIchinose/ddu-source-markdown')
 
   " Denops
   call minpac#add('lambdalisue/askpass.vim')

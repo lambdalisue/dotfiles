@@ -26,7 +26,7 @@ HideMouseWhenTyping = true
 
 ## This option makes the whole GUI window in semi-transparent.
 ## This setting also implicitly enables the Drawborder setting
-Transparent = 0.95
+#Transparent = 0.99
 
 ## Launch goneovim with full screen window size.
 # StartFullscreen = false
