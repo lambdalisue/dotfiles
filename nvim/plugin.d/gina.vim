@@ -11,8 +11,8 @@ let g:gina_gitrebase_support_mappings = 0
 " nnoremap <silent> <Leader>ad :<C-u>Gina changes origin/HEAD...<CR>
 " nnoremap <silent> <Leader>ah :<C-u>Gina log --graph<CR>
 " nnoremap <silent> <Leader>aH :<C-u>Gina log --graph --all<CR>
-nnoremap <silent> <Leader>al :<C-u>Gina log<CR>
-nnoremap <silent> <Leader>aL :<C-u>Gina log :%<CR>
+" nnoremap <silent> <Leader>al :<C-u>Gina log<CR>
+" nnoremap <silent> <Leader>aL :<C-u>Gina log :%<CR>
 " nnoremap <silent> <Leader>af :<C-u>Gina ls<CR>
 " nnoremap <silent> <Leader>ars :<C-u>Gina show <C-r><C-w><CR>
 " nnoremap <silent> <Leader>arc :<C-u>Gina changes <C-r><C-w><CR>

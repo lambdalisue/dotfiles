@@ -20,6 +20,9 @@ call ddu#custom#patch_global({
       \   'file': {
       \     'defaultAction': 'open',
       \   },
+      \   'help': {
+      \     'defaultAction': 'open',
+      \   },
       \   'ui_select': {
       \     'defaultAction': 'select',
       \   },
@@ -165,7 +168,7 @@ nnoremap <silent> <Leader>jj <Cmd>call ddu#start({
       \ }],
       \ 'sourceOptions': {
       \   '_': {
-      \     'sorters': ['sorter_alpha'],
+      \     'sorters': ['sorter_alpha', 'sorter_reversed'],
       \   },
       \ },
       \})<CR>

@@ -327,9 +327,6 @@ augroup my_quickfix
   autocmd QuickFixCmdPost [^l]* nested cwindow
   autocmd QuickFixCmdPost l* nested lwindow
 augroup END
-
-" Quick grep
-cnoreabbrev grep silent grep!
 " }}}
 
 " Macros {{{

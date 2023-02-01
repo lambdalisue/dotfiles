@@ -9,6 +9,7 @@ function! s:init() abort
   call minpac#add('Shougo/ddu-commands.vim')
   call minpac#add('Shougo/ddu-filter-matcher_substring')
   call minpac#add('Shougo/ddu-filter-sorter_alpha')
+  call minpac#add('Shougo/ddu-filter-sorter_reversed')
   call minpac#add('Shougo/ddu-kind-file')
   call minpac#add('Shougo/ddu-kind-word')
   call minpac#add('Shougo/ddu-source-action')
@@ -20,6 +21,7 @@ function! s:init() abort
   call minpac#add('Shougo/ddu.vim')
   call minpac#add('kuuote/ddu-source-mr')
   call minpac#add('matsui54/ddu-source-command_history')
+  call minpac#add('matsui54/ddu-source-help')
   call minpac#add('matsui54/ddu-vim-ui-select')
   call minpac#add('mikanIchinose/ddu-source-markdown')
 

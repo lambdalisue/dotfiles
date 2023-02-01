@@ -1,9 +1,4 @@
-if exists('g:loaded_nvim_treesitter')
-  setlocal foldmethod=expr
-  setlocal foldexpr=nvim_treesitter#foldexpr()
-else
-  setlocal foldmethod=syntax
-endif
+setlocal foldmethod=syntax
 
 " Automatically indent dot chained method calls
 setlocal indentkeys+=0.
