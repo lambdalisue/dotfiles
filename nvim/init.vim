@@ -481,10 +481,10 @@ function! s:load_configurations() abort
 endfunction
 call s:load_configurations()
 
-" silent! colorscheme slate
-silent! colorscheme iceberg
-silent! colorscheme edge
-set background=dark
+"silent! colorscheme slate
+"silent! colorscheme iceberg
+"silent! colorscheme edge
+silent! colorscheme nightfly
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local

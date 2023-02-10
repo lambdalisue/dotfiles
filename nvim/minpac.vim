@@ -40,6 +40,8 @@ function! s:init() abort
   call minpac#add('Shougo/junkfile.vim')
   call minpac#add('Vimjas/vim-python-pep8-indent')
   call minpac#add('aiya000/aho-bakaup.vim')
+  call minpac#add('bluz71/vim-moonfly-colors')
+  call minpac#add('bluz71/vim-nightfly-colors')
   call minpac#add('bluz71/vim-nightfly-guicolors')
   call minpac#add('c000/rapidfire.vim')
   call minpac#add('cocopon/colorswatch.vim')

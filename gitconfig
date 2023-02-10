@@ -39,8 +39,7 @@
   colormoved = dimmed-zebra
 
 [alias]
-  push-f = push --force-with-lease
-  graph = log --graph --oneline --pretty=format:'%C(yellow)%h%Creset %s%C(auto)%d%Creset %C(green)%cr%Creset %C(magenta)<%an>%Creset'
+  push-f = push --force-with-lease --force-if-includes
 
 [init]
   defaultBranch = main
