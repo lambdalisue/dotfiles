@@ -46,10 +46,9 @@ nmap <nowait> gQ <Plug>(coc-format-selected)
 vmap <nowait> gQ <Plug>(coc-format-selected)
 nmap <nowait> qf <Plug>(coc-fix-current)
 nmap <nowait> qr <Plug>(coc-rename)
-nmap <nowait> <C-k> <Plug>(coc-codeaction-cursor)
-vmap <silent><nowait><expr> <C-k> mode() ==# 'V'
-      \ ? "\<Plug>(coc-codeaction-line)"
-      \ : "\<Plug>(coc-codeaction-selected)"
+nmap <nowait> <C-k> <Plug>(coc-codeaction)
+nmap <nowait> g<C-k> <Plug>(coc-codeaction-cursor)
+vmap <nowait> <C-k> <Plug>(coc-codeaction-selected)
 
 " Use [[ and ]]  to navigate diagnostics
 nnoremap <silent> <Plug>(my-zv) <Cmd>call timer_start(10, { -> feedkeys("zv", "nx") })<CR>
