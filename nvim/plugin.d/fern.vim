@@ -2,6 +2,7 @@ if !exists('$SSH_CONNECTION')
   let g:fern#renderer = 'nerdfont'
 endif
 
+
 let g:fern#hide_cursor = 1
 let g:fern#keepalt_on_edit = 1
 let g:fern#default_hidden = 1

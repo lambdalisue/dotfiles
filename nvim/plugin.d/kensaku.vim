@@ -1,1 +1,1 @@
-cnoremap <CR> <Plug>(kensaku-search-replace)<CR>
+"cnoremap <CR> <Plug>(kensaku-search-replace)<CR>
