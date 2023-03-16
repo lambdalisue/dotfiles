@@ -26,6 +26,7 @@ function! s:init() abort
   call minpac#add('mikanIchinose/ddu-source-markdown')
 
   " Denops
+  call minpac#add('lambdalisue/kensaku.vim')
   call minpac#add('lambdalisue/askpass.vim')
   call minpac#add('lambdalisue/gin.vim')
   call minpac#add('lambdalisue/guise.vim')
