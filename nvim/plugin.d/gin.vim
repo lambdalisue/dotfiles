@@ -31,12 +31,19 @@ function! s:my_gin_status() abort
   nmap <buffer><nowait> g<CR> <Plug>(gin-action-edit:HEAD)
 endfunction
 
+function! s:define_gin_local() abort
+  command! -buffer -bar GinLocal execute 'edit' gin#util#expand('%')
+endfunction
+
 augroup my-gin
   autocmd!
   autocmd User GinComponentPost redrawtabline
   autocmd FileType gitrebase silent! call s:my_gitrebase()
   autocmd FileType gitcommit silent! call s:my_gitcommit()
   autocmd FileType gin-status silent! call s:my_gin_status()
+  autocmd BufReadCmd ginedit://* call s:define_gin_local()
+  autocmd BufReadCmd gindiff://* call s:define_gin_local()
+  autocmd BufReadCmd ginlog://* call s:define_gin_local()
 augroup END
 
 let g:gin_diff_default_args = [

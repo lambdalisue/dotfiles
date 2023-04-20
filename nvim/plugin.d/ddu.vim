@@ -10,7 +10,7 @@ call ddu#custom#patch_global({
       \ ],
       \ 'sourceOptions': {
       \   '_': {
-      \     'matchers': ['matcher_kensaku'],
+      \     'matchers': ['merge'],
       \   },
       \ },
       \ 'kindOptions': {
@@ -40,6 +40,15 @@ call ddu#custom#patch_global({
       \   },
       \ },
       \ 'filterParams': {
+      \   'merge': #{
+      \     filters: [
+      \       #{name: 'matcher_kensaku', weight: 2.0},
+      \       'matcher_matchfuzzy'
+      \     ],
+      \   },
+      \   'matcher_matchfuzzy': {
+      \     'highlightMatched': 'Search',
+      \   },
       \   'matcher_substring': {
       \     'highlightMatched': 'Search',
       \   },
@@ -86,8 +95,8 @@ function! s:my_ddu_ff_filter() abort
 
   inoremap <nowait><buffer><silent> <CR> <Esc><Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
   nnoremap <nowait><buffer><silent> <CR> <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-  inoremap <nowait><buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#ff#close()<CR>
-  nnoremap <nowait><buffer><silent> <Esc> <Cmd>call ddu#ui#ff#close()<CR>
+  inoremap <nowait><buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#ff#do_action('closeFilterWindow')<CR>
+  nnoremap <nowait><buffer><silent> <Esc> <Cmd>call ddu#ui#ff#do_action('closeFilterWindow')<CR>
 
   inoremap <nowait><buffer><silent> <C-a> <Esc><Cmd>call ddu#ui#ff#do_action('chooseAction')<CR>
   inoremap <nowait><buffer><silent> <C-n> <Cmd>call <SID>execute('normal! j')<CR>

@@ -4,7 +4,9 @@ function! s:init() abort
   call minpac#add('k-takata/minpac', { 'type': 'opt' })
 
   " ddu
+  call minpac#add('Bakudankun/ddu-filter-matchfuzzy')
   call minpac#add('Milly/ddu-filter-kensaku')
+  call minpac#add('Milly/ddu-filter-merge')
   call minpac#add('Shougo/ddu-column-filename')
   call minpac#add('Shougo/ddu-commands.vim')
   call minpac#add('Shougo/ddu-filter-matcher_substring')
@@ -66,6 +68,7 @@ function! s:init() abort
   call minpac#add('lambdalisue/fern-mapping-quickfix.vim')
   call minpac#add('lambdalisue/fern-renderer-nerdfont.vim')
   call minpac#add('lambdalisue/fern.vim')
+  call minpac#add('lambdalisue/file-protocol.vim')
   call minpac#add('lambdalisue/gina.vim')
   call minpac#add('lambdalisue/glyph-palette.vim')
   call minpac#add('lambdalisue/mr.vim')
@@ -80,7 +83,6 @@ function! s:init() abort
   call minpac#add('lambdalisue/vim-quickrun-neovim-job')
   call minpac#add('lambdalisue/wifi.vim')
   call minpac#add('machakann/vim-sandwich')
-  call minpac#add('mattn/vim-lexiv')
   call minpac#add('mattn/vim-textobj-url')
   call minpac#add('mattn/webapi-vim')
   call minpac#add('mbbill/undotree')
@@ -109,12 +111,14 @@ function! s:init() abort
 
   " Vim
   call minpac#add('rhysd/vim-healthcheck', {'type': 'opt' })
+  call minpac#add('mattn/vim-lexiv', {'type': 'opt'})
 
   " Neovim
   call minpac#add('nvim-treesitter/nvim-treesitter', {
        \ 'type': 'opt',
        \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
        \})
+  call minpac#add('hrsh7th/nvim-insx', {'type': 'opt'})
 endfunction
 
 function! s:local() abort
@@ -132,8 +136,10 @@ endfunction
 function! s:configure() abort
   if has('nvim')
     silent! packadd nvim-treesitter
+    silent! packadd nvim-insx
   else
     silent! packadd vim-healthcheck
+    silent! packadd vim-lexiv
   endif
 
   " Load plugin configurations

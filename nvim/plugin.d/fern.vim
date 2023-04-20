@@ -42,6 +42,9 @@ function! s:fern_local_init() abort
   nmap <buffer> N <Plug>(fern-action-new-path)
 
   nmap <buffer> <Plug>(fern-action-dirdiff) <Plug>(fern-action-ex=)DirDiff<CR>
+
+  nmap <buffer> <LeftRelease> <Plug>(fern-my-open-or-enter)
+
 endfunction
 
 augroup my-fern
