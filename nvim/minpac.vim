@@ -36,6 +36,9 @@ function! s:init() abort
   call minpac#add('vim-denops/denops-shared-server.vim')
   call minpac#add('vim-denops/denops.vim')
   call minpac#add('yuki-yano/fuzzy-motion.vim')
+  call minpac#add('skanehira/denops-silicon.vim')
+
+  call minpac#add('github/copilot.vim')
 
   call minpac#add('AndrewRadev/linediff.vim')
   call minpac#add('Bakudankun/BackAndForward.vim')
