@@ -146,6 +146,10 @@ autoload -Uz zrecompile
 zrecompile ${HOME}/.zshenv
 zrecompile ${ZDOTDIR}/.zshrc
 
+if [[ -f "$HOME/.profile.local" ]]; then
+  source "$HOME/.profile.local"
+fi
+
 # Profiling
 if type zprof >/dev/null 2>&1; then
   zprof > $HOME/zsh-startup.$$.log

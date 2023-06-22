@@ -28,7 +28,15 @@ endfunction
 function! s:my_gin_status() abort
   nnoremap <buffer><nowait> <C-^> <Cmd>Gin commit -v<CR>
   nnoremap <buffer><nowait> <C-6> <Cmd>Gin commit -v<CR>
+  nnoremap <buffer><nowait> g<C-^> <Cmd>Gin commit -v --amend<CR>
+  nnoremap <buffer><nowait> g<C-6> <Cmd>Gin commit -v --amend<CR>
   nmap <buffer><nowait> g<CR> <Plug>(gin-action-edit:HEAD)
+  setl cursorline
+endfunction
+
+function! s:my_gin_log() abort
+  nnoremap <buffer> <Plug>(gin-action-show) <Plug>(gin-action-show:emojify)
+  setl cursorline
 endfunction
 
 function! s:define_gin_local() abort
@@ -41,6 +49,7 @@ augroup my-gin
   autocmd FileType gitrebase silent! call s:my_gitrebase()
   autocmd FileType gitcommit silent! call s:my_gitcommit()
   autocmd FileType gin-status silent! call s:my_gin_status()
+  autocmd FileType gin-log silent! call s:my_gin_log()
   autocmd BufReadCmd ginedit://* call s:define_gin_local()
   autocmd BufReadCmd gindiff://* call s:define_gin_local()
   autocmd BufReadCmd ginlog://* call s:define_gin_local()
@@ -50,5 +59,6 @@ let g:gin_diff_default_args = [
       \ '++processor=delta --diff-highlight --keep-plus-minus-markers',
       \]
 let g:gin_log_default_args = [
+      \ '++emojify',
       \ '--pretty=%C(yellow)%h%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset) %C(magenta)[%ar]%C(reset)',
       \]

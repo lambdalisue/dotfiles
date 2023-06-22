@@ -26,19 +26,20 @@ function! s:init() abort
   call minpac#add('matsui54/ddu-source-help')
   call minpac#add('matsui54/ddu-vim-ui-select')
   call minpac#add('mikanIchinose/ddu-source-markdown')
+  call minpac#add('tennashi/ddu-source-docbase')
 
   " Denops
-  call minpac#add('lambdalisue/kensaku.vim')
+  " call minpac#add('skanehira/denops-silicon.vim')
+  call minpac#add('Shougo/dda.vim')
   call minpac#add('lambdalisue/askpass.vim')
   call minpac#add('lambdalisue/gin.vim')
   call minpac#add('lambdalisue/guise.vim')
+  call minpac#add('lambdalisue/kensaku.vim')
   call minpac#add('skanehira/denops-translate.vim')
+  call minpac#add('tani/hey.vim')
   call minpac#add('vim-denops/denops-shared-server.vim')
   call minpac#add('vim-denops/denops.vim')
   call minpac#add('yuki-yano/fuzzy-motion.vim')
-  call minpac#add('skanehira/denops-silicon.vim')
-
-  call minpac#add('github/copilot.vim')
 
   call minpac#add('AndrewRadev/linediff.vim')
   call minpac#add('Bakudankun/BackAndForward.vim')
@@ -52,6 +53,7 @@ function! s:init() abort
   call minpac#add('c000/rapidfire.vim')
   call minpac#add('cocopon/colorswatch.vim')
   call minpac#add('dstein64/vim-startuptime')
+  call minpac#add('github/copilot.vim')
   call minpac#add('hrsh7th/vim-eft')
   call minpac#add('itchyny/vim-parenmatch')
   call minpac#add('kana/vim-operator-replace')
@@ -106,6 +108,7 @@ function! s:init() abort
   call minpac#add('tyru/current-func-info.vim')
   call minpac#add('tyru/open-browser.vim')
   call minpac#add('will133/vim-dirdiff')
+  call minpac#add('yuki-yano/fern-preview.vim')
 
   " Colorscheme
   call minpac#add('cocopon/iceberg.vim')
@@ -121,7 +124,9 @@ function! s:init() abort
        \ 'type': 'opt',
        \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
        \})
+  call minpac#add('nvim-treesitter/nvim-treesitter-context', {'type': 'opt'})
   call minpac#add('hrsh7th/nvim-insx', {'type': 'opt'})
+  call minpac#add('rcarriga/nvim-notify', {'type': 'opt'})
 endfunction
 
 function! s:local() abort
@@ -139,7 +144,9 @@ endfunction
 function! s:configure() abort
   if has('nvim')
     silent! packadd nvim-treesitter
+    silent! packadd nvim-treesitter-context
     silent! packadd nvim-insx
+    silent! packadd nvim-notify
   else
     silent! packadd vim-healthcheck
     silent! packadd vim-lexiv

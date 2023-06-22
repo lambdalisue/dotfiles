@@ -40,7 +40,7 @@
 
 [alias]
   push-f = push --force-with-lease --force-if-includes
-  progresstest = !deno run https://raw.githubusercontent.com/lambdalisue/deno-progresstest/main/progresstest.ts
+  progresstest = !deno run https://raw.githubusercontent.com/lambdalisue/deno-progresstest/main/progresstest.ts?version=1 -I -m
 
 [init]
   defaultBranch = main

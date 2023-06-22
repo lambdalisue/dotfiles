@@ -186,3 +186,13 @@ nnoremap <silent> <Leader>df <Cmd>call ddu#start({
       \   'name': 'file_rec',
       \ }],
       \})<CR>
+nnoremap <silent> <Leader>dc <Cmd>call ddu#start({
+      \ 'sources': [{
+      \   'name': 'docbase_memo',
+      \ }],
+      \})<CR>
+nnoremap <silent> <Leader>dh <Cmd>call ddu#start({
+      \ 'sources': [{
+      \   'name': 'help',
+      \ }],
+      \})<CR>

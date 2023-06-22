@@ -21,6 +21,7 @@ function! s:statusline() abort
         \ '%{exists("w:quickfix_title") ? w:quickfix_title : ""}',
         \ '%=',
         \ s:safe('coc#status()'),
+        \ s:safe('gin#indicator#status#get()'),
         \ '%{&filetype}',
         \ '%{&fileformat}',
         \ '%{&fileencoding}',
