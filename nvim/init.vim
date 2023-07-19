@@ -467,7 +467,8 @@ nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))
 " Postludium {{{
 
 " Plugin
-source $VIMHOME/minpac.vim
+"source $VIMHOME/minpac.vim
+source $VIMHOME/jetpack.vim
 
 syntax on
 filetype indent plugin on
