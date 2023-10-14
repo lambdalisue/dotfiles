@@ -1,6 +1,7 @@
 function! s:init() abort
   call s:ensure()
   call jetpack#begin()
+  call jetpack#add('tani/vim-jetpack')
 
   " ddu
   call jetpack#add('Bakudankun/ddu-filter-matchfuzzy')
@@ -25,10 +26,9 @@ function! s:init() abort
   call jetpack#add('matsui54/ddu-source-help')
   call jetpack#add('matsui54/ddu-vim-ui-select')
   call jetpack#add('mikanIchinose/ddu-source-markdown')
-  call jetpack#add('tennashi/ddu-source-docbase')
 
   " Denops
-  " call jetpack#add('skanehira/denops-silicon.vim')
+  call jetpack#add('skanehira/denops-silicon.vim')
   call jetpack#add('Shougo/dda.vim')
   call jetpack#add('lambdalisue/askpass.vim')
   call jetpack#add('lambdalisue/gin.vim')
