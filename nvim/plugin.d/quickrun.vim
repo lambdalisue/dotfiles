@@ -25,6 +25,11 @@ let g:quickrun_config = extend(get(g:, 'quickrun_config', {}), {
       \   'cmdopt': '--allow-all --unstable',
       \   'exec': 'NO_COLOR=1 %c run %o %s',
       \ },
+      \ 'typescriptreact': {
+      \   'command': 'deno',
+      \   'cmdopt': '--allow-all --unstable',
+      \   'exec': 'NO_COLOR=1 %c run %o %s',
+      \ },
       \})
 
 if has('nvim')

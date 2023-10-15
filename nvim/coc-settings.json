@@ -28,6 +28,8 @@
   "sumneko-lua.enableNvimLuaDev": true,
   "vetur.format.defaultFormatter.html": "prettier",
   "go.goplsOptions": {
+    "gofumpt": true,
+    "usePlaceholders": true,
     "completeUnimported": true,
     "completionDocumentation": true
   },
@@ -39,6 +41,5 @@
       "initializationOptions": {},
       "settings": {}
     }
-  },
-  "Lua.telemetry.enable": true
+  }
 }

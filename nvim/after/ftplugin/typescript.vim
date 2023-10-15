@@ -7,14 +7,14 @@ function! s:enable_deno() abort
   call coc#config('deno.enable', v:true)
   call coc#config('tsserver.enable', v:false)
   call coc#config('prettier.enable', v:false)
-  call timer_start(0, { -> execute('CocRestart') })
+  call timer_start(0, { -> execute('silent! CocRestart') })
 endfunction
 
 function! s:enable_tsserver() abort
   call coc#config('deno.enable', v:false)
   call coc#config('tsserver.enable', v:true)
   call coc#config('prettier.enable', v:true)
-  call timer_start(0, { -> execute('CocRestart') })
+  call timer_start(0, { -> execute('silent! CocRestart') })
 endfunction
 
 command! CocTypescriptOnDeno call s:enable_deno()
@@ -26,10 +26,12 @@ function! s:switch_coc_typescript(bufname) abort
   endif
   let g:my_coc_typescript_detected = 1
   let dir = a:bufname ==# '' ? '.' : fnamemodify(a:bufname, ':p:h')
-  if empty(finddir("node_modules", dir . ';'))
+  if !empty(findfile("deno.json", dir . ';'))
     call s:enable_deno()
-  else
+  elseif !empty(findfile("package.json", dir . ';'))
     call s:enable_tsserver()
+  else
+    call s:enable_deno()
   endif
 endfunction
 

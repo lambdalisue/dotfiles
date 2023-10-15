@@ -36,6 +36,7 @@ require('nvim-treesitter.configs').setup {
     "scss",
     "toml",
     "typescript",
+    "tsx",
     "terraform",
     "vim",
     "vue",

@@ -13,7 +13,7 @@ path=(
     $HOME/.krew/bin(N-/)
     $HOME/.local/bin(N-/)
     $HOME/.local/share/aquaproj-aqua/bin(N-/)
-    $HOME/.config/nvim/pack/jetpack/src/github.com/thinca/vim-themis/bin(N-/)
+    $HOME/.config/nvim/pack/jetpack/opt/vim-themis/bin(N-/)
     $HOME/.config/nvim/pack/minpac/start/vim-themis/bin(N-/)
     /Applications/Wireshark.app/Contents/MacOS(N-/)
     /opt/homebrew/opt/llvm/bin(N-/)

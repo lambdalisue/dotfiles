@@ -55,7 +55,6 @@ function! s:init() abort
   call jetpack#add('github/copilot.vim')
   call jetpack#add('hrsh7th/vim-eft')
   call jetpack#add('itchyny/vim-parenmatch')
-  call jetpack#add('itchyny/vim-qfedit')
   call jetpack#add('kana/vim-operator-replace')
   call jetpack#add('kana/vim-operator-user')
   call jetpack#add('kana/vim-repeat')
@@ -162,7 +161,7 @@ endfunction
 
 function! s:ensure() abort
   let url = 'https://github.com/tani/vim-jetpack'
-  let dir = expand('$VIMHOME/pack/jetpack/start/vim-jetpack')
+  let dir = expand('$VIMHOME/pack/jetpack/opt/vim-jetpack')
   if !isdirectory(dir)
     silent execute printf('!git clone --depth 1 %s %s', url, dir)
   endif

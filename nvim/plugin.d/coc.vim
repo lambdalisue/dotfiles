@@ -103,3 +103,6 @@ augroup END
 nmap <silent> gs <Plug>(coc-git-chunkinfo)
 nmap <silent> gp <Plug>(coc-git-prevchunk)
 nmap <silent> gn <Plug>(coc-git-nextchunk)
+
+command! CocEnableFormatOnSave call coc#config('coc.preferences.formatOnSave', v:true)
+command! CocDisableFormatOnSave call coc#config('coc.preferences.formatOnSave', v:false)

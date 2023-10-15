@@ -55,10 +55,12 @@ augroup my-gin
   autocmd BufReadCmd ginlog://* call s:define_gin_local()
 augroup END
 
-let g:gin_diff_default_args = [
+let g:gin_diff_persistent_args = [
       \ '++processor=delta --diff-highlight --keep-plus-minus-markers',
       \]
-let g:gin_log_default_args = [
+let g:gin_log_persistent_args = [
       \ '++emojify',
       \ '--pretty=%C(yellow)%h%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset) %C(magenta)[%ar]%C(reset)',
       \]
+
+let g:gin_proxy_apply_without_confirm = 1

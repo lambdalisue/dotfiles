@@ -176,6 +176,18 @@ if type direnv &>/dev/null; then
   source ${CACHE_PROFILE}/direnv.zsh
 fi
 
+# kubectl
+if type kubectl &>/dev/null; then
+  cache::kubectl() {
+    kubectl completion zsh > ${CACHE_PROFILE}/kubectl.zsh
+    zcompile ${CACHE_PROFILE}/kubectl.zsh
+  }
+  if [[ ! -f ${CACHE_PROFILE}/kubectl.zsh ]]; then
+    cache::kubectl
+  fi
+  source ${CACHE_PROFILE}/kubectl.zsh
+fi
+
 # docker
 if [[ -d /Applications/Docker.app ]]; then
   cache::docker() {
@@ -187,17 +199,5 @@ if [[ -d /Applications/Docker.app ]]; then
   }
   if [[ ! -f $HOME/.zfunc/_docker ]]; then
     cache::docker
-  fi
-fi
-
-# kubectl
-if type kubectl &>/dev/null; then
-  cache::kubectl() {
-    local dst="$HOME/.zfunc"
-    mkdir -p "$dst"
-    kubectl completion zsh > "$dst/_kubectl"
-  }
-  if [[ ! -f $HOME/.zfunc/_kubectl ]]; then
-    cache::kubectl
   fi
 fi
