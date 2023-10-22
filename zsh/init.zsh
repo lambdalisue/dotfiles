@@ -164,6 +164,18 @@ if [ -f ~/.poetry/env ]; then
   source ~/.poetry/env
 fi
 
+# pdm
+if type pdm &>/dev/null; then
+  cache::pdm() {
+    local dst="$HOME/.zfunc"
+    mkdir -p "$dst"
+    pdm --completion zsh > "$dst/_pdm"
+  }
+  if [[ ! -f $HOME/.zfunc/_pdm ]]; then
+    cache::pdm
+  fi
+fi
+
 # direnv
 if type direnv &>/dev/null; then
   cache::direnv() {
