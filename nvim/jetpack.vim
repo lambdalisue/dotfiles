@@ -36,6 +36,7 @@ function! s:init() abort
   call jetpack#add('vim-denops/denops-shared-server.vim')
   call jetpack#add('vim-denops/denops.vim')
   call jetpack#add('yuki-yano/fuzzy-motion.vim')
+  call jetpack#add('skanehira/denops-silicon.vim')
 
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
