@@ -21,6 +21,7 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-prettier',
       \ 'coc-pyright',
+      \ '@yaegassy/coc-ruff',
       \ 'coc-rust-analyzer',
       \ 'coc-sh',
       \ 'coc-sumneko-lua',

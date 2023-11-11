@@ -13,3 +13,8 @@ setl expandtab
 
 setl textwidth&
 setl colorcolumn&
+
+augroup my-coc-python
+  autocmd!
+  autocmd BufWrite <buffer> silent! call CocAction('runCommand', 'python.sortImports')
+augroup END
