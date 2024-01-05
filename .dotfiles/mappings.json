@@ -1,6 +1,6 @@
 {
   "tmux/tmux.conf": "~/.tmux.conf",
-  "alacritty.yml": "~/.alacritty.yml",
+  "alacritty.toml": "~/.alacritty.toml",
   "gitconfig": "~/.gitconfig",
   "git": "~/.config/git"
 }

@@ -86,6 +86,7 @@ function! s:init() abort
   call jetpack#add('mattn/vim-textobj-url')
   call jetpack#add('mattn/webapi-vim')
   call jetpack#add('mbbill/undotree')
+  call jetpack#add('neo4j-contrib/cypher-vim-syntax')
   call jetpack#add('neoclide/coc.nvim', {'branch': 'release'})
   call jetpack#add('osyo-manga/vim-textobj-multiblock')
   call jetpack#add('previm/previm')

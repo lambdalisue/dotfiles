@@ -1,0 +1,25 @@
+[colors]
+transparent_background_colors = false
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "IntoneMono Nerd Font"
+style = "Light"
+
+[[keyboard.bindings]]
+chars = "\u001E"
+key = "Key6"
+mods = "Control"
+
+[shell]
+args = ["--login"]
+program = "/opt/homebrew/bin/zsh"
+
+[window]
+opacity = 1.0
+
+[window.padding]
+x = 4
+y = 4

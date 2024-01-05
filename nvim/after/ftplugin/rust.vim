@@ -16,6 +16,9 @@ nnoremap <buffer><silent> gT <Cmd>CocRustAnalyzerTestCurrent<CR>
 nnoremap <buffer><silent> <F5> <Cmd>CocRustAnalyzerReload<CR>
 nnoremap <buffer><silent> <Space>rr <Cmd>CocRustAnalyzerRun<CR>
 
+nunmap <buffer> [[
+nunmap <buffer> ]]
+
 command! CocRustAnalyzerRun CocCommand rust-analyzer.run
 command! CocRustAnalyzerReload CocCommand rust-analyzer.reload
 command! CocRustAnalyzerPeekTests CocCommand rust-analyzer.peekTests

@@ -29,6 +29,7 @@ require('nvim-treesitter.configs').setup {
     "make",
     "markdown",
     "python",
+    "proto",
     "regex",
     "rego",
     "rst",

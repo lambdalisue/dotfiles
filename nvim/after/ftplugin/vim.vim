@@ -17,6 +17,6 @@ setl autoindent
 setl smartindent
 setl keywordprg=:help
 
-imap <buffer><expr> <CR> coc#pum#visible()
-     \ ? coc#pum#confirm()
-     \ : "\<Plug>(vim-backslash-CR)"
+" imap <buffer><expr> <CR> coc#pum#visible()
+"     \ ? coc#pum#confirm()
+"     \ : "\<Plug>(vim-backslash-CR)"

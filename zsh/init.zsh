@@ -103,16 +103,16 @@ if type brew &>/dev/null && type asdf &>/dev/null; then
   }
 fi
 
-# rtx
-if type brew &>/dev/null && type rtx &>/dev/null; then
-  cache::rtx() {
-    echo 'eval "$(rtx activate zsh)"' > ${CACHE_PROFILE}/rtx.zsh
-    zcompile ${CACHE_PROFILE}/rtx.zsh
+# mise
+if type brew &>/dev/null && type mise &>/dev/null; then
+  cache::mise() {
+    echo 'eval "$(mise activate zsh)"' > ${CACHE_PROFILE}/mise.zsh
+    zcompile ${CACHE_PROFILE}/mise.zsh
   }
-  if [[ ! -f ${CACHE_PROFILE}/rtx.zsh ]]; then
-    cache::rtx
+  if [[ ! -f ${CACHE_PROFILE}/mise.zsh ]]; then
+    cache::mise
   fi
-  source ${CACHE_PROFILE}/rtx.zsh
+  source ${CACHE_PROFILE}/mise.zsh
 fi
 
 # pip
