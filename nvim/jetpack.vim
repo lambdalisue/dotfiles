@@ -128,10 +128,13 @@ function! s:init() abort
 endfunction
 
 function! s:local() abort
+  let excludes = [
+        \ 'denops-massive-plugins-tester',
+        \]
   let proves = ['/autoload', '/plugin', '/ftplugin', '/denops']
   for path in glob('~/ghq/github.com/*/*', 1, 1, 1)
     for prove in proves
-      if isdirectory(path . prove)
+      if isdirectory(path . prove) && index(excludes, fnamemodify(path, ':t')) is# -1
         execute printf('set runtimepath^=%s', fnameescape(path))
         break
       endif

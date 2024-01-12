@@ -11,6 +11,8 @@ set completeopt-=longest
 
 " Global extension names to install when they aren't installed
 let g:coc_global_extensions = [
+      \ '@yaegassy/coc-ruff',
+      \ '@yaegassy/coc-tailwindcss3',
       \ 'coc-deno',
       \ 'coc-diagnostic',
       \ 'coc-eslint',
@@ -21,7 +23,6 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-prettier',
       \ 'coc-pyright',
-      \ '@yaegassy/coc-ruff',
       \ 'coc-rust-analyzer',
       \ 'coc-sh',
       \ 'coc-sumneko-lua',

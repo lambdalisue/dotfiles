@@ -1,4 +1,16 @@
 {
+  "diagnostic.floatConfig": {
+    "border": true
+  },
+  "signature.floatConfig": {
+    "border": true
+  },
+  "hover.floatConfig": {
+    "border": true
+  },
+  "suggest.floatConfig": {
+    "border": true
+  },
   "suggest.asciiCharactersOnly": true,
   "suggest.noselect": true,
   "suggest.enablePreselect": false,

@@ -25,7 +25,6 @@ require('nvim-treesitter.configs').setup {
     "json5",
     "jsonc",
     "llvm",
-    "lua",
     "make",
     "markdown",
     "python",
