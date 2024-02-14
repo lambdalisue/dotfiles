@@ -1,1 +1,1 @@
--- require('insx.preset.standard').setup()
+require('insx.preset.standard').setup()

@@ -21,6 +21,7 @@ let g:coc_global_extensions = [
       \ 'coc-go',
       \ 'coc-jest',
       \ 'coc-json',
+      \ 'coc-lua',
       \ 'coc-prettier',
       \ 'coc-pyright',
       \ 'coc-rust-analyzer',

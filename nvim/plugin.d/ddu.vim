@@ -71,21 +71,21 @@ function! s:my_ddu_ff() abort
   setlocal cursorline
 
   nnoremap <nowait><buffer><silent> <CR>
-        \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+        \ <Cmd>call ddu#ui#do_action('itemAction')<CR>
   nnoremap <nowait><buffer><silent> a
-        \ <Cmd>call ddu#ui#ff#do_action('chooseAction')<CR>
+        \ <Cmd>call ddu#ui#do_action('chooseAction')<CR>
   nnoremap <nowait><buffer><silent> p
-        \ <Cmd>call ddu#ui#ff#do_action('preview')<CR>
+        \ <Cmd>call ddu#ui#do_action('preview')<CR>
   nnoremap <nowait><buffer><silent> i
-        \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+        \ <Cmd>call ddu#ui#do_action('openFilterWindow')<CR>
   nnoremap <nowait><buffer><silent> <Esc>
-        \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+        \ <Cmd>call ddu#ui#do_action('quit')<CR>
 
   " Mark
   nnoremap <nowait><buffer><silent> -
-        \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+        \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>
   nnoremap <nowait><buffer><silent> <C-j>
-        \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>j
+        \ <Cmd>call ddu#ui#do_action('toggleSelectItem')<CR>j
   nnoremap <nowait><buffer><silent> <C-k>
         \ k<Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
 endfunction
@@ -93,10 +93,10 @@ endfunction
 function! s:my_ddu_ff_filter() abort
   let b:coc_suggest_disable = 1
 
-  inoremap <nowait><buffer><silent> <CR> <Esc><Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-  nnoremap <nowait><buffer><silent> <CR> <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-  inoremap <nowait><buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#ff#do_action('closeFilterWindow')<CR>
-  nnoremap <nowait><buffer><silent> <Esc> <Cmd>call ddu#ui#ff#do_action('closeFilterWindow')<CR>
+  inoremap <nowait><buffer><silent> <CR> <Esc><Cmd>call ddu#ui#do_action('itemAction')<CR>
+  nnoremap <nowait><buffer><silent> <CR> <Cmd>call ddu#ui#do_action('itemAction')<CR>
+  inoremap <nowait><buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
+  nnoremap <nowait><buffer><silent> <Esc> <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 
   inoremap <nowait><buffer><silent> <C-a> <Esc><Cmd>call ddu#ui#ff#do_action('chooseAction')<CR>
   inoremap <nowait><buffer><silent> <C-n> <Cmd>call <SID>execute('normal! j')<CR>

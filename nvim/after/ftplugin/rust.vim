@@ -16,8 +16,6 @@ nnoremap <buffer><silent> gT <Cmd>CocRustAnalyzerTestCurrent<CR>
 nnoremap <buffer><silent> <F5> <Cmd>CocRustAnalyzerReload<CR>
 nnoremap <buffer><silent> <Space>rr <Cmd>CocRustAnalyzerRun<CR>
 
-nunmap <buffer> [[
-nunmap <buffer> ]]
 
 command! CocRustAnalyzerRun CocCommand rust-analyzer.run
 command! CocRustAnalyzerReload CocCommand rust-analyzer.reload
@@ -41,3 +39,9 @@ command! CocRustAnalyzerTargetPlatform call s:set_rust_target(v:null)
 command! CocRustAnalyzerTargetWindows call s:set_rust_target('x86_64-pc-windows-gnu')
 command! CocRustAnalyzerTargetMacOS call s:set_rust_target('x86_64-apple-darwin')
 command! CocRustAnalyzerTargetLinux call s:set_rust_target('x86_64-unknown-linux-gnu')
+
+function! s:overwrite_default_mappings() abort
+  nmap <buffer><nowait> [[ <Plug>(coc-diagnostic-prev)<Plug>(my-zv)
+  nmap <buffer><nowait> ]] <Plug>(coc-diagnostic-next)<Plug>(my-zv)
+endfunction
+silent! call s:overwrite_default_mappings()
