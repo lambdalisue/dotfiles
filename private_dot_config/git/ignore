@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Vim
+.*.sw[a-z]
+*.un~
+
+# direnv
+.envrc
+
+.venv

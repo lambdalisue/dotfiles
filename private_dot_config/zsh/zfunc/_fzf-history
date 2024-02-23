@@ -1,0 +1,14 @@
+fzf-history() {
+    if ! type fc 1>/dev/null 2>&1; then
+        echo 'A "fc" command is not found.'
+        return 1
+    fi
+    local s=$(fc -ln 1 | fzf --query "$1")
+    [[ -n $s ]] && print "$s"
+}
+
+[[ "x$BUFFER" != "x" ]] && BUFFER="$BUFFER "
+BUFFER="$BUFFER $(fzf-history)"
+CURSOR=$#BUFFER
+zle redisplay
+zle zle-line-init

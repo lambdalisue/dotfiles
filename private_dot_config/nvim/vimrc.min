@@ -1,0 +1,20 @@
+if exists('+compatible') && &compatible
+  set nocompatible
+endif
+
+" Disable Vim's native pack feature
+set packpath=
+
+" Clone https://github.com/lambdalisue/fern.vim in somewhere
+" and specify that directory to the below
+set runtimepath^=~/ghq/github.com/lambdalisue/fern.vim
+
+filetype plugin indent on
+syntax on
+"----------------------------------------------------------------
+
+nnoremap ; :
+nnoremap : ;
+
+"----------------------------------------------------------------
+echomsg "Custom minimal vimrc has loaded"

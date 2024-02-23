@@ -1,0 +1,49 @@
+{
+  "Lua.workspace.checkThirdParty": false,
+  "coc.preferences.bracketEnterImprove": false,
+  "coc.preferences.formatOnSave": true,
+  "coc.preferences.useQuickfixForLocations": true,
+  "deno.codeLens.implementations": true,
+  "deno.codeLens.references": true,
+  "deno.codeLens.referencesAllFunctions": true,
+  "deno.lint": true,
+  "deno.suggest.imports.hosts": { "https://deno.land": true },
+  "deno.unstable": true,
+  "diagnostic.floatConfig": { "border": true },
+  "hover.floatConfig": { "border": true },
+  "prettier.formatterPriority": 1,
+  "python.formatting.provider": "none",
+  "python.linting.enabled": true,
+  "python.linting.ruffEnabled": true,
+  "ruff.autoFixOnSave": true,
+  "rust-analyzer.cargo.buildScripts.enable": true,
+  "rust-analyzer.imports.granularity.enforce": true,
+  "rust-analyzer.inlayHints.bindingModeHints.enable": true,
+  "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "with_block",
+  "rust-analyzer.lens.references.adt.enable": true,
+  "rust-analyzer.lens.references.enumVariant.enable": true,
+  "rust-analyzer.lens.references.method.enable": true,
+  "rust-analyzer.lens.references.trait.enable": true,
+  "signature.floatConfig": { "border": true },
+  "suggest.asciiCharactersOnly": true,
+  "suggest.enablePreselect": false,
+  "suggest.floatConfig": { "border": true },
+  "suggest.noselect": true,
+  "sumneko-lua.enableNvimLuaDev": true,
+  "vetur.format.defaultFormatter.html": "prettier",
+  "go.goplsOptions": {
+    "gofumpt": true,
+    "usePlaceholders": true,
+    "completeUnimported": true,
+    "completionDocumentation": true
+  },
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
+}

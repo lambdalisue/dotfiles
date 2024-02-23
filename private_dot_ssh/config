@@ -1,0 +1,6 @@
+# https://h2ham.net/macos-sierra-use-keychain
+AddKeysToAgent yes
+UseKeychain yes
+
+# https://qiita.com/tango110/items/c8194d43b46fa2a712d1
+IPQoS none

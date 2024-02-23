@@ -1,0 +1,52 @@
+[include]
+  path = ~/.gitconfig.local
+
+[user]
+  name  = Alisue
+  email = lambdalisue@gmail.com
+  signingkey = 74D5B4A7F3E1B28C
+
+[rerere]
+  enabled = true
+
+[core]
+  autocrlf = input
+  ignorecase = false
+  quotepath = false
+
+[color]
+  ui = auto
+
+[push]
+  default = current
+  useForceIfIncludes = true
+
+[branch]
+  autosetupmerge = always
+
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+
+[commit]
+  gpgsign = true
+  verbose = true
+
+[diff]
+  algorithm = patience
+  colormoved = dimmed-zebra
+
+[alias]
+  push-f = push --force-with-lease --force-if-includes
+  browse = "!deno run --allow-net --allow-run --allow-read https://deno.land/x/git_browse/bin/browse.ts"
+
+[init]
+  defaultBranch = main
+
+[github]
+  user = lambdalisue
+
+[fetch]
+  prune = true
