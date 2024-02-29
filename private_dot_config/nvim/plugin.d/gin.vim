@@ -36,6 +36,9 @@ endfunction
 
 function! s:my_gin_log() abort
   nnoremap <buffer> <Plug>(gin-action-show) <Plug>(gin-action-show:emojify)
+  nnoremap <buffer> <Plug>(gin-action-stat) 
+        \ <Plug>(gin-action-yank:commit)
+        \ :<C-u>GinBuffer diff --stat <C-r>+~..<C-r>+<CR>
   setl cursorline
 endfunction
 

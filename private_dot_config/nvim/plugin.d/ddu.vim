@@ -37,6 +37,7 @@ call ddu#custom#patch_global({
       \     'highlights': {
       \       'floating': 'Normal',
       \     },
+      \     'startFilter': v:true,
       \   },
       \ },
       \ 'filterParams': {
@@ -98,13 +99,8 @@ function! s:my_ddu_ff_filter() abort
   inoremap <nowait><buffer><silent> <Esc> <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
   nnoremap <nowait><buffer><silent> <Esc> <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
 
-  inoremap <nowait><buffer><silent> <C-a> <Esc><Cmd>call ddu#ui#ff#do_action('chooseAction')<CR>
   inoremap <nowait><buffer><silent> <C-n> <Cmd>call <SID>execute('normal! j')<CR>
   inoremap <nowait><buffer><silent> <C-p> <Cmd>call <SID>execute('normal! k')<CR>
-  inoremap <nowait><buffer><silent> <C-g> <Cmd>call <SID>execute('normal! j')<CR>
-  inoremap <nowait><buffer><silent> <C-t> <Cmd>call <SID>execute('normal! k')<CR>
-  inoremap <nowait><buffer><silent> <C-d> <Cmd>call <SID>execute("normal! \<C-d>")<CR>
-  inoremap <nowait><buffer><silent> <C-u> <Cmd>call <SID>execute("normal! \<C-u>")<CR>
 endfunction
 
 augroup my-ddu
@@ -163,7 +159,7 @@ nnoremap <silent> <Leader>dd <Cmd>call ddu#start({
       \     ],
       \   },
       \   'options': {
-      \     'path': <SID>ghq_root() . '/github.com/lambdalisue/dotfiles',
+      \     'path': expand('~/.local/share/chezmoi')
       \   },
       \ }],
       \})<CR>

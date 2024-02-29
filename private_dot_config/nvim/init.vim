@@ -381,6 +381,10 @@ autocmd MyAutoCmd BufWritePre *
       \ call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
 " }}}
 
+" Open help on right
+autocmd MyAutoCmd FileType help wincmd L
+
+
 " }}}
 
 " Mapping {{{
@@ -485,6 +489,14 @@ call s:load_configurations()
 "silent! colorscheme iceberg
 "silent! colorscheme edge
 silent! colorscheme nightfly
+
+" chezmoi
+if executable("chezmoi") && isdirectory(expand("~/.local/share/chezmoi"))
+  augroup my_chezmoi
+    autocmd!
+    autocmd BufWritePost ~/.local/share/chezmoi/* silent! !chezmoi apply --source-path "%"
+  augroup END
+endif
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local

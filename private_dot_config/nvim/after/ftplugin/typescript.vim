@@ -1,4 +1,5 @@
 setlocal foldmethod=syntax
+setlocal shiftwidth=2
 
 " Automatically indent dot chained method calls
 setlocal indentkeys+=0.

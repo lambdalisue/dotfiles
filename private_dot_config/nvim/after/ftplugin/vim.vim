@@ -1,5 +1,4 @@
-setlocal foldmethod=syntax
-
+setl foldmethod=syntax
 let g:vimsyn_folding='af'
 
 setl tabstop=8
@@ -11,7 +10,3 @@ setl expandtab
 setl autoindent
 setl smartindent
 setl keywordprg=:help
-
-imap <buffer><expr> <CR> coc#pum#visible()
-    \ ? coc#pum#confirm()
-    \ : "\<Plug>(vim-backslash-CR)"

@@ -39,15 +39,15 @@ function! s:init() abort
   call jetpack#add('yuki-yano/fuzzy-motion.vim')
   call jetpack#add('skanehira/denops-silicon.vim')
 
+  " Colorscheme
+  call jetpack#add('bluz71/vim-moonfly-colors')
+  call jetpack#add('bluz71/vim-nightfly-colors')
+  call jetpack#add('bluz71/vim-nightfly-guicolors')
+
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
   call jetpack#add('Shougo/context_filetype.vim')
   call jetpack#add('Shougo/junkfile.vim')
-  call jetpack#add('Vimjas/vim-python-pep8-indent')
-  call jetpack#add('bluz71/vim-moonfly-colors')
-  call jetpack#add('bluz71/vim-nightfly-colors')
-  call jetpack#add('bluz71/vim-nightfly-guicolors')
-  call jetpack#add('c000/rapidfire.vim')
   call jetpack#add('cocopon/colorswatch.vim')
   call jetpack#add('dstein64/vim-startuptime')
   call jetpack#add('github/copilot.vim')
