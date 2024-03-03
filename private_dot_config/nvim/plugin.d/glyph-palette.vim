@@ -5,5 +5,6 @@ endfunction
 augroup my-glyph-palette
   autocmd! *
   autocmd FileType fern call glyph_palette#apply()
+  autocmd FileType fall-selector call glyph_palette#apply()
   autocmd ColorScheme * call s:regulate_glyph_palette()
 augroup END

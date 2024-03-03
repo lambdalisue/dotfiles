@@ -147,7 +147,7 @@ nnoremap <silent> <Leader>ll <Cmd>call ddu#start({
       \   'name': 'line',
       \ }],
       \})<CR>
-nnoremap <silent> <Leader>dd <Cmd>call ddu#start({
+nnoremap <silent> <Leader>DD <Cmd>call ddu#start({
       \ 'name': 'dotfiles',
       \ 'sources': [{
       \   'name': 'file_rec',
