@@ -30,6 +30,7 @@ endfunction
 
 function! s:tabline() abort
   let lhs = [
+        \ '%{get(b:, "copilot_enabled") ? "\uf4b8 " : "\uf4b9 "}',
         \ join(map(range(1, tabpagenr('$')), { -> s:tab(v:val) }), ' ┆ '),
         \]
   let rhs = [

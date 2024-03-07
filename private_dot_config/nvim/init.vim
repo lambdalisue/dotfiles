@@ -485,7 +485,7 @@ call s:load_configurations()
 "silent! colorscheme slate
 "silent! colorscheme iceberg
 "silent! colorscheme edge
-silent! colorscheme nightfly
+silent! colorscheme nordfox
 
 " chezmoi
 if executable("chezmoi") && isdirectory(expand("~/.local/share/chezmoi"))

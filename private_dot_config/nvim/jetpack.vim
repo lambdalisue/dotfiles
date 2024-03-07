@@ -101,8 +101,6 @@ function! s:init() abort
   call jetpack#add('thinca/vim-zenspace')
   call jetpack#add('tweekmonster/helpful.vim')
   call jetpack#add('tyru/capture.vim')
-  call jetpack#add('tyru/caw.vim')
-  call jetpack#add('tyru/current-func-info.vim')
   call jetpack#add('tyru/open-browser.vim')
   call jetpack#add('will133/vim-dirdiff')
   call jetpack#add('yuki-yano/fern-preview.vim')
@@ -115,15 +113,16 @@ function! s:init() abort
   " Vim
   call jetpack#add('rhysd/vim-healthcheck', {'opt': 1 })
   call jetpack#add('mattn/vim-lexiv', {'opt': 1})
+  call jetpack#add('tyru/caw.vim', {'opt': 1})
 
   " Neovim
   call jetpack#add('nvim-treesitter/nvim-treesitter', {
        \ 'opt': 1,
        \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
        \})
-  call jetpack#add('nvim-treesitter/nvim-treesitter-context', {'opt': 1})
   call jetpack#add('hrsh7th/nvim-insx', {'opt': 1})
   call jetpack#add('rcarriga/nvim-notify', {'opt': 1})
+  call jetpack#add('numToStr/Comment.nvim', {'opt': 1})
 
   call jetpack#end()
 endfunction
@@ -146,9 +145,9 @@ endfunction
 function! s:configure() abort
   if has('nvim')
     silent! packadd nvim-treesitter
-    silent! packadd nvim-treesitter-context
     silent! packadd nvim-insx
     silent! packadd nvim-notify
+    silent! packadd Comment.nvim
   else
     silent! packadd vim-healthcheck
     silent! packadd vim-lexiv
