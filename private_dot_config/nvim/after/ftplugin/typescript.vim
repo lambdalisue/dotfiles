@@ -1,4 +1,9 @@
-setlocal foldmethod=syntax
+if has('nvim')
+  setlocal foldmethod=expr
+  setlocal foldexpr=nvim_treesitter#foldexpr()
+else
+  setlocal foldmethod=syntax
+endif
 setlocal shiftwidth=2
 
 " Automatically indent dot chained method calls

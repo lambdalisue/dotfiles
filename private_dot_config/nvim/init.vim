@@ -381,6 +381,7 @@ autocmd MyAutoCmd BufWritePre *
       \ call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
 " }}}
 
+autocmd MyAutoCmd FileType help wincmd L
 
 " }}}
 

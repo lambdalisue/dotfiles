@@ -1,4 +1,9 @@
-setlocal foldmethod=syntax
+if has('nvim')
+  setlocal foldmethod=expr
+  setlocal foldexpr=nvim_treesitter#foldexpr()
+else
+  setlocal foldmethod=syntax
+endif
 
 setl tabstop=8
 setl softtabstop=2
