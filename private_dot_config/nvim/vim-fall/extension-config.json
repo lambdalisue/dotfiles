@@ -1,0 +1,105 @@
+{
+  "$schema": "https://vim-fall.github.io/jsonschema/v1/extension-config.schema.json",
+  "action": {
+    "open": {
+      "uri": "builtin:action/open",
+      "variants": {
+        "split": {
+          "opener": "split"
+        },
+        "vsplit": {
+          "opener": "vsplit"
+        },
+        "tabedit": {
+          "opener": "tabedit"
+        },
+        "edit-split": {
+          "splitter": "split"
+        },
+        "edit-vsplit": {
+          "splitter": "vsplit"
+        },
+        "edit-tabedit": {
+          "splitter": "tabedit"
+        }
+      }
+    },
+    "quickfix": {
+      "uri": "package:vim-fall/package-common:action/quickfix",
+      "variants": {
+        "add": {
+          "action": "a"
+        },
+        "replace": {
+          "action": "r"
+        },
+        "processed": {
+          "target": "selected-or-processed"
+        },
+        "processed:add": {
+          "target": "selected-or-processed",
+          "action": "a"
+        },
+        "processed:replace": {
+          "target": "selected-or-processed",
+          "action": "r"
+        }
+      }
+    }
+  },
+  "previewer": {
+    "path": {
+      "uri": "builtin:previewer/path"
+    }
+  },
+  "processor": {
+    "substring_filter": {
+      "uri": "builtin:processor/substring_filter"
+    },
+    "lexical_sorter": {
+      "uri": "package:vim-fall/package-common:processor/lexical_sorter",
+      "variants": {
+        "reverse": {
+          "reverse": true
+        }
+      }
+    }
+  },
+  "renderer": {
+    "nerdfont": {
+      "uri": "package:lambdalisue/fall-nerdfont.vim:renderer/nerdfont"
+    }
+  },
+  "source": {
+    "mru": {
+      "uri": "package:lambdalisue/fall-mr.vim:source/mru"
+    },
+    "mrw": {
+      "uri": "package:lambdalisue/fall-mr.vim:source/mrw"
+    },
+    "mrr": {
+      "uri": "package:lambdalisue/fall-mr.vim:source/mrr"
+    },
+    "file": {
+      "uri": "builtin:source/file",
+      "options": {
+        "excludes": [
+          "/.git/",
+          "/node_modules/",
+          "/target/",
+          "/.DS_Store",
+          "/Desktop.ini",
+          "/Thumbs.db"
+        ]
+      },
+      "variants": {
+        "file:all": {
+          "excludes": []
+        }
+      }
+    },
+    "line": {
+      "uri": "package:vim-fall/package-common:source/line"
+    }
+  }
+}
