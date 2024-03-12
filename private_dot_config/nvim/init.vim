@@ -333,6 +333,32 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
+" Open raw content URL for GitHub
+" https://github.com/lambdalisue/lambdalisue/blob/main/README.md
+" https://raw.githubusercontent.com/lambdalisue/lambdalisue/main/README.md
+function! s:edit_github() abort
+  let l:amatch = expand('<amatch>')
+  let l:m = matchlist(
+        \ l:amatch,
+        \ 'https://github\.com/\([^/]*\)/\([^/]*\)/blob/\(.*\)',
+        \)
+  if empty(l:m)
+    return
+  endif
+  let l:url = printf(
+        \ 'https://raw.githubusercontent.com/%s/%s/%s',
+        \ l:m[1],
+        \ l:m[2],
+        \ l:m[3],
+        \)
+  execute printf(
+        \ 'keepalt keepjumps edit %s',
+        \ fnameescape(l:url),
+        \)
+  execute printf('silent! bwipeout! %s', fnameescape(l:amatch))
+endfunction
+autocmd MyAutoCmd BufReadCmd https://github.com/* ++nested call s:edit_github()
+
 " Automatically re-assign filetype {{{
 autocmd MyAutoCmd BufWritePost *
       \ if &filetype ==# '' && exists('b:ftdetect') |

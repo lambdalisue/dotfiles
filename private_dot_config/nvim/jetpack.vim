@@ -72,6 +72,7 @@ function! s:init() abort
   call jetpack#add('lambdalisue/file-protocol.vim')
   call jetpack#add('lambdalisue/gina.vim')
   call jetpack#add('lambdalisue/glyph-palette.vim')
+  call jetpack#add('lambdalisue/http-protocol.vim')
   call jetpack#add('lambdalisue/mr.vim')
   call jetpack#add('lambdalisue/nerdfont.vim')
   call jetpack#add('lambdalisue/readablefold.vim')
