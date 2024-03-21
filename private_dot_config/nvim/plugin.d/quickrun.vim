@@ -17,17 +17,17 @@ let g:quickrun_config = extend(get(g:, 'quickrun_config', {}), {
       \ },
       \ 'javascript': {
       \   'command': 'deno',
-      \   'cmdopt': '--allow-all',
+      \   'cmdopt': '--allow-all --unstable-ffi --unstable-temporal --unstable-kv',
       \   'exec': 'NO_COLOR=1 %c run %o %s',
       \ },
       \ 'typescript': {
       \   'command': 'deno',
-      \   'cmdopt': '--allow-all',
+      \   'cmdopt': '--allow-all --unstable-ffi --unstable-temporal --unstable-kv',
       \   'exec': 'NO_COLOR=1 %c run %o %s',
       \ },
       \ 'typescriptreact': {
       \   'command': 'deno',
-      \   'cmdopt': '--allow-all',
+      \   'cmdopt': '--allow-all --unstable-ffi --unstable-temporal --unstable-kv',
       \   'exec': 'NO_COLOR=1 %c run %o %s',
       \ },
       \})

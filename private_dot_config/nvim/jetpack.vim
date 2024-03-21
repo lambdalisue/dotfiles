@@ -117,6 +117,8 @@ function! s:init() abort
   call jetpack#add('tyru/caw.vim', {'opt': 1})
 
   " Neovim
+  call jetpack#add('nvim-lua/plenary.nvim', {'opt': 1})
+  call jetpack#add('nvim-telescope/telescope.nvim', {'tag': '0.1.5', 'opt': 1})
   call jetpack#add('nvim-treesitter/nvim-treesitter', {
        \ 'opt': 1,
        \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
@@ -145,6 +147,8 @@ endfunction
 
 function! s:configure() abort
   if has('nvim')
+    silent! packadd plenary.nvim
+    silent! packadd telescope.nvim
     silent! packadd nvim-treesitter
     silent! packadd nvim-insx
     silent! packadd nvim-notify

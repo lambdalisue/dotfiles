@@ -81,30 +81,8 @@ if type vim &>/dev/null; then
   fi
 fi
 
-# asdf
-if [[ -f ~/.asdf/asdf.sh ]]; then
-  source ~/.asdf/asdf.sh
-fi
-if type brew &>/dev/null && type asdf &>/dev/null; then
-  cache::asdf() {
-    echo ". $(brew --prefix asdf)/libexec/asdf.sh" > ${CACHE_PROFILE}/asdf.zsh
-    zcompile ${CACHE_PROFILE}/asdf.zsh
-  }
-  if [[ ! -f ${CACHE_PROFILE}/asdf.zsh ]]; then
-    cache::asdf
-  fi
-  source ${CACHE_PROFILE}/asdf.zsh
-
-  asdf() {
-    # https://github.com/pyenv/pyenv/wiki/Common-build-problems#error-the-python-ssl-extension-was-not-compiled-missing-the-openssl-lib
-    export CFLAGS="-I$(brew --prefix openssl)/include"
-    export LDFLAGS="-L$(brew --prefix openssl)/lib"
-    command asdf $@
-  }
-fi
-
 # mise
-if type brew &>/dev/null && type mise &>/dev/null; then
+if type mise &>/dev/null; then
   cache::mise() {
     echo 'eval "$(mise activate zsh)"' > ${CACHE_PROFILE}/mise.zsh
     zcompile ${CACHE_PROFILE}/mise.zsh

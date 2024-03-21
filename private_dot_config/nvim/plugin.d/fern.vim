@@ -31,9 +31,16 @@ function! s:fern_local_init() abort
         \   "\<Plug>(fern-my-leave-and-tcd)",
         \   "\<Plug>(fern-action-leave)",
         \ )
+
+  nmap <buffer><expr>
+        \ <Plug>(fern-my-leave-or-open-or-enter)
+        \ fern#smart#root(
+        \   "<Plug>(fern-my-leave)",
+        \   "<Plug>(fern-my-open-or-enter)",
+        \ )
   nmap <buffer><nowait> <C-m> <Return>
   nmap <buffer><nowait> <C-h> <Backspace>
-  nmap <buffer><nowait> <Return>    <Plug>(fern-my-open-or-enter)
+  nmap <buffer><nowait> <Return>    <Plug>(fern-my-leave-or-open-or-enter)
   nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
   nmap <buffer><nowait> T <Plug>(fern-action-terminal)
   nnoremap <buffer><nowait> ~ :<C-u>Fern ~<CR>

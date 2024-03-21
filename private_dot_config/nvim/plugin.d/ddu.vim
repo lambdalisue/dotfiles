@@ -113,70 +113,70 @@ function! s:ghq_root() abort
   return substitute(system("ghq root"), '\r\?\n$', '', '')
 endfunction
 
-nnoremap <silent> <Leader>mm <Cmd>call ddu#start({
-      \ 'name': 'mrw',
-      \ 'sources': [{
-      \   'name': 'mr',
-      \   'params': {
-      \     'kind': 'mrw',
-      \   },
-      \ }],
-      \ 'uiOptions': {
-      \   'ff': {
-      \     'defaultAction': 'cd',
-      \   },
-      \ },
-      \})<CR>
-nnoremap <silent> <Leader>mr <Cmd>call ddu#start({
-      \ 'name': 'mrr',
-      \ 'sources': [{
-      \   'name': 'mr',
-      \   'params': {
-      \     'kind': 'mrr',
-      \   },
-      \ }],
-      \ 'uiOptions': {
-      \   'ff': {
-      \     'defaultAction': 'cd',
-      \   },
-      \ },
-      \})<CR>
-nnoremap <silent> <Leader>ll <Cmd>call ddu#start({
-      \ 'name': 'line',
-      \ 'sources': [{
-      \   'name': 'line',
-      \ }],
-      \})<CR>
-nnoremap <silent> <Leader>dd <Cmd>call ddu#start({
-      \ 'name': 'dotfiles',
-      \ 'sources': [{
-      \   'name': 'file_rec',
-      \   'params': {
-      \     'ignoredDirectories': [
-      \       '.git',
-      \       '.addons',
-      \       'pack',
-      \     ],
-      \   },
-      \   'options': {
-      \     'path': expand('~/.local/share/chezmoi')
-      \   },
-      \ }],
-      \})<CR>
-nnoremap <silent> <Leader>jj <Cmd>call ddu#start({
-      \ 'name': 'junkfiles',
-      \ 'sources': [{
-      \   'name': 'file_rec',
-      \   'options': {
-      \     'path': expand(g:junkfile#directory),
-      \   },
-      \ }],
-      \ 'sourceOptions': {
-      \   '_': {
-      \     'sorters': ['sorter_alpha', 'sorter_reversed'],
-      \   },
-      \ },
-      \})<CR>
+" nnoremap <silent> <Leader>mm <Cmd>call ddu#start({
+"       \ 'name': 'mrw',
+"       \ 'sources': [{
+"       \   'name': 'mr',
+"       \   'params': {
+"       \     'kind': 'mrw',
+"       \   },
+"       \ }],
+"       \ 'uiOptions': {
+"       \   'ff': {
+"       \     'defaultAction': 'cd',
+"       \   },
+"       \ },
+"       \})<CR>
+" nnoremap <silent> <Leader>mr <Cmd>call ddu#start({
+"       \ 'name': 'mrr',
+"       \ 'sources': [{
+"       \   'name': 'mr',
+"       \   'params': {
+"       \     'kind': 'mrr',
+"       \   },
+"       \ }],
+"       \ 'uiOptions': {
+"       \   'ff': {
+"       \     'defaultAction': 'cd',
+"       \   },
+"       \ },
+"       \})<CR>
+" nnoremap <silent> <Leader>ll <Cmd>call ddu#start({
+"       \ 'name': 'line',
+"       \ 'sources': [{
+"       \   'name': 'line',
+"       \ }],
+"       \})<CR>
+" nnoremap <silent> <Leader>dd <Cmd>call ddu#start({
+"       \ 'name': 'dotfiles',
+"       \ 'sources': [{
+"       \   'name': 'file_rec',
+"       \   'params': {
+"       \     'ignoredDirectories': [
+"       \       '.git',
+"       \       '.addons',
+"       \       'pack',
+"       \     ],
+"       \   },
+"       \   'options': {
+"       \     'path': expand('~/.local/share/chezmoi')
+"       \   },
+"       \ }],
+"       \})<CR>
+" nnoremap <silent> <Leader>jj <Cmd>call ddu#start({
+"       \ 'name': 'junkfiles',
+"       \ 'sources': [{
+"       \   'name': 'file_rec',
+"       \   'options': {
+"       \     'path': expand(g:junkfile#directory),
+"       \   },
+"       \ }],
+"       \ 'sourceOptions': {
+"       \   '_': {
+"       \     'sorters': ['sorter_alpha', 'sorter_reversed'],
+"       \   },
+"       \ },
+"       \})<CR>
 nnoremap <silent> <Leader>df <Cmd>call ddu#start({
       \ 'sources': [{
       \   'name': 'file_rec',

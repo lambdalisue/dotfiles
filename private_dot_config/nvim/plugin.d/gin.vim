@@ -39,6 +39,7 @@ function! s:my_gin_log() abort
   nnoremap <buffer> <Plug>(gin-action-stat) 
         \ <Plug>(gin-action-yank:commit)
         \ :<C-u>GinBuffer diff --stat <C-r>+~..<C-r>+<CR>
+  nnoremap <buffer> <Plug>(gin-action-fixup:instant) <Plug>(gin-action-fixup:instant-fixup)
   setl cursorline
 endfunction
 
