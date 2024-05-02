@@ -44,7 +44,7 @@ function! s:my_gin_log() abort
 endfunction
 
 function! s:define_gin_local() abort
-  command! -buffer -bar GinLocal execute 'edit' gin#util#expand('%')
+  command! -buffer -bar GinLocal execute printf('edit +%d', line('.')) gin#util#expand('%:p')
 endfunction
 
 augroup my-gin

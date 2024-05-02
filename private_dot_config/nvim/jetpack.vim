@@ -39,11 +39,6 @@ function! s:init() abort
   call jetpack#add('yuki-yano/fuzzy-motion.vim')
   call jetpack#add('skanehira/denops-silicon.vim')
 
-  " Colorscheme
-  call jetpack#add('bluz71/vim-moonfly-colors')
-  call jetpack#add('bluz71/vim-nightfly-colors')
-  call jetpack#add('bluz71/vim-nightfly-guicolors')
-
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
   call jetpack#add('Shougo/context_filetype.vim')
@@ -53,6 +48,7 @@ function! s:init() abort
   call jetpack#add('github/copilot.vim')
   call jetpack#add('hrsh7th/vim-eft')
   call jetpack#add('itchyny/vim-parenmatch')
+  call jetpack#add('itchyny/vim-qfedit')
   call jetpack#add('kana/vim-operator-replace')
   call jetpack#add('kana/vim-operator-user')
   call jetpack#add('kana/vim-repeat')
@@ -107,6 +103,9 @@ function! s:init() abort
   call jetpack#add('yuki-yano/fern-preview.vim')
 
   " Colorscheme
+  call jetpack#add('bluz71/vim-moonfly-colors')
+  call jetpack#add('bluz71/vim-nightfly-colors')
+  call jetpack#add('bluz71/vim-nightfly-guicolors')
   call jetpack#add('cocopon/iceberg.vim')
   call jetpack#add('EdenEast/nightfox.nvim')
   call jetpack#add('sainnhe/edge')

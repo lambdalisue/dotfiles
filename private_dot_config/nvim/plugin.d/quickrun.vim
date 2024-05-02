@@ -32,12 +32,12 @@ let g:quickrun_config = extend(get(g:, 'quickrun_config', {}), {
       \ },
       \})
 
-if executable('pdm')
-  let g:quickrun_config.python = {
-        \ 'command': 'pdm',
-        \ 'cmdopt': 'run',
-        \}
-endif
+" if executable('pdm')
+"   let g:quickrun_config.python = {
+"         \ 'command': 'pdm',
+"         \ 'cmdopt': 'run',
+"         \}
+" endif
 
 if has('nvim')
   let g:quickrun_config._.runner = 'neovim_job'

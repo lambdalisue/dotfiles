@@ -73,5 +73,4 @@ endfunction
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%:p<CR>
 nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -reveal=%<CR>
 nnoremap <silent> <Leader>gg :<C-u>Fern <C-r>=<SID>ghq_root()<CR>/github.com -reveal=lambdalisue<CR>
-nnoremap <silent> <Leader>DD :<C-u>Fern <C-r>=<SID>ghq_root()<CR>/github.com/lambdalisue/dotfiles -reveal=%:p<CR>
-nnoremap <silent> <Leader>JJ :<C-u>Fern <C-r>=expand(g:junkfile#directory)<CR> -reveal=%:p<CR>
+nnoremap <silent> <Leader>oo :<C-u>Fern ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/ObsidianVault/ -reveal=%:p<CR>

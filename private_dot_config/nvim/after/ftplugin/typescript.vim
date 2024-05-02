@@ -47,5 +47,7 @@ if has('vim_starting')
     autocmd User CocNvimInit call s:switch_coc_typescript()
   augroup END
 else
-call s:switch_coc_typescript(expand('%'))
+  call s:switch_coc_typescript(expand('%'))
 endif
+
+command! -buffer Test !NO_COLOR=1 deno test -A %
