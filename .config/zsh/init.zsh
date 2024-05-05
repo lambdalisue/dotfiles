@@ -49,7 +49,7 @@ if type fzf &>/dev/null; then
   abindkey '^X^D' _fzf-cdr
   abindkey '^X^B' _fzf-bindkey
   abindkey '^X^K' _fzf-kill
-  abindkey '^X^G' _fzf-ghq
+  abindkey '^X^G' _fzf-ogh
   abindkey '^X^P' _fzf-k8s-pods
 fi
 
