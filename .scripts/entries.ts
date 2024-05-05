@@ -1,4 +1,4 @@
-import { fromFileUrl, globToRegExp, join, resolve } from "@std/path";
+import { fromFileUrl, globToRegExp } from "@std/path";
 
 const root = new URL("../", import.meta.url);
 
