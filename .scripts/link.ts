@@ -9,6 +9,8 @@ const home = Deno.build.os === "windows"
 
 const root = fromFileUrl(new URL("../", import.meta.url));
 
+console.log(patterns);
+
 const entries = [
   ...walkSync(new URL("../", import.meta.url), {
     includeDirs: true,
@@ -53,7 +55,7 @@ function main(): void {
 
   for (const { path, src, dst, dir } of targets) {
     const displaySrc = relative(root, path);
-    const displayDst = `~/${relative(home, dst)}`;
+    const displayDst = join("~", relative(home, dst));
     if (!execute) {
       console.log(
         `'${displaySrc}' will symlinked to '${displayDst}' (dry-run)`,

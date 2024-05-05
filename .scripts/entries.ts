@@ -1,6 +1,6 @@
-import { fromFileUrl, globToRegExp, join } from "@std/path";
+import { fromFileUrl, globToRegExp, join, resolve } from "@std/path";
 
-const root = fromFileUrl(new URL("../", import.meta.url));
+const root = new URL("../", import.meta.url);
 
 function load(filename: string): RegExp[] {
   try {
@@ -9,7 +9,7 @@ function load(filename: string): RegExp[] {
       .split("\n")
       .filter((v) => v)
       .filter((v) => !v.startsWith("#"))
-      .map((v) => join(root, v))
+      .map((v) => fromFileUrl(new URL(v, root)))
       .map((v) => globToRegExp(v));
   } catch (err) {
     if (err instanceof Deno.errors.NotFound) {
