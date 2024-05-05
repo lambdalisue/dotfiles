@@ -509,9 +509,6 @@ function! s:load_configurations() abort
 endfunction
 call s:load_configurations()
 
-"silent! colorscheme slate
-"silent! colorscheme iceberg
-"silent! colorscheme edge
 silent! colorscheme nordfox
 
 " chezmoi

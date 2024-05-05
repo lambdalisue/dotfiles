@@ -3,32 +3,8 @@ function! s:init() abort
   call jetpack#begin()
   call jetpack#add('tani/vim-jetpack')
 
-  " ddu
-  call jetpack#add('Bakudankun/ddu-filter-matchfuzzy')
-  call jetpack#add('Milly/ddu-filter-kensaku')
-  call jetpack#add('Milly/ddu-filter-merge')
-  call jetpack#add('Shougo/dda.vim')
-  call jetpack#add('Shougo/ddu-column-filename')
-  call jetpack#add('Shougo/ddu-commands.vim')
-  call jetpack#add('Shougo/ddu-filter-matcher_substring')
-  call jetpack#add('Shougo/ddu-filter-sorter_alpha')
-  call jetpack#add('Shougo/ddu-filter-sorter_reversed')
-  call jetpack#add('Shougo/ddu-kind-file')
-  call jetpack#add('Shougo/ddu-kind-word')
-  call jetpack#add('Shougo/ddu-source-action')
-  call jetpack#add('Shougo/ddu-source-file')
-  call jetpack#add('Shougo/ddu-source-file_rec')
-  call jetpack#add('Shougo/ddu-source-line')
-  call jetpack#add('Shougo/ddu-source-register')
-  call jetpack#add('Shougo/ddu-ui-ff')
-  call jetpack#add('Shougo/ddu.vim')
-  call jetpack#add('kuuote/ddu-source-mr')
-  call jetpack#add('matsui54/ddu-source-command_history')
-  call jetpack#add('matsui54/ddu-source-help')
-  call jetpack#add('matsui54/ddu-vim-ui-select')
-  call jetpack#add('mikanIchinose/ddu-source-markdown')
-
   " Denops
+  call jetpack#add('vim-fall/fall.vim')
   call jetpack#add('lambdalisue/gin.vim')
   call jetpack#add('lambdalisue/askpass.vim')
   call jetpack#add('lambdalisue/guise.vim')
@@ -103,12 +79,7 @@ function! s:init() abort
   call jetpack#add('yuki-yano/fern-preview.vim')
 
   " Colorscheme
-  call jetpack#add('bluz71/vim-moonfly-colors')
-  call jetpack#add('bluz71/vim-nightfly-colors')
-  call jetpack#add('bluz71/vim-nightfly-guicolors')
-  call jetpack#add('cocopon/iceberg.vim')
   call jetpack#add('EdenEast/nightfox.nvim')
-  call jetpack#add('sainnhe/edge')
 
   " Vim
   call jetpack#add('rhysd/vim-healthcheck', {'opt': 1 })
@@ -117,13 +88,11 @@ function! s:init() abort
 
   " Neovim
   call jetpack#add('nvim-lua/plenary.nvim', {'opt': 1})
-  call jetpack#add('nvim-telescope/telescope.nvim', {'tag': '0.1.5', 'opt': 1})
   call jetpack#add('nvim-treesitter/nvim-treesitter', {
        \ 'opt': 1,
        \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
        \})
   call jetpack#add('hrsh7th/nvim-insx', {'opt': 1})
-  call jetpack#add('rcarriga/nvim-notify', {'opt': 1})
   call jetpack#add('numToStr/Comment.nvim', {'opt': 1})
 
   call jetpack#end()
