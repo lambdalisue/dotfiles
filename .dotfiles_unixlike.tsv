@@ -1,6 +1,6 @@
 .config/alacritty
 .config/nvim
-.config/vim
+.config/nvim	.config/vim
 .config/zsh
 .ssh
 .tmux.conf

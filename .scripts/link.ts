@@ -1,7 +1,6 @@
 import { parseArgs } from "@std/cli";
-import { walkSync } from "@std/fs/walk";
 import { dirname, fromFileUrl, join, relative, resolve } from "@std/path";
-import { patterns } from "./entries.ts";
+import { entries } from "./entries.ts";
 
 const home = Deno.build.os === "windows"
   ? Deno.env.get("USERPROFILE")!
@@ -9,25 +8,16 @@ const home = Deno.build.os === "windows"
 
 const root = fromFileUrl(new URL("../", import.meta.url));
 
-console.log(patterns);
-
-const entries = [
-  ...walkSync(new URL("../", import.meta.url), {
-    includeDirs: true,
-    includeSymlinks: true,
-    match: patterns,
-  }),
-];
-
-const targets = entries.map((v) => {
-  const path = v.path;
-  const src = v.isSymlink ? resolve(Deno.readLinkSync(path)) : path;
-  const dst = join(home, relative(root, path));
+const targets = entries.map(([src, dst]) => {
+  const info = Deno.lstatSync(src);
+  const path = src;
+  src = info.isSymlink ? resolve(Deno.readLinkSync(path)) : path;
+  dst = join(home, relative(root, dst ?? path));
   return {
     path,
     src,
     dst,
-    dir: v.isDirectory,
+    dir: info.isDirectory,
   };
 });
 
