@@ -1,42 +1,35 @@
 # 🩳 dotfiles
 
-My personal dotfiles managed by [chezmoi].
+My personal dotfiles managed by my personal [Deno] script.
+
+[Deno]: https://deno.land
 
 ## Usage
 
-Install chezmoi via `apk` (Alpine), `snap` (Ubuntu), `brew` (macOS), or `scoop` (Windows)
+Install [Deno] and execute the `link` task like below:
 
 ```console
-# Alpine
-$ apk add chezmoi
-
-# Ubuntu
-$ snap install chezmoi --classic
-
-# macOS
-$ brew install chezmoi
-
-# Windows
-$ scoop install chezmoi
+$ deno task link
 ```
 
-See [Install](https://www.chezmoi.io/install) for more detail for installing chezmoi.
-
-Then apply this dotfiles by chezmoi like
+Above runs the `link` task with dry-run mode. Use `--execute` flag to actually
+link the dotfiles.
 
 ```console
-$ chezmoi init https://github.com/lambdalisue/dotfiles
-$ chezmoi diff
-$ chezmoi apply -v
+$ deno task link --execute
 ```
 
-Pull and apply the latest changes on the repository with
+And use `--force` flag to overwrite existing files.
 
 ```console
-$ chezmoi update -v
+$ deno task link --execute --force
 ```
 
-[chezmoi]: https://www.chezmoi.io
+## Entries
+
+Edit one of the following files to determine the entries.
+
+- `.dotfiles`
 
 ## License
 

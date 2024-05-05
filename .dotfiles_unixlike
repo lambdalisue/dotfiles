@@ -1,0 +1,7 @@
+.config/alacritty
+.config/nvim
+.config/vim
+.config/zsh
+.ssh
+.tmux.conf
+.zshenv
