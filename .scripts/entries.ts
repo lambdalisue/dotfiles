@@ -4,7 +4,7 @@ const root = new URL("../", import.meta.url);
 
 function load(filename: string): RegExp[] {
   try {
-    return Deno.readTextFileSync(new URL(`../${filename}`, import.meta.url))
+    return Deno.readTextFileSync(new URL(`../${filename}.tsv`, import.meta.url))
       .trim()
       .split("\n")
       .filter((v) => v)
