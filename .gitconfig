@@ -40,7 +40,7 @@
 
 [alias]
   push-f = push --force-with-lease --force-if-includes
-  browse = "!deno run --allow-net --allow-run --allow-read https://deno.land/x/git_browse/bin/browse.ts"
+  browse = "!deno run --allow-net --allow-run --allow-read --allow-env jsr:@lambdalisue/git-browse/cli"
 
 [init]
   defaultBranch = main

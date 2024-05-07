@@ -3,12 +3,8 @@ fzf-ogh() {
         echo 'A "ogh" command is not found.'
         return 1
     fi
-    if ! which perl 1>/dev/null 2>&1; then
-        echo 'A "perl" command is not found.'
-        return 1
-    fi
     local s="$(ogh list | fzf -q "$1")"
-    [[ -n $s ]] && print "cd $(echo $s | perl -lanE 'say $F[0]')"
+    [[ -n $s ]] && print "cd $(echo $(ogh root)$s)"
 }
 BUFFER=$(fzf-ogh $BUFFER)
 [[ -n $BUFFER ]] && zle accept-line
