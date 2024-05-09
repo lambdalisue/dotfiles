@@ -1,6 +1,8 @@
 .config/alacritty
 .config/nvim
 .config/nvim	.config/vim
+.config/nvim/init.vim	.config/vim/vimrc
+.config/nvim/ginit.vim	.config/vim/gvimrc
 .config/zsh
 .ssh
 .tmux.conf

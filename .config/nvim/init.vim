@@ -509,14 +509,10 @@ function! s:load_configurations() abort
 endfunction
 call s:load_configurations()
 
-silent! colorscheme nordfox
-
-" chezmoi
-if executable("chezmoi") && isdirectory(expand("~/.local/share/chezmoi"))
-  augroup my_chezmoi
-    autocmd!
-    autocmd BufWritePost ~/.local/share/chezmoi/* silent! !chezmoi apply --source-path "%"
-  augroup END
+if has('nvim')
+  silent! colorscheme nordfox
+else
+  silent! colorscheme slate
 endif
 
 if filereadable(expand("~/.vimrc.local"))
