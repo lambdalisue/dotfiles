@@ -179,15 +179,13 @@ if type kubectl &>/dev/null; then
 fi
 
 # docker
-if [[ -d /Applications/Docker.app ]]; then
+if type docker &>/dev/null; then
   cache::docker() {
-    local src="/Applications/Docker.app/Contents/Resources/etc"
-    local dst="$HOME/.zfunc"
-    mkdir -p "$dst"
-    ln -sf "$src/docker.zsh-completion" "$dst/_docker"
-    ln -sf "$src/docker-compose.zsh-completion" "$dst/_docker-compose"
+    docker completion zsh > ${CACHE_PROFILE}/docker.zsh
+    zcompile ${CACHE_PROFILE}/docker.zsh
   }
-  if [[ ! -f $HOME/.zfunc/_docker ]]; then
+  if [[ ! -f ${CACHE_PROFILE}/docker.zsh ]]; then
     cache::docker
   fi
+  source ${CACHE_PROFILE}/docker.zsh
 fi

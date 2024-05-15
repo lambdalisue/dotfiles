@@ -7,10 +7,16 @@
   "deno.codeLens.references": true,
   "deno.codeLens.referencesAllFunctions": true,
   "deno.lint": true,
-  "deno.suggest.imports.hosts": { "https://deno.land": true },
+  "deno.suggest.imports.hosts": {
+    "https://deno.land": true
+  },
   "deno.unstable": true,
-  "diagnostic.floatConfig": { "border": true },
-  "hover.floatConfig": { "border": true },
+  "diagnostic.floatConfig": {
+    "border": true
+  },
+  "hover.floatConfig": {
+    "border": true
+  },
   "prettier.formatterPriority": 1,
   "python.formatting.provider": "none",
   "python.linting.enabled": true,
@@ -24,10 +30,14 @@
   "rust-analyzer.lens.references.enumVariant.enable": true,
   "rust-analyzer.lens.references.method.enable": true,
   "rust-analyzer.lens.references.trait.enable": true,
-  "signature.floatConfig": { "border": true },
+  "signature.floatConfig": {
+    "border": true
+  },
   "suggest.asciiCharactersOnly": true,
   "suggest.enablePreselect": false,
-  "suggest.floatConfig": { "border": true },
+  "suggest.floatConfig": {
+    "border": true
+  },
   "suggest.noselect": true,
   "sumneko-lua.enableNvimLuaDev": true,
   "vetur.format.defaultFormatter.html": "prettier",
@@ -40,8 +50,13 @@
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
-      "args": ["serve"],
-      "filetypes": ["terraform", "tf"],
+      "args": [
+        "serve"
+      ],
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
       "initializationOptions": {},
       "settings": {}
     }

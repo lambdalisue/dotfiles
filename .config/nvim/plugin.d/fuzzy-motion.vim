@@ -1,4 +1,4 @@
-nnoremap <Leader><Leader> <Cmd>FuzzyMotion<CR>
+nnoremap <Leader>jj <Cmd>FuzzyMotion<CR>
 
 " Enable kensaku.vim matcher
 let g:fuzzy_motion_matchers = ['fzf', 'kensaku']

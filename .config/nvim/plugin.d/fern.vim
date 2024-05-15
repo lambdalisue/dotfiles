@@ -3,7 +3,7 @@ let g:fern#renderer = 'nerdfont'
 let g:fern#hide_cursor = 1
 let g:fern#keepalt_on_edit = 1
 let g:fern#default_hidden = 1
-let g:fern#default_exclude = '\%(\.DS_Store\|__pycache__\)'
+let g:fern#default_exclude = '\%(\.DS_Store\|__pycache__\|\.coverage\)'
 let g:fern#renderer#nerdfont#indent_markers = 1
 
 function! s:fern_local_init() abort
