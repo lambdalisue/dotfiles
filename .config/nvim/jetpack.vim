@@ -16,7 +16,6 @@ function! s:init() abort
   call jetpack#add('vim-denops/denops-shared-server.vim')
   call jetpack#add('vim-denops/denops-startup-recorder.vim')
   call jetpack#add('vim-denops/denops.vim')
-  call jetpack#add('vim-fall/vim-fall')
   call jetpack#add('yuki-yano/fuzzy-motion.vim')
 
   call jetpack#add('AndrewRadev/linediff.vim')
@@ -86,18 +85,23 @@ function! s:init() abort
   call jetpack#add('EdenEast/nightfox.nvim')
 
   " Vim
-  call jetpack#add('rhysd/vim-healthcheck', {'opt': 1 })
-  call jetpack#add('mattn/vim-lexiv', {'opt': 1})
-  call jetpack#add('tyru/caw.vim', {'opt': 1})
+  if !has('nvim')
+    call jetpack#add('rhysd/vim-healthcheck', {'opt': 1 })
+    call jetpack#add('mattn/vim-lexiv', {'opt': 1})
+    call jetpack#add('tyru/caw.vim', {'opt': 1})
+  endif
 
   " Neovim
-  call jetpack#add('nvim-lua/plenary.nvim', {'opt': 1})
-  call jetpack#add('nvim-treesitter/nvim-treesitter', {
-       \ 'opt': 1,
-       \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
-       \})
-  call jetpack#add('hrsh7th/nvim-insx', {'opt': 1})
-  call jetpack#add('numToStr/Comment.nvim', {'opt': 1})
+  if has('nvim')
+    call jetpack#add('nvim-lua/plenary.nvim', {'opt': 1})
+    call jetpack#add('nvim-telescope/telescope.nvim', { 'opt': 1 })
+    call jetpack#add('nvim-treesitter/nvim-treesitter', {
+        \ 'opt': 1,
+        \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
+        \})
+    call jetpack#add('hrsh7th/nvim-insx', {'opt': 1})
+    call jetpack#add('numToStr/Comment.nvim', {'opt': 1})
+  endif
 
   call jetpack#end()
 endfunction
@@ -123,7 +127,6 @@ function! s:configure() abort
     silent! packadd telescope.nvim
     silent! packadd nvim-treesitter
     silent! packadd nvim-insx
-    silent! packadd nvim-notify
     silent! packadd Comment.nvim
   else
     silent! packadd vim-healthcheck

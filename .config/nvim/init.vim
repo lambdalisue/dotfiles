@@ -368,14 +368,17 @@ autocmd MyAutoCmd BufWritePost *
 "}}}
 
 " Automatically keep cursor position {{{
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid, when inside an event handler
-" (happens when dropping a file on gvim) and for a commit message (it's
-" likely a different one than last time).
-autocmd MyAutoCmd BufReadPost *
-      \ if line("'\"") >= 1 && line("'\"") <= line("$") && !empty(&buftype) |
-      \   execute "normal! g`\"zv" |
-      \ endif
+augroup restore-cursor
+  autocmd!
+  autocmd BufReadPost *
+        \ : if line("'\"") >= 1 && line("'\"") <= line("$")
+        \ |   exe "normal! g`\"zv"
+        \ | endif
+  autocmd BufWinEnter *
+        \ : if empty(&buftype) && line('.') > winheight(0) / 2
+        \ |   execute 'normal! zz'
+        \ | endif
+augroup END
 " }}}
 
 " Automatically create missing directories {{{
