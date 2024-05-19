@@ -34,6 +34,7 @@ function! s:init() abort
   call jetpack#add('kana/vim-textobj-indent')
   call jetpack#add('kana/vim-textobj-line')
   call jetpack#add('kana/vim-textobj-user')
+  "call jetpack#add('lambdalisue/vim-seethrough')
   call jetpack#add('lambdalisue/vim-backslash')
   call jetpack#add('lambdalisue/vim-battery')
   call jetpack#add('lambdalisue/vim-compl-local-filename')
