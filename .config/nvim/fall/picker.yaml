@@ -19,6 +19,13 @@ line:
   previewers:
     - buffer
 
+buffer:
+  renderers:
+    - nerdfont
+
+  previewers:
+    - buffer
+
 # Fallback setting
 "":
   # Use 'open' as a default action (invoked by <Return>)
@@ -32,6 +39,10 @@ line:
     - open:vsplit
     - open:tabedit
     - quickfix
+    - quickfix:qfreplace
+
+  transformers:
+    - relative-path
 
   # Use 'fzf' projector to filter/sort items
   projectors:
@@ -39,9 +50,9 @@ line:
 
   # Try several previewers to preview the content of the item
   previewers:
-    - attribute
-    - buffer
     - file
+    - buffer
+    - attribute
 
   # Use 'fzf' projector to filter/sort actions
   actionProjectors:

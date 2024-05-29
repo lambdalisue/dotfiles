@@ -458,6 +458,12 @@ nnoremap s "_s
 " http://baqamore.hatenablog.com/entry/2016/07/07/201856
 xnoremap <expr> p printf('pgv"%sygv<esc>', v:register)
 
+" https://blog.atusy.net/2024/05/29/vim-hl-enhanced/
+nnoremap H H<Plug>(H)
+nnoremap L L<Plug>(L)
+nnoremap <Plug>(H)H <PageUp>H<Plug>(H)
+nnoremap <Plug>(L)L <PageDown>Lzb<Plug>(L)
+
 " Use Ctrl-f/b in Normal as well
 noremap <C-f> <Right>
 noremap <C-b> <Left>

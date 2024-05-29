@@ -17,7 +17,11 @@
   "hover.floatConfig": {
     "border": true
   },
-  "prettier.formatterPriority": 1,
+  "prettier.formatterPriority": -1,
+  "prettier.disableLanguages": [
+    "vue",
+    "markdown"
+  ],
   "python.formatting.provider": "none",
   "python.linting.enabled": true,
   "python.linting.ruffEnabled": true,

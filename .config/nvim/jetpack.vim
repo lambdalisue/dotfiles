@@ -102,6 +102,7 @@ function! s:init() abort
         \})
     call jetpack#add('hrsh7th/nvim-insx', {'opt': 1})
     call jetpack#add('numToStr/Comment.nvim', {'opt': 1})
+    call jetpack#add('MeanderingProgrammer/markdown.nvim', {'opt': 1})
   endif
 
   call jetpack#end()
@@ -129,6 +130,7 @@ function! s:configure() abort
     silent! packadd nvim-treesitter
     silent! packadd nvim-insx
     silent! packadd Comment.nvim
+    silent! packadd markdown.nvim
   else
     silent! packadd vim-healthcheck
     silent! packadd vim-lexiv
