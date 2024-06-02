@@ -1,5 +1,7 @@
 nnoremap <silent> <Leader><Leader> <Cmd>FallRestore<CR>
 nnoremap <silent> <Leader>ff <Cmd>Fall file<CR>
+nnoremap <silent> <Leader>fb <Cmd>Fall buffer<CR>
+nnoremap <silent> <Leader>fh <Cmd>Fall helptag<CR>
 nnoremap <silent> <Leader>fg <Cmd>Fall rg<CR>
 nnoremap <silent> <Leader>fd <Cmd>Fall file:dotfiles ~/ogh/lambdalisue/dotfiles<CR>
 nnoremap <silent> <Leader>fo <Cmd>Fall file:obsidian ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/ObsidianVault<CR>

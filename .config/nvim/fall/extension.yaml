@@ -1,76 +1,50 @@
 source:
-  # Exclude some files from the result
   file:
-    excludes:
-      - ".*/\\.DS_Store"
-      - ".*/\\.git/.*"
-      - ".*/\\.cache/.*"
-      - ".*/\\.Trash/.*"
-      - ".*/node_modules/.*"
-      - ".*/target/.*"
+    options:
+      excludes:
+        - ".*/\\.DS_Store"
+        - ".*/\\.git/.*"
+        - ".*/\\.cache/.*"
+        - ".*/\\.Trash/.*"
+        - ".*/node_modules/.*"
+        - ".*/target/.*"
+        - ".*/target/.*"
+        - ".*/pack/.*"
+        - ".*/\\.addons/.*"
+        - ".*/\\.coverage/.*"
 
   file:dotfiles:
-    excludes:
-      - ".*/\\.DS_Store"
-      - ".*/\\.git/.*"
-      - ".*/\\.cache/.*"
-      - ".*/\\.Trash/.*"
-      - ".*/node_modules/.*"
-      - ".*/target/.*"
-      - ".*/target/.*"
-      - ".*/pack/.*"
-      - ".*/.addons/.*"
+    options:
+      excludes:
+        - ".*/\\.DS_Store"
+        - ".*/\\.git/.*"
+        - ".*/\\.cache/.*"
+        - ".*/\\.Trash/.*"
+        - ".*/node_modules/.*"
+        - ".*/target/.*"
+        - ".*/target/.*"
+        - ".*/pack/.*"
+        - ".*/.addons/.*"
 
   file:obsidian:
-    excludes:
-      - ".*/\\.DS_Store"
-      - ".*/\\.git/.*"
-      - ".*/\\.cache/.*"
-      - ".*/\\.Trash/.*"
-      - ".*/node_modules/.*"
-      - ".*/target/.*"
-      - ".*/target/.*"
-      - ".*/pack/.*"
-      - ".*/.addons/.*"
-      - ".*/.obsidian/.*"
-
-  buffer:
-    mode: "bufloaded"
-
-  buffer:listed:
-    mode: "buflisted"
-
-  buffer:modified:
-    mode: "bufmodified"
-
-transformer: {}
-
-projector: {}
-
-renderer: {}
-
-previewer:
-  oneof:buffer-or-file:
-    previewers:
-      - buffer
-      - file
-
-  # Preview the content in 'item.detail.description'
-  attribute:description:
-    attribute: description
+    options:
+      excludes:
+        - ".*/\\.DS_Store"
+        - ".*/\\.git/.*"
+        - ".*/\\.cache/.*"
+        - ".*/\\.Trash/.*"
+        - ".*/node_modules/.*"
+        - ".*/target/.*"
+        - ".*/target/.*"
+        - ".*/pack/.*"
+        - ".*/.addons/.*"
+        - ".*/.obsidian/.*"
 
 action:
-  # Define variants of 'open' action
-  open:split:
-    opener: split
-  open:vsplit:
-    opener: vsplit
-  open:tabedit:
-    opener: tabedit
-
   quickfix:qfreplace:
-    after: Qfreplace
+    options:
+      after: Qfreplace
 
 # JSON schema of this file
-# yaml-language-server: $schema=https://raw.githubusercontent.com/lambdalisue/vim-fall/main/denops/fall/config/extension.schema.json
-$schema: https://raw.githubusercontent.com/lambdalisue/vim-fall/main/denops/fall/config/extension.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/lambdalisue/vim-fall/main/denops/fall/config/extension/schema.json
+$schema: https://raw.githubusercontent.com/lambdalisue/vim-fall/main/denops/fall/config/extension/schema.json

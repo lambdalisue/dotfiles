@@ -47,7 +47,7 @@ endif
 
 nmap <Leader>rr <Plug>(quickrun)
 
-" Terminate the quickrun with <C-c>
-nnoremap <expr><silent> <C-c> quickrun#is_running()
-      \ ? quickrun#sweep_sessions()
-      \ : "\<C-c>"
+" " Terminate the quickrun with <C-c>
+" nnoremap <expr><silent> <C-c> quickrun#is_running()
+"       \ ? quickrun#sweep_sessions()
+"       \ : "\<C-c>"

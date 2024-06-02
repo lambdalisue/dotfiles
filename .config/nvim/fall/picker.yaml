@@ -1,5 +1,9 @@
-# Use 'smart-path' renderer for the source
 file:
+  renderers:
+    - smart-path
+    - nerdfont
+
+oldfiles:
   renderers:
     - smart-path
     - nerdfont
@@ -14,54 +18,15 @@ mru:
     - smart-path
     - nerdfont
 
-# Use 'buffer' previewer for the source
-line:
-  previewers:
-    - buffer
+mrr:
+  renderers:
+    - smart-path
+    - nerdfont
 
 buffer:
   renderers:
     - nerdfont
 
-  previewers:
-    - buffer
-
-# Fallback setting
-"":
-  # Use 'open' as a default action (invoked by <Return>)
-  defaultAction: open
-
-  # Allow the following actions
-  actions:
-    - debug
-    - open
-    - open:split
-    - open:vsplit
-    - open:tabedit
-    - quickfix
-    - quickfix:qfreplace
-
-  transformers:
-    - relative-path
-
-  # Use 'fzf' projector to filter/sort items
-  projectors:
-    - fzf
-
-  # Try several previewers to preview the content of the item
-  previewers:
-    - file
-    - buffer
-    - attribute
-
-  # Use 'fzf' projector to filter/sort actions
-  actionProjectors:
-    - fzf
-
-  # Use 'attribute:description' previewer to preview actions
-  actionPreviewers:
-    - attribute:description
-
 # JSON schema of this file
-# yaml-language-server: $schema=https://raw.githubusercontent.com/lambdalisue/vim-fall/main/denops/fall/config/picker.schema.json
-$schema: https://raw.githubusercontent.com/lambdalisue/vim-fall/main/denops/fall/config/picker.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/lambdalisue/vim-fall/main/denops/fall/config/picker/schema.json
+$schema: https://raw.githubusercontent.com/lambdalisue/vim-fall/main/denops/fall/config/picker/schema.json
