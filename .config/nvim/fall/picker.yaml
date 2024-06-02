@@ -1,24 +1,40 @@
 file:
+  projectors:
+    - to-relative-path
+    - fzf-matcher
+
   renderers:
     - smart-path
     - nerdfont
 
 oldfiles:
+  projectors:
+    - to-relative-path
+    - fzf-matcher
+
   renderers:
     - smart-path
     - nerdfont
 
-mrw:
+mr:mrw:
+  projectors:
+    - to-relative-path
+    - fzf-matcher
+
   renderers:
     - smart-path
     - nerdfont
 
-mru:
+mr:mru:
+  projectors:
+    - to-relative-path
+    - fzf-matcher
+
   renderers:
     - smart-path
     - nerdfont
 
-mrr:
+mr:mrr:
   renderers:
     - smart-path
     - nerdfont
