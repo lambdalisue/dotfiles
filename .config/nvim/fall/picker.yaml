@@ -9,6 +9,7 @@ file:
 
 oldfiles:
   projectors:
+    - cwd-filter
     - to-relative-path
     - fzf-matcher
 
@@ -16,32 +17,66 @@ oldfiles:
     - smart-path
     - nerdfont
 
-mr:mrw:
-  projectors:
-    - to-relative-path
-    - fzf-matcher
-
-  renderers:
-    - smart-path
-    - nerdfont
-
-mr:mru:
-  projectors:
-    - to-relative-path
-    - fzf-matcher
-
-  renderers:
-    - smart-path
-    - nerdfont
-
-mr:mrr:
-  renderers:
-    - smart-path
-    - nerdfont
+line:
+  previewers:
+    - buffer
 
 buffer:
+  previewers:
+    - buffer
+
   renderers:
     - nerdfont
+
+helptag:
+  defaultAction: cmd:help
+
+  actions:
+    - cmd:help
+
+  renderers:
+    - helptag
+
+  previewers:
+    - helptag
+
+history:
+  defaultAction: cmd
+  previewers: []
+
+# Fallback setting
+"":
+  actionAliases:
+    cmd:cd: cd
+    cmd:lcd: lcd
+    cmd:tcd: tcd
+    cmd:bunload: bunload
+    cmd:bdelete: bdelete
+    cmd:bwipeout: bwipeout
+    cmd:help: help
+    cmd:write: write
+
+  defaultAction: open
+
+  actions:
+    - "*"
+
+  projectors:
+    - fzf-matcher
+
+  previewers:
+    - file
+    - buffer
+    - attr
+
+  actionProjectors:
+    - lexical-sorter
+    - fzf-matcher
+
+  actionRenderers:
+    - description
+
+  actionPreviewers: []
 
 # JSON schema of this file
 # yaml-language-server: $schema=https://raw.githubusercontent.com/lambdalisue/vim-fall/main/denops/fall/config/picker/schema.json
