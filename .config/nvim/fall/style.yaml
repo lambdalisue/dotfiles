@@ -3,13 +3,13 @@ picker:
   # Style of source picker
   source:
     style:
-      widthRatio: 0.9
+      widthRatio: 0.95
       widthMin: 80
-      widthMax: 800
-      heightRatio: 0.9
-      heightMin: 10
-      heightMax: 300
-      previewRatio: 0.45
+      widthMax: 1000
+      heightRatio: 0.60
+      heightMin: 30
+      heightMax: 1000
+      previewRatio: 0.7
 
   # Style of action picker
   action:
