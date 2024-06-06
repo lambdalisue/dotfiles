@@ -6,10 +6,10 @@ picker:
       widthRatio: 0.95
       widthMin: 80
       widthMax: 1000
-      heightRatio: 0.60
+      heightRatio: 0.80
       heightMin: 30
       heightMax: 1000
-      previewRatio: 0.7
+      previewRatio: 0.6
 
   # Style of action picker
   action:

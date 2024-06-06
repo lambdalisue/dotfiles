@@ -8,11 +8,12 @@ function! s:init() abort
 
   " Denops
   call jetpack#add('lambdalisue/vim-askpass')
-  call jetpack#add('lambdalisue/vim-gin')
   call jetpack#add('lambdalisue/vim-deno-cache')
+  call jetpack#add('lambdalisue/vim-gin')
   call jetpack#add('lambdalisue/vim-guise')
   call jetpack#add('lambdalisue/vim-kensaku')
   call jetpack#add('skanehira/denops-silicon.vim')
+  call jetpack#add('uga-rosa/denippet.vim')
   call jetpack#add('vim-denops/denops-shared-server.vim')
   call jetpack#add('vim-denops/denops-startup-recorder.vim')
   call jetpack#add('vim-denops/denops.vim')
