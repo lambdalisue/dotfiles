@@ -7,7 +7,7 @@ picker:
       widthMin: 80
       widthMax: 1000
       heightRatio: 0.80
-      heightMin: 30
+      heightMin: 10
       heightMax: 1000
       previewRatio: 0.6
 

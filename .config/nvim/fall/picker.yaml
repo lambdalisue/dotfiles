@@ -7,6 +7,26 @@ file:
     - smart-path
     - nerdfont
 
+mr:mrw:
+  projectors:
+    - cwd-filter
+    - to-relative-path
+    - fzf-matcher
+
+  renderers:
+    - smart-path
+    - nerdfont
+
+mr:mru:
+  projectors:
+    - cwd-filter
+    - to-relative-path
+    - fzf-matcher
+
+  renderers:
+    - smart-path
+    - nerdfont
+
 oldfiles:
   projectors:
     - cwd-filter
@@ -77,6 +97,10 @@ history:
     - description
 
   actionPreviewers: []
+
+  options:
+    itemCollector:
+      threshold: 20000
 
 # JSON schema of this file
 # yaml-language-server: $schema=https://raw.githubusercontent.com/lambdalisue/vim-fall/main/denops/fall/config/picker/schema.json
