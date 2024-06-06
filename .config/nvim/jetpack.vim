@@ -117,7 +117,7 @@ function! s:local() abort
   for path in glob('~/ogh/*/*', 1, 1, 1)
     for prove in proves
       if isdirectory(path . prove) && index(excludes, fnamemodify(path, ':t')) is# -1
-        execute printf('set runtimepath^=%s', fnameescape(path))
+        execute printf('set runtimepath+=%s', fnameescape(path))
         break
       endif
     endfor

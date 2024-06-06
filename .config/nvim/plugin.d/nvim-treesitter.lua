@@ -1,5 +1,7 @@
 local parser_install_dir = vim.fn.stdpath("data") .. "/treesitter"
-vim.opt.runtimepath:append(parser_install_dir)
+-- It MUST be at the beginning of runtimepath. Otherwise the parsers from Neovim itself
+-- is loaded that may not be compatible with the queries from the 'nvim-treesitter' plugin.
+vim.opt.runtimepath:prepend(parser_install_dir)
 
 require('nvim-treesitter.configs').setup {
   parser_install_dir = parser_install_dir,
