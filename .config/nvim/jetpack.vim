@@ -85,6 +85,7 @@ function! s:init() abort
 
   " Colorscheme
   call jetpack#add('EdenEast/nightfox.nvim')
+  call jetpack#add('cocopon/iceberg.vim')
 
   " Vim
   if !has('nvim')

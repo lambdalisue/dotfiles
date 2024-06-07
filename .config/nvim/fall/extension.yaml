@@ -39,6 +39,19 @@ source:
     options:
       mode: "bufmodified"
 
+  mr:mrw:
+    options:
+      type: mrw
+
+  mr:mru:
+    options:
+      type: mru
+
+  mr:mrr:
+    options:
+      type: mrr
+
+
 action:
   # Define variants of 'open' action
   open:drop:

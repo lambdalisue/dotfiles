@@ -516,10 +516,11 @@ function! s:load_configurations() abort
 endfunction
 call s:load_configurations()
 
+set background=dark
 if has('nvim')
   silent! colorscheme nordfox
 else
-  silent! colorscheme slate
+  silent! colorscheme iceberg
 endif
 
 if filereadable(expand("~/.vimrc.local"))
