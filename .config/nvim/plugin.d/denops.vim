@@ -9,9 +9,9 @@ endif
 
 function! s:interrupt() abort
   if quickrun#is_running()
-    call quickrun#sweep_sessions()
+    silent! call quickrun#sweep_sessions()
   endif
-  call denops#interrupt()
+  silent! call denops#interrupt()
 endfunction
 
 " Interrupt the process of plugins via <C-c>

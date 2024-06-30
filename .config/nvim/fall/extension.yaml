@@ -39,18 +39,54 @@ source:
     options:
       mode: "bufmodified"
 
+  extension:source:
+    options:
+      type: "source"
+  extension:projector:
+    options:
+      type: "projector"
+  extension:renderer:
+    options:
+      type: "renderer"
+  extension:previewer:
+    options:
+      type: "previewer"
+  extension:action:
+    options:
+      type: "action"
+
   mr:mrw:
     options:
       type: mrw
-
   mr:mru:
     options:
       type: mru
-
   mr:mrr:
     options:
       type: mrr
 
+projector:
+  numerical-sorter:fzf-score:
+    description: "Sort by the score of fzf"
+    options:
+      attrs:
+        - "detail.fzf.score"
+
+  date-sorter:stat-atime:
+    description: "Sort by the atime (last access time) of the file stat"
+    options:
+      attrs:
+        - "detail.stat.atime"
+  date-sorter:stat-mtime:
+    description: "Sort by the mtime (last modified time) of the file stat"
+    options:
+      attrs:
+        - "detail.stat.mtime"
+  date-sorter:stat-birthtime:
+    description: "Sort by the birthtime (creation time) of the file stat"
+    options:
+      attrs:
+        - "detail.stat.birthtime"
 
 action:
   # Define variants of 'open' action
@@ -76,55 +112,54 @@ action:
     description: "Perform 'cd' to the directory of the cursor or last selected item"
     options:
       immediate: true
-      prefix: "cd "
+      template: "cd {}"
       restriction: "directory-or-parent"
       fnameescape: true
   cmd:lcd:
     description: "Perform 'lcd' to the directory of the cursor or last selected item"
     options:
       immediate: true
-      prefix: "lcd "
+      template: "lcd {}"
       restriction: "directory-or-parent"
       fnameescape: true
   cmd:tcd:
     description: "Perform 'tcd' to the directory of the cursor or last selected item"
     options:
       immediate: true
-      prefix: "tcd "
+      template: "tcd {}"
       restriction: "directory-or-parent"
       fnameescape: true
   cmd:bunload:
     description: "Unload the buffer of the cursor or selected items"
     options:
       immediate: true
-      prefix: "bunload "
+      template: "bunload {}"
       restriction: "buffer"
       fnameescape: true
   cmd:bdelete:
     description: "Delete the buffer of the cursor or selected items"
     options:
       immediate: true
-      prefix: "bdelete "
+      template: "bdelete {}"
       restriction: "buffer"
       fnameescape: true
   cmd:bwipeout:
     description: "Wipeout the buffer of the cursor or selected items"
     options:
       immediate: true
-      prefix: "bwipeout "
+      template: "bwipeout {}"
       restriction: "buffer"
       fnameescape: true
   cmd:help:
     description: "Open help of the keyword under the cursor or last selected item"
     options:
       immediate: true
-      prefix: "help "
+      template: "help {}"
   cmd:write:
     description: "Perform 'write' to the buffer of the cursor or selected items"
     options:
       immediate: true
-      prefix: "tabedit "
-      suffix: " | write | tabclose"
+      template: "tabedit {} | write | tabclose"
       restriction: "buffer"
       fnameescape: true
 

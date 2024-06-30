@@ -2,26 +2,8 @@ file:
   projectors:
     - to-relative-path
     - fzf-matcher
-
-  renderers:
-    - smart-path
-    - nerdfont
-
-mr:mrw:
-  projectors:
-    - cwd-filter
-    - to-relative-path
-    - fzf-matcher
-
-  renderers:
-    - smart-path
-    - nerdfont
-
-mr:mru:
-  projectors:
-    - cwd-filter
-    - to-relative-path
-    - fzf-matcher
+    - stat-annotator
+    - bufinfo-annotator
 
   renderers:
     - smart-path
@@ -30,8 +12,13 @@ mr:mru:
 oldfiles:
   projectors:
     - cwd-filter
+    - exists-filter
     - to-relative-path
     - fzf-matcher
+    - stat-annotator
+    - bufinfo-annotator
+    - date-sorter:stat-mtime
+    - numerical-sorter:fzf-score
 
   renderers:
     - smart-path
@@ -42,6 +29,10 @@ line:
     - buffer
 
 buffer:
+  projectors:
+    - fzf-matcher
+    - bufinfo-annotator
+
   previewers:
     - buffer
 
@@ -63,6 +54,35 @@ helptag:
 history:
   defaultAction: cmd
   previewers: []
+
+extension:
+  projectors:
+    - lexical-sorter
+    - fzf-matcher
+  previewers:
+    - extension
+
+mr:mrw:
+  projectors:
+    - cwd-filter
+    - exists-filter
+    - to-relative-path
+    - fzf-matcher
+
+  renderers:
+    - smart-path
+    - nerdfont
+
+mr:mru:
+  projectors:
+    - cwd-filter
+    - exists-filter
+    - to-relative-path
+    - fzf-matcher
+
+  renderers:
+    - smart-path
+    - nerdfont
 
 # Fallback setting
 "":
@@ -99,6 +119,8 @@ history:
   actionPreviewers: []
 
   options:
+    preview:
+      mode: fast
     itemCollector:
       threshold: 20000
 

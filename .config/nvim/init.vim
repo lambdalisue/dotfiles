@@ -519,6 +519,7 @@ call s:load_configurations()
 set background=dark
 if has('nvim')
   silent! colorscheme nordfox
+  "silent! colorscheme dayfox
 else
   silent! colorscheme iceberg
 endif

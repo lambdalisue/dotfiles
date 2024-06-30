@@ -4,7 +4,7 @@
 [user]
   name  = Alisue
   email = lambdalisue@gmail.com
-  signingkey = 74D5B4A7F3E1B28C
+  signingkey = B11731DAB90A2400
 
 [rerere]
   enabled = true

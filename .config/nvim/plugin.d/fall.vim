@@ -1,4 +1,5 @@
 nnoremap <silent> <Leader><Leader> <Cmd>FallRestore<CR>
+nnoremap <silent> <Leader>fe <Cmd>Fall extension<CR>
 nnoremap <silent> <Leader>ff <Cmd>Fall file<CR>
 nnoremap <silent> <Leader>fb <Cmd>Fall buffer<CR>
 nnoremap <silent> <Leader>fh <Cmd>Fall helptag<CR>
