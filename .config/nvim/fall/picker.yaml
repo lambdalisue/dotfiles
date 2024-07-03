@@ -2,8 +2,8 @@ file:
   projectors:
     - to-relative-path
     - fzf-matcher
-    - stat-annotator
-    - bufinfo-annotator
+    # - stat-annotator
+    # - bufinfo-annotator
 
   renderers:
     - smart-path
