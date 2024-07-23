@@ -1,4 +1,5 @@
 .addons
 .zcompdump
 .zcompcache
+.zsh_sessions
 *.zwc

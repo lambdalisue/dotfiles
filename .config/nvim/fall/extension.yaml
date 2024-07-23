@@ -64,6 +64,9 @@ source:
   mr:mrr:
     options:
       type: mrr
+  mr:mrd:
+    options:
+      type: mrd
 
 projector:
   numerical-sorter:fzf-score:

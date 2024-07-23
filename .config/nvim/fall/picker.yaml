@@ -84,6 +84,10 @@ mr:mru:
     - smart-path
     - nerdfont
 
+vim-jp-radio:
+  defaultAction: vim-jp-radio
+  previewers: []
+
 # Fallback setting
 "":
   actionAliases:
