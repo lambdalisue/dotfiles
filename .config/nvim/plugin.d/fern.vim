@@ -65,9 +65,9 @@ endfunction
 
 function! s:smart_path() abort
   if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
-    return escape(fnameescape(fnamemodify('.', ':p')), '\')
+    return fnameescape(fnameescape(fnamemodify('.', ':p')))
   endif
-  return escape(fnameescape(fnamemodify(expand('%'), ':p:h')), '\')
+  return fnameescape(fnameescape(fnamemodify(expand('%'), ':p:h')))
 endfunction
 
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%:p<CR>
