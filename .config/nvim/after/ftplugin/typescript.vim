@@ -32,7 +32,7 @@ function! s:switch_coc_typescript(bufname) abort
   endif
   let g:my_coc_typescript_detected = 1
   let dir = a:bufname ==# '' ? '.' : fnamemodify(a:bufname, ':p:h')
-  if !empty(findfile("deno.json", dir . ';'))
+  if !empty(findfile("deno.json", dir . ';')) || !empty(findfile("deno.jsonc", dir . ';'))
     call s:enable_deno()
   elseif !empty(findfile("package.json", dir . ';'))
     call s:enable_tsserver()
