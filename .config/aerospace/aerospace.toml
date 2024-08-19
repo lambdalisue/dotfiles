@@ -126,10 +126,10 @@ end tell'
 '''
 
 # Focus
-alt-h = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop left'
-alt-j = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop down'
-alt-k = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop up'
-alt-l = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop right'
+alt-h = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors left'
+alt-j = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors down'
+alt-k = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors up'
+alt-l = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors right'
 alt-tab = 'exec-and-forget aerospace focus-back-and-forth || aerospace workspace-back-and-forth'
 
 # Move
@@ -139,10 +139,10 @@ alt-shift-k = 'move up'
 alt-shift-l = 'move right'
 
 # Join
-alt-ctrl-h = ['join-with left']
-alt-ctrl-j = ['join-with down']
-alt-ctrl-k = ['join-with up']
-alt-ctrl-l = ['join-with right']
+alt-ctrl-h = 'join-with left'
+alt-ctrl-j = 'join-with down'
+alt-ctrl-k = 'join-with up'
+alt-ctrl-l = 'join-with right'
 
 # Workspace
 alt-1 = 'workspace --auto-back-and-forth 1'
@@ -154,6 +154,8 @@ alt-6 = 'workspace --auto-back-and-forth 6'
 alt-7 = 'workspace --auto-back-and-forth 7'
 alt-8 = 'workspace --auto-back-and-forth 8'
 alt-9 = 'workspace --auto-back-and-forth 9'
+alt-rightSquareBracket = 'workspace --wrap-around next'
+alt-leftSquareBracket = 'workspace --wrap-around prev'
 alt-n = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace --wrap-around next'
 alt-p = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace --wrap-around prev'
 
@@ -167,6 +169,14 @@ alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
 alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
 alt-shift-8 = ['move-node-to-workspace 8', 'workspace 7']
 alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+alt-shift-rightSquareBracket = [
+  'move-node-to-workspace --wrap-around next',
+  'workspace --wrap-around next',
+]
+alt-shift-leftSquareBracket = [
+  'move-node-to-workspace --wrap-around prev',
+  'workspace --wrap-around prev',
+]
 alt-shift-n = [
   'move-node-to-workspace --wrap-around next',
   'workspace --wrap-around next',
@@ -177,29 +187,20 @@ alt-shift-p = [
 ]
 
 # Focus monitor
-alt-keypad4 = 'focus-monitor left'
-alt-keypad2 = 'focus-monitor down'
-alt-keypad8 = 'focus-monitor up'
-alt-keypad6 = 'focus-monitor right'
-alt-keypadMinus = 'focus-monitor --wrap-around prev'
-alt-keypadPlus = 'focus-monitor --wrap-around next'
+alt-left = 'focus-monitor left'
+alt-down = 'focus-monitor down'
+alt-up = 'focus-monitor up'
+alt-right = 'focus-monitor right'
 
 # Move monitor
-alt-shift-keypad4 = ['move-node-to-monitor left', 'focus-monitor left']
-alt-shift-keypad2 = ['move-node-to-monitor down', 'focus-monitor down']
-alt-shift-keypad8 = ['move-node-to-monitor up', 'focus-monitor up']
-alt-shift-keypad6 = ['move-node-to-monitor right', 'focus-monitor right']
-alt-shift-keypadMinus = [
-  'move-node-to-monitor --wrap-around prev',
-  'focus-monitor --wrap-around prev',
-]
-alt-shift-keypadPlus = [
-  'move-node-to-monitor --wrap-around next',
-  'focus-monitor --wrap-around next',
-]
-alt-shift-keypadEnter = 'move-workspace-to-monitor --wrap-around next'
+alt-shift-left = ['move-node-to-monitor left', 'focus-monitor left']
+alt-shift-down = ['move-node-to-monitor down', 'focus-monitor down']
+alt-shift-up = ['move-node-to-monitor up', 'focus-monitor up']
+alt-shift-right = ['move-node-to-monitor right', 'focus-monitor right']
+alt-shift-enter = 'move-workspace-to-monitor --wrap-around next'
 
 # Window size
+alt-enter = 'macos-native-fullscreen'
 alt-f = 'fullscreen'
 alt-minus = 'resize smart -50'
 alt-equal = 'resize smart +50'
