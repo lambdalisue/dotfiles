@@ -63,6 +63,12 @@ outer.bottom = 10
 outer.top = 10
 outer.right = 10
 
+[exec]
+inherit-env-vars = true
+
+[exec.env-vars]
+XDG_CONFIG_HOME = '${HOME}/.config'
+
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -95,34 +101,10 @@ outer.right = 10
 # Layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
-alt-period = '''exec-and-forget aerospace layout floating || aerospace layout tiling && aerospace trigger-binding --mode main alt-shift-f'''
-alt-shift-f = '''exec-and-forget osascript -e '
--- Find focused monitor name
-set monitorName to do shell script "aerospace list-monitors --focused --format '%{monitor-name}'"
-
--- Get focused monitor display info
-set jqFilter to ".SPDisplaysDataType[].spdisplays_ndrvs[] | select(._name == \\\"" & monitorName & "\\\") | ._spdisplays_resolution"
-set shellCommand to "system_profiler SPDisplaysDataType -json | jq -r \"" & jqFilter & "\""
-set displayInfo to do shell script shellCommand
-set screenWidth to word 1 of displayInfo
-set screenHeight to word 3 of displayInfo
-
--- Calculate new size/position
-set newWidth to screenWidth / 5 * 3
-set newHeight to screenHeight / 5 * 3
-set newX to (screenWidth - newWidth) / 2
-set newY to (screenHeight - newHeight) / 2
-
--- Resize/Replace the focused application window
-tell application "System Events"
-  set frontApp to name of first application process whose frontmost is true
-
-  tell process frontApp
-    set win to front window
-    set position of win to {newX, newY}
-    set size of win to {newWidth, newHeight}
-  end tell
-end tell'
+alt-period = '''exec-and-forget
+aerospace layout floating \
+  && ${XDG_CONFIG_HOME}/aerospace/scripts/centralize-focused-window.sh \
+  || aerospace layout tiling
 '''
 
 # Focus
