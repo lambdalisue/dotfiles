@@ -63,12 +63,6 @@ outer.bottom = 10
 outer.top = 10
 outer.right = 10
 
-[exec]
-inherit-env-vars = true
-
-[exec.env-vars]
-XDG_CONFIG_HOME = '${HOME}/.config'
-
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -101,9 +95,9 @@ XDG_CONFIG_HOME = '${HOME}/.config'
 # Layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
-alt-period = '''exec-and-forget
+alt-period = '''exec-and-forget \
 aerospace layout floating \
-  && ${XDG_CONFIG_HOME}/aerospace/scripts/centralize-focused-window.sh \
+  && ${HOME}/.config/aerospace/scripts/centralize-focused-window.sh \
   || aerospace layout tiling
 '''
 
