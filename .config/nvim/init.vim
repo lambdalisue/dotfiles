@@ -48,7 +48,6 @@ if has('vim_starting')
   let g:loaded_getscriptPlugin   = 1
   let g:loaded_logipat           = 1
   let g:loaded_matchparen        = 1
-  let g:loaded_man               = 1
   " NOTE:
   " The Netrw is use to download a missing spellfile
   let g:loaded_netrw             = 1
