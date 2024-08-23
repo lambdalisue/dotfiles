@@ -176,11 +176,11 @@ alt-shift-right = ['move-node-to-monitor right', 'focus-monitor right']
 alt-shift-enter = 'move-workspace-to-monitor --wrap-around next'
 
 # Window size
-alt-enter = 'macos-native-fullscreen'
 alt-minus = 'resize smart -50'
 alt-equal = 'resize smart +50'
 alt-shift-equal = 'balance-sizes'
 alt-shift-f = 'fullscreen'
+alt-shift-ctrl-f = 'macos-native-fullscreen'
 
 # Service
 alt-shift-semicolon = 'mode service'
@@ -197,3 +197,15 @@ esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main']                # reset layout
 f = ['layout floating tiling', 'mode main']
 backspace = ['close-all-windows-but-current', 'mode main']
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeak.slackmacgap'
+run = ['move-node-to-workspace 10']
+
+[[on-window-detected]]
+if.app-id = 'com.cron.electron'
+run = ['move-node-to-workspace 10']
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = ['move-node-to-workspace 10']
