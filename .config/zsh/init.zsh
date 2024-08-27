@@ -189,3 +189,8 @@ if type docker &>/dev/null; then
   fi
   source ${CACHE_PROFILE}/docker.zsh
 fi
+
+# ogh
+ogh() {
+  command deno run --allow-net --allow-run --allow-read --allow-env jsr:@lambdalisue/ogh/cli $@
+}
