@@ -194,3 +194,14 @@ fi
 ogh() {
   command deno run --allow-net --allow-run --allow-read --allow-env jsr:@lambdalisue/ogh/cli $@
 }
+ogh:reload() {
+  command deno run -r --allow-net --allow-run --allow-read --allow-env jsr:@lambdalisue/ogh/cli $@
+}
+
+# docbase
+docbase() {
+  command deno run --allow-net --allow-read --allow-write --allow-env jsr:@lambdalisue/docbase/cli/docbase $@
+}
+docbase:reload() {
+  command deno run -r --allow-net --allow-read --allow-write --allow-env jsr:@lambdalisue/docbase/cli/docbase $@
+}

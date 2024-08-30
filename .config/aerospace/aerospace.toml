@@ -93,8 +93,8 @@ outer.right = 10
 # '''
 
 # Layout
-alt-slash = 'layout tiles horizontal vertical'
-alt-comma = 'layout accordion horizontal vertical'
+alt-t = 'layout tiles horizontal vertical'
+alt-a = 'layout accordion horizontal vertical'
 alt-f = '''exec-and-forget \
 aerospace layout floating \
   && ${HOME}/.config/aerospace/scripts/centralize-focused-window.sh \
