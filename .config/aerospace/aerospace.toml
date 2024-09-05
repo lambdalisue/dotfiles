@@ -199,6 +199,22 @@ f = ['layout floating tiling', 'mode main']
 backspace = ['close-all-windows-but-current', 'mode main']
 
 [[on-window-detected]]
+if.app-id = 'com.apple.Preview'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.QuickTimePlayerX'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.hanvon.PenTablet'
+run = ['layout floating']
+
+[[on-window-detected]]
 if.app-id = 'com.tinyspeak.slackmacgap'
 run = ['move-node-to-workspace 10']
 
@@ -208,4 +224,12 @@ run = ['move-node-to-workspace 10']
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
+run = ['move-node-to-workspace 10']
+
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+run = ['move-node-to-workspace 10']
+
+[[on-window-detected]]
+if.app-id = 'com.gather.Gather'
 run = ['move-node-to-workspace 10']

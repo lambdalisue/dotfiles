@@ -69,6 +69,10 @@ source:
       type: mrd
 
 projector:
+  lexical-sorter:reverse:
+    options:
+      reverse: true
+
   numerical-sorter:fzf-score:
     description: "Sort by the score of fzf"
     options:

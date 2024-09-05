@@ -18,6 +18,7 @@ function! s:init() abort
   call jetpack#add('vim-denops/denops-shared-server.vim')
   call jetpack#add('vim-denops/denops-startup-recorder.vim')
   call jetpack#add('vim-denops/denops.vim')
+  call jetpack#add('vim-skk/skkeleton')
   call jetpack#add('yuki-yano/fuzzy-motion.vim')
 
   call jetpack#add('AndrewRadev/linediff.vim')

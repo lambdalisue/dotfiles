@@ -9,6 +9,18 @@ file:
     - smart-path
     - nerdfont
 
+file:junkfiles:
+  projectors:
+    - to-relative-path
+    - fzf-matcher
+    - lexical-sorter:reverse
+    # - stat-annotator
+    # - bufinfo-annotator
+
+  renderers:
+    - smart-path
+    - nerdfont
+
 oldfiles:
   projectors:
     - cwd-filter
