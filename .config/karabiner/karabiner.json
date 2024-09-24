@@ -17,6 +17,7 @@
                                 ],
                                 "from": { "key_code": "escape" },
                                 "to": [
+                                    { "key_code": "lang2" },
                                     { "key_code": "escape" },
                                     { "key_code": "escape" }
                                 ],
