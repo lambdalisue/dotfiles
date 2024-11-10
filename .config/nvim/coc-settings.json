@@ -27,6 +27,7 @@
   "python.linting.ruffEnabled": true,
   "ruff.autoFixOnSave": true,
   "rust-analyzer.cargo.buildScripts.enable": true,
+  "rust-analyzer.cargo.features": "all",
   "rust-analyzer.imports.granularity.enforce": true,
   "rust-analyzer.inlayHints.bindingModeHints.enable": true,
   "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "with_block",
@@ -64,5 +65,6 @@
       "initializationOptions": {},
       "settings": {}
     }
-  }
+  },
+  "svelte.enable-ts-plugin": true
 }

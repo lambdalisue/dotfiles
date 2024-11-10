@@ -1,0 +1,29 @@
+{
+  "title": "XP-PEN",
+  "rules": [
+    {
+      "description": "Send P (Pen) instead of B (Brash) on Goodnote 6",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": [
+                "^com\\.goodnotesapp\\.x$"
+              ],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "key_code": "b"
+          },
+          "to": [
+            {
+              "key_code": "p"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}

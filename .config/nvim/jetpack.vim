@@ -6,6 +6,10 @@ function! s:init() abort
   call jetpack#add('ryanoasis/vim-devicons')
   call jetpack#add('nvim-tree/nvim-web-devicons')
 
+  " FuzzyFinder
+  call jetpack#add('vim-scripts/L9')
+  call jetpack#add('vim-scripts/FuzzyFinder')
+
   " Denops
   call jetpack#add('lambdalisue/vim-askpass')
   call jetpack#add('lambdalisue/vim-deno-cache')

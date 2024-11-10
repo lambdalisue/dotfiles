@@ -7,6 +7,8 @@ let g:fern#default_exclude = '\%(\.DS_Store\|__pycache__\|\.coverage\)'
 let g:fern#renderer#nerdfont#indent_markers = 1
 
 function! s:fern_local_init() abort
+  setlocal nonumber
+
   nmap <buffer>
         \ <Plug>(fern-my-enter-and-tcd)
         \ <Plug>(fern-action-enter)<Plug>(fern-wait)<Plug>(fern-action-tcd:root)

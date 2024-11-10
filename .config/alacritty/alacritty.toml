@@ -13,7 +13,7 @@ chars = "\u001E"
 key = "Key6"
 mods = "Control"
 
-[shell]
+[terminal.shell]
 args = ["--login"]
 program = "/opt/homebrew/bin/zsh"
 
@@ -23,3 +23,5 @@ opacity = 1.0
 [window.padding]
 x = 4
 y = 4
+
+[terminal]

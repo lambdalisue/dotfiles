@@ -1,15 +1,14 @@
-nnoremap <silent> <Leader><Leader> <Cmd>FallRestore<CR>
-nnoremap <silent> <Leader>fe <Cmd>Fall extension<CR>
 nnoremap <silent> <Leader>ff <Cmd>Fall file<CR>
 nnoremap <silent> <Leader>fb <Cmd>Fall buffer<CR>
-nnoremap <silent> <Leader>fh <Cmd>Fall helptag<CR>
+nnoremap <silent> <Leader>fh <Cmd>Fall help<CR>
 nnoremap <silent> <Leader>fg <Cmd>Fall rg<CR>
-nnoremap <silent> <Leader>fd <Cmd>Fall file:dotfiles ~/ogh/lambdalisue/dotfiles<CR>
-nnoremap <silent> <Leader>fo <Cmd>Fall file:obsidian ~/ObsidianVault<CR>
-nnoremap <silent> <Leader>fj <Cmd>Fall file:junkfiles ~/Documents/vim/junkfiles<CR>
+nnoremap <silent> <Leader>fd <Cmd>Fall file ~/ogh/lambdalisue/dotfiles<CR>
+nnoremap <silent> <Leader>fo <Cmd>Fall file ~/ObsidianVault<CR>
+nnoremap <silent> <Leader>fj <Cmd>Fall file ~/Documents/vim/junkfiles<CR>
 nnoremap <silent> <Leader>fl <Cmd>Fall line<CR>
-nnoremap <silent> <Leader>mm <Cmd>Fall mr:mrw<CR>
-nnoremap <silent> <Leader>mu <Cmd>Fall mr:mru<CR>
-nnoremap <silent> <Leader>mr <Cmd>Fall mr:mrr<CR>
+nnoremap <silent> <Leader>mm <Cmd>Fall mru<CR>
+nnoremap <silent> <Leader>mw <Cmd>Fall mrw<CR>
+nnoremap <silent> <Leader>mr <Cmd>Fall mrr<CR>
+nnoremap <silent> <Leader>md <Cmd>Fall mrd<CR>
 
 nnoremap <silent> <C-x><C-g> <Cmd>Fall file ~/ogh<CR>

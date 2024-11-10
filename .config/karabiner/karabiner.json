@@ -125,41 +125,6 @@
                 {
                     "identifiers": {
                         "is_keyboard": true,
-                        "product_id": 305,
-                        "vendor_id": 1390
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 4871,
-                        "vendor_id": 65261
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 3354,
-                        "vendor_id": 5840
-                    },
-                    "ignore": true,
-                    "manipulate_caps_lock_led": false
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 256,
-                        "vendor_id": 2131
-                    },
-                    "manipulate_caps_lock_led": false
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
                         "product_id": 1031,
                         "vendor_id": 4176
                     },
@@ -177,7 +142,21 @@
                 {
                     "identifiers": {
                         "is_keyboard": true,
-                        "product_id": 32982,
+                        "is_pointing_device": true,
+                        "product_id": 2357,
+                        "vendor_id": 10429
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "b" },
+                            "to": [{ "key_code": "p" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 32983,
                         "vendor_id": 1149
                     },
                     "ignore": true
@@ -207,20 +186,7 @@
             ],
             "name": "HHKB (US)",
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": { "key_code": "japanese_pc_nfer" },
-                    "to": [{ "key_code": "japanese_eisuu" }]
-                },
-                {
-                    "from": { "key_code": "japanese_pc_xfer" },
-                    "to": [{ "key_code": "japanese_kana" }]
-                },
-                {
-                    "from": { "key_code": "keypad_num_lock" },
-                    "to": [{ "key_code": "fn" }]
-                }
-            ]
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         { "name": "Disabled" },
         {

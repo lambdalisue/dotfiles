@@ -1,2 +1,1 @@
-map <Leader>h <Plug>(operator-quickhl-manual-this-motion)
-
+map H <Plug>(operator-quickhl-manual-this-motion)
