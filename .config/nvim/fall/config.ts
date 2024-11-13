@@ -1,11 +1,13 @@
 import {
+  composeActions,
   composeRenderers,
   type Entrypoint,
   refineCurator,
   refineSource,
-} from "jsr:@vim-fall/std@^0.2.0-pre.2";
-import * as builtin from "jsr:@vim-fall/std@^0.2.0-pre.2/builtin";
-import * as extra from "jsr:@vim-fall/extra@^0.1.0";
+} from "jsr:@vim-fall/std@^0.4.0";
+import * as builtin from "jsr:@vim-fall/std@^0.4.0/builtin";
+import * as extra from "jsr:@vim-fall/extra@^0.2.0";
+import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
 
 const myPathActions = {
   ...builtin.action.defaultOpenActions,
@@ -27,6 +29,90 @@ const myMiscActions = {
   ...builtin.action.defaultSubmatchActions,
 };
 
+const myFilterFile = (path: string) => {
+  const excludes = [
+    ".7z",
+    ".DS_Store",
+    ".avi",
+    ".avi",
+    ".bmp",
+    ".class",
+    ".dll",
+    ".dmg",
+    ".doc",
+    ".docx",
+    ".dylib",
+    ".ear",
+    ".exe",
+    ".fla",
+    ".flac",
+    ".flv",
+    ".gif",
+    ".ico",
+    ".id_ed25519",
+    ".id_rsa",
+    ".iso",
+    ".jar",
+    ".jpeg",
+    ".jpg",
+    ".key",
+    ".mkv",
+    ".mov",
+    ".mp3",
+    ".mp4",
+    ".mpeg",
+    ".mpg",
+    ".o",
+    ".obj",
+    ".ogg",
+    ".pdf",
+    ".png",
+    ".ppt",
+    ".pptx",
+    ".rar",
+    ".so",
+    ".swf",
+    ".tar.gz",
+    ".war",
+    ".wav",
+    ".webm",
+    ".wma",
+    ".wmv",
+    ".xls",
+    ".xlsx",
+    ".zip",
+  ];
+  for (const exclude of excludes) {
+    if (path.endsWith(exclude)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const myFilterDirectory = (path: string) => {
+  const excludes = [
+    "$RECYVLE.BIN",
+    ".cache",
+    ".git",
+    ".hg",
+    ".ssh",
+    ".svn",
+    "__pycache__", // Python
+    "build", // C/C++
+    "node_modules", // Node.js
+    "target", // Rust
+    `nvim${SEPARATOR}pack`,
+    `zsh${SEPARATOR}.addons`,
+  ];
+  for (const exclude of excludes) {
+    if (path.includes(`${SEPARATOR}${exclude}${SEPARATOR}`)) {
+      return false;
+    }
+  }
+  return true;
+};
+
 export const main: Entrypoint = (
   {
     defineItemPickerFromSource,
@@ -35,7 +121,11 @@ export const main: Entrypoint = (
   },
 ) => {
   refineGlobalConfig({
-    coordinator: builtin.coordinator.modern,
+    // coordinator: builtin.coordinator.modern,
+    coordinator: builtin.coordinator.modern({
+      widthRatio: 0.90,
+      heightRatio: 0.90,
+    }),
     theme: builtin.theme.MODERN_THEME,
   });
 
@@ -78,7 +168,6 @@ export const main: Entrypoint = (
     "mru",
     refineSource(
       extra.source.mr,
-      builtin.refiner.cwd,
       builtin.refiner.relativePath,
     ),
     {
@@ -136,8 +225,12 @@ export const main: Entrypoint = (
         ...myPathActions,
         ...myQuickfixActions,
         ...myMiscActions,
+        "cd-and-open": composeActions(
+          builtin.action.cd,
+          builtin.action.open,
+        ),
       },
-      defaultAction: "open",
+      defaultAction: "cd-and-open",
     },
   );
   defineItemPickerFromSource(
@@ -155,8 +248,12 @@ export const main: Entrypoint = (
         ...myPathActions,
         ...myQuickfixActions,
         ...myMiscActions,
+        "cd-and-open": composeActions(
+          builtin.action.cd,
+          builtin.action.open,
+        ),
       },
-      defaultAction: "open",
+      defaultAction: "cd-and-open",
     },
   );
 
@@ -164,31 +261,35 @@ export const main: Entrypoint = (
     "file",
     refineSource(
       builtin.source.file({
-        excludes: [
-          /.*\/nvim\/pack\/.*/,
-          /.*\/zsh\/\.addons\/.*/,
-          /.*\/node_modules\/.*/,
-          /.*\/target\/.*/,
-          /.*\/.git\/.*/,
-          /.*\/.svn\/.*/,
-          /.*\/.hg\/.*/,
-          /.*\/.ssh\/.*/,
-          /.*\/.DS_Store$/,
-        ],
+        filterFile: myFilterFile,
+        filterDirectory: myFilterDirectory,
       }),
       builtin.refiner.relativePath,
     ),
     {
-      matchers: [builtin.matcher.fzf],
-      renderers: [composeRenderers(
-        builtin.renderer.smartPath,
-        // Install https://www.nerdfonts.com/ to use this renderer
-        builtin.renderer.nerdfont,
-        //extra.renderer.nerdfont,
-        //extra.renderer.devicons,
-        //extra.renderer.nvimWebDevicons,
-      )],
-      previewers: [builtin.previewer.file],
+      matchers: [
+        builtin.matcher.substring,
+        builtin.matcher.regexp,
+      ],
+      sorters: [
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          // Install https://www.nerdfonts.com/ to use this renderer
+          builtin.renderer.nerdfont,
+          //extra.renderer.nerdfont,
+          //extra.renderer.devicons,
+          //extra.renderer.nvimWebDevicons,
+        ),
+        builtin.renderer.noop,
+      ],
+      previewers: [
+        builtin.previewer.file,
+        builtin.previewer.noop,
+      ],
       actions: {
         ...myPathActions,
         ...myQuickfixActions,
@@ -199,8 +300,11 @@ export const main: Entrypoint = (
   );
 
   defineItemPickerFromSource("line", builtin.source.line, {
-    //matchers: [builtin.matcher.fzf],
-    matchers: [extra.matcher.kensaku],
+    matchers: [
+      builtin.matcher.fzf,
+      builtin.matcher.regexp,
+      //extra.matcher.kensaku,
+    ],
     previewers: [builtin.previewer.buffer],
     actions: {
       ...myQuickfixActions,
@@ -235,5 +339,15 @@ export const main: Entrypoint = (
       ...builtin.action.defaultHelpActions,
     },
     defaultAction: "help",
+  });
+
+  defineItemPickerFromSource("quickfix", builtin.source.quickfix, {
+    matchers: [builtin.matcher.fzf],
+    previewers: [builtin.previewer.buffer],
+    actions: {
+      ...myMiscActions,
+      ...builtin.action.defaultOpenActions,
+    },
+    defaultAction: "open",
   });
 };

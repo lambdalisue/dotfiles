@@ -1,4 +1,4 @@
-nnoremap <silent> <Leader>aa :<C-u>GinStatus -- <C-r>=fnamemodify(getcwd(), ":p:h")<CR><CR>
+nnoremap <silent> <Leader>aa :<C-u>GinStatus<CR><CR>
 nnoremap <silent> <Leader>ab <Cmd>GinBranch --all<CR>
 nnoremap <silent> <Leader>al :<C-u>GinLog<CR>
 nnoremap <silent> <Leader>aL :<C-u>GinLog -- %<CR>
