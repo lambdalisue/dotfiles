@@ -272,6 +272,7 @@ export const main: Entrypoint = (
         builtin.matcher.regexp,
       ],
       sorters: [
+        builtin.sorter.noop,
         builtin.sorter.lexical,
         builtin.sorter.lexical({ reverse: true }),
       ],

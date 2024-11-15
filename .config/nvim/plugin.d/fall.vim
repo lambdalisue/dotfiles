@@ -12,3 +12,15 @@ nnoremap <silent> <Leader>mr <Cmd>Fall mrr<CR>
 nnoremap <silent> <Leader>md <Cmd>Fall mrd<CR>
 
 nnoremap <silent> <C-x><C-g> <Cmd>Fall file ~/ogh<CR>
+
+function! s:init() abort
+  cnoremap <silent> <C-p> <Plug>(fall-list-prev)
+  cnoremap <silent> <C-n> <Plug>(fall-list-next)
+  cnoremap <silent> <Up> <Plug>(fall-list-prev)
+  cnoremap <silent> <Down> <Plug>(fall-list-next)
+endfunction
+
+augroup my_fall
+  autocmd!
+  autocmd User FallPickerEnter:* call s:init()
+augroup END
