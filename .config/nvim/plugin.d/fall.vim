@@ -2,6 +2,7 @@ nnoremap <silent> <Leader>ff <Cmd>Fall file<CR>
 nnoremap <silent> <Leader>fb <Cmd>Fall buffer<CR>
 nnoremap <silent> <Leader>fh <Cmd>Fall help<CR>
 nnoremap <silent> <Leader>fg <Cmd>Fall rg<CR>
+nnoremap <silent> <Leader>fq <Cmd>Fall quickfix<CR>
 nnoremap <silent> <Leader>fd <Cmd>Fall file ~/ogh/lambdalisue/dotfiles<CR>
 nnoremap <silent> <Leader>fo <Cmd>Fall file ~/ObsidianVault<CR>
 nnoremap <silent> <Leader>fj <Cmd>Fall file ~/Documents/vim/junkfiles<CR>
@@ -18,6 +19,8 @@ function! s:init() abort
   cnoremap <silent> <C-n> <Plug>(fall-list-next)
   cnoremap <silent> <Up> <Plug>(fall-list-prev)
   cnoremap <silent> <Down> <Plug>(fall-list-next)
+  cnoremap <silent> <C-x> <Cmd>call fall#action('open:split')<CR>
+  cnoremap <silent> <C-v> <Cmd>call fall#action('open:vsplit')<CR>
 endfunction
 
 augroup my_fall

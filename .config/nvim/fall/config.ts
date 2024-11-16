@@ -1,11 +1,11 @@
+import type { Entrypoint } from "jsr:@vim-fall/config@^0.17.3";
 import {
   composeActions,
   composeRenderers,
-  type Entrypoint,
   refineCurator,
   refineSource,
-} from "jsr:@vim-fall/std@^0.4.0";
-import * as builtin from "jsr:@vim-fall/std@^0.4.0/builtin";
+} from "jsr:@vim-fall/std@^0.7.4";
+import * as builtin from "jsr:@vim-fall/std@^0.7.4/builtin";
 import * as extra from "jsr:@vim-fall/extra@^0.2.0";
 import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
 
@@ -17,7 +17,6 @@ const myPathActions = {
 
 const myQuickfixActions = {
   ...builtin.action.defaultQuickfixActions,
-  // Install https://github.com/thinca/vim-qfreplace to use this action
   "quickfix:qfreplace": builtin.action.quickfix({
     after: "Qfreplace",
   }),
@@ -117,25 +116,24 @@ export const main: Entrypoint = (
   {
     defineItemPickerFromSource,
     defineItemPickerFromCurator,
-    refineGlobalConfig,
   },
 ) => {
-  refineGlobalConfig({
-    // coordinator: builtin.coordinator.modern,
-    coordinator: builtin.coordinator.modern({
-      widthRatio: 0.90,
-      heightRatio: 0.90,
-    }),
-    theme: builtin.theme.MODERN_THEME,
-  });
-
   defineItemPickerFromCurator(
-    "git-grep",
+    "grep",
     refineCurator(
-      builtin.curator.gitGrep,
+      builtin.curator.grep,
       builtin.refiner.relativePath,
     ),
     {
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        builtin.renderer.nerdfont,
+        builtin.renderer.noop,
+      ],
       previewers: [builtin.previewer.file],
       actions: {
         ...myPathActions,
@@ -146,7 +144,32 @@ export const main: Entrypoint = (
     },
   );
 
-  // Install https://github.com/BurntSushi/ripgrep to use this curator
+  defineItemPickerFromCurator(
+    "git-grep",
+    refineCurator(
+      builtin.curator.gitGrep,
+      builtin.refiner.relativePath,
+    ),
+    {
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        builtin.renderer.nerdfont,
+        builtin.renderer.noop,
+      ],
+      previewers: [builtin.previewer.file],
+      actions: {
+        ...myPathActions,
+        ...myQuickfixActions,
+        ...myMiscActions,
+      },
+      defaultAction: "open",
+    },
+  );
+
   defineItemPickerFromCurator(
     "rg",
     refineCurator(
@@ -154,6 +177,15 @@ export const main: Entrypoint = (
       builtin.refiner.relativePath,
     ),
     {
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        builtin.renderer.nerdfont,
+        builtin.renderer.noop,
+      ],
       previewers: [builtin.previewer.file],
       actions: {
         ...myPathActions,
@@ -168,15 +200,24 @@ export const main: Entrypoint = (
     "mru",
     refineSource(
       extra.source.mr,
+      builtin.refiner.cwd,
       builtin.refiner.relativePath,
     ),
     {
       matchers: [builtin.matcher.fzf],
-      renderers: [composeRenderers(
-        builtin.renderer.smartPath,
-        // Install https://www.nerdfonts.com/ to use this renderer
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
         builtin.renderer.nerdfont,
-      )],
+        builtin.renderer.noop,
+      ],
       previewers: [builtin.previewer.file],
       actions: {
         ...myPathActions,
@@ -196,11 +237,19 @@ export const main: Entrypoint = (
     ),
     {
       matchers: [builtin.matcher.fzf],
-      renderers: [composeRenderers(
-        builtin.renderer.smartPath,
-        // Install https://www.nerdfonts.com/ to use this renderer
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
         builtin.renderer.nerdfont,
-      )],
+        builtin.renderer.noop,
+      ],
       previewers: [builtin.previewer.file],
       actions: {
         ...myPathActions,
@@ -215,11 +264,14 @@ export const main: Entrypoint = (
     extra.source.mr({ type: "mrr" }),
     {
       matchers: [builtin.matcher.fzf],
-      renderers: [composeRenderers(
-        builtin.renderer.smartPath,
-        // Install https://www.nerdfonts.com/ to use this renderer
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
         builtin.renderer.nerdfont,
-      )],
+        builtin.renderer.noop,
+      ],
       previewers: [builtin.previewer.file],
       actions: {
         ...myPathActions,
@@ -238,11 +290,14 @@ export const main: Entrypoint = (
     extra.source.mr({ type: "mrd" }),
     {
       matchers: [builtin.matcher.fzf],
-      renderers: [composeRenderers(
-        builtin.renderer.smartPath,
-        // Install https://www.nerdfonts.com/ to use this renderer
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
         builtin.renderer.nerdfont,
-      )],
+        builtin.renderer.noop,
+      ],
       previewers: [builtin.previewer.file],
       actions: {
         ...myPathActions,
@@ -268,7 +323,8 @@ export const main: Entrypoint = (
     ),
     {
       matchers: [
-        builtin.matcher.substring,
+        builtin.matcher.fzf,
+        extra.matcher.kensaku,
         builtin.matcher.regexp,
       ],
       sorters: [
@@ -279,12 +335,9 @@ export const main: Entrypoint = (
       renderers: [
         composeRenderers(
           builtin.renderer.smartPath,
-          // Install https://www.nerdfonts.com/ to use this renderer
           builtin.renderer.nerdfont,
-          //extra.renderer.nerdfont,
-          //extra.renderer.devicons,
-          //extra.renderer.nvimWebDevicons,
         ),
+        builtin.renderer.nerdfont,
         builtin.renderer.noop,
       ],
       previewers: [
@@ -304,7 +357,7 @@ export const main: Entrypoint = (
     matchers: [
       builtin.matcher.fzf,
       builtin.matcher.regexp,
-      //extra.matcher.kensaku,
+      extra.matcher.kensaku,
     ],
     previewers: [builtin.previewer.buffer],
     actions: {
@@ -321,6 +374,11 @@ export const main: Entrypoint = (
     builtin.source.buffer({ filter: "bufloaded" }),
     {
       matchers: [builtin.matcher.fzf],
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
       previewers: [builtin.previewer.buffer],
       actions: {
         ...myQuickfixActions,
@@ -334,6 +392,11 @@ export const main: Entrypoint = (
 
   defineItemPickerFromSource("help", builtin.source.helptag, {
     matchers: [builtin.matcher.fzf],
+    sorters: [
+      builtin.sorter.noop,
+      builtin.sorter.lexical,
+      builtin.sorter.lexical({ reverse: true }),
+    ],
     previewers: [builtin.previewer.helptag],
     actions: {
       ...myMiscActions,
@@ -344,11 +407,55 @@ export const main: Entrypoint = (
 
   defineItemPickerFromSource("quickfix", builtin.source.quickfix, {
     matchers: [builtin.matcher.fzf],
+    sorters: [
+      builtin.sorter.noop,
+      builtin.sorter.lexical,
+      builtin.sorter.lexical({ reverse: true }),
+    ],
     previewers: [builtin.previewer.buffer],
     actions: {
       ...myMiscActions,
       ...builtin.action.defaultOpenActions,
     },
     defaultAction: "open",
+  });
+
+  defineItemPickerFromSource(
+    "oldfiles",
+    refineSource(
+      builtin.source.oldfiles,
+      builtin.refiner.cwd,
+      builtin.refiner.exists,
+      builtin.refiner.relativePath,
+    ),
+    {
+      matchers: [builtin.matcher.fzf],
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      previewers: [builtin.previewer.file],
+      actions: {
+        ...myPathActions,
+        ...myQuickfixActions,
+        ...myMiscActions,
+      },
+      defaultAction: "open",
+    },
+  );
+
+  defineItemPickerFromSource("history", builtin.source.history, {
+    matchers: [builtin.matcher.fzf],
+    sorters: [
+      builtin.sorter.noop,
+      builtin.sorter.lexical,
+      builtin.sorter.lexical({ reverse: true }),
+    ],
+    actions: {
+      "cmd": builtin.action.cmd({ immediate: true }),
+      ...myMiscActions,
+    },
+    defaultAction: "cmd",
   });
 };
