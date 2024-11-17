@@ -215,41 +215,6 @@ export const main: Entrypoint = (
   );
 
   definePickerFromSource(
-    "file",
-    refineSource(
-      builtin.source.file({
-        filterFile: myFilterFile,
-        filterDirectory: myFilterDirectory,
-        relativeFromBase: true,
-      }),
-      builtin.refiner.relativePath,
-    ),
-    {
-      matchers: [builtin.matcher.fzf],
-      sorters: [
-        builtin.sorter.noop,
-        builtin.sorter.lexical,
-        builtin.sorter.lexical({ reverse: true }),
-      ],
-      renderers: [
-        composeRenderers(
-          builtin.renderer.smartPath,
-          builtin.renderer.nerdfont,
-        ),
-        builtin.renderer.nerdfont,
-        builtin.renderer.noop,
-      ],
-      previewers: [builtin.previewer.file],
-      actions: {
-        ...myPathActions,
-        ...myQuickfixActions,
-        ...myMiscActions,
-      },
-      defaultAction: "open",
-    },
-  );
-
-  definePickerFromSource(
     "mru",
     refineSource(
       extra.source.mr,
@@ -281,6 +246,7 @@ export const main: Entrypoint = (
       defaultAction: "open",
     },
   );
+
   definePickerFromSource(
     "mrw",
     refineSource(
@@ -312,6 +278,7 @@ export const main: Entrypoint = (
       defaultAction: "open",
     },
   );
+
   definePickerFromSource(
     "mrr",
     extra.source.mr({ type: "mrr" }),
@@ -338,6 +305,7 @@ export const main: Entrypoint = (
       defaultAction: "cd-and-open",
     },
   );
+
   definePickerFromSource(
     "mrd",
     extra.source.mr({ type: "mrd" }),
@@ -362,6 +330,47 @@ export const main: Entrypoint = (
         ),
       },
       defaultAction: "cd-and-open",
+    },
+  );
+
+  definePickerFromSource(
+    "file",
+    refineSource(
+      builtin.source.file({
+        filterFile: myFilterFile,
+        filterDirectory: myFilterDirectory,
+        relativeFromBase: true,
+      }),
+      builtin.refiner.relativePath,
+    ),
+    {
+      matchers: [
+        builtin.matcher.fzf,
+        builtin.matcher.regexp,
+      ],
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
+        builtin.renderer.nerdfont,
+        builtin.renderer.noop,
+      ],
+      previewers: [
+        builtin.previewer.file,
+        builtin.previewer.noop,
+      ],
+      actions: {
+        ...myPathActions,
+        ...myQuickfixActions,
+        ...myMiscActions,
+      },
+      defaultAction: "open",
     },
   );
 
