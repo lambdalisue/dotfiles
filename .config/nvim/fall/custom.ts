@@ -1,10 +1,12 @@
 import type { Entrypoint } from "jsr:@vim-fall/custom@^0.1.0";
 import {
+  composeActions,
   composeRenderers,
   refineCurator,
   refineSource,
 } from "jsr:@vim-fall/std@^0.9.0";
 import * as builtin from "jsr:@vim-fall/std@^0.9.0/builtin";
+import * as extra from "jsr:@vim-fall/extra@^0.2.0";
 import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
 
 //import { file } from "http://localhost:6000/file:///Users/alisue/ogh/vim-fall/deno-fall-std/builtin/source/file.ts";
@@ -248,6 +250,122 @@ export const main: Entrypoint = (
   );
 
   definePickerFromSource(
+    "mru",
+    refineSource(
+      extra.source.mr,
+      builtin.refiner.cwd,
+      builtin.refiner.relativePath,
+    ),
+    {
+      matchers: [builtin.matcher.fzf],
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
+        builtin.renderer.nerdfont,
+        builtin.renderer.noop,
+      ],
+      previewers: [builtin.previewer.file],
+      actions: {
+        ...myPathActions,
+        ...myQuickfixActions,
+        ...myMiscActions,
+        ...extra.action.defaultMrDeleteActions,
+      },
+      defaultAction: "open",
+    },
+  );
+  definePickerFromSource(
+    "mrw",
+    refineSource(
+      extra.source.mr({ type: "mrw" }),
+      builtin.refiner.cwd,
+      builtin.refiner.relativePath,
+    ),
+    {
+      matchers: [builtin.matcher.fzf],
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
+        builtin.renderer.nerdfont,
+        builtin.renderer.noop,
+      ],
+      previewers: [builtin.previewer.file],
+      actions: {
+        ...myPathActions,
+        ...myQuickfixActions,
+        ...myMiscActions,
+      },
+      defaultAction: "open",
+    },
+  );
+  definePickerFromSource(
+    "mrr",
+    extra.source.mr({ type: "mrr" }),
+    {
+      matchers: [builtin.matcher.fzf],
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
+        builtin.renderer.nerdfont,
+        builtin.renderer.noop,
+      ],
+      previewers: [builtin.previewer.file],
+      actions: {
+        ...myPathActions,
+        ...myQuickfixActions,
+        ...myMiscActions,
+        "cd-and-open": composeActions(
+          builtin.action.cd,
+          builtin.action.open,
+        ),
+      },
+      defaultAction: "cd-and-open",
+    },
+  );
+  definePickerFromSource(
+    "mrd",
+    extra.source.mr({ type: "mrd" }),
+    {
+      matchers: [builtin.matcher.fzf],
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
+        builtin.renderer.nerdfont,
+        builtin.renderer.noop,
+      ],
+      previewers: [builtin.previewer.file],
+      actions: {
+        ...myPathActions,
+        ...myQuickfixActions,
+        ...myMiscActions,
+        "cd-and-open": composeActions(
+          builtin.action.cd,
+          builtin.action.open,
+        ),
+      },
+      defaultAction: "cd-and-open",
+    },
+  );
+
+  definePickerFromSource(
     "file:all",
     refineSource(
       builtin.source.file,
@@ -288,9 +406,6 @@ export const main: Entrypoint = (
       ...builtin.action.defaultBufferActions,
     },
     defaultAction: "open",
-    coordinator: builtin.coordinator.modern({
-      hidePreview: true,
-    }),
   });
 
   definePickerFromSource(
