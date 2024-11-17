@@ -160,6 +160,43 @@
                         "vendor_id": 1149
                     },
                     "ignore": true
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 33120,
+                        "vendor_id": 9354
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "page_down" },
+                            "to": [{ "key_code": "down_arrow" }]
+                        },
+                        {
+                            "from": { "key_code": "page_up" },
+                            "to": [{ "key_code": "up_arrow" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 33120,
+                        "vendor_id": 9354
+                    },
+                    "ignore": false,
+                    "mouse_discard_x": true,
+                    "mouse_discard_y": true,
+                    "simple_modifications": [
+                        {
+                            "from": { "pointing_button": "button1" },
+                            "to": [{ "key_code": "left_arrow" }]
+                        },
+                        {
+                            "from": { "pointing_button": "button2" },
+                            "to": [{ "key_code": "right_arrow" }]
+                        }
+                    ]
                 }
             ],
             "fn_function_keys": [
