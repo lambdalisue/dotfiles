@@ -170,11 +170,11 @@
                     "simple_modifications": [
                         {
                             "from": { "key_code": "page_down" },
-                            "to": [{ "key_code": "down_arrow" }]
+                            "to": [{ "mouse_key": { "vertical_wheel": 64 } }]
                         },
                         {
                             "from": { "key_code": "page_up" },
-                            "to": [{ "key_code": "up_arrow" }]
+                            "to": [{ "mouse_key": { "vertical_wheel": -32 } }]
                         }
                     ]
                 },

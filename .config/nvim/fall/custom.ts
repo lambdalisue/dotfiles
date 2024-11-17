@@ -1,13 +1,20 @@
-import type { Entrypoint } from "jsr:@vim-fall/config@^0.17.3";
+import type { Entrypoint } from "jsr:@vim-fall/custom@^0.1.0";
 import {
-  composeActions,
   composeRenderers,
   refineCurator,
   refineSource,
-} from "jsr:@vim-fall/std@^0.7.4";
-import * as builtin from "jsr:@vim-fall/std@^0.7.4/builtin";
-import * as extra from "jsr:@vim-fall/extra@^0.2.0";
+} from "jsr:@vim-fall/std@^0.9.0";
+import * as builtin from "jsr:@vim-fall/std@^0.9.0/builtin";
 import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
+
+//import { file } from "http://localhost:6000/file:///Users/alisue/ogh/vim-fall/deno-fall-std/builtin/source/file.ts";
+
+// NOTE:
+//
+// Install https://github.com/BurntSushi/ripgrep to use 'builtin.curator.rg'
+// Install https://www.nerdfonts.com/ to use 'builtin.renderer.nerdfont'
+// Install https://github.com/thinca/vim-qfreplace to use 'Qfreplace'
+//
 
 const myPathActions = {
   ...builtin.action.defaultOpenActions,
@@ -80,6 +87,8 @@ const myFilterFile = (path: string) => {
     ".xls",
     ".xlsx",
     ".zip",
+    "id_ed25519",
+    "id_rsa",
   ];
   for (const exclude of excludes) {
     if (path.endsWith(exclude)) {
@@ -103,6 +112,7 @@ const myFilterDirectory = (path: string) => {
     "target", // Rust
     `nvim${SEPARATOR}pack`,
     `zsh${SEPARATOR}.addons`,
+    `karabiner${SEPARATOR}automatic_backups`,
   ];
   for (const exclude of excludes) {
     if (path.includes(`${SEPARATOR}${exclude}${SEPARATOR}`)) {
@@ -114,11 +124,17 @@ const myFilterDirectory = (path: string) => {
 
 export const main: Entrypoint = (
   {
-    defineItemPickerFromSource,
-    defineItemPickerFromCurator,
+    definePickerFromSource,
+    definePickerFromCurator,
+    refineSetting,
   },
 ) => {
-  defineItemPickerFromCurator(
+  refineSetting({
+    coordinator: builtin.coordinator.modern,
+    theme: builtin.theme.MODERN_THEME,
+  });
+
+  definePickerFromCurator(
     "grep",
     refineCurator(
       builtin.curator.grep,
@@ -144,7 +160,7 @@ export const main: Entrypoint = (
     },
   );
 
-  defineItemPickerFromCurator(
+  definePickerFromCurator(
     "git-grep",
     refineCurator(
       builtin.curator.gitGrep,
@@ -170,7 +186,7 @@ export const main: Entrypoint = (
     },
   );
 
-  defineItemPickerFromCurator(
+  definePickerFromCurator(
     "rg",
     refineCurator(
       builtin.curator.rg,
@@ -196,137 +212,18 @@ export const main: Entrypoint = (
     },
   );
 
-  defineItemPickerFromSource(
-    "mru",
-    refineSource(
-      extra.source.mr,
-      builtin.refiner.cwd,
-      builtin.refiner.relativePath,
-    ),
-    {
-      matchers: [builtin.matcher.fzf],
-      sorters: [
-        builtin.sorter.noop,
-        builtin.sorter.lexical,
-        builtin.sorter.lexical({ reverse: true }),
-      ],
-      renderers: [
-        composeRenderers(
-          builtin.renderer.smartPath,
-          builtin.renderer.nerdfont,
-        ),
-        builtin.renderer.nerdfont,
-        builtin.renderer.noop,
-      ],
-      previewers: [builtin.previewer.file],
-      actions: {
-        ...myPathActions,
-        ...myQuickfixActions,
-        ...myMiscActions,
-        ...extra.action.defaultMrDeleteActions,
-      },
-      defaultAction: "open",
-    },
-  );
-  defineItemPickerFromSource(
-    "mrw",
-    refineSource(
-      extra.source.mr({ type: "mrw" }),
-      builtin.refiner.cwd,
-      builtin.refiner.relativePath,
-    ),
-    {
-      matchers: [builtin.matcher.fzf],
-      sorters: [
-        builtin.sorter.noop,
-        builtin.sorter.lexical,
-        builtin.sorter.lexical({ reverse: true }),
-      ],
-      renderers: [
-        composeRenderers(
-          builtin.renderer.smartPath,
-          builtin.renderer.nerdfont,
-        ),
-        builtin.renderer.nerdfont,
-        builtin.renderer.noop,
-      ],
-      previewers: [builtin.previewer.file],
-      actions: {
-        ...myPathActions,
-        ...myQuickfixActions,
-        ...myMiscActions,
-      },
-      defaultAction: "open",
-    },
-  );
-  defineItemPickerFromSource(
-    "mrr",
-    extra.source.mr({ type: "mrr" }),
-    {
-      matchers: [builtin.matcher.fzf],
-      renderers: [
-        composeRenderers(
-          builtin.renderer.smartPath,
-          builtin.renderer.nerdfont,
-        ),
-        builtin.renderer.nerdfont,
-        builtin.renderer.noop,
-      ],
-      previewers: [builtin.previewer.file],
-      actions: {
-        ...myPathActions,
-        ...myQuickfixActions,
-        ...myMiscActions,
-        "cd-and-open": composeActions(
-          builtin.action.cd,
-          builtin.action.open,
-        ),
-      },
-      defaultAction: "cd-and-open",
-    },
-  );
-  defineItemPickerFromSource(
-    "mrd",
-    extra.source.mr({ type: "mrd" }),
-    {
-      matchers: [builtin.matcher.fzf],
-      renderers: [
-        composeRenderers(
-          builtin.renderer.smartPath,
-          builtin.renderer.nerdfont,
-        ),
-        builtin.renderer.nerdfont,
-        builtin.renderer.noop,
-      ],
-      previewers: [builtin.previewer.file],
-      actions: {
-        ...myPathActions,
-        ...myQuickfixActions,
-        ...myMiscActions,
-        "cd-and-open": composeActions(
-          builtin.action.cd,
-          builtin.action.open,
-        ),
-      },
-      defaultAction: "cd-and-open",
-    },
-  );
-
-  defineItemPickerFromSource(
+  definePickerFromSource(
     "file",
     refineSource(
       builtin.source.file({
         filterFile: myFilterFile,
         filterDirectory: myFilterDirectory,
+        relativeFromBase: true,
       }),
       builtin.refiner.relativePath,
     ),
     {
-      matchers: [
-        builtin.matcher.fzf,
-        extra.matcher.kensaku,
-        builtin.matcher.regexp,
-      ],
+      matchers: [builtin.matcher.fzf],
       sorters: [
         builtin.sorter.noop,
         builtin.sorter.lexical,
@@ -340,10 +237,7 @@ export const main: Entrypoint = (
         builtin.renderer.nerdfont,
         builtin.renderer.noop,
       ],
-      previewers: [
-        builtin.previewer.file,
-        builtin.previewer.noop,
-      ],
+      previewers: [builtin.previewer.file],
       actions: {
         ...myPathActions,
         ...myQuickfixActions,
@@ -353,12 +247,39 @@ export const main: Entrypoint = (
     },
   );
 
-  defineItemPickerFromSource("line", builtin.source.line, {
-    matchers: [
-      builtin.matcher.fzf,
-      builtin.matcher.regexp,
-      extra.matcher.kensaku,
-    ],
+  definePickerFromSource(
+    "file:all",
+    refineSource(
+      builtin.source.file,
+      builtin.refiner.relativePath,
+    ),
+    {
+      matchers: [builtin.matcher.fzf],
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        composeRenderers(
+          builtin.renderer.smartPath,
+          builtin.renderer.nerdfont,
+        ),
+        builtin.renderer.nerdfont,
+        builtin.renderer.noop,
+      ],
+      previewers: [builtin.previewer.file],
+      actions: {
+        ...myPathActions,
+        ...myQuickfixActions,
+        ...myMiscActions,
+      },
+      defaultAction: "open",
+    },
+  );
+
+  definePickerFromSource("line", builtin.source.line, {
+    matchers: [builtin.matcher.fzf],
     previewers: [builtin.previewer.buffer],
     actions: {
       ...myQuickfixActions,
@@ -367,9 +288,12 @@ export const main: Entrypoint = (
       ...builtin.action.defaultBufferActions,
     },
     defaultAction: "open",
+    coordinator: builtin.coordinator.modern({
+      hidePreview: true,
+    }),
   });
 
-  defineItemPickerFromSource(
+  definePickerFromSource(
     "buffer",
     builtin.source.buffer({ filter: "bufloaded" }),
     {
@@ -390,7 +314,7 @@ export const main: Entrypoint = (
     },
   );
 
-  defineItemPickerFromSource("help", builtin.source.helptag, {
+  definePickerFromSource("help", builtin.source.helptag, {
     matchers: [builtin.matcher.fzf],
     sorters: [
       builtin.sorter.noop,
@@ -405,7 +329,7 @@ export const main: Entrypoint = (
     defaultAction: "help",
   });
 
-  defineItemPickerFromSource("quickfix", builtin.source.quickfix, {
+  definePickerFromSource("quickfix", builtin.source.quickfix, {
     matchers: [builtin.matcher.fzf],
     sorters: [
       builtin.sorter.noop,
@@ -414,13 +338,13 @@ export const main: Entrypoint = (
     ],
     previewers: [builtin.previewer.buffer],
     actions: {
-      ...myMiscActions,
       ...builtin.action.defaultOpenActions,
+      ...myMiscActions,
     },
     defaultAction: "open",
   });
 
-  defineItemPickerFromSource(
+  definePickerFromSource(
     "oldfiles",
     refineSource(
       builtin.source.oldfiles,
@@ -445,7 +369,7 @@ export const main: Entrypoint = (
     },
   );
 
-  defineItemPickerFromSource("history", builtin.source.history, {
+  definePickerFromSource("history", builtin.source.history, {
     matchers: [builtin.matcher.fzf],
     sorters: [
       builtin.sorter.noop,
