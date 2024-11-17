@@ -26,4 +26,5 @@ endfunction
 augroup my_fall
   autocmd!
   autocmd User FallPickerEnter:* call s:init()
+  autocmd User FallPreviewRendered:* setlocal nonumber norelativenumber
 augroup END
