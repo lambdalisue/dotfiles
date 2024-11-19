@@ -4,12 +4,14 @@ import {
   composeRenderers,
   refineCurator,
   refineSource,
-} from "jsr:@vim-fall/std@^0.9.0";
-import * as builtin from "jsr:@vim-fall/std@^0.9.0/builtin";
+} from "jsr:@vim-fall/std@^0.10.0";
+import * as builtin from "jsr:@vim-fall/std@^0.10.0/builtin";
 import * as extra from "jsr:@vim-fall/extra@^0.2.0";
 import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
 
 //import { file } from "http://localhost:6000/file:///Users/alisue/ogh/vim-fall/deno-fall-std/builtin/source/file.ts";
+import { MODERN_THEME } from "http://localhost:6000/file:///Users/alisue/ogh/vim-fall/deno-fall-std/builtin/theme/modern.ts";
+import { ASCII_THEME } from "http://localhost:6000/file:///Users/alisue/ogh/vim-fall/deno-fall-std/builtin/theme/ascii.ts";
 
 // NOTE:
 //
@@ -112,12 +114,13 @@ const myFilterDirectory = (path: string) => {
     "build", // C/C++
     "node_modules", // Node.js
     "target", // Rust
+    ".coverage",
     `nvim${SEPARATOR}pack`,
     `zsh${SEPARATOR}.addons`,
     `karabiner${SEPARATOR}automatic_backups`,
   ];
   for (const exclude of excludes) {
-    if (path.includes(`${SEPARATOR}${exclude}${SEPARATOR}`)) {
+    if (path.endsWith(`${SEPARATOR}${exclude}`)) {
       return false;
     }
   }
@@ -134,6 +137,8 @@ export const main: Entrypoint = (
   refineSetting({
     coordinator: builtin.coordinator.modern,
     theme: builtin.theme.MODERN_THEME,
+    // theme: MODERN_THEME,
+    // theme: ASCII_THEME,
   });
 
   definePickerFromCurator(
