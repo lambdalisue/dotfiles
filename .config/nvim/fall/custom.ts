@@ -20,6 +20,8 @@ import { ASCII_THEME } from "http://localhost:6000/file:///Users/alisue/ogh/vim-
 // Install https://github.com/thinca/vim-qfreplace to use 'Qfreplace'
 //
 
+const coordinator = builtin.coordinator.modern;
+
 const myPathActions = {
   ...builtin.action.defaultOpenActions,
   ...builtin.action.defaultSystemopenActions,
@@ -135,7 +137,7 @@ export const main: Entrypoint = (
   },
 ) => {
   refineSetting({
-    coordinator: builtin.coordinator.modern({
+    coordinator: coordinator({
       widthRatio: 0.9,
       heightRatio: 0.8,
     }),
@@ -308,6 +310,9 @@ export const main: Entrypoint = (
         ),
       },
       defaultAction: "cd-and-open",
+      coordinator: coordinator({
+        hidePreview: true,
+      }),
     },
   );
 
@@ -335,6 +340,9 @@ export const main: Entrypoint = (
         ),
       },
       defaultAction: "cd-and-open",
+      coordinator: coordinator({
+        hidePreview: true,
+      }),
     },
   );
 
