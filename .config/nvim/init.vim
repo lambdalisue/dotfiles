@@ -519,8 +519,19 @@ call s:load_configurations()
 
 set background=dark
 if has('nvim')
+  function! s:fix_iceberg_border() abort
+    highlight link FloatNormal Normal
+    highlight link FloatBorder Comment
+  endfunction
+  augroup my_iceberg_fix
+    autocmd!
+    autocmd ColorScheme iceberg call s:fix_iceberg_border()
+  augroup END
+endif
+if has('nvim')
+  autocmd MyAutoCmd User ChameleonBackgroundChanged:light silent! colorscheme dawnfox
+  autocmd MyAutoCmd User ChameleonBackgroundChanged:dark silent! colorscheme nordfox
   silent! colorscheme nordfox
-  "silent! colorscheme dayfox
 else
   silent! colorscheme iceberg
 endif

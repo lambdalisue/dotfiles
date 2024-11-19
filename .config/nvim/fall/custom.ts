@@ -135,7 +135,10 @@ export const main: Entrypoint = (
   },
 ) => {
   refineSetting({
-    coordinator: builtin.coordinator.modern,
+    coordinator: builtin.coordinator.modern({
+      widthRatio: 0.9,
+      heightRatio: 0.8,
+    }),
     theme: builtin.theme.MODERN_THEME,
     // theme: MODERN_THEME,
     // theme: ASCII_THEME,
@@ -221,11 +224,7 @@ export const main: Entrypoint = (
 
   definePickerFromSource(
     "mru",
-    refineSource(
-      extra.source.mr,
-      builtin.refiner.cwd,
-      builtin.refiner.relativePath,
-    ),
+    extra.source.mr,
     {
       matchers: [builtin.matcher.fzf],
       sorters: [
@@ -279,6 +278,7 @@ export const main: Entrypoint = (
         ...myPathActions,
         ...myQuickfixActions,
         ...myMiscActions,
+        ...extra.action.defaultMrDeleteActions,
       },
       defaultAction: "open",
     },
@@ -297,11 +297,11 @@ export const main: Entrypoint = (
         builtin.renderer.nerdfont,
         builtin.renderer.noop,
       ],
-      previewers: [builtin.previewer.file],
       actions: {
         ...myPathActions,
         ...myQuickfixActions,
         ...myMiscActions,
+        ...extra.action.defaultMrDeleteActions,
         "cd-and-open": composeActions(
           builtin.action.cd,
           builtin.action.open,
@@ -324,11 +324,11 @@ export const main: Entrypoint = (
         builtin.renderer.nerdfont,
         builtin.renderer.noop,
       ],
-      previewers: [builtin.previewer.file],
       actions: {
         ...myPathActions,
         ...myQuickfixActions,
         ...myMiscActions,
+        ...extra.action.defaultMrDeleteActions,
         "cd-and-open": composeActions(
           builtin.action.cd,
           builtin.action.open,
