@@ -529,9 +529,9 @@ if has('nvim')
   augroup END
 endif
 if has('nvim')
-  autocmd MyAutoCmd User ChameleonBackgroundChanged:light silent! colorscheme dawnfox
-  autocmd MyAutoCmd User ChameleonBackgroundChanged:dark silent! colorscheme nordfox
   silent! colorscheme nordfox
+  autocmd MyAutoCmd User ChameleonBackgroundChanged:light ++nested silent! colorscheme dawnfox
+  autocmd MyAutoCmd User ChameleonBackgroundChanged:dark ++nested silent! colorscheme nordfox
 else
   silent! colorscheme iceberg
 endif
