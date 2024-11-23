@@ -11,9 +11,6 @@ endfunction
 noremap <silent> <C-c> <Cmd>call <SID>interrupt()<CR><C-c>
 inoremap <silent> <C-c> <Cmd>call <SID>interrupt()<CR><C-c>
 cnoremap <silent> <C-c> <Cmd>call <SID>interrupt()<CR><C-c>
-noremap <silent> <F12> <Cmd>call <SID>interrupt()<CR>
-inoremap <silent> <F12> <Cmd>call <SID>interrupt()<CR>
-cnoremap <silent> <F12> <Cmd>call <SID>interrupt()<CR>
 
 " Restart Denops server
 command! DenopsRestart call denops#server#restart()

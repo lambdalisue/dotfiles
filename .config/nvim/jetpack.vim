@@ -3,8 +3,9 @@ function! s:init() abort
   call jetpack#begin()
   call jetpack#add('tani/vim-jetpack')
 
-  call jetpack#add('ryanoasis/vim-devicons')
-  call jetpack#add('nvim-tree/nvim-web-devicons')
+  " NerdFont
+  " call jetpack#add('ryanoasis/vim-devicons')
+  " call jetpack#add('nvim-tree/nvim-web-devicons')
 
   " FuzzyFinder
   " call jetpack#add('vim-scripts/L9')
@@ -19,17 +20,20 @@ function! s:init() abort
   " call jetpack#add('Shougo/ddu.vim')
 
   " Denops
+  "call jetpack#add('vim-skk/skkeleton')
+  "call jetpack#add('yuki-yano/fuzzy-motion.vim')
   call jetpack#add('lambdalisue/vim-askpass')
+  call jetpack#add('lambdalisue/vim-chameleon')
   call jetpack#add('lambdalisue/vim-deno-cache')
   call jetpack#add('lambdalisue/vim-gin')
   call jetpack#add('lambdalisue/vim-guise')
+  call jetpack#add('lambdalisue/vim-initial')
   call jetpack#add('lambdalisue/vim-kensaku')
   call jetpack#add('skanehira/denops-silicon.vim')
   call jetpack#add('vim-denops/denops-shared-server.vim')
   call jetpack#add('vim-denops/denops-startup-recorder.vim')
   call jetpack#add('vim-denops/denops.vim')
-  call jetpack#add('vim-skk/skkeleton')
-  call jetpack#add('yuki-yano/fuzzy-motion.vim')
+  call jetpack#add('vim-fall/fall.vim')
 
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
@@ -50,9 +54,6 @@ function! s:init() abort
   call jetpack#add('lambdalisue/vim-backslash')
   call jetpack#add('lambdalisue/vim-battery')
   call jetpack#add('lambdalisue/vim-compl-local-filename')
-  call jetpack#add('lambdalisue/vim-fall')
-  call jetpack#add('lambdalisue/vim-fall-mr')
-  call jetpack#add('lambdalisue/vim-fall-renderer-nerdfont')
   call jetpack#add('lambdalisue/vim-fern')
   call jetpack#add('lambdalisue/vim-fern-git-status')
   call jetpack#add('lambdalisue/vim-fern-hijack')
@@ -63,10 +64,9 @@ function! s:init() abort
   call jetpack#add('lambdalisue/vim-fern-renderer-nerdfont')
   call jetpack#add('lambdalisue/vim-file-protocol')
   call jetpack#add('lambdalisue/vim-findent')
-  call jetpack#add('lambdalisue/vim-gin')
+  call jetpack#add('lambdalisue/vim-gina')
   call jetpack#add('lambdalisue/vim-glyph-palette')
   call jetpack#add('lambdalisue/vim-http-protocol')
-  call jetpack#add('lambdalisue/vim-kensaku')
   call jetpack#add('lambdalisue/vim-mr')
   call jetpack#add('lambdalisue/vim-nerdfont')
   call jetpack#add('lambdalisue/vim-operator-breakline')
@@ -76,6 +76,8 @@ function! s:init() abort
   call jetpack#add('lambdalisue/vim-trimmer')
   call jetpack#add('lambdalisue/vim-wifi')
   call jetpack#add('machakann/vim-sandwich')
+  call jetpack#add('machakann/vim-swap')
+  call jetpack#add('machakann/vim-textobj-delimited')
   call jetpack#add('mattn/vim-textobj-url')
   call jetpack#add('mattn/webapi-vim')
   call jetpack#add('mbbill/undotree')
@@ -96,8 +98,6 @@ function! s:init() abort
   call jetpack#add('tyru/capture.vim')
   call jetpack#add('tyru/open-browser.vim')
   call jetpack#add('will133/vim-dirdiff')
-  call jetpack#add('yuki-yano/fern-preview.vim')
-
   " Colorscheme
   call jetpack#add('EdenEast/nightfox.nvim')
   call jetpack#add('cocopon/iceberg.vim')
@@ -112,7 +112,6 @@ function! s:init() abort
   " Neovim
   if has('nvim')
     call jetpack#add('nvim-lua/plenary.nvim', {'opt': 1})
-    call jetpack#add('nvim-telescope/telescope.nvim', { 'opt': 1 })
     call jetpack#add('nvim-treesitter/nvim-treesitter', {
         \ 'opt': 1,
         \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
@@ -143,7 +142,6 @@ endfunction
 function! s:configure() abort
   if has('nvim')
     silent! packadd plenary.nvim
-    silent! packadd telescope.nvim
     silent! packadd nvim-treesitter
     silent! packadd nvim-insx
     silent! packadd Comment.nvim

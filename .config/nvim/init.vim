@@ -503,7 +503,6 @@ nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))
 " Postludium {{{
 
 " Plugin
-"source $VIMHOME/minpac.vim
 source $VIMHOME/jetpack.vim
 
 syntax on
@@ -519,19 +518,7 @@ call s:load_configurations()
 
 set background=dark
 if has('nvim')
-  function! s:fix_iceberg_border() abort
-    highlight link FloatNormal Normal
-    highlight link FloatBorder Comment
-  endfunction
-  augroup my_iceberg_fix
-    autocmd!
-    autocmd ColorScheme iceberg call s:fix_iceberg_border()
-  augroup END
-endif
-if has('nvim')
   silent! colorscheme nordfox
-  autocmd MyAutoCmd User ChameleonBackgroundChanged:light ++nested silent! colorscheme dawnfox
-  autocmd MyAutoCmd User ChameleonBackgroundChanged:dark ++nested silent! colorscheme nordfox
 else
   silent! colorscheme iceberg
 endif

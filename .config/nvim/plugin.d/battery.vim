@@ -6,4 +6,3 @@ let g:battery#graph_indicators = [
       \ '',
       \ '',
       \]
-

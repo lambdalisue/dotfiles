@@ -40,30 +40,24 @@ function! s:fern_local_init() abort
         \   "<Plug>(fern-my-leave)",
         \   "<Plug>(fern-my-open-or-enter)",
         \ )
+  
   nmap <buffer><nowait> <C-m> <Return>
   nmap <buffer><nowait> <C-h> <Backspace>
-  nmap <buffer><nowait> <Return>    <Plug>(fern-my-leave-or-open-or-enter)
+  nmap <buffer><nowait> <Return> <Plug>(fern-my-leave-or-open-or-enter)
   nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
   nmap <buffer><nowait> T <Plug>(fern-action-terminal)
-  nnoremap <buffer><nowait> ~ :<C-u>Fern ~<CR>
+  nnoremap <buffer><nowait> ~ <Cmd>Fern ~<CR>
 
   nmap <buffer> K <Nop>
   nmap <buffer> N <Plug>(fern-action-new-path)
 
   nmap <buffer> <Plug>(fern-action-dirdiff) <Plug>(fern-action-ex=)DirDiff<CR>
-
-  nmap <buffer> <LeftRelease> <Plug>(fern-my-open-or-enter)
-
 endfunction
 
 augroup my-fern
   autocmd! *
   autocmd FileType fern call s:fern_local_init()
 augroup END
-
-function! s:ghq_root() abort
-  return substitute(system("ghq root"), '\r\?\n$', '', '')
-endfunction
 
 function! s:smart_path() abort
   if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
@@ -73,6 +67,5 @@ function! s:smart_path() abort
 endfunction
 
 nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%:p<CR>
-nnoremap <silent> <Leader>EE :<C-u>Fern . -drawer -reveal=%<CR>
-nnoremap <silent> <Leader>gg :<C-u>Fern <C-r>=<SID>ghq_root()<CR>/github.com -reveal=lambdalisue<CR>
-nnoremap <silent> <Leader>oo :<C-u>Fern ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/ObsidianVault/ -reveal=%:p<CR>
+nnoremap <silent> <Leader>dd :<C-u>Fern . -toggle -drawer -reveal=%:p<CR>
+nnoremap <silent> <Leader>gg :<C-u>Fern ~/ogh -reveal=lambdalisue<CR>

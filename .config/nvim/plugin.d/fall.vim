@@ -1,17 +1,15 @@
+nnoremap <silent> <C-x><C-g> <Cmd>Fall mrd<CR>
+nnoremap <silent> <Backspace> <Cmd>Fall mrw<CR>
 nnoremap <silent> <Leader>ff <Cmd>Fall file<CR>
 nnoremap <silent> <Leader>fb <Cmd>Fall buffer<CR>
 nnoremap <silent> <Leader>fh <Cmd>Fall help<CR>
 nnoremap <silent> <Leader>fg <Cmd>Fall rg<CR>
 nnoremap <silent> <Leader>fq <Cmd>Fall quickfix<CR>
 nnoremap <silent> <Leader>fd <Cmd>Fall file ~/ogh/lambdalisue/dotfiles<CR>
-nnoremap <silent> <Leader>fo <Cmd>Fall file ~/ObsidianVault<CR>
 nnoremap <silent> <Leader>fj <Cmd>Fall file ~/Documents/vim/junkfiles<CR>
 nnoremap <silent> <Leader>fl <Cmd>Fall line<CR>
-nnoremap <silent> <Leader>mm <Cmd>Fall mru<CR>
-nnoremap <silent> <Leader>mw <Cmd>Fall mrw<CR>
-nnoremap <silent> <Leader>mr <Cmd>Fall mrr<CR>
-nnoremap <silent> <Leader>md <Cmd>Fall mrd<CR>
-nnoremap <silent> <C-x><C-g> <Cmd>Fall file ~/ogh<CR>
+nnoremap <silent> <Leader>fm <Cmd>Fall mru<CR>
+nnoremap <silent> <Leader>fr <Cmd>Fall mrr<CR>
 
 function! s:init() abort
   cnoremap <silent><nowait> <C-p> <Plug>(fall-list-prev)
