@@ -4,14 +4,38 @@ import {
   composeRenderers,
   refineCurator,
   refineSource,
-} from "jsr:@vim-fall/std@^0.10.0";
-import * as builtin from "jsr:@vim-fall/std@^0.10.0/builtin";
+} from "jsr:@vim-fall/std@^0.10.1";
+import * as builtin from "jsr:@vim-fall/std@^0.10.1/builtin";
 import * as extra from "jsr:@vim-fall/extra@^0.2.0";
 import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
 
 //import { file } from "http://localhost:6000/file:///Users/alisue/ogh/vim-fall/deno-fall-std/builtin/source/file.ts";
 import { MODERN_THEME } from "http://localhost:6000/file:///Users/alisue/ogh/vim-fall/deno-fall-std/builtin/theme/modern.ts";
 import { ASCII_THEME } from "http://localhost:6000/file:///Users/alisue/ogh/vim-fall/deno-fall-std/builtin/theme/ascii.ts";
+
+import { defineMatcher, defineSource } from "jsr:@vim-fall/std@^0.10.0";
+
+function infinity() {
+  return defineSource(async function* () {
+    let n = 0;
+    while (true) {
+      yield {
+        id: n,
+        value: (n++).toString(),
+        detail: {},
+      };
+      if (n % 1000 === 0) {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      }
+    }
+  });
+}
+
+function noop() {
+  return defineMatcher(async function* (_denops, { items }) {
+    yield* items;
+  });
+}
 
 // NOTE:
 //
@@ -519,4 +543,25 @@ export const main: Entrypoint = (
     },
     defaultAction: "cmd",
   });
+
+  definePickerFromSource(
+    "infinity",
+    infinity,
+    {
+      matchers: [
+        noop,
+        builtin.matcher.fzf,
+        builtin.matcher.substring,
+      ],
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      actions: {
+        ...myMiscActions,
+      },
+      defaultAction: "echo",
+    },
+  );
 };

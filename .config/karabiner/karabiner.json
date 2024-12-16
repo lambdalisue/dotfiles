@@ -5,6 +5,7 @@
                 "rules": [
                     {
                         "description": "Send Escape twice (https://forum.obsidian.md/t/let-vim-insert-mode-escape-esc-to-normal-mode-even-if-suggestion-dropdown-open/35414)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -64,6 +65,7 @@
                     },
                     {
                         "description": "Send lang2 (japanese_eisuu) and escape on escape",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": { "key_code": "escape" },
@@ -77,6 +79,7 @@
                     },
                     {
                         "description": "Send lang2 (japanese_eisuu) and escape on Ctrl+[",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -93,6 +96,7 @@
                     },
                     {
                         "description": "Send shift/lang2 on left shift",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -107,6 +111,7 @@
                     },
                     {
                         "description": "Send shift/lang1 on right shift",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {

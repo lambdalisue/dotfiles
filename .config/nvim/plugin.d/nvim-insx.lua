@@ -14,3 +14,18 @@ insx.add('<', insx.with(require('insx.recipe.auto_pair')({
 insx.add('<C-]>', require('insx.recipe.fast_wrap')({
   close = '>',
 }))
+
+-- <Tab> to jump to next closing brackets / symbols
+insx.add('<C-]>', require('insx.recipe.jump_next')({
+  jump_pat = {
+    ([=[\%%#[^%s]*%s\zs]=]):format(';', insx.esc(';')),
+    ([=[\%%#[^%s]*%s\zs]=]):format(')', insx.esc(')')),
+    ([=[\%%#[^%s]*%s\zs]=]):format('\\]', insx.esc(']')),
+    ([=[\%%#[^%s]*%s\zs]=]):format('}', insx.esc('}')),
+    ([=[\%%#[^%s]*%s\zs]=]):format('>', insx.esc('>')),
+    ([=[\%%#[^%s]*%s\zs]=]):format('"', insx.esc('"')),
+    ([=[\%%#[^%s]*%s\zs]=]):format("'", insx.esc("'")),
+    ([=[\%%#[^%s]*%s\zs]=]):format('`', insx.esc('`')),
+    ([=[\%#.*\zs]=]),
+  }
+}))
