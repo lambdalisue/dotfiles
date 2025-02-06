@@ -5,7 +5,6 @@
                 "rules": [
                     {
                         "description": "Send Escape twice (https://forum.obsidian.md/t/let-vim-insert-mode-escape-esc-to-normal-mode-even-if-suggestion-dropdown-open/35414)",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [

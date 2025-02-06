@@ -500,6 +500,15 @@ nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))
       \ : "\<C-l>:syntax sync fromstart\<CR>"
 " }}}
 
+" Highlight {{{
+function! s:special_highlight() abort
+  syntax match SpecialChar '～' contained
+endfunction
+autocmd MyAutoCmd ColorScheme * call s:special_highlight()
+" }}}
+
+set runtimepath^=~/wk/postchan
+
 " Postludium {{{
 
 " Plugin

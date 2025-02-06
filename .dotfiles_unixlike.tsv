@@ -4,6 +4,7 @@
 .config/nvim/init.vim	.config/vim/vimrc
 .config/nvim/ginit.vim	.config/vim/gvimrc
 .config/zsh
+.config/ghostty
 .ssh
 .tmux.conf
 .zshenv

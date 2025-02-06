@@ -1,0 +1,20 @@
+font-family = "FiraCode Nerd Font Mono Reg"
+font-size = 14
+theme = nordfox
+
+window-inherit-font-size = true
+window-inherit-working-directory = true
+
+quick-terminal-position = bottom
+quick-terminal-autohide = false
+
+# Disable tabs because aerospace doesn't work well with tabs.
+# https://github.com/nikitabobko/AeroSpace/issues/778
+keybind = cmd+t=unbind
+
+# Show quick terminal by F12
+keybind = global:f12=toggle_quick_terminal
+
+# Disable ligature
+# https://github.com/ghostty-org/ghostty/issues/1710
+font-feature = -dlig
