@@ -7,6 +7,8 @@ function! s:skkeleton_init() abort
   call skkeleton#register_kanatable('rom', {
         \ '(' : ['（', ''],
         \ ')' : ['）', ''],
+        \ 'z(' : ['【', ''],
+        \ 'z)' : ['】', ''],
         \ 'z1' : ['１', ''],
         \ 'z2' : ['２', ''],
         \ 'z3' : ['３', ''],
