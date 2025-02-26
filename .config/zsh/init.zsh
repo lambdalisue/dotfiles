@@ -179,6 +179,9 @@ if type kubectl &>/dev/null; then
 fi
 
 # docker
+if [[ -d /Applications/Docker.app ]]; then
+  alias docker=/Applications/Docker.app/Contents/Resources/bin/docker
+fi
 if type docker &>/dev/null; then
   cache::docker() {
     docker completion zsh > ${CACHE_PROFILE}/docker.zsh

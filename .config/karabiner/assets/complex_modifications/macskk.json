@@ -74,6 +74,104 @@
           "type": "basic"
         }
       ]
+    },
+    {
+      "description": "macSKK for Ghostty",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": [
+                "^com\\.mitchellh\\.ghostty$"
+              ],
+              "type": "frontmost_application_if"
+            },
+            {
+              "input_sources": [
+                {
+                  "input_source_id": "^net\\.mtgto\\.inputmethod\\.macSKK\\.(hiragana|katakana|hankaku)$"
+                }
+              ],
+              "type": "input_source_if"
+            }
+          ],
+          "from": {
+            "key_code": "l"
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "input_mode_id": "net.mtgto.inputmethod.macSKK.ascii",
+                "input_source_id": "net.mtgto.inputmethod.macSKK.ascii",
+                "language": "en"
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": [
+                "^com\\.mitchellh\\.ghostty$"
+              ],
+              "type": "frontmost_application_if"
+            },
+            {
+              "input_sources": [
+                {
+                  "input_source_id": "^net\\.mtgto\\.inputmethod\\.macSKK\\.(katakana|hankaku)$"
+                }
+              ],
+              "type": "input_source_if"
+            }
+          ],
+          "from": {
+            "key_code": "q"
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "input_mode_id": "net.mtgto.inputmethod.macSKK.hiragana",
+                "input_source_id": "net.mtgto.inputmethod.macSKK.hiragana",
+                "language": "ja"
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "bundle_identifiers": [
+                "^com\\.mitchellh\\.ghostty$"
+              ],
+              "type": "frontmost_application_if"
+            },
+            {
+              "input_sources": [
+                {
+                  "input_source_id": "^net\\.mtgto\\.inputmethod\\.macSKK\\.hiragana$"
+                }
+              ],
+              "type": "input_source_if"
+            }
+          ],
+          "from": {
+            "key_code": "q"
+          },
+          "to": [
+            {
+              "select_input_source": {
+                "input_mode_id": "net.mtgto.inputmethod.macSKK.katakana",
+                "input_source_id": "net.mtgto.inputmethod.macSKK.katakana",
+                "language": "ja"
+              }
+            }
+          ],
+          "type": "basic"
+        }
+      ]
     }
   ]
 }
