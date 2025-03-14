@@ -2,7 +2,7 @@
   "title": "Obsidian",
   "rules": [
     {
-      "description": "Send Escape twice on Escape",
+      "description": "Obsidian Send Escape twice on Escape",
       "manipulators": [
         {
           "conditions": [

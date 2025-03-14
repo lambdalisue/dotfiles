@@ -1,4 +1,4 @@
-font-family = "FiraCode Nerd Font Mono Reg"
+font-family = "IntoneMono Nerd Font Light"
 font-size = 14
 theme = nordfox
 
@@ -18,3 +18,7 @@ keybind = global:f12=toggle_quick_terminal
 # Disable ligature
 # https://github.com/ghostty-org/ghostty/issues/1710
 font-feature = -dlig
+
+# Disable Ctrl-J
+# https://zenn.dev/mtgto/articles/macskk-karabiner-settings-for-ghostty
+keybind = ctrl+j=ignore

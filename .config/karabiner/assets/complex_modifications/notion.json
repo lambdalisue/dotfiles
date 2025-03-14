@@ -2,7 +2,7 @@
   "title": "Notion",
   "rules": [
     {
-      "description": "Ctrl-h to Backspace",
+      "description": "Notion Ctrl-h to Backspace",
       "manipulators": [
         {
           "conditions": [
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "description": "Ctrl-m to Return",
+      "description": "Notion Ctrl-m to Return",
       "manipulators": [
         {
           "conditions": [
@@ -66,7 +66,7 @@
       ]
     },
     {
-      "description": "Ctrl-i to Tab",
+      "description": "Notion Ctrl-i to Tab",
       "manipulators": [
         {
           "conditions": [
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "description": "Ctrl-[ to Escape",
+      "description": "Notion Ctrl-[ to Escape",
       "manipulators": [
         {
           "conditions": [
