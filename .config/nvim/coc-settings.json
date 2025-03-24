@@ -3,13 +3,12 @@
   "coc.preferences.bracketEnterImprove": false,
   "coc.preferences.formatOnSave": true,
   "coc.preferences.useQuickfixForLocations": true,
+  "deno.cacheOnSave": true,
   "deno.codeLens.implementations": true,
   "deno.codeLens.references": true,
   "deno.codeLens.referencesAllFunctions": true,
+  "deno.codeLens.test": true,
   "deno.lint": true,
-  "deno.suggest.imports.hosts": {
-    "https://deno.land": true
-  },
   "deno.unstable": true,
   "diagnostic.floatConfig": {
     "border": true
@@ -65,6 +64,5 @@
       "initializationOptions": {},
       "settings": {}
     }
-  },
-  "svelte.enable-ts-plugin": true
+  }
 }
