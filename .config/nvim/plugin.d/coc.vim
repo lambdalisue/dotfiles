@@ -109,3 +109,6 @@ nmap <silent> gn <Plug>(coc-git-nextchunk)
 
 command! CocEnableFormatOnSave call coc#config('coc.preferences.formatOnSave', v:true)
 command! CocDisableFormatOnSave call coc#config('coc.preferences.formatOnSave', v:false)
+
+command! CocEnableInlayHint call coc#config('inlayHint.enable', v:true)
+command! CocDisableInlayHint call coc#config('inlayHint.enable', v:false)

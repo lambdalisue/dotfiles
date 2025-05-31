@@ -63,6 +63,16 @@
       ],
       "initializationOptions": {},
       "settings": {}
+    },
+    "proto": {
+      "command": "protobuf-language-server",
+      "filetypes": [
+        "proto",
+        "cpp"
+      ],
+      "settings": {
+        "additional-proto-dirs": []
+      }
     }
   }
 }

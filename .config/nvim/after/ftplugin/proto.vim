@@ -1,4 +1,4 @@
-setlocal foldmethod=syntax
+setl foldmethod=syntax
 
 setl tabstop=8
 setl softtabstop=2
@@ -8,3 +8,6 @@ setl expandtab
 
 setl autoindent
 setl smartindent
+
+" It seems nvim-treesitter overwrites the indentexpr
+call timer_start(0, { -> execute('setl indentexpr=""') })

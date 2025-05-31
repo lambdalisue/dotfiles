@@ -16,6 +16,7 @@ path=(
     $HOME/.local/share/nvim/site/pack/jetpack/opt/vim-themis/bin(N-/)
     /Applications/Wireshark.app/Contents/MacOS(N-/)
     /opt/homebrew/opt/llvm/bin(N-/)
+    /opt/homebrew/opt/libpq/bin(N-/)
     /opt/homebrew/bin(N-/)
     /usr/local/bin(N-/)
     /usr/bin(N-/)

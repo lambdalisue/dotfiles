@@ -1,7 +1,7 @@
 nnoremap <silent> <Leader>aa :<C-u>GinStatus<CR><CR>
 nnoremap <silent> <Leader>ab <Cmd>GinBranch --all<CR>
 nnoremap <silent> <Leader>al :<C-u>GinLog<CR>
-nnoremap <silent> <Leader>aL :<C-u>GinLog -- %<CR>
+nnoremap <silent> <Leader>aL :<C-u>GinLog -- %:p<CR>
 
 function! s:show_commit(opener) abort
   let l:commit = matchstr(getline('.'), '\<[a-fA-F0-9]\{7,}\>')
