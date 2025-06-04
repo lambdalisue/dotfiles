@@ -3,8 +3,6 @@ export LANG="en_US.UTF-8"
 export LC_ALL=en_US.UTF-8
 export PLATFORM="$(uname)"
 
-export GOPRIVATE="github.com/fixpoint/*"
-
 # cache profile
 export CACHE_PROFILE="${XDG_CACHE_HOME}/zsh/profile"
 mkdir -p ${CACHE_PROFILE}
@@ -24,6 +22,25 @@ fi
 
 # PostgreSQL (Hit \e on psql)
 export PSQL_EDITOR='nvim +"setfiletype sql" '
+
+# GPG
+# https://github.com/GPGTools/pinentry-mac/blob/b34748f3e443d8f4f90e720d0eddc32510550397/Source/main.m#L52-L73
+if [[ -n "$SSH_CONNECTION" ]]; then
+    export GPG_TTY=$(tty)
+    export PINENTRY_USER_DATA="USE_CURSES=1"
+fi
+
+# linuxbrew
+if [[ -d /home/linuxbrew/.linuxbrew ]]; then
+  cache::linuxbrew() {
+    /home/linuxbrew/.linuxbrew/bin/brew shellenv > ${CACHE_PROFILE}/linuxbrew.zsh
+    zcompile ${CACHE_PROFILE}/linuxbrew.zsh
+  }
+  if [[ ! -f ${CACHE_PROFILE}/linuxbrew.zsh ]]; then
+    cache::linuxbrew
+  fi
+  source ${CACHE_PROFILE}/linuxbrew.zsh
+fi
 
 # fzf
 if type fzf &>/dev/null; then
@@ -60,13 +77,6 @@ if type xdg-open &>/dev/null; then
   }
 fi
 
-# GPG
-# https://github.com/GPGTools/pinentry-mac/blob/b34748f3e443d8f4f90e720d0eddc32510550397/Source/main.m#L52-L73
-if [[ -n "$SSH_CONNECTION" ]]; then
-    export GPG_TTY=$(tty)
-    export PINENTRY_USER_DATA="USE_CURSES=1"
-fi
-
 # vim
 if type nvim &>/dev/null; then
   alias nvimm="nvim -u ~/.vim/vimrc.min -i NONE"
@@ -84,7 +94,7 @@ fi
 # mise
 if type mise &>/dev/null; then
   cache::mise() {
-    echo 'eval "$(mise activate zsh)"' > ${CACHE_PROFILE}/mise.zsh
+    mise activate zsh > ${CACHE_PROFILE}/mise.zsh
     zcompile ${CACHE_PROFILE}/mise.zsh
   }
   if [[ ! -f ${CACHE_PROFILE}/mise.zsh ]]; then
