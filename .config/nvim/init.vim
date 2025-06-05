@@ -173,6 +173,8 @@ set tagcase=match       " use case sensitive for tag
 set smartcase           " override the ignorecase if the search pattern contains
                         " upper case characters
 
+set foldmethod=manual
+
 " Do NOT store current directory and options/mappings in view
 set viewoptions&
       \ viewoptions-=curdir
@@ -506,8 +508,6 @@ function! s:special_highlight() abort
 endfunction
 autocmd MyAutoCmd ColorScheme * call s:special_highlight()
 " }}}
-
-set runtimepath^=~/wk/postchan
 
 " Postludium {{{
 
