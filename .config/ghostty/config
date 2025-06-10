@@ -19,6 +19,6 @@ keybind = global:f12=toggle_quick_terminal
 # https://github.com/ghostty-org/ghostty/issues/1710
 font-feature = -dlig
 
-# Disable Ctrl-J
-# https://zenn.dev/mtgto/articles/macskk-karabiner-settings-for-ghostty
-keybind = ctrl+j=ignore
+# # Disable Ctrl-J
+# # https://zenn.dev/mtgto/articles/macskk-karabiner-settings-for-ghostty
+# keybind = ctrl+j=ignore

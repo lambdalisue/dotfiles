@@ -296,7 +296,13 @@
                         "is_keyboard": true,
                         "product_id": 795,
                         "vendor_id": 2131
-                    }
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "right_shift" },
+                            "to": [{ "key_code": "spacebar" }]
+                        }
+                    ]
                 }
             ],
             "fn_function_keys": [

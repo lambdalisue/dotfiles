@@ -5,7 +5,7 @@ nnoremap <silent> <Leader>fb <Cmd>Fall buffer<CR>
 nnoremap <silent> <Leader>fh <Cmd>Fall help<CR>
 nnoremap <silent> <Leader>fg <Cmd>Fall rg<CR>
 nnoremap <silent> <Leader>fq <Cmd>Fall quickfix<CR>
-nnoremap <silent> <Leader>fd <Cmd>Fall file ~/ogh/lambdalisue/dotfiles<CR>
+nnoremap <silent> <Leader>fd <Cmd>Fall config<CR>
 nnoremap <silent> <Leader>fj <Cmd>Fall rg ~/Documents/vim/junkfiles<CR>
 nnoremap <silent> <Leader>fo <Cmd>Fall rg ~/ObsidianVault<CR>
 nnoremap <silent> <Leader>fl <Cmd>Fall line<CR>

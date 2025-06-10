@@ -1,11 +1,13 @@
 import type { Entrypoint } from "jsr:@vim-fall/custom@^0.1.0";
 import {
+  bindSourceArgs,
   composeActions,
   composeRenderers,
+  composeSources,
   refineCurator,
   refineSource,
-} from "jsr:@vim-fall/std@^0.10.1";
-import * as builtin from "jsr:@vim-fall/std@^0.10.1/builtin";
+} from "jsr:@vim-fall/std@^0.12.0";
+import * as builtin from "jsr:@vim-fall/std@^0.12.0/builtin";
 import * as extra from "jsr:@vim-fall/extra@^0.2.0";
 import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
 
@@ -149,7 +151,41 @@ const myFilterDirectory = (path: string) => {
   return true;
 };
 
-const macSKKSource = builtin.source.list([]);
+function expandTilde(path: string): string {
+  if (!path.startsWith("~")) {
+    return path;
+  }
+
+  const homeDir = Deno.env.get("HOME") || Deno.env.get("USERPROFILE");
+  if (!homeDir) {
+    return path;
+  }
+
+  return path.replace(/^~(?=\/|\\|$)/, homeDir);
+}
+
+function pathToList(path: string) {
+  return {
+    id: `path:${path}`,
+    value: path,
+    detail: {
+      path: expandTilde(path),
+    },
+  };
+}
+
+const macSKKSource = builtin.source.list([
+  "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries",
+  "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries/skk-jisyo.utf8",
+].map(pathToList));
+
+const claudeSource = builtin.source.list([
+  "./CLAUDE.md",
+  "./claude/settings.json",
+  "./claude/settings.local.json",
+  "~/.claude/CLAUDE.md",
+  "~/.claude/settings.json",
+].map(pathToList));
 
 export const main: Entrypoint = ({
   definePickerFromSource,
@@ -317,6 +353,45 @@ export const main: Entrypoint = ({
       hidePreview: true,
     }),
   });
+
+  definePickerFromSource(
+    "config",
+    refineSource(
+      composeSources(
+        bindSourceArgs(
+          builtin.source.file({
+            filterFile: myFilterFile,
+            filterDirectory: myFilterDirectory,
+            relativeFromBase: true,
+          }),
+          ["~/ogh/lambdalisue/dotfiles"],
+        ),
+        macSKKSource,
+        claudeSource,
+      ),
+      builtin.refiner.relativePath,
+    ),
+    {
+      matchers: [builtin.matcher.fzf, builtin.matcher.regexp],
+      sorters: [
+        builtin.sorter.noop,
+        builtin.sorter.lexical,
+        builtin.sorter.lexical({ reverse: true }),
+      ],
+      renderers: [
+        composeRenderers(builtin.renderer.smartPath, builtin.renderer.nerdfont),
+        builtin.renderer.nerdfont,
+        builtin.renderer.noop,
+      ],
+      previewers: [builtin.previewer.file, builtin.previewer.noop],
+      actions: {
+        ...myPathActions,
+        ...myQuickfixActions,
+        ...myMiscActions,
+      },
+      defaultAction: "open",
+    },
+  );
 
   definePickerFromSource(
     "file",
