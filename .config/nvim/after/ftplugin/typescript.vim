@@ -1,6 +1,7 @@
 if has('nvim')
   setlocal foldmethod=expr
   setlocal foldexpr=nvim_treesitter#foldexpr()
+  setlocal foldmethod=manual
 else
   setlocal foldmethod=syntax
 endif
