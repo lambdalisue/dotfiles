@@ -22,3 +22,4 @@ font-feature = -dlig
 # # Disable Ctrl-J
 # # https://zenn.dev/mtgto/articles/macskk-karabiner-settings-for-ghostty
 # keybind = ctrl+j=ignore
+keybind = shift+enter=text:\n

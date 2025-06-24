@@ -183,8 +183,8 @@ const claudeSource = builtin.source.list([
   "./CLAUDE.md",
   "./claude/settings.json",
   "./claude/settings.local.json",
-  "~/.config/claude/CLAUDE.md",
-  "~/.config/claude/settings.json",
+  "~/.claude/CLAUDE.md",
+  "~/.claude/settings.json",
 ].map(pathToList));
 
 export const main: Entrypoint = ({
