@@ -154,5 +154,3 @@ fi
 if type zprof >/dev/null 2>&1; then
   zprof > $HOME/zsh-startup.$$.log
 fi
-
-alias claude="/Users/alisue/.claude/local/claude"
