@@ -6,11 +6,12 @@ nnoremap <silent> <Leader>fh <Cmd>Fall help<CR>
 nnoremap <silent> <Leader>fg <Cmd>Fall rg<CR>
 nnoremap <silent> <Leader>fq <Cmd>Fall quickfix<CR>
 nnoremap <silent> <Leader>fd <Cmd>Fall config<CR>
-nnoremap <silent> <Leader>fj <Cmd>Fall rg ~/Documents/vim/junkfiles<CR>
-nnoremap <silent> <Leader>fo <Cmd>Fall rg ~/ObsidianVault<CR>
+nnoremap <silent> <Leader>fo <Cmd>Fall rg ~/Compost<CR>
 nnoremap <silent> <Leader>fl <Cmd>Fall line<CR>
 nnoremap <silent> <Leader>fm <Cmd>Fall mru<CR>
 nnoremap <silent> <Leader>fr <Cmd>Fall mrr<CR>
+nnoremap <silent> <Leader>fs <Cmd>FallSession<CR>
+nnoremap <silent> <Leader><Leader> <Cmd>FallResume<CR>
 
 function! s:init() abort
   cnoremap <silent><nowait> <C-p> <Plug>(fall-list-prev)
