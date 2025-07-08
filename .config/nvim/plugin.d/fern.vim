@@ -41,9 +41,8 @@ function! s:fern_local_init() abort
         \   "<Plug>(fern-my-open-or-enter)",
         \ )
   
-  nmap <buffer><nowait> <C-m> <Return>
+  nmap <buffer><nowait> <C-m> <Plug>(fern-my-open-or-enter-and-tcd)
   nmap <buffer><nowait> <C-h> <Backspace>
-  nmap <buffer><nowait> <Return> <Plug>(fern-my-leave-or-open-or-enter)
   nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
   nmap <buffer><nowait> T <Plug>(fern-action-terminal)
   nnoremap <buffer><nowait> ~ <Cmd>Fern ~<CR>
@@ -52,6 +51,9 @@ function! s:fern_local_init() abort
   nmap <buffer> N <Plug>(fern-action-new-path)
 
   nmap <buffer> <Plug>(fern-action-dirdiff) <Plug>(fern-action-ex=)DirDiff<CR>
+
+  " I use <Return> in fall.vim to open MRW so unmap it
+  nunmap <buffer> <Return>
 endfunction
 
 augroup my-fern
