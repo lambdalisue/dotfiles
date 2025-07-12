@@ -41,19 +41,16 @@ function! s:fern_local_init() abort
         \   "<Plug>(fern-my-open-or-enter)",
         \ )
   
+  nunmap <buffer> <Backspace>
+  nmap <buffer><nowait> <C-h> <Plug>(fern-my-leave)
+  nmap <buffer><nowait> <Enter> <C-m>
   nmap <buffer><nowait> <C-m> <Plug>(fern-my-open-or-enter-and-tcd)
-  nmap <buffer><nowait> <C-h> <Backspace>
-  nmap <buffer><nowait> <Backspace> <Plug>(fern-my-leave)
   nmap <buffer><nowait> T <Plug>(fern-action-terminal)
-  nnoremap <buffer><nowait> ~ <Cmd>Fern ~<CR>
-
-  nmap <buffer> K <Nop>
   nmap <buffer> N <Plug>(fern-action-new-path)
 
-  nmap <buffer> <Plug>(fern-action-dirdiff) <Plug>(fern-action-ex=)DirDiff<CR>
+  nnoremap <buffer><nowait> ~ <Cmd>Fern ~<CR>
 
-  " I use <Return> in fall.vim to open MRW so unmap it
-  nunmap <buffer> <Return>
+  nmap <buffer> <Plug>(fern-action-dirdiff) <Plug>(fern-action-ex=)DirDiff<CR>
 endfunction
 
 augroup my-fern
@@ -68,6 +65,14 @@ function! s:smart_path() abort
   return fnameescape(fnamemodify(expand('%'), ':p:h'))
 endfunction
 
-nnoremap <silent> <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%:p<CR>
-nnoremap <silent> <Leader>dd :<C-u>Fern . -toggle -drawer -reveal=%:p<CR>
-nnoremap <silent> <Leader>gg :<C-u>Fern ~/ogh -reveal=lambdalisue<CR>
+function! s:prefer_repo_root() abort
+  let l:git_dir = finddir('.git', '.;')
+  if empty(l:git_dir)
+    return getcwd()
+  endif
+  return fnamemodify(l:git_dir, ':p:h:h')
+endfunction
+
+nnoremap <Leader>dd <Cmd>Fern . -toggle -drawer -reveal=%:p<CR>
+nnoremap <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%:p<CR>
+nnoremap <Leader>gg :<C-u>Fern ~/ogh -toggle -drawer -reveal=<C-r>=<SID>prefer_repo_root()<CR><CR>

@@ -1,6 +1,6 @@
-nnoremap <silent> <Enter> <Cmd>Fall mru<CR>
-nnoremap <silent> <Backspace> <Cmd>Fall mrr<CR>
+nnoremap <silent> <Backspace> <Cmd>Fall mru<CR>
 nnoremap <silent> <C-x><C-g> <Cmd>Fall mrd<CR>
+nnoremap <silent> <Leader>fr <Cmd>Fall mrr<CR>
 nnoremap <silent> <Leader>ff <Cmd>Fall file<CR>
 nnoremap <silent> <Leader>fb <Cmd>Fall buffer<CR>
 nnoremap <silent> <Leader>fh <Cmd>Fall help<CR>
