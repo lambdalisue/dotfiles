@@ -43,8 +43,8 @@ function! s:fern_local_init() abort
   
   nunmap <buffer> <Backspace>
   nmap <buffer><nowait> <C-h> <Plug>(fern-my-leave)
-  nmap <buffer><nowait> <Enter> <C-m>
   nmap <buffer><nowait> <C-m> <Plug>(fern-my-open-or-enter-and-tcd)
+  nmap <buffer><nowait> <Return> <Plug>(fern-my-open-or-enter-and-tcd)
   nmap <buffer><nowait> T <Plug>(fern-action-terminal)
   nmap <buffer> N <Plug>(fern-action-new-path)
 
