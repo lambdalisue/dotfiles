@@ -13,6 +13,22 @@ import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
 
 import { defineMatcher, defineSource } from "jsr:@vim-fall/std@^0.10.0";
 
+import {
+  ImportMapImporter,
+  loadImportMap,
+} from "jsr:@lambdalisue/import-map-importer@^0.3.1";
+
+const importMap = await loadImportMap(
+  "/Users/alisue/ogh/vim-fall/deno-fall-std/deno.jsonc",
+);
+const importer = new ImportMapImporter(importMap, { clearDenoCache: true });
+const builtinNew = await importer.import<
+  typeof import("file:///Users/alisue/ogh/vim-fall/deno-fall-std/builtin/mod.ts")
+>(
+  "file:///Users/alisue/ogh/vim-fall/deno-fall-std/builtin/mod.ts",
+);
+console.log(builtinNew);
+
 function infinity() {
   return defineSource(async function* () {
     let n = 0;
@@ -554,6 +570,19 @@ export const main: Entrypoint = ({
 
   definePickerFromSource("infinity", infinity, {
     matchers: [noop, builtin.matcher.fzf, builtin.matcher.substring],
+    sorters: [
+      builtin.sorter.noop,
+      builtin.sorter.lexical,
+      builtin.sorter.lexical({ reverse: true }),
+    ],
+    actions: {
+      ...myMiscActions,
+    },
+    defaultAction: "echo",
+  });
+
+  definePickerFromSource("window", builtinNew.source.window, {
+    matchers: [builtin.matcher.fzf, builtin.matcher.substring],
     sorters: [
       builtin.sorter.noop,
       builtin.sorter.lexical,
