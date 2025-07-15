@@ -41,7 +41,7 @@ function! s:fern_local_init() abort
         \   "<Plug>(fern-my-open-or-enter)",
         \ )
   
-  nunmap <buffer> <Backspace>
+  silent! nunmap <buffer> <Backspace>
   nmap <buffer><nowait> <C-h> <Plug>(fern-my-leave)
   nmap <buffer><nowait> <C-m> <Plug>(fern-my-open-or-enter-and-tcd)
   nmap <buffer><nowait> <Return> <Plug>(fern-my-open-or-enter-and-tcd)
