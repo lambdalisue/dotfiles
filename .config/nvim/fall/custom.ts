@@ -16,7 +16,7 @@ import { defineMatcher, defineSource } from "jsr:@vim-fall/std@^0.10.0";
 import {
   ImportMapImporter,
   loadImportMap,
-} from "jsr:@lambdalisue/import-map-importer@^0.3.1";
+} from "jsr:@lambdalisue/import-map-importer@^0.4.0";
 
 const importMap = await loadImportMap(
   "/Users/alisue/ogh/vim-fall/deno-fall-std/deno.jsonc",
@@ -587,6 +587,9 @@ export const main: Entrypoint = ({
       builtin.sorter.noop,
       builtin.sorter.lexical,
       builtin.sorter.lexical({ reverse: true }),
+    ],
+    previewers: [
+      builtinNew.previewer.buffer,
     ],
     actions: {
       ...myMiscActions,
