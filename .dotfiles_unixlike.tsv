@@ -1,4 +1,5 @@
 .config/alacritty
+.config/claude	.claude
 .config/nvim
 .config/nvim	.config/vim
 .config/nvim/init.vim	.config/vim/vimrc
