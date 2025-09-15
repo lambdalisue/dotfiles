@@ -1,3 +1,5 @@
+" vim -u vimrc.min
+" nvim -u vimrc.min
 if exists('+compatible') && &compatible
   set nocompatible
 endif
@@ -5,16 +7,23 @@ endif
 " Disable Vim's native pack feature
 set packpath=
 
-" Clone https://github.com/lambdalisue/fern.vim in somewhere
-" and specify that directory to the below
-set runtimepath^=~/ghq/github.com/lambdalisue/fern.vim
+" The target plugin directory
+set runtimepath^=~/ogh/vim-denops/denops.vim
 
 filetype plugin indent on
 syntax on
 "----------------------------------------------------------------
 
+" Swap ; and : (my personal preference)
 nnoremap ; :
 nnoremap : ;
+
+" Add Capture commmand to copy messages to clipboard
+function! s:capture() abort
+  cal setreg('+', execute('messages', ''))
+  echo "Messages copied to clipboard"
+endfunction
+command! Capture call s:capture()
 
 "----------------------------------------------------------------
 echomsg "Custom minimal vimrc has loaded"
