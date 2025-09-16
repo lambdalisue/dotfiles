@@ -201,6 +201,7 @@ const claudeSource = builtin.source.list([
   "./claude/settings.local.json",
   "~/.claude/CLAUDE.md",
   "~/.claude/settings.json",
+  "~/Library/Application Support/cage/presets.yaml",
 ].map(pathToList));
 
 export const main: Entrypoint = ({
