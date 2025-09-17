@@ -1,3 +1,7 @@
+# 
+# Cmd + Shift + , to reload
+#
+font-family = ""
 font-family = "IntoneMono Nerd Font Light"
 font-size = 14
 theme = nordfox
