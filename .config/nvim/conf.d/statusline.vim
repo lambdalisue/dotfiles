@@ -4,7 +4,7 @@ function! s:tab(n) abort
   let hi = a:n is# tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
   let label = getcwd(0, a:n)
   let label = fnamemodify(label, ':t')
-  return printf('%%%dT%s%s%%T%%#TabLineFill#', a:n, hi, label)
+  return printf('%%%dT%s %s %%T%%#TabLineFil#', a:n, hi, label)
 endfunction
 
 function! s:safe(expr) abort
@@ -31,21 +31,21 @@ endfunction
 function! s:tabline() abort
   let lhs = [
         \ '%{get(b:, "copilot_enabled") ? "\uf4b8 " : "\uf4b9 "}',
-        \ join(map(range(1, tabpagenr('$')), { -> s:tab(v:val) }), ' ┆ '),
+        \ join(map(range(1, tabpagenr('$')), { -> s:tab(v:val) }), ' '),
         \]
   let rhs = [
         \ s:safe('gin#component#worktree#name()'),
         \ s:safe('gin#component#branch#unicode()'),
         \ s:safe('gin#component#traffic#unicode()'),
         \ s:safe('wifi#component()'),
-        \ s:safe('battery#component_escaped()'),
+        \ s:safe('battery#component_escaped()') .. ' ',
         \ '%{fnamemodify(".", ":p:~")}',
         \]
-  call map(lhs, { _, v -> substitute(v, '^\s*\|\s*$', '', 'g') })
-  call map(rhs, { _, v -> substitute(v, '^\s*\|\s*$', '', 'g') })
+  " call map(lhs, { _, v -> substitute(v, '^\s*\|\s*$', '', 'g') })
+  " call map(rhs, { _, v -> substitute(v, '^\s*\|\s*$', '', 'g') })
   call filter(lhs, { _, v -> !empty(v) })
   call filter(rhs, { _, v -> !empty(v) })
-  return join(lhs, ' │ ') . '%=' . join(rhs, ' │ ')
+  return join(lhs, '│') .. '%=' .. join(rhs, '│')
 endfunction
 
 let &statusline = printf('%%!%s()', get(function('s:statusline'), 'name'))

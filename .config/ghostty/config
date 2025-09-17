@@ -4,7 +4,7 @@
 font-family = ""
 font-family = "IntoneMono Nerd Font Light"
 font-size = 14
-theme = nordfox
+theme = Nightfox
 
 window-inherit-font-size = true
 window-inherit-working-directory = true

@@ -22,7 +22,6 @@ function! s:init() abort
   " Denops
   "call jetpack#add('yuki-yano/fuzzy-motion.vim')
   call jetpack#add('lambdalisue/vim-askpass')
-  call jetpack#add('lambdalisue/vim-chameleon')
   call jetpack#add('lambdalisue/vim-deno-cache')
   call jetpack#add('lambdalisue/vim-gin')
   call jetpack#add('lambdalisue/vim-guise')
@@ -105,6 +104,7 @@ function! s:init() abort
   " Colorscheme
   call jetpack#add('EdenEast/nightfox.nvim')
   call jetpack#add('cocopon/iceberg.vim')
+  call jetpack#add('catppuccin/vim')
 
   " Vim
   if !has('nvim')

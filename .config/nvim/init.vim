@@ -526,11 +526,7 @@ endfunction
 call s:load_configurations()
 
 set background=dark
-if has('nvim')
-  silent! colorscheme nordfox
-else
-  silent! colorscheme iceberg
-endif
+silent! colorscheme nightfox
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
