@@ -134,7 +134,7 @@ function! s:local() abort
   let excludes = [
         \ 'denops-massive-plugins-tester',
         \]
-  let proves = ['/autoload', '/plugin', '/ftplugin', '/denops']
+  let proves = ['/autoload', '/plugin', '/ftplugin', '/denops', '/lua']
   for path in glob('~/ogh/*/*', 1, 1, 1)
     for prove in proves
       if isdirectory(path . prove) && index(excludes, fnamemodify(path, ':t')) is# -1
