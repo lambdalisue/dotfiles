@@ -38,11 +38,15 @@ function! s:init() abort
   call jetpack#add('Shougo/ddc-matcher_head')
   call jetpack#add('Shougo/ddc-sorter_rank')
 
+  " Colorscheme
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
+  call jetpack#add('EdenEast/nightfox.nvim')
   call jetpack#add('Shougo/context_filetype.vim')
   call jetpack#add('Shougo/junkfile.vim')
+  call jetpack#add('catppuccin/vim')
   call jetpack#add('cocopon/colorswatch.vim')
+  call jetpack#add('cocopon/iceberg.vim')
   call jetpack#add('dstein64/vim-startuptime')
   call jetpack#add('github/copilot.vim')
   call jetpack#add('hrsh7th/vim-eft')
@@ -70,6 +74,7 @@ function! s:init() abort
   call jetpack#add('lambdalisue/vim-gina')
   call jetpack#add('lambdalisue/vim-glyph-palette')
   call jetpack#add('lambdalisue/vim-http-protocol')
+  call jetpack#add('lambdalisue/vim-improved-gf')
   call jetpack#add('lambdalisue/vim-mr')
   call jetpack#add('lambdalisue/vim-nerdfont')
   call jetpack#add('lambdalisue/vim-operator-breakline')
@@ -101,10 +106,6 @@ function! s:init() abort
   call jetpack#add('tyru/capture.vim')
   call jetpack#add('tyru/open-browser.vim')
   call jetpack#add('will133/vim-dirdiff')
-  " Colorscheme
-  call jetpack#add('EdenEast/nightfox.nvim')
-  call jetpack#add('cocopon/iceberg.vim')
-  call jetpack#add('catppuccin/vim')
 
   " Vim
   if !has('nvim')
