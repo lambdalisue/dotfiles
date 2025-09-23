@@ -83,6 +83,7 @@ function! s:init() abort
   call jetpack#add('lambdalisue/vim-suda')
   call jetpack#add('lambdalisue/vim-trimmer')
   call jetpack#add('lambdalisue/vim-wifi')
+  call jetpack#add('liuchengxu/vista.vim')
   call jetpack#add('machakann/vim-sandwich')
   call jetpack#add('machakann/vim-swap')
   call jetpack#add('machakann/vim-textobj-delimited')
