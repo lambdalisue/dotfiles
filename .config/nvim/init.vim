@@ -480,16 +480,30 @@ cnoremap <Down> <C-n>
 " Fix unreasonable mappings by historical reason
 nnoremap Y y$
 
-" Tab navigation
-nnoremap <silent> <C-w>t :<C-u>tabnew<CR>
-nnoremap <silent> <C-w><C-t> :<C-u>tabnew<CR>
-nnoremap <silent> <C-w>q :<C-u>tabclose<CR>
-nnoremap <silent> <C-w><C-q> :<C-u>tabclose<CR>
-nnoremap <C-n> gt
-nnoremap <C-p> gT
+" Neovim native Tab navigation is mapped to <C-PageDown> and <C-PageUp> so
+" map <C-Insert> and <C-Delete> to tabnew and tabclose for consistency.
+nnoremap <silent> <C-PageDown> <Cmd>tabnext<CR>
+nnoremap <silent> <C-PageUp> <Cmd>tabprevious<CR>
+nnoremap <silent> <C-Insert> <Cmd>tabnew<CR>
+nnoremap <silent> <C-Del> <Cmd>tabclose<CR>
 
-" Open terminal
-nnoremap <Leader>tt :<C-u>tabnew<CR><BAR>:terminal<CR>
+" <C-T> is for tag but recently we don't use tags so often because of LSP
+" so use it for tab management like <C-W> is for window management.
+nnoremap <silent> <C-t>T <Cmd>tabprevious<CR>
+nnoremap <silent> <C-t>t <Cmd>tabnext<CR>
+nnoremap <silent> <C-t>n <Cmd>tabnew<CR>
+nnoremap <silent> <C-t>c <Cmd>tabclose<CR>
+nnoremap <silent> <C-t>h <Cmd>tabprevious<CR>
+nnoremap <silent> <C-t>j <Cmd>tabnext<CR>
+nnoremap <silent> <C-t>k <Cmd>tabprevious<CR>
+nnoremap <silent> <C-t>l <Cmd>tabnext<CR>
+nnoremap <silent> <C-t><C-t> <Cmd>tabnext<CR>
+nnoremap <silent> <C-t><C-n> <Cmd>tabnew<CR>
+nnoremap <silent> <C-t><C-c> <Cmd>tabclose<CR>
+nnoremap <silent> <C-t><C-h> <Cmd>tabprevious<CR>
+nnoremap <silent> <C-t><C-j> <Cmd>tabnext<CR>
+nnoremap <silent> <C-t><C-k> <Cmd>tabprevious<CR>
+nnoremap <silent> <C-t><C-l> <Cmd>tabnext<CR>
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
