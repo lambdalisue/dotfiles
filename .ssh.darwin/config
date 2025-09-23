@@ -4,3 +4,7 @@ UseKeychain yes
 
 # https://qiita.com/tango110/items/c8194d43b46fa2a712d1
 IPQoS none
+
+# To avoid double rand random letter when typing on SSH
+Host *
+  SetEnv TERM=xterm-256color
