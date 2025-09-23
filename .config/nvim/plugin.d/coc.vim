@@ -52,10 +52,10 @@ nmap <nowait> <C-k> <Plug>(coc-codeaction)
 nmap <nowait> g<C-k> <Plug>(coc-codeaction-cursor)
 vmap <nowait> <C-k> <Plug>(coc-codeaction-selected)
 
-" Use [[ and ]]  to navigate diagnostics
+" Use [g and ]g  to navigate diagnostics
 nnoremap <silent> <Plug>(my-zv) <Cmd>call timer_start(10, { -> feedkeys("zv", "nx") })<CR>
-nmap <nowait> [[ <Plug>(coc-diagnostic-prev)<Plug>(my-zv)
-nmap <nowait> ]] <Plug>(coc-diagnostic-next)<Plug>(my-zv)
+nmap <nowait> [g <Plug>(coc-diagnostic-prev)<Plug>(my-zv)
+nmap <nowait> ]g <Plug>(coc-diagnostic-next)<Plug>(my-zv)
 nmap <nowait><silent> qd <Cmd>call CocAction('diagnosticToggle')<CR>
 
 xmap <nowait> if <Plug>(coc-funcobj-i)
