@@ -1,154 +1,161 @@
 ---
 argument-hint: [error-message]
-description: エラー・挙動不良等、問題の原因を特定するための調査専用コマンド
+description: Investigation-only command for identifying causes of errors, malfunctions, and other issues
+readonly_tools:
+  - name: Read
+    description: File content viewing
+  - name: Grep
+    description: Pattern search
+  - name: Glob
+    description: File exploration
+  - name: LS
+    description: Directory structure viewing
+  - name: context7
+    description: MCP that provides latest documentation for frameworks and libraries (actively use when available)
+  - name: serena
+    description: MCP for semantic search, LSP search, and documentation within projects (actively use for efficient investigation)
+  - name: playwrite
+    description: Browser operations, DevTools error content confirmation, page display, layout confirmation (actively use when available)
 ---
 
-# investigating-error - 原因調査専用コマンド
+# investigating-error - Root Cause Investigation Command
 
-## 目的
+## Purpose
 
-エラーメッセージ・ユーザーの指摘から原因を特定し、事実に基づく分析結果を提供するコマンド。
-エラーの解消は行わず、原因特定と調査のみに専念する（対応は`/execute`コマンドで実施）。
+A command that identifies causes from error messages and user reports, providing fact-based analysis results.
+Focuses solely on cause identification and investigation without resolving errors (resolution is handled by `/execute` command).
 
-## 基本方針
+## Basic Principles
 
-- **ログファースト**: 推測ではなく、ログを一次情報として最優先で確認・分析を行い原因特定
-- **周辺コードの確認**: 怪しいコードも、周辺ファイルの同様な実装を見ると同様な可能性もある。この場合は別に原因がある可能性も考慮
-- **体系的調査**: エラーの発生経路を時系列・処理順序により追跡
-- **非忖度**: ユーザーの想定に寄り添わず、事実に基づく冷静な分析
-- **読み取り専用**: ファイルの変更・作成・削除は行わない
+- **Log-first**: Prioritize logs as primary information source for root cause analysis, not speculation
+- **Check surrounding code**: Suspicious code might be normal when compared to similar implementations in neighboring files. Consider alternative causes in such cases
+- **Systematic investigation**: Track error occurrence path chronologically and by processing order
+- **Non-sycophantic**: Provide objective analysis based on facts, not accommodating user assumptions
+- **Read-only**: Never modify, create, or delete files
 
-## 入力
+## Input
 
-エラーメッセージなど: $ARGUMENTS
+Error message etc.: $ARGUMENTS
 
-## 実行手順
+## Execution Steps
 
-### 1. エラーメッセージの解析
+### 1. Error Message Analysis
 
-- エラータイプの特定（構文エラー、実行時エラー、論理エラー等）
-- エラー発生箇所の特定（ファイル名、行番号、関数名）
-- スタックトレースの解析
-- タイムスタンプの確認
+- Identify error type (syntax error, runtime error, logic error, etc.)
+- Identify error location (filename, line number, function name)
+- Analyze stack trace
+- Check timestamps
 
-### 2. ログの調査（最重要）
+### 2. Log Investigation (Most Important)
 
-**ログファイルの探索と確認:**
+**Log File Exploration and Confirmation:**
 
-- アプリケーションログの確認
+- Application log confirmation
 
   - `!ls -la logs/ 2>/dev/null || ls -la *.log 2>/dev/null`
   - `!tail -n 100 [relevant-log-file]`
   - `!grep -i error [log-files]`
 
-- システムログの確認（必要に応じて）
+- System log confirmation (as needed)
 
   - `!journalctl -xe --no-pager -n 50` (Linux)
   - `!tail -n 100 /var/log/system.log` (macOS)
 
-- エラー前後のログコンテキスト確認
-  - エラー発生前の処理フロー
-  - エラー発生時の詳細情報
-  - エラー後の影響範囲
+- Error context log confirmation
+  - Processing flow before error
+  - Detailed information at error occurrence
+  - Impact scope after error
 
-### 3. コード調査
+### 3. Code Investigation
 
-使用ツール（読み取り専用）:
+Conduct investigation using read-only tools defined in the frontmatter.
 
-- `Read`: エラー発生箇所のコード確認
-- `Grep`: エラー関連パターンの検索
-- `Glob`: 関連ファイルの探索
-- `LS`: プロジェクト構造の確認
-- `context7`: フレームワーク・ライブラリのドキュメント確認（利用可能な場合、積極利用）
-- `serena`: セマンティック検索、LSP検索（効率的な調査のために積極利用）
-- `playwrite`: ブラウザ操作、Devtoolsのエラー内容確認、ページの表示、レイアウトの確認（利用可能な場合、積極利用）
+**Investigation Items:**
 
-**調査項目:**
+- Code details at error location
+- Related dependencies and imports
+- Configuration file contents
+- Environment variable usage
+- Recent change history (from git log)
 
-- エラー発生箇所のコード詳細
-- 関連する依存関係とインポート
-- 設定ファイルの内容
-- 環境変数の使用状況
-- 最近の変更履歴（gitログから）
+### 4. Environment Investigation
 
-### 4. 環境調査
+- Execution environment confirmation
 
-- 実行環境の確認
+  - OS, runtime version
+  - Dependency package versions
+  - Environment variable settings
 
-  - OS、ランタイムバージョン
-  - 依存パッケージのバージョン
-  - 環境変数の設定状況
+- Resource status (as needed)
+  - Disk space
+  - Memory usage
+  - Network connectivity
 
-- リソース状況（必要に応じて）
-  - ディスク容量
-  - メモリ使用状況
-  - ネットワーク接続状態
+### 5. Providing Investigation Results
 
-### 5. 調査結果の提供
+**Output Structure:**
 
-**出力構成:**
+#### Summary (example - only output investigated results)
 
-#### 概要（一例、調査していない結果は出力しなくて良い）
+- **Report Summary**
+- **Investigation Results Summary**
 
-- **報告の概要**
-- **報告に関する調査結果の概要**
+#### 📝 Log Analysis Results
 
-#### 📝 ログ分析結果
+- **Key Log Information**:
+  - [Important information extracted from log files]
+  - [Context before and after error]
+  - [Related Warnings and Info]
 
-- **主要ログ情報**:
-  - [ログファイルから抽出した重要な情報]
-  - [エラー前後のコンテキスト]
-  - [関連するWarningやInfo]
+#### 🔍 Code Investigation Results
 
-#### 🔍 コード調査結果
+- **Problematic Code Location**:
+  - [Relevant code quotation]
+  - [Problem identification]
 
-- **問題のあるコード箇所**:
-  - [該当コードの引用]
-  - [問題点の指摘]
+#### 🎯 Cause Identification
 
-#### 🎯 原因特定
+- **Direct Cause**: [Direct cause identified from logs and code]
+- **Root Cause**: [Deeper cause (design, configuration, environment, etc.)]
+- **Occurrence Conditions**: [Specific conditions that trigger the error]
 
-- **直接的原因**: [ログとコードから特定した直接的な原因]
-- **根本原因**: [より深層的な原因（設計、設定、環境等）]
-- **発生条件**: [エラーが発生する具体的な条件]
+#### 📊 Investigation Metrics
 
-#### 📊 調査指標
+- **Confidence**: [0-100] Certainty of cause identification
+- **Log Utilization**: [0-100] Level of log information utilization
+- **Objectivity**: [0-100] Objectivity of fact-based judgment
 
-- **信頼度**: [0-100] 原因特定の確実性
-- **ログ活用度**: [0-100] ログ情報の活用レベル
-- **忖度回避度**: [0-100] 事実ベース判断の客観性
+#### 🔗 Related Information
 
-#### 🔗 関連情報
+- Impact Scope: [Functions and processes affected by this error]
+- Similar Errors: [Past similar cases and patterns]
 
-- 影響範囲: [このエラーが影響する機能や処理]
-- 類似エラー: [過去の類似ケースやパターン]
+#### 💡 Response Strategy (No Implementation)
 
-#### 💡 対応方針（実装は行わない）
+1. [Recommended fix method]
+2. [Alternative approach]
+3. [Preventive measures]
 
-1. [推奨される修正方法]
-2. [代替アプローチ]
-3. [予防策]
+#### ⚠️ Items Requiring Additional Investigation
 
-#### ⚠️ 追加調査が必要な項目
+- [Unclear points or items requiring additional confirmation]
 
-- [不明確な点や追加で確認が必要な事項]
+## Important Constraints
 
-## 重要な制約
+- Never edit, create, or delete files
+- Do not fix errors or implement solutions (investigation and analysis only)
+- **Use logs as the highest priority information source**
+- Honestly report unclear points and clearly indicate need for additional investigation
+- Judge based on facts rather than accepting user assumptions
+- Provide fact-based investigation results instead of apologies
 
-- ファイルの編集・作成・削除は絶対に行わない
-- エラーの修正や実装は行わない（調査と分析のみ）
-- **ログを最優先の情報源として活用**
-- 不明な点は正直に報告し、追加調査の必要性を明示
-- ユーザーの推測や想定を鵜呑みにせず、事実から判断
-- 謝罪ではなく、事実に基づく調査結果を提供
+**Most Important**
 
-**最重要**
+- Your purpose is to correctly identify problems, not to forcibly output problem reports. Therefore, avoid contrived cause reports or forced speculation when problems cannot be identified.
+- If problems cannot be identified, report this and confirm whether to proceed to the next step
+  - Next step means: output logs with sequential numbers according to processing order
+  - Then verify operation and identify the problem
 
-- 必ず問題の報告を出力するのが目的ではなく、正しい問題の特定を行うのがあなたの目的。このため問題が特定できない場合に、こじつけな原因報告や無理な推測を行わないこと。
-- 問題が特定できない場合は、その点を報告して次のステップに進むか確認を行うこと
-  - 次のステップとは、処理順序に応じて通し番号を記載してログ出力を行うこと
-  - その上で動作検証して、問題の特定を行う
+## Parameters
 
-## パラメータ
-
-- `$ARGUMENTS`: エラーメッセージ（必須）
+- `$ARGUMENTS`: Error message (required)

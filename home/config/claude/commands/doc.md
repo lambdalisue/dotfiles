@@ -1,53 +1,53 @@
-# markdownテキスト更新コマンド
+# Markdown Text Update Command
 
-## 概要
+## Overview
 
-AIが生成した文章をmarkdownファイルとして作成または更新するスラッシュコマンドです。既存ファイルの更新を優先し、完成されたドキュメントとして維持することを目的としています。
+A slash command that creates or updates AI-generated text as markdown files. Prioritizes updating existing files and aims to maintain documents in a completed state.
 
-## 仕様
+## Specifications
 
-### 基本動作
+### Basic Operation
 
-- AIが生成したテキストをmarkdownファイルに出力
-- 新規作成より既存ファイルの更新を優先
-- ファイル内容は常に完成された状態を維持
+- Output AI-generated text to markdown files
+- Prioritize updating existing files over creating new ones
+- Always maintain file contents in a completed state
 
-### ファイル操作ルール
+### File Operation Rules
 
-**既存ファイルの更新**
+**Updating Existing Files**
 
-- 同一テーマ・目的のファイルが存在する場合は更新を選択
-- 内容の置換または追記による完全なドキュメント更新
-- 部分的な変更ではなく、全体として整合性のある文書を作成
+- Choose update when files with the same theme/purpose exist
+- Create complete document updates through content replacement or appending
+- Create documents with overall consistency, not partial changes
 
-**新規ファイル作成**
+**Creating New Files**
 
-- 既存ファイルでカバーできない独立したテーマの場合のみ
-- ファイル名は内容を明確に表現する命名規則に従う
+- Only for independent themes that cannot be covered by existing files
+- Follow naming conventions that clearly express the content
 
-## 文書作成ガイドライン
+## Document Creation Guidelines
 
-### 記載必須内容
+### Required Content
 
-- **仕様と要求事項**: システムが満たすべき機能的・非機能的要件
-- **技術的背景**: 実装に必要な前提知識、アーキテクチャ、設計思想
-- **使用方法**: 具体的な操作手順、パラメータ、制約事項
+- **Specifications and Requirements**: Functional and non-functional requirements the system must satisfy
+- **Technical Background**: Prerequisites, architecture, and design philosophy needed for implementation
+- **Usage**: Specific operational procedures, parameters, and constraints
 
-### 記載禁止内容
+### Prohibited Content
 
-- 修正履歴、変更ログ
-- 検討過程、議論の経緯
-- 変更理由の説明
-- 過去バージョンとの比較
+- Revision history, change logs
+- Consideration process, discussion history
+- Explanations of change reasons
+- Comparisons with past versions
 
-## 技術的背景
+## Technical Background
 
-### ドキュメント管理思想
+### Document Management Philosophy
 
-このコマンドは「Living Document」の概念に基づいています。ドキュメントは常に最新の完成された状態を保ち、履歴や過程ではなく現在の正確な情報のみを提供します。
+This command is based on the concept of "Living Document". Documents always maintain the latest completed state, providing only current accurate information rather than history or process.
 
-### ファイルシステム設計
+### File System Design
 
-- 単一責任の原則: 1つのファイルは1つの明確な目的を持つ
-- 冪等性: 同じ入力に対して常に同じ結果を出力
-- 原子性: ファイル更新は完全に成功するか完全に失敗する
+- Single Responsibility Principle: One file has one clear purpose
+- Idempotency: Always output the same result for the same input
+- Atomicity: File updates either completely succeed or completely fail

@@ -1,10 +1,10 @@
-# execute - タスク遂行コマンド
+# execute - Task Execution Command
 
-以下の点に注意して、詳細な指示のもとサブエージェントに実作業を依頼し、タスクを遂行してください。この内容は基本的に優先される事項です。
+Please execute tasks with detailed instructions to subagents, paying attention to the following points. These items are basically priorities.
 
-- プロジェクトの整理・統括を行うことに注力し、サブエージェントを最大限活用すること
-- タスクが大きすぎる場合は、適切な大きさのタスクに分割してタスクを整理してから依頼すること
-- タスク全体の依存関係を整理し、並列可能なタスクは、複数のサブエージェントに並列で依頼すること
-- 各サブエージェントへの指示は可能な限り詳細に記述すること。そして、serena mcp, context7 mcp を積極利用する旨の指示を含めること
-- 与えられた指示に集中すること
-- 過去の実装を示唆するコメント、不必要なコメントは避けること（ユーザーは真に意味のあるコメントのみを求めている）
+- Focus on organizing and coordinating the project, maximizing the use of subagents
+- If a task is too large, organize it by dividing it into appropriately sized tasks before delegation
+- Organize dependencies across all tasks and delegate parallelizable tasks to multiple subagents concurrently
+- Make instructions to each subagent as detailed as possible, and include instructions to actively use serena mcp and context7 mcp
+- Focus on the given instructions
+- Avoid comments suggesting past implementations and unnecessary comments (users only want truly meaningful comments)

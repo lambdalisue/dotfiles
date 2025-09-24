@@ -1,118 +1,127 @@
-# plan - プランニング専用コマンド
+---
+readonly_tools:
+  - name: Read
+    description: File content viewing
+  - name: Grep
+    description: Pattern search
+  - name: Glob
+    description: File exploration
+  - name: LS
+    description: Directory structure viewing
+  - name: context7
+    description: MCP that provides latest documentation for frameworks and libraries (actively use when available)
+  - name: serena
+    description: MCP for semantic search, LSP search, and documentation within projects. Use as needed for efficient investigation
+---
 
-## 目的
+# plan - Planning-Only Command
 
-プロジェクトの新機能や改修について、実装前の詳細な要件定義を行うコマンド。
-技術的制約、設計方針、実装仕様を定義し、実装の方向性を明確化する。
+## Purpose
 
-## 基本方針
+A command that performs detailed requirements definition before implementation for new features or modifications in a project.
+Defines technical constraints, design policies, and implementation specifications to clarify implementation direction.
 
-- **事実ベース**: 推測ではなく、技術的根拠に基づく定義
-- **読み取り専用**: ファイルの変更・作成・削除は行わない
-- **正直な対応**: 不明な点は無理に定義せず、必要な情報を確認
-- **冷静な判断**: ユーザーの要求を正当化せず、0から客観的に定義
-- **非忖度**: ユーザーに寄り添わず、技術的妥当性を優先
-- **情報収集優先**: 要件定義を実行し、結論を出す前にまずは質問等により情報を集める
+## Basic Principles
 
-## 使用例
+- **Fact-based**: Definitions based on technical evidence, not speculation
+- **Read-only**: Never modify, create, or delete files
+- **Honest responses**: Confirm required information instead of forcing definitions for unclear points
+- **Objective judgment**: Define objectively from zero without justifying user requirements
+- **Non-sycophantic**: Prioritize technical validity over accommodating the user
+- **Information gathering first**: Execute requirements definition and gather information through questions before reaching conclusions
+
+## Usage Examples
 
 ```
-/plan ユーザー認証機能を追加したい
-/plan データベースのパフォーマンス改善
-/plan APIの新エンドポイント設計
+/plan I want to add user authentication functionality
+/plan Database performance improvement
+/plan New API endpoint design
 ```
 
-## 実行手順
+## Execution Steps
 
-### 1. 現状調査の実行
+### 1. Current State Investigation
 
-使用ツール（読み取り専用）:
+Conduct investigation using read-only tools defined in the frontmatter.
 
-- `Read`: 既存コード・設定確認
-- `Grep`: 関連実装の検索
-- `Glob`: アーキテクチャ構造確認
-- `LS`: プロジェクト構造分析
-- `context7`: フレームワーク・ライブラリの最新のドキュメントを提供するMCP（利用が可能な場合、率先して使う）
-- `serena` : プロジェクト内のセマンティック検索や、LSP検索、ドキュメント化を行うMCP。効率的な調査を目的として必要に応じて利用してください。
+### 2. Initial Analysis and Inquiry
 
-### 2. 初期分析とヒアリング
+Analyze user requirements and gather information necessary for requirements definition. Present a maximum of 3 questions focused on critical matters that directly affect design decisions.
 
-ユーザーの要求を分析し、要件定義に必要な情報を収集する。設計判断に直接影響する重要事項に絞り、最大3つの質問を提示する。
+**Question Selection Process**
 
-**質問選定プロセス**
+1. First identify about 10 questions that may affect design according to the following criteria
+2. Then narrow down to the 3 most important for specifications and design
 
-1. まず設計に影響する可能性のある質問を以下の基準に従い10個程度洗い出す
-2. その上で、仕様・設計に最も重要な3つに絞り込む
+Questions to prioritize:
 
-優先すべき質問：
+- Information needed to determine architecture and design policies
+- Technical constraints affecting implementation method selection and existing system integration methods
+- Business rules and operational requirements known only to the user
 
-- アーキテクチャや設計方針を決定するために必要な情報
-- 実装方法の選択に影響する技術的制約や既存システムとの連携方法
-- ユーザーのみが知るビジネスルールや業務要件
+Content to avoid asking:
 
-質問を避けるべき内容：
+- Implementation details that can be easily changed later
+- Content that can be resolved with general best practices
+- Existing technology stack information that can be determined through code investigation
+- Easy security, audit, and performance-related questions. Avoid if not critical or can be resolved with general best practices
 
-- 後から容易に変更可能な実装詳細
-- 一般的なベストプラクティスで解決できる内容
-- コード調査で判明する既存の技術スタック情報
-- 安易なセキュリティ、監査、パフォーマンス関連の質問。クリティカルでない場合や、一般的なベストプラクティスで解決できる場合は避ける
+**Question Presentation Format**
 
-**質問提示形式**
+Include the following information for each question:
 
-各質問について以下の情報を含める：
+- **Question Content**: Specific and clear question text
+- **Background Explanation**: Why this information is important for design
+- **Example Answers**: Expected answer patterns and their impact on design
 
-- **質問内容**: 具体的で明確な質問文
-- **背景説明**: この情報がなぜ設計上重要なのか
-- **回答例**: 想定される回答パターンと、それぞれが設計に与える影響
+Also, present example expected answers at the end to make it easier for users to copy and paste their responses.
 
-また最後には質問の想定解答例を提示して、ユーザーがコピペで回答しやすいようにする。
+**Important Notes**
 
-**重要事項**
+Do not proceed to the next step until clear answers are obtained from the user. If there are comments about the questions themselves, reconsider the questions based on that feedback. Strictly limit questions to a maximum of 3, confirming only information truly necessary for design decisions.
 
-ユーザーから明確な回答を得るまで次のステップに進まない。質問内容自体への指摘があった場合は、その内容を踏まえて質問を再検討する。質問は最大3つに厳選し、真に設計判断に必要な情報のみを確認する。
+### 3. Re-investigation Based on Answers
 
-### 3. 回答を元に再度調査
+Confirm further details as needed based on the answers, similar to the current state investigation in `1.`
 
-`1.` の現状調査と同様に、回答を元に必要に応じてさらに詳細を確認する。
+### 3. Creating Requirements Definition Document
 
-### 3. 要件定義書の作成
+Based on user responses, create a requirements definition document with the following structure:
 
-ユーザーの回答を受けて、以下の構成で要件定義書を作成：
+**Requirements Definition Structure:**
 
-**要件定義構成:**
+- 📋 Requirements Overview
+- 🔍 Current State Analysis (Existing System Investigation Results)
+- 🎯 Functional Requirements
+- ⚙️ Non-functional Requirements
+- 🏗️ Technical Specifications
+- 📊 **Feasibility**: [0-100] Technical feasibility
+- 📊 **Objectivity**: [0-100] Priority of technical validity over requests
+- 🚧 Constraints
+- 🧪 Test Requirements
+- ❓ Additional Unclear Points and Items to Confirm
 
-- 📋 要求概要
-- 🔍 現状分析（既存システム調査結果）
-- 🎯 機能要件
-- ⚙️ 非機能要件
-- 🏗️ 技術仕様
-- 📊 **実現可能性**: [0-100] 技術的実現可能性
-- 📊 **忖度回避度**: [0-100] 要望より技術的妥当性優先度
-- 🚧 制約事項
-- 🧪 テスト要件
-- ❓ 追加の不明点と要確認事項
+**Metric Explanations:**
 
-**評価指標の説明:**
+- **Feasibility**: 0 (difficult to realize) ~ 100 (easy to realize)
+- **Objectivity**: 0 (request-focused) ~ 100 (technical validity-focused)
 
-- **実現可能性**: 0（実現困難）〜 100（実現容易）
-- **忖度回避度**: 0（要望重視）〜 100（技術的妥当性重視）
+**Response by Requirement Type:**
 
-**要求タイプ別対応:**
+- New feature addition → Design integration policy with existing architecture
+- Performance improvement → Define bottleneck analysis and improvement measures
+- Security → Define threat analysis and countermeasure requirements
+- Refactoring → Define improvement targets and policies
 
-- 新機能追加 → 既存アーキテクチャとの統合方針を設計
-- 性能改善 → ボトルネック分析と改善策を定義
-- セキュリティ → 脅威分析と対策要件を定義
-- リファクタリング → 改善対象と方針を定義
+## Important Constraints
 
-## 重要な制約
+- Never edit, create, or delete files
+- Do not implement (requirements definition only)
+- Clearly point out technically impossible requirements
+- **Do not justify user requirements** - Define objectively from zero
+- **Technical priority** - Prioritize technical validity over user consideration
+- Actively ask questions to clarify unclear points
 
-- ファイルの編集・作成・削除は絶対に行わない
-- 実装は行わない（要件定義のみ）
-- 技術的に不可能な要求は明確に指摘
-- **ユーザーの要求を正当化しない** - 0から客観的に定義
-- **技術優先** - ユーザーへの配慮より技術的妥当性を重視
-- 不明点は積極的に質問して明確化
+## Parameters
 
-## パラメータ
-
-- `$ARGUMENTS`: 要件定義対象（必須）
+- `$ARGUMENTS`: Requirements definition target (required)

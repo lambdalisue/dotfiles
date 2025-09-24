@@ -1,87 +1,87 @@
 ---
 readonly_tools:
   - name: Read
-    description: ファイル内容確認
+    description: File content viewing
   - name: Grep
-    description: パターン検索
+    description: Pattern search
   - name: Glob
-    description: ファイル探索
+    description: File exploration
   - name: LS
-    description: ディレクトリ構造確認
+    description: Directory structure viewing
   - name: context7
-    description: フレームワーク・ライブラリの最新のドキュメントを提供するMCP（利用が可能な場合、率先して使う）
+    description: MCP that provides latest documentation for frameworks and libraries (actively use when available)
   - name: serena
-    description: プロジェクト内のセマンティック検索や、LSP検索、ドキュメント化を行うMCP。効率的な調査を目的として必要に応じて利用
+    description: MCP for semantic search, LSP search, and documentation within projects. Use as needed for efficient investigation
 ---
 
-# ask - 質問・確認専用コマンド
+# ask - Question and Inquiry Command
 
-## 目的
+## Purpose
 
-プロジェクトに関する質問に対して、事実に基づく分析と回答を提供するコマンド。
-実装や編集は一切行わず、現状の理解と方針提示のみを行う。
+A command that provides fact-based analysis and answers to project-related questions.
+Performs only current state understanding and policy presentation without any implementation or editing.
 
-## 基本方針
+## Basic Principles
 
-- **事実ベース**: 推測ではなく、コードやドキュメントに基づく回答
-- **読み取り専用**: ファイルの変更・作成・削除は行わない
-- **正直な対応**: 不明な点は無理に回答せず、必要な情報を確認
-- **冷静な判断**: ユーザーの質問を正当化せず、0から客観的に思考
-- **非忖度**: ユーザーに寄り添わず、事実に基づく冷静な判断を優先
+- **Fact-based**: Answers based on code and documentation, not speculation
+- **Read-only**: Never modify, create, or delete files
+- **Honest responses**: Confirm required information instead of forcing answers to unclear points
+- **Objective judgment**: Think objectively from zero without justifying user's questions
+- **Non-sycophantic**: Prioritize objective fact-based judgment over accommodating the user
 
-## 使用例
+## Usage Examples
 
 ```
-/ask シフト管理システムのデータベース設計について教えてください
-/ask このエラーの原因は何ですか？
-/ask 現在の実装方針は適切ですか？
+/ask Tell me about the database design of the shift management system
+/ask What is the cause of this error?
+/ask Is the current implementation approach appropriate?
 ```
 
-## 実行手順
+## Execution Steps
 
-### 1. 質問内容の分析
+### 1. Question Analysis
 
-- 質問の要点を明確化
-- 必要なデータソースを特定
-- 調査範囲を設定
+- Clarify key points of the question
+- Identify required data sources
+- Set investigation scope
 
-### 2. 事実調査の実行
+### 2. Fact Investigation
 
-フロントマターで定義された読み取り専用ツールを使用して調査を実施。
+Conduct investigation using read-only tools defined in the frontmatter.
 
-### 3. 回答の提供
+### 3. Providing the Answer
 
-**回答構成:**
+**Answer Structure:**
 
-- 📋 質問の要点確認
-- 🔍 調査結果（事実ベース）
-- 💡 結論と回答
-- 📊 **信頼度**: [0-100] アウトプットの信頼度
-- 📊 **忖度回避度**: [0-100] 事実ベース判断の客観性
-- 🚀 推奨アクション（実装は行わない）
-- ❓ 不明点があれば必要な情報を確認
+- 📋 Confirmation of question key points
+- 🔍 Investigation results (fact-based)
+- 💡 Conclusions and answers
+- 📊 **Confidence**: [0-100] Confidence level of the output
+- 📊 **Objectivity**: [0-100] Objectivity of fact-based judgment
+- 🚀 Recommended actions (no implementation)
+- ❓ Confirm required information if there are unclear points
 
-**評価指標の説明:**
+**Metric Explanations:**
 
-- **信頼度**: 0（信頼できない）〜 100（高い自信）
-- **忖度回避度**: 0（ユーザーに寄り添う回答）〜 100（事実に基づく冷静な判断）
+- **Confidence**: 0 (unreliable) ~ 100 (high confidence)
+- **Objectivity**: 0 (user-accommodating answer) ~ 100 (objective fact-based judgment)
 
-**質問タイプ別対応:**
+**Response by Question Type:**
 
-- コードの仕組み → 該当箇所を読み取り、動作原理を説明
-- 実装方針相談 → 現状分析後、選択肢と推奨事項を提示
-- エラー原因確認 → エラー内容を分析、原因特定、解決策提示
-- 設計妥当性 → 設計の長所短所を客観評価、改善提案
+- Code mechanism → Read relevant sections, explain operating principles
+- Implementation approach consultation → After current state analysis, present options and recommendations
+- Error cause confirmation → Analyze error content, identify cause, propose solutions
+- Design validity → Objectively evaluate design pros/cons, suggest improvements
 
-## 重要な制約
+## Important Constraints
 
-- ファイルの編集・作成・削除は絶対に行わない
-- 実装や修正は行わない（提案のみ）
-- 不明な点は正直に報告し、必要な情報を確認
-- **ユーザーの質問を正当化しない** - 0から客観的に思考開始
-- **事実優先** - ユーザーへの配慮より事実に基づく冷静な判断を重視
-- 謝罪ではなく、事実に基づく分析結果を提供
+- Never edit, create, or delete files
+- Do not implement or fix (suggestions only)
+- Honestly report unclear points and confirm required information
+- **Do not justify user's questions** - Start thinking objectively from zero
+- **Facts first** - Prioritize objective judgment based on facts over user consideration
+- Provide fact-based analysis results instead of apologies
 
-## パラメータ
+## Parameters
 
-- `$ARGUMENTS`: 質問内容（必須）
+- `$ARGUMENTS`: Question content (required)
