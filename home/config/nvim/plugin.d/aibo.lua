@@ -1,17 +1,3 @@
-require("aibo").setup({
-  prompt = {
-    on_attach = function(bufnr)
-      vim.keymap.set("n", "q", "<Cmd>quit<CR>", { buffer = bufnr })
-    end,
-  },
-  console = {
-    on_attach = function(bufnr)
-      vim.keymap.set("n", "q", "<Cmd>quit<CR>", { buffer = bufnr })
-      vim.keymap.set("n", "Q", "<Cmd>bwipeout!<CR>", { buffer = bufnr })
-    end,
-  },
-})
-
 vim.api.nvim_create_user_command("Claude", "Aibo -jump -opener='botright vsplit' claude", {})
 vim.api.nvim_create_user_command("Codex", "Aibo -jump -opener='botright vsplit' codex", {})
 vim.api.nvim_create_user_command("Ollama", "Aibo -jump -opener='botright vsplit' ollama run gpt-oss", {})
