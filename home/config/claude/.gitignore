@@ -1,0 +1,6 @@
+*
+!agents/**
+!commands/**
+!CLAUDE.md
+!settings.json
+!statusline.sh
