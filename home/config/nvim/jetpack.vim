@@ -128,6 +128,7 @@ function! s:init() abort
     call jetpack#add('delphinus/skkeleton_indicator.nvim', {'opt': 1})
     call jetpack#add('CopilotC-Nvim/CopilotChat.nvim', {'opt': 1})
     call jetpack#add("rcarriga/nvim-notify", {'opt': 1})
+    call jetpack#add("lambdalisue/nvim-aibo", {'opt': 1})
   endif
 
   call jetpack#end()
@@ -158,6 +159,7 @@ function! s:configure() abort
     silent! packadd skkeleton_indicator.nvim
     silent! packadd CopilotChat.nvim
     silent! packadd nvim-notify
+    silent! packadd nvim-aibo
   else
     silent! packadd vim-healthcheck
     silent! packadd vim-lexiv
