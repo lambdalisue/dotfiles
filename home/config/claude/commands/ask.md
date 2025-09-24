@@ -1,87 +1,230 @@
 ---
 readonly_tools:
   - name: Read
-    description: File content viewing
+    description: File content viewing - use for examining specific files
   - name: Grep
-    description: Pattern search
+    description: Pattern search - use for finding specific code patterns or text
   - name: Glob
-    description: File exploration
+    description: File exploration - use for discovering file structures
   - name: LS
-    description: Directory structure viewing
+    description: Directory structure viewing - use for understanding project layout
   - name: context7
-    description: MCP that provides latest documentation for frameworks and libraries (actively use when available)
+    description: Framework/library documentation MCP - ALWAYS use for external dependencies
   - name: serena
-    description: MCP for semantic search, LSP search, and documentation within projects. Use as needed for efficient investigation
+    description: Project semantic search MCP - use for understanding codebase relationships
 ---
 
-# ask - Question and Inquiry Command
+# ask - Investigative Analysis Command
 
 ## Purpose
 
-A command that provides fact-based analysis and answers to project-related questions.
-Performs only current state understanding and policy presentation without any implementation or editing.
+Provide comprehensive, fact-based analysis of project-related questions through systematic investigation.
+This is a READ-ONLY command focused on understanding and explaining, never modifying.
 
-## Basic Principles
+## Core Principles
 
-- **Fact-based**: Answers based on code and documentation, not speculation
-- **Read-only**: Never modify, create, or delete files
-- **Honest responses**: Confirm required information instead of forcing answers to unclear points
-- **Objective judgment**: Think objectively from zero without justifying user's questions
-- **Non-sycophantic**: Prioritize objective fact-based judgment over accommodating the user
+1. **Evidence-Based Analysis**
+   - Every claim must reference specific code/documentation
+   - Include file paths and line numbers when citing code
+   - Distinguish clearly between facts and inferences
+
+2. **Intellectual Honesty**
+   - Acknowledge limitations and unknowns explicitly
+   - Challenge incorrect assumptions in questions
+   - Provide confidence levels for all assessments
+
+3. **Systematic Investigation**
+   - Follow structured investigation patterns
+   - Use multiple tools to cross-verify findings
+   - Document investigation path for reproducibility
 
 ## Usage Examples
 
+```bash
+/ask How does the authentication middleware handle JWT tokens?
+/ask What are the performance bottlenecks in the data processing pipeline?
+/ask Is our error handling consistent across all API endpoints?
+/ask Why might the database connections be leaking?
 ```
-/ask Tell me about the database design of the shift management system
-/ask What is the cause of this error?
-/ask Is the current implementation approach appropriate?
+
+## Execution Workflow
+
+### Phase 1: Question Decomposition
+
+**Actions:**
+1. Parse the question to identify:
+   - Primary investigation target
+   - Required context boundaries
+   - Success criteria for a complete answer
+
+2. Categorize question type:
+   - **Architecture Review**: System design and structure
+   - **Code Behavior**: How specific code works
+   - **Problem Diagnosis**: Why something isn't working as expected
+   - **Best Practice Audit**: Compliance with standards
+   - **Impact Analysis**: Effects of potential changes
+
+3. Define investigation strategy based on type
+
+### Phase 2: Systematic Investigation
+
+**Investigation Priority Order:**
+
+1. **Direct Evidence Gathering**
+   ```
+   - Use Read for suspected relevant files
+   - Use Grep for pattern matching across codebase
+   - Use Glob to understand file organization
+   ```
+
+2. **Context Expansion**
+   ```
+   - Use serena for semantic relationships
+   - Use context7 for framework/library specifics
+   - Use LS for structural understanding
+   ```
+
+3. **Cross-Verification**
+   ```
+   - Verify findings across multiple sources
+   - Look for counter-examples
+   - Check edge cases
+   ```
+
+### Phase 3: Analysis & Synthesis
+
+**Analysis Framework:**
+
+1. **Data Correlation**
+   - Connect findings across different files
+   - Identify patterns and anomalies
+   - Build comprehensive understanding
+
+2. **Critical Evaluation**
+   - Assess code quality objectively
+   - Identify potential issues
+   - Evaluate against best practices
+
+3. **Inference Generation**
+   - Draw logical conclusions from evidence
+   - Identify implications
+   - Predict potential consequences
+
+### Phase 4: Response Construction
+
+## Required Output Format
+
+```markdown
+## Investigation Summary
+
+### 📋 Question Analysis
+- **Core Question**: [Restate the essential question]
+- **Investigation Scope**: [What was examined]
+- **Methodology**: [How investigation was conducted]
+
+### 🔍 Key Findings
+
+#### Finding 1: [Title]
+- **Evidence**: `path/to/file.js:42-45`
+- **Description**: [What was discovered]
+- **Implications**: [What this means]
+
+#### Finding 2: [Title]
+[Continue pattern...]
+
+### 💡 Analysis & Conclusions
+
+#### Primary Conclusion
+[Main answer to the question with supporting evidence]
+
+#### Secondary Insights
+[Additional relevant discoveries]
+
+### 📊 Assessment Metrics
+
+| Metric | Value | Description |
+|--------|-------|-------------|
+| **Confidence Level** | [0-100]% | Overall confidence in conclusions |
+| **Coverage** | [0-100]% | Percentage of relevant code examined |
+| **Evidence Quality** | [Low/Medium/High] | Strength of supporting evidence |
+| **Objectivity** | [0-100]% | Degree of unbiased analysis |
+
+### 🚀 Recommendations
+
+1. **Immediate Actions**: [If any issues found]
+2. **Further Investigation**: [Areas needing deeper analysis]
+3. **Improvement Opportunities**: [Potential enhancements]
+
+### ⚠️ Caveats & Limitations
+
+- [Any assumptions made]
+- [Areas not investigated]
+- [Potential blind spots]
+
+### 📚 References
+
+- [List all files examined with line ranges]
+- [External documentation consulted]
 ```
 
-## Execution Steps
+## Decision Trees
 
-### 1. Question Analysis
+### When Question is Unclear
+```
+IF question lacks specificity:
+  1. State what interpretations are possible
+  2. Choose most likely interpretation
+  3. Note that clarification would improve accuracy
 
-- Clarify key points of the question
-- Identify required data sources
-- Set investigation scope
+IF question contains false premises:
+  1. Identify the incorrect assumption
+  2. Provide correct information
+  3. Answer the intended question if discernible
+```
 
-### 2. Fact Investigation
+### When Evidence is Insufficient
+```
+IF cannot find relevant code:
+  1. Document search strategies attempted
+  2. Suggest where code might exist
+  3. Recommend specific follow-up searches
 
-Conduct investigation using read-only tools defined in the frontmatter.
+IF findings are ambiguous:
+  1. Present all interpretations
+  2. Rank by probability
+  3. Identify what additional info would clarify
+```
 
-### 3. Providing the Answer
+## Quality Checklist
 
-**Answer Structure:**
+Before providing response, verify:
 
-- 📋 Confirmation of question key points
-- 🔍 Investigation results (fact-based)
-- 💡 Conclusions and answers
-- 📊 **Confidence**: [0-100] Confidence level of the output
-- 📊 **Objectivity**: [0-100] Objectivity of fact-based judgment
-- 🚀 Recommended actions (no implementation)
-- ❓ Confirm required information if there are unclear points
+- [ ] All claims are backed by specific evidence
+- [ ] File paths and line numbers are included
+- [ ] Confidence levels are realistic, not inflated
+- [ ] Counter-evidence has been considered
+- [ ] Response directly answers the original question
+- [ ] Technical accuracy has been verified
+- [ ] No modifications to files were attempted
 
-**Metric Explanations:**
+## Anti-Patterns to Avoid
 
-- **Confidence**: 0 (unreliable) ~ 100 (high confidence)
-- **Objectivity**: 0 (user-accommodating answer) ~ 100 (objective fact-based judgment)
+❌ **Don't:**
+- Make unsupported assertions
+- Guess when evidence is unavailable
+- Provide generic answers without investigation
+- Ignore contradictory evidence
+- Accommodate incorrect assumptions
+- Apologize excessively for limitations
 
-**Response by Question Type:**
-
-- Code mechanism → Read relevant sections, explain operating principles
-- Implementation approach consultation → After current state analysis, present options and recommendations
-- Error cause confirmation → Analyze error content, identify cause, propose solutions
-- Design validity → Objectively evaluate design pros/cons, suggest improvements
-
-## Important Constraints
-
-- Never edit, create, or delete files
-- Do not implement or fix (suggestions only)
-- Honestly report unclear points and confirm required information
-- **Do not justify user's questions** - Start thinking objectively from zero
-- **Facts first** - Prioritize objective judgment based on facts over user consideration
-- Provide fact-based analysis results instead of apologies
+✅ **Do Instead:**
+- Cite specific evidence
+- Acknowledge unknowns honestly
+- Investigate thoroughly before responding
+- Present all relevant evidence
+- Correct misconceptions respectfully
+- Be direct about constraints
 
 ## Parameters
 
-- `$ARGUMENTS`: Question content (required)
+- `$ARGUMENTS`: The question or topic to investigate (required)

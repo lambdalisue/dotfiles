@@ -1,127 +1,505 @@
 ---
 readonly_tools:
   - name: Read
-    description: File content viewing
+    description: File content viewing - examine existing implementations
   - name: Grep
-    description: Pattern search
+    description: Pattern search - find related code patterns
   - name: Glob
-    description: File exploration
+    description: File exploration - understand project structure
   - name: LS
-    description: Directory structure viewing
+    description: Directory structure - map system organization
   - name: context7
-    description: MCP that provides latest documentation for frameworks and libraries (actively use when available)
+    description: Framework documentation - research best practices and APIs
   - name: serena
-    description: MCP for semantic search, LSP search, and documentation within projects. Use as needed for efficient investigation
+    description: Semantic code search - understand system relationships
 ---
 
-# plan - Planning-Only Command
+# plan - Requirements Engineering Command
 
 ## Purpose
 
-A command that performs detailed requirements definition before implementation for new features or modifications in a project.
-Defines technical constraints, design policies, and implementation specifications to clarify implementation direction.
+Transform vague ideas into precise technical specifications through systematic requirements analysis and stakeholder consultation.
 
-## Basic Principles
+## Requirements Engineering Framework
 
-- **Fact-based**: Definitions based on technical evidence, not speculation
-- **Read-only**: Never modify, create, or delete files
-- **Honest responses**: Confirm required information instead of forcing definitions for unclear points
-- **Objective judgment**: Define objectively from zero without justifying user requirements
-- **Non-sycophantic**: Prioritize technical validity over accommodating the user
-- **Information gathering first**: Execute requirements definition and gather information through questions before reaching conclusions
+### Core Philosophy
 
-## Usage Examples
+1. **Requirements Before Solutions**
+   - Understand the "why" before defining "how"
+   - Challenge assumptions and stated solutions
+   - Focus on underlying needs and constraints
+
+2. **Stakeholder Engagement**
+   - Ask smart questions that reveal hidden requirements
+   - Validate understanding through concrete examples
+   - Balance technical excellence with business needs
+
+3. **Specification Precision**
+   - Eliminate ambiguity through formal definitions
+   - Use measurable success criteria
+   - Define clear boundaries and interfaces
+
+## Requirements Analysis Protocol
+
+### Stage 1: Domain Discovery (5-10 minutes)
+
+**Initial Assessment Matrix:**
+
+```yaml
+Context Analysis:
+  Business Domain:
+    - Core business process affected
+    - Stakeholders impacted
+    - Business value expected
+
+  Technical Domain:
+    - System components involved
+    - Integration touchpoints
+    - Technology constraints
+
+  Risk Domain:
+    - Security implications
+    - Performance requirements
+    - Scalability considerations
+```
+
+**Investigation Checklist:**
+
+1. **Existing System Analysis**
+   ```
+   - Current implementation patterns
+   - Architecture decisions in place
+   - Technology stack and versions
+   - Integration patterns used
+   - Error handling approaches
+   - Testing strategies employed
+   ```
+
+2. **Constraint Identification**
+   ```
+   Technical Constraints:
+     - Language/framework limitations
+     - Performance budgets
+     - Memory/storage limits
+     - Network bandwidth
+     - Browser compatibility
+     - API rate limits
+
+   Business Constraints:
+     - Timeline requirements
+     - Budget limitations
+     - Regulatory compliance
+     - Backward compatibility
+     - User experience standards
+   ```
+
+3. **Dependency Mapping**
+   ```
+   Internal Dependencies:
+     - Required modules/services
+     - Shared resources
+     - Database schemas
+     - Configuration systems
+
+   External Dependencies:
+     - Third-party services
+     - External APIs
+     - CDN requirements
+     - Authentication providers
+   ```
+
+### Stage 2: Strategic Inquiry (Critical Phase)
+
+**Question Engineering Framework:**
+
+```python
+# Question Generation Algorithm
+def generate_strategic_questions(requirement):
+    all_questions = []
+
+    # Layer 1: Fundamental understanding
+    all_questions.extend(identify_core_purpose_questions())
+
+    # Layer 2: Technical decisions
+    all_questions.extend(identify_architecture_questions())
+
+    # Layer 3: Business rules
+    all_questions.extend(identify_domain_logic_questions())
+
+    # Layer 4: Quality attributes
+    all_questions.extend(identify_nonfunctional_questions())
+
+    # Layer 5: Integration concerns
+    all_questions.extend(identify_integration_questions())
+
+    # Scoring and filtering
+    scored_questions = prioritize_by_impact(all_questions)
+    return select_top_3_critical(scored_questions)
+```
+
+**Question Quality Criteria:**
+
+| High-Value Questions | Low-Value Questions |
+|---------------------|---------------------|
+| Reveals hidden requirements | Already discoverable in code |
+| Affects architecture decisions | Implementation details |
+| Defines business rules | Style preferences |
+| Clarifies acceptance criteria | Generic best practices |
+| Identifies integration needs | Obvious requirements |
+
+**Question Template Structure:**
+
+```markdown
+### Question [N]: [Concise Question Title]
+
+**Question**: [Specific, unambiguous question]
+
+**Why This Matters**:
+[Explain how the answer affects the design/architecture]
+
+**Impact on Design**:
+- If Answer A → [Design implication]
+- If Answer B → [Alternative design implication]
+
+**Example Response Options**:
+```
+Option 1: [Concrete example answer]
+Option 2: [Alternative example answer]
+Option 3: [Another possibility]
+```
+```
+
+### Stage 3: Requirements Synthesis
+
+**Requirements Categorization:**
+
+```yaml
+Functional Requirements:
+  User Stories:
+    - As a [role]
+    - I want [capability]
+    - So that [business value]
+
+  Acceptance Criteria:
+    - Given [precondition]
+    - When [action]
+    - Then [expected outcome]
+
+Non-Functional Requirements:
+  Performance:
+    - Response time targets
+    - Throughput requirements
+    - Resource utilization limits
+
+  Security:
+    - Authentication methods
+    - Authorization rules
+    - Data protection needs
+
+  Usability:
+    - Accessibility standards
+    - User experience goals
+    - Error handling expectations
+
+  Reliability:
+    - Availability targets
+    - Failure recovery
+    - Data integrity
+```
+
+### Stage 4: Specification Generation
+
+## Requirements Document Template
+
+```markdown
+# Requirements Specification: [Feature/Project Name]
+
+## Executive Summary
+
+### Vision
+[1-2 sentences describing the desired future state]
+
+### Objectives
+1. [Primary objective]
+2. [Secondary objective]
+3. [Tertiary objective]
+
+## Stakeholder Analysis
+
+### Primary Stakeholders
+- **[Role]**: [Their needs and concerns]
+
+### Secondary Stakeholders
+- **[Role]**: [Their needs and concerns]
+
+## Functional Requirements
+
+### Core Functionality
+
+#### FR-001: [Requirement Title]
+- **Description**: [Detailed description]
+- **Priority**: [Critical/High/Medium/Low]
+- **Acceptance Criteria**:
+  - [ ] [Measurable criterion 1]
+  - [ ] [Measurable criterion 2]
+
+#### FR-002: [Next Requirement]
+[Continue pattern...]
+
+### User Interactions
+
+#### UI-001: [Interaction Requirement]
+- **User Story**: As a [user], I want [goal] so that [benefit]
+- **Mockup/Flow**: [Description or ASCII diagram]
+- **Validation Rules**: [Input constraints]
+
+## Non-Functional Requirements
+
+### Performance Requirements
+
+#### PF-001: Response Time
+- **Requirement**: [Specific metric]
+- **Measurement Method**: [How to verify]
+- **Rationale**: [Why this matters]
+
+### Security Requirements
+
+#### SE-001: Authentication
+- **Requirement**: [Security specification]
+- **Threat Model**: [What we're protecting against]
+- **Implementation Constraints**: [Specific requirements]
+
+## Technical Specification
+
+### Architecture Overview
 
 ```
-/plan I want to add user authentication functionality
-/plan Database performance improvement
-/plan New API endpoint design
+[ASCII or Mermaid diagram showing component relationships]
 ```
 
-## Execution Steps
+### Component Specifications
 
-### 1. Current State Investigation
+#### [Component Name]
+- **Purpose**: [What it does]
+- **Interfaces**: [Input/output specifications]
+- **Dependencies**: [What it requires]
+- **Constraints**: [Limitations]
 
-Conduct investigation using read-only tools defined in the frontmatter.
+### Data Model
 
-### 2. Initial Analysis and Inquiry
+```yaml
+Entity: [Name]
+  Attributes:
+    - field_name: type, constraints
+  Relationships:
+    - related_entity: relationship_type
+```
 
-Analyze user requirements and gather information necessary for requirements definition. Present a maximum of 3 questions focused on critical matters that directly affect design decisions.
+### API Specifications
 
-**Question Selection Process**
+#### Endpoint: [Method] /path
+- **Purpose**: [What it does]
+- **Request**: [Format and parameters]
+- **Response**: [Format and fields]
+- **Errors**: [Possible error conditions]
 
-1. First identify about 10 questions that may affect design according to the following criteria
-2. Then narrow down to the 3 most important for specifications and design
+## Implementation Strategy
 
-Questions to prioritize:
+### Development Phases
 
-- Information needed to determine architecture and design policies
-- Technical constraints affecting implementation method selection and existing system integration methods
-- Business rules and operational requirements known only to the user
+#### Phase 1: Foundation
+- **Scope**: [What's included]
+- **Duration**: [Estimated time]
+- **Deliverables**: [What will be complete]
 
-Content to avoid asking:
+#### Phase 2: Core Features
+[Continue pattern...]
 
-- Implementation details that can be easily changed later
-- Content that can be resolved with general best practices
-- Existing technology stack information that can be determined through code investigation
-- Easy security, audit, and performance-related questions. Avoid if not critical or can be resolved with general best practices
+### Technical Decisions
 
-**Question Presentation Format**
+| Decision | Option Selected | Rationale |
+|----------|----------------|-----------|
+| [Area] | [Choice] | [Why] |
 
-Include the following information for each question:
+## Testing Requirements
 
-- **Question Content**: Specific and clear question text
-- **Background Explanation**: Why this information is important for design
-- **Example Answers**: Expected answer patterns and their impact on design
+### Test Strategy
 
-Also, present example expected answers at the end to make it easier for users to copy and paste their responses.
+#### Unit Testing
+- **Coverage Target**: [Percentage]
+- **Key Areas**: [What must be tested]
 
-**Important Notes**
+#### Integration Testing
+- **Scenarios**: [Key integration points]
 
-Do not proceed to the next step until clear answers are obtained from the user. If there are comments about the questions themselves, reconsider the questions based on that feedback. Strictly limit questions to a maximum of 3, confirming only information truly necessary for design decisions.
+#### Acceptance Testing
+- **Test Cases**: [User scenarios to validate]
 
-### 3. Re-investigation Based on Answers
+## Risk Analysis
 
-Confirm further details as needed based on the answers, similar to the current state investigation in `1.`
+### Technical Risks
 
-### 3. Creating Requirements Definition Document
+| Risk | Probability | Impact | Mitigation |
+|------|------------|---------|------------|
+| [Risk description] | [L/M/H] | [L/M/H] | [Strategy] |
 
-Based on user responses, create a requirements definition document with the following structure:
+### Business Risks
 
-**Requirements Definition Structure:**
+[Similar table structure]
 
-- 📋 Requirements Overview
-- 🔍 Current State Analysis (Existing System Investigation Results)
-- 🎯 Functional Requirements
-- ⚙️ Non-functional Requirements
-- 🏗️ Technical Specifications
-- 📊 **Feasibility**: [0-100] Technical feasibility
-- 📊 **Objectivity**: [0-100] Priority of technical validity over requests
-- 🚧 Constraints
-- 🧪 Test Requirements
-- ❓ Additional Unclear Points and Items to Confirm
+## Success Metrics
 
-**Metric Explanations:**
+### KPIs
+1. **[Metric Name]**: [Target value]
+   - Measurement: [How to measure]
+   - Baseline: [Current value]
 
-- **Feasibility**: 0 (difficult to realize) ~ 100 (easy to realize)
-- **Objectivity**: 0 (request-focused) ~ 100 (technical validity-focused)
+### Acceptance Criteria
+- [ ] [Overall success criterion 1]
+- [ ] [Overall success criterion 2]
 
-**Response by Requirement Type:**
+## Constraints and Assumptions
 
-- New feature addition → Design integration policy with existing architecture
-- Performance improvement → Define bottleneck analysis and improvement measures
-- Security → Define threat analysis and countermeasure requirements
-- Refactoring → Define improvement targets and policies
+### Constraints
+- **Technical**: [Immutable technical limitations]
+- **Business**: [Non-negotiable business rules]
+- **Resource**: [Time/budget/personnel limits]
 
-## Important Constraints
+### Assumptions
+- [Assumption 1 - what we're taking as given]
+- [Assumption 2]
 
-- Never edit, create, or delete files
-- Do not implement (requirements definition only)
-- Clearly point out technically impossible requirements
-- **Do not justify user requirements** - Define objectively from zero
-- **Technical priority** - Prioritize technical validity over user consideration
-- Actively ask questions to clarify unclear points
+## Dependencies
+
+### Upstream Dependencies
+- **[System/Service]**: [What we need from it]
+
+### Downstream Impact
+- **[System/Service]**: [How it will be affected]
+
+## Appendices
+
+### Glossary
+- **[Term]**: [Definition]
+
+### References
+- [Document/resource name]: [Why it's relevant]
+
+---
+
+## Review and Approval
+
+### Technical Review
+- **Feasibility**: [Assessment]
+- **Completeness**: [Assessment]
+- **Clarity**: [Assessment]
+
+### Stakeholder Sign-off
+- [ ] Product Owner
+- [ ] Technical Lead
+- [ ] QA Lead
+
+## Metrics
+
+| Aspect | Rating | Notes |
+|--------|--------|-------|
+| **Requirements Clarity** | [0-100]% | [Assessment] |
+| **Technical Feasibility** | [0-100]% | [Assessment] |
+| **Business Alignment** | [0-100]% | [Assessment] |
+| **Risk Level** | [Low/Medium/High] | [Key concerns] |
+```
+
+## Inquiry Best Practices
+
+### Effective Question Patterns
+
+**For Understanding Scope:**
+```
+"Should this feature support [specific scenario], or is it acceptable to
+[simpler alternative]? For example, in a bulk upload, should we process
+all items even if some fail, or stop at the first error?"
+```
+
+**For Performance Requirements:**
+```
+"What's the expected usage pattern? For instance:
+- Typical number of concurrent users?
+- Peak load scenarios?
+- Acceptable response time for [operation]?"
+```
+
+**For Business Rules:**
+```
+"When [edge case] occurs, what should happen?
+Example scenario: [concrete example]
+Option A: [business-friendly handling]
+Option B: [technically simpler handling]"
+```
+
+**For Integration Needs:**
+```
+"Will this need to integrate with [external system]? If yes:
+- Real-time or batch synchronization?
+- What data needs to be exchanged?
+- Who owns the integration interface?"
+```
+
+### Question Anti-Patterns
+
+❌ **Too Vague:**
+"What about security?"
+
+✅ **Specific:**
+"What authentication method should we use: JWT tokens, OAuth 2.0, or session-based?"
+
+---
+
+❌ **Leading:**
+"Don't you think we should use microservices?"
+
+✅ **Neutral:**
+"What are the scaling requirements that might influence architecture choices?"
+
+---
+
+❌ **Technical Jargon:**
+"Should we implement CQRS with event sourcing?"
+
+✅ **Business-Focused:**
+"Do we need to track the history of all changes, or just the current state?"
+
+## Quality Checklist
+
+Before finalizing requirements:
+
+### Completeness
+- [ ] All functional requirements identified
+- [ ] Non-functional requirements specified
+- [ ] Acceptance criteria measurable
+- [ ] Edge cases considered
+- [ ] Error scenarios defined
+
+### Clarity
+- [ ] No ambiguous terms
+- [ ] Technical terms defined
+- [ ] Success criteria explicit
+- [ ] Priorities assigned
+- [ ] Dependencies mapped
+
+### Feasibility
+- [ ] Technical approach validated
+- [ ] Resource requirements realistic
+- [ ] Timeline achievable
+- [ ] Risks identified and manageable
+- [ ] Constraints acknowledged
+
+### Alignment
+- [ ] Stakeholder needs addressed
+- [ ] Business value clear
+- [ ] Technical excellence balanced with pragmatism
+- [ ] Future extensibility considered
+- [ ] Maintenance burden evaluated
 
 ## Parameters
 
-- `$ARGUMENTS`: Requirements definition target (required)
+- `$ARGUMENTS`: Feature or system requiring requirements definition (required)

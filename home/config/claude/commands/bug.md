@@ -1,161 +1,382 @@
 ---
 argument-hint: [error-message]
-description: Investigation-only command for identifying causes of errors, malfunctions, and other issues
+description: Systematic root cause analysis for errors, bugs, and unexpected behaviors
 readonly_tools:
   - name: Read
-    description: File content viewing
+    description: File content examination - use for reading error-related code
   - name: Grep
-    description: Pattern search
+    description: Pattern search - use for finding error patterns and related code
   - name: Glob
-    description: File exploration
+    description: File discovery - use for locating log files and error handlers
   - name: LS
-    description: Directory structure viewing
+    description: Directory listing - use for understanding project structure
   - name: context7
-    description: MCP that provides latest documentation for frameworks and libraries (actively use when available)
+    description: Framework documentation - use for understanding expected behaviors
   - name: serena
-    description: MCP for semantic search, LSP search, and documentation within projects (actively use for efficient investigation)
+    description: Semantic code search - use for finding related error handling
   - name: playwrite
-    description: Browser operations, DevTools error content confirmation, page display, layout confirmation (actively use when available)
+    description: Browser automation - use for frontend errors and UI issues
 ---
 
-# investigating-error - Root Cause Investigation Command
+# bug - Root Cause Analysis Command
 
 ## Purpose
 
-A command that identifies causes from error messages and user reports, providing fact-based analysis results.
-Focuses solely on cause identification and investigation without resolving errors (resolution is handled by `/execute` command).
+Perform systematic root cause analysis of errors through forensic investigation.
+Focus exclusively on diagnosis and evidence gathering, NOT on fixing issues.
 
-## Basic Principles
+## Investigation Philosophy
 
-- **Log-first**: Prioritize logs as primary information source for root cause analysis, not speculation
-- **Check surrounding code**: Suspicious code might be normal when compared to similar implementations in neighboring files. Consider alternative causes in such cases
-- **Systematic investigation**: Track error occurrence path chronologically and by processing order
-- **Non-sycophantic**: Provide objective analysis based on facts, not accommodating user assumptions
-- **Read-only**: Never modify, create, or delete files
+1. **Evidence Hierarchy**
+   ```
+   Priority 1: Error logs and stack traces (direct evidence)
+   Priority 2: System state at failure time (contextual evidence)
+   Priority 3: Code analysis at error location (implementation evidence)
+   Priority 4: Historical patterns (circumstantial evidence)
+   ```
 
-## Input
+2. **Scientific Method**
+   - Form hypotheses based on evidence
+   - Test hypotheses through investigation
+   - Eliminate possibilities systematically
+   - Document reasoning transparently
 
-Error message etc.: $ARGUMENTS
+3. **Objectivity Standards**
+   - Never assume user's diagnosis is correct
+   - Seek disconfirming evidence actively
+   - Consider multiple root causes
+   - Distinguish correlation from causation
 
-## Execution Steps
+## Input Format
 
-### 1. Error Message Analysis
+```
+Error message or symptom description: $ARGUMENTS
+```
 
-- Identify error type (syntax error, runtime error, logic error, etc.)
-- Identify error location (filename, line number, function name)
-- Analyze stack trace
-- Check timestamps
+## Investigation Protocol
 
-### 2. Log Investigation (Most Important)
+### Stage 1: Initial Triage (2-3 minutes)
 
-**Log File Exploration and Confirmation:**
+**Immediate Actions:**
 
-- Application log confirmation
+1. **Parse Error Indicators**
+   ```python
+   # Extract from $ARGUMENTS:
+   - Error type/code
+   - File locations mentioned
+   - Line numbers
+   - Function/method names
+   - Timestamps
+   - Error messages/descriptions
+   ```
 
-  - `!ls -la logs/ 2>/dev/null || ls -la *.log 2>/dev/null`
-  - `!tail -n 100 [relevant-log-file]`
-  - `!grep -i error [log-files]`
+2. **Classify Error Category**
+   - **Syntax Error**: Code won't parse/compile
+   - **Runtime Error**: Execution failure
+   - **Logic Error**: Incorrect behavior
+   - **Performance Issue**: Slow/timeout
+   - **Integration Error**: External service failure
+   - **Configuration Error**: Setup/environment issue
 
-- System log confirmation (as needed)
+3. **Set Investigation Scope**
+   ```yaml
+   Scope:
+     primary_target: [specific file/module]
+     search_radius: [related files/modules]
+     time_window: [when error started occurring]
+     affected_components: [list of systems involved]
+   ```
 
-  - `!journalctl -xe --no-pager -n 50` (Linux)
-  - `!tail -n 100 /var/log/system.log` (macOS)
+### Stage 2: Log Forensics (CRITICAL - 5-10 minutes)
 
-- Error context log confirmation
-  - Processing flow before error
-  - Detailed information at error occurrence
-  - Impact scope after error
+**Log Investigation Checklist:**
 
-### 3. Code Investigation
+```bash
+# 1. Locate all log sources
+ls -la logs/ 2>/dev/null || find . -name "*.log" -type f
+ls -la /var/log/ 2>/dev/null
+ls -la ~/.npm/_logs/ 2>/dev/null  # For Node.js
 
-Conduct investigation using read-only tools defined in the frontmatter.
+# 2. Extract error context (last 500 lines)
+tail -n 500 [main-log-file] | grep -C 10 -i "error\|exception\|fail"
 
-**Investigation Items:**
+# 3. Timeline reconstruction
+grep -h "2024-" *.log | sort | tail -n 100  # Adjust date
 
-- Code details at error location
-- Related dependencies and imports
-- Configuration file contents
-- Environment variable usage
-- Recent change history (from git log)
+# 4. Pattern analysis
+grep -c "ERROR" [log-file]  # Error frequency
+grep -o "ERROR.*" [log-file] | sort | uniq -c  # Error types
 
-### 4. Environment Investigation
+# 5. Correlation search
+grep -A5 -B5 "[specific-error-id]" [log-files]
+```
 
-- Execution environment confirmation
+**What to Extract from Logs:**
 
-  - OS, runtime version
-  - Dependency package versions
-  - Environment variable settings
+- **Pre-failure state**: Last successful operations
+- **Failure moment**: Exact error with full context
+- **Post-failure behavior**: Cascading effects
+- **Frequency data**: Is this intermittent or consistent?
+- **Environmental factors**: Memory, CPU, disk at failure time
 
-- Resource status (as needed)
-  - Disk space
-  - Memory usage
-  - Network connectivity
+### Stage 3: Code Archaeology (5-10 minutes)
 
-### 5. Providing Investigation Results
+**Systematic Code Investigation:**
 
-**Output Structure:**
+1. **Error Site Analysis**
+   ```
+   Read the exact error location
+   ├── Examine 50 lines before/after
+   ├── Check all function parameters
+   ├── Trace data flow backwards
+   └── Identify external dependencies
+   ```
 
-#### Summary (example - only output investigated results)
+2. **Dependency Chain Verification**
+   ```
+   For each import/require:
+   ├── Verify module exists
+   ├── Check version compatibility
+   ├── Review recent changes
+   └── Test assumptions about behavior
+   ```
 
-- **Report Summary**
-- **Investigation Results Summary**
+3. **Similar Code Pattern Search**
+   ```
+   Use Grep to find:
+   ├── Similar function calls
+   ├── Same error handling patterns
+   ├── Related business logic
+   └── Test files for this code
+   ```
 
-#### 📝 Log Analysis Results
+4. **Configuration Audit**
+   ```
+   Check all config files:
+   ├── Environment variables used
+   ├── Default vs actual values
+   ├── Schema validation
+   └── Recent config changes
+   ```
 
-- **Key Log Information**:
-  - [Important information extracted from log files]
-  - [Context before and after error]
-  - [Related Warnings and Info]
+### Stage 4: Environmental Analysis (3-5 minutes)
 
-#### 🔍 Code Investigation Results
+**System State Verification:**
 
-- **Problematic Code Location**:
-  - [Relevant code quotation]
-  - [Problem identification]
+```bash
+# Resource availability
+df -h  # Disk space
+free -m  # Memory (Linux)
+ps aux | head -20  # Process list
 
-#### 🎯 Cause Identification
+# Network connectivity
+netstat -an | grep LISTEN  # Open ports
+curl -I https://api.example.com  # External service check
 
-- **Direct Cause**: [Direct cause identified from logs and code]
-- **Root Cause**: [Deeper cause (design, configuration, environment, etc.)]
-- **Occurrence Conditions**: [Specific conditions that trigger the error]
+# Permission issues
+ls -la [error-related-files]
+whoami && groups  # User context
 
-#### 📊 Investigation Metrics
+# Dependency versions
+npm list --depth=0  # Node.js
+pip freeze  # Python
+bundle list  # Ruby
+```
 
-- **Confidence**: [0-100] Certainty of cause identification
-- **Log Utilization**: [0-100] Level of log information utilization
-- **Objectivity**: [0-100] Objectivity of fact-based judgment
+### Stage 5: Root Cause Determination
 
-#### 🔗 Related Information
+**Causality Analysis Framework:**
 
-- Impact Scope: [Functions and processes affected by this error]
-- Similar Errors: [Past similar cases and patterns]
+```mermaid
+graph TD
+    A[Observed Error] --> B{Direct Cause Found?}
+    B -->|Yes| C[Verify Cause]
+    B -->|No| D[Expand Investigation]
+    C --> E{Multiple Causes?}
+    E -->|Yes| F[Determine Primary]
+    E -->|No| G[Document Root Cause]
+    D --> H[Check Assumptions]
+    H --> B
+    F --> G
+```
 
-#### 💡 Response Strategy (No Implementation)
+**Root Cause Categories:**
 
-1. [Recommended fix method]
-2. [Alternative approach]
-3. [Preventive measures]
+1. **Code Defects**
+   - Logic errors
+   - Off-by-one errors
+   - Null/undefined handling
+   - Type mismatches
 
-#### ⚠️ Items Requiring Additional Investigation
+2. **Environmental Issues**
+   - Resource exhaustion
+   - Permission problems
+   - Network failures
+   - Version conflicts
 
-- [Unclear points or items requiring additional confirmation]
+3. **Data Problems**
+   - Invalid input
+   - Corrupted state
+   - Race conditions
+   - Cache inconsistency
 
-## Important Constraints
+4. **Integration Failures**
+   - API changes
+   - Protocol mismatches
+   - Timeout configurations
+   - Authentication failures
 
-- Never edit, create, or delete files
-- Do not fix errors or implement solutions (investigation and analysis only)
-- **Use logs as the highest priority information source**
-- Honestly report unclear points and clearly indicate need for additional investigation
-- Judge based on facts rather than accepting user assumptions
-- Provide fact-based investigation results instead of apologies
+## Required Output Format
 
-**Most Important**
+```markdown
+# Root Cause Analysis Report
 
-- Your purpose is to correctly identify problems, not to forcibly output problem reports. Therefore, avoid contrived cause reports or forced speculation when problems cannot be identified.
-- If problems cannot be identified, report this and confirm whether to proceed to the next step
-  - Next step means: output logs with sequential numbers according to processing order
-  - Then verify operation and identify the problem
+## Executive Summary
+- **Error**: [One-line description]
+- **Root Cause**: [Primary cause identified]
+- **Confidence**: [0-100]%
+- **Severity**: [Critical/High/Medium/Low]
+
+## 📝 Log Analysis
+
+### Critical Log Entries
+```
+[timestamp] ERROR: [actual error from logs]
+[timestamp] INFO: [relevant context]
+```
+
+### Timeline of Events
+1. [time]: Normal operation observed
+2. [time]: First indication of issue
+3. [time]: Error manifested
+4. [time]: System impact observed
+
+## 🔍 Code Investigation
+
+### Error Location
+- **File**: `path/to/file.js:line`
+- **Function**: `functionName()`
+- **Code**:
+```javascript
+// Actual code snippet
+```
+
+### Problematic Pattern
+[Explain why this code fails under certain conditions]
+
+## 🎯 Root Cause Analysis
+
+### Primary Cause
+**[Category]: [Specific Issue]**
+- Evidence: [Log entry or code that proves this]
+- Mechanism: [How this causes the observed error]
+- Trigger: [What conditions cause this to occur]
+
+### Contributing Factors
+1. [Secondary cause if applicable]
+2. [Environmental factor if applicable]
+
+### Eliminated Hypotheses
+- ❌ [Hypothesis 1]: Disproved by [evidence]
+- ❌ [Hypothesis 2]: Inconsistent with [observation]
+
+## 📊 Analysis Metrics
+
+| Metric | Value | Notes |
+|--------|-------|-------|
+| **Confidence** | X% | Based on available evidence |
+| **Log Coverage** | X% | Percentage of relevant logs analyzed |
+| **Code Coverage** | X% | Percentage of suspect code examined |
+| **Reproducibility** | Yes/No/Unknown | Can error be reproduced? |
+
+## 🔗 Impact Assessment
+
+### Affected Systems
+- [Component 1]: [How it's affected]
+- [Component 2]: [How it's affected]
+
+### Failure Conditions
+- **Required**: [Conditions that must be present]
+- **Frequency**: [How often this occurs]
+- **User Impact**: [What users experience]
+
+## 💡 Remediation Strategy (Not Implemented)
+
+### Immediate Mitigation
+1. [Quick fix to stop bleeding]
+
+### Permanent Solution
+1. [Proper fix approach]
+2. [Validation strategy]
+
+### Prevention Measures
+1. [How to prevent recurrence]
+
+## ⚠️ Investigation Limitations
+
+- [What wasn't accessible]
+- [Assumptions made]
+- [Areas needing deeper investigation]
+
+## 📚 Evidence Trail
+
+### Files Examined
+- `file1.js:10-50` - [What was checked]
+- `logs/error.log:latest` - [What was found]
+
+### Searches Performed
+- `grep "ErrorPattern"` - [Results summary]
+- `find . -name "*.config"` - [Results summary]
+```
+
+## Investigation Decision Tree
+
+```
+Start Investigation
+├── Error message exists?
+│   ├── Yes → Parse error details
+│   └── No → Request more information
+├── Logs available?
+│   ├── Yes → Analyze logs first
+│   └── No → Proceed to code analysis
+├── Error reproducible?
+│   ├── Yes → Document reproduction steps
+│   └── No → Focus on historical data
+└── Multiple errors?
+    ├── Yes → Identify primary vs cascading
+    └── No → Deep dive on single error
+```
+
+## Quality Gates
+
+Before concluding investigation:
+
+- [ ] Logs have been thoroughly examined
+- [ ] Error site code has been analyzed
+- [ ] Dependencies have been verified
+- [ ] Environmental factors checked
+- [ ] Alternative hypotheses tested
+- [ ] Evidence supports conclusion
+- [ ] Confidence level is justified
+
+## Common Pitfalls to Avoid
+
+❌ **Investigation Anti-patterns:**
+- Accepting user's diagnosis without verification
+- Focusing only on recent changes
+- Ignoring logs in favor of code reading
+- Assuming first error is root cause
+- Missing cascade effects
+- Premature conclusion without evidence
+
+✅ **Best Practices:**
+- Start with logs, always
+- Question every assumption
+- Look for patterns, not just instances
+- Consider timing and sequence
+- Verify with multiple evidence sources
+- Document uncertainty honestly
 
 ## Parameters
 
-- `$ARGUMENTS`: Error message (required)
+- `$ARGUMENTS`: Error message, stack trace, or symptom description (required)
