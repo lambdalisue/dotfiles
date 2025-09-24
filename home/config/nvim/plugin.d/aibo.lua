@@ -1,19 +1,11 @@
 require("aibo").setup({
   prompt = {
     on_attach = function(bufnr)
-      vim.keymap.del("n", "<C-n>", { buffer = bufnr })
-      vim.keymap.del("n", "<C-p>", { buffer = bufnr })
-      vim.keymap.set({ "n", "i" }, "<Down>", "<Plug>(aibo-prompt-next)", { buffer = bufnr })
-      vim.keymap.set({ "n", "i" }, "<Up>", "<Plug>(aibo-prompt-prev)", { buffer = bufnr })
       vim.keymap.set("n", "q", "<Cmd>quit<CR>", { buffer = bufnr })
     end,
   },
   console = {
     on_attach = function(bufnr)
-      vim.keymap.del("n", "<C-n>", { buffer = bufnr })
-      vim.keymap.del("n", "<C-p>", { buffer = bufnr })
-      vim.keymap.set("n", "<Down>", "<Plug>(aibo-console-next)", { buffer = bufnr })
-      vim.keymap.set("n", "<Up>", "<Plug>(aibo-console-prev)", { buffer = bufnr })
       vim.keymap.set("n", "q", "<Cmd>quit<CR>", { buffer = bufnr })
       vim.keymap.set("n", "Q", "<Cmd>bwipeout!<CR>", { buffer = bufnr })
     end,
