@@ -1,9 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "autoCompactEnabled": false,
-  "autoUpdates": true,
-  "enableAllProjectMcpServers": true,
-  "model": "opus",
   "env": {
     "BASH_DEFAULT_TIMEOUT_MS": "300000",
     "BASH_MAX_TIMEOUT_MS": "1200000",
@@ -23,23 +19,7 @@
     "MAX_MCP_OUTPUT_TOKENS": "50000",
     "MCP_TOOL_TIMEOUT": "120000"
   },
-  "feedbackSurveyState": {
-    "lastShownTime": 1754089004345
-  },
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "command": "terminal-notifier -message 'ClaudeCodeのタスクが完了しました！' -title 'Claude Code' -sound Blow",
-            "type": "command"
-          }
-        ]
-      }
-    ]
-  },
   "includeCoAuthoredBy": false,
-  "outputStyle": "Explanatory",
   "permissions": {
     "deny": [
       "Bash(rm -rf /*)",
@@ -66,10 +46,29 @@
       "Bash(rm -rf ~/.config*)"
     ]
   },
+  "model": "opus",
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -message 'ClaudeCodeのタスクが完了しました！' -title 'Claude Code' -sound Blow"
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
-    "command": "./statusline.sh",
-    "padding": 0,
-    "type": "command"
+    "type": "command",
+    "command": "./statusline.sh"
+  },
+  "outputStyle": "Explanatory",
+  "autoCompactEnabled": false,
+  "autoUpdates": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754089004345
   },
   "theme": "dark"
 }

@@ -1,5 +1,4 @@
 {
-  "Lua.workspace.checkThirdParty": false,
   "coc.preferences.bracketEnterImprove": false,
   "coc.preferences.formatOnSave": true,
   "coc.preferences.useQuickfixForLocations": true,
@@ -44,6 +43,9 @@
   },
   "suggest.noselect": true,
   "sumneko-lua.enableNvimLuaDev": true,
+  "Lua.diagnostics.unusedLocalExclude": [
+    "_*"
+  ],
   "vetur.format.defaultFormatter.html": "prettier",
   "go.goplsOptions": {
     "gofumpt": true,
@@ -75,5 +77,4 @@
       }
     }
   },
-  "svelte.enable-ts-plugin": false
 }
