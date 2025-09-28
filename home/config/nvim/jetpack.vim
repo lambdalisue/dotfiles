@@ -128,7 +128,7 @@ function! s:init() abort
     call jetpack#add('delphinus/skkeleton_indicator.nvim', {'opt': 1})
     call jetpack#add('CopilotC-Nvim/CopilotChat.nvim', {'opt': 1})
     call jetpack#add("rcarriga/nvim-notify", {'opt': 1})
-    call jetpack#add("lambdalisue/nvim-aibo", {'opt': 1})
+    "call jetpack#add("lambdalisue/nvim-aibo", {'opt': 1})
   endif
 
   call jetpack#end()

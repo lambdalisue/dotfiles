@@ -69,6 +69,5 @@ augroup skkeleton-coc
   autocmd User skkeleton-disable-pre call s:skkeleton_disable()
 augroup END
 
+" Enable Skkeleton only on Insert mode (not on Command/Terminal mode)
 imap <C-j> <Plug>(skkeleton-enable)
-cmap <C-j> <Plug>(skkeleton-enable)
-tmap <C-j> <Plug>(skkeleton-enable)
