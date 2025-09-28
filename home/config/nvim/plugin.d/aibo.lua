@@ -1,7 +1,7 @@
 vim.api.nvim_create_user_command("Claude",
-  "Aibo -reuse -opener='topleft vsplit' claude --permission-mode bypassPermissions", {})
-vim.api.nvim_create_user_command("Codex", "Aibo -reuse -opener='topleft vsplit' codex", {})
-vim.api.nvim_create_user_command("Ollama", "Aibo -reuse -opener='topleft vsplit' ollama run gpt-oss", {})
+  "Aibo -focus -opener='topleft vsplit' claude --permission-mode bypassPermissions", {})
+vim.api.nvim_create_user_command("Codex", "Aibo -focus -opener='topleft vsplit' codex", {})
+vim.api.nvim_create_user_command("Ollama", "Aibo -focus -opener='topleft vsplit' ollama run gpt-oss", {})
 
 vim.keymap.set("n", "<leader>ii", "<Cmd>Claude<CR>", { desc = "Chat with Claude" })
 vim.keymap.set("n", "<leader>ix", "<Cmd>Codex<CR>", { desc = "Chat with Codex" })
