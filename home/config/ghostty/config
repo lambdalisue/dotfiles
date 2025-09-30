@@ -1,10 +1,16 @@
 # 
 # Cmd + Shift + , to reload
 #
+theme = Nightfox
+
 font-family = ""
 font-family = "IntoneMono Nerd Font Light"
 font-size = 14
-theme = Nightfox
+
+# Disable ligature
+# https://github.com/ghostty-org/ghostty/issues/1710
+font-feature = -dlig
+
 
 window-inherit-font-size = true
 window-inherit-working-directory = true
@@ -16,14 +22,8 @@ quick-terminal-autohide = false
 # https://github.com/nikitabobko/AeroSpace/issues/778
 keybind = cmd+t=unbind
 
+# Disable fullscreen toggle by Cmd+Enter
+keybind = cmd+enter=unbind
+
 # Show quick terminal by F12
 keybind = global:f12=toggle_quick_terminal
-
-# Disable ligature
-# https://github.com/ghostty-org/ghostty/issues/1710
-font-feature = -dlig
-
-# # Disable Ctrl-J
-# # https://zenn.dev/mtgto/articles/macskk-karabiner-settings-for-ghostty
-# keybind = ctrl+j=ignore
-keybind = shift+enter=text:\n

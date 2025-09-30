@@ -46,7 +46,6 @@
       "Bash(rm -rf ~/.config*)"
     ]
   },
-  "model": "opus",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "Stop": [
