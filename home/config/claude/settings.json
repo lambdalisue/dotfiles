@@ -46,6 +46,7 @@
       "Bash(rm -rf ~/.config*)"
     ]
   },
+  "model": "sonnet[1m]",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "Stop": [
@@ -64,11 +65,11 @@
     "command": "./statusline.sh"
   },
   "outputStyle": "Explanatory",
+  "alwaysThinkingEnabled": true,
   "autoCompactEnabled": false,
   "autoUpdates": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754089004345
   },
-  "theme": "dark",
-  "model": "sonnet[1m]"
+  "theme": "dark"
 }

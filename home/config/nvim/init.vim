@@ -480,30 +480,36 @@ cnoremap <Down> <C-n>
 " Fix unreasonable mappings by historical reason
 nnoremap Y y$
 
-" Neovim native Tab navigation is mapped to <C-PageDown> and <C-PageUp> so
-" map <C-Insert> and <C-Delete> to tabnew and tabclose for consistency.
-nnoremap <silent> <C-PageDown> <Cmd>tabnext<CR>
-nnoremap <silent> <C-PageUp> <Cmd>tabprevious<CR>
-nnoremap <silent> <C-Insert> <Cmd>tabnew<CR>
-nnoremap <silent> <C-Del> <Cmd>tabclose<CR>
-
-" <C-T> is for tag but recently we don't use tags so often because of LSP
-" so use it for tab management like <C-W> is for window management.
-nnoremap <silent> <C-t>T <Cmd>tabprevious<CR>
-nnoremap <silent> <C-t>t <Cmd>tabnext<CR>
-nnoremap <silent> <C-t>n <Cmd>tabnew<CR>
-nnoremap <silent> <C-t>c <Cmd>tabclose<CR>
-nnoremap <silent> <C-t>h <Cmd>tabprevious<CR>
-nnoremap <silent> <C-t>j <Cmd>tabnext<CR>
-nnoremap <silent> <C-t>k <Cmd>tabprevious<CR>
-nnoremap <silent> <C-t>l <Cmd>tabnext<CR>
-nnoremap <silent> <C-t><C-t> <Cmd>tabnext<CR>
-nnoremap <silent> <C-t><C-n> <Cmd>tabnew<CR>
-nnoremap <silent> <C-t><C-c> <Cmd>tabclose<CR>
-nnoremap <silent> <C-t><C-h> <Cmd>tabprevious<CR>
-nnoremap <silent> <C-t><C-j> <Cmd>tabnext<CR>
-nnoremap <silent> <C-t><C-k> <Cmd>tabprevious<CR>
-nnoremap <silent> <C-t><C-l> <Cmd>tabnext<CR>
+" Tab navigation
+" https://zenn.dev/lambdalisue/scraps/b593451512db63
+nnoremap <silent> <C-w>n <Cmd>tabnext<CR>
+nnoremap <silent> <C-w>p <Cmd>tabprevious<CR>
+nnoremap <silent> <C-w>t <Cmd>tabnew<CR>
+nnoremap <silent> <C-w>d <Cmd>tabclose<CR>
+nnoremap <silent> <C-w>1 <Cmd>silent! tabnext 1<CR>
+nnoremap <silent> <C-w>2 <Cmd>silent! tabnext 2<CR>
+nnoremap <silent> <C-w>3 <Cmd>silent! tabnext 3<CR>
+nnoremap <silent> <C-w>4 <Cmd>silent! tabnext 4<CR>
+nnoremap <silent> <C-w>5 <Cmd>silent! tabnext 5<CR>
+nnoremap <silent> <C-w>6 <Cmd>silent! tabnext 6<CR>
+nnoremap <silent> <C-w>7 <Cmd>silent! tabnext 7<CR>
+nnoremap <silent> <C-w>8 <Cmd>silent! tabnext 8<CR>
+nnoremap <silent> <C-w>9 <Cmd>silent! tabnext 9<CR>
+nnoremap <silent> <C-w>0 <Cmd>silent! tabnext 0<CR>
+nnoremap <silent> <C-w><C-n> <Cmd>tabnext<CR>
+nnoremap <silent> <C-w><C-p> <Cmd>tabprevious<CR>
+nnoremap <silent> <C-w><C-t> <Cmd>tabnew<CR>
+nnoremap <silent> <C-w><C-d> <Cmd>tabclose<CR>
+nnoremap <silent> <C-w><C-1> <Cmd>silent! tabnext 1<CR>
+nnoremap <silent> <C-w><C-2> <Cmd>silent! tabnext 2<CR>
+nnoremap <silent> <C-w><C-3> <Cmd>silent! tabnext 3<CR>
+nnoremap <silent> <C-w><C-4> <Cmd>silent! tabnext 4<CR>
+nnoremap <silent> <C-w><C-5> <Cmd>silent! tabnext 5<CR>
+nnoremap <silent> <C-w><C-6> <Cmd>silent! tabnext 6<CR>
+nnoremap <silent> <C-w><C-7> <Cmd>silent! tabnext 7<CR>
+nnoremap <silent> <C-w><C-8> <Cmd>silent! tabnext 8<CR>
+nnoremap <silent> <C-w><C-9> <Cmd>silent! tabnext 9<CR>
+nnoremap <silent> <C-w><C-0> <Cmd>silent! tabnext 0<CR>
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
