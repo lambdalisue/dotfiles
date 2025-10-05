@@ -65,7 +65,7 @@
     "command": "./statusline.sh"
   },
   "outputStyle": "Explanatory",
-  "alwaysThinkingEnabled": true,
+  "alwaysThinkingEnabled": false,
   "autoCompactEnabled": false,
   "autoUpdates": true,
   "feedbackSurveyState": {
