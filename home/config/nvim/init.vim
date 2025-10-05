@@ -519,8 +519,18 @@ nnoremap <silent> <C-w><C-9> <Cmd>silent! tabnext 9<CR>
 nnoremap <silent> <C-w><C-0> <Cmd>silent! tabnext 0<CR>
 
 " Window navigation
-" Allow `<C-w>+,-,<,>` without pressing `<C-w>` repeatedly
+" Allow `<C-w><C-h,j,k,l>` and `<C-w>+,-,<,>` without pressing `<C-w>` repeatedly
 " https://blog.atusy.net/2024/05/29/vim-hl-enhanced/
+nnoremap <Plug>(winmode:nav) <Nop>
+nnoremap <silent> <Plug>(winmode:nav)<C-h> <C-w>h<Plug>(winmode:nav)
+nnoremap <silent> <Plug>(winmode:nav)<C-j> <C-w>j<Plug>(winmode:nav)
+nnoremap <silent> <Plug>(winmode:nav)<C-k> <C-w>k<Plug>(winmode:nav)
+nnoremap <silent> <Plug>(winmode:nav)<C-l> <C-w>l<Plug>(winmode:nav)
+nnoremap <silent> <C-w><C-h> <C-w>h<Plug>(winmode:nav)
+nnoremap <silent> <C-w><C-j> <C-w>j<Plug>(winmode:nav)
+nnoremap <silent> <C-w><C-k> <C-w>k<Plug>(winmode:nav)
+nnoremap <silent> <C-w><C-l> <C-w>l<Plug>(winmode:nav)
+
 nnoremap <Plug>(winmode:resize) <Nop>
 nnoremap <silent> <Plug>(winmode:resize)+ <C-w>+<Plug>(winmode:resize)
 nnoremap <silent> <Plug>(winmode:resize)- <C-w>-<Plug>(winmode:resize)
