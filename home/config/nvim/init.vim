@@ -482,6 +482,7 @@ nnoremap Y y$
 
 " Tab navigation
 " https://zenn.dev/lambdalisue/scraps/b593451512db63
+" Allow `<C-w>n/p` without pressing `<C-w>` repeatedly
 " https://blog.atusy.net/2024/05/29/vim-hl-enhanced/
 nnoremap <Plug>(tabmode) <Nop>
 nnoremap <silent> <Plug>(tabmode)n <Cmd>tabnext<CR><Plug>(tabmode)
@@ -516,6 +517,45 @@ nnoremap <silent> <C-w><C-7> <Cmd>silent! tabnext 7<CR>
 nnoremap <silent> <C-w><C-8> <Cmd>silent! tabnext 8<CR>
 nnoremap <silent> <C-w><C-9> <Cmd>silent! tabnext 9<CR>
 nnoremap <silent> <C-w><C-0> <Cmd>silent! tabnext 0<CR>
+
+" Window navigation
+" Allow `<C-w>h/j/k/l,H,J,K,L,+,-,<,>` without pressing `<C-w>` repeatedly
+" https://blog.atusy.net/2024/05/29/vim-hl-enhanced/
+nnoremap <Plug>(winmode:nav) <Nop>
+nnoremap <silent> <Plug>(winmode:nav)h <C-w>h<Plug>(winmode:nav)
+nnoremap <silent> <Plug>(winmode:nav)j <C-w>j<Plug>(winmode:nav)
+nnoremap <silent> <Plug>(winmode:nav)k <C-w>k<Plug>(winmode:nav)
+nnoremap <silent> <Plug>(winmode:nav)l <C-w>l<Plug>(winmode:nav)
+nnoremap <silent> <Plug>(winmode:nav)<C-h> <C-w>h<Plug>(winmode:nav)
+nnoremap <silent> <Plug>(winmode:nav)<C-j> <C-w>j<Plug>(winmode:nav)
+nnoremap <silent> <Plug>(winmode:nav)<C-k> <C-w>k<Plug>(winmode:nav)
+nnoremap <silent> <Plug>(winmode:nav)<C-l> <C-w>l<Plug>(winmode:nav)
+nnoremap <silent> <C-w>h <C-w>h<Plug>(winmode:nav)
+nnoremap <silent> <C-w>j <C-w>j<Plug>(winmode:nav)
+nnoremap <silent> <C-w>k <C-w>k<Plug>(winmode:nav)
+nnoremap <silent> <C-w>l <C-w>l<Plug>(winmode:nav)
+nnoremap <silent> <C-w><C-h> <C-w>h<Plug>(winmode:nav)
+nnoremap <silent> <C-w><C-j> <C-w>j<Plug>(winmode:nav)
+nnoremap <silent> <C-w><C-k> <C-w>k<Plug>(winmode:nav)
+nnoremap <silent> <C-w><C-l> <C-w>l<Plug>(winmode:nav)
+nnoremap <Plug>(winmode:move) <Nop>
+nnoremap <silent> <Plug>(winmode:move)h <C-w>U<Plug>(winmode:move)
+nnoremap <silent> <Plug>(winmode:move)j <C-w>U<Plug>(winmode:move)
+nnoremap <silent> <Plug>(winmode:move)k <C-w>U<Plug>(winmode:move)
+nnoremap <silent> <Plug>(winmode:move)l <C-w>U<Plug>(winmode:move)
+nnoremap <silent> <C-w>H <C-w>U<Plug>(winmode:move)
+nnoremap <silent> <C-w>J <C-w>U<Plug>(winmode:move)
+nnoremap <silent> <C-w>K <C-w>U<Plug>(winmode:move)
+nnoremap <silent> <C-w>L <C-w>U<Plug>(winmode:move)
+nnoremap <Plug>(winmode:resize) <Nop>
+nnoremap <silent> <Plug>(winmode:resize)+ <C-w>+<Plug>(winmode:resize)
+nnoremap <silent> <Plug>(winmode:resize)- <C-w>-<Plug>(winmode:resize)
+nnoremap <silent> <Plug>(winmode:resize)<lt> <C-w><lt><Plug>(winmode:resize)
+nnoremap <silent> <Plug>(winmode:resize)> <C-w>><Plug>(winmode:resize)
+nnoremap <silent> <C-w>+ <C-w>+<Plug>(winmode:resize)
+nnoremap <silent> <C-w>- <C-w>-<Plug>(winmode:resize)
+nnoremap <silent> <C-w><lt> <C-w><lt><Plug>(winmode:resize)
+nnoremap <silent> <C-w>> <C-w>><Plug>(winmode:resize)
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
