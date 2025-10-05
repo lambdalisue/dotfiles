@@ -485,8 +485,6 @@ nnoremap Y y$
 " Allow `<C-w>n/p` without pressing `<C-w>` repeatedly
 " https://blog.atusy.net/2024/05/29/vim-hl-enhanced/
 nnoremap <Plug>(tabmode) <Nop>
-nnoremap <silent> <Plug>(tabmode)n <Cmd>tabnext<CR><Plug>(tabmode)
-nnoremap <silent> <Plug>(tabmode)p <Cmd>tabprevious<CR><Plug>(tabmode)
 nnoremap <silent> <Plug>(tabmode)<C-n> <Cmd>tabnext<CR><Plug>(tabmode)
 nnoremap <silent> <Plug>(tabmode)<C-p> <Cmd>tabprevious<CR><Plug>(tabmode)
 nnoremap <silent> <C-w>n <Cmd>tabnext<CR><Plug>(tabmode)
@@ -526,6 +524,10 @@ nnoremap <silent> <Plug>(winmode:nav)<C-h> <C-w>h<Plug>(winmode:nav)
 nnoremap <silent> <Plug>(winmode:nav)<C-j> <C-w>j<Plug>(winmode:nav)
 nnoremap <silent> <Plug>(winmode:nav)<C-k> <C-w>k<Plug>(winmode:nav)
 nnoremap <silent> <Plug>(winmode:nav)<C-l> <C-w>l<Plug>(winmode:nav)
+nnoremap <silent> <C-w>h <C-w>h<Plug>(winmode:nav)
+nnoremap <silent> <C-w>j <C-w>j<Plug>(winmode:nav)
+nnoremap <silent> <C-w>k <C-w>k<Plug>(winmode:nav)
+nnoremap <silent> <C-w>l <C-w>l<Plug>(winmode:nav)
 nnoremap <silent> <C-w><C-h> <C-w>h<Plug>(winmode:nav)
 nnoremap <silent> <C-w><C-j> <C-w>j<Plug>(winmode:nav)
 nnoremap <silent> <C-w><C-k> <C-w>k<Plug>(winmode:nav)
