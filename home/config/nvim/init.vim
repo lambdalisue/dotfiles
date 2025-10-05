@@ -487,8 +487,8 @@ nnoremap Y y$
 nnoremap <Plug>(tabmode) <Nop>
 nnoremap <silent> <Plug>(tabmode)<C-n> <Cmd>tabnext<CR><Plug>(tabmode)
 nnoremap <silent> <Plug>(tabmode)<C-p> <Cmd>tabprevious<CR><Plug>(tabmode)
-nnoremap <silent> <C-w>n <Cmd>tabnext<CR><Plug>(tabmode)
-nnoremap <silent> <C-w>p <Cmd>tabprevious<CR><Plug>(tabmode)
+nnoremap <silent> <C-w>n <Cmd>tabnext<CR>
+nnoremap <silent> <C-w>p <Cmd>tabprevious<CR>
 nnoremap <silent> <C-w>t <Cmd>tabnew<CR>
 nnoremap <silent> <C-w>d <Cmd>tabclose<CR>
 nnoremap <silent> <C-w>1 <Cmd>silent! tabnext 1<CR>
@@ -524,10 +524,6 @@ nnoremap <silent> <Plug>(winmode:nav)<C-h> <C-w>h<Plug>(winmode:nav)
 nnoremap <silent> <Plug>(winmode:nav)<C-j> <C-w>j<Plug>(winmode:nav)
 nnoremap <silent> <Plug>(winmode:nav)<C-k> <C-w>k<Plug>(winmode:nav)
 nnoremap <silent> <Plug>(winmode:nav)<C-l> <C-w>l<Plug>(winmode:nav)
-nnoremap <silent> <C-w>h <C-w>h<Plug>(winmode:nav)
-nnoremap <silent> <C-w>j <C-w>j<Plug>(winmode:nav)
-nnoremap <silent> <C-w>k <C-w>k<Plug>(winmode:nav)
-nnoremap <silent> <C-w>l <C-w>l<Plug>(winmode:nav)
 nnoremap <silent> <C-w><C-h> <C-w>h<Plug>(winmode:nav)
 nnoremap <silent> <C-w><C-j> <C-w>j<Plug>(winmode:nav)
 nnoremap <silent> <C-w><C-k> <C-w>k<Plug>(winmode:nav)
