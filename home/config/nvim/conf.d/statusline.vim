@@ -1,10 +1,19 @@
 scriptencoding utf-8
 
+function s:tabbufname(n)
+  let l:buflist = tabpagebuflist(a:n)
+  let l:winnr = tabpagewinnr(a:n)
+  let l:bufname = bufname(l:buflist[l:winnr - 1])
+  return l:bufname ==# '' ? '[No Name]' : fnamemodify(l:bufname, ':t')
+endfunction
+
 function! s:tab(n) abort
-  let hi = a:n is# tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
-  let label = getcwd(0, a:n)
-  let label = fnamemodify(label, ':t')
-  return printf('%%%dT%s %s %%T%%#TabLineFil#', a:n, hi, label)
+  let l:hi = a:n is# tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+  let l:cwd = getcwd(0, a:n)
+  let l:cwd = fnamemodify(l:cwd, ':t')
+  let l:bufname = s:tabbufname(a:n)
+  let l:label = printf('%d:%s@%s', a:n, l:bufname, l:cwd)
+  return printf('%%%dT%s %s %%T%%#TabLineFil#', a:n, l:hi, l:label)
 endfunction
 
 function! s:safe(expr) abort
