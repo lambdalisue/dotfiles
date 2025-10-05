@@ -482,8 +482,14 @@ nnoremap Y y$
 
 " Tab navigation
 " https://zenn.dev/lambdalisue/scraps/b593451512db63
-nnoremap <silent> <C-w>n <Cmd>tabnext<CR>
-nnoremap <silent> <C-w>p <Cmd>tabprevious<CR>
+" https://blog.atusy.net/2024/05/29/vim-hl-enhanced/
+nnoremap <Plug>(tabmode) <Nop>
+nnoremap <silent> <Plug>(tabmode)n <Cmd>tabnext<CR><Plug>(tabmode)
+nnoremap <silent> <Plug>(tabmode)p <Cmd>tabprevious<CR><Plug>(tabmode)
+nnoremap <silent> <Plug>(tabmode)<C-n> <Cmd>tabnext<CR><Plug>(tabmode)
+nnoremap <silent> <Plug>(tabmode)<C-p> <Cmd>tabprevious<CR><Plug>(tabmode)
+nnoremap <silent> <C-w>n <Cmd>tabnext<CR><Plug>(tabmode)
+nnoremap <silent> <C-w>p <Cmd>tabprevious<CR><Plug>(tabmode)
 nnoremap <silent> <C-w>t <Cmd>tabnew<CR>
 nnoremap <silent> <C-w>d <Cmd>tabclose<CR>
 nnoremap <silent> <C-w>1 <Cmd>silent! tabnext 1<CR>
@@ -496,8 +502,8 @@ nnoremap <silent> <C-w>7 <Cmd>silent! tabnext 7<CR>
 nnoremap <silent> <C-w>8 <Cmd>silent! tabnext 8<CR>
 nnoremap <silent> <C-w>9 <Cmd>silent! tabnext 9<CR>
 nnoremap <silent> <C-w>0 <Cmd>silent! tabnext 0<CR>
-nnoremap <silent> <C-w><C-n> <Cmd>tabnext<CR>
-nnoremap <silent> <C-w><C-p> <Cmd>tabprevious<CR>
+nnoremap <silent> <C-w><C-n> <Cmd>tabnext<CR><Plug>(tabmode)
+nnoremap <silent> <C-w><C-p> <Cmd>tabprevious<CR><Plug>(tabmode)
 nnoremap <silent> <C-w><C-t> <Cmd>tabnew<CR>
 nnoremap <silent> <C-w><C-d> <Cmd>tabclose<CR>
 nnoremap <silent> <C-w><C-1> <Cmd>silent! tabnext 1<CR>
