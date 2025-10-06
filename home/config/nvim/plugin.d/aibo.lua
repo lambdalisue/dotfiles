@@ -1,3 +1,15 @@
+local aibo = require("aibo")
+
+aibo.setup({
+  prompt = {
+    on_attach = function(bufnr)
+      local opts = { buffer = bufnr }
+      pcall(vim.keymap.del, "i", "<C-n>", opts)
+      pcall(vim.keymap.del, "i", "<C-p>", opts)
+    end,
+  }
+})
+
 local claude = "claude --permission-mode bypassPermissions"
 local opener = "rightbelow vsplit"
 
