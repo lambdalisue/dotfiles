@@ -39,3 +39,9 @@ function! s:overwrite_default_mappings() abort
   nmap <buffer><nowait> ]] <Plug>(coc-diagnostic-next)<Plug>(my-zv)
 endfunction
 silent! call s:overwrite_default_mappings()
+
+" https://github.com/fannheyward/coc-rust-analyzer/issues/745
+augroup my_coc_rust
+  autocmd!
+  autocmd User CocTerminalOpen :execute printf('resize %d', &lines / 2)
+augroup END
