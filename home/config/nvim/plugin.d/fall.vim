@@ -8,8 +8,8 @@ nnoremap <silent> <Leader>fg <Cmd>Fall rg<CR>
 nnoremap <silent> <Leader>fq <Cmd>Fall quickfix<CR>
 nnoremap <silent> <Leader>fd <Cmd>Fall config<CR>
 nnoremap <silent> <Leader>fo <Cmd>Fall rg ~/Compost<CR>
-nnoremap <silent> <Leader>fl :<C-u>Fall -input="<C-r>=expand('<cword>')<CR>" line<CR>
-nnoremap <silent> <Leader>fL :<C-u>Fall -input="<C-r>=expand('<cWORD>')<CR>" line<CR>
+nnoremap <silent> <Leader>fl <Cmd>Fall line<CR>
+nnoremap <silent> <Leader>fL :<C-u>Fall -input="<C-r>=expand('<cword>')<CR>" line<CR>
 nnoremap <silent> <Leader>fs <Cmd>FallSession<CR>
 nnoremap <silent> <Leader><Leader> <Cmd>FallResume<CR>
 
