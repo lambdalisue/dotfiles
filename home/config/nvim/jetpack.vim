@@ -38,7 +38,6 @@ function! s:init() abort
   call jetpack#add('Shougo/ddc-matcher_head')
   call jetpack#add('Shougo/ddc-sorter_rank')
 
-  " Colorscheme
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
   call jetpack#add('EdenEast/nightfox.nvim')
@@ -52,6 +51,7 @@ function! s:init() abort
   call jetpack#add('hrsh7th/vim-eft')
   call jetpack#add('itchyny/vim-parenmatch')
   call jetpack#add('itchyny/vim-qfedit')
+  call jetpack#add('junegunn/goyo.vim')
   call jetpack#add('kana/vim-operator-replace')
   call jetpack#add('kana/vim-operator-user')
   call jetpack#add('kana/vim-repeat')
