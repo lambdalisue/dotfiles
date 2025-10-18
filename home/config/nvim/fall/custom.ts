@@ -428,7 +428,10 @@ export const main: Entrypoint = ({
   );
 
   definePickerFromSource("line", builtin.source.line, {
-    matchers: [builtin.matcher.fzf],
+    matchers: [builtin.matcher.substring],
+    sorters: [
+      builtin.sorter.noop,
+    ],
     previewers: [builtin.previewer.buffer],
     actions: {
       ...myQuickfixActions,
