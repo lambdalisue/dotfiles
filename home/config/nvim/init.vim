@@ -208,7 +208,7 @@ set preserveindent  " Use :retab to clean up whitespace
 set undofile        " keep undo history on undofile
 set virtualedit=all " allow virtual editing in all modes
 
-set number
+set nonumber norelativenumber
 
 " Do not recognize octal numbers for Ctrl-A and Ctrl-X, most users find it
 " confusing.

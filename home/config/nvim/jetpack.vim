@@ -48,6 +48,7 @@ function! s:init() abort
   call jetpack#add('cocopon/iceberg.vim')
   call jetpack#add('dstein64/vim-startuptime')
   call jetpack#add('github/copilot.vim')
+  call jetpack#add('haya14busa/vim-edgemotion')
   call jetpack#add('hrsh7th/vim-eft')
   call jetpack#add('itchyny/vim-parenmatch')
   call jetpack#add('itchyny/vim-qfedit')
