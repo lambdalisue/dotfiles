@@ -122,7 +122,7 @@ set showtabline=2       " always shows tabline
 set breakindent         " every wrapped line will continue visually indented
 set report=0            " reports any changes
 set previewheight=40    " specify previewwindow height
-set splitright          " vertically split right
+set splitbelow splitright
 
 " Show a few lines of context around the cursor.  Note that this makes the
 " text scroll if you mouse-click near the start or end of the window.
