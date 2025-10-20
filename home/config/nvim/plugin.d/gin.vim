@@ -71,3 +71,5 @@ let g:gin_log_persistent_args = [
       \]
 
 let g:gin_proxy_apply_without_confirm = 1
+
+let g:gin_difffold_prefixes = g:gin#difffold#prefixes_nerdfont

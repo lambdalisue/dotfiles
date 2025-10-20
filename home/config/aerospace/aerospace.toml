@@ -225,23 +225,3 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'org.pqrs.Karabiner-EventViewer'
 run = ['layout floating']
-
-[[on-window-detected]]
-if.app-id = 'com.tinyspeak.slackmacgap'
-run = ['move-node-to-workspace 10']
-
-[[on-window-detected]]
-if.app-id = 'com.cron.electron'
-run = ['move-node-to-workspace 10']
-
-[[on-window-detected]]
-if.app-id = 'com.spotify.client'
-run = ['move-node-to-workspace 10']
-
-[[on-window-detected]]
-if.app-id = 'com.hnc.Discord'
-run = ['move-node-to-workspace 10']
-
-[[on-window-detected]]
-if.app-id = 'com.gather.Gather'
-run = ['move-node-to-workspace 10']
