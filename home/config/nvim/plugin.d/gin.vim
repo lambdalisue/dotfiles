@@ -8,7 +8,7 @@ function! s:show_commit(opener) abort
   if empty(l:commit)
     return
   endif
-  execute printf('GinBuffers ++opener=%s ++jump=%s show %s', a:opener, l:commit, l:commit)
+  execute printf('GinBuffer ++opener=%s ++difffold ++diffjump=%s show %s', a:opener, l:commit, l:commit)
 endfunction
 
 function! s:my_gitrebase() abort

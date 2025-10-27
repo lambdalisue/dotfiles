@@ -551,7 +551,7 @@ nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))
 " }}}
 
 " Command {{{
-command! Arto execute('<Cmd>!open -a Arto %s', fnameescape(expand('%:p')))
+command! Arto execute(printf('<Cmd>!open -a Arto %s', fnameescape(expand('%:p'))))
 " }}}
 
 " Highlight {{{
