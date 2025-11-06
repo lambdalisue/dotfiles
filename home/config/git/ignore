@@ -15,7 +15,9 @@ Desktop.ini
 
 # direnv
 .envrc
+.direnv/*
 
 .venv
 
 **/.claude/settings.local.json
+
