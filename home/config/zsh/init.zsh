@@ -164,6 +164,15 @@ if type pdm &>/dev/null; then
   fi
 fi
 
+# pnpm
+if [[ -d "/Users/alisue/Library/pnpm" ]] then
+  export PNPM_HOME="/Users/alisue/Library/pnpm"
+  case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
+fi
+
 # direnv
 if type direnv &>/dev/null; then
   cache::direnv() {

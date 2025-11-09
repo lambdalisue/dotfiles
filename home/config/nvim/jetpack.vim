@@ -3,24 +3,7 @@ function! s:init() abort
   call jetpack#begin()
   call jetpack#add('tani/vim-jetpack')
 
-  " NerdFont
-  " call jetpack#add('ryanoasis/vim-devicons')
-  " call jetpack#add('nvim-tree/nvim-web-devicons')
-
-  " FuzzyFinder
-  " call jetpack#add('vim-scripts/L9')
-  " call jetpack#add('vim-scripts/FuzzyFinder')
-  " call jetpack#add('Shougo/unite.vim')
-  " call jetpack#add('ctrlpvim/ctrlp.vim')
-  " call jetpack#add('junegunn/fzf', #{ do: { -> fzf#install() } })
-  " call jetpack#add('junegunn/fzf.vim')
-  " call jetpack#add('Shougo/denite.nvim')
-  " call jetpack#add('yuki-yano/fzf-preview.vim', #{ branch: 'release/rpc' })
-  " call jetpack#add('nvim-telescope/telescope.nvim')
-  " call jetpack#add('Shougo/ddu.vim')
-
   " Denops
-  "call jetpack#add('yuki-yano/fuzzy-motion.vim')
   call jetpack#add('lambdalisue/vim-askpass')
   call jetpack#add('lambdalisue/vim-deno-cache')
   call jetpack#add('lambdalisue/vim-gin')
@@ -59,6 +42,7 @@ function! s:init() abort
   call jetpack#add('kana/vim-textobj-indent')
   call jetpack#add('kana/vim-textobj-line')
   call jetpack#add('kana/vim-textobj-user')
+  call jetpack#add('lambdalisue/nvim-aibo')
   call jetpack#add('lambdalisue/vim-backslash')
   call jetpack#add('lambdalisue/vim-battery')
   call jetpack#add('lambdalisue/vim-compl-local-filename')

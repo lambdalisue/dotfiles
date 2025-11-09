@@ -27,3 +27,4 @@ keybind = cmd+enter=unbind
 
 # Show quick terminal by F12
 keybind = global:f12=toggle_quick_terminal
+keybind = shift+enter=text:\x1b\r
