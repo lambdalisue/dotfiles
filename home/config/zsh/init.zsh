@@ -12,7 +12,10 @@ cache::clear() {
 }
 
 # ls/la
-if [[ $PLATFORM == "Darwin" ]]; then
+if [[ $IN_NIX_SHELL ]]; then
+  alias ls="ls --color=always"
+  alias la="ls -lhAF"
+elif [[ $PLATFORM == "Darwin" ]]; then
   alias ls="ls -G -w"
   alias la="ls -lhAFG"
 else
