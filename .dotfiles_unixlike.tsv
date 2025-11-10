@@ -1,10 +1,11 @@
 home/config/alacritty	.config/alacritty
 home/config/claude	.claude
+home/config/ghostty	.config/ghostty
+home/config/nix	.config/nix
 home/config/nvim	.config/nvim
 home/config/nvim	.vim
-home/config/nvim/init.vim	.vim/vimrc
 home/config/nvim/ginit.vim	.vim/gvimrc
+home/config/nvim/init.vim	.vim/vimrc
 home/config/zsh	.config/zsh
-home/config/ghostty	.config/ghostty
 home/tmux.conf	.tmux.conf
 home/zshenv	.zshenv
