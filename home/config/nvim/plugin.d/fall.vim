@@ -14,6 +14,7 @@ nnoremap <silent> <Leader>fs <Cmd>FallSession<CR>
 nnoremap <silent> <Leader><Leader> <Cmd>FallResume<CR>
 
 function! s:init() abort
+  cnoremap <silent><nowait> <C-j> <Plug>(skkeleton-enable)
   cnoremap <silent><nowait> <C-p> <Plug>(fall-list-prev)
   cnoremap <silent><nowait> <C-n> <Plug>(fall-list-next)
   cnoremap <silent><nowait> <C-u> <Plug>(fall-list-prev:scroll)

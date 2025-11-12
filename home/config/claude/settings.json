@@ -46,6 +46,7 @@
       "Bash(rm -rf ~/.config*)"
     ]
   },
+  "model": "sonnet[1m]",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "Stop": [
