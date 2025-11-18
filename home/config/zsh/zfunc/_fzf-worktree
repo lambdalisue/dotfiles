@@ -1,0 +1,11 @@
+fzf-worktree() {
+    if ! which git 1>/dev/null 2>&1; then
+        echo 'A "git" command is not found.'
+        return 1
+    fi
+    local s="$(git worktree list | fzf -q "$1" | awk '{print $1}')"
+    [[ -n $s ]] && print "cd $s"
+}
+BUFFER=$(fzf-worktree $BUFFER)
+[[ -n $BUFFER ]] && zle accept-line
+zle clear-screen

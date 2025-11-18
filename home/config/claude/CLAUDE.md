@@ -22,45 +22,9 @@
   1. カスタムサブエージェント（プロジェクト独自設定）
   2. 汎用サブエージェント（Task）
 
-### Serena MCPメモリ管理（実装作業）
+### ツール利用
 
-#### 実装前必須確認
-
-1. `list_memories`でメモリ一覧取得
-2. `read_memory`で関連メモリ確認
-3. 記録されたパターン・規約を厳密に遵守
-
-#### 新規パターン記録
-
-- 重要な実装パターン確立時は`write_memory`で記録
-- 命名規則：
-  - `{project}-conventions` - プロジェクト全体の規約
-  - `{feature}-patterns` - 機能別実装パターン
-  - `{domain}-patterns` - ドメイン固有パターン
-  - `{layer}-conventions` - レイヤー固有の規約
-  - `architecture-{decision}` - アーキテクチャ決定事項
-  - `{service}-api-spec` - 外部サービスAPI仕様
-  - `{issue}-solution` - トラブルシューティング記録
-  - `refactoring-{target}` - リファクタリング方針
-
-#### メモリ管理原則
-
-- 不要になったメモリは`delete_memory`で削除
-- メモリは簡潔で検索しやすい名前を使用
-- 更新頻度の高い情報は都度上書き更新
-
-### Serena活用（コード操作）
-
-**積極活用すべきツール**：
-
-- `find_symbol` - シンボル検索
-- `get_symbols_overview` - ファイル構造把握
-- `find_referencing_symbols` - 依存関係確認
-- `replace_symbol_body` - 関数/クラス全体の置換
-- `insert_before_symbol` / `insert_after_symbol` - シンボル前後への挿入
-- `search_for_pattern` - 横断的パターン検索
-
-**原則**: ファイル全体読み込みより、シンボルレベル操作を優先すること
+- `sed` や `awk` の代りに `perl` を利用すること
 
 ### 実装前確認事項
 

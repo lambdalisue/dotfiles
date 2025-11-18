@@ -70,6 +70,7 @@ if type fzf &>/dev/null; then
   abindkey '^X^B' _fzf-bindkey
   abindkey '^X^K' _fzf-kill
   abindkey '^X^G' _fzf-ogh
+  abindkey '^X^W' _fzf-worktree
   abindkey '^X^P' _fzf-k8s-pods
 fi
 
