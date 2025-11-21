@@ -36,6 +36,7 @@
   colormoved = dimmed-zebra
 
 [alias]
+  notch = "!git stash store -m "notch-$(date +%Y%m%d%H%M%S)" $(git stash create)"
   push-f = push --force-with-lease --force-if-includes
   browse = "!deno run --allow-net --allow-run --allow-read --allow-env jsr:@lambdalisue/git-browse/cli"
 
