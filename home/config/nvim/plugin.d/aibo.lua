@@ -8,8 +8,13 @@ aibo.setup({
       pcall(vim.keymap.del, "i", "<C-p>", opts)
     end,
   },
-  -- disable_startinsert_on_startup = true,
-  -- disable_startinsert_on_insert = true,
+  console = {
+    on_attach = function(bufnr)
+      local opts = { buffer = bufnr }
+      pcall(vim.keymap.del, "n", "<C-u>", opts)
+      pcall(vim.keymap.del, "n", "<C-o>", opts)
+    end,
+  },
 })
 
 local claude = "claude --permission-mode bypassPermissions"
