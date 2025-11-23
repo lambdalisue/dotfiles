@@ -1,5 +1,7 @@
 *
+!agents/
 !agents/**
+!commands/
 !commands/**
 !CLAUDE.md
 !settings.json

@@ -1,57 +1,46 @@
-## Agent基本原則
+## Agent Delegation
 
-### Sonnet 4.5 (1M) など、大きなコンテキストをサポートしている場合
+Delegate tasks to agents. Focus on strategy, decisions, requirements, specifications.
 
-エージェントは極力使わないで、自分で担当して。
+**You (Parent Agent)**
+- Strategy, decisions, requirements, specifications
 
-### Opus など、大きなコンテキストをサポートしていない場合
+**Child Agents**
+- Execute detailed tasks: research, docs, code
+- Priority: 1) Custom subagents 2) Generic Task agents
 
-極力エージェントを利用して、あなたは方針決定・判断・要件定義・仕様検討などに従事して。
+### Tools
 
-**親エージェント（あなた）**
+- **Shell text processing**: Use `perl` instead of `sed`/`awk`
+- **Documentation lookup**: Use deepwiki MCP for external documentation queries
 
-- 方針決定・判断・要件定義・仕様検討
+### Pre-Implementation
 
-**子エージェント**
+- **Check existing patterns**: Review code/docs before implementing
+- **Avoid duplication**: Check existing code before custom implementations
+- **T-Wada style**: Implement from tests when possible
 
-- 詳細指示に基づく実行作業
-  - 調査
-  - ドキュメント作成
-  - コード生成
-- 優先順位：
-  1. カスタムサブエージェント（プロジェクト独自設定）
-  2. 汎用サブエージェント（Task）
+### Restrictions
 
-### ツール利用
+- **Git operations - STRICT**:
+  - **FORBIDDEN**: Any `git commit`/`push`/`add` without explicit user instruction
+  - **Reconfirm always**: Even if approved earlier in conversation, reconfirm before each git operation (except immediately consecutive operations)
+  - **Allowed**: Propose commit messages, await approval
+  - **Violation is critical**: Most severe rule violation
+- **Config files**: Require permission before changes
 
-- `sed` や `awk` の代りに `perl` を利用すること
+### Documentation
 
-### 実装前確認事項
-
-- **既存パターンの確認**: 実装前に必ず既存コード・ドキュメントを確認
-- **ライブラリ最新情報**: ライブラリ使用時はContext7で最新仕様を確認
-- **重複実装の防止**: 共通機能の独自実装前に既存コードを確認
-- **メモリ確認**: `list_memories`で過去の実装パターン・決定事項を確認
-
-### 操作制限
-
-- **Git操作厳格制限**:
-  - **絶対禁止**: ユーザーの明示的な指示なしに`git commit`、`git push`、`git add`等のGit操作を実行すること
-  - **許可される行動**: 変更内容を確認し、コミットメッセージ案を提示してユーザーに承認を求める
-  - **違反は重大**: この規則違反は最も重大なルール違反とみなされる
-- **設定ファイル**: 変更前に必ず許可を取得
-- **バックアップ不要**: Gitで管理されているため作成不要
-
-### ドキュメント規則
-
-- **日時記載禁止**: 更新日時等の記載は不要
-- **簡潔性重視**: 工数・後方互換性の考慮は不要
-- **図表作成**: ドキュメント内で図を記載する際は **必ずMermaid記法** を使用すること
-  - アーキテクチャ図: `graph TD` または `flowchart`
-  - シーケンス図: `sequenceDiagram`
-  - ER図: `erDiagram`
-  - ASCII artやプレーンテキスト図は使用禁止
-- **コメント規則**:
-  - 複雑なロジックのみコメント記載
-  - 基本は英語でのコメント記載。ただし、プロジェクトで日本語コメントが多用されている場合は日本語でのコメント記載
-  - TODOコメントは具体的に記載
+- **No timestamps**: Don't record update dates
+- **Brevity**: No effort estimates or backward compatibility notes
+- **Temporary docs**: Save implementation plans and temporary documents to Desktop as `{%Y%m%d%H%M%S}-{summary}.md` (e.g., `20250123143052-api-implementation-plan.md`), then open with system default app (`open` command on macOS)
+- **Diagrams**: Use **Mermaid only**
+  - Architecture: `graph TD`/`flowchart`
+  - Sequence: `sequenceDiagram`
+  - ER: `erDiagram`
+  - No ASCII art or plain text diagrams
+- **Comments**:
+  - Only for complex logic
+  - English (Japanese if project uses it extensively)
+  - Specific TODOs only
+  - No decorative section dividers
