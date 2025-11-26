@@ -3,6 +3,10 @@ export LANG="en_US.UTF-8"
 export LC_ALL=en_US.UTF-8
 export PLATFORM="$(uname)"
 
+# completion
+export ZCOMPLETIONS="${ZDOTDIR}/completions"
+mkdir -p ${ZCOMPLETIONS}
+
 # cache profile
 export CACHE_PROFILE="${XDG_CACHE_HOME}/zsh/profile"
 mkdir -p ${CACHE_PROFILE}
@@ -206,14 +210,22 @@ if [[ -d /Applications/Docker.app ]]; then
   alias docker=/Applications/Docker.app/Contents/Resources/bin/docker
 fi
 if type docker &>/dev/null; then
-  cache::docker() {
-    docker completion zsh > ${CACHE_PROFILE}/docker.zsh
-    zcompile ${CACHE_PROFILE}/docker.zsh
+  completion::docker() {
+    docker completion zsh > ${ZCOMPLETIONS}/_docker
   }
-  if [[ ! -f ${CACHE_PROFILE}/docker.zsh ]]; then
-    cache::docker
+  if [[ ! -f ${ZCOMPLETIONS}/_docker ]]; then
+    completion::docker
   fi
-  source ${CACHE_PROFILE}/docker.zsh
+fi
+
+# deno
+if type deno &>/dev/null; then
+  completion::deno() {
+    deno completions zsh > ${ZCOMPLETIONS}/_deno
+  }
+  if [[ ! -f ${ZCOMPLETIONS}/_deno ]]; then
+    completion::deno
+  fi
 fi
 
 # ogh
