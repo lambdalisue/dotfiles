@@ -1,7 +1,7 @@
 ---
 name: code-writer
 description: Use this agent when the user requests code to be written, modified, or refactored. This agent specializes in writing code that adheres to existing patterns, T-Wada style testing principles, and project conventions. Examples:\n\n- User: "Please implement a user authentication function"\n  Assistant: "I'll use the code-writer agent to implement this function by first reviewing existing authentication patterns in the codebase."\n\n- User: "Add error handling to the payment processing module"\n  Assistant: "Let me delegate this to the code-writer agent to add error handling that matches our existing error handling patterns."\n\n- User: "Create a new API endpoint for user registration"\n  Assistant: "I'm launching the code-writer agent to create this endpoint following our existing API patterns and conventions."\n\n- User: "Refactor the database query functions to use prepared statements"\n  Assistant: "I'll use the code-writer agent to perform this refactoring while maintaining consistency with our codebase standards."
-model: haiku
+model: opus
 color: yellow
 ---
 
