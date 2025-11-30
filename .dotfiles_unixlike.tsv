@@ -1,5 +1,4 @@
 home/config/alacritty	.config/alacritty
-home/config/claude	.claude
 home/config/ghostty	.config/ghostty
 home/config/nix	.config/nix
 home/config/nvim	.config/nvim
@@ -10,3 +9,6 @@ home/config/zsh	.config/zsh
 home/tmux.conf	.tmux.conf
 home/zshenv	.zshenv
 home/local/bin/git-backup	.local/bin/git-backup
+home/claude	.claude
+home/codex	.codex
+home/gemini	.gemini
