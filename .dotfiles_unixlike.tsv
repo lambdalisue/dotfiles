@@ -9,3 +9,4 @@ home/config/nvim/init.vim	.vim/vimrc
 home/config/zsh	.config/zsh
 home/tmux.conf	.tmux.conf
 home/zshenv	.zshenv
+home/local/bin/git-backup	.local/bin/git-backup

@@ -13,6 +13,13 @@ Delegate tasks to agents. Focus on strategy, decisions, requirements, specificat
 
 - **Shell text processing**: Use `perl` instead of `sed`/`awk`
 - **Documentation lookup**: Use deepwiki MCP for external documentation queries
+- **Backup before risky changes**: Use `git backup {comment}` instead of `git stash`. If the alias is unavailable, run:
+  ```bash
+  git checkout -b "backup/$(git branch --show-current)/$(date +%Y%m%d-%H%M%S)"
+  git commit -am "WIP: before risky refactoring"
+  git checkout -
+  git cherry-pick --no-commit HEAD@{1}
+  ```
 
 ### Pre-Implementation
 
