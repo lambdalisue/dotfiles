@@ -22,33 +22,34 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "deny": [
-      "Bash(rm -rf /*)",
-      "Bash(rm -rf /)",
-      "Bash(sudo rm -:*)",
-      "Bash(chmod 777 /*)",
+      "Bash(awk:*)",
       "Bash(chmod -R 777 /*)",
+      "Bash(chmod 777 /*)",
       "Bash(dd if=:*)",
-      "Bash(mkfs.:*)",
       "Bash(fdisk -:*)",
       "Bash(format -:*)",
-      "Bash(shutdown -:*)",
-      "Bash(reboot -:*)",
+      "Bash(git commit --amend:*)",
+      "Bash(git stash:*)",
       "Bash(halt -:*)",
-      "Bash(poweroff -:*)",
       "Bash(killall -:*)",
-      "Bash(pkill -:*)",
+      "Bash(mkfs.:*)",
       "Bash(nc -l -:*)",
       "Bash(ncat -l -:*)",
       "Bash(netcat -l -:*)",
-      "Bash(rm -rf ~:*)",
+      "Bash(pkill -:*)",
+      "Bash(poweroff -:*)",
+      "Bash(reboot -:*)",
       "Bash(rm -rf $HOME:*)",
-      "Bash(rm -rf ~/.ssh*)",
+      "Bash(rm -rf /)",
+      "Bash(rm -rf /*)",
       "Bash(rm -rf ~/.config*)",
-      "Bash(awk:*)",
-      "Bash(sed:*)"
+      "Bash(rm -rf ~/.ssh*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(sed:*)",
+      "Bash(shutdown -:*)",
+      "Bash(sudo rm -:*)"
     ]
   },
-  "model": "sonnet[1m]",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "Stop": [
@@ -62,12 +63,8 @@
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "./statusline.sh"
-  },
   "outputStyle": "Explanatory",
-  "alwaysThinkingEnabled": true,
+  "alwaysThinkingEnabled": false,
   "autoCompactEnabled": false,
   "autoUpdates": true,
   "feedbackSurveyState": {
