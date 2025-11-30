@@ -19,7 +19,7 @@ aibo.setup({
 
 local claude = "claude --permission-mode bypassPermissions"
 local codex = "codex --dangerously-bypass-approvals-and-sandbox"
-local gemini = "gemini --sandbox --yolo"
+local gemini = "gemini --yolo"
 
 vim.keymap.set(
   "n",
