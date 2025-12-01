@@ -3,3 +3,4 @@
 .zcompcache
 .zsh_sessions
 *.zwc
+completions
