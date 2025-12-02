@@ -3,6 +3,7 @@
 - **Avoid duplication**: Check existing code before custom implementations
 - **Check existing patterns**: Review code/docs before implementing
 - **T-Wada style**: Implement from tests when possible
+- **Use specialized tools**: Actively use Task (agents), MCP servers, and Skills for efficiency
 
 ## STRICT RULES (MUST FOLLOW)
 
@@ -10,16 +11,15 @@
 
 **NEVER commit without explicit user permission.**
 
-- Commits are forbidden by default
-- Only perform a commit ONCE when the user explicitly grants permission
-- After committing, MUST recite this rule:
-  > "Reminder: Commits are forbidden by default. I will not commit again unless
+- Commits forbidden by default
+- Only commit ONCE when explicitly permitted
+- After committing, MUST recite:
+  > "Reminder: Commits forbidden by default. Won't commit again unless
   > explicitly permitted."
 
 ### 2. Backup Before Destructive Operations
 
-**ALWAYS create a backup before any operation that may lose working tree
-state.**
+**ALWAYS backup before operations that may lose working tree state.**
 
 Examples requiring backup:
 
@@ -27,41 +27,39 @@ Examples requiring backup:
 - `git reset`
 - `git checkout` (switching branches with uncommitted changes)
 - `git stash drop`
-- Any file deletion or overwrite of uncommitted work
+- Any file deletion/overwrite of uncommitted work
 
 ### 3. Pre-Completion Verification
 
-BEFORE reporting task completion, run project specific verification command to
-ensure zero errors/warnings:
+BEFORE reporting task completion, run project-specific verification command to
+ensure zero errors/warnings.
 
 ### 4. English for Version-Controlled Content
 
-**Use English for ALL content tracked by Git:**
+**Use English for ALL Git-tracked content:**
 
-- Code (variable names, function names)
+- Code (variable/function names)
 - Comments
 - Documentation (README, CLAUDE.md, etc.)
 - Commit messages
 - Error messages in code
 
-Unless the project already contains non-English tracked contents.
+Unless project already contains non-English tracked content.
 
 ### 5. Stay in Worktree During Worktree Tasks
 
-**NEVER leave the worktree directory when working on a worktree task.**
+**NEVER leave worktree directory when working on worktree task.**
 
-- If you start work in `.worktrees/{branch}/`, ALL operations must stay there
-- Do NOT `cd` to the root repository or other directories
-- Run all commands (git, deno, etc.) from within the worktree
-- If you need to check the root repository state, use absolute paths without
-  changing directory
+- If starting in `.worktrees/{branch}/`, ALL operations stay there
+- Do NOT `cd` to root repository or other directories
+- Run all commands (git, deno, etc.) from within worktree
+- Use absolute paths to check root repository state without changing directory
 
-### 6. Git Stash is Forbidden in Worktrees
+### 6. Git Stash Forbidden in Worktrees
 
 **NEVER use `git stash` in worktree environments.**
 
-Git stash is shared across all worktrees. This causes accidental cross-worktree
-contamination.
+Git stash is shared across worktrees, causing cross-worktree contamination.
 
 **Use backup branch instead:**
 
@@ -72,5 +70,26 @@ git checkout -
 git cherry-pick --no-commit HEAD@{1}
 ```
 
-This creates a persistent backup branch while keeping changes in your working
-tree.
+### 7. Document Output Location
+
+**Implementation plans and documents:**
+
+- Output to: `~/Documents/Compost/AI Notes/{year}-{month}/`
+- Filename: `{day}-{hour}{minutes}-{title}.md`
+- Multiple documents: `{day}-{hour}{minutes}-{title}/{number}-{title}.md`
+
+### 8. User Communication
+
+**Communicate in polite Japanese.**
+
+### 9. Proactive Tool Usage
+
+**Actively leverage specialized tools for efficiency:**
+
+- **Task tool (agents)**: Use for complex/multi-step operations
+  - `Explore` agent: Codebase exploration, understanding structure
+  - `code-writer`: Code implementation following project patterns
+  - `typescript-code-writer`/`deno-code-writer`/`rust-code-writer`: Language-specific implementations
+- **MCP servers**: Utilize available MCP tools (prefixed with `mcp__`)
+- **Skills**: Execute custom slash commands for user-defined operations
+- Prefer specialized tools over manual operations for better UX
