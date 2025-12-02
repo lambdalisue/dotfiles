@@ -1,0 +1,8 @@
+*
+!agents/
+!agents/**/*.md
+!commands/
+!commands/**/*.md
+!CLAUDE.md
+!mcp.json
+!settings.json

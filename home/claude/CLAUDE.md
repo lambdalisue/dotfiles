@@ -15,13 +15,10 @@
 - Permission is valid for ONE commit ONLY and expires immediately after use
 - If you make additional changes (e.g., update README), you MUST ask for permission again before committing
 - After each commit, MUST recite:
-  > "Reminder: Commits forbidden by default. Won't commit again unless
-  > explicitly permitted."
-
-**Examples:**
-- ✅ User: "commit and PR" → 1 commit → push → PR → STOP
-- ❌ User: "commit and PR" → commit → push → notice missing file → commit again (WRONG!)
-- ✅ User: "commit and PR" → commit → push → PR → User: "update README too" → update file → ASK for permission → commit
+  > "🚨 COMMIT PERMISSION EXPIRED 🚨
+  > I am now FORBIDDEN to commit.
+  > I will NOT commit again until explicitly permitted.
+  > If I need to commit, I MUST ASK FIRST."
 
 ### 2. Backup Before Destructive Operations
 
