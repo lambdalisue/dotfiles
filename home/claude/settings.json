@@ -50,6 +50,7 @@
       "Bash(sudo rm -:*)"
     ]
   },
+  "model": "sonnet[1m]",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "Stop": [
@@ -70,6 +71,5 @@
   "feedbackSurveyState": {
     "lastShownTime": 1754089004345
   },
-  "theme": "dark",
-  "model": "sonnet[1m]"
+  "theme": "dark"
 }
