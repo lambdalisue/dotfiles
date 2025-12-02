@@ -77,7 +77,7 @@ git cherry-pick --no-commit HEAD@{1}
 
 **Implementation plans and documents:**
 
-- Output to: `~/Documents/Compost/AI Notes/{year}-{month}/`
+- Output to: `~/Compost/AI Notes/{year}-{month}/`
 - Filename: `{day}-{hour}{minutes}-{title}.md`
 - Multiple documents: `{day}-{hour}{minutes}-{title}/{number}-{title}.md`
 
