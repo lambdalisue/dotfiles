@@ -80,6 +80,8 @@ git cherry-pick --no-commit HEAD@{1}
 - Output to: `~/Compost/AI Notes/{year}-{month}/`
 - Filename: `{day}-{hour}{minutes}-{title}.md`
 - Multiple documents: `{day}-{hour}{minutes}-{title}/{number}-{title}.md`
+- **Language**: Write documents in Japanese
+- **Diagrams**: Use Mermaid syntax for all diagrams and flowcharts
 
 ### 8. User Communication
 

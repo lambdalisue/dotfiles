@@ -65,7 +65,7 @@
     ]
   },
   "outputStyle": "Explanatory",
-  "alwaysThinkingEnabled": false,
+  "alwaysThinkingEnabled": true,
   "autoCompactEnabled": false,
   "autoUpdates": true,
   "feedbackSurveyState": {
