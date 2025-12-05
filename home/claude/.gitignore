@@ -3,6 +3,8 @@
 !agents/**/*.md
 !commands/
 !commands/**/*.md
+!rules/
+!rules/**/*.md
 !CLAUDE.md
 !mcp.json
 !settings.json

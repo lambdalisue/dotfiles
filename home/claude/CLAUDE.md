@@ -4,6 +4,8 @@
 - **Check existing patterns**: Review code/docs before implementing
 - **T-Wada style**: Implement from tests when possible
 - **Use specialized tools**: Actively use Task (agents), MCP servers, and Skills for efficiency
+- **Rust**: Follow rules/rust-implementation.md when writing Rust code
+- **Text processing**: Use `perl` instead of `sed`/`awk` for cross-platform consistency and powerful regex support
 
 ## STRICT RULES (MUST FOLLOW)
 
@@ -77,11 +79,19 @@ git cherry-pick --no-commit HEAD@{1}
 
 **Implementation plans and documents:**
 
-- Output to: `~/Compost/AI Notes/{year}-{month}/`
+- Output to: `~/Compost/AI-Notes/{year}-{month}/`
 - Filename: `{day}-{hour}{minutes}-{title}.md`
 - Multiple documents: `{day}-{hour}{minutes}-{title}/{number}-{title}.md`
 - **Language**: Write documents in Japanese
 - **Diagrams**: Use Mermaid syntax for all diagrams and flowcharts
+
+**Reading existing notes:**
+
+- When user requests reading from notes (e.g., "read from notes"), search `~/Compost/AI-Notes` efficiently:
+  - Use Glob tool to find relevant files by pattern
+  - Search recent directories first (`{year}-{month}/` ordered by date)
+  - Use Grep to search content across notes when needed
+  - Prioritize Task tool with Explore agent for complex searches
 
 ### 8. User Communication
 
@@ -98,3 +108,11 @@ git cherry-pick --no-commit HEAD@{1}
 - **MCP servers**: Utilize available MCP tools (prefixed with `mcp__`)
 - **Skills**: Execute custom slash commands for user-defined operations
 - Prefer specialized tools over manual operations for better UX
+
+### 10. Periodic Rule Refresh
+
+**Re-read this file regularly to maintain compliance:**
+
+- Read `~/.claude/CLAUDE.md` every 25 messages or when starting complex tasks
+- After reading, silently confirm understanding without notifying user
+- If rules conflict with user request, clarify with user before proceeding
