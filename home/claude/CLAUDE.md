@@ -4,8 +4,9 @@
 - **Check existing patterns**: Review code/docs before implementing
 - **T-Wada style**: Implement from tests when possible
 - **Use specialized tools**: Actively use Task (agents), MCP servers, and Skills for efficiency
-- **Rust**: Follow rules/rust-implementation.md when writing Rust code
 - **Text processing**: Use `perl` instead of `sed`/`awk` for cross-platform consistency and powerful regex support
+- **Rust**: Follow rules/rust-implementation.md when writing Rust code
+- **TypeScript**: Follow rules/typescript-implementation.md when writing TypeScript code
 
 ## STRICT RULES (MUST FOLLOW)
 
