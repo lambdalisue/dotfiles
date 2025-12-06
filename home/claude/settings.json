@@ -50,7 +50,6 @@
       "Bash(sudo rm -:*)"
     ]
   },
-  "model": "sonnet[1m]",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "Stop": [
@@ -65,7 +64,7 @@
     ]
   },
   "outputStyle": "Explanatory",
-  "alwaysThinkingEnabled": false,
+  "alwaysThinkingEnabled": true,
   "autoCompactEnabled": false,
   "autoUpdates": true,
   "feedbackSurveyState": {
