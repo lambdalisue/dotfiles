@@ -6,6 +6,8 @@ else
   setlocal foldmethod=syntax
 endif
 setlocal shiftwidth=2
+setlocal autoindent
+setlocal smartindent
 
 " Automatically indent dot chained method calls
 setlocal indentkeys+=0.

@@ -16,16 +16,25 @@ cache::clear() {
 }
 
 # ls/la
-if [[ $IN_NIX_SHELL ]]; then
-  alias ls="ls --color=always"
-  alias la="ls -lhAF"
-elif [[ $PLATFORM == "Darwin" ]]; then
-  alias ls="ls -G -w"
-  alias la="ls -lhAFG"
-else
-  alias ls="ls --color=always"
-  alias la="ls -lhAF"
-fi
+ls() {
+  if [[ $IN_NIX_SHELL ]]; then
+    command ls --color=always
+  elif [[ $PLATFORM == "Darwin" ]]; then
+    command ls -G -w
+  else
+    command ls --color=always
+  fi
+}
+
+la() {
+  if [[ $IN_NIX_SHELL ]]; then
+    command ls -lhAF
+  elif [[ $PLATFORM == "Darwin" ]]; then
+    command ls -lhAFG
+  else
+    command ls -lhAF
+  fi
+}
 
 # PostgreSQL (Hit \e on psql)
 export PSQL_EDITOR='nvim +"setfiletype sql" '
