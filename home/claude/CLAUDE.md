@@ -3,10 +3,13 @@
 - **Avoid duplication**: Check existing code before custom implementations
 - **Check existing patterns**: Review code/docs before implementing
 - **T-Wada style**: Implement from tests when possible
-- **Use specialized tools**: Actively use Task (agents), MCP servers, and Skills for efficiency
-- **Text processing**: Use `perl` instead of `sed`/`awk` for cross-platform consistency and powerful regex support
+- **Use specialized tools**: Actively use Task (agents), MCP servers, and Skills
+  for efficiency
+- **Text processing**: Use `perl` instead of `sed`/`awk` for cross-platform
+  consistency and powerful regex support
 - **Rust**: Follow rules/rust-implementation.md when writing Rust code
-- **TypeScript**: Follow rules/typescript-implementation.md when writing TypeScript code
+- **TypeScript**: Follow rules/typescript-implementation.md when writing
+  TypeScript code
 
 ## STRICT RULES (MUST FOLLOW)
 
@@ -16,12 +19,12 @@
 
 - Commits forbidden by default
 - Permission is valid for ONE commit ONLY and expires immediately after use
-- If you make additional changes (e.g., update README), you MUST ask for permission again before committing
+- If you make additional changes (e.g., update README), you MUST ask for
+  permission again before committing
 - After each commit, MUST recite:
-  > "🚨 COMMIT PERMISSION EXPIRED 🚨
-  > I am now FORBIDDEN to commit.
-  > I will NOT commit again until explicitly permitted.
-  > If I need to commit, I MUST ASK FIRST."
+  > "🚨 COMMIT PERMISSION EXPIRED 🚨 I am now FORBIDDEN to commit. I will NOT
+  > commit again until explicitly permitted. If I need to commit, I MUST ASK
+  > FIRST."
 
 ### 2. Backup Before Destructive Operations
 
@@ -88,7 +91,8 @@ git cherry-pick --no-commit HEAD@{1}
 
 **Reading existing notes:**
 
-- When user requests reading from notes (e.g., "read from notes"), search `~/Compost/AI-Notes` efficiently:
+- When user requests reading from notes (e.g., "read from notes"), search
+  `~/Compost/AI-Notes` efficiently:
   - Use Glob tool to find relevant files by pattern
   - Search recent directories first (`{year}-{month}/` ordered by date)
   - Use Grep to search content across notes when needed
@@ -105,7 +109,8 @@ git cherry-pick --no-commit HEAD@{1}
 - **Task tool (agents)**: Use for complex/multi-step operations
   - `Explore` agent: Codebase exploration, understanding structure
   - `code-writer`: Code implementation following project patterns
-  - `typescript-code-writer`/`deno-code-writer`/`rust-code-writer`: Language-specific implementations
+  - `typescript-code-writer`/`deno-code-writer`/`rust-code-writer`:
+    Language-specific implementations
 - **MCP servers**: Utilize available MCP tools (prefixed with `mcp__`)
 - **Skills**: Execute custom slash commands for user-defined operations
 - Prefer specialized tools over manual operations for better UX

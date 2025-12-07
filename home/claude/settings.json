@@ -51,18 +51,6 @@
     ]
   },
   "enableAllProjectMcpServers": true,
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "terminal-notifier -message 'ClaudeCodeのタスクが完了しました！' -title 'Claude Code' -sound Blow"
-          }
-        ]
-      }
-    ]
-  },
   "outputStyle": "Explanatory",
   "alwaysThinkingEnabled": true,
   "autoCompactEnabled": false,
@@ -70,5 +58,6 @@
   "feedbackSurveyState": {
     "lastShownTime": 1754089004345
   },
-  "theme": "dark"
+  "theme": "dark",
+  "model": "haiku"
 }
