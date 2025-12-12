@@ -50,6 +50,7 @@
       "Bash(sudo rm -:*)"
     ]
   },
+  "model": "haiku",
   "enableAllProjectMcpServers": true,
   "outputStyle": "Explanatory",
   "alwaysThinkingEnabled": true,
@@ -58,6 +59,5 @@
   "feedbackSurveyState": {
     "lastShownTime": 1754089004345
   },
-  "theme": "dark",
-  "model": "haiku"
+  "theme": "dark"
 }
