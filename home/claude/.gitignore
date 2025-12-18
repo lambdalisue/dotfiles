@@ -1,9 +1,12 @@
 *
 !agents/
+!agents/**/
 !agents/**/*.md
 !commands/
+!commands/**/
 !commands/**/*.md
 !rules/
+!rules/**/
 !rules/**/*.md
 !CLAUDE.md
 !mcp.json
