@@ -480,6 +480,8 @@ cnoremap <Down> <C-n>
 " Fix unreasonable mappings by historical reason
 nnoremap Y y$
 
+tmap <silent> <C-w> <C-\><C-n><C-w>
+
 " Tab navigation
 " https://zenn.dev/lambdalisue/scraps/b593451512db63
 " Allow `<C-w>n/p` without pressing `<C-w>` repeatedly
