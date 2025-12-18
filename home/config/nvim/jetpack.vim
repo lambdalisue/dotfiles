@@ -24,6 +24,7 @@ function! s:init() abort
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
   call jetpack#add('EdenEast/nightfox.nvim')
+  call jetpack#add('Makaze/AnsiEsc')
   call jetpack#add('Shougo/context_filetype.vim')
   call jetpack#add('Shougo/junkfile.vim')
   call jetpack#add('catppuccin/vim')

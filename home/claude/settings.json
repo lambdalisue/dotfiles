@@ -50,10 +50,9 @@
       "Bash(sudo rm -:*)"
     ]
   },
-  "model": "haiku",
   "enableAllProjectMcpServers": true,
   "outputStyle": "Explanatory",
-  "alwaysThinkingEnabled": true,
+  "alwaysThinkingEnabled": false,
   "autoCompactEnabled": false,
   "autoUpdates": true,
   "feedbackSurveyState": {
