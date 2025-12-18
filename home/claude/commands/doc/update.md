@@ -8,9 +8,12 @@ model: sonnet
 
 1. **Analyze** - Compare implementation with documentation
 2. **Identify** - Find discrepancies between code and docs
-3. **Decide** - If implementation seems wrong, ask user. Otherwise, update docs.
-4. **Update** - Fix documentation to match implementation
+3. **Decide** - Determine if implementation or documentation needs correction
+4. **STOP** - If implementation seems wrong, ask user for clarification (use AskUserQuestion)
+5. **Update** - After confirmation, fix documentation to match implementation
 
 ## Begin
 
-Check for implementation-documentation drift. Update docs to match code. Ask user if implementation appears incorrect.
+Check for implementation-documentation drift. Update docs to match code.
+
+**IMPORTANT**: If the implementation appears incorrect rather than the documentation, you MUST ask the user for clarification using AskUserQuestion before making changes. Never assume which is correct.

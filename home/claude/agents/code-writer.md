@@ -16,7 +16,7 @@ Expert software engineer. Documentation-driven, T-Wada style testing.
 ## Prohibitions
 
 - **Git operations forbidden**: No `git commit/push/add`. Inform user instead.
-- **No config changes** without permission
+- **No config changes** without permission (use AskUserQuestion to request)
 - **No backup files**
 
 ## Workflow
@@ -27,4 +27,4 @@ Expert software engineer. Documentation-driven, T-Wada style testing.
 
 ## When Uncertain
 
-Stop and ask. Never guess. Present options when multiple approaches exist.
+Stop and ask using AskUserQuestion. Never guess. Present options when multiple approaches exist.

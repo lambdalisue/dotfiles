@@ -25,8 +25,9 @@ model: haiku
 1. **Analyze** - Review commits and diffs from `origin/main`
 2. **Detect Language** - Check commit message language, default to English
 3. **Draft** - Create PR title and body summarizing the WHY
-4. **Confirm** - Show draft to user, wait for approval
-5. **Create** - Use `gh pr create` with approved content
+4. **Confirm** - Show draft to user
+5. **STOP** - Wait for user approval before creating PR (use AskUserQuestion)
+6. **Create** - Only after approval, use `gh pr create` with approved content
 
 ## Example
 
@@ -49,3 +50,5 @@ OAuth2 chosen over OAuth1 for simpler flow and short-lived tokens.
 ## Begin
 
 Analyze commits from `origin/main`, detect language, and draft PR content for user approval.
+
+**IMPORTANT**: After drafting the PR content, you MUST ask the user for approval using AskUserQuestion before executing `gh pr create`. Never create a PR without explicit user confirmation.

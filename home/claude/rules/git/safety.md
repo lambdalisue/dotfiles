@@ -4,6 +4,16 @@
 
 **NEVER commit without explicit user permission.**
 
+### Workflow
+
+1. **Stage** - Prepare files to commit
+2. **Draft** - Create commit message
+3. **Confirm** - Show staged files and draft message to user
+4. **STOP** - Wait for user approval (use AskUserQuestion)
+5. **Commit** - Only after approval, execute `git commit`
+
+### Rules
+
 - Commits forbidden by default
 - Permission is valid for ONE commit ONLY and expires immediately after use
 - If you make additional changes (e.g., update README), you MUST ask for
@@ -12,6 +22,8 @@
   > "🚨 COMMIT PERMISSION EXPIRED 🚨 I am now FORBIDDEN to commit. I will NOT
   > commit again until explicitly permitted. If I need to commit, I MUST ASK
   > FIRST."
+
+**IMPORTANT**: Always use AskUserQuestion to obtain explicit approval before executing `git commit`. Never assume permission is granted.
 
 ## Backup Before Destructive Operations
 
