@@ -1,10 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "statusLine": {
-    "type": "command",
-    "command": "deno run --allow-read ~/.claude/statusline.ts",
-    "padding": 0
-  },
   "env": {
     "BASH_DEFAULT_TIMEOUT_MS": "300000",
     "BASH_MAX_TIMEOUT_MS": "1200000",
@@ -51,8 +46,12 @@
     ]
   },
   "enableAllProjectMcpServers": true,
+  "statusLine": {
+    "type": "command",
+    "command": "deno run --allow-read ~/.claude/statusline.ts",
+    "padding": 0
+  },
   "outputStyle": "Explanatory",
-  "alwaysThinkingEnabled": false,
   "autoCompactEnabled": false,
   "autoUpdates": true,
   "feedbackSurveyState": {

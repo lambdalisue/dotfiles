@@ -8,6 +8,9 @@
 !rules/
 !rules/**/
 !rules/**/*.md
+!skills/
+!skills/**/
+!skills/**/*.md
 !CLAUDE.md
 !mcp.json
 !settings.json

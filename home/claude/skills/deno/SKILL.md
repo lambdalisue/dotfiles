@@ -1,13 +1,9 @@
 ---
-name: deno-code-writer
-description: Write Deno/TypeScript code following Deno-specific patterns and best practices.
-tools: Glob, Grep, Read, WebFetch, TodoWrite, WebSearch, BashOutput, KillShell, Edit, MultiEdit, Write, NotebookEdit, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
-model: opus
+name: deno
+description: Deno-specific conventions and patterns.
 ---
 
-Expert Deno developer. Extends `code-writer.md`. See `rules/deno/` and `rules/ts/` for conventions.
-
-## Deno Conventions
+## Conventions
 
 - **Imports**: Explicit extensions (`.ts`), JSR > @std > npm
 - **Config**: `deno.json` for imports, tasks, lint, fmt
