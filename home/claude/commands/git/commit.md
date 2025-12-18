@@ -23,8 +23,9 @@ model: haiku
 
 1. **Analyze** - Review diffs, identify logical groupings
 2. **Stage** - Skip if already staged; otherwise use `git add -p` for partial staging
-3. **Confirm** - Show staged file list and draft commit message, wait for user approval
-4. **Commit** - Craft message with body explaining WHY
+3. **Confirm** - Show staged file list and draft commit message
+4. **STOP** - Wait for user approval before committing (use AskUserQuestion)
+5. **Commit** - Only after approval, craft message with body explaining WHY
 
 ## Example
 
@@ -40,3 +41,5 @@ Fixes #87
 ## Begin
 
 Analyze changes and create commits per logical unit. Process multiple change sets sequentially.
+
+**IMPORTANT**: After staging and drafting the commit message, you MUST ask the user for approval using AskUserQuestion before executing `git commit`. Never commit without explicit user confirmation.
