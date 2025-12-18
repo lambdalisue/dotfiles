@@ -25,7 +25,19 @@ model: haiku
 1. **Analyze** - Review commits and diffs from `origin/main`
 2. **Detect Language** - Check commit message language, default to English
 3. **Draft** - Create PR title and body summarizing the WHY
-4. **Confirm** - Show draft to user
+4. **Confirm** - Display draft title and body in a fenced code block:
+   ```
+   Title: <concise summary>
+
+   ## Summary
+   - <bullet points of changes>
+
+   ## Why
+   <explanation of WHY these changes were made>
+
+   ## Test Plan
+   - [ ] <test items>
+   ```
 5. **STOP** - Wait for user approval before creating PR (use AskUserQuestion)
 6. **Create** - Only after approval, use `gh pr create` with approved content
 

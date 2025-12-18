@@ -23,9 +23,14 @@ model: haiku
 
 1. **Analyze** - Review diffs, identify logical groupings
 2. **Stage** - Skip if already staged; otherwise use `git add -p` for partial staging
-3. **Confirm** - Show staged file list and draft commit message
+3. **Confirm** - Show staged file list AND display the draft commit message in a fenced code block:
+   ```
+   <type>[scope]: <description>
+
+   <body explaining WHY>
+   ```
 4. **STOP** - Wait for user approval before committing (use AskUserQuestion)
-5. **Commit** - Only after approval, craft message with body explaining WHY
+5. **Commit** - Only after approval, execute `git commit` with the approved message
 
 ## Example
 

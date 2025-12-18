@@ -1,22 +1,3 @@
-local aibo = require("aibo")
-
-aibo.setup({
-  prompt = {
-    on_attach = function(bufnr)
-      local opts = { buffer = bufnr }
-      pcall(vim.keymap.del, "i", "<C-n>", opts)
-      pcall(vim.keymap.del, "i", "<C-p>", opts)
-    end,
-  },
-  console = {
-    on_attach = function(bufnr)
-      local opts = { buffer = bufnr }
-      pcall(vim.keymap.del, "n", "<C-u>", opts)
-      pcall(vim.keymap.del, "n", "<C-o>", opts)
-    end,
-  },
-})
-
 local claude = string.format(
   "claude --mcp-config %s --permission-mode bypassPermissions",
   vim.fn.expand("~/.claude/mcp.json")
