@@ -1,3 +1,6 @@
+---
+paths: "**/*.ts"
+---
 # Type Assertions
 
 ## Prohibited

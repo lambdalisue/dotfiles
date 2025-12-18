@@ -1,3 +1,6 @@
+---
+paths: "**/*.rs"
+---
 # Error Handling and Logging
 
 ## Common

@@ -1,3 +1,6 @@
+---
+paths: "**/*.ts"
+---
 # Error Handling and Logging
 
 ## Common

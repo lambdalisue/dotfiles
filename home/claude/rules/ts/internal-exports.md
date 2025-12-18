@@ -1,3 +1,6 @@
+---
+paths: "**/*.ts"
+---
 # Internal Exports
 
 For exports needed only for testing or internal use:

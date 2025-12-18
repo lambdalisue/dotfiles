@@ -1,3 +1,6 @@
+---
+paths: "**/*.ts"
+---
 # Module Structure
 
 ## mod.ts

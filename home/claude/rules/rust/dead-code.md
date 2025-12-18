@@ -1,3 +1,6 @@
+---
+paths: "**/*.rs"
+---
 # Dead Code
 
 ## Prohibited
