@@ -480,7 +480,11 @@ cnoremap <Down> <C-n>
 " Fix unreasonable mappings by historical reason
 nnoremap Y y$
 
+" Terminal mappings
 tmap <silent> <C-w> <C-\><C-n><C-w>
+tnoremap <silent> <Esc> <C-\><C-n>
+tnoremap <silent> <C-c> <Esc>
+tnoremap <silent> <C-g><C-c> <C-c>
 
 " Tab navigation
 " https://zenn.dev/lambdalisue/scraps/b593451512db63
