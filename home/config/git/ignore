@@ -21,3 +21,5 @@ Desktop.ini
 
 **/.claude/settings.local.json
 
+# Git
+.worktrees
