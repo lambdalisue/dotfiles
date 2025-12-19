@@ -38,10 +38,10 @@ Parse the arguments:
 
 ```markdown
 ---
-allowed-tools: {tools}
-argument-hint: {hint if needed}
-description: {brief description}
-model: {haiku|sonnet|opus}
+allowed-tools: { tools }
+argument-hint: { hint if needed }
+description: { brief description }
+model: { haiku|sonnet|opus }
 ---
 
 ## Workflow
@@ -56,11 +56,19 @@ model: {haiku|sonnet|opus}
 
 ## Examples
 
-**Input**: `/cc:command-local deploy Deploy this project to staging`
+**Input**: `/cc:add-command-local deploy Deploy this project to staging`
 **Output**: `{project-root}/.claude/commands/deploy.md`
 
-**Input**: `/cc:command-local db/migrate Run database migrations`
+**Input**: `/cc:add-command-local db/migrate Run database migrations`
 **Output**: `{project-root}/.claude/commands/db/migrate.md`
+
+## Content Guidelines
+
+Analyze the `{description}` to understand the intended purpose, then write the command file content:
+
+- **In English**, optimized for AI comprehension
+- Use clear, imperative language
+- Focus on actionable instructions rather than verbose explanations
 
 ## Begin
 

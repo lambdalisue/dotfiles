@@ -37,8 +37,8 @@ Parse the arguments:
 
 ```markdown
 ---
-name: {name}
-description: {Brief description ending with period}
+name: { name }
+description: { Brief description ending with period }
 ---
 
 ## Conventions
@@ -57,11 +57,19 @@ description: {Brief description ending with period}
 
 ## Examples
 
-**Input**: `/cc:skill python Python idioms and best practices`
+**Input**: `/cc:add-skill python Python idioms and best practices`
 **Output**: `~/.claude/skills/python/SKILL.md`
 
-**Input**: `/cc:skill react React component patterns and hooks`
+**Input**: `/cc:add-skill react React component patterns and hooks`
 **Output**: `~/.claude/skills/react/SKILL.md`
+
+## Content Guidelines
+
+Analyze the `{description}` to understand the intended purpose, then write the skill file content:
+
+- **In English**, optimized for AI comprehension
+- Use clear, imperative language
+- Focus on actionable instructions rather than verbose explanations
 
 ## Begin
 

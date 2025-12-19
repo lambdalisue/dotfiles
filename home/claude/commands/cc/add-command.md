@@ -37,10 +37,10 @@ Parse the arguments:
 
 ```markdown
 ---
-allowed-tools: {tools}
-argument-hint: {hint if needed}
-description: {brief description}
-model: {haiku|sonnet|opus}
+allowed-tools: { tools }
+argument-hint: { hint if needed }
+description: { brief description }
+model: { haiku|sonnet|opus }
 ---
 
 ## Workflow
@@ -55,11 +55,19 @@ model: {haiku|sonnet|opus}
 
 ## Examples
 
-**Input**: `/cc:command test-runner Run project tests and report failures`
+**Input**: `/cc:add-command test-runner Run project tests and report failures`
 **Output**: `~/.claude/commands/test-runner.md`
 
-**Input**: `/cc:command git/sync Sync current branch with remote`
+**Input**: `/cc:add-command git/sync Sync current branch with remote`
 **Output**: `~/.claude/commands/git/sync.md`
+
+## Content Guidelines
+
+Analyze the `{description}` to understand the intended purpose, then write the command file content:
+
+- **In English**, optimized for AI comprehension
+- Use clear, imperative language
+- Focus on actionable instructions rather than verbose explanations
 
 ## Begin
 

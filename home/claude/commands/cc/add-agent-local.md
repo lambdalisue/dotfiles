@@ -41,10 +41,10 @@ Parse the arguments:
 
 ```markdown
 ---
-name: {name}
-description: {Brief description ending with period}
-model: {sonnet|opus}
-color: {blue|green|yellow|red|purple|cyan}
+name: { name }
+description: { Brief description ending with period }
+model: { sonnet|opus }
+color: { blue|green|yellow|red|purple|cyan }
 ---
 
 {One-line persona/expertise statement}
@@ -74,11 +74,19 @@ blue, green, yellow, red, purple, cyan, magenta, orange, white
 
 ## Examples
 
-**Input**: `/cc:agent-local migrator Handle database migrations for this project`
+**Input**: `/cc:add-agent-local migrator Handle database migrations for this project`
 **Output**: `{project-root}/.claude/agents/migrator.md`
 
-**Input**: `/cc:agent-local e2e-tester Run and debug E2E tests`
+**Input**: `/cc:add-agent-local e2e-tester Run and debug E2E tests`
 **Output**: `{project-root}/.claude/agents/e2e-tester.md`
+
+## Content Guidelines
+
+Analyze the `{description}` to understand the intended purpose, then write the agent file content:
+
+- **In English**, optimized for AI comprehension
+- Use clear, imperative language
+- Focus on actionable instructions rather than verbose explanations
 
 ## Begin
 

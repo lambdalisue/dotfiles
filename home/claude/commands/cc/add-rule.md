@@ -55,14 +55,22 @@ Rule content here.
 
 ## Examples
 
-**Input**: `/cc:rule Use descriptive variable names`
+**Input**: `/cc:add-rule Use descriptive variable names`
 **Output**: `~/.claude/rules/code/descriptive-variables.md`
 
-**Input**: `/cc:rule *.py Always use type annotations`
+**Input**: `/cc:add-rule *.py Always use type annotations`
 **Output**: `~/.claude/rules/python/type-annotations.md` with `globs: *.py`
 
-**Input**: `/cc:rule src/**/*.ts Use strict null checks`
+**Input**: `/cc:add-rule src/**/*.ts Use strict null checks`
 **Output**: `~/.claude/rules/ts/strict-null-checks.md` with `globs: src/**/*.ts`
+
+## Content Guidelines
+
+Analyze the `{rule content}` to understand the intended purpose, then write the rule file content:
+
+- **In English**, optimized for AI comprehension
+- Use clear, imperative language
+- Focus on actionable instructions rather than verbose explanations
 
 ## Begin
 

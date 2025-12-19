@@ -56,14 +56,22 @@ Rule content here.
 
 ## Examples
 
-**Input**: `/cc:rule-local Use project-specific error types`
+**Input**: `/cc:add-rule-local Use project-specific error types`
 **Output**: `{project-root}/.claude/rules/errors/project-error-types.md`
 
-**Input**: `/cc:rule-local *.ts Run deno fmt before commit`
+**Input**: `/cc:add-rule-local *.ts Run deno fmt before commit`
 **Output**: `{project-root}/.claude/rules/deno/format-on-commit.md` with `globs: *.ts`
 
-**Input**: `/cc:rule-local src/**/*.tsx Use functional components only`
+**Input**: `/cc:add-rule-local src/**/*.tsx Use functional components only`
 **Output**: `{project-root}/.claude/rules/react/functional-components.md` with `globs: src/**/*.tsx`
+
+## Content Guidelines
+
+Analyze the `{rule content}` to understand the intended purpose, then write the rule file content:
+
+- **In English**, optimized for AI comprehension
+- Use clear, imperative language
+- Focus on actionable instructions rather than verbose explanations
 
 ## Begin
 

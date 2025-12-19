@@ -40,10 +40,10 @@ Parse the arguments:
 
 ```markdown
 ---
-name: {name}
-description: {Brief description ending with period}
-model: {sonnet|opus}
-color: {blue|green|yellow|red|purple|cyan}
+name: { name }
+description: { Brief description ending with period }
+model: { sonnet|opus }
+color: { blue|green|yellow|red|purple|cyan }
 ---
 
 {One-line persona/expertise statement}
@@ -73,11 +73,19 @@ blue, green, yellow, red, purple, cyan, magenta, orange, white
 
 ## Examples
 
-**Input**: `/cc:agent api-designer Design RESTful APIs following best practices`
+**Input**: `/cc:add-agent api-designer Design RESTful APIs following best practices`
 **Output**: `~/.claude/agents/api-designer.md`
 
-**Input**: `/cc:agent security-reviewer Review code for security vulnerabilities`
+**Input**: `/cc:add-agent security-reviewer Review code for security vulnerabilities`
 **Output**: `~/.claude/agents/security-reviewer.md`
+
+## Content Guidelines
+
+Analyze the `{description}` to understand the intended purpose, then write the agent file content:
+
+- **In English**, optimized for AI comprehension
+- Use clear, imperative language
+- Focus on actionable instructions rather than verbose explanations
 
 ## Begin
 

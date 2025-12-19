@@ -38,8 +38,8 @@ Parse the arguments:
 
 ```markdown
 ---
-name: {name}
-description: {Brief description ending with period}
+name: { name }
+description: { Brief description ending with period }
 ---
 
 ## Conventions
@@ -58,11 +58,19 @@ description: {Brief description ending with period}
 
 ## Examples
 
-**Input**: `/cc:skill-local api Project API conventions and patterns`
+**Input**: `/cc:add-skill-local api Project API conventions and patterns`
 **Output**: `{project-root}/.claude/skills/api/SKILL.md`
 
-**Input**: `/cc:skill-local testing Testing patterns for this project`
+**Input**: `/cc:add-skill-local testing Testing patterns for this project`
 **Output**: `{project-root}/.claude/skills/testing/SKILL.md`
+
+## Content Guidelines
+
+Analyze the `{description}` to understand the intended purpose, then write the skill file content:
+
+- **In English**, optimized for AI comprehension
+- Use clear, imperative language
+- Focus on actionable instructions rather than verbose explanations
 
 ## Begin
 
