@@ -1,7 +1,7 @@
 ---
 allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git remote:*), Bash(gh pr:*)
 description: Create a pull request with title and body based on commits
-model: haiku
+model: sonet
 ---
 
 ## Context
@@ -21,6 +21,8 @@ model: haiku
 **Body**: Explain WHY these changes were made, not just WHAT changed.
 
 ## Workflow
+
+First, create a new branch if the current branch is `main`.
 
 1. **Analyze** - Review commits and diffs from `origin/main`
 2. **Detect Language** - Check commit message language, default to English

@@ -1,7 +1,7 @@
 ---
 allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(git show:*)
 description: Stage meaningful diffs and create Conventional Commits with WHY-focused messages
-model: haiku
+model: sonnet
 ---
 
 ## Context
@@ -21,14 +21,22 @@ model: haiku
 
 ## Workflow
 
-1. **Analyze** - Review diffs, identify logical groupings
-2. **Stage** - Skip if already staged; otherwise use `git add -p` for partial staging
-3. **Confirm** - Show staged file list AND display the draft commit message in a fenced code block:
-   ```
-   <type>[scope]: <description>
+**ONLY process ALREADY STAGED changes unless nothing is staged.**
 
-   <body explaining WHY>
-   ```
+First, run `git diff --cached --stat` and check if there are staged changes.
+
+### Already staged changes (NEVER stage more changes)
+
+1. **Analyze** - Review diffs of staged changes, identify logical groupings
+2. **Confirm** - Show staged file list AND **display the draft commit message**
+3. **STOP** - Wait for user approval before committing (use AskUserQuestion)
+4. **Commit** - Only after approval, execute `git commit` with the approved message
+
+### No staged changes
+
+1. **Analyze** - Review diffs, identify logical groupings
+2. **Stage** - Run `git add -p` to stage relevant hunks ONLY when no changes are staged
+3. **Confirm** - Show staged file list AND **display the draft commit message** in a fenced code block:
 4. **STOP** - Wait for user approval before committing (use AskUserQuestion)
 5. **Commit** - Only after approval, execute `git commit` with the approved message
 
