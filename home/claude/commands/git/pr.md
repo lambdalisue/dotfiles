@@ -1,7 +1,7 @@
 ---
 allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git remote:*), Bash(gh pr:*)
 description: Create a pull request with title and body based on commits
-model: sonet
+model: sonnet
 ---
 
 ## Context

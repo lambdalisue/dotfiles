@@ -51,6 +51,7 @@
     "command": "deno run --allow-read ~/.claude/statusline.ts",
     "padding": 0
   },
+  "enabledPlugins": {},
   "outputStyle": "Explanatory",
   "autoCompactEnabled": false,
   "autoUpdates": true,
