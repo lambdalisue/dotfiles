@@ -27,18 +27,20 @@ First, run `git diff --cached --stat` and check if there are staged changes.
 
 ### Already staged changes (NEVER stage more changes)
 
-1. **Analyze** - Review diffs of staged changes, identify logical groupings
+1. **Analyze** - Review diffs of staged changes
 2. **Confirm** - Show staged file list AND **display the draft commit message**
 3. **STOP** - Wait for user approval before committing (use AskUserQuestion)
 4. **Commit** - Only after approval, execute `git commit` with the approved message
+5. **Complete** - Do NOT repeat or continue
 
 ### No staged changes
 
-1. **Analyze** - Review diffs, identify logical groupings
+1. **Analyze** - Review diffs, identify logical groupings and create TODO list
 2. **Stage** - Run `git add -p` to stage relevant hunks ONLY when no changes are staged
 3. **Confirm** - Show staged file list AND **display the draft commit message** in a fenced code block:
 4. **STOP** - Wait for user approval before committing (use AskUserQuestion)
 5. **Commit** - Only after approval, execute `git commit` with the approved message
+6. **Check** - Check TODO list and continue if remainings
 
 ## Example
 

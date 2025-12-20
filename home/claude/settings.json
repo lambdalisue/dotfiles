@@ -51,9 +51,33 @@
     "command": "deno run --allow-read ~/.claude/statusline.ts",
     "padding": 0
   },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/enforce-perl.sh",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/warn-mod-rs.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {},
   "outputStyle": "Explanatory",
-  "autoCompactEnabled": false,
+  "autoCompactEnabled": true,
   "autoUpdates": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754089004345
