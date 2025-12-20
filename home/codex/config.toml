@@ -1,4 +1,7 @@
-model = "gpt-5.1-codex-max"
+model = "gpt-5.2-codex"
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 hide_rate_limit_model_nudge = true
+
+[notice.model_migrations]
+"gpt-5.1-codex-max" = "gpt-5.2-codex"
