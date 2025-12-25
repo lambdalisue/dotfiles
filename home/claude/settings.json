@@ -76,7 +76,9 @@
     "command": "deno run --allow-read ~/.claude/statusline.ts",
     "padding": 0
   },
-  "enabledPlugins": {},
+  "enabledPlugins": {
+    "probitas@jsr-probitas": true
+  },
   "outputStyle": "Explanatory",
   "autoCompactEnabled": true,
   "autoUpdates": true,

@@ -20,6 +20,13 @@
         "mcp-server-fetch"
       ]
     },
+    "slite": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "slite-mcp-server"
+      ]
+    },
     "deepwiki": {
       "type": "http",
       "url": "https://mcp.deepwiki.com/mcp"
