@@ -1,5 +1,5 @@
 ---
-globs: "**/*.ts"
+paths: "**/*.ts"
 ---
 
 # JSR Package Documentation
