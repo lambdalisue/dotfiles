@@ -6,8 +6,8 @@ import {
   composeSources,
   refineCurator,
   refineSource,
-} from "jsr:@vim-fall/std@^0.13.0";
-import * as builtin from "jsr:@vim-fall/std@^0.13.0/builtin";
+} from "jsr:@vim-fall/std@^0.14.0";
+import * as builtin from "jsr:@vim-fall/std@^0.14.0/builtin";
 import * as extra from "jsr:@vim-fall/extra@^0.2.0";
 import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
 
@@ -221,7 +221,12 @@ export const main: Entrypoint = ({
 
   definePickerFromCurator(
     "rg",
-    refineCurator(builtin.curator.rg, builtin.refiner.relativePath),
+    refineCurator(
+      builtin.curator.rg({
+        hidden: true,
+      }),
+      builtin.refiner.relativePath,
+    ),
     {
       sorters: [
         builtin.sorter.noop,

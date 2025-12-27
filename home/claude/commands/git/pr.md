@@ -26,8 +26,9 @@ First, create a new branch if the current branch is `main`.
 
 1. **Analyze** - Review commits and diffs from `origin/main`
 2. **Detect Language** - Check commit message language, default to English
-3. **Draft** - Create PR title and body summarizing the WHY
-4. **Confirm** - Display draft title and body in a fenced code block:
+3. **Check Remote** - Verify if current branch is pushed to remote
+4. **Draft** - Create PR title and body summarizing the WHY
+5. **Confirm** - Display draft title and body in a fenced code block:
    ```
    Title: <concise summary>
 
@@ -40,8 +41,9 @@ First, create a new branch if the current branch is `main`.
    ## Test Plan
    - [ ] <test items>
    ```
-5. **STOP** - Wait for user approval before creating PR (use AskUserQuestion)
-6. **Create** - Only after approval, use `gh pr create` with approved content
+6. **STOP** - Wait for user approval before creating PR (use AskUserQuestion)
+7. **Push Notice** - If branch is not pushed or not up-to-date, instruct user to push manually
+8. **Create** - Only after user confirms push is complete, use `gh pr create` with approved content
 
 ## Example
 
@@ -65,4 +67,7 @@ OAuth2 chosen over OAuth1 for simpler flow and short-lived tokens.
 
 Analyze commits from `origin/main`, detect language, and draft PR content for user approval.
 
-**IMPORTANT**: After drafting the PR content, you MUST ask the user for approval using AskUserQuestion before executing `gh pr create`. Never create a PR without explicit user confirmation.
+**IMPORTANT**:
+1. After drafting the PR content, you MUST ask the user for approval using AskUserQuestion before creating the PR
+2. Never push to remote - always instruct the user to run `git push` manually
+3. Only execute `gh pr create` after confirming the user has pushed the branch
