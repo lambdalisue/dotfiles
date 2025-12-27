@@ -28,6 +28,7 @@
       "Bash(dd if=)",
       "Bash(fdisk)",
       "Bash(format)",
+      "Bash(git push:*)",
       "Bash(halt)",
       "Bash(killall)",
       "Bash(mkfs.)",
