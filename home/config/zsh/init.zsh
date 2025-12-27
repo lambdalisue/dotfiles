@@ -237,6 +237,11 @@ if type deno &>/dev/null; then
   fi
 fi
 
+# bun
+if [[ -s "$HOME/.bun/_bun" ]] then
+  source "/Users/alisue/.bun/_bun"
+fi
+
 # ogh
 ogh() {
   command deno run --allow-net --allow-run --allow-read --allow-env jsr:@lambdalisue/ogh/cli $@

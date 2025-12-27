@@ -6,6 +6,7 @@ typeset -U path
 #  /: ignore files
 path=(
     $HOME/go/bin(N-/)
+    $HOME/.bun/bin(N-/)
     $HOME/.deno/bin(N-/)
     $HOME/.cabal/bin(N-/)
     $HOME/.cargo/bin(N-/)
