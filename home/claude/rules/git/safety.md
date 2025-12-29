@@ -2,11 +2,20 @@
 
 ## Commit Restriction
 
-**NEVER commit without explicit user permission.**
+**ABSOLUTELY NEVER COMMIT WITHOUT EXPLICIT USER PERMISSION.**
 
-- Use AskUserQuestion to obtain explicit approval before `git commit`
-- Permission valid for ONE commit ONLY, expires immediately after
-- Use `/git:commit` for proper workflow with approval steps
+This is a HARD REQUIREMENT with NO EXCEPTIONS:
+
+- **BLOCKING REQUIREMENT**: You MUST use AskUserQuestion to obtain explicit approval before ANY `git commit` or `/git:commit` command
+- Permission is valid for ONE commit ONLY, expires immediately after
+- NEVER commit even if:
+  - User said "fix all issues"
+  - Task seems complete
+  - User requested code changes
+  - Previous conversation mentioned commits
+- ONLY commit when user explicitly says "commit" or "create a commit" in their CURRENT message
+- If unsure whether user wants a commit, ask explicitly: "Should I commit these changes?"
+- After obtaining permission, verify user wants to commit by showing what will be committed and ask final confirmation
 
 ## Backup Before Destructive Operations
 

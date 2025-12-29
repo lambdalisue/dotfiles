@@ -55,6 +55,10 @@ deno run -A ~/.claude/skills/ai-notes/notes.ts list --limit 10 --offset 10
 ## Content Requirements
 
 - **Language**: Write documents in Japanese
+- **Code Comments**: ALWAYS write code comments in English, even when the document is in Japanese
+  - Example code snippets should have English comments
+  - Inline code documentation should be in English
+  - Only narrative text outside code blocks should be in Japanese
 - **Diagrams**: Use Mermaid syntax for all diagrams and flowcharts
 
 ## Reading Notes
