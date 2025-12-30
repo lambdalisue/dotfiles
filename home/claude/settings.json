@@ -46,7 +46,6 @@
       "Bash(sudo:*)"
     ]
   },
-  "model": "sonnet",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "PreToolUse": [
