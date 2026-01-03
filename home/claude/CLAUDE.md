@@ -4,16 +4,36 @@
 - Document at the right layer: Code → How, Tests → What, Commits → Why, Comments → Why not
 - Keep documentation up to date with code changes
 
-## Skill Usage Priority
+## Skill and Agent Usage Priority
 
-**ALWAYS use available Skills when relevant to the task.**
+**ALWAYS use available Skills and Agents when relevant to the task.**
+
+### Skills First
 
 Before implementing any task manually, check if a relevant Skill exists:
 - Skills provide specialized, optimized workflows for specific tasks
 - Skills ensure consistency across similar operations
 - Using Skills reduces errors and follows established patterns
 
-When a task matches a Skill's description, invoke it IMMEDIATELY using the Skill tool. Do not bypass Skills by implementing the task manually.
+When a task matches a Skill's description, invoke it IMMEDIATELY using the Skill tool.
+
+### Proactive Agent Usage
+
+**Use the Task tool with specialized agents for complex operations:**
+
+| Scenario | Agent Type |
+|----------|------------|
+| Codebase exploration, "where is X?" | `Explore` |
+| Implementation planning | `Plan` |
+| Writing/refactoring code | `code-writer` |
+| Code review after changes | `multi-perspective-code-reviewer` |
+| Complex multi-step tasks | `general-purpose` |
+
+**Key principles:**
+- Launch multiple agents in parallel when tasks are independent
+- Use `Explore` agent instead of manual Glob/Grep for open-ended searches
+- Spawn agents proactively—don't wait for explicit requests
+- Use `run_in_background: true` for long-running agents
 
 ## Agent Communication
 
