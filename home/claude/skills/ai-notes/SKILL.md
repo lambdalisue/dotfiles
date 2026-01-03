@@ -1,6 +1,6 @@
 ---
 name: ai-notes
-description: Manage AI notes in ~/Compost/AI-Notes - read existing notes, list recent documents, and write new implementation plans. Auto-triggers when reading from or writing to notes.
+description: Manage AI notes in ~/Compost/AI-Notes - read existing notes, list recent documents, and write new implementation plans (仕様書, 計画書, 設計書). Auto-triggers when reading from or writing to notes, specifications, or plans.
 ---
 
 ## Notes Management Script

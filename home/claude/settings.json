@@ -9,7 +9,6 @@
     "MCP_TOOL_TIMEOUT": "120000"
   },
   "includeCoAuthoredBy": false,
-  "telemetry": "off",
   "permissions": {
     "deny": [
       "Bash(awk:*)",
@@ -79,9 +78,11 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "probitas@jsr-probitas": true
+    "probitas@jsr-probitas": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
   },
   "outputStyle": "Explanatory",
+  "telemetry": "off",
   "autoCompactEnabled": true,
   "autoUpdates": false,
   "theme": "dark"
