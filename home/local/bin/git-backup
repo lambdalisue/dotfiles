@@ -1,6 +1,7 @@
 #!/bin/bash
 backup_branch="backup/$(git branch --show-current)/$(date +%Y%m%d-%H%M%S)"
 git checkout -b "$backup_branch"
-git commit -am "WIP: ${1:-checkpoint}"
+git add .
+git commit -m "WIP: ${1:-checkpoint}"
 git checkout -
 git cherry-pick --no-commit "$backup_branch"
