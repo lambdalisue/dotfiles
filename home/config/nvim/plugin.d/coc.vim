@@ -48,9 +48,11 @@ nmap <nowait> gQ <Plug>(coc-format-selected)
 vmap <nowait> gQ <Plug>(coc-format-selected)
 nmap <nowait> qf <Plug>(coc-fix-current)
 nmap <nowait> qr <Plug>(coc-rename)
-nmap <nowait> <C-k> <Plug>(coc-codeaction)
-nmap <nowait> g<C-k> <Plug>(coc-codeaction-cursor)
-vmap <nowait> <C-k> <Plug>(coc-codeaction-selected)
+nmap <nowait> <Leader>ca <Plug>(coc-codeaction)
+vmap <nowait> <Leader>ca <Plug>(coc-codeaction-selected)
+nmap <nowait> <Leader>cr <Plug>(coc-codeaction-refactor)
+vmap <nowait> <Leader>cr <Plug>(coc-codeaction-refactor-selected)
+nmap <nowait> <Leader>cs <Plug>(coc-codeaction-source)
 
 " Use [g and ]g  to navigate diagnostics
 nnoremap <silent> <Plug>(my-zv) <Cmd>call timer_start(10, { -> feedkeys("zv", "nx") })<CR>
@@ -69,16 +71,8 @@ omap <nowait> ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 " Note coc#float#scroll works on neovim >= 0.4.3 or vim >= 8.2.0750
-if has('nvim-0.4.3') || has('patch-8.2.0750')
-  nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-" NeoVim-only mapping for visual mode scroll
-" Useful on signatureHelp after jump placeholder of snippet expansion
-if has('nvim')
-  vnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#nvim_scroll(1, 1) : "\<C-f>"
-  vnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#nvim_scroll(0, 1) : "\<C-b>"
-endif
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 " Use K to show documentation in preview window
 function! s:show_documentation() abort
@@ -111,3 +105,5 @@ command! CocDisableFormatOnSave call coc#config('coc.preferences.formatOnSave', 
 
 command! CocEnableInlayHint call coc#config('inlayHint.enable', v:true)
 command! CocDisableInlayHint call coc#config('inlayHint.enable', v:false)
+
+command! -nargs=0 CocOrganizeImport call CocAction('organizeImport')

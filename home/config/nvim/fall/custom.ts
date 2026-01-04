@@ -1,4 +1,6 @@
+import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
 import type { Entrypoint } from "jsr:@vim-fall/custom@^0.1.0";
+import * as extra from "jsr:@vim-fall/extra@^0.2.0";
 import {
   bindSourceArgs,
   composeActions,
@@ -8,8 +10,6 @@ import {
   refineSource,
 } from "jsr:@vim-fall/std@^0.14.0";
 import * as builtin from "jsr:@vim-fall/std@^0.14.0/builtin";
-import * as extra from "jsr:@vim-fall/extra@^0.2.0";
-import { SEPARATOR } from "jsr:@std/path@^1.0.8/constants";
 
 // NOTE:
 //
@@ -223,7 +223,7 @@ export const main: Entrypoint = ({
     "rg",
     refineCurator(
       builtin.curator.rg({
-        hidden: true,
+        noIgnoreDot: true,
       }),
       builtin.refiner.relativePath,
     ),
