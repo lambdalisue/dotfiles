@@ -94,6 +94,20 @@ if type xdg-open &>/dev/null; then
   }
 fi
 
+# git-wt
+# https://github.com/k1LoW/git-wt
+if type git-wt &>/dev/null; then
+  cache::git-wt() {
+    git wt --init zsh > ${CACHE_PROFILE}/git-wt.zsh
+    zcompile ${CACHE_PROFILE}/git-wt.zsh
+  }
+  if [[ ! -f ${CACHE_PROFILE}/git-wt.zsh ]]; then
+    cache::git-wt
+  fi
+  source ${CACHE_PROFILE}/git-wt.zsh
+fi
+
+
 # vim
 if type nvim &>/dev/null; then
   alias nvimm="nvim -u ~/.vim/vimrc.min -i NONE"
