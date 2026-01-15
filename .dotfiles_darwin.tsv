@@ -1,5 +1,6 @@
 home/config/karabiner	.config/karabiner
 home/ssh.darwin	.ssh
 home/config/aerospace	.config/aerospace
+home/glide.toml	.glide.toml
 home/config/borders/bordersrc	.config/borders/bordersrc
 home/Library/Application Support/Rectangle/RectangleConfig.json	Library/Application Support/Rectangle/RectangleConfig.json
