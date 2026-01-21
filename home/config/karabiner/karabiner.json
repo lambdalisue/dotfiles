@@ -122,6 +122,7 @@
                     },
                     {
                         "description": "macSKK for Ghostty",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [

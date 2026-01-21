@@ -8,7 +8,7 @@ animate = true
 
 # Disable each space by default. When this is set, Use the
 # toggle_space_activated command to enable a space.
-default_disable = false
+default_disable = true
 
 # Focus the window under the mouse as it moves.
 focus_follows_mouse = true
