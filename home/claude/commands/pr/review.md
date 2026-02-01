@@ -63,18 +63,27 @@ model: sonnet
 
 4. **Filter Unresolved** - Extract only threads where `isResolved: false`
 
-5. **Summarize in Japanese** - Display unresolved comments with:
+5. **Summarize and Evaluate in Japanese** - Display unresolved comments with:
    - Numbered list (1, 2, 3...)
    - File path and line number
    - Comment author
+   - Priority rating (★☆☆ to ★★★) indicating whether the comment should be addressed
    - Brief Japanese summary of the feedback (no original text needed)
+   - Reason for the priority rating in Japanese
+
+   Priority scale:
+   - ★★★: Must address — correctness bugs, security issues, data loss risks, or blocking concerns
+   - ★★☆: Should address — valid improvements to readability, maintainability, or conventions
+   - ★☆☆: Optional — stylistic preferences, minor nits, or subjective suggestions
+   - ☆☆☆: Disagree — reviewer's suggestion is based on a misunderstanding, would introduce a bug, or is factually incorrect
 
    Format:
    ```
    ## 未解決のレビューコメント (N件)
 
-   ### 1. [ファイルパス:行番号] (@author)
+   ### 1. [ファイルパス:行番号] (@author) ★★★
    <Japanese summary of the comment>
+   → 理由: <why this priority rating>
 
    ### 2. ...
    ```
@@ -120,14 +129,21 @@ model: sonnet
 ```
 ## 未解決のレビューコメント (3件)
 
-### 1. [src/utils.ts:42] (@reviewer1)
+### 1. [src/utils.ts:42] (@reviewer1) ★★★
 エラーハンドリングが不足している。try-catchで囲むべき
+→ 理由: 未処理の例外によりランタイムクラッシュの可能性がある
 
-### 2. [src/api.ts:15] (@reviewer2)
+### 2. [src/api.ts:15] (@reviewer2) ★★☆
 型定義が any になっている。適切な型を指定すべき
+→ 理由: 型安全性が損なわれるが、即座にバグを引き起こすわけではない
 
-### 3. [tests/utils.test.ts:28] (@reviewer1)
+### 3. [tests/utils.test.ts:28] (@reviewer1) ★☆☆
 エッジケースのテストが不足している
+→ 理由: テストカバレッジの改善提案であり、現在の動作に問題はない
+
+### 4. [src/utils.ts:10] (@reviewer2) ☆☆☆
+この関数はnullを返す可能性がある
+→ 理由: 上流で既にnullチェック済みであり、指摘は誤解に基づいている
 ```
 
 ## Begin

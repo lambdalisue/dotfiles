@@ -1,54 +1,18 @@
 ---
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git commit:*)
 description: Create a Conventional Commit from already staged changes
 model: sonnet
 ---
 
-## Context
+## Language
 
-!`git diff --cached --stat`
-!`git log --oneline -5`
-
-## Principles
-
-**Conventional Commits**: `<type>[scope]: <description>` + body + footer
-
-**Breaking Changes**: `feat!:` or `fix!:` only (other types cannot be breaking by definition)
-
-**t-wada's Principle**: Code=HOW, Tests=WHAT, **Commit=WHY**, Comments=WHY NOT
-
-**Staging is NOT this command's job**: NEVER run `git add` or any staging command. If nothing is staged, tell the user and stop.
+- Task prompts to agents: **English**
+- User-facing explanations, summaries, AskUserQuestion: **Japanese**
+- Git artifacts (commit messages, branch names, PR titles/bodies): **preserve original language** from agent output
 
 ## Workflow
 
-1. **Check** - Run `git diff --cached --stat`. If nothing is staged, inform the user and **STOP** immediately
-2. **Analyze** - Review staged diffs with `git diff --cached`
-3. **Draft** - Create commit message summarizing the WHY in a fenced code block:
-   ```
-   <type>[scope]: <description>
+1. **Analyze** - Use the Task tool (`subagent_type: "git-commit"`) to analyze staged changes and draft a commit message. If the agent reports nothing is staged, inform the user and **STOP**.
 
-   <body explaining WHY>
+2. **Approve** - Present the proposed commit message to the user exactly as returned by the agent. Use AskUserQuestion to ask for approval with options: "Approve", "Edit" (let user modify the message), "Cancel".
 
-   [optional footer]
-   ```
-4. **STOP** - Wait for user approval (use AskUserQuestion)
-5. **Commit** - Only after approval, execute `git commit` with the approved message
-
-## Example
-
-```
-fix(parser): handle empty input without panic
-
-The parser assumed non-empty input, causing crashes in automated
-pipelines. Defensive handling follows the robustness principle.
-
-Fixes #87
-```
-
-## Begin
-
-Check for staged changes. If present, analyze and draft a commit message for user approval. If nothing is staged, inform the user and stop.
-
-**IMPORTANT**:
-1. NEVER run `git add`, `git add -p`, or any staging command — this is out of scope
-2. You MUST ask the user for approval using AskUserQuestion before executing `git commit`
+3. **Execute** - If approved, use the Task tool (`subagent_type: "git-commit"`) to execute the commit with the approved (or edited) message. Present the result to the user.

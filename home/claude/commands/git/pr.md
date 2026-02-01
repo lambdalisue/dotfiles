@@ -1,72 +1,18 @@
 ---
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(gh pr:*)
 description: Create a pull request with title and body based on commits
 model: sonnet
 ---
 
-## Context
+## Language
 
-!`git branch --show-current`
-!`git log --oneline origin/main..HEAD`
-!`git diff --stat origin/main..HEAD`
-
-## Principles
-
-**Language**: Detect from recent commit messages. Default to English if unclear.
-
-**Scope**: Use only `origin/main..HEAD` diff unless explicitly specified otherwise.
-
-**Title**: Concise summary of all changes (imperative mood)
-
-**Body**: Explain WHY these changes were made, not just WHAT changed.
+- Task prompts to agents: **English**
+- User-facing explanations, summaries, AskUserQuestion: **Japanese**
+- Git artifacts (commit messages, branch names, PR titles/bodies): **preserve original language** from agent output
 
 ## Workflow
 
-First, create a new branch if the current branch is `main`.
+1. **Analyze** - Use the Task tool (`subagent_type: "git-pr"`) to analyze commits and draft PR content. If the agent reports no changes or main branch issues, inform the user and **STOP**.
 
-1. **Analyze** - Review commits and diffs from `origin/main`
-2. **Detect Language** - Check commit message language, default to English
-3. **Draft** - Create PR title and body summarizing the WHY
-4. **Confirm** - Display draft title and body in a fenced code block:
-   ```
-   Title: <concise summary>
+2. **Approve** - Present the PR draft to the user exactly as returned by the agent. Use AskUserQuestion to ask for approval with options: "Approve", "Edit" (let user modify), "Cancel".
 
-   ## Summary
-   - <bullet points of changes>
-
-   ## Why
-   <explanation of WHY these changes were made>
-
-   ## Test Plan
-   - [ ] <test items>
-   ```
-5. **STOP** - Wait for user approval before creating PR (use AskUserQuestion)
-6. **Quick Check** - Verify remote branch exists: `git rev-parse --verify origin/<branch> 2>/dev/null`. If missing, warn user and wait for push
-7. **Create** - Use `gh pr create` with approved content
-
-## Example
-
-```
-Title: Add OAuth2 support for GitHub login
-
-## Summary
-- Add GitHub OAuth2 authentication flow
-- Store tokens securely with encryption
-
-## Why
-Users requested GitHub login to avoid creating separate accounts.
-OAuth2 chosen over OAuth1 for simpler flow and short-lived tokens.
-
-## Test Plan
-- [ ] Test login flow with valid GitHub account
-- [ ] Verify token refresh works correctly
-```
-
-## Begin
-
-Analyze commits from `origin/main`, detect language, and draft PR content for user approval.
-
-**IMPORTANT**:
-1. After drafting the PR content, you MUST ask the user for approval using AskUserQuestion before creating the PR
-2. Never push to remote - if the branch is not on remote, instruct the user to push manually and wait
-3. The branch is typically already pushed when this command is invoked, so keep the remote check lightweight
+3. **Create** - If approved, use the Task tool (`subagent_type: "git-pr"`) to create the PR with the approved content. Present the PR URL to the user.
