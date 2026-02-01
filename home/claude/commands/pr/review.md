@@ -45,7 +45,6 @@ model: sonnet
                comments(first: 10) {
                  nodes {
                    id
-                   databaseId
                    body
                    author { login }
                    path
@@ -88,20 +87,33 @@ model: sonnet
 7. **For Each Selected Comment**:
    a. **Plan** - Analyze the feedback and determine the fix approach
    b. **Detect Language** - Check if original comment is in English, Japanese, or other language
-   c. **Reply** - Post a review comment reply in the SAME language as the original comment:
+   c. **Reply** - Post a review thread reply in the SAME language as the original comment using GraphQL:
       ```bash
-      # For English comments:
-      gh api repos/{owner}/{repo}/pulls/{pr}/comments/{comment_id}/replies \
-        -f body="Will fix: <approach description in English>"
-
-      # For Japanese comments:
-      gh api repos/{owner}/{repo}/pulls/{pr}/comments/{comment_id}/replies \
-        -f body="対応します: <approach description in Japanese>"
+      gh api graphql -f query='
+        mutation($threadId: ID!, $body: String!) {
+          addPullRequestReviewThreadReply(input: {
+            pullRequestReviewThreadId: $threadId
+            body: $body
+          }) {
+            comment { id body }
+          }
+        }
+      ' -f threadId="THREAD_NODE_ID" -f body="Will fix: <approach description>"
       ```
    d. **Implement** - Make the necessary code changes
    e. **Confirm** - Show the changes made
+   f. **Resolve** - Mark the review thread as resolved using GraphQL:
+      ```bash
+      gh api graphql -f query='
+        mutation($threadId: ID!) {
+          resolveReviewThread(input: { threadId: $threadId }) {
+            thread { isResolved }
+          }
+        }
+      ' -f threadId="THREAD_NODE_ID"
+      ```
 
-8. **Summary** - After addressing all selected comments, show summary of changes made
+8. **Summary** - After addressing all selected comments, show summary of changes made and resolved threads
 
 ## Example Output
 
@@ -127,3 +139,4 @@ Identify the target PR (from argument or current branch), fetch unresolved revie
 2. Post a reply comment BEFORE making code changes to communicate intent
 3. Match the reply language to the reviewer's original comment language
 4. Ask user confirmation via AskUserQuestion before addressing comments
+5. After implementing and confirming each fix, resolve the thread using the `resolveReviewThread` GraphQL mutation with the thread's node ID (fetched in step 3)

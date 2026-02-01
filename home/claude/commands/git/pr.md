@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git remote:*), Bash(gh pr:*)
+allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(gh pr:*)
 description: Create a pull request with title and body based on commits
 model: sonnet
 ---
@@ -26,9 +26,8 @@ First, create a new branch if the current branch is `main`.
 
 1. **Analyze** - Review commits and diffs from `origin/main`
 2. **Detect Language** - Check commit message language, default to English
-3. **Check Remote** - Verify if current branch is pushed to remote
-4. **Draft** - Create PR title and body summarizing the WHY
-5. **Confirm** - Display draft title and body in a fenced code block:
+3. **Draft** - Create PR title and body summarizing the WHY
+4. **Confirm** - Display draft title and body in a fenced code block:
    ```
    Title: <concise summary>
 
@@ -41,9 +40,9 @@ First, create a new branch if the current branch is `main`.
    ## Test Plan
    - [ ] <test items>
    ```
-6. **STOP** - Wait for user approval before creating PR (use AskUserQuestion)
-7. **Push Notice** - If branch is not pushed or not up-to-date, instruct user to push manually
-8. **Create** - Only after user confirms push is complete, use `gh pr create` with approved content
+5. **STOP** - Wait for user approval before creating PR (use AskUserQuestion)
+6. **Quick Check** - Verify remote branch exists: `git rev-parse --verify origin/<branch> 2>/dev/null`. If missing, warn user and wait for push
+7. **Create** - Use `gh pr create` with approved content
 
 ## Example
 
@@ -69,5 +68,5 @@ Analyze commits from `origin/main`, detect language, and draft PR content for us
 
 **IMPORTANT**:
 1. After drafting the PR content, you MUST ask the user for approval using AskUserQuestion before creating the PR
-2. Never push to remote - always instruct the user to run `git push` manually
-3. Only execute `gh pr create` after confirming the user has pushed the branch
+2. Never push to remote - if the branch is not on remote, instruct the user to push manually and wait
+3. The branch is typically already pushed when this command is invoked, so keep the remote check lightweight

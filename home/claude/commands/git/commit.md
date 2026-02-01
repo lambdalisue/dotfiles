@@ -1,13 +1,11 @@
 ---
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(git show:*)
-description: Stage meaningful diffs and create Conventional Commits with WHY-focused messages
+allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git commit:*)
+description: Create a Conventional Commit from already staged changes
 model: sonnet
 ---
 
 ## Context
 
-!`git status --short`
-!`git diff --stat`
 !`git diff --cached --stat`
 !`git log --oneline -5`
 
@@ -19,28 +17,22 @@ model: sonnet
 
 **t-wada's Principle**: Code=HOW, Tests=WHAT, **Commit=WHY**, Comments=WHY NOT
 
+**Staging is NOT this command's job**: NEVER run `git add` or any staging command. If nothing is staged, tell the user and stop.
+
 ## Workflow
 
-**ONLY process ALREADY STAGED changes unless nothing is staged.**
+1. **Check** - Run `git diff --cached --stat`. If nothing is staged, inform the user and **STOP** immediately
+2. **Analyze** - Review staged diffs with `git diff --cached`
+3. **Draft** - Create commit message summarizing the WHY in a fenced code block:
+   ```
+   <type>[scope]: <description>
 
-First, run `git diff --cached --stat` and check if there are staged changes.
+   <body explaining WHY>
 
-### Already staged changes (NEVER stage more changes)
-
-1. **Analyze** - Review diffs of staged changes
-2. **Confirm** - Show staged file list AND **display the draft commit message**
-3. **STOP** - Wait for user approval before committing (use AskUserQuestion)
-4. **Commit** - Only after approval, execute `git commit` with the approved message
-5. **Complete** - Do NOT repeat or continue
-
-### No staged changes
-
-1. **Analyze** - Review diffs, identify logical groupings and create TODO list
-2. **Stage** - Run `git add -p` to stage relevant hunks ONLY when no changes are staged
-3. **Confirm** - Show staged file list AND **display the draft commit message** in a fenced code block:
-4. **STOP** - Wait for user approval before committing (use AskUserQuestion)
+   [optional footer]
+   ```
+4. **STOP** - Wait for user approval (use AskUserQuestion)
 5. **Commit** - Only after approval, execute `git commit` with the approved message
-6. **Check** - Check TODO list and continue if remainings
 
 ## Example
 
@@ -55,6 +47,8 @@ Fixes #87
 
 ## Begin
 
-Analyze changes and create commits per logical unit. Process multiple change sets sequentially.
+Check for staged changes. If present, analyze and draft a commit message for user approval. If nothing is staged, inform the user and stop.
 
-**IMPORTANT**: After staging and drafting the commit message, you MUST ask the user for approval using AskUserQuestion before executing `git commit`. Never commit without explicit user confirmation.
+**IMPORTANT**:
+1. NEVER run `git add`, `git add -p`, or any staging command — this is out of scope
+2. You MUST ask the user for approval using AskUserQuestion before executing `git commit`
