@@ -10,6 +10,14 @@ description: Deno-specific conventions and patterns.
 - **Tools**: `deno fmt/lint/check/test` (not Prettier/ESLint/Vitest)
 - **No node_modules**
 
+## Module Structure
+
+- `mod.ts` only at top level; submodules use `{module}.ts` not `{module}/mod.ts`
+
+## JSR Package Docs
+
+Use `deno doc jsr:{package}` to retrieve package documentation.
+
 ## Testing
 
 ```typescript
