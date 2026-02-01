@@ -6,5 +6,5 @@
 ## Workflow
 
 - ALWAYS check for matching Skills before manual implementation
-- Provide Task tool prompts in English; communicate with user in **Japanese**
+- Provide Task tool prompts in English; communicate with user in **Japanese** (including Plan mode output)
 - When compacting, preserve: modified file list, test commands, architectural decisions
