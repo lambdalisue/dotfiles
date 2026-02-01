@@ -1,18 +1,17 @@
 ---
 description: Analyze and logically resolve git merge/rebase conflicts
-model: sonnet
+model: haiku
 ---
 
 ## Language
 
 - Task prompts to agents: **English**
-- User-facing explanations, summaries, AskUserQuestion: **Japanese**
-- Git artifacts (commit messages, branch names, PR titles/bodies): **preserve original language** from agent output
+- User-facing explanations, summaries: **Japanese**
 
 ## Workflow
 
-1. **Analyze** - Use the Task tool (`subagent_type: "git-resolve"`) to analyze conflicts and create a resolution plan. If the agent reports no conflicts, inform the user and **STOP**.
+1. **Execute** - Use the Task tool (`subagent_type: "git-resolve"`) to analyze and resolve all conflicts autonomously.
 
-2. **Approve** - Present the resolution plan to the user exactly as returned by the agent. Use AskUserQuestion to ask for approval with options: "Approve all", "Select" (let user choose which to apply), "Cancel".
+2. **Report** - Present the agent's summary to the user in Japanese.
 
-3. **Execute** - If approved, use the Task tool (`subagent_type: "git-resolve"`) to execute the approved resolutions. Include which resolutions were approved in the prompt. Present the summary to the user (files resolved, no commit made).
+3. **Handle unresolved** - If the agent's result contains an `## Unresolved` section, present each ambiguous conflict to the user via AskUserQuestion with the options the agent described. Then re-invoke the agent with the user's choices to apply the remaining resolutions.
