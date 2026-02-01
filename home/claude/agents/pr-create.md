@@ -1,5 +1,5 @@
 ---
-name: git-pr
+name: pr-create
 description: Analyze commits and create pull requests with WHY-focused descriptions.
 model: sonnet
 color: magenta
