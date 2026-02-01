@@ -42,12 +42,13 @@ When asked to analyze:
 ## Execution
 
 When asked to create a PR:
-1. Verify remote branch: `git rev-parse --verify origin/<branch> 2>/dev/null`
-2. If missing, warn and stop (do NOT push)
+1. Verify remote branch: `git ls-remote --exit-code origin refs/heads/<branch>`
+2. If missing, report "Branch not found on remote. Push first." and **STOP immediately**
 3. Create PR: `gh pr create` with approved content
 4. Return the PR URL
 
 ## Restrictions
 
-- NEVER push to remote — if branch not on remote, instruct user to push
+- **ABSOLUTELY NEVER run `git push`** — the caller has already pushed before invoking this agent
+- If the branch is not on remote, report the error and STOP. Do NOT push, do NOT suggest push commands
 - Do NOT ask for user approval — approval is handled by the caller
