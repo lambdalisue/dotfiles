@@ -4,7 +4,7 @@
 
 **ABSOLUTELY NEVER COMMIT WITHOUT EXPLICIT USER PERMISSION.**
 
-- MUST use AskUserQuestion before ANY `git commit` or `/git:commit`
+- MUST use AskUserQuestion before ANY `git commit`, `/git:commit`, or `/git:commit-staged`
 - Permission valid for ONE commit only
 - ONLY commit when user explicitly says "commit" in CURRENT message
 - Show what will be committed and ask final confirmation

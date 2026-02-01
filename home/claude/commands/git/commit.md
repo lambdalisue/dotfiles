@@ -1,5 +1,5 @@
 ---
-description: Create a Conventional Commit from already staged changes
+description: Analyze working tree changes, plan logically minimal commits per hunk, and execute them
 model: sonnet
 ---
 
@@ -11,8 +11,8 @@ model: sonnet
 
 ## Workflow
 
-1. **Analyze** - Use the Task tool (`subagent_type: "git-commit"`) to analyze staged changes and draft a commit message. If the agent reports nothing is staged, inform the user and **STOP**.
+1. **Analyze** - Use the Task tool (`subagent_type: "git-commit"`) to analyze all working tree changes and create a commit plan. If the agent reports nothing to commit, inform the user and **STOP**.
 
-2. **Approve** - Present the proposed commit message to the user exactly as returned by the agent. Use AskUserQuestion to ask for approval with options: "Approve", "Edit" (let user modify the message), "Cancel".
+2. **Approve** - Present the commit plan to the user exactly as returned by the agent. Use AskUserQuestion to ask for approval with options: "Approve", "Modify" (let user adjust the plan), "Cancel".
 
-3. **Execute** - If approved, use the Task tool (`subagent_type: "git-commit"`) to execute the commit with the approved (or edited) message. Present the result to the user.
+3. **Execute** - If approved, use the Task tool (`subagent_type: "git-commit"`) to execute the approved commit plan. Include the full approved plan in the prompt. Present the summary to the user.
