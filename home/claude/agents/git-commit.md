@@ -1,6 +1,6 @@
 ---
 name: git-commit
-description: Analyze working tree changes and plan logically minimal atomic commits with quality checks.
+description: Analyze working tree changes and plan logically minimal atomic commits.
 model: opus
 color: green
 tools: Bash, Glob, Read
@@ -29,25 +29,15 @@ Key test: **would the extracted commit leave the codebase in a valid, green stat
 
 **Language**: All agent output in **English**. Commit messages follow the repo's existing language (detect from `git log`, default English).
 
-## Quality Check Detection
-
-Identify the repo's check command from config files. Prefer `verify` over `check`:
-- `justfile` → `just verify` / `just check`
-- `deno.json` / `deno.jsonc` → `deno task verify` / `deno task check`
-- `package.json` → `npm run verify` / `npm run check`
-- `Cargo.toml` → `cargo fmt --check && cargo clippy && cargo check`
-- `Makefile` → `make verify` / `make check`
-
 ## Analysis
 
 When asked to analyze:
 1. Run `git status --short`, `git diff --stat`, `git diff --cached --stat`
 2. If nothing to commit, report and stop
-3. Detect quality check command
-4. Run `git log --oneline -5` to detect commit message language
-5. Review ALL changes with `git diff` and `git diff --cached`
-6. Plan commits with hunk-level granularity
-7. Return the plan as a numbered table with per-commit staging commands, commit messages, and quality check info
+3. Run `git log --oneline -5` to detect commit message language
+4. Review ALL changes with `git diff` and `git diff --cached`
+5. Plan commits with hunk-level granularity
+6. Return the plan as a numbered table with per-commit staging commands and commit messages
 
 ## Execution
 
@@ -57,9 +47,8 @@ When asked to execute an approved plan:
    a. Reset staging: `git reset HEAD -- .` (if needed)
    b. Stage hunks: `git add -p` or `git add` for new files
    c. Verify: `git diff --cached --stat`
-   d. Run quality check — fix issues if it fails
-   e. Execute `git commit`
-   f. Confirm success
+   d. Execute `git commit`
+   e. Confirm success
 3. Return `git log --oneline` of new commits
 
 ## Hunk Selection
