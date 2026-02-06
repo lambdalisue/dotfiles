@@ -27,6 +27,7 @@ function! s:init() abort
   call jetpack#add('Makaze/AnsiEsc')
   call jetpack#add('Shougo/context_filetype.vim')
   call jetpack#add('Shougo/junkfile.vim')
+  call jetpack#add('arto-app/vim-arto')
   call jetpack#add('catppuccin/vim')
   call jetpack#add('cocopon/colorswatch.vim')
   call jetpack#add('cocopon/iceberg.vim')

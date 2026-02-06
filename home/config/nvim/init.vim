@@ -556,13 +556,6 @@ nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))
       \ : "\<C-l>:syntax sync fromstart\<CR>"
 " }}}
 
-" Command {{{
-function! s:Arto(path) abort
-  execute printf('!open -a Arto -- %s', fnameescape(a:path))
-endfunction
-command! Arto call s:Arto(expand('%:p'))
-" }}}
-
 " Highlight {{{
 function! s:special_highlight() abort
   syntax match SpecialChar '～' contained
