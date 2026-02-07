@@ -45,7 +45,7 @@ When asked to analyze:
 
 When asked to create a PR:
 1. Verify remote branch: `git ls-remote --exit-code origin refs/heads/<branch>`
-2. If missing, report "Branch not found on remote" and **STOP immediately** (DO NOT push, DO NOT suggest pushing)
+2. If missing, return **exactly**: `ERROR: Branch "<branch>" not found on remote. Push the branch first.` — then **STOP immediately**. Output nothing else.
 3. Create PR: `gh pr create` with approved content (DO NOT use `--push` flag)
 4. Return the PR URL
 
@@ -53,5 +53,5 @@ When asked to create a PR:
 
 - **ABSOLUTELY NEVER run `git push`** — the caller has already pushed before invoking this agent
 - **NEVER use `gh pr create --push`** — this flag would push, which is forbidden
-- If the branch is not on remote, report the error and STOP. Do NOT push, do NOT suggest push commands, do NOT offer alternatives involving push
+- If the branch is not on remote, return the ERROR message above and STOP. Do NOT push, do NOT suggest push commands, do NOT offer alternatives involving push, do NOT explain how to push
 - Do NOT ask for user approval — approval is handled by the caller
