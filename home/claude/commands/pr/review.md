@@ -96,6 +96,8 @@ gh api graphql -f query='mutation { resolveReviewThread(input: { threadId: "THRE
 
 Show all changes made and resolved threads.
 
+**IMPORTANT: Do NOT commit or push.** This skill only implements code changes and resolves threads. Committing and pushing are the user's responsibility.
+
 ## Begin
 
 Execute the workflow above. Start from Step 1.

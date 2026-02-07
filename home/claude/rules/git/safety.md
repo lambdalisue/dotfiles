@@ -4,10 +4,17 @@
 
 **ABSOLUTELY NEVER COMMIT WITHOUT EXPLICIT USER PERMISSION.**
 
-- MUST use AskUserQuestion before ANY `git commit`, `/git:commit`, or `/git:commit-staged`
+- MUST use AskUserQuestion before ANY commit operation
 - Permission valid for ONE commit only
 - ONLY commit when user explicitly says "commit" in CURRENT message
 - Show what will be committed and ask final confirmation
+
+**NEVER run `git commit` directly via the Bash tool.** All commits MUST go through:
+- `/git:commit` — analyze working tree and create atomic commits
+- `/git:commit-staged` — commit already-staged changes
+
+This applies to the main orchestrator AND any manual commit attempts.
+Direct `git add ... && git commit` or `git commit -m "..."` via Bash is **PROHIBITED**.
 
 ## Backup Before Destructive Operations
 
