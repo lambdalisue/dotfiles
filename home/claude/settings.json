@@ -58,18 +58,6 @@
           }
         ]
       }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Task",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/save-plan-analysis.sh",
-            "timeout": 10
-          }
-        ]
-      }
     ]
   },
   "statusLine": {
