@@ -52,12 +52,21 @@ set visualbell t_vb=
 set guicursor+=a:blinkon0
 
 " Use FiraCode Nerd Font
-set guifont=FiraCode\ Nerd\ Font\ Mono:h14:l
+set guifont=IntoneMono\ Nerd\ Font:h14:l
 
 " Use antialias if possible
 if exists('antialias')
   set antialias
 endif
+
+" Neovide
+let g:neovide_position_animation_length = 0
+let g:neovide_cursor_animation_length = 0.00
+let g:neovide_cursor_trail_size = 0
+let g:neovide_cursor_animate_in_insert_mode = v:false
+let g:neovide_cursor_animate_command_line = v:false
+let g:neovide_scroll_animation_far_lines = 0
+let g:neovide_scroll_animation_length = 0.0
 
 if filereadable(expand('~/.gvimrc.local'))
   execute 'source' fnameescape(expand('~/.gvimrc.local'))

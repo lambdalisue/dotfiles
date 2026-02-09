@@ -85,5 +85,7 @@
   "telemetry": "off",
   "autoCompactEnabled": true,
   "autoUpdates": false,
-  "theme": "dark"
+  "theme": "dark",
+  "effortLevel": "low",
+  "model": "sonnet"
 }
