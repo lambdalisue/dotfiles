@@ -35,6 +35,7 @@
       "Bash(sudo:*)"
     ]
   },
+  "model": "sonnet",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "PreToolUse": [
@@ -67,13 +68,13 @@
   },
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true
+    "frontend-design@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true
   },
   "outputStyle": "Explanatory",
   "telemetry": "off",
   "autoCompactEnabled": true,
   "autoUpdates": false,
   "theme": "dark",
-  "effortLevel": "low",
-  "model": "sonnet"
+  "effortLevel": "low"
 }

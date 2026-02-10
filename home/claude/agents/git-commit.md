@@ -36,8 +36,9 @@ When asked to analyze:
 2. If nothing to commit, report and stop
 3. Run `git log --oneline -5` to detect commit message language
 4. Review ALL changes with `git diff` and `git diff --cached`
-5. Plan commits with hunk-level granularity
-6. Return the plan as a numbered table with per-commit staging commands and commit messages
+5. **Consider context**: If additional context is provided in the request (e.g., "Fix #123", "Performance improvement"), incorporate it into the commit messages to explain the WHY for all relevant commits
+6. Plan commits with hunk-level granularity
+7. Return the plan as a numbered table with per-commit staging commands and commit messages
 
 ## Execution
 

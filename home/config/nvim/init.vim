@@ -478,7 +478,11 @@ cnoremap <Up>   <C-p>
 cnoremap <Down> <C-n>
 
 " Fix unreasonable mappings by historical reason
-nnoremap Y y$
+"nnoremap Y y$
+
+" Copy an absolute file path and the current line number
+nnoremap <silent> Y :let @+=expand('%:p') . ':' . line('.')<CR>
+vnoremap <silent> Y :<C-u>let @+=expand('%:p') . ':' . line("'<") . '-' . line("'>")<CR>
 
 " Terminal mappings
 tmap <silent> <C-w> <C-\><C-n><C-w>

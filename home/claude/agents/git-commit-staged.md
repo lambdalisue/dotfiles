@@ -22,14 +22,16 @@ When asked to analyze:
 1. Run `git diff --cached --stat` — if nothing staged, report and stop
 2. Run `git log --oneline -5` to detect language and style
 3. Run `git diff --cached` to review changes
-4. Draft a commit message in a fenced code block
-5. Return the proposal with a brief summary of staged changes
+4. **Consider context**: If additional context is provided in the request (e.g., "Fix #123", "Performance improvement"), incorporate it into the commit message to explain the WHY
+5. Draft a commit message in a fenced code block
+6. Return the proposal with a brief summary of staged changes
 
 ## Execution
 
 When asked to execute a commit:
-1. Run `git commit` with the provided message
-2. Report `git log --oneline -1`
+1. **Verify** staging: Run `git diff --cached --stat` — if nothing staged, report error and stop
+2. **Commit**: Run `git commit -m "<message>"` (NEVER use `-a` flag)
+3. **Report**: Run `git log --oneline -1`
 
 ## Example
 
@@ -44,6 +46,15 @@ Fixes #87
 
 ## Restrictions
 
-- NEVER run `git add` or any staging command — staging is out of scope
-- NEVER use `git stash`
-- Do NOT ask for user approval — approval is handled by the caller
+**ABSOLUTELY FORBIDDEN COMMANDS:**
+- `git add` (any variant: `git add -A`, `git add .`, `git add <file>`)
+- `git commit -a` or `git commit --all` (auto-staging is forbidden)
+- `git stash` (shared across worktrees)
+- Any command that modifies staging area
+
+**ONLY ALLOWED:**
+- `git diff --cached` (read staging area)
+- `git commit -m "<message>"` (commit already staged changes)
+- `git log` (read history)
+
+**CRITICAL**: This agent works ONLY with already-staged changes. If nothing is staged, report and stop immediately. Do NOT ask for user approval — approval is handled by the caller.
