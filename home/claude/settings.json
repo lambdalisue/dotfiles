@@ -35,7 +35,6 @@
       "Bash(sudo:*)"
     ]
   },
-  "model": "sonnet",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "PreToolUse": [
@@ -76,5 +75,5 @@
   "autoCompactEnabled": true,
   "autoUpdates": false,
   "theme": "dark",
-  "effortLevel": "low"
+  "skipDangerousModePermissionPrompt": true
 }

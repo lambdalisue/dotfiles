@@ -150,19 +150,23 @@ function pathToList(path: string) {
   };
 }
 
-const macSKKSource = builtin.source.list([
-  "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries",
-  "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries/skk-jisyo.utf8",
-].map(pathToList));
+const macSKKSource = builtin.source.list(
+  [
+    "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries",
+    "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries/skk-jisyo.utf8",
+  ].map(pathToList),
+);
 
-const claudeSource = builtin.source.list([
-  "./CLAUDE.md",
-  "./claude/settings.json",
-  "./claude/settings.local.json",
-  "~/.claude/CLAUDE.md",
-  "~/.claude/settings.json",
-  "~/Library/Application Support/cage/presets.yaml",
-].map(pathToList));
+const claudeSource = builtin.source.list(
+  [
+    "./CLAUDE.md",
+    "./claude/settings.json",
+    "./claude/settings.local.json",
+    "~/.claude/CLAUDE.md",
+    "~/.claude/settings.json",
+    "~/Library/Application Support/cage/presets.yaml",
+  ].map(pathToList),
+);
 
 export const main: Entrypoint = ({
   definePickerFromSource,
@@ -434,9 +438,7 @@ export const main: Entrypoint = ({
 
   definePickerFromSource("line", builtin.source.line, {
     matchers: [builtin.matcher.substring],
-    sorters: [
-      builtin.sorter.noop,
-    ],
+    sorters: [builtin.sorter.noop],
     previewers: [builtin.previewer.buffer],
     actions: {
       ...myQuickfixActions,
