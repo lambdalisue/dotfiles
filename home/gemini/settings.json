@@ -3,5 +3,37 @@
     "auth": {
       "selectedType": "oauth-personal"
     }
+  },
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ]
+    },
+    "slite": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "slite-mcp-server"
+      ]
+    },
+    "deepwiki": {
+      "httpUrl": "https://mcp.deepwiki.com/mcp"
+    }
   }
 }

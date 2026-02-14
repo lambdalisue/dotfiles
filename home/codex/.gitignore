@@ -1,3 +1,6 @@
 *
+!.gitignore
 !AGENTS.md
 !config.toml
+!skills/
+!skills/*/**.md
