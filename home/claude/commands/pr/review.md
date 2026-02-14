@@ -1,7 +1,7 @@
 ---
-allowed-tools: Bash(git branch:*), Bash(gh pr:*), Bash(gh api:*), Bash(jq:*), Read, Edit, Glob, Grep, AskUserQuestion
+allowed-tools: Bash(git branch:*), Bash(gh pr:*), Bash(gh api:*), Bash(jq:*), Read, Glob, Grep
 argument-hint: [PR_NUMBER] Optional PR number to review
-description: Fetch unresolved PR review comments and help address them
+description: Fetch unresolved PR review comments and display analysis
 model: sonnet
 ---
 
@@ -16,9 +16,9 @@ model: sonnet
 - If PR number is provided as argument, use that number
 - If no argument, use the PR number from Context above
 - Only show unresolved review comments (threads not marked as resolved)
-- Summarize comments in Japanese for the user
-- Reply to reviewers in THEIR language (detect from original comment)
-- When addressing a comment, first post a reply, then implement the fix
+- This command is **display-only**. Do NOT modify files, reply to threads, resolve threads, or ask the user for actions
+- Summarize and analyze comments in Japanese for the user
+- Show planned reply content in the REVIEWER's language (detect from original comment)
 
 ## Workflow
 
@@ -43,60 +43,49 @@ Pipe the result to filter unresolved threads:
 | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)]'
 ```
 
-### Step 3: Summarize in Japanese
+### Step 3: Analyze and display in Japanese
 
-Display unresolved comments as numbered list.
+Read the relevant source files for each comment to understand the full context before analyzing.
 
-Priority is shown as exactly 3 characters using filled and empty stars:
+Display unresolved comments as a numbered list. Each finding uses the following structure:
 
-- Must address: `[★★★]`
-- Should address: `[★★☆]`
-- Optional: `[★☆☆]`
-- Disagree: `[☆☆☆]`
+Severity levels (exactly 3 characters using filled and empty stars):
+
+- Must address: `(★★★)`
+- Should address: `(★★☆)`
+- Optional: `(★☆☆)`
+- Disagree: `(☆☆☆)`
 
 Format (follow exactly):
 
 ```
 ## 未解決のレビューコメント (N件)
 
-### 1. [path:line] (@author) [★★☆]
-summary in Japanese
-→ 理由: reason
+---
+
+### 1. 指摘のタイトル (`path/to/file:line`) (★★☆)
+
+> 指摘事項の要約をここに記述する。何が指摘されているのかを簡潔にまとめる。
+
+指摘に対してどう考えるか。対応するべきか、対応不要か、その理由を述べる。
+
+対応する場合は対応方法の概要を簡潔に記述する。
+
+**返信内容** (@reviewer_name へ、レビュワーの言語で):
+
+> Reply content in the reviewer's language here.
+> This should be the actual message you would post as a thread reply.
+
+---
 
 ### 2. ...
 ```
 
-### Step 4: Ask user
-
-Use AskUserQuestion with options: "All", "Select", "None"
-
-### Step 5: Address selected comments
-
-For each selected comment:
-
-a. Plan the fix approach
-
-b. Reply to the thread. Build the JSON by replacing THREAD_ID and MESSAGE with actual values:
-
-```bash
-gh api graphql --input - << 'GQLEOF'
-{"query":"mutation($body:String!){addPullRequestReviewThreadReply(input:{pullRequestReviewThreadId:\"THREAD_ID\",body:$body}){comment{id body}}}","variables":{"body":"MESSAGE"}}
-GQLEOF
-```
-
-c. Implement the code changes
-
-d. Resolve the thread. Replace THREAD_ID with the actual thread node ID:
-
-```bash
-gh api graphql -f query='mutation { resolveReviewThread(input: { threadId: "THREAD_ID" }) { thread { isResolved } } }'
-```
-
-### Step 6: Summary
-
-Show all changes made and resolved threads.
-
-**IMPORTANT: Do NOT commit or push.** This skill only implements code changes and resolves threads. Committing and pushing are the user's responsibility.
+Notes:
+- Sort by severity (★★★ > ★★☆ > ★☆☆ > ☆☆☆)
+- The opinion section should include your own judgment: agree/disagree with the reviewer, whether it's worth fixing, and why
+- The 返信内容 section MUST be in the reviewer's language (detected from the original comment), NOT Japanese
+- Do NOT offer to take any actions after displaying the report
 
 ## Begin
 

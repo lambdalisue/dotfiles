@@ -208,7 +208,16 @@ After all 3 agents complete:
 
 ### Step 5: Report to user in Japanese
 
-Format the final report:
+This command is **display-only**. Do NOT offer to take any actions after displaying the report.
+
+Severity levels (exactly 3 characters using filled and empty stars):
+
+- Critical (must fix): `(★★★)`
+- Warning (should fix): `(★★☆)`
+- Notice (optional): `(★☆☆)`
+- Disagree (not an issue): `(☆☆☆)`
+
+Format the final report. Each finding uses the following structure:
 
 ```
 ## コードレビュー結果
@@ -217,40 +226,36 @@ Format the final report:
 
 ---
 
-### Critical [★★★] (N件)
+### 1. 指摘のタイトル (`path/to/file:line`) (★★★)
 
-#### 1. `path/to/file:line` — 問題タイトル
-説明文
-→ **推奨**: 修正アプローチ
-📋 検出: Security / Performance / Maintainability
+> 指摘事項の要約をここに記述する。何が問題なのかを簡潔にまとめる。
 
----
+指摘に対してどう考えるか。対応するべきか、対応不要か、その理由を述べる。
 
-### Warning [★★☆] (N件)
-
-#### 1. `path/to/file:line` — 問題タイトル
-説明文
-→ **推奨**: 修正アプローチ
-📋 検出: Security / Performance / Maintainability
+対応する場合は対応方法の概要を簡潔に記述する。
 
 ---
 
-### Notice [★☆☆] (N件)
+### 2. 指摘のタイトル (`path/to/file:line`) (★★☆)
 
-#### 1. `path/to/file:line` — 問題タイトル
-説明文
-→ **推奨**: 修正アプローチ
-📋 検出: Security / Performance / Maintainability
+> 指摘事項の要約をここに記述する。何が問題なのかを簡潔にまとめる。
+
+...
 
 ---
 
-### レビュアー間の見解相違 (該当がある場合のみ)
+### 3. 指摘のタイトル (`path/to/file:line`) (★☆☆)
 
-#### `path/to/file:line`
-- **Agent A の見解**: ...
-- **Agent B の見解**: ...
-- **判断**: ... (理由)
+> 指摘事項の要約をここに記述する。何が問題なのかを簡潔にまとめる。
+
+...
 ```
+
+Notes:
+- Sort by severity (★★★ > ★★☆ > ★☆☆ > ☆☆☆), then by file path
+- The opinion section should include your own judgment: agree/disagree with the finding, whether it's worth fixing, and why
+- If agents disagreed on a finding, mention the disagreement and your reasoning in the opinion section
+- Do NOT group findings by severity heading — use a flat numbered list sorted by severity
 
 If no issues are found, report:
 
