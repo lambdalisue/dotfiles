@@ -71,9 +71,9 @@
     "lua-lsp@claude-plugins-official": true
   },
   "outputStyle": "Explanatory",
+  "skipDangerousModePermissionPrompt": true,
   "telemetry": "off",
   "autoCompactEnabled": true,
   "autoUpdates": false,
-  "theme": "dark",
-  "skipDangerousModePermissionPrompt": true
+  "theme": "dark"
 }
