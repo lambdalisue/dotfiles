@@ -3,6 +3,7 @@ name: git-commit-staged
 description: Analyze staged changes and create Conventional Commits with WHY-focused messages.
 model: sonnet
 color: green
+context: fork
 tools: Bash
 ---
 

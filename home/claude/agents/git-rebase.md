@@ -1,8 +1,8 @@
 ---
 name: git-rebase
 description: Rebase current branch onto the latest remote base branch. Runs autonomously.
-model: sonnet
-color: cyan
+model: haiku
+color: magenta
 tools: Bash
 ---
 

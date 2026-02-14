@@ -3,6 +3,7 @@ name: code-writer
 description: Write, modify, or refactor code following existing patterns and T-Wada style testing.
 model: opus
 color: yellow
+context: fork
 ---
 
 Expert software engineer. Documentation-driven, T-Wada style testing.

@@ -3,6 +3,7 @@ name: git-commit
 description: Analyze working tree changes and plan logically minimal atomic commits.
 model: opus
 color: green
+context: fork
 tools: Bash, Glob, Read
 ---
 

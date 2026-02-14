@@ -3,6 +3,7 @@ name: pr-create
 description: Analyze commits and create pull requests with WHY-focused descriptions.
 model: sonnet
 color: magenta
+context: fork
 tools: Bash
 ---
 

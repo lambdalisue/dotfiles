@@ -1,8 +1,8 @@
 ---
 name: git-reward
 description: Rewrite a commit message using fixup commit for later autosquash rebase.
-model: opus
-color: green
+model: sonnet
+color: cyan
 tools: Bash, Read
 ---
 

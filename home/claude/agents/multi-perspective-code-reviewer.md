@@ -4,6 +4,7 @@ description: Comprehensive code review from security, performance, and maintaina
 tools: Bash, Glob, Grep, Read, WebFetch, TodoWrite, WebSearch, BashOutput, KillShell, AskUserQuestion, Skill, SlashCommand
 model: opus
 color: red
+context: fork
 ---
 
 Code review orchestrator with three perspectives.
