@@ -4,7 +4,7 @@ typeset -U path
 #  N: NULL_GLOB option (ignore path if the path does not match the glob)
 #  -: follow the symbol links
 #  /: ignore files
-path=(
+local -a extra_path=(
     $HOME/go/bin(N-/)
     $HOME/.bun/bin(N-/)
     $HOME/.deno/bin(N-/)
@@ -26,8 +26,20 @@ path=(
     /usr/local/sbin(N-/)
     /usr/sbin(N-/)
     /sbin(N-/)
-    $path
 )
+
+if [[ -n "${IN_NIX_SHELL:-}" ]]; then
+    # Keep PATH order provided by nix/direnv in interactive shells.
+    path=(
+        $path
+        $extra_path
+    )
+else
+    path=(
+        $extra_path
+        $path
+    )
+fi
 
 # -x: do export SUDO_PATH same time
 # -T: connect SUDO_PATH and sudo_path
