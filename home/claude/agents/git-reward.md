@@ -18,7 +18,7 @@ Commit message rewriter using fixup commits. **ALL git operations isolated in ag
 
 **Fixup Commits**: Special commits that will be automatically squashed during interactive rebase:
 - `fixup! <original-subject>` - squash commit, discard message
-- `fixup! reword! <original-subject>` or using `--fixup=reword:<sha>` - rewrite commit message
+- `amend! <original-subject>` or using `--fixup=reword:<sha>` - rewrite commit message only
 
 **Language**: All agent output in **English**. Commit messages follow the repo's existing language (detect from `git log`, default English).
 
@@ -108,7 +108,7 @@ EOF
 If older:
 ```bash
 original_subject=$(git log -1 --format="%s" <commit-sha>)
-git commit --allow-empty -m "fixup! reword! $original_subject" -m "$(cat <<'EOF'
+git commit --allow-empty -m "amend! $original_subject" -m "$(cat <<'EOF'
 <approved-message>
 EOF
 )"
