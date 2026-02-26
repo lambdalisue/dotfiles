@@ -57,7 +57,7 @@ First, exclude files marked as `linguist-generated` in `.gitattributes`:
 1. Get the changed file list: `git diff --name-only <merge-base>...HEAD`
 2. Check attributes for those files: `git check-attr linguist-generated -- <files...>`
 3. Collect files where the result is `true` — these are generated files
-4. Append `':!<path>'` pathspec for each generated file to all `git diff` commands below
+4. Append `':(exclude)<path>'` pathspec for each generated file to all `git diff` commands below
 
 If no `.gitattributes` exists or no files are marked, skip this filtering.
 
