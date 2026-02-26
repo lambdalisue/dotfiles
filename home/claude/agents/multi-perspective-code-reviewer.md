@@ -45,5 +45,6 @@ Code review orchestrator with three perspectives.
 
 ## Principles
 
+- Exclude files marked as `linguist-generated` in `.gitattributes` from review scope (use `git check-attr linguist-generated -- <file>` to check)
 - Prioritize ruthlessly: not every suggestion needs implementation
 - Escalate uncertainty to user
