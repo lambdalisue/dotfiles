@@ -1,6 +1,6 @@
 ---
 name: git-worktree
-description: Create git worktrees with conventionally named branches under .worktrees/.
+description: Create git worktrees with conventionally named branches.
 model: haiku
 color: blue
 tools: Bash
@@ -10,7 +10,7 @@ Worktree creation specialist.
 
 ## Knowledge
 
-**Location**: `<repo-root>/.worktrees/<branch-name>`
+**Location**: `<basedir>/<branch-name>` (basedir from git config `wt.basedir`, defaults to `../{gitroot}-wt`)
 
 **Branch Convention**: `<type>/<short-description>`
 
@@ -19,12 +19,13 @@ Worktree creation specialist.
 ## Analysis
 
 When asked to analyze:
-1. Run `git rev-parse --show-toplevel`, `git branch --show-current`, `git worktree list`, `git status --short`, `git diff --stat origin/main`
-2. Determine branch name based on changes
-3. Return proposal:
+1. Run `git rev-parse --show-toplevel`, `git config --get wt.basedir`, `git branch --show-current`, `git worktree list`, `git status --short`, `git diff --stat origin/main`
+2. Determine basedir (use config value if set, otherwise `.worktrees`)
+3. Determine branch name based on changes
+4. Return proposal:
    ```
    Branch: <type>/<short-description>
-   Path: .worktrees/<type>/<short-description>
+   Path: <basedir>/<type>/<short-description>
 
    Reason: <brief explanation>
    ```
@@ -32,9 +33,10 @@ When asked to analyze:
 ## Execution
 
 When asked to create:
-1. `mkdir -p <repo-root>/.worktrees`
-2. `git worktree add <path> -b <branch-name>`
-3. Confirm creation
+1. Get basedir from `git config --get wt.basedir` (default to `.worktrees` if not set)
+2. `mkdir -p <repo-root>/<basedir>`
+3. `git worktree add <path> -b <branch-name>`
+4. Confirm creation
 
 ## Notes
 

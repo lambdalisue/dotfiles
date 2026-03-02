@@ -86,7 +86,7 @@ Use the Task tool to spawn exactly 3 agents **in parallel** (all in a single mes
 
 ```
 subagent_type: "general-purpose"
-model: "sonnet"
+model: "opus"
 ```
 
 Prompt template:
@@ -127,7 +127,7 @@ Return your findings as a structured list.
 
 ```
 subagent_type: "general-purpose"
-model: "sonnet"
+model: "opus"
 ```
 
 Prompt template:
@@ -168,7 +168,7 @@ Return your findings as a structured list.
 
 ```
 subagent_type: "general-purpose"
-model: "sonnet"
+model: "opus"
 ```
 
 Prompt template:

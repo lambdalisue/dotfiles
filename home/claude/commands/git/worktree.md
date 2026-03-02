@@ -1,5 +1,5 @@
 ---
-description: Create a git worktree under .worktrees/ with an appropriate branch name
+description: Create a git worktree with an appropriate branch name (location configured via git config wt.basedir, defaults to ../{gitroot}-wt)
 model: haiku
 ---
 
