@@ -27,11 +27,11 @@ Execute all steps without stopping for approval. Report any issues in the result
 6. If rebase succeeds: report `git log --oneline -10` showing the rebased history
 7. If rebase fails due to conflicts:
    - Report the conflicted files from `git status`
-   - Do NOT attempt to resolve — inform that `/git:resolve` should be used
+   - Do NOT attempt to resolve — inform that `/git-resolve` should be used
    - Do NOT run `git rebase --abort` unless explicitly instructed
 
 ## Restrictions
 
 - NEVER force-push (`git push --force` or `git push --force-with-lease`)
 - NEVER use `git stash`
-- Do NOT resolve conflicts — delegate to `/git:resolve`
+- Do NOT resolve conflicts — delegate to `/git-resolve`

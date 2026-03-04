@@ -39,7 +39,7 @@ When asked to analyze:
    ```bash
    git log --oneline <base>..HEAD
    ```
-   If no commits exist since base, report: "No commits found since base branch. All changes will be new commits. Consider using `/git:commit` instead." and **stop**.
+   If no commits exist since base, report: "No commits found since base branch. All changes will be new commits. Consider using `/git-commit` instead." and **stop**.
 
 3. **Analyze each commit's scope** (what files/regions each commit touched):
    ```bash

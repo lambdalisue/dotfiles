@@ -43,7 +43,7 @@ When asked to analyze:
    ```bash
    git log --oneline <base>..HEAD
    ```
-   If no commits exist since base, report: "No commits found since base branch. All staged changes will be a new commit. Consider using `/git:commit-staged` instead." and **stop**.
+   If no commits exist since base, report: "No commits found since base branch. All staged changes will be a new commit. Consider using `/git-commit-staged` instead." and **stop**.
 
 4. **Analyze each commit's scope**:
    ```bash

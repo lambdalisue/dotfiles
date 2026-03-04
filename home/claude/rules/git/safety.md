@@ -9,10 +9,10 @@
 - ONLY commit when user explicitly says "commit" in CURRENT message
 
 **NEVER run `git commit` directly via the Bash tool.** All commits MUST go through:
-- `/git:commit` — analyze working tree and create atomic commits
-- `/git:commit-staged` — commit already-staged changes
-- `/git:commit-fixup` — map working tree changes to existing commits as fixup
-- `/git:commit-staged-fixup` — map staged changes to existing commits as fixup
+- `/git-commit` — analyze working tree and create atomic commits
+- `/git-commit-staged` — commit already-staged changes
+- `/git-commit-fixup` — map working tree changes to existing commits as fixup
+- `/git-commit-staged-fixup` — map staged changes to existing commits as fixup
 
 ## Forbidden Staging Commands
 
