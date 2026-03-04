@@ -9,6 +9,7 @@
 ## Workflow
 
 - ALWAYS check for matching Skills before manual implementation
+- When input starts with `/` (e.g. `/xxxxx`), treat it as a Claude Code command/skill invocation and follow the corresponding Skill/Command instructions first
 - Provide Task tool prompts in English; communicate with user in **Japanese** (including Plan mode output)
 - **Written artifacts** (commit messages, PR titles/bodies, Issue titles/bodies, branch names): preserve the original language as-is — do NOT translate them to match the conversation language
 - When compacting, preserve: modified file list, test commands, architectural decisions

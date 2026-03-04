@@ -2,7 +2,7 @@
 allowed-tools: Read, Write, Glob, Bash(ls:*), Bash(mkdir:*), Bash(pwd:*)
 argument-hint: name description...
 description: Create a project-local Claude Code skill in .claude/skills
-model: opus
+model: sonnet
 ---
 
 ## Arguments

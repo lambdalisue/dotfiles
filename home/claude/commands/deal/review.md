@@ -1,8 +1,8 @@
 ---
 allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(gh pr:*), Bash(gh api:*), Bash(gh repo:*), Bash(jq:*), Read, Edit, Glob, Grep
 argument-hint: "[context]"
-description: Address review findings from /code:review or /pr:review
-model: opus
+description: Address review findings from /code:review, /style:review, /doc:review, or /pr:review
+model: sonnet
 ---
 
 ## Arguments
@@ -22,10 +22,10 @@ model: opus
 
 ## Principles
 
-- This command runs **after** `/code:review` or `/pr:review`. The review results are in the conversation history.
+- This command runs **after** `/code:review`, `/style:review`, `/doc:review`, or `/pr:review`. The review results are in the conversation history.
 - User's `context` argument takes **highest priority** over the review's own severity judgments.
 - If no `context` is provided, follow the review's recommendations (address ★★★ and ★★☆; skip ★☆☆ and ☆☆☆ unless they are trivially fixable).
-- Do NOT commit or push. Only implement code changes, reply to threads, and resolve threads.
+- Do NOT commit or push. Only implement changes (code or document), reply to threads, and resolve threads.
 
 ## Workflow
 
@@ -34,6 +34,8 @@ model: opus
 Look at the conversation history to determine which review command was run:
 
 - **Code review** (`/code:review`): The report starts with `## コードレビュー結果`
+- **Style review** (`/style:review`): The report starts with `## スタイルレビュー結果`
+- **Doc review** (`/doc:review`): The report starts with `## ドキュメントレビュー結果`
 - **PR review** (`/pr:review`): The report starts with `## 未解決のレビューコメント`
 
 If neither is found, inform the user and **STOP**.
@@ -69,13 +71,13 @@ Display the action plan in Japanese:
 
 For each finding marked as "対応する", implement the fix:
 
-1. Read the relevant source files
-2. Make the code changes using Edit tool
+1. Read the relevant source files or documents
+2. Make changes using Edit tool (code) or Edit/Write tool (documents)
 3. Briefly report what was changed
 
 ### Step 4: PR review — Reply and resolve threads (PR review only)
 
-**Skip this step if the review was `/code:review`.**
+**Skip this step if the review was `/code:review`, `/style:review`, or `/doc:review`.**
 
 For PR review, fetch the unresolved threads to get thread IDs:
 
@@ -106,27 +108,42 @@ gh api graphql -f query='mutation { resolveReviewThread(input: { threadId: "THRE
 
 ### Step 5: Summary
 
-Display a summary in Japanese:
+Display a detailed summary in Japanese. Each addressed finding must explain **what** was changed, **why** that approach was chosen, and **how** it was implemented.
 
 ```
 ## 対応結果
 
-### 変更したファイル
-- `path/to/file` — 変更内容の概要
-
 ### 対応した指摘 (N件)
-- #1: タイトル
-- #2: タイトル
+
+#### #1: 指摘タイトル (★★★)
+
+- **何を**: `path/to/file:line` の関数Xを修正
+- **なぜ**: 元のコードはYの場合にZが発生するため。レビュー指摘の通り、信頼境界での検証が欠落していた
+- **どのように**: 入力値の検証をAパターンで追加。既存の `path/to/validator.ts:42` と同じ方式を採用した
+
+#### #2: 指摘タイトル (★★☆)
+
+- **何を**: `path/to/file:line` のモジュール構造を変更
+- **なぜ**: 既存の設計パターン（`path/to/existing.ts` で確立）と不整合があったため
+- **どのように**: 責務をBモジュールに移動し、インターフェースをCパターンに統一
 
 ### スキップした指摘 (N件)
-- #3: タイトル — 理由
+
+- **#3** (★☆☆): 指摘タイトル — 軽微な改善であり、現状でも正しく動作するため見送り
+- **#4** (☆☆☆): 指摘タイトル — 既存コードベース全体が同じアプローチを採用しており、ここだけ変更するのは不整合を生むため不同意
+
+### 変更ファイル一覧
+
+- `path/to/file1` — 変更概要
+- `path/to/file2` — 変更概要
 
 ### 返信・解決したスレッド (N件) ← PR review only
-- #1: @reviewer — 返信済み・解決済み
-- #2: @reviewer — 返信済み・解決済み
+
+- **#1**: @reviewer — 修正内容を説明、解決済み
+- **#3**: @reviewer — 見送り理由を説明、解決済み
 ```
 
-**IMPORTANT: Do NOT commit or push.** This command only implements code changes and handles PR threads.
+**IMPORTANT: Do NOT commit or push.** This command only implements changes (code or document) and handles PR threads.
 
 ## Begin
 

@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git merge-base:*), Bash(git rev-parse:*), Bash(gh pr:*), Read, Glob, Grep, Task
+allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(git status:*), Bash(git branch:*), Bash(git merge-base:*), Bash(git rev-parse:*), Bash(git check-attr:*), Bash(gh pr:*), Bash(cat:*), Read, Glob, Grep, Agent
 argument-hint: "[base] [context]"
 description: Multi-perspective code review from base branch with 3 independent reviewer agents
 model: opus
@@ -7,273 +7,118 @@ model: opus
 
 ## Arguments
 
-- `base` (optional): Base branch/ref to diff against. Defaults to the base branch of the current branch.
-- `context` (optional): Additional context about the changes (e.g., "Performance optimization", "Security fix for auth").
-
-### Argument Parsing Rules
-
-- **No args**: Detect base branch automatically, no additional context.
-- **One arg**: If it matches a valid git ref (`git rev-parse --verify <arg>` succeeds), treat as `base`. Otherwise treat as `context`.
-- **Two+ args**: First token is `base`, remaining tokens joined as `context`.
+- `base` (optional): Base branch/ref. Auto-detected if omitted.
+- `context` (optional): Additional context (e.g., "Security fix for auth").
+- **No args**: auto-detect. **One arg**: git ref → `base`, else → `context`. **Two+**: first=`base`, rest=`context`.
 
 ## Language
 
-- Task prompts to agents: **English**
-- User-facing report and summaries: **Japanese**
+- Agent prompts: **English** / User-facing report: **Japanese**
 
 ## Principles
 
-- This command performs **read-only review**. Do NOT modify any files.
-- Focus on **improvements and concerns**, not praise. Skip "good points".
-- Each agent reviews independently with a distinct lens.
-- When agents contradict each other, the orchestrator resolves the conflict and explains the reasoning.
-- Severity levels:
-  - **Critical** `[★★★]`: Must fix before merge — bugs, vulnerabilities, data loss risks
-  - **Warning** `[★★☆]`: Should fix — design issues, performance concerns, maintainability problems
-  - **Notice** `[★☆☆]`: Consider fixing — style, minor improvements, optional enhancements
+- **Read-only**. **No nits** (style/naming/formatting → `/style:review`).
+- **Focus**: design mistakes, architectural misfit, best practices violations, security holes, codebase inconsistency, rule violations, logic bugs.
+- Severity: **★★★** must fix / **★★☆** should fix / **★☆☆** consider
 
 ## Workflow
 
-### Step 1: Parse arguments and determine base
+### Step 1: Determine review scope
 
-1. Parse the provided arguments according to the rules above.
-2. If no `base` specified, detect the base branch:
-   ```bash
-   git rev-parse --abbrev-ref HEAD
-   ```
-   Then determine the upstream/base branch. Try in order:
-   - `gh pr view --json baseRefName --jq '.baseRefName'` (if PR exists)
-   - `git config branch.<current>.merge` (tracking branch)
-   - Fall back to `main` or `master` (whichever exists on remote)
-3. Compute the merge base:
-   ```bash
-   git merge-base <base> HEAD
-   ```
+**If `base` given** → `git diff <merge-base>...HEAD`.
 
-### Step 2: Gather review material
+**If no `base`** → auto-detect:
+1. `git status --short` — uncommitted changes?
+2. **Uncommitted** → `git diff` + `git diff --cached` (header: `**モード**: 未コミット変更`)
+3. **All committed** → detect base (`gh pr view` → `git config branch.*.merge` → `main`/`master`), then `git diff <merge-base>...HEAD` + `git log --oneline <merge-base>...HEAD` (header: `**ベース**: \`{base}\``)
 
-First, exclude files marked as `linguist-generated` in `.gitattributes`:
+### Step 2: Gather material
 
-1. Get the changed file list: `git diff --name-only <merge-base>...HEAD`
-2. Check attributes for those files: `git check-attr linguist-generated -- <files...>`
-3. Collect files where the result is `true` — these are generated files
-4. Append `':(exclude)<path>'` pathspec for each generated file to all `git diff` commands below
+Exclude `linguist-generated` files. Gather diff + file list per Step 1. If empty → **STOP**.
 
-If no `.gitattributes` exists or no files are marked, skip this filtering.
+Also read **project rules**: `CLAUDE.md`, `.claude/rules/**/*.md`, `rules/**/*.md` → combine as `{project_rules}`.
 
-Run in parallel (with pathspec exclusions if any):
+### Step 3: Launch 3 agents in parallel
 
-```bash
-# Changed files list
-git diff --name-status <merge-base>...HEAD
+Spawn via Agent tool, all in one message. Each agent gets: diff, file list, commit log (if any), project rules, context.
 
-# Full diff
-git diff <merge-base>...HEAD
-
-# Commit log
-git log --oneline --no-decorate <merge-base>...HEAD
-```
-
-If the diff is empty, inform the user and **STOP**.
-
-### Step 3: Launch 3 reviewer agents in parallel
-
-Use the Task tool to spawn exactly 3 agents **in parallel** (all in a single message). Each agent receives the same diff, changed file list, and commit log, but reviews from a different perspective.
-
-**IMPORTANT**: All 3 Task calls MUST be in the same message to run in parallel.
-
-#### Agent 1: Security & Reliability Reviewer
+**Shared preamble** (prepend to each):
 
 ```
-subagent_type: "general-purpose"
-model: "opus"
+MANDATORY before ANY findings: Read tool to read FULL content of every changed file + 2-3 related files (imports, callers, siblings).
+IGNORE: style/naming/formatting, "consider adding" suggestions, missing docs, theoretical concerns without concrete impact, generic "error handling could be better".
 ```
 
-Prompt template:
+**Shared data suffix** (append to each):
 
 ```
-You are a Security & Reliability code reviewer. Review the following changes for:
+## Project rules — check for violations
+{project_rules}
 
-- Security vulnerabilities (injection, XSS, CSRF, auth bypass, secrets exposure)
-- Error handling gaps (unhandled exceptions, missing validation, race conditions)
-- Edge cases and boundary conditions
-- Data integrity risks
-- Unsafe operations (file I/O, network, process execution)
-
-Context: {context if provided}
-Base: {base}
-
-Changed files:
-{file list}
-
-Commit log:
-{commit log}
-
-Diff:
-{diff}
-
-For each issue found, report:
-1. File path and line number(s)
-2. Severity: Critical / Warning / Notice
-3. Description of the issue
-4. Suggested fix approach
-
-If you need to read full file contents for context, use the Read tool.
-Report ONLY issues and concerns. Do NOT list positive aspects.
-Return your findings as a structured list.
+Context: {context}
+Changed files: {file list}
+Commit log: {commit log}
+Diff: {diff}
 ```
 
-#### Agent 2: Performance & Architecture Reviewer
+#### Agent 1: Design & Architecture (`model: "sonnet"`)
 
 ```
-subagent_type: "general-purpose"
-model: "opus"
+{preamble}
+Senior architect. Find design, architectural, and best-practices problems.
+Methodology: Read changed files → read related files → identify codebase patterns → compare against patterns AND language/framework best practices.
+Find: Architectural misfit (layer violations, wrong module), design defects (wrong data structure, over-engineering, leaky abstraction), best practices violations (anti-patterns with concrete negative consequence), API inconsistency with existing codebase, coupling problems, missing design considerations.
+{data suffix}
+Per issue: file:line, Severity, what is wrong and WHY, concrete fix.
 ```
 
-Prompt template:
+#### Agent 2: Security & Correctness (`model: "sonnet"`)
 
 ```
-You are a Performance & Architecture code reviewer. Review the following changes for:
-
-- Performance regressions (unnecessary allocations, O(n^2) algorithms, blocking operations)
-- Architectural concerns (tight coupling, layer violations, incorrect abstractions)
-- Scalability issues
-- Resource leaks (memory, file handles, connections)
-- API design problems (breaking changes, inconsistent interfaces)
-
-Context: {context if provided}
-Base: {base}
-
-Changed files:
-{file list}
-
-Commit log:
-{commit log}
-
-Diff:
-{diff}
-
-For each issue found, report:
-1. File path and line number(s)
-2. Severity: Critical / Warning / Notice
-3. Description of the issue
-4. Suggested fix approach
-
-If you need to read full file contents for context, use the Read tool.
-Report ONLY issues and concerns. Do NOT list positive aspects.
-Return your findings as a structured list.
+{preamble}
+Security engineer. Find real vulnerabilities, logic bugs, security best-practices violations. NOT theoretical risks.
+Methodology: Read changed files → trace data flow (input → validation → output) → check auth/middleware for bypass → check error handling for leaks.
+Find: Exploitable vulnerabilities (with concrete attack path), logic bugs (wrong conditions, race conditions, null handling), data integrity (missing atomicity, missing validation at trust boundaries), secrets exposure, unsafe operations, security best-practices violations (with concrete risk).
+{data suffix}
+Per issue: file:line, Severity, specific vulnerability/bug with attack/failure scenario, concrete fix.
 ```
 
-#### Agent 3: Maintainability & Standards Reviewer
+#### Agent 3: Consistency & Convention (`model: "sonnet"`)
 
 ```
-subagent_type: "general-purpose"
-model: "opus"
+{preamble}
+Codebase consistency specialist. Find violations of ESTABLISHED patterns.
+Methodology: Read changed files → read 3-5 EXISTING files in same dirs to establish patterns (error handling, module structure, testing) → compare → check project rules.
+Find: Pattern violations (cite file:line of established pattern), convention breaks, missing tests (vs existing coverage), rule violations, interface inconsistency.
+IMPORTANT: Every finding MUST reference file:line of established pattern. No reference = not established = don't report.
+{data suffix}
+Per issue: file:line of violation, file:line of pattern, Severity, what is violated, how to fix.
 ```
 
-Prompt template:
+### Step 4: Synthesize
 
-```
-You are a Maintainability & Standards code reviewer. Review the following changes for:
+1. Filter remaining nits. 2. Deduplicate. 3. Resolve contradictions. 4. Sort by severity.
 
-- Code complexity (deeply nested logic, overly long functions, unclear control flow)
-- Naming and readability issues
-- Missing or inadequate tests for new/changed behavior
-- Inconsistency with existing codebase patterns and conventions
-- Documentation gaps for public APIs or complex logic
-- Dead code or unnecessary changes
-- DRY violations
-
-Context: {context if provided}
-Base: {base}
-
-Changed files:
-{file list}
-
-Commit log:
-{commit log}
-
-Diff:
-{diff}
-
-For each issue found, report:
-1. File path and line number(s)
-2. Severity: Critical / Warning / Notice
-3. Description of the issue
-4. Suggested fix approach
-
-If you need to read full file contents for context, use the Read tool.
-Report ONLY issues and concerns. Do NOT list positive aspects.
-Return your findings as a structured list.
-```
-
-### Step 4: Synthesize and resolve conflicts
-
-After all 3 agents complete:
-
-1. **Deduplicate**: Merge findings that refer to the same issue from different perspectives.
-2. **Resolve contradictions**: If agents disagree (e.g., one says "add abstraction" while another says "keep it simple"), evaluate the context and make a judgment call. Note the disagreement and your reasoning.
-3. **Prioritize**: Sort by severity (Critical > Warning > Notice), then by file path.
-
-### Step 5: Report to user in Japanese
-
-This command is **display-only**. Do NOT offer to take any actions after displaying the report.
-
-Severity levels (exactly 3 characters using filled and empty stars):
-
-- Critical (must fix): `(★★★)`
-- Warning (should fix): `(★★☆)`
-- Notice (optional): `(★☆☆)`
-- Disagree (not an issue): `(☆☆☆)`
-
-Format the final report. Each finding uses the following structure:
+### Step 5: Report (Japanese, display-only)
 
 ```
 ## コードレビュー結果
 
-**ベース**: `{base}` | **変更ファイル数**: N | **レビュアー**: 3/3 完了
+{header} | **変更ファイル数**: N
+
+### 判断サマリー
+
+判断が必要だったポイントのみ: エージェント間不一致、重要度調整、棄却とその理由。全員一致の指摘は含めない。
 
 ---
 
-### 1. 指摘のタイトル (`path/to/file:line`) (★★★)
+### 1. タイトル (`path:line`) (★★★)
 
-> 指摘事項の要約をここに記述する。何が問題なのかを簡潔にまとめる。
+> 問題の端的な説明。
 
-指摘に対してどう考えるか。対応するべきか、対応不要か、その理由を述べる。
-
-対応する場合は対応方法の概要を簡潔に記述する。
-
----
-
-### 2. 指摘のタイトル (`path/to/file:line`) (★★☆)
-
-> 指摘事項の要約をここに記述する。何が問題なのかを簡潔にまとめる。
-
-...
-
----
-
-### 3. 指摘のタイトル (`path/to/file:line`) (★☆☆)
-
-> 指摘事項の要約をここに記述する。何が問題なのかを簡潔にまとめる。
-
-...
-```
-
-Notes:
-- Sort by severity (★★★ > ★★☆ > ★☆☆ > ☆☆☆), then by file path
-- The opinion section should include your own judgment: agree/disagree with the finding, whether it's worth fixing, and why
-- If agents disagreed on a finding, mention the disagreement and your reasoning in the opinion section
-- Do NOT group findings by severity heading — use a flat numbered list sorted by severity
-
-If no issues are found, report:
-
-```
-## コードレビュー結果
-
-レビュー対象の変更に問題は見つかりませんでした。
+対応方法。
 ```
 
 ## Begin
 
-Execute the workflow above. Start from Step 1.
+Execute from Step 1.

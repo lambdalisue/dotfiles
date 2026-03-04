@@ -2,7 +2,7 @@
 allowed-tools: Read, Write, Glob, Bash(ls:*), Bash(mkdir:*)
 argument-hint: name description...
 description: Create a global Claude Code skill in ~/.claude/skills
-model: opus
+model: sonnet
 ---
 
 ## Arguments

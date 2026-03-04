@@ -1,7 +1,7 @@
 ---
 name: git-resolve
 description: Analyze and resolve git merge/rebase conflicts using three-way analysis. Runs autonomously unless ambiguous.
-model: opus
+model: sonnet
 color: orange
 tools: Bash, Read, Edit, Glob, Grep
 ---

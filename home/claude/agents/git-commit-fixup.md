@@ -1,7 +1,7 @@
 ---
 name: git-commit-fixup
 description: Analyze working tree changes, map them to existing commits for fixup, and create fixup commits.
-model: opus
+model: sonnet
 color: green
 context: fork
 tools: Bash, Glob, Read
