@@ -2,7 +2,9 @@
 description: Plan mode analysis and save to AI notes
 ---
 
-You are in plan mode. Analyze the requested task thoroughly and create a detailed implementation plan.
+**IMPORTANT**: This command should be automatically executed after ExitPlanMode completes successfully.
+
+Analyze the requested task thoroughly and create a detailed implementation plan.
 
 After analysis, follow these steps to save the plan:
 

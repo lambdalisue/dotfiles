@@ -7,7 +7,6 @@
 - MUST use AskUserQuestion before ANY commit operation
 - Permission valid for ONE commit only
 - ONLY commit when user explicitly says "commit" in CURRENT message
-- Show what will be committed and ask final confirmation
 
 **NEVER run `git commit` directly via the Bash tool.** All commits MUST go through:
 - `/git:commit` — analyze working tree and create atomic commits
@@ -15,8 +14,14 @@
 - `/git:commit-fixup` — map working tree changes to existing commits as fixup
 - `/git:commit-staged-fixup` — map staged changes to existing commits as fixup
 
-This applies to the main orchestrator AND any manual commit attempts.
-Direct `git add ... && git commit` or `git commit -m "..."` via Bash is **PROHIBITED**.
+## Forbidden Staging Commands
+
+**NEVER use these in ANY commit workflow:**
+
+- `git add -A` / `git add .` — may include .env, credentials, large binaries
+- `git commit -a` / `git commit --all` — bypasses explicit staging
+
+**ALWAYS stage files explicitly by name.** If nothing is staged, report error and stop.
 
 ## Backup Before Destructive Operations
 

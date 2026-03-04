@@ -5,6 +5,7 @@
     "BASH_MAX_TIMEOUT_MS": "1200000",
     "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "1",
     "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "32000",
+    "ENABLE_TOOL_SEARCH": "true",
     "MAX_MCP_OUTPUT_TOKENS": "50000",
     "MCP_TOOL_TIMEOUT": "120000"
   },
@@ -70,7 +71,7 @@
     "frontend-design@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true
   },
-  "outputStyle": "Explanatory",
+  "outputStyle": "concise",
   "skipDangerousModePermissionPrompt": true,
   "telemetry": "off",
   "autoCompactEnabled": true,

@@ -1,3 +1,7 @@
+---
+paths: "**/*.rs"
+---
+
 # Variable Scoping and Code Consistency
 
 ## Block Expressions for Scoping Temporaries
