@@ -36,6 +36,7 @@ local claude = string.format(
 )
 local codex = "codex --dangerously-bypass-approvals-and-sandbox"
 local gemini = "gemini --yolo"
+local copilot = "copilot --allow-all-tools"
 
 vim.keymap.set(
   "n",
@@ -72,6 +73,18 @@ vim.keymap.set(
   "<leader>ig",
   string.format("<Cmd>Aibo %s<CR>", gemini),
   { desc = "Chat with Gemini" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>iP",
+  string.format("<Cmd>Aibo -focus %s resume --last<CR>", copilot),
+  { desc = "Chat with Copilot" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>ip",
+  string.format("<Cmd>Aibo %s<CR>", copilot),
+  { desc = "Chat with Copilot" }
 )
 
 vim.keymap.set("n", "<leader>is", "<Cmd>AiboSend -input<CR>", { desc = "Send to AI" })
