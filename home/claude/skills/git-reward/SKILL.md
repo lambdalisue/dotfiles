@@ -1,6 +1,6 @@
 ---
 name: git-reward
-argument-hint: [commit] [description] Optional commit SHA/ref and additional context for rewriting
+argument-hint: "[commit] [description] Optional commit SHA/ref and additional context for rewriting"
 description: Rewrite a commit message using fixup
 model: sonnet
 ---

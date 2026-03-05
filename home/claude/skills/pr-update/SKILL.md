@@ -1,7 +1,7 @@
 ---
 name: pr-update
 allowed-tools: Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(gh pr:*), AskUserQuestion
-argument-hint: [PR_NUMBER] Optional PR number to update
+argument-hint: "[PR_NUMBER] Optional PR number to update"
 description: Update the title and body of an existing pull request
 model: sonnet
 ---

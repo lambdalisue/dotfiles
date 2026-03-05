@@ -1,7 +1,7 @@
 ---
 name: pr-review
 allowed-tools: Bash(git branch:*), Bash(gh pr:*), Bash(gh api:*), Bash(jq:*), Read, Glob, Grep
-argument-hint: [PR_NUMBER] Optional PR number to review
+argument-hint: "[PR_NUMBER] Optional PR number to review"
 description: Fetch unresolved PR review comments and display analysis
 model: sonnet
 ---
