@@ -79,5 +79,6 @@
   "telemetry": "off",
   "autoCompactEnabled": true,
   "autoUpdates": false,
-  "theme": "dark"
+  "theme": "dark",
+  "effortLevel": "medium"
 }
