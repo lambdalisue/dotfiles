@@ -12,7 +12,6 @@
     "MAX_MCP_OUTPUT_TOKENS": "50000",
     "MCP_TOOL_TIMEOUT": "120000"
   },
-  "includeCoAuthoredBy": false,
   "permissions": {
     "deny": [
       "Bash(awk:*)",
@@ -39,7 +38,6 @@
       "Bash(sudo:*)"
     ]
   },
-  "enableAllProjectMcpServers": true,
   "hooks": {
     "PreToolUse": [
       {
@@ -74,11 +72,7 @@
     "frontend-design@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true
   },
-  "outputStyle": "concise",
   "skipDangerousModePermissionPrompt": true,
   "telemetry": "off",
-  "autoCompactEnabled": true,
-  "autoUpdates": false,
-  "theme": "dark",
   "effortLevel": "medium"
 }
