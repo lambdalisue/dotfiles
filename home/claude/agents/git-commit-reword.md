@@ -1,5 +1,5 @@
 ---
-name: git-reward
+name: git-commit-reword
 description: Rewrite a commit message using fixup commit for later autosquash rebase.
 model: sonnet
 color: cyan

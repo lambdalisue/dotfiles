@@ -1,5 +1,5 @@
 ---
-name: git-reward
+name: git-commit-reword
 argument-hint: "[commit] [description] Optional commit SHA/ref and additional context for rewriting"
 description: Rewrite a commit message using fixup
 model: sonnet
@@ -15,7 +15,7 @@ model: sonnet
 
 ### Phase 1: Analyze
 
-Use Task tool (`subagent_type: "git-reward"`, mode: "analyze"):
+Use Task tool (`subagent_type: "git-commit-reword"`, mode: "analyze"):
 - Pass: commit ref from args (may be null), description from args
 - Agent returns EITHER:
   - **Commit list** (if ref was null): array of `{sha, subject}` for recent commits
@@ -34,7 +34,7 @@ Use Task tool (`subagent_type: "git-reward"`, mode: "analyze"):
 
 ### Phase 3: Execute
 
-Use Task tool (`subagent_type: "git-reward"`, mode: "execute"):
+Use Task tool (`subagent_type: "git-commit-reword"`, mode: "execute"):
 - Pass: target commit SHA, approved message
 - Agent creates fixup commit and returns result
 
