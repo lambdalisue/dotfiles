@@ -2,7 +2,6 @@
 name: git-commit-fixup
 description: Analyze working tree changes, map to existing commits, and create fixup commits for autosquash
 argument-hint: "[context]"
-model: sonnet
 ---
 
 ## Arguments

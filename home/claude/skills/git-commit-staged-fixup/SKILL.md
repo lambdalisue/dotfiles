@@ -2,7 +2,6 @@
 name: git-commit-staged-fixup
 description: Map staged changes to existing commits and create fixup commits for autosquash
 argument-hint: "[context]"
-model: sonnet
 ---
 
 ## Arguments

@@ -1,7 +1,6 @@
 ---
 name: git-branch
 description: Analyze changes from origin/main and create a descriptively named branch
-model: haiku
 ---
 
 ## Language

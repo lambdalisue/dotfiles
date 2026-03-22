@@ -1,7 +1,6 @@
 ---
 name: git-resolve
 description: Analyze and logically resolve git merge/rebase conflicts
-model: haiku
 ---
 
 ## Language

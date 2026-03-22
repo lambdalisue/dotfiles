@@ -2,7 +2,6 @@
 name: git-commit-staged
 description: Create a Conventional Commit from already staged changes
 argument-hint: "[context]"
-model: sonnet
 ---
 
 ## Arguments

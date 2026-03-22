@@ -1,7 +1,6 @@
 ---
 name: pr-describe
 description: Summarize current PR changes with PR metadata (title, body, comments, linked issues) in 4 perspectives (Context, Changes, Impact, Open)
-model: sonnet
 ---
 
 ## Language

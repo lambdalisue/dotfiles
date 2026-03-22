@@ -2,7 +2,6 @@
 name: doc-update
 allowed-tools: Read, Edit, Write, Glob, Grep
 description: Sync documentation with implementation
-model: sonnet
 ---
 
 ## Workflow

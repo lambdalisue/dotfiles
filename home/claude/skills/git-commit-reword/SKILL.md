@@ -2,7 +2,6 @@
 name: git-commit-reword
 argument-hint: "[commit] [description] Optional commit SHA/ref and additional context for rewriting"
 description: Rewrite a commit message using fixup
-model: sonnet
 ---
 
 ## Language

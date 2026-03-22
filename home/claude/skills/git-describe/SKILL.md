@@ -1,7 +1,6 @@
 ---
 name: git-describe
 description: Summarize branch changes from base branch in 4 perspectives (Context, Changes, Impact, Open)
-model: sonnet
 ---
 
 ## Language

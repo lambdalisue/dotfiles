@@ -1,7 +1,6 @@
 ---
 name: pr-create
 description: Create a pull request with title and body based on commits
-model: sonnet
 ---
 
 ## Language

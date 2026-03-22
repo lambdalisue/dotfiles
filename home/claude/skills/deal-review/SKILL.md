@@ -3,7 +3,6 @@ name: deal-review
 allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(gh pr:*), Bash(gh api:*), Bash(gh repo:*), Bash(jq:*), Read, Edit, Glob, Grep
 argument-hint: "[context]"
 description: Address review findings from /code-review, /style-review, /doc-review, or /pr-review
-model: sonnet
 ---
 
 ## Arguments

@@ -3,7 +3,6 @@ name: cc-add-rule-local
 allowed-tools: Read, Write, Glob, Bash(ls:*), Bash(mkdir:*), Bash(pwd:*)
 argument-hint: "[pattern] rule content..."
 description: Create a project-local Claude Code rule in .claude/rules
-model: sonnet
 ---
 
 ## Arguments

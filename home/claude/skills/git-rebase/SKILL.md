@@ -1,7 +1,6 @@
 ---
 name: git-rebase
 description: Rebase current branch onto the latest remote base branch
-model: haiku
 ---
 
 ## Language

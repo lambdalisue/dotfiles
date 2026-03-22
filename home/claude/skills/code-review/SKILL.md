@@ -3,7 +3,6 @@ name: code-review
 allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(git status:*), Bash(git branch:*), Bash(git merge-base:*), Bash(git rev-parse:*), Bash(git check-attr:*), Bash(gh pr:*), Bash(cat:*), Read, Glob, Grep, Agent
 argument-hint: "[base] [context]"
 description: Multi-perspective code review from base branch with 3 independent reviewer agents
-model: opus
 ---
 
 ## Arguments

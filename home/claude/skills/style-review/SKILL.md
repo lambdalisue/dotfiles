@@ -3,7 +3,6 @@ name: style-review
 allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(git status:*), Bash(git branch:*), Bash(git merge-base:*), Bash(git rev-parse:*), Bash(git check-attr:*), Bash(gh pr:*), Read, Glob, Grep, Agent
 argument-hint: "[base]"
 description: Style and naming review — formatting, naming conventions, readability, code hygiene
-model: sonnet
 ---
 
 ## Arguments
@@ -63,7 +62,6 @@ Use the Agent tool to spawn 1 agent.
 
 ```
 subagent_type: "general-purpose"
-model: "sonnet"
 ```
 
 Prompt:

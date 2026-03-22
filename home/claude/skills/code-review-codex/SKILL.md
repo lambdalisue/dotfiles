@@ -3,7 +3,6 @@ name: code-review-codex
 allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(git status:*), Bash(git branch:*), Bash(git merge-base:*), Bash(git rev-parse:*), Bash(git check-attr:*), Bash(gh pr:*), Bash(cat:*), Bash(codex review:*), Read, Glob, Grep
 argument-hint: "[base] [context]"
 description: Code review using OpenAI Codex CLI with project context (rules, diff, conventions)
-model: opus
 ---
 
 ## Arguments

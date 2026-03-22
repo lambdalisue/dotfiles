@@ -3,7 +3,6 @@ name: cc-add-rule
 allowed-tools: Read, Write, Glob, Bash(ls:*), Bash(mkdir:*)
 argument-hint: "[pattern] rule content..."
 description: Create a global Claude Code rule in ~/.claude/rules
-model: sonnet
 ---
 
 ## Arguments

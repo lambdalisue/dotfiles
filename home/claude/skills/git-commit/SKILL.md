@@ -2,7 +2,6 @@
 name: git-commit
 description: Analyze working tree changes, plan logically minimal commits per hunk, and execute them
 argument-hint: "[context]"
-model: sonnet
 ---
 
 ## Arguments

@@ -3,7 +3,6 @@ name: cc-add-agent
 allowed-tools: Read, Write, Glob, Bash(ls:*), Bash(mkdir:*)
 argument-hint: name description...
 description: Create a global Claude Code agent in ~/.claude/agents
-model: sonnet
 ---
 
 ## Arguments
@@ -43,7 +42,6 @@ Parse the arguments:
 ---
 name: { name }
 description: { Brief description ending with period }
-model: { sonnet|opus }
 color: { blue|green|yellow|red|purple|cyan }
 ---
 

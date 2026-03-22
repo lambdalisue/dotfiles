@@ -3,7 +3,6 @@ name: doc-review
 allowed-tools: Bash(deno run:*), Bash(ls:*), Read, Glob, Grep, Agent
 argument-hint: "<path-or-keyword>"
 description: Review documentation quality — AI notes, Slite notes, plans, and specifications
-model: sonnet
 ---
 
 ## Arguments
@@ -62,7 +61,6 @@ Use the Agent tool to spawn 1 agent.
 
 ```
 subagent_type: "general-purpose"
-model: "sonnet"
 ```
 
 Prompt (adapt review criteria based on document type):

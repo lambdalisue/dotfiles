@@ -2,7 +2,6 @@
 name: doc-check
 allowed-tools: Bash(npx:*), Bash(deno:*), Bash(ls:*), Bash(test:*)
 description: Run format, lint, and spell check for documentation
-model: haiku
 ---
 
 ## Workflow
