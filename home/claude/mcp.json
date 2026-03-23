@@ -7,6 +7,10 @@
         "@upstash/context7-mcp@latest"
       ]
     },
+    "clickup": {
+      "type": "http",
+      "url": "https://mcp.clickup.com/mcp"
+    },
     "playwright": {
       "command": "npx",
       "args": [

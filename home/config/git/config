@@ -58,7 +58,6 @@
   helper = !gh auth git-credential
 
 [wt]
-  basedir = ../{gitroot}-wt
-  copyignored = true
+  nocopy = dist/
   nocopy = target/
   nocopy = node_modules/
