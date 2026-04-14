@@ -74,6 +74,5 @@
     "lua-lsp@claude-plugins-official": true
   },
   "skipDangerousModePermissionPrompt": true,
-  "telemetry": "off",
-  "effortLevel": "medium"
+  "telemetry": "off"
 }
