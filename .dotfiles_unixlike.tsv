@@ -1,5 +1,6 @@
 home/config/alacritty	.config/alacritty
 home/config/ghostty	.config/ghostty
+home/config/direnv	.config/direnv
 home/config/nix	.config/nix
 home/config/nvim	.config/nvim
 home/config/nvim	.vim
