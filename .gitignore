@@ -1,1 +1,4 @@
-deno.lock
+result
+
+# Private binary-cache credentials — machine-local, never committed
+home/config/nix/netrc
