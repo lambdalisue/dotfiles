@@ -1,35 +1,121 @@
-# 🩳 dotfiles
+# dotfiles
 
-My personal dotfiles managed by my personal [Deno] script.
+My personal dotfiles managed with [nix-darwin] and [home-manager].
 
-[Deno]: https://deno.land
+[nix-darwin]: https://github.com/LnL7/nix-darwin
+[home-manager]: https://github.com/nix-community/home-manager
+
+## Initial setup
+
+On a fresh machine, `bootstrap.sh` installs the prerequisites and runs the first
+nix-darwin activation. It installs Nix (official installer) and Homebrew if they
+are missing, trusts the third-party Homebrew taps, moves aside the `/etc` files
+nix-darwin manages, activates the configuration, and clears the stale zsh cache.
+It is idempotent — re-run it if a step fails.
+
+### Before you run it
+
+- Clone this repository to `~/ogh/lambdalisue/dotfiles`. `dotfilesDir` in
+  `flake.nix` derives from that path by convention; clone elsewhere only if you
+  also override `dotfilesDir` for the host.
+- Register the machine in `flake.nix`: add an entry to `hosts` whose attribute
+  name is the machine's hostname (`scutil --get LocalHostName`). nix-darwin then
+  selects the matching configuration automatically, so `--flake .` needs no
+  explicit target.
+- If you pull from the private binary caches, put their credentials in
+  `~/.config/nix/netrc` (never committed).
+- Migrating a machine off the Determinate installer? Remove it first:
+  `sudo -i /nix/nix-installer uninstall`.
+
+### Bootstrap
+
+```console
+$ ./bootstrap.sh
+```
+
+Existing dotfile symlinks are backed up automatically by home-manager
+(`*.before-nix-darwin`), so nothing needs to be removed by hand. Open a new
+terminal when it finishes.
+
+### Clean up Homebrew
+
+After confirming all Nix-managed packages work, change `cleanup` in
+`nix/darwin/homebrew.nix` from `"none"` to `"zap"`, then re-apply:
+
+```console
+$ sudo darwin-rebuild switch --flake .
+```
 
 ## Usage
 
-Install [Deno] and execute the `link` task like below:
+### Apply configuration
+
+Build and activate the full system configuration (nix-darwin + home-manager):
 
 ```console
-$ deno task link
+$ sudo darwin-rebuild switch --flake .
 ```
 
-Above runs the `link` task with dry-run mode. Use `--execute` flag to actually
-link the dotfiles.
+### Preview changes
+
+Build without activating to check for errors:
 
 ```console
-$ deno task link --execute
+$ darwin-rebuild build --flake .
 ```
 
-And use `--force` flag to overwrite existing files.
+### Update dependencies
+
+Update nixpkgs, nix-darwin, and home-manager to their latest versions:
 
 ```console
-$ deno task link --execute --force
+$ nix flake update
 ```
 
-## Entries
+Then re-apply:
 
-Edit one of the following files to determine the entries.
+```console
+$ sudo darwin-rebuild switch --flake .
+```
 
-- `.dotfiles`
+## Structure
+
+```
+flake.nix                    # Flake entry point
+nix/
+  darwin/
+    default.nix              # Nix settings, users, substituters
+    system.nix               # macOS system preferences (Dock, Finder, etc.)
+    homebrew.nix             # Declarative Homebrew cask/formula management
+  home/
+    default.nix              # home-manager entry point
+    packages.nix             # CLI packages managed by Nix
+    files.nix                # Dotfile symlinks (xdg.configFile, home.file)
+    shell.nix                # direnv, fzf
+    git.nix                  # git, git-lfs
+home/                        # Raw dotfiles (symlinked into ~ by home-manager)
+```
+
+## Adding dotfiles
+
+1. Place the file under `home/` (e.g. `home/config/foo/` for `~/.config/foo/`)
+2. Add a symlink entry in `nix/home/files.nix`:
+
+   ```nix
+   # For ~/.config/ files (link is config.lib.file.mkOutOfStoreSymlink)
+   xdg.configFile."foo".source = link "${dotfilesDir}/home/config/foo";
+
+   # For ~/ files
+   home.file.".foo".source = link "${dotfilesDir}/home/foo";
+   ```
+
+3. Apply: `sudo darwin-rebuild switch --flake .`
+
+## Adding packages
+
+- **CLI tools** — add to `home.packages` in `nix/home/packages.nix`
+- **GUI apps (casks)** — add to `homebrew.casks` in `nix/darwin/homebrew.nix`
+- **macOS-specific formulae** — add to `homebrew.brews` in `nix/darwin/homebrew.nix`
 
 ## License
 

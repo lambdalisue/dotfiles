@@ -4,69 +4,60 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a personal dotfiles repository that uses a custom Deno-based script to manage symbolic links from the repository to the home directory. The linking system is platform-aware and uses TSV files to define mappings.
+This is a personal dotfiles repository managed with **nix-darwin** and **home-manager** using Nix flakes. It provides declarative, reproducible system configuration for macOS (Apple Silicon).
 
 ## Development Commands
 
 ### Core Tasks
 
 ```bash
-# Preview what would be linked (dry-run mode)
-deno task link
+# Build and activate the configuration (writes /etc and system state, needs root)
+sudo darwin-rebuild switch --flake .
 
-# Actually create symlinks
-deno task link --execute
+# Build without activating (preview changes)
+darwin-rebuild build --flake .
 
-# Overwrite existing files when linking
-deno task link --execute --force
-```
+# Update flake inputs (nixpkgs, nix-darwin, home-manager)
+nix flake update
 
-### Deno Operations
-
-```bash
-# Check Deno version
-deno --version
-
-# Run the link script directly with permissions
-deno run -A ./.scripts/link.ts
+# Check flake for errors
+nix flake check
 ```
 
 ## Architecture
 
-### Linking System
+### Nix Flake Structure
 
-The repository uses a cascading TSV-based configuration system defined in `.scripts/entries.ts`:
+```
+flake.nix                    # Flake entry point (inputs, outputs)
+nix/
+  darwin/
+    default.nix              # nix-darwin configuration (nix settings, users)
+    system.nix               # macOS system preferences (Dock, Finder, etc.)
+    homebrew.nix             # Declarative Homebrew cask/formula management
+  home/
+    default.nix              # home-manager entry point
+    packages.nix             # Nix-managed CLI packages
+    files.nix                # Dotfile symlinks (xdg.configFile, home.file)
+    shell.nix                # Zsh and direnv configuration
+    git.nix                  # Git and git-lfs configuration
+home/                        # Raw dotfiles (symlinked by home-manager)
+```
 
-1. **Platform-specific loading order**:
-   - Linux: `.dotfiles` → `.dotfiles_unixlike` → `.dotfiles_linux`
-   - macOS: `.dotfiles` → `.dotfiles_unixlike` → `.dotfiles_darwin`
-   - Windows: `.dotfiles` → `.dotfiles_windows`
+### Configuration Approach
 
-2. **TSV file format**: Each line contains tab-separated values:
-   ```
-   source_path\tdestination_path
-   ```
-   - Source path: Relative to repository root
-   - Destination path: Relative to home directory (omit if same as source)
-   - Lines starting with `#` are comments
-   - Empty lines are ignored
-
-3. **Link script behavior** (`.scripts/link.ts`):
-   - Reads TSV files based on current platform
-   - Resolves symbolic links before creating new ones
-   - Creates parent directories as needed
-   - Supports force mode to overwrite existing files
-   - Uses `Deno.symlinkSync()` with proper file/directory type detection
+- **Raw symlink strategy**: Existing config files in `home/` are symlinked as-is via `xdg.configFile` and `home.file` in `nix/home/files.nix`
+- **Packages**: CLI tools managed by Nix in `nix/home/packages.nix`; GUI apps managed by Homebrew in `nix/darwin/homebrew.nix`
+- **System settings**: macOS defaults (Dock, Finder, trackpad, etc.) in `nix/darwin/system.nix`
 
 ### Directory Structure
 
 - `home/` - Contains all dotfiles to be linked to home directory
-  - `home/config/` - XDG config directory contents (→ `~/.config/`)
-  - `home/claude/` - Claude Code configuration (→ `~/.claude/`)
+  - `home/config/` - XDG config directory contents (-> `~/.config/`)
+  - `home/claude/` - Claude Code configuration (-> `~/.claude/`)
   - `home/local/` - Local binaries and scripts
-- `.scripts/` - Deno scripts for repository management
-  - `link.ts` - Main linking script
-  - `entries.ts` - TSV file loader and platform detection
+- `nix/darwin/` - nix-darwin system-level configuration
+- `nix/home/` - home-manager user-level configuration
 
 ### Key Configuration Areas
 
@@ -84,23 +75,17 @@ The repository primarily manages configurations for:
 ### Adding New Dotfiles
 
 1. Add the file/directory to the `home/` directory structure
-2. Add an entry to the appropriate TSV file:
-   - Common files → `.dotfiles.tsv`
-   - Unix-like only → `.dotfiles_unixlike.tsv`
-   - macOS specific → `.dotfiles_darwin.tsv`
-   - Windows specific → `.dotfiles_windows.tsv`
-3. Test with `deno task link` (dry-run) first
-4. Apply with `deno task link --execute`
+2. Add a symlink entry in `nix/home/files.nix`:
+   - XDG config files: `xdg.configFile."name".source = ../../home/config/name;`
+   - Home directory files: `home.file.".name".source = ../../home/name;`
+3. Run `darwin-rebuild switch --flake .` to apply
 
-### Modifying the Link Script
+### Adding Packages
 
-The link script uses Deno standard library imports from JSR:
-- `@std/cli` - Command-line argument parsing
-- `@std/fs` - File system utilities
-- `@std/path` - Path manipulation
+- **CLI tools**: Add to `home.packages` in `nix/home/packages.nix`
+- **GUI apps (casks)**: Add to `homebrew.casks` in `nix/darwin/homebrew.nix`
+- **macOS-specific formulae**: Add to `homebrew.brews` in `nix/darwin/homebrew.nix`
 
-When modifying, maintain:
-- Platform detection via `Deno.build.os`
-- Proper symlink type detection (file vs directory)
-- Error handling for existing files
-- Dry-run mode support
+### Modifying System Preferences
+
+Edit `nix/darwin/system.nix` to change macOS defaults (Dock, Finder, keyboard, etc.).
