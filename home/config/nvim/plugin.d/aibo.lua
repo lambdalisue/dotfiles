@@ -31,7 +31,7 @@ aibo.setup({
 })
 
 local claude = string.format(
-  "claude --mcp-config %s --permission-mode bypassPermissions",
+  "claude --mcp-config %s --permission-mode auto",
   vim.fn.expand("~/.claude/mcp.json")
 )
 local codex = "codex --dangerously-bypass-approvals-and-sandbox"

@@ -83,5 +83,7 @@
     }
   },
   "skipDangerousModePermissionPrompt": true,
-  "telemetry": "off"
+  "verbose": true,
+  "telemetry": "off",
+  "effortLevel": "xhigh"
 }
