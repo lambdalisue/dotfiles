@@ -17,11 +17,6 @@
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "deno run --allow-read ~/.claude/statusline.ts",
-    "padding": 0
-  },
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
@@ -36,8 +31,5 @@
       }
     }
   },
-  "skipDangerousModePermissionPrompt": true,
-  "verbose": true,
-  "telemetry": "off",
   "skipAutoPermissionPrompt": true
 }
