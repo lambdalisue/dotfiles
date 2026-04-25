@@ -1,56 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "env": {
-    "BASH_DEFAULT_TIMEOUT_MS": "300000",
-    "BASH_MAX_TIMEOUT_MS": "1200000",
-    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "1",
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "CLAUDE_CODE_HIDE_ACCOUNT_INFO": "1",
-    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "32000",
-    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
-    "ENABLE_TOOL_SEARCH": "true",
-    "MAX_MCP_OUTPUT_TOKENS": "50000",
-    "MCP_TOOL_TIMEOUT": "120000"
-  },
   "permissions": {
-    "deny": [
-      "Bash(awk:*)",
-      "Bash(chmod -R 777 /)",
-      "Bash(chmod 777 /)",
-      "Bash(dd if=)",
-      "Bash(fdisk)",
-      "Bash(format)",
-      "Bash(git push:*)",
-      "Bash(halt)",
-      "Bash(killall)",
-      "Bash(mkfs.)",
-      "Bash(nc -l)",
-      "Bash(ncat -l)",
-      "Bash(netcat -l)",
-      "Bash(pkill)",
-      "Bash(poweroff)",
-      "Bash(reboot)",
-      "Bash(rm -rf $HOME)",
-      "Bash(rm -rf /)",
-      "Bash(rm -rf ~)",
-      "Bash(sed:*)",
-      "Bash(shutdown)",
-      "Bash(sudo:*)"
-    ]
+    "defaultMode": "auto"
   },
   "hooks": {
     "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/enforce-perl.sh",
-            "timeout": 5
-          }
-        ]
-      },
       {
         "matcher": "Write",
         "hooks": [
@@ -85,5 +39,5 @@
   "skipDangerousModePermissionPrompt": true,
   "verbose": true,
   "telemetry": "off",
-  "effortLevel": "xhigh"
+  "skipAutoPermissionPrompt": true
 }
