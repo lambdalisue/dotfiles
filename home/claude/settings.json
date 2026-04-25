@@ -71,7 +71,16 @@
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
-    "lua-lsp@claude-plugins-official": true
+    "lua-lsp@claude-plugins-official": true,
+    "probitas@probitas-test": true
+  },
+  "extraKnownMarketplaces": {
+    "probitas-test": {
+      "source": {
+        "source": "github",
+        "repo": "probitas-test/claude-plugins"
+      }
+    }
   },
   "skipDangerousModePermissionPrompt": true,
   "telemetry": "off"
