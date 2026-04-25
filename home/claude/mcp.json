@@ -7,10 +7,6 @@
         "@upstash/context7-mcp@latest"
       ]
     },
-    "clickup": {
-      "type": "http",
-      "url": "https://mcp.clickup.com/mcp"
-    },
     "playwright": {
       "command": "npx",
       "args": [
@@ -22,13 +18,6 @@
       "command": "uvx",
       "args": [
         "mcp-server-fetch"
-      ]
-    },
-    "slite": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "slite-mcp-server"
       ]
     },
     "deepwiki": {
