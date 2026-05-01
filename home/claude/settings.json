@@ -1,6 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
+    "allow": [
+      "Bash(git commit:*)"
+    ],
     "defaultMode": "auto"
   },
   "hooks": {
@@ -31,6 +34,7 @@
       }
     }
   },
+  "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "agentPushNotifEnabled": true
+  "effortLevel": "high"
 }

@@ -7,14 +7,44 @@
         "@upstash/context7-mcp@latest"
       ]
     },
-    "grafana": {
+    "grafana-production": {
       "command": "uvx",
       "args": [
         "mcp-grafana"
       ],
       "env": {
-        "GRAFANA_URL": "${GRAFANA_URL}",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_SERVICE_ACCOUNT_TOKEN}"
+        "GRAFANA_URL": "${GRAFANA_URL_PRODUCTION}",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_SERVICE_ACCOUNT_TOKEN_PRODUCTION}"
+      }
+    },
+    "grafana-staging": {
+      "command": "uvx",
+      "args": [
+        "mcp-grafana"
+      ],
+      "env": {
+        "GRAFANA_URL": "${GRAFANA_URL_STAGING}",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_SERVICE_ACCOUNT_TOKEN_STAGING}"
+      }
+    },
+    "arrove-duo-1": {
+      "command": "node",
+      "args": [
+        "/Users/alisue/ogh/attmcojp/arrove-duo-mcp/dist/index.js"
+      ],
+      "env": {
+        "ARROVE_DUO_BASE_URL": "${ARROVE_DUO_BASE_URL}",
+        "ARROVE_DUO_PAT": "${ARROVE_DUO_PAT1}"
+      }
+    },
+    "arrove-duo-2": {
+      "command": "node",
+      "args": [
+        "/Users/alisue/ogh/attmcojp/arrove-duo-mcp/dist/index.js"
+      ],
+      "env": {
+        "ARROVE_DUO_BASE_URL": "${ARROVE_DUO_BASE_URL}",
+        "ARROVE_DUO_PAT": "${ARROVE_DUO_PAT2}"
       }
     },
     "playwright": {
