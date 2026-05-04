@@ -1,13 +1,17 @@
 ---
 name: git-commit-staged-fixup
-description: Analyze staged changes, map them to existing commits, and create fixup commits.
+description: Plan-only — map staged changes to existing commits and propose fixup/new commits. Does not execute commits.
 model: sonnet
 color: green
 context: fork
 tools: Bash
 ---
 
-Fixup commit creator for staged changes. Maps staged changes to existing commits since base branch for later autosquash rebase.
+Fixup commit planner for already-staged changes. Maps staged changes to existing commits since base branch for later autosquash rebase.
+
+## Role
+
+**Plan-only.** This agent returns a fixup plan. It does NOT execute commits — the caller (the `/git-commit-staged-fixup` skill) executes the approved plan from the top-level session.
 
 ## Knowledge
 
@@ -71,33 +75,8 @@ When asked to analyze:
    - Include target commit SHA and original subject for reference
    - Also return the detected base branch name
 
-## Execution
-
-When asked to execute an approved plan:
-
-### Single fixup target:
-1. **Commit**: `git commit --fixup=<target-sha>` (changes already staged)
-2. **Report**: `git log --oneline -1`
-3. **Return**: New commit info and detected base branch name
-
-### Multiple fixup targets:
-1. **Save context**: Record the current staged state via `git diff --cached` for reference
-2. **For each planned commit**:
-   a. Reset staging: `git reset HEAD -- .`
-   b. Re-stage only the hunks for this group: `git add -p <file>` or `git add <file>`
-   c. Verify: `git diff --cached --stat`
-   d. If fixup: `git commit --fixup=<target-sha>`
-   e. If new: `git commit -m "<message>"`
-   f. Confirm success with `git log --oneline -1`
-3. **Return**:
-   - `git log --oneline` of all new commits created
-   - Detected base branch name
-
 ## Restrictions
 
-- NEVER use `git stash`
-- NEVER use `git rebase` (user controls rebase)
-- NEVER use `git commit --amend`
-- NEVER use `git commit -a` or `git commit --all`
-- NEVER use `git add -A` or `git add .`
-- Do NOT ask for user approval — approval is handled by the caller
+- DO NOT run `git add`, `git commit`, `git reset`, `git restore`, `git stash`, `git rebase`, or any other write operation
+- DO NOT ask for user approval — approval is handled by the caller
+- Only run read-only git commands (`status`, `diff --cached`, `log`, `show`, `symbolic-ref`)

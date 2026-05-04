@@ -1,14 +1,9 @@
 # Git Safety Rules
 
-These rules apply to the **top-level (main) Claude session**. Subagents invoked
-from the approved commit slash commands operate under their own agent
-definition (see "Subagent carve-out" below) — do NOT re-apply these top-level
-rules inside them.
+## Commit Restriction (top-level)
 
-## Commit Restriction (top-level only)
-
-**Top-level Claude MUST NOT run `git commit` directly via Bash.** All commits
-go through one of these slash commands:
+**Top-level Claude MUST NOT run `git commit` directly via Bash on its own
+initiative.** Commits only run via one of these slash commands:
 
 - `/git-commit` — analyze working tree and create atomic commits
 - `/git-commit-staged` — commit already-staged changes
@@ -21,36 +16,41 @@ Before invoking any of the above:
 - Permission is valid for ONE invocation only
 - ONLY proceed when the user explicitly says "commit" in the CURRENT message
 
-## Subagent carve-out
+## Plan-then-execute architecture
 
-When a subagent (e.g. `git-commit`, `git-commit-staged`, `git-commit-fixup`,
-`git-commit-staged-fixup`) is invoked **by one of the approved slash commands
-above**, the user has already granted explicit permission at the slash-command
-layer. Inside the subagent:
+Each commit slash command works in two phases:
 
-- DO follow the subagent's own definition (analyze / plan / execute)
-- DO run `git commit` (and `git commit --fixup=<sha>`) as planned
-- DO NOT ask the user for additional approval
-- DO NOT block on AskUserQuestion — approval is the caller's responsibility
+1. **Plan** — a planner subagent (`git-commit`, `git-commit-staged`,
+   `git-commit-fixup`, `git-commit-staged-fixup`) reads the working tree /
+   staging area and returns a structured plan. The subagent runs **read-only
+   git commands only** and never executes `git add` / `git commit` / `git reset`.
+2. **Execute** — after the user approves the plan via AskUserQuestion, the
+   slash command body (top-level Claude) runs `git add` and `git commit`
+   directly via Bash, scoped to **exactly the approved plan**.
 
-The "ABSOLUTELY NEVER COMMIT WITHOUT EXPLICIT USER PERMISSION" intent is
-satisfied by the slash command at the top level. Re-asking inside the
-subagent breaks the workflow.
+**Why this split**: a single approval grants execution authority for one
+specific plan. The planner has no write tools; the executor (top-level) only
+acts on plans the user just approved in this turn. There is no "subagent
+carve-out" — the only place commits run is the slash command body, after
+explicit user approval.
 
 ## Forbidden Staging Commands (always)
 
-NEVER use these in ANY commit workflow, top-level or subagent:
+NEVER use these in ANY commit workflow:
 
 - `git add -A` / `git add .` — may include .env, credentials, large binaries
 - `git commit -a` / `git commit --all` — bypasses explicit staging
 
-ALWAYS stage files explicitly by name. If nothing is staged when staged-only
-flow expects staged changes, report error and stop.
+ALWAYS stage files explicitly by name. If nothing is staged when a
+staged-only flow expects staged changes, report error and stop.
 
 ## Backup Before Destructive Operations
 
 ALWAYS backup before: `git restore`, `git reset`, `git checkout` (with
 uncommitted changes), file deletion of uncommitted work.
+
+Prefer `git backup "<reason>"` (alias) when available; otherwise
+`git branch backup/$(date +%s) HEAD`.
 
 ## Git Stash Forbidden
 

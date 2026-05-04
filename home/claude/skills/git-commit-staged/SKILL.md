@@ -25,8 +25,16 @@ argument-hint: "[context]"
 2. **Analyze** - Use the Task tool (`subagent_type: "git-commit-staged"`) to analyze staged changes and draft a commit message.
    - If context argument is provided, include it in the prompt: "Analyze the staged changes and draft a commit message. Additional context: {context}"
    - If no context is provided, simply: "Analyze the staged changes and draft a commit message."
+   - The agent returns a draft message only — it does NOT execute the commit.
    - If the agent reports nothing is staged (this should NOT happen after pre-check), inform the user and **STOP**.
 
 3. **Approve** - Present the proposed commit message to the user exactly as returned by the agent. Use AskUserQuestion to ask for approval with options: "Approve", "Edit" (let user modify the message), "Cancel".
 
-4. **Execute** - If approved, use the Task tool (`subagent_type: "git-commit-staged"`) to execute the commit with the approved (or edited) message. Present the result to the user.
+4. **Execute** - If approved, execute `git commit` **directly via the Bash tool** (do NOT delegate to the agent for execution). The user's approval at step 3 is the explicit permission; this is the only place the commit runs.
+
+   Procedure:
+   1. Verify staging is still intact: `git diff --cached --stat`
+   2. Run `git commit -m "<approved message>"` (use a heredoc for multi-line messages). NEVER use `-a` / `--all`.
+   3. Report `git log --oneline -1` to the user.
+
+   If the commit fails (e.g., pre-commit hook), stop and report — do NOT improvise around the failure.
