@@ -132,8 +132,8 @@ alt-8 = 'workspace --auto-back-and-forth 8'
 alt-9 = 'workspace --auto-back-and-forth 9'
 alt-rightSquareBracket = 'workspace --wrap-around next'
 alt-leftSquareBracket = 'workspace --wrap-around prev'
-alt-n = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace --wrap-around next'
-alt-p = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace --wrap-around prev'
+alt-n = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace next --wrap-around --stdin'
+alt-p = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | aerospace workspace prev --wrap-around --stdin'
 
 # Move workspace
 alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
