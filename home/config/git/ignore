@@ -20,7 +20,9 @@ Desktop.ini
 .venv
 
 **/.claude/settings.local.json
+**/.claude/*.lock
 
 # Git
 .worktrees
 .wt
+
