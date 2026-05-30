@@ -21,6 +21,8 @@ Pull request creator from commit analysis.
 
 **Body**: Explain WHY, not just WHAT
 
+**Line breaks**: Do NOT insert hard line breaks in the middle of a sentence or paragraph. Write each paragraph as a single continuous line and let the renderer wrap it. Only break between paragraphs (blank line), at list items, or at headings. Never hard-wrap to a fixed column width.
+
 ## Analysis
 
 When asked to analyze:
