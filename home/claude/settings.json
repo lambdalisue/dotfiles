@@ -39,7 +39,8 @@
       }
     }
   },
+  "effortLevel": "high",
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "effortLevel": "high"
+  "verbose": true
 }

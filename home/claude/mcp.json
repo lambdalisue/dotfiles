@@ -7,44 +7,34 @@
         "@upstash/context7-mcp@latest"
       ]
     },
-    "grafana-production": {
+    "grafana:unofficial-national-economy-production": {
       "command": "uvx",
       "args": [
         "mcp-grafana"
       ],
       "env": {
-        "GRAFANA_URL": "${GRAFANA_URL_PRODUCTION}",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_SERVICE_ACCOUNT_TOKEN_PRODUCTION}"
+        "GRAFANA_URL": "https://lambdalisue.grafana.net",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${UNOFFICIAL_NATIONAL_ECONOMY_PRODUCTION_GRAFANA_SERVICE_ACCOUNT_TOKEN}"
       }
     },
-    "grafana-staging": {
+    "grafana:arrove-production": {
       "command": "uvx",
       "args": [
         "mcp-grafana"
       ],
       "env": {
-        "GRAFANA_URL": "${GRAFANA_URL_STAGING}",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_SERVICE_ACCOUNT_TOKEN_STAGING}"
+        "GRAFANA_URL": "",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${ARROVE_PRODUCTION_GRAFANA_SERVICE_ACCOUNT_TOKEN}"
       }
     },
-    "arrove-duo-1": {
-      "command": "node",
+    "grafana:arrove-staging": {
+      "command": "uvx",
       "args": [
-        "/Users/alisue/ogh/attmcojp/arrove-duo-mcp/dist/index.js"
+        "mcp-grafana"
       ],
       "env": {
-        "ARROVE_DUO_BASE_URL": "${ARROVE_DUO_BASE_URL}",
-        "ARROVE_DUO_PAT": "${ARROVE_DUO_PAT1}"
-      }
-    },
-    "arrove-duo-2": {
-      "command": "node",
-      "args": [
-        "/Users/alisue/ogh/attmcojp/arrove-duo-mcp/dist/index.js"
-      ],
-      "env": {
-        "ARROVE_DUO_BASE_URL": "${ARROVE_DUO_BASE_URL}",
-        "ARROVE_DUO_PAT": "${ARROVE_DUO_PAT2}"
+        "GRAFANA_URL": "",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${ARROVE_STAGING_GRAFANA_SERVICE_ACCOUNT_TOKEN}"
       }
     },
     "playwright": {
@@ -52,12 +42,6 @@
       "args": [
         "-y",
         "@playwright/mcp@latest"
-      ]
-    },
-    "fetch": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-fetch"
       ]
     },
     "deepwiki": {
