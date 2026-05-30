@@ -5,16 +5,27 @@
 **Top-level Claude MUST NOT run `git commit` directly via Bash on its own
 initiative.** Commits only run via one of these slash commands:
 
-- `/git-commit` — analyze working tree and create atomic commits
+- `/git-commit` — fixup into existing commits where appropriate, otherwise new atomic commits
+- `/git-commit-new` — new atomic commits only (no fixup)
 - `/git-commit-staged` — commit already-staged changes
 - `/git-commit-fixup` — map working tree changes to existing commits as fixup
 - `/git-commit-staged-fixup` — map staged changes to existing commits as fixup
 
-Before invoking any of the above:
+Each command above also has a non-interactive `-now` variant
+(`/git-commit-now`, `/git-commit-new-now`, `/git-commit-staged-now`,
+`/git-commit-fixup-now`, `/git-commit-staged-fixup-now`) that skips the
+in-command approval step and commits immediately. They are allowed commit
+pathways too.
 
-- MUST use AskUserQuestion to confirm intent
+Before invoking any of these commands (interactive OR `-now`):
+
+- MUST use AskUserQuestion to confirm intent — EXCEPT when the user typed the
+  `-now` command themselves in the CURRENT message; that explicit invocation
+  IS the confirmation, so do NOT ask again.
 - Permission is valid for ONE invocation only
-- ONLY proceed when the user explicitly says "commit" in the CURRENT message
+- ONLY proceed when the user explicitly requested the commit in the CURRENT
+  message. Top-level Claude must NEVER reach for a `-now` variant on its own
+  initiative to dodge the approval prompt.
 
 ## Plan-then-execute architecture
 
@@ -33,6 +44,12 @@ specific plan. The planner has no write tools; the executor (top-level) only
 acts on plans the user just approved in this turn. There is no "subagent
 carve-out" — the only place commits run is the slash command body, after
 explicit user approval.
+
+The `-now` variants keep the same plan-then-execute split and the same
+read-only planner, but skip the AskUserQuestion approval gate: the user's
+explicit `/...-now` invocation in the current message is the execution
+authority. Everything else (read-only planner, explicit staging by name,
+forbidden-command list below) still applies unchanged.
 
 ## Forbidden Staging Commands (always)
 
