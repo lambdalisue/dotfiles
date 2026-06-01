@@ -362,6 +362,9 @@ function! s:edit_github() abort
 endfunction
 autocmd MyAutoCmd BufReadCmd https://github.com/* ++nested call s:edit_github()
 
+autocmd MyAutoCmd BufWinLeave * let b:winview_saved = winsaveview()
+autocmd MyAutoCmd BufWinEnter * if exists('b:winview_saved') | call timer_start(0, { -> winrestview(b:winview_saved) }) | endif
+
 " Automatically re-assign filetype {{{
 autocmd MyAutoCmd BufWritePost *
       \ if &filetype ==# '' && exists('b:ftdetect') |
@@ -369,20 +372,6 @@ autocmd MyAutoCmd BufWritePost *
       \  filetype detect |
       \ endif
 "}}}
-
-" Automatically keep cursor position {{{
-augroup restore-cursor
-  autocmd!
-  autocmd BufReadPost *
-        \ : if line("'\"") >= 1 && line("'\"") <= line("$")
-        \ |   exe "normal! g`\"zv"
-        \ | endif
-  autocmd BufWinEnter *
-        \ : if empty(&buftype) && line('.') > winheight(0) / 2
-        \ |   execute 'normal! zz'
-        \ | endif
-augroup END
-" }}}
 
 " Automatically create missing directories {{{
 function! s:auto_mkdir(dir, force) abort
