@@ -23,7 +23,7 @@
         "mcp-grafana"
       ],
       "env": {
-        "GRAFANA_URL": "",
+        "GRAFANA_URL": "https://monitor.arrove.jp",
         "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${ARROVE_PRODUCTION_GRAFANA_SERVICE_ACCOUNT_TOKEN}"
       }
     },
@@ -33,7 +33,7 @@
         "mcp-grafana"
       ],
       "env": {
-        "GRAFANA_URL": "",
+        "GRAFANA_URL": "https://monitor.staging.arrove.jp",
         "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${ARROVE_STAGING_GRAFANA_SERVICE_ACCOUNT_TOKEN}"
       }
     },
