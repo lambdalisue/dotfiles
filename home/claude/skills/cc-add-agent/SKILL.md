@@ -42,7 +42,7 @@ Parse the arguments:
 ---
 name: { name }
 description: { Brief description ending with period }
-color: { blue|green|yellow|red|purple|cyan }
+color: { one of the Available Colors listed below }
 ---
 
 {One-line persona/expertise statement}

@@ -22,10 +22,10 @@ Parse the arguments:
 
 1. **Parse** - Extract rule content and optional path-pattern from arguments
 2. **Analyze** - Determine appropriate category and filename based on rule content:
-   - Categories: `tools/`, `git/`, `documents/`, `deno/`, `rust/`, `ts/`, or create new if needed
+   - Categories: existing ones include `tools/`, `git/`, `rust/`, `ts/`, `i18n/`, `claude/`; create a new category when none fit
    - Filename: kebab-case, descriptive, `.md` extension
 3. **Draft** - Create the rule file content:
-   - If path-pattern provided: Add frontmatter with `globs` field
+   - If path-pattern provided: Add frontmatter with a `paths` field
    - Write clear, concise rule in Markdown format
 4. **Confirm** - Show the proposed file path and content
 5. **STOP** - Wait for user approval (use AskUserQuestion)
@@ -45,7 +45,7 @@ Rule content here.
 
 ```markdown
 ---
-globs: { path-pattern }
+paths: "{ path-pattern }"
 ---
 
 # Rule Title
@@ -59,10 +59,10 @@ Rule content here.
 **Output**: `~/.claude/rules/code/descriptive-variables.md`
 
 **Input**: `/cc-add-rule *.py Always use type annotations`
-**Output**: `~/.claude/rules/python/type-annotations.md` with `globs: *.py`
+**Output**: `~/.claude/rules/python/type-annotations.md` with `paths: "**/*.py"`
 
 **Input**: `/cc-add-rule src/**/*.ts Use strict null checks`
-**Output**: `~/.claude/rules/ts/strict-null-checks.md` with `globs: src/**/*.ts`
+**Output**: `~/.claude/rules/ts/strict-null-checks.md` with `paths: "src/**/*.ts"`
 
 ## Content Guidelines
 
