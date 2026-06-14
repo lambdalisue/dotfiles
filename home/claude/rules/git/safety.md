@@ -26,6 +26,13 @@ Before invoking any of these commands:
   message. Top-level Claude must NEVER reach for one of these commands on its
   own initiative to dodge the approval prompt.
 
+**Policy-level, not permission-enforced.** `settings.json` intentionally
+pre-approves `git commit` / `git add` / `git reset` / `git restore` so the
+commit skills run without a permission prompt each step. That means this
+restriction is NOT enforced by the permission layer — it is Claude's discipline.
+A stray `git commit` would not be blocked, so the rules above must be honored
+deliberately.
+
 ## Plan-then-execute (in one context)
 
 Each commit slash command is **self-contained**: the slash command body
