@@ -16,7 +16,7 @@ All notes MUST be created under the "ありすえメモ" collection.
 
 ## Creating Notes
 
-Use `mcp__slite__create-note` to create a note.
+Use `mcp__claude_ai_Slite__create-note` to create a note.
 
 ### Title Convention
 
@@ -54,7 +54,7 @@ Details...
 ### Example
 
 ```typescript
-// Example mcp__slite__create-note call
+// Example mcp__claude_ai_Slite__create-note call
 {
   parentNoteId: "VSfehtphYIDN1C",
   title: "2026-02-24: プロキシ内部トークン設計書",
@@ -64,7 +64,7 @@ Details...
 
 ## Listing Notes
 
-Use `mcp__slite__get-note-children` to list notes under the collection.
+Use `mcp__claude_ai_Slite__get-note-children` to list notes under the collection.
 
 ```typescript
 // Retrieve notes under the collection
@@ -77,7 +77,7 @@ Use the `cursor` parameter for pagination when needed.
 
 ## Searching Notes
 
-Use `mcp__slite__search-notes` for keyword search.
+Use `mcp__claude_ai_Slite__search-notes` for keyword search.
 
 ```typescript
 // Search by keyword
@@ -89,7 +89,7 @@ Use `mcp__slite__search-notes` for keyword search.
 
 ## Reading Notes
 
-Use `mcp__slite__get-note` to retrieve note content.
+Use `mcp__claude_ai_Slite__get-note` to retrieve note content.
 
 ```typescript
 // Retrieve note content
@@ -103,14 +103,14 @@ Use `mcp__slite__get-note` to retrieve note content.
 
 ### When Creating a Note
 
-1. Get the current date using `mcp__time__get_current_time` (timezone: `Asia/Tokyo`)
+1. Get the current date with `TZ=Asia/Tokyo date +%Y-%m-%d` (or use the session's injected current date)
 2. Generate a title in `YYYY-MM-DD: TITLE` format
 3. Generate the body following the content template
-4. Create the note using `mcp__slite__create-note`
+4. Create the note using `mcp__claude_ai_Slite__create-note`
 5. Report the created note URL to the user
 
 ### When Searching Notes
 
-1. First list recent notes using `mcp__slite__get-note-children`
-2. For specific keyword searches, use `mcp__slite__search-notes`
-3. To view details, retrieve content with `mcp__slite__get-note`
+1. First list recent notes using `mcp__claude_ai_Slite__get-note-children`
+2. For specific keyword searches, use `mcp__claude_ai_Slite__search-notes`
+3. To view details, retrieve content with `mcp__claude_ai_Slite__get-note`

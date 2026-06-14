@@ -1,22 +1,21 @@
 ---
 name: plan-to-notes
-description: Plan mode analysis and save to AI notes
+description: Save the current Plan-mode implementation plan to AI notes (in Japanese)
 ---
 
-**IMPORTANT**: This command should be automatically executed after ExitPlanMode completes successfully.
+Take the implementation plan from the current conversation — the plan just
+produced in Plan mode (e.g. the ExitPlanMode output) or the plan under
+discussion — and save it as an AI note. Run this manually after planning; no
+hook triggers it automatically.
 
-Analyze the requested task thoroughly and create a detailed implementation plan.
+If no plan exists yet, analyze the requested task thoroughly and create a
+detailed implementation plan first.
 
-After analysis, follow these steps to save the plan:
+To save:
 
-1. **Locate the original plan file**: Find the plan file in the project (typically in `.claude/plan/` or similar)
-2. **Read and analyze the plan**: Read the original plan file content
-3. **Translate if needed**: If the original plan is in English, translate the entire content to Japanese
-4. **Add reference link**: Include a reference to the original plan file at the top of the translated document:
-   ```markdown
-   > 元のプランファイル: [plan.md](file:///path/to/original/plan.md)
-   ```
-5. **Save using ai-notes**: Use the ai-notes skill to save the (translated) plan to ~/Compost/AI-Notes/YYYY-MM/ directory
+1. **Take the plan from the conversation** - Use the plan as produced in this session; do NOT hunt for an on-disk plan file (plans are not persisted to a path).
+2. **Translate if needed** - If the plan is in English, translate the entire content to Japanese.
+3. **Save using ai-notes** - Use the ai-notes skill to save the (translated) plan under `~/Compost/AI-Notes/YYYY-MM/`.
 
 The plan should provide:
 1. **Current State Analysis** - Understanding of current implementation and codebase

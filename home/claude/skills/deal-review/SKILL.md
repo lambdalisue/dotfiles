@@ -17,7 +17,6 @@ description: Address review findings from /code-review, /style-review, /doc-revi
 
 ## Language
 
-- Task prompts to agents: **English**
 - User-facing output: **Japanese**
 
 ## Principles
