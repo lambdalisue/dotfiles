@@ -16,30 +16,40 @@ changes are mapped to existing commits (since base branch) as `fixup` where
 appropriate, otherwise committed as new atomic commits; with no commits since
 base it falls back to new commits only.
 
+**Self-contained**: this skill reads git and commits directly from the
+top-level session. Do NOT spawn a subagent — it adds a slow context round-trip.
+
 Use `/git-commit-new` for new commits only (no fixup).
+
+## Conventions
+
+- **Conventional Commits**: `<type>[scope]: <subject>` + body (the WHY) + footer; breaking changes use `feat!`/`fix!` only.
+- **Commit = WHY** (t-wada): the body explains why, not what. Message language follows the repo (detect from `git log`; default English).
+- **Atomic**: split by intent, not by file. Extract standalone precursors (helpers, type definitions, refactors) into earlier commits when they would leave the tree in a valid state.
+- **Fixup mapping**: map each hunk to the commit whose intent it extends — semantic intent is the primary signal, file/region overlap is secondary, and a later commit is the tiebreaker when intent fits several equally. Changes with no related commit become a new commit.
 
 ## Language
 
-- Task prompts to agents: **English**
 - User-facing explanations, summaries: **Japanese**
-- Git artifacts (commit messages, branch names, PR titles/bodies): **preserve original language** from agent output
+- Git artifacts (commit messages, branch names, PR titles/bodies): **preserve original language** (repo's existing language)
 
 ## Workflow
 
-1. **Analyze** - Use the Task tool (`subagent_type: "git-commit-fixup"`) to analyze all working tree changes, map them to existing commits since base branch, and create a fixup-aware plan (mix of `fixup` and `new` entries).
-   - If context argument is provided, include it in the prompt: "Analyze all working tree changes and create a fixup-aware commit plan, mapping changes to existing commits where appropriate and using new commits otherwise. Additional context: {context}"
-   - If no context is provided: "Analyze all working tree changes and create a fixup-aware commit plan, mapping changes to existing commits where appropriate and using new commits otherwise."
-   - The agent returns a plan only — it does NOT execute commits.
-   - If the agent reports nothing to commit, inform the user and **STOP**.
-   - **Fallback (no commits since base)**: If the agent reports there are no commits since the base branch (nothing to fixup against), re-invoke with `subagent_type: "git-commit"` to produce a new-commits-only plan and continue with that plan.
+1. **Analyze** (read-only git):
+   1. Detect base branch: `git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'` (fallback: `main`/`master`).
+   2. Commits since base: `git log --oneline <base>..HEAD`. If none, there is nothing to fixup against → plan new commits only.
+   3. Working tree: `git status --short`, `git diff --stat`, `git diff --cached --stat`. If nothing to commit, inform the user and **STOP**.
+   4. Review changes with `git diff` and `git diff --cached`; inspect candidate target commits with `git show --stat <sha>` / `git show <sha>` as needed.
+   5. Detect commit-message language: `git log --oneline -5`.
+   6. Build a fixup-aware plan (mix of `fixup` and `new` entries), folding the `context` into the messages to explain WHY. Each entry: type, target SHA (for `fixup`) or full message (for `new`), and the explicit list of files to stage.
 
-2. **Execute** - Execute the plan **directly via the Bash tool** (do NOT delegate to the agent for execution). Do NOT ask for approval — the `/git-commit` invocation is the explicit permission.
+2. **Execute** - Run **directly via the Bash tool**. Do NOT ask for approval — the `/git-commit` invocation is the explicit permission.
 
    Procedure:
    1. Backup: `git backup "before commit-all"` (or `git branch backup/$(date +%s) HEAD` if `git backup` alias is unavailable)
    2. For each entry in the plan, in order:
-      - Reset staging if needed: `git reset HEAD -- .`
-      - Stage the planned files explicitly by name (`git add <file>...`); for partial hunks use `git add -p <file>` interactively only when truly necessary — prefer file-level staging
+      - Reset staging if needed: `git reset -q HEAD -- .`
+      - Stage the planned files explicitly by name (`git add <file>...`); for partial hunks use `git add -p <file>` only when truly necessary — prefer file-level staging
       - Verify: `git diff --cached --stat`
       - For `fixup` entries: `git commit --fixup=<target-sha>`
       - For `new` entries: `git commit -m "<message>"` (use a heredoc for multi-line messages)

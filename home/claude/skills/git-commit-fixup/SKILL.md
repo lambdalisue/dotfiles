@@ -12,27 +12,35 @@ argument-hint: "[context]"
 
 The user invoking `/git-commit-fixup` IS the explicit intent to commit — do NOT ask for approval.
 
+**Self-contained**: this skill reads git and commits directly from the
+top-level session. Do NOT spawn a subagent — it adds a slow context round-trip.
+
+## Conventions
+
+- **Fixup**: `git commit --fixup=<sha>` creates a commit auto-squashed into its target during `git rebase -i --autosquash`.
+- **Mapping**: map each hunk to the commit whose intent it extends — semantic intent is the primary signal, file/region overlap is secondary, and a later commit is the tiebreaker when intent fits several equally. Changes with no related commit become a new commit.
+- **Commit = WHY** (t-wada). Message language follows the repo (detect from `git log`; default English).
+
 ## Language
 
-- Task prompts to agents: **English**
 - User-facing explanations, summaries: **Japanese**
-- Git artifacts (commit messages, branch names): **preserve original language** from agent output
+- Git artifacts (commit messages, branch names): **preserve original language** (repo's existing language)
 
 ## Workflow
 
-1. **Analyze** - Use the Task tool (`subagent_type: "git-commit-fixup"`) to analyze all working tree changes, map them to existing commits since base branch, and create a fixup plan.
-   - If context argument is provided, include it in the prompt: "Analyze all working tree changes and create a fixup commit plan. Additional context: {context}"
-   - If no context is provided, simply: "Analyze all working tree changes and create a fixup commit plan."
-   - The agent returns a plan only — it does NOT execute commits.
-   - If the agent reports nothing to commit, inform the user and **STOP**.
-   - If the agent reports no existing commits to fixup against, inform the user and suggest using `/git-commit` instead. **STOP**.
+1. **Analyze** (read-only git):
+   1. Detect base branch: `git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'` (fallback: `main`/`master`).
+   2. Commits since base: `git log --oneline <base>..HEAD`. If there are no commits to fixup against, inform the user and suggest using `/git-commit` instead. **STOP**.
+   3. Working tree: `git status --short`, `git diff --stat`, `git diff --cached --stat`. If nothing to commit, inform the user and **STOP**.
+   4. Review changes with `git diff` and `git diff --cached`; inspect candidate target commits with `git show --stat <sha>` / `git show <sha>` as needed.
+   5. Build a plan mapping changes to target commits (mostly `fixup`, with `new` for anything unmapped). Each entry: type, target SHA (for `fixup`) or full message (for `new`), and the explicit list of files to stage.
 
-2. **Execute** - Execute the plan **directly via the Bash tool** (do NOT delegate to the agent for execution). Do NOT ask for approval — the `/git-commit-fixup` invocation is the explicit permission.
+2. **Execute** - Run **directly via the Bash tool**. Do NOT ask for approval — the `/git-commit-fixup` invocation is the explicit permission.
 
    Procedure:
    1. Backup: `git backup "before commit-fixup"` (or `git branch backup/$(date +%s) HEAD` if `git backup` alias is unavailable)
    2. For each entry in the plan, in order:
-      - Reset staging if needed: `git reset HEAD -- .`
+      - Reset staging if needed: `git reset -q HEAD -- .`
       - Stage the planned files explicitly by name
       - Verify: `git diff --cached --stat`
       - For fixup entries: `git commit --fixup=<target-sha>`

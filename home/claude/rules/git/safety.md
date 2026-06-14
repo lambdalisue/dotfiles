@@ -25,24 +25,23 @@ Before invoking any of these commands:
   message. Top-level Claude must NEVER reach for one of these commands on its
   own initiative to dodge the approval prompt.
 
-## Plan-then-execute architecture
+## Plan-then-execute (in one context)
 
-Each commit slash command works in two phases:
+Each commit slash command is **self-contained**: the slash command body
+(top-level Claude) reads the working tree / staging area with read-only git
+commands, builds a structured plan, then executes it with `git add` / `git
+commit` — all in the same context, no planner subagent. (Subagents were
+removed: the fork round-trip was slow and bought nothing once the approval
+gate was gone.)
 
-1. **Plan** — a planner subagent (`git-commit`, `git-commit-staged`,
-   `git-commit-fixup`, `git-commit-staged-fixup`) reads the working tree /
-   staging area and returns a structured plan. The subagent runs **read-only
-   git commands only** and never executes `git add` / `git commit` / `git reset`.
+1. **Plan** — read-only git only (`status`, `diff`, `log`, `show`,
+   `symbolic-ref`). No `git add` / `git commit` / `git reset` yet.
 2. **Execute** — once intent is confirmed (the user typed the command, or
-   AskUserQuestion confirmed it), the slash command body (top-level Claude)
-   runs `git add` and `git commit` directly via Bash, scoped to **exactly the
-   plan**.
+   AskUserQuestion confirmed it), run `git add` and `git commit` scoped to
+   **exactly the plan**.
 
-**Why this split**: confirmed intent grants execution authority for one
-specific plan. The planner has no write tools; the executor (top-level) only
-acts on the plan produced in this turn. There is no "subagent carve-out" —
-the only place commits run is the slash command body. The read-only planner,
-explicit staging by name, and the forbidden-command list below always apply.
+Confirmed intent grants execution authority for one specific plan. Explicit
+staging by name and the forbidden-command list below always apply.
 
 ## Forbidden Staging Commands (always)
 

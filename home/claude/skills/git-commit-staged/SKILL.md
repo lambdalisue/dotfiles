@@ -16,30 +16,38 @@ IS the explicit intent to commit, so do NOT ask for approval. It is
 branch) as `fixup` where appropriate, otherwise committed as a new commit; with
 no commits since base it falls back to a single new commit.
 
+**Self-contained**: this skill reads git and commits directly from the
+top-level session. Do NOT spawn a subagent — it adds a slow context round-trip.
+
 Use `/git-commit-staged-new` for a new commit only (no fixup).
+
+## Conventions
+
+- **Conventional Commits**: `<type>[scope]: <subject>` + body (the WHY) + footer; breaking changes use `feat!`/`fix!` only.
+- **Commit = WHY** (t-wada). Message language follows the repo (detect from `git log`; default English).
+- **Fixup mapping**: map staged changes to the commit whose intent they extend — semantic intent primary, file/region overlap secondary, later commit as tiebreaker. Staged changes spanning several targets may split across multiple fixup/new entries.
 
 ## Language
 
-- Task prompts to agents: **English**
 - User-facing explanations, summaries: **Japanese**
-- Git artifacts (commit messages, branch names, PR titles/bodies): **preserve original language** from agent output
+- Git artifacts (commit messages, branch names, PR titles/bodies): **preserve original language** (repo's existing language)
 
 ## Workflow
 
-1. **Pre-check** - BEFORE calling the agent, verify staging status:
+1. **Pre-check** - Verify staging status:
    ```bash
    git diff --cached --quiet && echo "NOTHING_STAGED" || echo "HAS_STAGED_CHANGES"
    ```
-   If output is "NOTHING_STAGED", inform the user: "ステージングされた変更がありません。先に `git add <file>` でファイルをステージングしてください。" and **STOP**. Do NOT proceed to the agent.
+   If "NOTHING_STAGED", inform the user: "ステージングされた変更がありません。先に `git add <file>` でファイルをステージングしてください。" and **STOP**.
 
-2. **Analyze** - Use the Task tool (`subagent_type: "git-commit-staged-fixup"`) to analyze the staged changes, map them to existing commits since base branch, and create a fixup-aware plan (mix of `fixup` and `new` entries).
-   - If context argument is provided, include it in the prompt: "Analyze staged changes and create a fixup-aware commit plan, mapping changes to existing commits where appropriate and using a new commit otherwise. Additional context: {context}"
-   - If no context is provided: "Analyze staged changes and create a fixup-aware commit plan, mapping changes to existing commits where appropriate and using a new commit otherwise."
-   - The agent returns a plan only — it does NOT execute commits.
-   - If the agent reports nothing is staged (this should NOT happen after pre-check), inform the user and **STOP**.
-   - **Fallback (no commits since base)**: If the agent reports there are no commits since the base branch (nothing to fixup against), re-invoke with `subagent_type: "git-commit-staged"` to draft a single new-commit message and continue with that as a `new` plan.
+2. **Analyze** (read-only git):
+   1. Detect base branch: `git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'` (fallback: `main`/`master`).
+   2. Commits since base: `git log --oneline <base>..HEAD`. If none, plan a single new commit from the staged set.
+   3. Review the staged changes: `git diff --cached`; inspect candidate target commits with `git show --stat <sha>` / `git show <sha>` as needed.
+   4. Detect commit-message language: `git log --oneline -5`.
+   5. Build a fixup-aware plan (mix of `fixup` and `new` entries) over the staged set, folding the `context` into the message. Each entry: type, target SHA (for `fixup`) or full message (for `new`), and the files in that group.
 
-3. **Execute** - Execute the plan **directly via the Bash tool** (do NOT delegate to the agent for execution). Do NOT ask for approval — the `/git-commit-staged` invocation is the explicit permission.
+3. **Execute** - Run **directly via the Bash tool**. Do NOT ask for approval — the `/git-commit-staged` invocation is the explicit permission.
 
    Procedure (single fixup target — staging untouched):
    1. Backup: `git backup "before commit-staged"` (or `git branch backup/$(date +%s) HEAD` if `git backup` alias is unavailable)
@@ -56,7 +64,7 @@ Use `/git-commit-staged-new` for a new commit only (no fixup).
    1. Backup as above
    2. Note the current staged set via `git diff --cached --stat`
    3. For each entry, in plan order:
-      - Reset staging: `git reset HEAD -- .`
+      - Reset staging: `git reset -q HEAD -- .`
       - Re-stage only the files in this group, explicitly by name
       - Verify: `git diff --cached --stat`
       - For `fixup` entries: `git commit --fixup=<target-sha>`
