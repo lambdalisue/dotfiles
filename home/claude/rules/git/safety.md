@@ -12,6 +12,7 @@ initiative.** Commits only run via one of these slash commands:
 - `/git-commit-staged-new` — staged changes: a new commit only (no fixup)
 - `/git-commit-staged-fixup` — staged changes: map to existing commits as fixup
 - `/git-commit-amend` — amend the previous (HEAD) commit, folding in working tree changes (rewrites HEAD)
+- `/git-commit-reword` — review commit messages since base and add reword fixup commits where needed
 
 Each command above commits immediately without an in-command approval step.
 

@@ -1,75 +1,74 @@
 ---
 name: git-commit-reword
-argument-hint: "[commit] [description] Optional commit SHA/ref and additional context for rewriting"
-description: Rewrite a commit message using fixup
+argument-hint: "[context]"
+description: Review every commit message since base branch and add reword fixups where the message needs improvement (non-interactive)
 ---
+
+## Arguments
+
+- `context` (optional): Additional context to inform the re-evaluation (e.g., "these implement the auth refactor", "focus on tightening the subjects"). Folded into the judgment and the new messages.
 
 ## Behavior
 
-Rewrites an existing commit's message by creating a `reword` fixup commit (an
-`amend!` commit) that `git rebase -i --autosquash` folds in later — the original
-code is never touched. The user reviews and approves the new message before it
-is written.
+Reviews **every commit message since the base branch**, re-judges each one in the
+current context, and for each commit whose message should be improved, creates a
+`reword` fixup commit (an `amend!` commit) so `git rebase -i --autosquash`
+rewrites just that message later — the original code is never touched. Commits
+whose messages are already good are left untouched.
 
-**Self-contained**: this skill reads git and creates the fixup commit directly
-from the top-level session. Do NOT spawn a subagent.
+**Non-interactive**: the `/git-commit-reword` invocation IS the explicit intent —
+do NOT ask for approval. **Self-contained**: this skill reads git and creates the
+fixup commits directly from the top-level session. Do NOT spawn a subagent.
 
 ## Conventions
 
-- **Conventional Commits**: `<type>[scope]: <subject>` + body (the WHY) + footer.
+- **Conventional Commits**: `<type>[scope]: <subject>` + body (the WHY) + footer; breaking changes use `feat!`/`fix!` only.
 - **Commit = WHY** (t-wada). Message language follows the repo (detect from `git log`; default English).
+- **When a message needs reword**: it is uninformative (e.g., `Update`, `wip`, `fix`, bare filenames), does not follow Conventional Commits, mislabels the change type, or its body fails to explain WHY for a non-trivial change. Also reword when **the message no longer matches the commit's actual content** — e.g., fixups squashed in (via `fixup`/`amend!` → `--autosquash`) grew or changed the diff so the original subject/body now under- or mis-describes what the commit really does. Always judge the message against the commit's **current** full diff, not its original intent. **Do NOT reword a message that is already accurate and clear** — avoid needless churn.
 
 ## Language
 
-- User-facing explanations, summaries, AskUserQuestion: **Japanese**
-- Git artifacts (commit messages, branch names): **preserve original language** (repo's existing language)
+- User-facing explanations, summaries: **Japanese**
+- Git artifacts (commit messages): **preserve original language** (repo's existing language)
 
 ## Workflow
 
-### Phase 1: Select the commit (read-only)
+1. **Detect base branch**: `git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'` (fallback: `main`/`master`).
 
-- If a commit ref was given in args, use it (verify with `git rev-parse --verify <ref>`).
-- Otherwise list recent commits: `git log --oneline -10`, then use AskUserQuestion to let the user pick one (options: `<sha> <subject>`).
+2. **List commits since base**: `git log --oneline <base>..HEAD`. If there are none, inform the user and **STOP**.
 
-### Phase 2: Draft the new message (read-only)
+3. **Review each commit** (read-only). For every commit in `<base>..HEAD`:
+   - Read its message: `git log -1 --format="%H%n%s%n%b" <sha>`
+   - Review its change: `git show --stat <sha>`, and `git show <sha>` when the diff is needed to judge the message.
+   - Detect repo language from `git log --oneline -10`.
 
-1. Read the original commit: `git log -1 --format="%H%n%s%n%b" <sha>`.
-2. Review its changes: `git show --stat <sha>` and `git show <sha>` as needed.
-3. Detect language: `git log --oneline -10`.
-4. Draft the new message from the original message, the diff, and any `description` from args (Conventional Commits, focus on WHY, subject + blank line + body).
+4. **Judge & draft**: re-evaluate each message against the Conventions above, folding in the optional `context`. Decide per commit: keep as-is, or reword. For each commit needing reword, draft an improved message (Conventional Commits, subject + blank line + WHY-focused body). Keep accurate messages unchanged.
 
-### Phase 3: Approve
+5. **Execute** (directly via Bash) — only if at least one commit needs reword:
+   1. Backup: `git backup "before reword"` (or `git branch backup/$(date +%s) HEAD` if `git backup` alias is unavailable).
+   2. For each commit needing reword, create a reword fixup commit (Git 2.32+):
+      ```bash
+      git commit --allow-empty --fixup=reword:<sha> -m "$(cat <<'EOF'
+      <new-message>
+      EOF
+      )"
+      ```
+      For older Git, use an explicit `amend!` commit:
+      ```bash
+      git commit --allow-empty -m "amend! $(git log -1 --format=%s <sha>)" -m "$(cat <<'EOF'
+      <new-message>
+      EOF
+      )"
+      ```
 
-- Present the draft with AskUserQuestion, options: "承認", "編集", "キャンセル".
-- If "編集": prompt for the custom message and use it.
-- If "キャンセル": stop.
+   **Forbidden**: `git commit --amend`, `git rebase`, `git stash`. Only create `--allow-empty` reword fixup commits; the user controls the rebase.
 
-### Phase 4: Execute (directly via Bash)
+6. **Present** (Japanese):
+   - If no commit needed reword, report that all messages since base are already clear and that **nothing was created**.
+   - Otherwise, list which commits got reword fixups (and note any left as-is), then show:
+     ```
+     ✅ reword fixup コミットを作成しました（N 件）
 
-1. Detect base branch: `git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'` (fallback: `main`/`master`).
-2. Create the reword fixup commit (Git 2.32+):
-   ```bash
-   git commit --allow-empty --fixup=reword:<sha> -m "$(cat <<'EOF'
-   <approved-message>
-   EOF
-   )"
-   ```
-   For older Git, use an explicit `amend!` commit:
-   ```bash
-   git commit --allow-empty -m "amend! $(git log -1 --format=%s <sha>)" -m "$(cat <<'EOF'
-   <approved-message>
-   EOF
-   )"
-   ```
-
-   **Forbidden**: `git commit --amend`, `git rebase`, `git stash`. Only create the `--allow-empty` fixup commit; the user controls the rebase.
-
-### Phase 5: Present
-
-Show rebase instructions in Japanese:
-```
-✅ fixup コミットを作成しました (<sha>)
-
-以下のコマンドで自動的にマージできます:
-  git rebase -i --autosquash origin/<base-branch>
-```
+     以下のコマンドでメッセージを自動的に書き換えできます:
+       git rebase -i --autosquash origin/<base-branch>
+     ```
