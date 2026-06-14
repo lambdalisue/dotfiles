@@ -1,35 +1,19 @@
 ---
 paths: "**/*.ts"
 ---
-# Error Handling and Logging
 
-## Common
+# Error Handling and Logging — TypeScript
 
-- Use `console` or project's logger (e.g., `@logtape/logtape`)
-- Do NOT log when throwing errors. Use `console.debug` only if context would be lost
-- Avoid excessive logging
+Severity policy (when to use warn/error/debug/info, library vs application) is
+shared: see `rules/code/error-and-logging.md`. This rule covers the
+TypeScript-specific API and idioms.
 
-## Library Modules
+## Logging API
 
-**Error Handling:**
+- Use `console` or the project's logger (e.g. `@logtape/logtape`).
+- The shared severity levels map to `console.warn` / `console.error` / `console.debug` / `console.info`.
 
-- Define custom `Error` subclasses with context
+## Error types
 
-**Logging:**
-
-- `console.warn` / `console.error` are prohibited — let caller decide severity
-- `console.debug` for debugging information
-- `console.info` only for critical flow tracking
-
-## Application Modules
-
-**Error Handling:**
-
-- Use standard `Error` or custom errors as appropriate
-
-**Logging:**
-
-- `console.warn` for recoverable errors (continue execution)
-- `console.error` for fatal errors (stop execution)
-- `console.debug` for debugging information
-- `console.info` for flow tracking
+- **Library modules**: define custom `Error` subclasses that carry context.
+- **Application modules**: use standard `Error` or custom errors as appropriate.

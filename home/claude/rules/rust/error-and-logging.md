@@ -2,15 +2,18 @@
 paths: "**/*.rs"
 ---
 
-# Error Handling and Logging
+# Error Handling and Logging — Rust
 
-## Common
+Severity policy (when to use warn/error/debug/info, library vs application) is
+shared: see `rules/code/error-and-logging.md`. This rule covers the
+Rust-specific API and idioms.
 
-- Use `tracing` for structured logging
-- Always use `tracing::` prefix (e.g., `tracing::debug!`, not `debug!`)
-- Decorate functions with `#[tracing::instrument]` for traceability
-- Do NOT log when returning errors. Use `tracing::debug!` only if context would be lost
-- Avoid excessive logging
+## Logging API
+
+- Use `tracing` for structured logging.
+- Always use the `tracing::` prefix (e.g. `tracing::debug!`, not `debug!`).
+- Decorate functions with `#[tracing::instrument]` for traceability.
+- The shared severity levels map to `tracing::warn!` / `tracing::error!` / `tracing::debug!` / `tracing::info!`.
 
 ### Structured Logging Best Practices
 
@@ -51,27 +54,7 @@ tracing::debug!(%path, ?self, "Saving persisted state");
 - `field` - Use the value directly (for types implementing `Value`)
 - `field = expr` - Custom expression as field value
 
-## Library Crates
+## Error types
 
-**Error Handling:**
-
-- Use `thiserror` to define dedicated error types with context
-
-**Logging:**
-
-- `tracing::warn!` / `tracing::error!` are prohibited — let caller decide severity
-- `tracing::debug!` for debugging information
-- `tracing::info!` only for critical flow tracking
-
-## Application Crates
-
-**Error Handling:**
-
-- Use `anyhow::Error`
-
-**Logging:**
-
-- `tracing::warn!` for recoverable errors (continue execution)
-- `tracing::error!` for fatal errors (stop execution)
-- `tracing::debug!` for debugging information
-- `tracing::info!` for flow tracking
+- **Library crates**: use `thiserror` to define dedicated error types with context.
+- **Application crates**: use `anyhow::Error`.
