@@ -1,5 +1,5 @@
 ---
-paths: "**/src/**/*.rs"
+paths: "**/*.rs"
 ---
 
 # Prefer glob re-exports (`pub use mod::*`) with fine-grained visibility on items

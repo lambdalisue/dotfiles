@@ -1,3 +1,7 @@
+---
+paths: "**/*.rs"
+---
+
 # SQLx Query Rules
 
 ## Always use compile-time checked macros

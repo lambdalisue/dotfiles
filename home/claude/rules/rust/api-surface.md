@@ -1,5 +1,5 @@
 ---
-paths: "**/src/**/*.rs"
+paths: "**/*.rs"
 ---
 
 # Use AsRef<T> and Into<T> for public APIs
