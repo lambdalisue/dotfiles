@@ -27,7 +27,7 @@ if echo "$command" | grep -qE '\b(sed|awk)\b'; then
     cat >&2 <<'EOF'
 ❌ sed/awk detected - Use perl instead
 
-According to text-processing rules, batch text operations should use perl.
+Per ~/.claude/rules/tools/text-processing.md, batch text operations should use perl.
 
 Examples:
   ❌ sed 's/foo/bar/g' file.txt
