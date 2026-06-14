@@ -29,26 +29,26 @@ if [[ "$file_path" =~ /mod\.rs$ ]]; then
     module_name=$(basename "$parent_dir")
 
     cat >&2 <<EOF
-🛑 BLOCKED: mod.rs creation is NOT ALLOWED in modern Rust (since Rust 2018)
+⚠️ Warning: prefer the modern module file naming over mod.rs (Rust 2018+)
 
-You NEVER need mod.rs, even for directories with submodules.
+You usually do NOT need mod.rs, even for directories with submodules.
 
-❌ WRONG (old Rust 2015 style):
+❌ Old (Rust 2015 style):
   $parent_dir/mod.rs        ← defines module '$module_name'
   $parent_dir/submodule.rs  ← defines '$module_name::submodule'
 
-✅ CORRECT (Rust 2018+ style):
+✅ Preferred (Rust 2018+ style):
   ${parent_dir%/*}/$module_name.rs        ← defines module '$module_name'
   ${parent_dir%/*}/$module_name/submodule.rs  ← defines '$module_name::submodule'
 
 The module name comes from the FILENAME, not from mod.rs inside a directory.
+Docs: https://doc.rust-lang.org/book/ch07-05-separating-modules-into-different-files.html
 
-If you think you need mod.rs, you're misunderstanding Rust modules.
-Read the documentation: https://doc.rust-lang.org/book/ch07-05-separating-modules-into-different-files.html
-
-This hook BLOCKS mod.rs creation. There are NO valid exceptions in new code.
+Exceptions (per ~/.claude/rules/rust/no-mod-rs.md): incremental migration of a
+large legacy codebase, or an explicit user request for mod.rs style. The
+creation is allowed to proceed — reconsider unless one of those applies.
 EOF
-    exit 2  # Block the command
+    exit 0  # Warn only — creation is allowed
 fi
 
 # File creation is valid
