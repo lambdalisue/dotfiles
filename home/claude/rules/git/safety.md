@@ -5,27 +5,25 @@
 **Top-level Claude MUST NOT run `git commit` directly via Bash on its own
 initiative.** Commits only run via one of these slash commands:
 
-- `/git-commit` — fixup into existing commits where appropriate, otherwise new atomic commits
-- `/git-commit-new` — new atomic commits only (no fixup)
-- `/git-commit-staged` — commit already-staged changes
-- `/git-commit-fixup` — map working tree changes to existing commits as fixup
-- `/git-commit-staged-fixup` — map staged changes to existing commits as fixup
+- `/git-commit` — working tree: fixup into existing commits where appropriate, otherwise new atomic commits
+- `/git-commit-new` — working tree: new atomic commits only (no fixup)
+- `/git-commit-fixup` — working tree: map changes to existing commits as fixup
+- `/git-commit-staged` — staged changes: fixup into existing commits where appropriate, otherwise a new commit
+- `/git-commit-staged-new` — staged changes: a new commit only (no fixup)
+- `/git-commit-staged-fixup` — staged changes: map to existing commits as fixup
+- `/git-commit-amend` — amend the previous (HEAD) commit, folding in working tree changes (rewrites HEAD)
 
-Each command above also has a non-interactive `-now` variant
-(`/git-commit-now`, `/git-commit-new-now`, `/git-commit-staged-now`,
-`/git-commit-fixup-now`, `/git-commit-staged-fixup-now`) that skips the
-in-command approval step and commits immediately. They are allowed commit
-pathways too.
+Each command above commits immediately without an in-command approval step.
 
-Before invoking any of these commands (interactive OR `-now`):
+Before invoking any of these commands:
 
 - MUST use AskUserQuestion to confirm intent — EXCEPT when the user typed the
-  `-now` command themselves in the CURRENT message; that explicit invocation
-  IS the confirmation, so do NOT ask again.
+  command themselves in the CURRENT message; that explicit invocation IS the
+  confirmation, so do NOT ask again.
 - Permission is valid for ONE invocation only
 - ONLY proceed when the user explicitly requested the commit in the CURRENT
-  message. Top-level Claude must NEVER reach for a `-now` variant on its own
-  initiative to dodge the approval prompt.
+  message. Top-level Claude must NEVER reach for one of these commands on its
+  own initiative to dodge the approval prompt.
 
 ## Plan-then-execute architecture
 
@@ -35,21 +33,16 @@ Each commit slash command works in two phases:
    `git-commit-fixup`, `git-commit-staged-fixup`) reads the working tree /
    staging area and returns a structured plan. The subagent runs **read-only
    git commands only** and never executes `git add` / `git commit` / `git reset`.
-2. **Execute** — after the user approves the plan via AskUserQuestion, the
-   slash command body (top-level Claude) runs `git add` and `git commit`
-   directly via Bash, scoped to **exactly the approved plan**.
+2. **Execute** — once intent is confirmed (the user typed the command, or
+   AskUserQuestion confirmed it), the slash command body (top-level Claude)
+   runs `git add` and `git commit` directly via Bash, scoped to **exactly the
+   plan**.
 
-**Why this split**: a single approval grants execution authority for one
+**Why this split**: confirmed intent grants execution authority for one
 specific plan. The planner has no write tools; the executor (top-level) only
-acts on plans the user just approved in this turn. There is no "subagent
-carve-out" — the only place commits run is the slash command body, after
-explicit user approval.
-
-The `-now` variants keep the same plan-then-execute split and the same
-read-only planner, but skip the AskUserQuestion approval gate: the user's
-explicit `/...-now` invocation in the current message is the execution
-authority. Everything else (read-only planner, explicit staging by name,
-forbidden-command list below) still applies unchanged.
+acts on the plan produced in this turn. There is no "subagent carve-out" —
+the only place commits run is the slash command body. The read-only planner,
+explicit staging by name, and the forbidden-command list below always apply.
 
 ## Forbidden Staging Commands (always)
 
