@@ -1,6 +1,6 @@
 ---
-name: git-commit-staged-now
-description: Create a Conventional Commit from already staged changes WITHOUT asking for approval
+name: git-commit-staged-new
+description: Create a Conventional Commit from already staged changes (new commit only, no fixup)
 argument-hint: "[context]"
 ---
 
@@ -8,9 +8,12 @@ argument-hint: "[context]"
 
 - `context` (optional): Additional context for the commit message (e.g., "Fix #123", "Performance improvement", "Refactor for clarity"). This context will be used to generate a more accurate and meaningful commit message.
 
-## When to use
+## Behavior
 
-This is the non-interactive variant of `/git-commit-staged`. The user invoking `/git-commit-staged-now` IS the explicit intent to commit — do NOT ask for approval. Use the interactive `/git-commit-staged` when the user wants to review the message first.
+The user invoking `/git-commit-staged-new` IS the explicit intent to commit — do
+NOT ask for approval. It creates a **new commit only** from the staged changes
+and never maps them into existing commits as fixups. Use `/git-commit-staged`
+when you want fixups where appropriate.
 
 ## Language
 
@@ -32,7 +35,7 @@ This is the non-interactive variant of `/git-commit-staged`. The user invoking `
    - The agent returns a draft message only — it does NOT execute the commit.
    - If the agent reports nothing is staged (this should NOT happen after pre-check), inform the user and **STOP**.
 
-3. **Execute** - Execute `git commit` **directly via the Bash tool** (do NOT delegate to the agent for execution). Do NOT ask for approval — the `/git-commit-staged-now` invocation is the explicit permission.
+3. **Execute** - Execute `git commit` **directly via the Bash tool** (do NOT delegate to the agent for execution). Do NOT ask for approval — the `/git-commit-staged-new` invocation is the explicit permission.
 
    Procedure:
    1. Verify staging is still intact: `git diff --cached --stat`
