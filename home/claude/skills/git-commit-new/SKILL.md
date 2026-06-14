@@ -10,14 +10,15 @@ argument-hint: "[context]"
 
 ## Behavior
 
-This command creates **new atomic commits only** — it never maps changes into
-existing commits as fixups. Use `/git-commit` when you want changes folded into
-related existing commits as fixups where appropriate.
+The user invoking `/git-commit-new` IS the explicit intent to commit — do NOT
+ask for approval. It creates **new atomic commits only** and never maps changes
+into existing commits as fixups. Use `/git-commit` when you want fixups where
+appropriate.
 
 ## Language
 
 - Task prompts to agents: **English**
-- User-facing explanations, summaries, AskUserQuestion: **Japanese**
+- User-facing explanations, summaries: **Japanese**
 - Git artifacts (commit messages, branch names, PR titles/bodies): **preserve original language** from agent output
 
 ## Workflow
@@ -28,13 +29,11 @@ related existing commits as fixups where appropriate.
    - The agent returns a plan only — it does NOT execute commits.
    - If the agent reports nothing to commit, inform the user and **STOP**.
 
-2. **Approve** - Present the commit plan to the user exactly as returned by the agent. Use AskUserQuestion to ask for approval with options: "Approve", "Modify" (let user adjust the plan), "Cancel".
-
-3. **Execute** - If approved, execute the approved plan **directly via the Bash tool** (do NOT delegate to the agent for execution). The user's approval at step 2 is the explicit permission to commit; this is the only place commits run.
+2. **Execute** - Execute the plan **directly via the Bash tool** (do NOT delegate to the agent for execution). Do NOT ask for approval — the `/git-commit-new` invocation is the explicit permission.
 
    Procedure:
    1. Backup: `git backup "before commit-all"` (or `git branch backup/$(date +%s) HEAD` if `git backup` alias is unavailable)
-   2. For each commit in the approved plan, in order:
+   2. For each commit in the plan, in order:
       - Reset staging if needed: `git reset HEAD -- .`
       - Stage the planned files explicitly by name (`git add <file>...`); for partial hunks use `git add -p <file>` interactively only when truly necessary — prefer file-level staging
       - Verify: `git diff --cached --stat`

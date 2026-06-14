@@ -8,10 +8,14 @@ argument-hint: "[context]"
 
 - `context` (optional): Additional context for mapping changes to commits (e.g., "These changes are for the auth refactor", "Fix edge cases in parser"). This context will be used to inform which existing commits the changes should be mapped to.
 
+## When to use
+
+The user invoking `/git-commit-fixup` IS the explicit intent to commit — do NOT ask for approval.
+
 ## Language
 
 - Task prompts to agents: **English**
-- User-facing explanations, summaries, AskUserQuestion: **Japanese**
+- User-facing explanations, summaries: **Japanese**
 - Git artifacts (commit messages, branch names): **preserve original language** from agent output
 
 ## Workflow
@@ -23,13 +27,11 @@ argument-hint: "[context]"
    - If the agent reports nothing to commit, inform the user and **STOP**.
    - If the agent reports no existing commits to fixup against, inform the user and suggest using `/git-commit` instead. **STOP**.
 
-2. **Approve** - Present the fixup plan to the user exactly as returned by the agent. Use AskUserQuestion to ask for approval with options: "Approve", "Modify" (let user adjust the plan), "Cancel".
-
-3. **Execute** - If approved, execute the approved plan **directly via the Bash tool** (do NOT delegate to the agent for execution). The user's approval at step 2 is the explicit permission; this is the only place commits run.
+2. **Execute** - Execute the plan **directly via the Bash tool** (do NOT delegate to the agent for execution). Do NOT ask for approval — the `/git-commit-fixup` invocation is the explicit permission.
 
    Procedure:
    1. Backup: `git backup "before commit-fixup"` (or `git branch backup/$(date +%s) HEAD` if `git backup` alias is unavailable)
-   2. For each entry in the approved plan, in order:
+   2. For each entry in the plan, in order:
       - Reset staging if needed: `git reset HEAD -- .`
       - Stage the planned files explicitly by name
       - Verify: `git diff --cached --stat`
@@ -41,7 +43,7 @@ argument-hint: "[context]"
 
    If a commit fails (e.g., pre-commit hook), stop and report — do NOT improvise around the failure.
 
-4. **Present** - Show rebase instructions in Japanese:
+3. **Present** - Show rebase instructions in Japanese:
    ```
    ✅ fixup コミットを作成しました
 

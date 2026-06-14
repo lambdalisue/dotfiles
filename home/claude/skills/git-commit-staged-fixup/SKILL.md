@@ -8,10 +8,14 @@ argument-hint: "[context]"
 
 - `context` (optional): Additional context for mapping changes to commits (e.g., "These changes are for the auth refactor", "Fix edge cases in parser"). This context will be used to inform which existing commits the changes should be mapped to.
 
+## When to use
+
+The user invoking `/git-commit-staged-fixup` IS the explicit intent to commit — do NOT ask for approval.
+
 ## Language
 
 - Task prompts to agents: **English**
-- User-facing explanations, summaries, AskUserQuestion: **Japanese**
+- User-facing explanations, summaries: **Japanese**
 - Git artifacts (commit messages, branch names): **preserve original language** from agent output
 
 ## Workflow
@@ -28,9 +32,7 @@ argument-hint: "[context]"
    - The agent returns a plan only — it does NOT execute commits.
    - If the agent reports no existing commits to fixup against, inform the user and suggest using `/git-commit-staged` instead. **STOP**.
 
-3. **Approve** - Present the fixup plan to the user exactly as returned by the agent. Use AskUserQuestion to ask for approval with options: "Approve", "Modify" (let user adjust the plan), "Cancel".
-
-4. **Execute** - If approved, execute the approved plan **directly via the Bash tool** (do NOT delegate to the agent for execution). The user's approval at step 3 is the explicit permission; this is the only place commits run.
+3. **Execute** - Execute the plan **directly via the Bash tool** (do NOT delegate to the agent for execution). Do NOT ask for approval — the `/git-commit-staged-fixup` invocation is the explicit permission.
 
    Procedure (single fixup target — staging untouched):
    1. `git commit --fixup=<target-sha>`
@@ -50,7 +52,7 @@ argument-hint: "[context]"
 
    If a commit fails (e.g., pre-commit hook), stop and report — do NOT improvise around the failure.
 
-5. **Present** - Show rebase instructions in Japanese:
+4. **Present** - Show rebase instructions in Japanese:
    ```
    ✅ fixup コミットを作成しました
 

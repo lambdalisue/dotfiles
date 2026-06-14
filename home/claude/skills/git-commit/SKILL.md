@@ -10,17 +10,18 @@ argument-hint: "[context]"
 
 ## Behavior
 
-This command is **fixup-aware**: each change is mapped to the existing commit
-(since the base branch) whose intent it extends and committed as a `fixup`;
-changes that match no existing commit become new atomic commits. When the
-branch has no commits since the base branch, it falls back to new commits only.
+Commits all working tree changes directly — the `/git-commit` invocation IS the
+explicit intent to commit, so do NOT ask for approval. It is **fixup-aware**:
+changes are mapped to existing commits (since base branch) as `fixup` where
+appropriate, otherwise committed as new atomic commits; with no commits since
+base it falls back to new commits only.
 
-Use `/git-commit-new` instead when you want new commits only, with no fixups.
+Use `/git-commit-new` for new commits only (no fixup).
 
 ## Language
 
 - Task prompts to agents: **English**
-- User-facing explanations, summaries, AskUserQuestion: **Japanese**
+- User-facing explanations, summaries: **Japanese**
 - Git artifacts (commit messages, branch names, PR titles/bodies): **preserve original language** from agent output
 
 ## Workflow
@@ -30,15 +31,13 @@ Use `/git-commit-new` instead when you want new commits only, with no fixups.
    - If no context is provided: "Analyze all working tree changes and create a fixup-aware commit plan, mapping changes to existing commits where appropriate and using new commits otherwise."
    - The agent returns a plan only — it does NOT execute commits.
    - If the agent reports nothing to commit, inform the user and **STOP**.
-   - **Fallback (no commits since base)**: If the agent reports there are no commits since the base branch (nothing to fixup against), re-invoke with `subagent_type: "git-commit"` to produce a new-commits-only plan and continue with that plan. Do NOT tell the user to switch commands.
+   - **Fallback (no commits since base)**: If the agent reports there are no commits since the base branch (nothing to fixup against), re-invoke with `subagent_type: "git-commit"` to produce a new-commits-only plan and continue with that plan.
 
-2. **Approve** - Present the plan to the user exactly as returned by the agent. Use AskUserQuestion to ask for approval with options: "Approve", "Modify" (let user adjust the plan), "Cancel".
-
-3. **Execute** - If approved, execute the approved plan **directly via the Bash tool** (do NOT delegate to the agent for execution). The user's approval at step 2 is the explicit permission to commit; this is the only place commits run.
+2. **Execute** - Execute the plan **directly via the Bash tool** (do NOT delegate to the agent for execution). Do NOT ask for approval — the `/git-commit` invocation is the explicit permission.
 
    Procedure:
    1. Backup: `git backup "before commit-all"` (or `git branch backup/$(date +%s) HEAD` if `git backup` alias is unavailable)
-   2. For each entry in the approved plan, in order:
+   2. For each entry in the plan, in order:
       - Reset staging if needed: `git reset HEAD -- .`
       - Stage the planned files explicitly by name (`git add <file>...`); for partial hunks use `git add -p <file>` interactively only when truly necessary — prefer file-level staging
       - Verify: `git diff --cached --stat`
@@ -50,7 +49,7 @@ Use `/git-commit-new` instead when you want new commits only, with no fixups.
 
    If a commit fails (e.g., pre-commit hook), stop and report — do NOT improvise around the failure.
 
-4. **Present** - If the plan contained any `fixup` entries, show rebase instructions in Japanese:
+3. **Present** - If the plan contained any `fixup` entries, show rebase instructions in Japanese:
    ```
    ✅ コミットを作成しました（fixup を含みます）
 

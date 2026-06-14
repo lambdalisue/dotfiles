@@ -1,9 +1,13 @@
 ---
 name: pr-update
-allowed-tools: Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(gh pr:*), AskUserQuestion
+allowed-tools: Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(gh pr:*)
 argument-hint: "[PR_NUMBER] Optional PR number to update"
 description: Update the title and body of an existing pull request
 ---
+
+## When to use
+
+The user invoking `/pr-update` IS the explicit intent to update the PR — do NOT ask for approval.
 
 ## Context
 
@@ -24,11 +28,14 @@ description: Update the title and body of an existing pull request
 
 **Body**: Explain WHY these changes were made, not just WHAT changed. Preserve existing structure if the body already follows a consistent format.
 
+**Line breaks**: Do NOT insert hard line breaks in the middle of a sentence or paragraph. Write each paragraph as a single continuous line and let the renderer wrap it. Only break between paragraphs (blank line), at list items, or at headings. Never hard-wrap to a fixed column width.
+
 ## Workflow
 
 1. **Identify PR** - Determine target PR number:
    - If argument provided: use that PR number
    - Otherwise: run `gh pr view --json number --jq '.number'` to get PR for current branch
+   - If no PR exists for the current branch, report it and **STOP immediately**.
 
 2. **Fetch Current PR** - Get current title, body, and base branch:
    ```bash
@@ -43,7 +50,7 @@ description: Update the title and body of an existing pull request
 
 4. **Detect Language** - Check the language of the existing PR title/body
 
-5. **Draft Update** - Create updated title and body, displayed in a fenced code block:
+5. **Draft Update** - Create updated title and body:
    ```
    Title: <concise summary>
 
@@ -57,44 +64,12 @@ description: Update the title and body of an existing pull request
    - [ ] <test items>
    ```
 
-6. **Show Diff** - Clearly show what changed from the current PR:
-   - Current title → New title
-   - Summarize body changes
-
-7. **STOP** - Wait for user approval before updating (use AskUserQuestion)
-
-8. **Update** - Only after user confirms, execute:
+6. **Update** - Execute immediately, without asking for approval (the `/pr-update` invocation is the explicit permission). Pass the body via a HEREDOC to preserve formatting:
    ```bash
    gh pr edit <number> --title "<title>" --body "<body>"
    ```
-
-## Example Output
-
-```
-### Current
-Title: Add new feature
-
-### Proposed
-Title: Add OAuth2 support for GitHub login
-
-## Summary
-- Add GitHub OAuth2 authentication flow
-- Store tokens securely with encryption
-
-## Why
-Users requested GitHub login to avoid creating separate accounts.
-OAuth2 chosen over OAuth1 for simpler flow and short-lived tokens.
-
-## Test Plan
-- [ ] Test login flow with valid GitHub account
-- [ ] Verify token refresh works correctly
-```
+   Present the PR URL to the user.
 
 ## Begin
 
-Identify the target PR (from argument or current branch), fetch current title and body, analyze commits, and draft updated content for user approval.
-
-**IMPORTANT**:
-1. After drafting the updated PR content, you MUST ask the user for approval using AskUserQuestion before updating the PR
-2. Show clearly what will change (current vs proposed)
-3. Pass the body via a HEREDOC to `gh pr edit` to preserve formatting
+Identify the target PR (from argument or current branch), fetch current title and body, analyze commits, draft updated content, and update the PR immediately. Do NOT ask for approval — the `/pr-update` invocation is the explicit permission.
