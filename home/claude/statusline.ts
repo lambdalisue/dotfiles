@@ -32,12 +32,20 @@ interface StatusLineInput {
 
 // Context window sizes by model
 const CONTEXT_SIZES: Record<string, number> = {
-  "claude-opus-4-5-20251101": 200000,
-  "claude-sonnet-4-5-20250929": 200000,
-  "claude-sonnet-4-20250514": 200000,
-  "claude-opus-4-20250514": 200000,
+  "claude-fable-5": 200000,
+  "claude-opus-4-8": 200000,
+  "claude-sonnet-4-6": 200000,
+  "claude-haiku-4-5": 200000,
   "default": 200000,
 };
+
+// Resolve the context window for a model id. A trailing `[1m]` marks the
+// 1M-context variant; otherwise match the base id (ignoring any date suffix).
+function resolveContextSize(modelId: string): number {
+  if (/\[1m\]/i.test(modelId)) return 1_000_000;
+  const base = modelId.replace(/\[1m\]$/i, "").replace(/-\d{8}$/, "");
+  return CONTEXT_SIZES[base] ?? CONTEXT_SIZES[modelId] ?? CONTEXT_SIZES["default"];
+}
 
 function formatTokens(n: number): string {
   if (n >= 1000) {
@@ -111,7 +119,7 @@ async function main(): Promise<void> {
 
   const model = data.model?.display_name ?? "Unknown";
   const modelId = data.model?.id ?? "default";
-  const contextSize = CONTEXT_SIZES[modelId] ?? CONTEXT_SIZES["default"];
+  const contextSize = resolveContextSize(modelId);
   const transcriptPath = data.transcript_path;
 
   if (!transcriptPath) {
