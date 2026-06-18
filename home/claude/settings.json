@@ -50,7 +50,9 @@
     }
   },
   "effortLevel": "high",
+  "skipWorkflowUsageWarning": true,
   "verbose": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "advisorModel": "opus"
 }
