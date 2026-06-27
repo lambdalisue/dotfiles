@@ -5,7 +5,10 @@ For batch text transformations on the command line, use `perl` instead of
 differs between GNU and BSD/macOS) and has a single consistent regex dialect.
 
 This is enforced by the `enforce-perl.sh` PreToolUse hook, which blocks `Bash`
-commands containing `sed` or `awk`.
+commands that **invoke** `sed` or `awk`. It matches a command word only — after
+stripping quoted strings and comments and splitting on command separators — so a
+mere mention (a `grep` pattern, a filename like `parsed`, a comment, a quoted
+string) is not blocked. Real invocations, including after a pipe or `xargs`, are.
 
 | Instead of | Use |
 | --- | --- |

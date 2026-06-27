@@ -50,9 +50,10 @@
     }
   },
   "effortLevel": "high",
+  "advisorModel": "opus",
   "skipWorkflowUsageWarning": true,
   "verbose": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "advisorModel": "opus"
+  "tui": "fullscreen"
 }

@@ -22,8 +22,23 @@ if [[ "$tool_name" != "Bash" ]] || [[ -z "$command" ]]; then
     exit 0
 fi
 
-# Check for sed or awk usage (word boundary to avoid false positives)
-if echo "$command" | grep -qE '\b(sed|awk)\b'; then
+# Block only a real sed/awk *invocation* — not a mention inside a quoted string,
+# a comment, a grep pattern, or a filename. Strip quotes and comments, split on
+# command separators, and flag a segment only when its command word is sed/awk.
+if CMD="$command" perl -e '
+    my $c = $ENV{CMD};
+    my $sq = chr(39); my $dq = chr(34);
+    $c =~ s/$sq[^$sq]*$sq//g;                 # remove single-quoted strings
+    $c =~ s/$dq(?:\\.|[^$dq\\])*$dq//g;        # remove double-quoted strings
+    $c =~ s/#.*//mg;                           # remove comments
+    for my $seg (split /\|\||&&|[|&;()\n`]/, $c) {
+        $seg =~ s/^\s+//;
+        1 while $seg =~ s/^\w+=\S*\s+//;       # drop leading VAR=val assignments
+        $seg =~ s/^(?:sudo|env|time|nice|nohup|command|builtin|exec|xargs)\s+//;
+        exit 0 if $seg =~ /^(?:sed|awk)\b/;    # a real invocation -> block
+    }
+    exit 1;
+'; then
     cat >&2 <<'EOF'
 ❌ sed/awk detected - Use perl instead
 
