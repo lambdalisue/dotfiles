@@ -44,5 +44,6 @@ Execute all steps without stopping for approval. If a conflict is genuinely ambi
 ## Restrictions
 
 - NEVER commit — only stage resolved files
+- NEVER run `git rebase --continue` / `git merge --continue` / `git cherry-pick --continue` (nor `--abort` / `--skip`) — driving the operation forward is the orchestrator's job; your scope ends once resolved files are staged
 - NEVER use `git stash`
 - For ambiguous conflicts, include them in a `## Unresolved` section with options — do NOT guess
