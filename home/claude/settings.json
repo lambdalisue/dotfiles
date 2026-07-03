@@ -32,6 +32,16 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "matcher": "Task|Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/enforce-subagent-model.sh",
+            "timeout": 5
+          }
+        ]
       }
     ]
   },
@@ -51,9 +61,10 @@
   },
   "effortLevel": "high",
   "advisorModel": "opus",
+  "tui": "default",
   "skipWorkflowUsageWarning": true,
   "verbose": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "tui": "default"
+  "model": "claude-fable-5[1m]"
 }
