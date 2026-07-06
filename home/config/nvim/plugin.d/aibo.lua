@@ -35,8 +35,7 @@ local claude = string.format(
   vim.fn.expand("~/.claude/mcp.json")
 )
 local codex = "codex --dangerously-bypass-approvals-and-sandbox"
-local gemini = "gemini --yolo"
-local copilot = "copilot --allow-all-tools"
+local ollama_claude = "ollama launch claude --model qwen3.6:latest --yes"
 
 vim.keymap.set(
   "n",
@@ -64,27 +63,15 @@ vim.keymap.set(
 )
 vim.keymap.set(
   "n",
-  "<leader>iG",
-  string.format("<Cmd>Aibo -focus %s resume --last<CR>", gemini),
-  { desc = "Chat with Gemini" }
+  "<leader>iO",
+  string.format("<Cmd>Aibo -focus %s resume --last<CR>", ollama_claude),
+  { desc = "Chat with Ollama Claude" }
 )
 vim.keymap.set(
   "n",
-  "<leader>ig",
-  string.format("<Cmd>Aibo %s<CR>", gemini),
-  { desc = "Chat with Gemini" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>iP",
-  string.format("<Cmd>Aibo -focus %s resume --last<CR>", copilot),
-  { desc = "Chat with Copilot" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>ip",
-  string.format("<Cmd>Aibo %s<CR>", copilot),
-  { desc = "Chat with Copilot" }
+  "<leader>io",
+  string.format("<Cmd>Aibo %s<CR>", ollama_claude),
+  { desc = "Chat with Ollama Claude" }
 )
 
 vim.keymap.set("n", "<leader>is", "<Cmd>AiboSend -input<CR>", { desc = "Send to AI" })
