@@ -1,5 +1,6 @@
 ---
 name: pr-create
+disable-model-invocation: true
 allowed-tools: Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(git ls-remote:*), Bash(gh pr:*)
 description: Create a pull request with title and body based on commits
 ---

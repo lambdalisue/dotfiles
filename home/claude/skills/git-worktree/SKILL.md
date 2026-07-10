@@ -1,5 +1,6 @@
 ---
 name: git-worktree
+disable-model-invocation: true
 description: Create a git worktree with an appropriate branch name (location configured via git config wt.basedir, defaults to ../{gitroot}-wt)
 ---
 

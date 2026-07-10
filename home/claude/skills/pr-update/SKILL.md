@@ -1,5 +1,6 @@
 ---
 name: pr-update
+disable-model-invocation: true
 allowed-tools: Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(gh pr:*)
 argument-hint: "[PR_NUMBER] Optional PR number to update"
 description: Update the title and body of an existing pull request

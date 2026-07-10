@@ -1,6 +1,6 @@
 ---
 name: pr-review
-allowed-tools: Bash(git branch:*), Bash(gh pr:*), Bash(gh api:*), Bash(jq:*), Read, Glob, Grep
+allowed-tools: Bash(git branch:*), Bash(gh pr:*), Bash(gh api:*), Bash(gh repo:*), Bash(jq:*), Read, Glob, Grep
 argument-hint: "[PR_NUMBER] Optional PR number to review"
 description: Fetch unresolved PR review comments and display analysis
 ---

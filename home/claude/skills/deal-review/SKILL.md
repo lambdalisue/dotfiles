@@ -1,8 +1,9 @@
 ---
 name: deal-review
-allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(gh pr:*), Bash(gh api:*), Bash(gh repo:*), Bash(jq:*), Read, Edit, Glob, Grep
+disable-model-invocation: true
+allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(gh pr:*), Bash(gh api:*), Bash(gh repo:*), Bash(jq:*), Read, Edit, Write, Glob, Grep
 argument-hint: "[context]"
-description: Address review findings from /code-review, /style-review, /doc-review, or /pr-review
+description: Address review findings from /code-review, /doc-review, or /pr-review
 ---
 
 ## Arguments
@@ -21,7 +22,7 @@ description: Address review findings from /code-review, /style-review, /doc-revi
 
 ## Principles
 
-- This command runs **after** `/code-review`, `/style-review`, `/doc-review`, or `/pr-review`. The review results are in the conversation history.
+- This command runs **after** `/code-review`, `/doc-review`, or `/pr-review`. The review results are in the conversation history.
 - User's `context` argument takes **highest priority** over the review's own severity judgments.
 - If no `context` is provided, follow the review's recommendations (address ★★★ and ★★☆; skip ★☆☆ and ☆☆☆ unless they are trivially fixable).
 - Do NOT commit or push. Only implement changes (code or document), reply to threads, and resolve threads.
@@ -33,7 +34,6 @@ description: Address review findings from /code-review, /style-review, /doc-revi
 Look at the conversation history to determine which review command was run:
 
 - **Code review** (`/code-review`): The report starts with `## コードレビュー結果`
-- **Style review** (`/style-review`): The report starts with `## スタイルレビュー結果`
 - **Doc review** (`/doc-review`): The report starts with `## ドキュメントレビュー結果`
 - **PR review** (`/pr-review`): The report starts with `## 未解決のレビューコメント`
 
@@ -76,7 +76,7 @@ For each finding marked as "対応する", implement the fix:
 
 ### Step 4: PR review — Reply and resolve threads (PR review only)
 
-**Skip this step if the review was `/code-review`, `/style-review`, or `/doc-review`.**
+**Skip this step if the review was `/code-review` or `/doc-review`.**
 
 For PR review, fetch the unresolved threads to get thread IDs:
 

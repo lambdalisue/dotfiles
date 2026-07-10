@@ -1,5 +1,6 @@
 ---
 name: pr-address
+disable-model-invocation: true
 description: Address PR review comments and CI failures end-to-end — run pr-review, fix failing CI, deal-review, git-commit, autosquash rebase, and push in sequence
 argument-hint: "[context]"
 ---
