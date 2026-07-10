@@ -63,6 +63,12 @@
         "source": "github",
         "repo": "probitas-test/claude-plugins"
       }
+    },
+    "cclens": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/alisue/ogh/lambdalisue/cclens"
+      }
     }
   },
   "effortLevel": "high",
