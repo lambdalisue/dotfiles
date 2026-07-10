@@ -134,6 +134,7 @@ function! s:local() abort
       endif
     endfor
   endfor
+  set runtimepath^=.
 endfunction
 
 function! s:configure() abort

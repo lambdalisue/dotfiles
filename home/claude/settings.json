@@ -11,6 +11,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -45,6 +46,11 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bun x ccusage statusline",
+    "padding": 0
+  },
   "enabledPlugins": {
     "rust-analyzer-lsp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
@@ -59,17 +65,11 @@
       }
     }
   },
-  "statusLine": {
-    "type": "command",
-    "command": "bun x ccusage statusline",
-    "padding": 0
-  },
   "effortLevel": "high",
   "advisorModel": "opus",
   "tui": "default",
   "skipWorkflowUsageWarning": true,
   "verbose": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true,
-  "model": "sonnet"
+  "skipAutoPermissionPrompt": true
 }
