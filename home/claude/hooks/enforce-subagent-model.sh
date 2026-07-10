@@ -12,6 +12,18 @@ set -euo pipefail
 
 input=$(cat)
 
+# Without jq the policy cannot be applied; fail closed (this hook is the
+# mechanical enforcement of model tiering, so a silent pass-through would
+# defeat it). Crude grep escape hatch: an explicit model in the input is
+# what the policy wants anyway, so let those calls through.
+if ! command -v jq &>/dev/null; then
+    if echo "$input" | grep -q '"model"'; then
+        exit 0
+    fi
+    echo "enforce-subagent-model: jq not found; pass an explicit \`model\` in the Agent call (see rules/claude/model-selection.md)" >&2
+    exit 2
+fi
+
 tool_name=$(echo "$input" | jq -r '.tool_name // ""')
 [[ "$tool_name" == "Task" || "$tool_name" == "Agent" ]] || exit 0
 

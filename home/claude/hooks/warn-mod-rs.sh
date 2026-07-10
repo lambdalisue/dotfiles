@@ -28,7 +28,7 @@ if [[ "$file_path" =~ /mod\.rs$ ]]; then
     parent_dir=$(dirname "$file_path")
     module_name=$(basename "$parent_dir")
 
-    cat >&2 <<EOF
+    warning=$(cat <<EOF
 ⚠️ Warning: prefer the modern module file naming over mod.rs (Rust 2018+)
 
 You usually do NOT need mod.rs, even for directories with submodules.
@@ -48,6 +48,23 @@ Exceptions (per ~/.claude/rules/rust/no-mod-rs.md): incremental migration of a
 large legacy codebase, or an explicit user request for mod.rs style. The
 creation is allowed to proceed — reconsider unless one of those applies.
 EOF
+    )
+
+    # Emit the advisory as additionalContext so it reaches Claude's context.
+    # A plain stderr print on exit 0 only lands in the debug log — nobody
+    # would ever see it. Without jq (needed for JSON encoding) fall back to
+    # stderr as a best effort.
+    if command -v jq &>/dev/null; then
+        jq -n --arg msg "$warning" '{
+            hookSpecificOutput: {
+                hookEventName: "PreToolUse",
+                permissionDecision: "allow",
+                additionalContext: $msg
+            }
+        }'
+    else
+        echo "$warning" >&2
+    fi
     exit 0  # Warn only — creation is allowed
 fi
 
