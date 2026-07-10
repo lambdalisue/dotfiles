@@ -16,7 +16,7 @@ description: Code review using OpenAI Codex CLI with project context (rules, dif
 
 ## Principles
 
-- **Read-only**. **No nits** (style/naming/formatting → `/style-review`).
+- **Read-only**. **No nits** (style/naming/formatting are out of scope).
 - **Focus**: design mistakes, architectural misfit, best practices violations, security holes, codebase inconsistency, rule violations, logic bugs.
 - Uses `codex exec` with a review prompt — codex reads the codebase and diff itself.
 

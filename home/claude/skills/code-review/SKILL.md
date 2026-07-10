@@ -17,7 +17,7 @@ description: Multi-perspective code review from base branch with 3 independent r
 
 ## Principles
 
-- **Read-only**. **No nits** (style/naming/formatting → `/style-review`).
+- **Read-only**. **No nits** (style/naming/formatting are out of scope).
 - **Focus**: design mistakes, architectural misfit, best practices violations, security holes, codebase inconsistency, rule violations, logic bugs.
 - Severity: **★★★** must fix / **★★☆** should fix / **★☆☆** consider
 
