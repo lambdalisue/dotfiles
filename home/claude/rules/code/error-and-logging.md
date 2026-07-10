@@ -1,5 +1,5 @@
 ---
-paths: "**/*.rs,**/*.ts"
+paths: "**/*.rs,**/*.ts,**/*.tsx,**/*.mts,**/*.cts"
 ---
 
 # Error Handling and Logging — shared policy

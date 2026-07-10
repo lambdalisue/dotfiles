@@ -4,7 +4,10 @@ The main session (orchestrator) runs on the model configured via
 `model` in `settings.json`.
 
 Subagents without an explicit `model` (Explore, Plan, general-purpose,
-fork) INHERIT the main-loop model. To keep the main-loop tier reserved
+claude) INHERIT the main-loop model. (`fork` also inherits, but it is
+NOT pinnable — forks always run on the parent model and a `model`
+param is ignored, so it is exempt from this rule and from the hook
+below.) To keep the main-loop tier reserved
 for orchestration and truly hard work, ALWAYS pass `model` explicitly
 when spawning subagents (Agent tool `model` param, Workflow `agent()`
 opts):
@@ -14,7 +17,7 @@ opts):
 | Ultra-hard investigation | `fable` | ONLY when the user explicitly asks for this tier, or when a lower-tier agent got stuck / made no progress |
 | Investigation / research | `opus` | Explore, Plan, general-purpose — codebase exploration, planning, root-cause analysis |
 | Implementation | `opus` | code-writer already pins `model: opus` in frontmatter |
-| Routine todo-style multi-step tasks | `sonnet` | Summaries, conflict resolution, checklist execution (git-describe / pr-describe / git-resolve) |
+| Routine todo-style multi-step tasks | `sonnet` | Summaries, conflict resolution, checklist execution (git-resolve) |
 | Trivial mechanical tasks | `haiku` | Single-purpose mechanical work (git-rebase) |
 
 Custom agents in `~/.claude/agents/` pin their tier via `model:`
@@ -22,7 +25,8 @@ frontmatter — keep new agent definitions consistent with this table.
 
 Enforcement: the built-in-agent case is enforced mechanically by the
 `enforce-subagent-model.sh` PreToolUse hook — a built-in subagent
-spawned without `model` gets `model: opus` injected. Explicit `model`
+(Explore, Plan, general-purpose, claude) spawned without `model` gets
+`model: opus` injected. Explicit `model`
 values (including fable escalation) pass through untouched. Workflow
 `agent()` calls are NOT covered by the hook; follow this table there.
 

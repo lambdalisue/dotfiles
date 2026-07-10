@@ -1,5 +1,5 @@
 ---
-paths: "**/*.ts"
+paths: "**/*.ts,**/*.tsx,**/*.mts,**/*.cts"
 ---
 
 # Error Handling and Logging — TypeScript

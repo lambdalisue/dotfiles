@@ -1,5 +1,5 @@
 ---
-paths: "**/*.ts"
+paths: "**/*.ts,**/*.tsx,**/*.mts,**/*.cts"
 ---
 # TypeScript Code Style
 
