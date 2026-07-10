@@ -3,10 +3,6 @@
 !agents/**/
 !agents/**/*
 agents/**/.DS_Store
-!commands/
-!commands/**/
-!commands/**/*
-commands/**/.DS_Store
 !rules/
 !rules/**/
 !rules/**/*
@@ -22,4 +18,3 @@ hooks/**/.DS_Store
 !CLAUDE.md
 !mcp.json
 !settings.json
-!statusline.ts
