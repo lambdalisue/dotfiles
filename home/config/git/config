@@ -61,3 +61,5 @@
   nocopy = dist/
   nocopy = target/
   nocopy = node_modules/
+  copy = .envrc
+  copy = .env
