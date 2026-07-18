@@ -20,9 +20,13 @@
     # Formulae that are macOS-specific or not available in nixpkgs
     brews = [
       "borders"
-      "cliclick"
+      "ccusage"
+      # Kept on Homebrew (not Nix) for the g-prefixed GNU tools (gtimeout, etc.)
+      # that scripts on this machine rely on; nixpkgs' coreutils ships unprefixed.
+      "coreutils"
       "git-wt"
-      "terminal-notifier"
+      # Required by homebrew.masApps below to drive Mac App Store installs.
+      "mas"
     ];
 
     casks = [
@@ -36,23 +40,37 @@
       "claude-code"
       "cleanshot"
       "discord"
-      "gcloud-cli"
+      "docker-desktop"
       "ghostty"
       "google-chrome"
       "gpg-suite"
       "istat-menus"
-      "jordanbaird-ice"
       "karabiner-elements"
       "macskk"
       "meetingbar"
       "monitorcontrol"
       "neovide-app"
       "obsidian"
+      "ollama-app"
+      "parallels"
       "portkiller"
       "raycast"
       "slack"
+      "spotify"
+      "steam"
       "steermouse"
+      "tailscale-app"
       "thaw"
     ];
+
+    # Mac App Store apps (installed via mas). Attribute name is informational;
+    # the numeric App Store ID is what mas uses.
+    masApps = {
+      "Amphetamine" = 937984704;
+      "Battery Line" = 6462894357;
+      "Calendars" = 608834326;
+      "Pixelmator Pro" = 1289583905;
+      "Spark Desktop" = 6445813049;
+    };
   };
 }

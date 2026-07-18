@@ -5,7 +5,6 @@
   home.packages = with pkgs; [
     bash
     deno
-    fastfetch
     ffmpeg
     gemini-cli
     gh
@@ -14,13 +13,12 @@
     just
     mise
     neovim
-    poppler
     ripgrep
     sccache
-    stylua
     tmux
     uv
     vim
+    wget
     zsh
   ];
 }
