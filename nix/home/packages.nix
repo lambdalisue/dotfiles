@@ -4,7 +4,7 @@
   # direnv, fzf: managed in shell.nix via programs.* modules
   home.packages = with pkgs; [
     bash
-    deno
+    deno  # required by denops.vim
     ffmpeg
     gemini-cli
     gh
@@ -13,6 +13,7 @@
     just
     mise
     neovim
+    nodejs  # required by coc.nvim
     ripgrep
     sccache
     tmux
