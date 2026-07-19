@@ -15,6 +15,10 @@
     taps = [
       "felixkratz/formulae"
       "k1low/tap"
+      # AeroSpace ships only from its author's tap, not homebrew/cask. Without
+      # this tap `brew` cannot find the cask and reports "No available formula
+      # with the name aerospace".
+      "nikitabobko/tap"
     ];
 
     # Formulae that are macOS-specific or not available in nixpkgs
@@ -31,7 +35,8 @@
 
     casks = [
       "1password"
-      "aerospace"
+      # Fully qualified so Homebrew resolves it from nikitabobko/tap (see taps).
+      "nikitabobko/tap/aerospace"
       "aqua-voice"
       "arto"
       "brave-browser"

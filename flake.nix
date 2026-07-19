@@ -23,17 +23,24 @@
       ...
     }:
     let
-      # Per-machine definitions. To add a Mac, append an entry whose attribute
-      # name equals the machine's hostname (scutil --get LocalHostName) —
-      # nix-darwin selects a configuration by hostname, so `darwin-rebuild
-      # switch --flake .` needs no explicit target on a machine listed here.
+      # Per-machine overrides, keyed by hostname (scutil --get LocalHostName).
+      # nix-darwin selects a configuration by hostname, so on a registered
+      # machine `darwin-rebuild switch --flake .` needs no explicit target.
       #
       # Each value overrides defaults as needed:
-      #   username     (default "alisue")
-      #   system       (default "aarch64-darwin"; "x86_64-darwin" on Intel)
-      #   dotfilesDir  (default "~/ogh/lambdalisue/dotfiles" for the username)
+      #   username       (default "alisue")
+      #   system         (default "aarch64-darwin"; "x86_64-darwin" on Intel)
+      #   dotfilesDir    (default "~/ogh/lambdalisue/dotfiles" for the username)
+      #   privateCaches  (default false; enable the private attmcojp cachix,
+      #                   which needs ~/.config/nix/netrc credentials)
+      #
+      # Registering a host here is OPTIONAL — it only pins per-host overrides.
+      # An unregistered machine bootstraps against the generic `default`
+      # configuration below, so its hostname can be anything.
       hosts = {
-        "AlisuenoMacBook-Pro" = { };
+        "AlisuenoMacBook-Pro" = {
+          privateCaches = true;
+        };
         # "AlisuenoMacBook-Air" = { };
       };
 
@@ -42,6 +49,7 @@
         let
           username = hostCfg.username or "alisue";
           system = hostCfg.system or "aarch64-darwin";
+          privateCaches = hostCfg.privateCaches or false;
           # Absolute path to the cloned repository on this machine.
           # mkOutOfStoreSymlink requires an absolute path (a store copy would
           # be read-only), so it is derived from the home directory on the
@@ -52,7 +60,7 @@
         nix-darwin.lib.darwinSystem {
           inherit system;
           specialArgs = {
-            inherit username;
+            inherit username privateCaches;
           };
           modules = [
             ./nix/darwin
@@ -77,6 +85,11 @@
         };
     in
     {
-      darwinConfigurations = nixpkgs.lib.mapAttrs mkDarwin hosts;
+      # Per-host configurations plus a generic `default` that any unregistered
+      # machine can activate regardless of hostname:
+      #   sudo darwin-rebuild switch --flake .#default
+      darwinConfigurations = (nixpkgs.lib.mapAttrs mkDarwin hosts) // {
+        default = mkDarwin "default" { };
+      };
     };
 }

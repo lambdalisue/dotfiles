@@ -8,22 +8,51 @@ My personal dotfiles managed with [nix-darwin] and [home-manager].
 ## Initial setup
 
 On a fresh machine, `bootstrap.sh` installs the prerequisites and runs the first
-nix-darwin activation. It installs Nix (official installer) and Homebrew if they
-are missing, trusts the third-party Homebrew taps, moves aside the `/etc` files
-nix-darwin manages, activates the configuration, and clears the stale zsh cache.
-It is idempotent — re-run it if a step fails.
+nix-darwin activation. The work is split into named, individually re-runnable
+steps so a failed run resumes from the middle instead of starting over:
+
+| Step        | What it does                                            |
+| ----------- | ------------------------------------------------------- |
+| `nix`       | Install Nix (official installer)                        |
+| `homebrew`  | Install Homebrew                                        |
+| `taps`      | Tap and trust the third-party Homebrew taps             |
+| `etc`       | Move aside the `/etc` files nix-darwin wants to own     |
+| `backups`   | Remove stale `*.before-nix-darwin` symlink backups      |
+| `activate`  | Run the nix-darwin switch                               |
+| `zsh-cache` | Clear the stale zsh profile cache                       |
+
+Every step is idempotent, so re-running is safe:
+
+```console
+$ ./bootstrap.sh                 # run every step in order
+$ ./bootstrap.sh --list          # list the steps
+$ ./bootstrap.sh --from activate # run this step and everything after it
+$ ./bootstrap.sh taps activate   # run just these steps (canonical order)
+```
+
+**About the `backups` step.** When home-manager first takes over a file it
+moves the old one aside to `<file>.before-nix-darwin`, and it refuses to run if
+that backup already exists — so a half-finished run leaves backups that block
+every retry. Because this setup only ever replaces symlinks, the `backups` step
+deletes `*.before-nix-darwin` entries that are themselves symlinks (they hold no
+data) and leaves any real file or directory in place, reporting it so you can
+resolve it by hand. It runs automatically before `activate`; run it alone with
+`./bootstrap.sh backups` to unblock a stuck retry.
 
 ### Before you run it
 
 - Clone this repository to `~/ogh/lambdalisue/dotfiles`. `dotfilesDir` in
   `flake.nix` derives from that path by convention; clone elsewhere only if you
   also override `dotfilesDir` for the host.
-- Register the machine in `flake.nix`: add an entry to `hosts` whose attribute
-  name is the machine's hostname (`scutil --get LocalHostName`). nix-darwin then
-  selects the matching configuration automatically, so `--flake .` needs no
-  explicit target.
-- If you pull from the private binary caches, put their credentials in
-  `~/.config/nix/netrc` (never committed).
+- The machine's hostname can be anything — registration is optional. An
+  unregistered host bootstraps against the generic `default` configuration.
+  Register a host in `flake.nix` `hosts` (attribute name = `scutil --get
+  LocalHostName`) only to pin per-host overrides such as `username`, `system`,
+  `dotfilesDir`, or `privateCaches`.
+- The private `attmcojp.cachix.org` cache is off by default because it needs
+  credentials. To use it, put them in `~/.config/nix/netrc` (never committed)
+  and set `privateCaches = true;` for the host in `flake.nix`. Without it,
+  bootstrap simply uses the public caches.
 - Migrating a machine off the Determinate installer? Remove it first:
   `sudo -i /nix/nix-installer uninstall`.
 
@@ -34,8 +63,10 @@ $ ./bootstrap.sh
 ```
 
 Existing dotfile symlinks are backed up automatically by home-manager
-(`*.before-nix-darwin`), so nothing needs to be removed by hand. Open a new
-terminal when it finishes.
+(`*.before-nix-darwin`), so nothing needs to be removed by hand. If a run fails
+partway, fix the cause and resume with `./bootstrap.sh --from <step>` — the
+`backups` step clears the stale backups that would otherwise block the retry.
+Open a new terminal when it finishes.
 
 ### Clean up Homebrew
 
@@ -54,6 +85,13 @@ Build and activate the full system configuration (nix-darwin + home-manager):
 
 ```console
 $ sudo darwin-rebuild switch --flake .
+```
+
+On a machine whose hostname is not registered in `flake.nix`, target the
+generic configuration explicitly:
+
+```console
+$ sudo darwin-rebuild switch --flake .#default
 ```
 
 ### Preview changes
