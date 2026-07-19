@@ -2,3 +2,6 @@ result
 
 # Private binary-cache credentials — machine-local, never committed
 home/config/nix/netrc
+
+# git-wt / git worktree checkouts — machine-local, never committed
+.worktrees/

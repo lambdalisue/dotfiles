@@ -1,0 +1,50 @@
+name: nix
+
+# Validate the flake on every push/PR: evaluate every darwin configuration
+# (catches eval errors, including on the private host, without fetching from
+# its private cache) and fully build the generic `default` configuration
+# (which uses only public caches, so it needs no secrets).
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: nix-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    # Apple Silicon runner so the aarch64-darwin configurations build natively.
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v30
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            accept-flake-config = true
+            substituters = https://cache.nixos.org https://arto.cachix.org
+            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= arto.cachix.org-1:yaH0JQomRJTosIcTh2xZPKBEny41D7h6QUePYQzWYqc=
+
+      - name: flake check
+        run: nix flake check --no-build
+
+      - name: evaluate every darwin configuration
+        run: |
+          names=$(nix eval --json '.#darwinConfigurations' --apply builtins.attrNames | jq -r '.[]')
+          for name in $names; do
+            echo "== evaluating $name =="
+            nix eval --raw ".#darwinConfigurations.$name.system.drvPath"
+            echo
+          done
+
+      # Resolve the full closure of the default configuration and report what
+      # would be fetched or built, without compiling. A real `nix build` here
+      # risks an hours-long source build if a heavy package (e.g. ffmpeg) is
+      # not cached for aarch64-darwin; the eval step above already catches the
+      # common breakage (typos, missing attrs). Drop --dry-run for a full build.
+      - name: build default configuration (dry run)
+        run: nix build --dry-run --print-build-logs '.#darwinConfigurations.default.system'

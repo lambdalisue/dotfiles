@@ -1,5 +1,7 @@
 # dotfiles
 
+[![nix](https://github.com/lambdalisue/dotfiles/actions/workflows/nix.yml/badge.svg)](https://github.com/lambdalisue/dotfiles/actions/workflows/nix.yml)
+
 My personal dotfiles managed with [nix-darwin] and [home-manager].
 
 [nix-darwin]: https://github.com/LnL7/nix-darwin
