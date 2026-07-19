@@ -8,6 +8,7 @@
     ./files.nix
     ./shell.nix
     ./git.nix
+    ./launchd.nix
   ];
 
   home = {
