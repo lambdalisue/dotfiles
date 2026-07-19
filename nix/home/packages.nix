@@ -6,6 +6,7 @@
     bash
     deno  # required by denops.vim
     ffmpeg
+    fish
     gh
     ghq
     gnupg

@@ -12,6 +12,7 @@ in
     "git".source = link "${dotfilesDir}/home/config/git";
 
     # Unix-like entries (from .dotfiles_unixlike.tsv)
+    "fish".source = link "${dotfilesDir}/home/config/fish";
     "ghostty".source = link "${dotfilesDir}/home/config/ghostty";
     # direnv is managed by programs.direnv module in shell.nix
     # nix config is managed by nix-darwin in darwin/default.nix

@@ -1,0 +1,3 @@
+# Runtime state fish writes into its config dir (this dir is symlinked in).
+fish_variables
+completions/
