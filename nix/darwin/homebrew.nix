@@ -38,8 +38,6 @@
       # bare name works while that tap is present, but qualifying it documents
       # the source and avoids clashing with other git-wt taps.
       "k1low/tap/git-wt"
-      # Required by homebrew.masApps below to drive Mac App Store installs.
-      "mas"
     ];
 
     casks = [
@@ -85,15 +83,5 @@
       "tailscale-app"
       "thaw"
     ];
-
-    # Mac App Store apps (installed via mas). Attribute name is informational;
-    # the numeric App Store ID is what mas uses.
-    masApps = {
-      "Amphetamine" = 937984704;
-      "Battery Line" = 6462894357;
-      "Calendars" = 608834326;
-      "Pixelmator Pro" = 1289583905;
-      "Spark Desktop" = 6445813049;
-    };
   };
 }
