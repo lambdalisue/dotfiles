@@ -6,7 +6,6 @@
     bash
     deno  # required by denops.vim
     ffmpeg
-    gemini-cli
     gh
     gnupg
     grpcurl

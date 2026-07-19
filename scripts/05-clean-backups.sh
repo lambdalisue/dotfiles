@@ -13,10 +13,10 @@
 # file or directory is left untouched and reported, in case it holds something
 # worth keeping; resolve those by hand.
 #
-# Scope: $HOME down to depth 4, which covers the deepest files.nix target
-# (~/Library/Application Support/Rectangle/RectangleConfig.json). /etc backups
-# are left alone — they are real originals and, having distinct names, never
-# block nix-darwin's own /etc symlinks.
+# Scope: $HOME down to depth 4, a safe ceiling that covers every files.nix
+# target (the deepest today is ~/.local/bin/git-backup). /etc backups are left
+# alone — they are real originals and, having distinct names, never block
+# nix-darwin's own /etc symlinks.
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/_lib.sh"
 
