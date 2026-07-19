@@ -23,29 +23,18 @@
       ...
     }:
     let
-      # Per-machine overrides, keyed by hostname (scutil --get LocalHostName).
-      # nix-darwin selects a configuration by hostname, so on a registered
-      # machine `darwin-rebuild switch --flake .` needs no explicit target.
+      # Configurations are selected by an explicit attribute name (the role of
+      # the machine), NOT by hostname, so `darwin-rebuild` never needs a
+      # matching LocalHostName — always pass an explicit `--flake .#<role>`.
       #
-      # Each value overrides defaults as needed:
+      # mkDarwin takes a per-machine override set; each field overrides a default:
       #   username       (default "alisue")
       #   system         (default "aarch64-darwin"; "x86_64-darwin" on Intel)
       #   dotfilesDir    (default "~/ogh/lambdalisue/dotfiles" for the username)
       #   privateCaches  (default false; enable the private attmcojp cachix,
       #                   which needs ~/.config/nix/netrc credentials)
-      #
-      # Registering a host here is OPTIONAL — it only pins per-host overrides.
-      # An unregistered machine bootstraps against the generic `default`
-      # configuration below, so its hostname can be anything.
-      hosts = {
-        "AlisuenoMacBook-Pro" = {
-          privateCaches = true;
-        };
-        # "AlisuenoMacBook-Air" = { };
-      };
-
       mkDarwin =
-        hostname: hostCfg:
+        hostCfg:
         let
           username = hostCfg.username or "alisue";
           system = hostCfg.system or "aarch64-darwin";
@@ -85,11 +74,13 @@
         };
     in
     {
-      # Per-host configurations plus a generic `default` that any unregistered
-      # machine can activate regardless of hostname:
-      #   sudo darwin-rebuild switch --flake .#default
-      darwinConfigurations = (nixpkgs.lib.mapAttrs mkDarwin hosts) // {
-        default = mkDarwin "default" { };
+      # Role-based configurations, selected by explicit attribute name so the
+      # command is independent of the machine's hostname:
+      #   sudo darwin-rebuild switch --flake .#private   # attmcojp private cachix (needs netrc)
+      #   sudo darwin-rebuild switch --flake .#default   # generic / fresh bootstrap
+      darwinConfigurations = {
+        default = mkDarwin { };
+        private = mkDarwin { privateCaches = true; };
       };
     };
 }

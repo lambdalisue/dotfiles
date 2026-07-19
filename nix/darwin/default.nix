@@ -17,10 +17,10 @@
   # `attmcojp.cachix.org` is a PRIVATE cache: querying it without credentials
   # returns HTTP 401, which breaks activation on a machine that has no
   # ~/.config/nix/netrc yet. It (and the netrc-file that authenticates it) is
-  # therefore gated behind `privateCaches`, an opt-in per-host flag in
-  # flake.nix. A fresh machine bootstraps with it off and builds from the
-  # public caches; enable it once the netrc is in place. `arto.cachix.org` is
-  # public and always on.
+  # therefore gated behind `privateCaches`, which is on only for the opt-in
+  # `#private` role in flake.nix. The `#default` role leaves it off and builds
+  # from the public caches; use `#private` once the netrc is in place.
+  # `arto.cachix.org` is public and always on.
   nix.settings =
     {
       experimental-features = [
