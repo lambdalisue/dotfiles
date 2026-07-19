@@ -62,7 +62,7 @@ PRIVATE_KEYS="attmcojp.cachix.org-1:oru6oV4EttotACGO/YDhmsEyPlPSytG6zWUgTRH3BMQ=
 # Third-party Homebrew taps used by nix/darwin/homebrew.nix. Homebrew refuses
 # to load formulae from untrusted taps, so they are trusted before the
 # nix-darwin activation runs `brew bundle`. Keep in sync with `taps` there.
-TAPS="felixkratz/formulae k1low/tap nikitabobko/tap"
+TAPS="felixkratz/formulae k1low/tap nikitabobko/tap arto-app/tap cedriceugeni/portkiller"
 
 # Ordered list of steps. `main` runs all of them, a `--from` suffix, or an
 # explicit subset — always in this canonical order.

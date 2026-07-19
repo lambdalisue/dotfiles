@@ -19,6 +19,10 @@
       # this tap `brew` cannot find the cask and reports "No available formula
       # with the name aerospace".
       "nikitabobko/tap"
+      # Arto is distributed only from its author's tap, not homebrew/cask.
+      "arto-app/tap"
+      # PortKiller (CedricEugeni's native menubar app) ships from its own tap.
+      "cedriceugeni/portkiller"
     ];
 
     # Formulae that are macOS-specific or not available in nixpkgs
@@ -28,7 +32,10 @@
       # Kept on Homebrew (not Nix) for the g-prefixed GNU tools (gtimeout, etc.)
       # that scripts on this machine rely on; nixpkgs' coreutils ships unprefixed.
       "coreutils"
-      "git-wt"
+      # Fully qualified so Homebrew resolves it from k1low/tap (see taps). The
+      # bare name works while that tap is present, but qualifying it documents
+      # the source and avoids clashing with other git-wt taps.
+      "k1low/tap/git-wt"
       # Required by homebrew.masApps below to drive Mac App Store installs.
       "mas"
     ];
@@ -38,7 +45,8 @@
       # Fully qualified so Homebrew resolves it from nikitabobko/tap (see taps).
       "nikitabobko/tap/aerospace"
       "aqua-voice"
-      "arto"
+      # Fully qualified: arto lives in arto-app/tap, not homebrew/cask.
+      "arto-app/tap/arto"
       "brave-browser"
       "chatgpt"
       "claude"
@@ -58,7 +66,9 @@
       "obsidian"
       "ollama-app"
       "parallels"
-      "portkiller"
+      # Fully qualified: this PortKiller lives in cedriceugeni/portkiller,
+      # not homebrew/cask.
+      "cedriceugeni/portkiller/portkiller"
       "raycast"
       "slack"
       "spotify"
