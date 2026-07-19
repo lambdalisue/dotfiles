@@ -18,12 +18,15 @@ It is idempotent — re-run it if a step fails.
 - Clone this repository to `~/ogh/lambdalisue/dotfiles`. `dotfilesDir` in
   `flake.nix` derives from that path by convention; clone elsewhere only if you
   also override `dotfilesDir` for the host.
-- Register the machine in `flake.nix`: add an entry to `hosts` whose attribute
-  name is the machine's hostname (`scutil --get LocalHostName`). nix-darwin then
-  selects the matching configuration automatically, so `--flake .` needs no
-  explicit target.
-- If you pull from the private binary caches, put their credentials in
-  `~/.config/nix/netrc` (never committed).
+- The machine's hostname can be anything — registration is optional. An
+  unregistered host bootstraps against the generic `default` configuration.
+  Register a host in `flake.nix` `hosts` (attribute name = `scutil --get
+  LocalHostName`) only to pin per-host overrides such as `username`, `system`,
+  `dotfilesDir`, or `privateCaches`.
+- The private `attmcojp.cachix.org` cache is off by default because it needs
+  credentials. To use it, put them in `~/.config/nix/netrc` (never committed)
+  and set `privateCaches = true;` for the host in `flake.nix`. Without it,
+  bootstrap simply uses the public caches.
 - Migrating a machine off the Determinate installer? Remove it first:
   `sudo -i /nix/nix-installer uninstall`.
 
@@ -54,6 +57,13 @@ Build and activate the full system configuration (nix-darwin + home-manager):
 
 ```console
 $ sudo darwin-rebuild switch --flake .
+```
+
+On a machine whose hostname is not registered in `flake.nix`, target the
+generic configuration explicitly:
+
+```console
+$ sudo darwin-rebuild switch --flake .#default
 ```
 
 ### Preview changes

@@ -8,9 +8,12 @@
 #
 # Prerequisites:
 #   - This repository is cloned to ~/ogh/lambdalisue/dotfiles.
-#   - The machine's hostname (scutil --get LocalHostName) is registered in
-#     flake.nix `hosts`.
-#   - ~/.config/nix/netrc exists if you pull from the private substituters.
+#   - ~/.config/nix/netrc exists if you pull from the private substituters
+#     (optional — without it, only the public caches are used).
+#
+# The machine's hostname does NOT need to be registered in flake.nix: an
+# unregistered host bootstraps against the generic `#default` configuration.
+# Register a hostname in `hosts` only to pin per-host overrides.
 #
 # One-time note for migrating THIS machine off the Determinate installer:
 # remove it first, then run this script:
@@ -26,15 +29,22 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 HOST="$(scutil --get LocalHostName)"
 NETRC="$HOME/.config/nix/netrc"
 
-# Private binary caches. These are public identifiers, not secrets; the
-# credentials for them live in $NETRC, which is never committed.
-SUBSTITUTERS="https://attmcojp.cachix.org https://arto.cachix.org"
-KEYS="attmcojp.cachix.org-1:oru6oV4EttotACGO/YDhmsEyPlPSytG6zWUgTRH3BMQ= arto.cachix.org-1:yaH0JQomRJTosIcTh2xZPKBEny41D7h6QUePYQzWYqc="
+# Extra binary caches. These are public identifiers, not secrets.
+#
+# arto.cachix.org is public and always used. attmcojp.cachix.org is PRIVATE:
+# querying it without credentials returns HTTP 401, which breaks the first
+# activation on a machine that has no $NETRC yet. It is therefore added only
+# when $NETRC exists (see the activation step below), matching the
+# `privateCaches` gate in the flake.
+PUBLIC_SUBSTITUTERS="https://arto.cachix.org"
+PUBLIC_KEYS="arto.cachix.org-1:yaH0JQomRJTosIcTh2xZPKBEny41D7h6QUePYQzWYqc="
+PRIVATE_SUBSTITUTERS="https://attmcojp.cachix.org"
+PRIVATE_KEYS="attmcojp.cachix.org-1:oru6oV4EttotACGO/YDhmsEyPlPSytG6zWUgTRH3BMQ="
 
 # Third-party Homebrew taps used by nix/darwin/homebrew.nix. Homebrew refuses
 # to load formulae from untrusted taps, so they are trusted below before the
 # nix-darwin activation runs `brew bundle`. Keep in sync with `taps` there.
-TAPS="felixkratz/formulae k1low/tap"
+TAPS="felixkratz/formulae k1low/tap nikitabobko/tap"
 
 # 1. Install Nix with the official installer if it is not present.
 if ! command -v nix >/dev/null 2>&1; then
@@ -86,17 +96,41 @@ done
 #    /etc/nix/nix.conf does not have yet (flakes + private caches + netrc);
 #    nix-darwin writes them into /etc/nix/nix.conf during this run, so later
 #    updates need only: sudo darwin-rebuild switch --flake .
-echo "==> Activating nix-darwin for host: $HOST"
+# Pick the flake target. Use the host-specific configuration if this hostname
+# is registered in flake.nix `hosts`; otherwise fall back to the generic
+# `default`, so any machine can bootstrap without being registered first.
+TARGET="$HOST"
+if "$NIX" eval --extra-experimental-features 'nix-command flakes' \
+    "$REPO#darwinConfigurations" \
+    --apply "cfgs: builtins.hasAttr \"$HOST\" cfgs" 2>/dev/null | grep -qx true; then
+  echo "==> Host '$HOST' is registered; using #$HOST"
+else
+  echo "==> Host '$HOST' not registered in flake.nix; using #default"
+  TARGET="default"
+fi
+
+# Extra caches. Public ones are always safe. The private cache is only added
+# when its credentials exist, otherwise its 401 responses break activation.
+substituters="$PUBLIC_SUBSTITUTERS"
+keys="$PUBLIC_KEYS"
 netrc_arg=()
-[ -f "$NETRC" ] && netrc_arg=(--netrc-file "$NETRC")
+if [ -f "$NETRC" ]; then
+  substituters="$substituters $PRIVATE_SUBSTITUTERS"
+  keys="$keys $PRIVATE_KEYS"
+  netrc_arg=(--netrc-file "$NETRC")
+else
+  echo "==> No $NETRC; skipping private caches ($PRIVATE_SUBSTITUTERS)"
+fi
+
+echo "==> Activating nix-darwin for target: $TARGET"
 # ${arr[@]+...} guards against "unbound variable" on an empty array under
 # `set -u` in the bash 3.2 that ships with macOS.
 sudo "$NIX" \
   --extra-experimental-features 'nix-command flakes' \
-  --extra-substituters "$SUBSTITUTERS" \
-  --extra-trusted-public-keys "$KEYS" \
+  --extra-substituters "$substituters" \
+  --extra-trusted-public-keys "$keys" \
   ${netrc_arg[@]+"${netrc_arg[@]}"} \
-  run github:LnL7/nix-darwin -- switch --flake "$REPO#$HOST"
+  run github:LnL7/nix-darwin -- switch --flake "$REPO#$TARGET"
 
 # 6. Clear the stale zsh profile cache (it hardcodes old Homebrew paths).
 rm -rf "$HOME/.cache/zsh/profile"
