@@ -5,3 +5,8 @@ home/config/nix/netrc
 
 # git-wt / git worktree checkouts — machine-local, never committed
 .worktrees/
+
+# Codex (ChatGPT desktop) auto-generates these mirrors of CLAUDE.md and
+# .claude/skills/. CLAUDE.md is the source of truth; keep the copies out of git.
+/AGENTS.md
+/.agents/
