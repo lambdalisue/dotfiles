@@ -4,8 +4,9 @@
 # step scripts, not executed on its own.
 #
 # Each step under scripts/ is a standalone, idempotent script that sources this
-# file and then does exactly one thing. There is no orchestrator: a human runs
-# the numbered steps in order (see README), judging which are still needed.
+# file and then does exactly one thing. `bootstrap.sh` runs steps 01-08 in order
+# for a fresh machine; each step also runs standalone, so a human can run just
+# the ones still needed (see README).
 
 # Repository root, derived from this file's location so steps work from any cwd.
 # The flake expects the canonical clone path for its out-of-store symlinks

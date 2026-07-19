@@ -9,12 +9,20 @@ My personal dotfiles managed with [nix-darwin] and [home-manager].
 
 ## Initial setup
 
-On a fresh machine, run the numbered scripts in `scripts/` in order. There is no
-orchestrator: each script does exactly one thing, is idempotent, and works
-standalone, so you run them one at a time and judge which are still needed.
+On a fresh machine, run `scripts/bootstrap.sh` — it runs the numbered steps
+01-08 in order:
+
+```console
+$ ./scripts/bootstrap.sh
+```
+
+Each step does exactly one thing, is idempotent, and works standalone, so if a
+step fails you can fix it and re-run `bootstrap.sh`, or run just the step you
+need by hand:
 
 | Script                           | What it does                                        |
 | -------------------------------- | --------------------------------------------------- |
+| `scripts/bootstrap.sh`           | Run steps 01-08 in order (fresh-machine setup)      |
 | `scripts/01-install-nix.sh`      | Install Nix (official multi-user installer)         |
 | `scripts/02-install-homebrew.sh` | Install Homebrew                                     |
 | `scripts/03-trust-taps.sh`       | Tap and trust the third-party Homebrew taps         |
@@ -34,6 +42,10 @@ $ ./scripts/06-activate.sh          # public; for the private cache see below
 $ ./scripts/07-macskk-dict.sh
 $ ./scripts/08-clear-zsh-cache.sh
 ```
+
+`bootstrap.sh` uses the default public-cache activation; for the private role
+use `scripts/activate-private.sh` instead (see below). Step 09 is opt-in and
+not run by `bootstrap.sh`.
 
 Open a new terminal when activation finishes. The private binary cache is fully
 opt-in — nothing on this default path touches it.
