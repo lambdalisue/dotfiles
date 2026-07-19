@@ -23,6 +23,7 @@ standalone, so you run them one at a time and judge which are still needed.
 | `scripts/06-activate.sh`         | First activation (`#default`, public caches)        |
 | `scripts/07-macskk-dict.sh`      | Download the SKK dictionary macSKK needs            |
 | `scripts/08-clear-zsh-cache.sh`  | Clear the stale zsh profile cache                   |
+| `scripts/09-macskk-input-source.sh` | Enable macSKK as a Japanese input source (opt-in) |
 
 ```console
 $ ./scripts/01-install-nix.sh
@@ -49,6 +50,14 @@ backup exists, so a half-finished activation blocks every retry. Run
 `scripts/05-clean-backups.sh` to clear it: it deletes only backups that are
 themselves symlinks (they hold no data) and reports any real file or directory
 for you to resolve by hand. Then re-run `scripts/06-activate.sh`.
+
+**macSKK input source (opt-in).** The `macskk` cask installs the input method,
+but macOS offers no declarative way to enable an input source, so it is not
+turned on automatically. `scripts/09-macskk-input-source.sh` is a best-effort
+helper that registers macSKK in `AppleEnabledInputSources`; **log out and back
+in** for it to appear. If it still does not show up, add it by hand under System
+Settings -> Keyboard -> Text Input -> Input Sources -> Edit -> + -> macSKK,
+which always works.
 
 ### Before you run it
 
