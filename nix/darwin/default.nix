@@ -54,9 +54,28 @@
 
   system.primaryUser = username;
 
+  # Use fish as the login shell. `programs.fish.enable` generates
+  # /etc/fish/config.fish (which bootstraps the Nix environment into fish) and
+  # is required by nix-darwin's assertion when a user's shell is fish.
+  # `environment.shells` registers fish in /etc/shells so it is a permissible
+  # login shell. The interactive fish config lives in home/config/fish/.
+  #
+  # To revert to zsh: change `shell` back to `pkgs.zsh` (or drop it) and
+  # re-run `sudo darwin-rebuild switch`. zsh and its config are left intact.
+  programs.fish.enable = true;
+  environment.shells = [ pkgs.fish ];
+
+  # nix-darwin only writes UserShell via dscl for users it manages, so the
+  # primary user must be listed in knownUsers. uid/gid must match the existing
+  # macOS account (501 / 20 staff) — nix-darwin updates properties in place and
+  # never recreates an existing user.
+  users.knownUsers = [ username ];
   users.users.${username} = {
     name = username;
     home = "/Users/${username}";
+    uid = 501;
+    gid = 20;
+    shell = pkgs.fish;
   };
 
   # Allow unfree packages
