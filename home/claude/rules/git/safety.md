@@ -2,8 +2,9 @@
 
 ## Commit Restriction (top-level)
 
-**Top-level Claude MUST NOT run `git commit` directly via Bash on its own
-initiative.** Commits only run via one of these slash commands:
+Commits run via one of these skills. Top-level Claude MAY invoke them itself
+(Skill tool or the matching slash command) — never hand-roll `git commit` via
+Bash outside them:
 
 - `/git-commit` — fixup into existing commits where appropriate, otherwise new atomic commits
 - `/git-commit-new` — new atomic commits only (no fixup)
@@ -12,15 +13,16 @@ initiative.** Commits only run via one of these slash commands:
 
 Each command above commits immediately without an in-command approval step.
 
-Before invoking any of these commands:
+Rules for invoking any of them:
 
-- MUST use AskUserQuestion to confirm intent — EXCEPT when the user typed the
-  command themselves in the CURRENT message; that explicit invocation IS the
-  confirmation, so do NOT ask again.
-- Permission is valid for ONE invocation only
-- ONLY proceed when the user explicitly requested the commit in the CURRENT
-  message. Top-level Claude must NEVER reach for one of these commands on its
-  own initiative to dodge the approval prompt.
+- ONLY invoke when the user explicitly requested the commit in the CURRENT
+  message — either by typing the slash command OR by a clear natural-language
+  request (e.g. "commit this", "これを fixup で"). That explicit request IS the
+  approval, so do NOT ask again with AskUserQuestion.
+- Absent an explicit request in the current message, do NOT commit. Top-level
+  Claude must NEVER self-initiate a commit the user did not ask for — instead
+  report that the changes are ready and let the user request it.
+- Permission is valid for ONE invocation only.
 
 **Policy-level, not permission-enforced.** `settings.json` intentionally
 pre-approves `git commit` / `git add` / `git reset` / `git restore` so the

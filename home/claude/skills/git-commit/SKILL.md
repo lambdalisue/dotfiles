@@ -1,6 +1,5 @@
 ---
 name: git-commit
-disable-model-invocation: true
 description: Analyze working tree changes and commit them — fixup into existing commits where appropriate, otherwise new atomic commits
 argument-hint: "[context]"
 ---

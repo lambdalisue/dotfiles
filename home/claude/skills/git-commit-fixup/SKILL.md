@@ -1,6 +1,5 @@
 ---
 name: git-commit-fixup
-disable-model-invocation: true
 description: Analyze working tree changes, map to existing commits, and create fixup commits for autosquash
 argument-hint: "[context]"
 ---

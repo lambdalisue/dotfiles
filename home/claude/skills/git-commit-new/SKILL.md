@@ -1,6 +1,5 @@
 ---
 name: git-commit-new
-disable-model-invocation: true
 description: Analyze working tree changes, plan logically minimal NEW atomic commits per hunk (no fixup), and execute them
 argument-hint: "[context]"
 ---

@@ -1,6 +1,5 @@
 ---
 name: git-commit-reword
-disable-model-invocation: true
 argument-hint: "[context]"
 description: Review every commit message since base branch and add reword fixups where the message needs improvement (non-interactive)
 ---
