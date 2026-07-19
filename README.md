@@ -61,9 +61,10 @@ which always works.
 
 ### Before you run it
 
-- Clone this repository to `~/ogh/lambdalisue/dotfiles`. `dotfilesDir` in
-  `flake.nix` derives from that path by convention; clone elsewhere only if you
-  also override `dotfilesDir` on the configuration.
+- Clone this repository to `~/ghq/github.com/lambdalisue/dotfiles` (e.g. with
+  `ghq get lambdalisue/dotfiles`). `dotfilesDir` in `flake.nix` derives from
+  that path by convention; clone elsewhere only if you also override
+  `dotfilesDir` on the configuration.
 - Configurations are selected by an explicit role name, not by hostname, so the
   command works on any machine regardless of its `LocalHostName`. Two roles are
   provided in `flake.nix`: `default` (generic, public caches) and `private`,

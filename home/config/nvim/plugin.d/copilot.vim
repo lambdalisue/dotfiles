@@ -4,7 +4,7 @@ let g:copilot_filetypes = {
       \}
 
 function! s:is_copilot_acceptable(path) abort
-  if a:path !~# '^\~/ogh/'
+  if a:path !~# '^\~/ghq/'
     " Do NOT allow copilot not under git repository for security reason.
     return 0
   endif

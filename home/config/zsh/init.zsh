@@ -82,7 +82,7 @@ if type fzf &>/dev/null; then
   abindkey '^X^D' _fzf-cdr
   abindkey '^X^B' _fzf-bindkey
   abindkey '^X^K' _fzf-kill
-  abindkey '^X^G' _fzf-ogh
+  abindkey '^X^G' _fzf-ghq
   abindkey '^X^W' _fzf-worktree
   abindkey '^X^P' _fzf-k8s-pods
 fi
@@ -255,14 +255,6 @@ fi
 if [[ -s "$HOME/.bun/_bun" ]] then
   source "/Users/alisue/.bun/_bun"
 fi
-
-# ogh
-ogh() {
-  command deno run --allow-net --allow-run --allow-read --allow-env jsr:@lambdalisue/ogh/cli $@
-}
-ogh:reload() {
-  command deno run -r --allow-net --allow-run --allow-read --allow-env jsr:@lambdalisue/ogh/cli $@
-}
 
 # docbase
 docbase() {

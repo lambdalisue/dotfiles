@@ -45,6 +45,9 @@
 [github]
   user = lambdalisue
 
+[ghq]
+  root = ~/ghq
+
 [fetch]
   prune = true
 

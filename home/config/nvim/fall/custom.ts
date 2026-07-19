@@ -350,7 +350,7 @@ export const main: Entrypoint = ({
             filterDirectory: myFilterDirectory,
             relativeFromBase: true,
           }),
-          ["~/ogh/lambdalisue/dotfiles"],
+          ["~/ghq/github.com/lambdalisue/dotfiles"],
         ),
         macSKKSource,
         claudeSource,

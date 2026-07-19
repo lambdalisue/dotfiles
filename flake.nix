@@ -30,7 +30,7 @@
       # mkDarwin takes a per-machine override set; each field overrides a default:
       #   username       (default "alisue")
       #   system         (default "aarch64-darwin"; "x86_64-darwin" on Intel)
-      #   dotfilesDir    (default "~/ogh/lambdalisue/dotfiles" for the username)
+      #   dotfilesDir    (default "~/ghq/github.com/lambdalisue/dotfiles" for the username)
       #   privateCaches  (default false; enable the private attmcojp cachix,
       #                   which needs ~/.config/nix/netrc credentials)
       mkDarwin =
@@ -44,7 +44,7 @@
           # be read-only), so it is derived from the home directory on the
           # convention that the repo is always cloned to the same location.
           # Override per host above if a machine clones it elsewhere.
-          dotfilesDir = hostCfg.dotfilesDir or "/Users/${username}/ogh/lambdalisue/dotfiles";
+          dotfilesDir = hostCfg.dotfilesDir or "/Users/${username}/ghq/github.com/lambdalisue/dotfiles";
         in
         nix-darwin.lib.darwinSystem {
           inherit system;

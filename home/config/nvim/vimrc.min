@@ -8,7 +8,7 @@ endif
 set packpath=
 
 " The target plugin directory
-set runtimepath^=~/ogh/vim-denops/denops.vim
+set runtimepath^=~/ghq/github.com/vim-denops/denops.vim
 
 filetype plugin indent on
 syntax on

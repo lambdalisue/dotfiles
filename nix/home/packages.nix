@@ -7,6 +7,7 @@
     deno  # required by denops.vim
     ffmpeg
     gh
+    ghq
     gnupg
     grpcurl
     just

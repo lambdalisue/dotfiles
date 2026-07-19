@@ -75,4 +75,4 @@ endfunction
 
 nnoremap <Leader>dd <Cmd>Fern . -toggle -drawer -reveal=%:p<CR>
 nnoremap <Leader>ee :<C-u>Fern <C-r>=<SID>smart_path()<CR> -reveal=%:p<CR>
-nnoremap <Leader>gg :<C-u>Fern ~/ogh -toggle -drawer -reveal=<C-r>=<SID>prefer_repo_root()<CR><CR>
+nnoremap <Leader>gg :<C-u>Fern ~/ghq/github.com -toggle -drawer -reveal=<C-r>=<SID>prefer_repo_root()<CR><CR>
