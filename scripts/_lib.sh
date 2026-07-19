@@ -46,3 +46,35 @@ ensure_brew_loaded() {
   done
   command -v brew >/dev/null 2>&1
 }
+
+# Run a command (a nix-darwin activation) under a TEMPORARY relaxed sudo policy,
+# so the many password prompts Homebrew casks trigger during `brew bundle`
+# collapse to a single authentication — without any permanent change to the
+# machine's sudo configuration.
+#
+# During activation nix-darwin runs `sudo --user=<you> env brew bundle …`, and
+# each cask that needs admin invokes its own `sudo`. macOS scopes sudo tickets
+# per terminal (tty_tickets), so a cask/installer running sudo on a different
+# pty re-prompts even within the 5-minute window. This drops an /etc/sudoers.d
+# file that shares one ticket per user and widens the window, runs the command,
+# then removes the file on exit — including on failure or Ctrl-C. The policy is
+# validated with `visudo -c` before it lands, so a mistake here cannot break
+# sudo, and it never persists past this run.
+run_with_relaxed_sudo() {
+  local sudoers="/etc/sudoers.d/99-darwin-rebuild-activation"
+  local tmp
+  tmp="$(mktemp)"
+  # Expand the paths now so the trap still has them after this function returns,
+  # and register it before anything can fail so the temp file is always cleaned.
+  # shellcheck disable=SC2064
+  trap "sudo rm -f '$sudoers'; rm -f '$tmp'" EXIT INT TERM
+  printf 'Defaults timestamp_timeout=30\nDefaults !tty_tickets\n' >"$tmp"
+  # Validate explicitly (do not rely on the caller's `set -e`) so an invalid
+  # sudoers file can never be installed and break sudo.
+  if ! sudo visudo -cf "$tmp" >/dev/null; then
+    log "internal error: generated sudoers failed validation; not installing it"
+    return 1
+  fi
+  sudo install -m 0440 -o root -g wheel "$tmp" "$sudoers" || return 1
+  "$@"
+}

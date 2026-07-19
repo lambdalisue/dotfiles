@@ -22,7 +22,7 @@ nix="$(command -v nix)"
 # into /etc/nix/nix.conf during this run, so later updates need only:
 #     sudo darwin-rebuild switch --flake .#default
 log "Activating nix-darwin (#default, public caches)"
-sudo "$nix" \
+run_with_relaxed_sudo sudo "$nix" \
   --extra-experimental-features 'nix-command flakes' \
   --extra-substituters "$PUBLIC_SUBSTITUTERS" \
   --extra-trusted-public-keys "$PUBLIC_KEYS" \

@@ -38,7 +38,7 @@ nix="$(command -v nix)"
 # After this run, later updates need only:
 #     sudo darwin-rebuild switch --flake .#private
 log "Activating nix-darwin (#private, public + private caches)"
-sudo "$nix" \
+run_with_relaxed_sudo sudo "$nix" \
   --extra-experimental-features 'nix-command flakes' \
   --extra-substituters "$PUBLIC_SUBSTITUTERS $PRIVATE_SUBSTITUTERS" \
   --extra-trusted-public-keys "$PUBLIC_KEYS $PRIVATE_KEYS" \
