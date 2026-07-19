@@ -9,6 +9,7 @@
   imports = [
     ./system.nix
     ./homebrew.nix
+    ./fonts.nix
   ];
 
   # Nix is installed with the official installer, so nix-darwin manages
