@@ -10,6 +10,10 @@
       # that all Nix-managed packages are working correctly.
       cleanup = "none";
       upgrade = true;
+      # Stream each formula/cask's install output (download progress,
+      # "Installing ..." lines) during activation. Without this `brew bundle`
+      # only prints a terse summary, hiding per-app progress on long installs.
+      extraFlags = [ "--verbose" ];
     };
 
     taps = [
