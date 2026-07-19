@@ -22,6 +22,7 @@
 #   etc        Move aside /etc files nix-darwin wants to own
 #   backups    Remove stale *.before-nix-darwin symlink backups (see below)
 #   activate   Run the nix-darwin switch
+#   macskk-dict Download the SKK dictionary macSKK needs (it ships with none)
 #   zsh-cache  Clear the stale zsh profile cache
 #
 # Prerequisites:
@@ -66,7 +67,7 @@ TAPS="felixkratz/formulae k1low/tap nikitabobko/tap arto-app/tap cedriceugeni/po
 
 # Ordered list of steps. `main` runs all of them, a `--from` suffix, or an
 # explicit subset — always in this canonical order.
-ALL_STEPS="nix homebrew taps etc backups activate zsh-cache"
+ALL_STEPS="nix homebrew taps etc backups activate macskk-dict zsh-cache"
 
 log() { echo "==> $*"; }
 
@@ -235,6 +236,28 @@ step_activate() {
     run github:LnL7/nix-darwin -- switch --flake "$REPO#$target"
 }
 
+step_macskk-dict() {
+  # macSKK no longer bundles a dictionary (SKK-JISYO.L was dropped from its
+  # installer), so a fresh install starts with an empty dictionary. Fetch the
+  # standard combined dictionary from skk-dev/dict into macSKK's sandbox
+  # Dictionaries directory. macSKK reads SKK-JISYO.L as EUC-JP by default, and
+  # the Neovim skkeleton config points at this same file. After this runs,
+  # enable the dictionary once from the macSKK menu bar: 設定 -> 辞書.
+  local dir="$HOME/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries"
+  local dict="$dir/SKK-JISYO.L"
+  local url="https://raw.githubusercontent.com/skk-dev/dict/master/SKK-JISYO.L"
+  if [ -s "$dict" ]; then
+    log "macSKK dictionary already present: $dict"
+    return 0
+  fi
+  log "Downloading SKK-JISYO.L into macSKK Dictionaries"
+  mkdir -p "$dir"
+  # Download to a temp file first so an interrupted fetch does not leave a
+  # partial dictionary that a later run would treat as already present.
+  curl -fL --retry 3 -o "$dict.download" "$url"
+  mv "$dict.download" "$dict"
+}
+
 step_zsh-cache() {
   # Clear the stale zsh profile cache (it hardcodes old Homebrew paths).
   log "Clearing zsh profile cache"
@@ -251,6 +274,7 @@ run_step() {
     etc) step_etc ;;
     backups) step_backups ;;
     activate) step_activate ;;
+    macskk-dict) step_macskk-dict ;;
     zsh-cache) step_zsh-cache ;;
     *)
       echo "Unknown step: $1" >&2
