@@ -65,7 +65,12 @@
       "neovide-app"
       "obsidian"
       "ollama-app"
-      "parallels"
+      # Parallels is intentionally NOT declared here: its cask postflight runs
+      # `sudo inittool init`, which needs interactive authentication. During
+      # nix-darwin activation `brew bundle` runs non-interactively with no tty
+      # (and Touch ID cannot reach that nested context), so the install aborts
+      # with "a terminal is required to read the password". Install it by hand
+      # instead: `brew install --cask parallels`.
       # Fully qualified: this PortKiller lives in cedriceugeni/portkiller,
       # not homebrew/cask.
       "cedriceugeni/portkiller/portkiller"
