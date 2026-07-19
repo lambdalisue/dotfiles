@@ -9,66 +9,58 @@ My personal dotfiles managed with [nix-darwin] and [home-manager].
 
 ## Initial setup
 
-On a fresh machine, `bootstrap.sh` installs the prerequisites and runs the first
-nix-darwin activation. The work is split into named, individually re-runnable
-steps so a failed run resumes from the middle instead of starting over:
+On a fresh machine, run the numbered scripts in `scripts/` in order. There is no
+orchestrator: each script does exactly one thing, is idempotent, and works
+standalone, so you run them one at a time and judge which are still needed.
 
-| Step        | What it does                                            |
-| ----------- | ------------------------------------------------------- |
-| `nix`       | Install Nix (official installer)                        |
-| `homebrew`  | Install Homebrew                                        |
-| `taps`      | Tap and trust the third-party Homebrew taps             |
-| `etc`       | Move aside the `/etc` files nix-darwin wants to own     |
-| `backups`   | Remove stale `*.before-nix-darwin` symlink backups      |
-| `activate`  | Run the nix-darwin switch                               |
-| `zsh-cache` | Clear the stale zsh profile cache                       |
-
-Every step is idempotent, so re-running is safe:
+| Script                           | What it does                                        |
+| -------------------------------- | --------------------------------------------------- |
+| `scripts/01-install-nix.sh`      | Install Nix (official multi-user installer)         |
+| `scripts/02-install-homebrew.sh` | Install Homebrew                                     |
+| `scripts/03-trust-taps.sh`       | Tap and trust the third-party Homebrew taps         |
+| `scripts/04-prepare-etc.sh`      | Move aside the `/etc` files nix-darwin wants to own |
+| `scripts/05-clean-backups.sh`    | Remove stale `*.before-nix-darwin` symlink backups  |
+| `scripts/06-activate.sh`         | First activation (`#default`, public caches)        |
+| `scripts/07-macskk-dict.sh`      | Download the SKK dictionary macSKK needs            |
+| `scripts/08-clear-zsh-cache.sh`  | Clear the stale zsh profile cache                   |
 
 ```console
-$ ./bootstrap.sh                 # run every step in order
-$ ./bootstrap.sh --list          # list the steps
-$ ./bootstrap.sh --from activate # run this step and everything after it
-$ ./bootstrap.sh taps activate   # run just these steps (canonical order)
+$ ./scripts/01-install-nix.sh
+$ ./scripts/02-install-homebrew.sh
+$ ./scripts/03-trust-taps.sh
+$ ./scripts/04-prepare-etc.sh
+$ ./scripts/06-activate.sh          # public; for the private cache see below
+$ ./scripts/07-macskk-dict.sh
+$ ./scripts/08-clear-zsh-cache.sh
 ```
 
-**About the `backups` step.** When home-manager first takes over a file it
-moves the old one aside to `<file>.before-nix-darwin`, and it refuses to run if
-that backup already exists — so a half-finished run leaves backups that block
-every retry. Because this setup only ever replaces symlinks, the `backups` step
-deletes `*.before-nix-darwin` entries that are themselves symlinks (they hold no
-data) and leaves any real file or directory in place, reporting it so you can
-resolve it by hand. It runs automatically before `activate`; run it alone with
-`./bootstrap.sh backups` to unblock a stuck retry.
+Open a new terminal when activation finishes. The private binary cache is fully
+opt-in — nothing on this default path touches it.
+
+**Private activation (opt-in).** `scripts/06-activate.sh` uses the `#default`
+role and the public caches only. To activate the `#private` role and its
+private binary cache instead, run the separate `scripts/activate-private.sh`. It
+needs credentials in `~/.config/nix/netrc` (never committed) and aborts without
+them.
+
+**If activation fails partway.** home-manager backs up each pre-existing target
+it replaces to `<file>.before-nix-darwin` and then refuses to run while that
+backup exists, so a half-finished activation blocks every retry. Run
+`scripts/05-clean-backups.sh` to clear it: it deletes only backups that are
+themselves symlinks (they hold no data) and reports any real file or directory
+for you to resolve by hand. Then re-run `scripts/06-activate.sh`.
 
 ### Before you run it
 
 - Clone this repository to `~/ogh/lambdalisue/dotfiles`. `dotfilesDir` in
   `flake.nix` derives from that path by convention; clone elsewhere only if you
-  also override `dotfilesDir` for the host.
-- The machine's hostname can be anything — registration is optional. An
-  unregistered host bootstraps against the generic `default` configuration.
-  Register a host in `flake.nix` `hosts` (attribute name = `scutil --get
-  LocalHostName`) only to pin per-host overrides such as `username`, `system`,
-  `dotfilesDir`, or `privateCaches`.
-- The private `attmcojp.cachix.org` cache is off by default because it needs
-  credentials. To use it, put them in `~/.config/nix/netrc` (never committed)
-  and set `privateCaches = true;` for the host in `flake.nix`. Without it,
-  bootstrap simply uses the public caches.
+  also override `dotfilesDir` on the configuration.
+- Configurations are selected by an explicit role name, not by hostname, so the
+  command works on any machine regardless of its `LocalHostName`. Two roles are
+  provided in `flake.nix`: `default` (generic, public caches) and `private`,
+  which additionally enables a private binary cache.
 - Migrating a machine off the Determinate installer? Remove it first:
   `sudo -i /nix/nix-installer uninstall`.
-
-### Bootstrap
-
-```console
-$ ./bootstrap.sh
-```
-
-Existing dotfile symlinks are backed up automatically by home-manager
-(`*.before-nix-darwin`), so nothing needs to be removed by hand. If a run fails
-partway, fix the cause and resume with `./bootstrap.sh --from <step>` — the
-`backups` step clears the stale backups that would otherwise block the retry.
-Open a new terminal when it finishes.
 
 ### Clean up Homebrew
 
@@ -76,24 +68,20 @@ After confirming all Nix-managed packages work, change `cleanup` in
 `nix/darwin/homebrew.nix` from `"none"` to `"zap"`, then re-apply:
 
 ```console
-$ sudo darwin-rebuild switch --flake .
+$ sudo darwin-rebuild switch --flake .#default
 ```
 
 ## Usage
 
 ### Apply configuration
 
-Build and activate the full system configuration (nix-darwin + home-manager):
-
-```console
-$ sudo darwin-rebuild switch --flake .
-```
-
-On a machine whose hostname is not registered in `flake.nix`, target the
-generic configuration explicitly:
+Build and activate the full system configuration (nix-darwin + home-manager).
+Pick the role explicitly — `default` uses the public caches only, and `private`
+additionally enables the private binary cache (needs `~/.config/nix/netrc`):
 
 ```console
 $ sudo darwin-rebuild switch --flake .#default
+$ sudo darwin-rebuild switch --flake .#private   # opt-in: private cache
 ```
 
 ### Preview changes
@@ -101,7 +89,7 @@ $ sudo darwin-rebuild switch --flake .#default
 Build without activating to check for errors:
 
 ```console
-$ darwin-rebuild build --flake .
+$ darwin-rebuild build --flake .#default
 ```
 
 ### Update dependencies
@@ -115,13 +103,29 @@ $ nix flake update
 Then re-apply:
 
 ```console
-$ sudo darwin-rebuild switch --flake .
+$ sudo darwin-rebuild switch --flake .#default
 ```
+
+## Uninstall
+
+`scripts/uninstall.sh` performs a complete clean uninstall — it removes
+nix-darwin, Nix (the `/nix` store volume, daemon, and `_nixbld` users), and
+Homebrew, and restores the `/etc` backups made during setup, returning the
+machine to a pre-bootstrap state. It is destructive and effectively
+irreversible, so it prompts for confirmation first:
+
+```console
+$ ./scripts/uninstall.sh          # prompt before doing anything
+$ ./scripts/uninstall.sh --yes    # skip the prompt (non-interactive)
+```
+
+Reboot afterwards to finish removing the `/nix` volume.
 
 ## Structure
 
 ```
 flake.nix                    # Flake entry point
+scripts/                     # Numbered setup steps + activate-private.sh, uninstall.sh
 nix/
   darwin/
     default.nix              # Nix settings, users, substituters
@@ -149,7 +153,7 @@ home/                        # Raw dotfiles (symlinked into ~ by home-manager)
    home.file.".foo".source = link "${dotfilesDir}/home/foo";
    ```
 
-3. Apply: `sudo darwin-rebuild switch --flake .`
+3. Apply: `sudo darwin-rebuild switch --flake .#default`
 
 ## Adding packages
 

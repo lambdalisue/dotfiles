@@ -10,12 +10,17 @@ This is a personal dotfiles repository managed with **nix-darwin** and **home-ma
 
 ### Core Tasks
 
+Configurations are selected by an explicit role name (`default` or `private`),
+not by hostname. `default` uses the public caches only; `private` is opt-in and
+additionally enables a private binary cache (needs `~/.config/nix/netrc`). Use
+`.#private` on a machine set up with those credentials, `.#default` otherwise.
+
 ```bash
 # Build and activate the configuration (writes /etc and system state, needs root)
-sudo darwin-rebuild switch --flake .
+sudo darwin-rebuild switch --flake .#default
 
 # Build without activating (preview changes)
-darwin-rebuild build --flake .
+darwin-rebuild build --flake .#default
 
 # Update flake inputs (nixpkgs, nix-darwin, home-manager)
 nix flake update
@@ -78,7 +83,7 @@ The repository primarily manages configurations for:
 2. Add a symlink entry in `nix/home/files.nix`:
    - XDG config files: `xdg.configFile."name".source = ../../home/config/name;`
    - Home directory files: `home.file.".name".source = ../../home/name;`
-3. Run `darwin-rebuild switch --flake .` to apply
+3. Run `darwin-rebuild switch --flake .#default` to apply
 
 ### Adding Packages
 
