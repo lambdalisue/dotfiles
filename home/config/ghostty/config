@@ -18,8 +18,7 @@ window-inherit-working-directory = true
 quick-terminal-position = bottom
 quick-terminal-autohide = false
 
-# Disable tabs because aerospace doesn't work well with tabs.
-# https://github.com/nikitabobko/AeroSpace/issues/778
+# Disable tabs because tiling window managers don't work well with in-app tabs.
 keybind = cmd+t=unbind
 
 # Disable fullscreen toggle by Cmd+Enter

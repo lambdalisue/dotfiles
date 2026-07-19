@@ -13,12 +13,11 @@
     };
 
     taps = [
-      "felixkratz/formulae"
       "k1low/tap"
-      # AeroSpace ships only from its author's tap, not homebrew/cask. Without
-      # this tap `brew` cannot find the cask and reports "No available formula
-      # with the name aerospace".
-      "nikitabobko/tap"
+      # OmniWM ships only from its author's tap, not homebrew/cask. Without this
+      # tap `brew` cannot find the cask and reports "No available formula with
+      # the name omniwm".
+      "barutsrb/tap"
       # Arto is distributed only from its author's tap, not homebrew/cask.
       "arto-app/tap"
       # PortKiller (CedricEugeni's native menubar app) ships from its own tap.
@@ -27,7 +26,6 @@
 
     # Formulae that are macOS-specific or not available in nixpkgs
     brews = [
-      "borders"
       "ccusage"
       # Kept on Homebrew (not Nix) for the g-prefixed GNU tools (gtimeout, etc.)
       # that scripts on this machine rely on; nixpkgs' coreutils ships unprefixed.
@@ -42,8 +40,6 @@
 
     casks = [
       "1password"
-      # Fully qualified so Homebrew resolves it from nikitabobko/tap (see taps).
-      "nikitabobko/tap/aerospace"
       "aqua-voice"
       # Fully qualified: arto lives in arto-app/tap, not homebrew/cask.
       "arto-app/tap/arto"
@@ -65,6 +61,9 @@
       "neovide-app"
       "obsidian"
       "ollama-app"
+      # Tiling window manager. Fully qualified: omniwm lives in barutsrb/tap,
+      # not homebrew/cask.
+      "barutsrb/tap/omniwm"
       # Parallels is intentionally NOT declared here: its cask postflight runs
       # `sudo inittool init`, which needs interactive authentication. During
       # nix-darwin activation `brew bundle` runs non-interactively with no tty

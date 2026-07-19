@@ -22,7 +22,7 @@ PUBLIC_KEYS="arto.cachix.org-1:yaH0JQomRJTosIcTh2xZPKBEny41D7h6QUePYQzWYqc="
 # Third-party Homebrew taps used by nix/darwin/homebrew.nix. Homebrew refuses to
 # load formulae from untrusted taps, so they are trusted before activation runs
 # `brew bundle`. Keep in sync with the taps declared there.
-TAPS="felixkratz/formulae k1low/tap nikitabobko/tap arto-app/tap cedriceugeni/portkiller"
+TAPS="k1low/tap barutsrb/tap arto-app/tap cedriceugeni/portkiller"
 
 log() { echo "==> $*"; }
 

@@ -23,8 +23,7 @@ in
 
     # Darwin entries (from .dotfiles_darwin.tsv)
     "karabiner".source = link "${dotfilesDir}/home/config/karabiner";
-    "aerospace".source = link "${dotfilesDir}/home/config/aerospace";
-    "borders/bordersrc".source = link "${dotfilesDir}/home/config/borders/bordersrc";
+    "omniwm".source = link "${dotfilesDir}/home/config/omniwm";
   };
 
   home.file = {

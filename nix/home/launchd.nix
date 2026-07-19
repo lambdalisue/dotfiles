@@ -3,10 +3,6 @@
   # GUI login items, managed declaratively as per-user LaunchAgents under
   # ~/Library/LaunchAgents. macOS "Login Items" (Background Items / SMAppService)
   # cannot be managed declaratively, so RunAtLoad agents are used instead.
-  #
-  # AeroSpace is intentionally NOT here: it self-registers a login agent via
-  # `start-at-login = true` in its own config, so managing it here too would
-  # launch two instances.
   launchd.agents = {
     # Launcher / hotkey app. `open -g` starts it in the background so it does
     # not steal focus at login (it lives in the menu bar).
@@ -23,15 +19,21 @@
       };
     };
 
-    # Window border highlighter (JankyBorders) that pairs with AeroSpace. It is
-    # a long-running process, so KeepAlive restarts it if it exits. It reads
-    # ~/.config/borders/bordersrc. Path is the Apple Silicon Homebrew prefix.
-    borders = {
+    # Tiling window manager. Unlike AeroSpace, OmniWM has no built-in
+    # start-at-login and does not self-register a login item, so it is started
+    # here. `open -g` launches it in the background without stealing focus (it
+    # runs as an accessory app with no Dock icon) and reads
+    # ~/.config/omniwm/settings.toml.
+    omniwm = {
       enable = true;
       config = {
-        ProgramArguments = [ "/opt/homebrew/bin/borders" ];
+        ProgramArguments = [
+          "/usr/bin/open"
+          "-g"
+          "-a"
+          "OmniWM"
+        ];
         RunAtLoad = true;
-        KeepAlive = true;
       };
     };
 
