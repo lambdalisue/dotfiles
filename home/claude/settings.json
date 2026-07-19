@@ -75,6 +75,7 @@
   "advisorModel": "opus",
   "tui": "default",
   "skipWorkflowUsageWarning": true,
+  "theme": "auto",
   "verbose": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true
