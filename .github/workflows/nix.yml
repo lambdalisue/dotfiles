@@ -41,5 +41,10 @@ jobs:
             echo
           done
 
-      - name: build default configuration
-        run: nix build --print-build-logs '.#darwinConfigurations.default.system'
+      # Resolve the full closure of the default configuration and report what
+      # would be fetched or built, without compiling. A real `nix build` here
+      # risks an hours-long source build if a heavy package (e.g. ffmpeg) is
+      # not cached for aarch64-darwin; the eval step above already catches the
+      # common breakage (typos, missing attrs). Drop --dry-run for a full build.
+      - name: build default configuration (dry run)
+        run: nix build --dry-run --print-build-logs '.#darwinConfigurations.default.system'
