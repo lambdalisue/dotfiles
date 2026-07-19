@@ -24,6 +24,9 @@
     # Global
     NSGlobalDomain = {
       AppleShowAllExtensions = true;
+      # Traditional (non-natural) scrolling: dragging down scrolls the content
+      # down. Matches mouse-wheel expectations.
+      "com.apple.swipescrolldirection" = false;
       InitialKeyRepeat = 15;
       KeyRepeat = 2;
       NSAutomaticCapitalizationEnabled = false;
