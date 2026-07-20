@@ -242,11 +242,11 @@ binding = "Unassigned"
 id = "workspaceBackAndForth"
 
 [[hotkeys]]
-binding = "Option+Right Arrow"
+binding = "Option+Right Bracket"
 id = "switchWorkspace.next"
 
 [[hotkeys]]
-binding = "Option+Left Arrow"
+binding = "Option+Left Bracket"
 id = "switchWorkspace.previous"
 
 [[hotkeys]]
@@ -310,19 +310,19 @@ binding = "Unassigned"
 id = "centerVisibleColumns"
 
 [[hotkeys]]
-binding = "Option+Shift+Left Arrow"
+binding = "Option+Shift+Left Bracket"
 id = "moveWindowToWorkspaceUp"
 
 [[hotkeys]]
-binding = "Option+Shift+Right Arrow"
+binding = "Option+Shift+Right Bracket"
 id = "moveWindowToWorkspaceDown"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+Left Arrow"
+binding = "Control+Option+Shift+Left Bracket"
 id = "moveColumnToWorkspaceUp"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+Right Arrow"
+binding = "Control+Option+Shift+Right Bracket"
 id = "moveColumnToWorkspaceDown"
 
 [[hotkeys]]
@@ -770,7 +770,7 @@ id = "toggleSystemStats"
 [[monitorRoutingOverrides]]
 gridColumn = 1
 gridRow = 0
-monitorDisplayId = 2
+monitorDisplayId = 5
 monitorName = "DELL U4025QW"
 
 [[monitorRoutingOverrides]]
