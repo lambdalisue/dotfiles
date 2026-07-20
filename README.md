@@ -33,6 +33,7 @@ need by hand:
 | -------------------------------- | --------------------------------------------------- |
 | `scripts/bootstrap.sh`           | Fresh-machine setup (macOS: 01-08; Linux: Nix + home-manager) |
 | `scripts/01-install-nix.sh`      | Install Nix (official multi-user installer) — both OS |
+| `scripts/install-nix-selinux.sh` | Install Nix on SELinux-enforcing Linux (Fedora); called by bootstrap in place of 01 |
 | `scripts/02-install-homebrew.sh` | Install Homebrew (macOS)                            |
 | `scripts/03-trust-taps.sh`       | Tap and trust the third-party Homebrew taps (macOS) |
 | `scripts/04-prepare-etc.sh`      | Move aside the `/etc` files nix-darwin wants to own (macOS) |
@@ -164,6 +165,14 @@ preparation, macSKK).
 $ ./scripts/bootstrap.sh
 ```
 
+On Fedora and other **SELinux enforcing** hosts the upstream Nix installer
+aborts, so `bootstrap.sh` automatically routes through
+`scripts/install-nix-selinux.sh`, which registers the `/nix` SELinux contexts,
+installs under a temporary Permissive window, relabels, and restores Enforcing —
+SELinux stays enforcing throughout. (Determinate's installer is intentionally
+not used.) A reboot afterwards is recommended for a full relabel but not
+required to continue.
+
 Afterwards `just switch` (home-only on Linux) handles day-to-day updates.
 macOS-only entries (Homebrew, Arto, karabiner, omniwm, ssh) are excluded
 automatically. The home-manager target is picked from the host architecture; to
@@ -193,7 +202,7 @@ Reboot afterwards to finish removing the `/nix` volume.
 ```
 flake.nix                    # Flake entry point (darwinConfigurations + homeConfigurations)
 justfile                     # `just switch` / `build` / `update` helpers
-scripts/                     # bootstrap.sh (both OS) + numbered macOS steps, activate-home.sh, activate-private.sh, switch.sh, uninstall.sh
+scripts/                     # bootstrap.sh (both OS) + numbered macOS steps, install-nix-selinux.sh, activate-home.sh, activate-private.sh, switch.sh, uninstall.sh
 nix/
   darwin/                    # macOS system layer (nix-darwin), imported only by darwinConfigurations
     default.nix              # Nix settings, users, substituters

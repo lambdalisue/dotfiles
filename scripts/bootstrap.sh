@@ -22,9 +22,16 @@ case "$(uname -s)" in
     done_msg="Bootstrap complete (steps 01-08)."
     ;;
   Linux)
-    # 05-clean-backups clears any *.before-home-manager left by an interrupted
-    # earlier run so activate-home can re-link cleanly.
-    steps=(./01-install-nix.sh ./05-clean-backups.sh ./activate-home.sh)
+    # The upstream Nix installer aborts under SELinux enforcing (Fedora's
+    # default), so use the SELinux-aware install step there; otherwise the plain
+    # installer. 05-clean-backups clears any *.before-home-manager left by an
+    # interrupted earlier run so activate-home can re-link cleanly.
+    if command -v getenforce >/dev/null 2>&1 && [ "$(getenforce)" = "Enforcing" ]; then
+      install_step=./install-nix-selinux.sh
+    else
+      install_step=./01-install-nix.sh
+    fi
+    steps=("$install_step" ./05-clean-backups.sh ./activate-home.sh)
     done_msg="Bootstrap complete (Nix + home-manager)."
     ;;
   *)
