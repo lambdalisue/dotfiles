@@ -40,6 +40,7 @@ need by hand:
 | `scripts/05-clean-backups.sh`    | Remove stale `*.before-home-manager` symlink backups — both OS |
 | `scripts/06-activate.sh`         | macOS first activation: nix-darwin system + home-manager (`#default`, public caches) |
 | `scripts/activate-home.sh`       | Activate home-manager only (public caches) — both OS; the shared home step |
+| `scripts/set-login-shell.sh`     | Set fish as the login shell on Linux (nix-darwin does this on macOS) |
 | `scripts/07-macskk-dict.sh`      | Download the SKK dictionary macSKK needs (macOS)   |
 | `scripts/08-clear-zsh-cache.sh`  | Clear the stale zsh profile cache (macOS)          |
 | `scripts/09-macskk-input-source.sh` | Enable macSKK as a Japanese input source (macOS, opt-in) |
@@ -172,6 +173,9 @@ triggers SELinux denials (and the upstream installer aborts outright), so
 whole class of SELinux problem disappears and SELinux stays enforcing —
 untouched. (Determinate's installer is intentionally not used.)
 
+`bootstrap.sh` also sets fish as the login shell (the Linux equivalent of what
+nix-darwin does on macOS); log out and back in for it to take effect.
+
 Afterwards `just switch` (home-only on Linux) handles day-to-day updates.
 macOS-only entries (Homebrew, Arto, karabiner, omniwm, ssh) are excluded
 automatically. The home-manager target is picked from the host architecture; to
@@ -201,7 +205,7 @@ Reboot afterwards to finish removing the `/nix` volume.
 ```
 flake.nix                    # Flake entry point (darwinConfigurations + homeConfigurations)
 justfile                     # `just switch` / `build` / `update` helpers
-scripts/                     # bootstrap.sh (both OS) + numbered macOS steps, install-nix-single-user.sh, activate-home.sh, activate-private.sh, switch.sh, uninstall.sh
+scripts/                     # bootstrap.sh (both OS) + numbered macOS steps, install-nix-single-user.sh, activate-home.sh, set-login-shell.sh, activate-private.sh, switch.sh, uninstall.sh
 nix/
   darwin/                    # macOS system layer (nix-darwin), imported only by darwinConfigurations
     default.nix              # Nix settings, users, substituters

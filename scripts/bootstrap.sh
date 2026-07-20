@@ -33,7 +33,9 @@ case "$(uname -s)" in
     else
       install_step=./01-install-nix.sh
     fi
-    steps=("$install_step" ./05-clean-backups.sh ./activate-home.sh)
+    # set-login-shell makes fish (now installed by home-manager) the login
+    # shell, the Linux equivalent of what nix-darwin does on macOS.
+    steps=("$install_step" ./05-clean-backups.sh ./activate-home.sh ./set-login-shell.sh)
     done_msg="Bootstrap complete (Nix + home-manager)."
     ;;
   *)
