@@ -1,5 +1,7 @@
 {
   config,
+  lib,
+  isDarwin,
   dotfilesDir,
   ...
 }:
@@ -19,7 +21,8 @@ in
     # (~/.config/nix/netrc is a local-only credential file, not symlinked)
     "nvim".source = link "${dotfilesDir}/home/config/nvim";
     "zsh".source = link "${dotfilesDir}/home/config/zsh";
-
+  }
+  // lib.optionalAttrs isDarwin {
     # Darwin entries (from .dotfiles_darwin.tsv)
     "karabiner".source = link "${dotfilesDir}/home/config/karabiner";
     "omniwm".source = link "${dotfilesDir}/home/config/omniwm";
@@ -33,7 +36,8 @@ in
     ".local/bin/git-backup".source = link "${dotfilesDir}/home/local/bin/git-backup";
     ".claude".source = link "${dotfilesDir}/home/claude";
     ".codex".source = link "${dotfilesDir}/home/codex";
-
+  }
+  // lib.optionalAttrs isDarwin {
     # Darwin entries (from .dotfiles_darwin.tsv)
     ".ssh".source = link "${dotfilesDir}/home/ssh.darwin";
 

@@ -4,13 +4,22 @@
 
 My personal dotfiles managed with [nix-darwin] and [home-manager].
 
+The user environment ([home-manager]) is standalone and works on both macOS and
+Linux; the macOS system layer ([nix-darwin]) is separate. On Linux the system is
+owned by the distro (e.g. Fedora) and Nix contributes only the home-manager
+generation — there is no system layer. `just switch` runs whatever applies to
+the current machine.
+
 [nix-darwin]: https://github.com/LnL7/nix-darwin
 [home-manager]: https://github.com/nix-community/home-manager
 
 ## Initial setup
 
-On a fresh machine, run `scripts/bootstrap.sh` — it runs the numbered steps
-01-08 in order:
+On a fresh machine, run `scripts/bootstrap.sh` — the same command on both
+platforms. It detects the OS and runs what applies: on **macOS** the numbered
+steps 01-08 (Homebrew, nix-darwin system layer, home-manager); on **Linux** just
+Nix + home-manager (the distro owns the system, so the macOS-only steps are
+skipped).
 
 ```console
 $ ./scripts/bootstrap.sh
@@ -22,16 +31,19 @@ need by hand:
 
 | Script                           | What it does                                        |
 | -------------------------------- | --------------------------------------------------- |
-| `scripts/bootstrap.sh`           | Run steps 01-08 in order (fresh-machine setup)      |
-| `scripts/01-install-nix.sh`      | Install Nix (official multi-user installer)         |
-| `scripts/02-install-homebrew.sh` | Install Homebrew                                     |
-| `scripts/03-trust-taps.sh`       | Tap and trust the third-party Homebrew taps         |
-| `scripts/04-prepare-etc.sh`      | Move aside the `/etc` files nix-darwin wants to own |
-| `scripts/05-clean-backups.sh`    | Remove stale `*.before-nix-darwin` symlink backups  |
-| `scripts/06-activate.sh`         | First activation (`#default`, public caches)        |
-| `scripts/07-macskk-dict.sh`      | Download the SKK dictionary macSKK needs            |
-| `scripts/08-clear-zsh-cache.sh`  | Clear the stale zsh profile cache                   |
-| `scripts/09-macskk-input-source.sh` | Enable macSKK as a Japanese input source (opt-in) |
+| `scripts/bootstrap.sh`           | Fresh-machine setup (macOS: 01-08; Linux: Nix + home-manager) |
+| `scripts/01-install-nix.sh`      | Install Nix (official multi-user installer) — both OS |
+| `scripts/02-install-homebrew.sh` | Install Homebrew (macOS)                            |
+| `scripts/03-trust-taps.sh`       | Tap and trust the third-party Homebrew taps (macOS) |
+| `scripts/04-prepare-etc.sh`      | Move aside the `/etc` files nix-darwin wants to own (macOS) |
+| `scripts/05-clean-backups.sh`    | Remove stale `*.before-home-manager` symlink backups — both OS |
+| `scripts/06-activate.sh`         | macOS first activation: nix-darwin system + home-manager (`#default`, public caches) |
+| `scripts/activate-home.sh`       | Activate home-manager only (public caches) — both OS; the shared home step |
+| `scripts/07-macskk-dict.sh`      | Download the SKK dictionary macSKK needs (macOS)   |
+| `scripts/08-clear-zsh-cache.sh`  | Clear the stale zsh profile cache (macOS)          |
+| `scripts/09-macskk-input-source.sh` | Enable macSKK as a Japanese input source (macOS, opt-in) |
+
+On macOS, running the steps by hand instead of `bootstrap.sh`:
 
 ```console
 $ ./scripts/01-install-nix.sh
@@ -56,10 +68,11 @@ private binary cache instead, run the separate `scripts/activate-private.sh`. It
 needs credentials in `~/.config/nix/netrc` (never committed) and aborts without
 them.
 
-**If activation fails partway.** home-manager backs up each pre-existing target
-it replaces to `<file>.before-nix-darwin` and then refuses to run while that
-backup exists, so a half-finished activation blocks every retry. Run
-`scripts/05-clean-backups.sh` to clear it: it deletes only backups that are
+**If activation fails partway.** home-manager (run with `-b before-home-manager`)
+backs up each pre-existing target it replaces to `<file>.before-home-manager` and
+then refuses to run while that backup exists, so a half-finished activation
+blocks every retry.
+Run `scripts/05-clean-backups.sh` to clear it: it deletes only backups that are
 themselves symlinks (they hold no data) and reports any real file or directory
 for you to resolve by hand. Then re-run `scripts/06-activate.sh`.
 
@@ -87,23 +100,39 @@ which always works.
 ### Clean up Homebrew
 
 After confirming all Nix-managed packages work, change `cleanup` in
-`nix/darwin/homebrew.nix` from `"none"` to `"zap"`, then re-apply:
+`nix/darwin/homebrew.nix` from `"none"` to `"zap"`, then re-apply the system
+layer:
 
 ```console
-$ sudo darwin-rebuild switch --flake .#default
+$ ./scripts/switch.sh          # or: just switch
 ```
 
 ## Usage
 
 ### Apply configuration
 
-Build and activate the full system configuration (nix-darwin + home-manager).
-Pick the role explicitly — `default` uses the public caches only, and `private`
-additionally enables the private binary cache (needs `~/.config/nix/netrc`):
+`just switch` activates whatever applies to the current machine — on macOS the
+nix-darwin system layer (via `scripts/switch.sh`, which collapses Homebrew's
+sudo prompts) plus home-manager; on Linux just home-manager. The home-manager
+target is auto-selected from the host architecture:
 
 ```console
-$ sudo darwin-rebuild switch --flake .#default
-$ sudo darwin-rebuild switch --flake .#private   # opt-in: private cache
+$ just switch
+```
+
+Override the nix-darwin role — `default` (public caches) or `private` (adds the
+private binary cache, needs `~/.config/nix/netrc`):
+
+```console
+$ just role=private switch
+```
+
+The individual steps `just switch` wraps, if you want to run one directly:
+
+```console
+$ ./scripts/switch.sh                              # macOS system layer (role arg optional)
+$ home-manager switch --flake .#aarch64-darwin     # user env on Apple Silicon macOS
+$ home-manager switch --flake .#x86_64-linux       # user env on Fedora etc.
 ```
 
 ### Preview changes
@@ -111,21 +140,37 @@ $ sudo darwin-rebuild switch --flake .#private   # opt-in: private cache
 Build without activating to check for errors:
 
 ```console
-$ darwin-rebuild build --flake .#default
+$ just build
 ```
 
 ### Update dependencies
 
-Update nixpkgs, nix-darwin, and home-manager to their latest versions:
+Update nixpkgs, nix-darwin, and home-manager to their latest versions, then
+re-apply:
 
 ```console
-$ nix flake update
+$ just update
+$ just switch
 ```
 
-Then re-apply:
+## Linux (Fedora etc.)
+
+On Linux the distro owns the system, so there is no nix-darwin — only
+home-manager runs. `scripts/bootstrap.sh` handles this: it installs Nix and
+activates home-manager, skipping the macOS-only steps (Homebrew, `/etc`
+preparation, macSKK).
 
 ```console
-$ sudo darwin-rebuild switch --flake .#default
+$ ./scripts/bootstrap.sh
+```
+
+Afterwards `just switch` (home-only on Linux) handles day-to-day updates.
+macOS-only entries (Homebrew, Arto, karabiner, omniwm, ssh) are excluded
+automatically. The home-manager target is picked from the host architecture; to
+run it directly instead of via `bootstrap.sh`/`just`:
+
+```console
+$ nix run github:nix-community/home-manager -- switch --flake .#x86_64-linux -b before-home-manager
 ```
 
 ## Uninstall
@@ -146,15 +191,16 @@ Reboot afterwards to finish removing the `/nix` volume.
 ## Structure
 
 ```
-flake.nix                    # Flake entry point
-scripts/                     # Numbered setup steps + activate-private.sh, uninstall.sh
+flake.nix                    # Flake entry point (darwinConfigurations + homeConfigurations)
+justfile                     # `just switch` / `build` / `update` helpers
+scripts/                     # bootstrap.sh (both OS) + numbered macOS steps, activate-home.sh, activate-private.sh, switch.sh, uninstall.sh
 nix/
-  darwin/
+  darwin/                    # macOS system layer (nix-darwin), imported only by darwinConfigurations
     default.nix              # Nix settings, users, substituters
     system.nix               # macOS system preferences (Dock, Finder, etc.)
     homebrew.nix             # Declarative Homebrew cask/formula management
-  home/
-    default.nix              # home-manager entry point
+  home/                      # User environment (home-manager), standalone on every OS
+    default.nix              # home-manager entry point (Darwin-only pieces gated on isDarwin)
     packages.nix             # CLI packages managed by Nix
     files.nix                # Dotfile symlinks (xdg.configFile, home.file)
     shell.nix                # direnv, fzf
@@ -175,7 +221,7 @@ home/                        # Raw dotfiles (symlinked into ~ by home-manager)
    home.file.".foo".source = link "${dotfilesDir}/home/foo";
    ```
 
-3. Apply: `sudo darwin-rebuild switch --flake .#default`
+3. Apply: `just switch` (dotfile symlinks are home-manager-managed)
 
 ## Adding packages
 

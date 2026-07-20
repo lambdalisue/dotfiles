@@ -4,30 +4,47 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a personal dotfiles repository managed with **nix-darwin** and **home-manager** using Nix flakes. It provides declarative, reproducible system configuration for macOS (Apple Silicon).
+This is a personal dotfiles repository managed with **nix-darwin** and **home-manager** using Nix flakes. It provides declarative, reproducible system configuration for macOS (Apple Silicon), plus a standalone home-manager configuration for Linux (`aarch64-linux` / `x86_64-linux`) that shares the same `nix/home` modules.
 
 ## Development Commands
 
 ### Core Tasks
 
-Configurations are selected by an explicit role name (`default` or `private`),
-not by hostname. `default` uses the public caches only; `private` is opt-in and
-additionally enables a private binary cache (needs `~/.config/nix/netrc`). Use
-`.#private` on a machine set up with those credentials, `.#default` otherwise.
+The user environment (home-manager) is **standalone on every OS** and the macOS
+system layer (nix-darwin) is separate. `just switch` runs both, so day-to-day
+activation is one command per machine:
 
 ```bash
-# Build and activate the configuration (writes /etc and system state, needs root)
-sudo darwin-rebuild switch --flake .#default
+# Activate everything for this machine (system on macOS + home-manager)
+just switch
 
-# Build without activating (preview changes)
-darwin-rebuild build --flake .#default
+# Preview without activating
+just build
 
 # Update flake inputs (nixpkgs, nix-darwin, home-manager)
-nix flake update
-
-# Check flake for errors
-nix flake check
+just update
 ```
+
+`just` auto-selects the home-manager target from the host architecture
+(`aarch64-darwin`, `x86_64-linux`, …). Override the nix-darwin role — `default`
+(public caches) or `private` (adds the attmcojp cachix, needs
+`~/.config/nix/netrc`) — with `just role=private switch`.
+
+The individual commands `just switch` wraps:
+
+```bash
+# macOS system layer (nix-darwin), role-selected, needs root
+sudo darwin-rebuild switch --flake .#default
+
+# User environment (home-manager), architecture-selected, no root
+home-manager switch --flake .#aarch64-darwin   # Apple Silicon macOS
+home-manager switch --flake .#x86_64-linux     # Fedora etc.
+```
+
+On **Linux** there is no nix-darwin (the distro owns the system); only the
+home-manager step runs. macOS-only pieces (Homebrew, system defaults, and the
+Darwin-gated home entries like Arto/karabiner/omniwm/ssh) are excluded
+automatically off macOS.
 
 ## Architecture
 
@@ -83,7 +100,7 @@ The repository primarily manages configurations for:
 2. Add a symlink entry in `nix/home/files.nix`:
    - XDG config files: `xdg.configFile."name".source = ../../home/config/name;`
    - Home directory files: `home.file.".name".source = ../../home/name;`
-3. Run `darwin-rebuild switch --flake .#default` to apply
+3. Run `just switch` to apply (dotfile symlinks are home-manager-managed)
 
 ### Adding Packages
 

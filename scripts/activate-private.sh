@@ -34,13 +34,30 @@ ensure_nix_loaded || {
 nix="$(command -v nix)"
 
 # See 06-activate.sh for why activation runs through `nix run` with explicit
-# flags. Here the private cache and netrc are added on top of the public cache.
-# After this run, later updates need only:
-#     sudo darwin-rebuild switch --flake .#private
-log "Activating nix-darwin (#private, public + private caches)"
+# flags, and why home-manager is activated separately. Here the private cache
+# and netrc are added on top of the public cache. After this run, later updates
+# need only:
+#     sudo darwin-rebuild switch --flake .#private   (system)
+#     home-manager switch --flake .#<arch>           (home)
+log "Activating nix-darwin system layer (#private, public + private caches)"
 run_with_relaxed_sudo sudo "$nix" \
   --extra-experimental-features 'nix-command flakes' \
   --extra-substituters "$PUBLIC_SUBSTITUTERS $PRIVATE_SUBSTITUTERS" \
   --extra-trusted-public-keys "$PUBLIC_KEYS $PRIVATE_KEYS" \
   --netrc-file "$NETRC" \
   run github:LnL7/nix-darwin -- switch --flake "$REPO#private"
+
+# home-manager is standalone; activate it separately with the private cache too.
+# `uname -m` reports arm64 on Apple Silicon but the flake attribute is
+# aarch64-darwin — normalize before building the target.
+arch="$(uname -m)"
+[ "$arch" = "arm64" ] && arch="aarch64"
+hm_system="${arch}-darwin"
+
+log "Activating home-manager (#${hm_system}, public + private caches)"
+"$nix" \
+  --extra-experimental-features 'nix-command flakes' \
+  --extra-substituters "$PUBLIC_SUBSTITUTERS $PRIVATE_SUBSTITUTERS" \
+  --extra-trusted-public-keys "$PUBLIC_KEYS $PRIVATE_KEYS" \
+  --netrc-file "$NETRC" \
+  run github:nix-community/home-manager -- switch --flake "$REPO#${hm_system}" -b before-home-manager

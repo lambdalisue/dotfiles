@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 #
-# Day-to-day `darwin-rebuild switch` wrapper. Functionally the same as
+# Activate the macOS SYSTEM layer (nix-darwin). This is the system-only step
+# that `just switch` wraps; the user environment (home-manager) is activated
+# separately (`home-manager switch --flake .#<arch>`), so prefer `just switch`
+# for a full activation.
+#
+# Functionally the same as
 #     sudo darwin-rebuild switch --flake .#<role>
 # but it collapses the repeated sudo prompts Homebrew casks trigger during
 # activation into a single authentication, using a TEMPORARY sudoers drop-in

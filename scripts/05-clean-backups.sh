@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
 #
-# Remove stale *.before-nix-darwin symlink backups that block a retry.
+# Remove stale *.before-home-manager symlink backups that block a retry.
 #
-# home-manager backs up each pre-existing target it replaces to
-# <target>.before-nix-darwin, and REFUSES to run if that backup already exists
-# ("would be clobbered by backing up ..."). After a half-finished activation
-# those stale backups block every retry.
+# home-manager (run with `-b before-home-manager`) backs up each pre-existing
+# target it replaces to <target>.before-home-manager, and REFUSES to run if that
+# backup already exists ("would be clobbered by backing up ..."). After a
+# half-finished activation those stale backups block every retry. The name is
+# parallel to the .before-nix-darwin backups the macOS /etc originals use (see
+# 04-prepare-etc.sh) — each names the tool taking over that path; the two never
+# collide (distinct suffix and location), so this only ever touches $HOME.
 #
 # This setup only ever replaces symlinks (the previous linker's), so a
-# *.before-nix-darwin that is itself a symlink holds no data and is safe to
+# *.before-home-manager that is itself a symlink holds no data and is safe to
 # delete — doing so lets a re-run recreate it cleanly. Anything that is a real
 # file or directory is left untouched and reported, in case it holds something
 # worth keeping; resolve those by hand.
 #
 # Scope: $HOME down to depth 4, a safe ceiling that covers every files.nix
-# target (the deepest today is ~/.local/bin/git-backup). /etc backups are left
-# alone — they are real originals and, having distinct names, never block
-# nix-darwin's own /etc symlinks.
+# target (the deepest today is ~/Library/Application Support/arto/config.json).
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/_lib.sh"
 
@@ -33,7 +34,7 @@ while IFS= read -r bak; do
     kept=$((kept + 1))
   fi
 done < <(
-  find "$HOME" -maxdepth 4 -name '*.before-nix-darwin' 2>/dev/null || true
+  find "$HOME" -maxdepth 4 -name '*.before-home-manager' 2>/dev/null || true
 )
 
 if [ "$removed" -eq 0 ] && [ "$kept" -eq 0 ]; then
