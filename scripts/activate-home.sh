@@ -33,9 +33,15 @@ esac
 # `-b before-home-manager` backs up any pre-existing target it replaces (e.g. a
 # previous linker's files) instead of aborting; ./scripts/05-clean-backups.sh
 # clears stale *.before-home-manager if a half-finished run leaves them behind.
+# `home-manager switch` spawns its own `nix` child processes, which a CLI flag
+# would not reach, so pass the experimental features via NIX_CONFIG — every nix
+# process inherits it from the environment. A single-user install has no system
+# nix.conf enabling these; after the first activation home-manager writes them to
+# ~/.config/nix/nix.conf (see nix/home). On macOS nix-darwin already enables them.
+export NIX_CONFIG="extra-experimental-features = nix-command flakes"
+
 log "Activating home-manager (#${hm_system}, public caches)"
 "$nix" \
-  --extra-experimental-features 'nix-command flakes' \
   --extra-substituters "$PUBLIC_SUBSTITUTERS" \
   --extra-trusted-public-keys "$PUBLIC_KEYS" \
   run github:nix-community/home-manager -- switch --flake "$REPO#${hm_system}" -b before-home-manager
