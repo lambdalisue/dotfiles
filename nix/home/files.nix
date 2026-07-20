@@ -36,5 +36,13 @@ in
 
     # Darwin entries (from .dotfiles_darwin.tsv)
     ".ssh".source = link "${dotfilesDir}/home/ssh.darwin";
+
+    # Arto (Markdown editor) stores its config under Application Support.
+    # Link the config files individually so the app-generated .build-id
+    # stays writable in the real directory.
+    "Library/Application Support/arto/config.json".source =
+      link "${dotfilesDir}/home/config/arto/config.json";
+    "Library/Application Support/arto/mappings.json".source =
+      link "${dotfilesDir}/home/config/arto/mappings.json";
   };
 }
