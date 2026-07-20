@@ -1,5 +1,5 @@
 {
-  "global": [
+  "menuShortcuts": [
     {
       "key": "Cmd+n",
       "action": "window.new"
@@ -31,10 +31,6 @@
     {
       "key": "Cmd+f",
       "action": "search.open"
-    },
-    {
-      "key": "Cmd+r",
-      "action": "window.reload"
     },
     {
       "key": "Cmd+b",
@@ -71,6 +67,12 @@
     {
       "key": "Cmd+Comma",
       "action": "file.preferences"
+    }
+  ],
+  "global": [
+    {
+      "key": "Cmd+r",
+      "action": "window.reload"
     },
     {
       "key": "Cmd+Slash",
