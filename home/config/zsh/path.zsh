@@ -5,6 +5,10 @@ typeset -U path
 #  -: follow the symbol links
 #  /: ignore files
 local -a extra_path=(
+    # nix profile bins (nix itself + home-manager's home.packages). macOS gets
+    # these from nix-darwin; a single-user Linux install needs them here.
+    $HOME/.nix-profile/bin(N-/)
+    /nix/var/nix/profiles/default/bin(N-/)
     $HOME/go/bin(N-/)
     $HOME/.bun/bin(N-/)
     $HOME/.deno/bin(N-/)

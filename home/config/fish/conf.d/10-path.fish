@@ -3,8 +3,15 @@
 # Collect the directories that exist, in priority order, then add them in a
 # single fish_add_path call so their relative order is preserved (a per-dir
 # loop would reverse it).
+#
+# The nix profile bins (nix itself + home-manager's home.packages) lead the
+# list. On macOS nix-darwin already puts them on PATH via /etc/fish, so
+# fish_add_path dedups them to a no-op there; on a single-user Linux install
+# there is no such hook, so this is where they get added.
 set -l extra_path
 for dir in \
+    $HOME/.nix-profile/bin \
+    /nix/var/nix/profiles/default/bin \
     $HOME/go/bin \
     $HOME/.bun/bin \
     $HOME/.deno/bin \
