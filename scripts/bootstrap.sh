@@ -22,12 +22,14 @@ case "$(uname -s)" in
     done_msg="Bootstrap complete (steps 01-08)."
     ;;
   Linux)
-    # The upstream Nix installer aborts under SELinux enforcing (Fedora's
-    # default), so use the SELinux-aware install step there; otherwise the plain
-    # installer. 05-clean-backups clears any *.before-home-manager left by an
-    # interrupted earlier run so activate-home can re-link cleanly.
+    # Under SELinux enforcing (Fedora's default) the multi-user nix-daemon
+    # triggers AVC denials and the upstream installer even aborts, so install
+    # single-user (daemonless) there — no daemon socket, no SELinux dance.
+    # Elsewhere use the standard multi-user installer. 05-clean-backups clears
+    # any *.before-home-manager left by an interrupted earlier run so
+    # activate-home can re-link cleanly.
     if command -v getenforce >/dev/null 2>&1 && [ "$(getenforce)" = "Enforcing" ]; then
-      install_step=./install-nix-selinux.sh
+      install_step=./install-nix-single-user.sh
     else
       install_step=./01-install-nix.sh
     fi

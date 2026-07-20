@@ -32,9 +32,16 @@ log() { echo "==> $*"; }
 
 ensure_nix_loaded() {
   command -v nix >/dev/null 2>&1 && return 0
-  local profile=/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-  # shellcheck disable=SC1090
-  [ -e "$profile" ] && . "$profile"
+  local profile
+  # Try the multi-user daemon profile first, then the single-user user profile
+  # (a --no-daemon install writes the latter instead).
+  for profile in \
+    /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh \
+    "$HOME/.nix-profile/etc/profile.d/nix.sh"; do
+    # shellcheck disable=SC1090
+    [ -e "$profile" ] && . "$profile"
+    command -v nix >/dev/null 2>&1 && return 0
+  done
   command -v nix >/dev/null 2>&1
 }
 
