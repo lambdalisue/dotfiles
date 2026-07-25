@@ -11,6 +11,7 @@
     ./files.nix
     ./shell.nix
     ./git.nix
+    ./gh.nix
   ]
   # launchd is macOS-only; its home-manager module asserts Darwin, so only
   # pull it in there. Linux login items are managed by other mechanisms.
