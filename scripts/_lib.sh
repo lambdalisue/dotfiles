@@ -53,19 +53,22 @@ ensure_brew_loaded() {
   command -v brew >/dev/null 2>&1
 }
 
-# Run a command (a nix-darwin activation) under a TEMPORARY relaxed sudo policy,
-# so the many password prompts Homebrew casks trigger during `brew bundle`
-# collapse to a single authentication — without any permanent change to the
-# machine's sudo configuration.
+# Run a command (a nix-darwin activation) under a TEMPORARY passwordless-sudo
+# policy for the invoking user, so the many password prompts Homebrew casks
+# trigger during `brew bundle` collapse to a single authentication — without
+# any permanent change to the machine's sudo configuration.
 #
 # During activation nix-darwin runs `sudo --user=<you> env brew bundle …`, and
-# each cask that needs admin invokes its own `sudo`. macOS scopes sudo tickets
-# per terminal (tty_tickets), so a cask/installer running sudo on a different
-# pty re-prompts even within the 5-minute window. This drops an /etc/sudoers.d
-# file that shares one ticket per user and widens the window, runs the command,
-# then removes the file on exit — including on failure or Ctrl-C. The policy is
-# validated with `visudo -c` before it lands, so a mistake here cannot break
-# sudo, and it never persists past this run.
+# each cask that needs admin invokes its own `sudo` from inside that dropped
+# context. A shared-ticket approach (`!tty_tickets`) does NOT survive that
+# nesting: the credential the outer activation cached is not found by the
+# cask's own sudo, so it re-prompts once per cask. Rather than depend on ticket
+# sharing across the `sudo --user` boundary — which is fragile and macOS
+# version-dependent — this grants the user NOPASSWD for the duration of the
+# run, so no authentication happens at all no matter how many casks install.
+# The drop-in is removed on exit — including on failure or Ctrl-C — so the
+# passwordless window never outlives this command. The policy is validated
+# with `visudo -c` before it lands, so a mistake here cannot break sudo.
 run_with_relaxed_sudo() {
   local sudoers="/etc/sudoers.d/99-darwin-rebuild-activation"
   local tmp
@@ -74,10 +77,19 @@ run_with_relaxed_sudo() {
   # and register it before anything can fail so the temp file is always cleaned.
   # shellcheck disable=SC2064
   trap "sudo rm -f '$sudoers'; rm -f '$tmp'" EXIT INT TERM
-  printf 'Defaults timestamp_timeout=30\nDefaults !tty_tickets\n' >"$tmp"
+  # The EXIT/INT/TERM trap covers normal exits, but a SIGKILL or power loss
+  # cannot fire it — which for a NOPASSWD drop-in would leave standing
+  # passwordless root behind. Remove any stale copy from a prior hard-killed
+  # run up front so such a hole can never outlive the next activation.
+  sudo rm -f "$sudoers"
+  # Scope the grant to root as the only target user (casks escalate to root,
+  # never to another account), so this never becomes a run-as-anyone hole.
+  printf '%s ALL=(root) NOPASSWD: ALL\n' "$(id -un)" >"$tmp"
   # Validate explicitly (do not rely on the caller's `set -e`) so an invalid
-  # sudoers file can never be installed and break sudo.
-  if ! sudo visudo -cf "$tmp" >/dev/null; then
+  # sudoers file can never be installed and break sudo. `visudo -c` only parses
+  # the file and needs no privilege, so it is not run under sudo — spending an
+  # auth here would just add a prompt before the NOPASSWD policy is in place.
+  if ! visudo -cf "$tmp" >/dev/null; then
     log "internal error: generated sudoers failed validation; not installing it"
     return 1
   fi
