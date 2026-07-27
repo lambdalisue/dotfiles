@@ -35,7 +35,6 @@ need by hand:
 | `scripts/01-install-nix.sh`      | Install Nix (official multi-user installer) — both OS |
 | `scripts/install-nix-single-user.sh` | Single-user (daemonless) Nix install for SELinux-enforcing Linux (Fedora); called by bootstrap in place of 01 |
 | `scripts/02-install-homebrew.sh` | Install Homebrew (macOS)                            |
-| `scripts/03-trust-taps.sh`       | Tap and trust the third-party Homebrew taps (macOS) |
 | `scripts/04-prepare-etc.sh`      | Move aside the `/etc` files nix-darwin wants to own (macOS) |
 | `scripts/05-clean-backups.sh`    | Remove stale `*.before-home-manager` symlink backups — both OS |
 | `scripts/06-activate.sh`         | macOS first activation: nix-darwin system + home-manager (`#default`, public caches) |
@@ -50,7 +49,6 @@ On macOS, running the steps by hand instead of `bootstrap.sh`:
 ```console
 $ ./scripts/01-install-nix.sh
 $ ./scripts/02-install-homebrew.sh
-$ ./scripts/03-trust-taps.sh
 $ ./scripts/04-prepare-etc.sh
 $ ./scripts/06-activate.sh          # public; for the private cache see below
 $ ./scripts/07-macskk-dict.sh

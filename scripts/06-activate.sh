@@ -16,6 +16,16 @@ ensure_nix_loaded || {
 }
 nix="$(command -v nix)"
 
+# home-manager is standalone (not a nix-darwin module), so activate it
+# separately. The home step is shared with the Linux bootstrap path, so it lives
+# in activate-home.sh (public caches, host-derived flake target).
+#
+# It runs BEFORE the nix-darwin layer because home-manager generates the
+# Homebrew trust.json (nix/home/homebrew-trust.nix) that the system layer's
+# `brew bundle` reads; a fresh `brew bundle` hard-fails on an untrusted tap, so
+# the trust files must exist first.
+bash "$(dirname "${BASH_SOURCE[0]}")/activate-home.sh"
+
 # darwin-rebuild is not on PATH yet, so run it through `nix run`. The flake ref
 # is pinned explicitly (not the `nix-darwin` registry alias) so bootstrapping
 # does not depend on the global flake registry; keep it in sync with the
@@ -29,8 +39,3 @@ run_with_relaxed_sudo sudo "$nix" \
   --extra-substituters "$PUBLIC_SUBSTITUTERS" \
   --extra-trusted-public-keys "$PUBLIC_KEYS" \
   run github:LnL7/nix-darwin -- switch --flake "$REPO#default"
-
-# home-manager is standalone (not a nix-darwin module), so activate it
-# separately. The home step is shared with the Linux bootstrap path, so it lives
-# in activate-home.sh (public caches, host-derived flake target).
-bash "$(dirname "${BASH_SOURCE[0]}")/activate-home.sh"

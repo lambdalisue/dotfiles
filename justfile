@@ -11,8 +11,11 @@ role := "default"
 # `arch()` already normalizes to the Nix system token (aarch64 / x86_64).
 hm := arch() + if os() == "macos" { "-darwin" } else { "-linux" }
 
-# Activate the whole configuration for this machine (system + home).
-switch: system home
+# Activate the whole configuration for this machine (home + system).
+# home runs first: it generates the Homebrew trust.json that the system layer's
+# `brew bundle` reads, and brew hard-fails on an untrusted tap (e.g. right after
+# a new tap is added to nix/homebrew-taps.nix).
+switch: home system
 
 # Activate the macOS system layer (nix-darwin). No-op off macOS.
 # Delegates to scripts/switch.sh so the repeated Homebrew sudo prompts collapse

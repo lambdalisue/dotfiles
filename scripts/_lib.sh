@@ -20,10 +20,9 @@ REPO="$(cd "$_LIB_DIR/.." && pwd)"
 PUBLIC_SUBSTITUTERS="https://arto.cachix.org"
 PUBLIC_KEYS="arto.cachix.org-1:yaH0JQomRJTosIcTh2xZPKBEny41D7h6QUePYQzWYqc="
 
-# Third-party Homebrew taps used by nix/darwin/homebrew.nix. Homebrew refuses to
-# load formulae from untrusted taps, so they are trusted before activation runs
-# `brew bundle`. Keep in sync with the taps declared there.
-TAPS="k1low/tap barutsrb/tap arto-app/tap cedriceugeni/portkiller"
+# Third-party Homebrew taps are trusted declaratively by home-manager
+# (nix/home/homebrew-trust.nix), generated from nix/homebrew-taps.nix, so there
+# is no tap list to maintain here.
 
 log() { echo "==> $*"; }
 

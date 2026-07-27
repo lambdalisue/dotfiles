@@ -12,6 +12,8 @@
     ./shell.nix
     ./git.nix
     ./gh.nix
+    # Homebrew tap trust; self-gates to Darwin (no Homebrew off macOS).
+    ./homebrew-trust.nix
   ]
   # launchd is macOS-only; its home-manager module asserts Darwin, so only
   # pull it in there. Linux login items are managed by other mechanisms.

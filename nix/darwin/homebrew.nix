@@ -16,17 +16,9 @@
       extraFlags = [ "--verbose" ];
     };
 
-    taps = [
-      "k1low/tap"
-      # OmniWM ships only from its author's tap, not homebrew/cask. Without this
-      # tap `brew` cannot find the cask and reports "No available formula with
-      # the name omniwm".
-      "barutsrb/tap"
-      # Arto is distributed only from its author's tap, not homebrew/cask.
-      "arto-app/tap"
-      # PortKiller (CedricEugeni's native menubar app) ships from its own tap.
-      "cedriceugeni/portkiller"
-    ];
+    # Shared with nix/home/homebrew-trust.nix so every tapped source is also
+    # trusted; see nix/homebrew-taps.nix for why each tap is needed.
+    taps = import ../homebrew-taps.nix;
 
     # Formulae that are macOS-specific or not available in nixpkgs
     brews = [
