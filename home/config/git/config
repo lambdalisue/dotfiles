@@ -54,11 +54,22 @@
 [include]
   path = ~/.gitconfig.local
 
+; The empty helper line is load-bearing: the system gitconfig that ships with
+; the Nix git package sets credential.helper=osxkeychain for every URL, and
+; helpers run in configuration order, so the keychain would answer with a stale
+; token before gh is ever asked. Resetting the list here scopes that reset to
+; GitHub and leaves osxkeychain in place for every other host.
+;
+; `gh auth git-credential` is deliberately not used: it only ever answers for
+; the account that happens to be active, and two accounts are logged in here.
+; Asking for the token by name keeps the identity pinned to the URL instead.
 [credential "https://github.com"]
-  helper = !gh auth git-credential
+  helper =
+  helper = "!f() { test \"$1\" = get || exit 0; echo username=lambdalisue; echo password=\"$(gh auth token -h github.com -u lambdalisue)\"; }; f"
 
 [credential "https://gist.github.com"]
-  helper = !gh auth git-credential
+  helper =
+  helper = "!f() { test \"$1\" = get || exit 0; echo username=lambdalisue; echo password=\"$(gh auth token -h github.com -u lambdalisue)\"; }; f"
 
 [wt]
   nocopy = dist/
