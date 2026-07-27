@@ -27,6 +27,7 @@ maxTotalBytes = 67108864
 defaultSplitRatio = 1.0
 moveToRootStable = false
 singleWindowAspectRatio = "fill"
+singleWindowFit = "fill"
 smartSplit = true
 splitWidthMultiplier = 1.0
 useGlobalGaps = true
@@ -76,17 +77,20 @@ rehideIntervalSeconds = 5.0
 
 [mouseWarp]
 constrainToArrangement = false
-enabled = false
+enabled = true
 margin = 1
 
 [niri]
 alwaysCenterSingleColumn = true
 centerFocusedColumn = "never"
 columnWidthPresets = [0.3333333333333333, 0.5, 0.6666666666666666]
+containerPrimarySpanPresets = [0.3333333333333333, 0.5, 0.6666666666666666]
 defaultColumnWidth = 0.5
 infiniteLoop = false
 maxVisibleColumns = 2
 singleWindowAspectRatio = "fill"
+singleWindowFit = "fill"
+visibleContainerCount = 2
 
 [overview]
 zoom = 0.75
@@ -128,7 +132,7 @@ position = "center"
 widthPercent = 50.0
 
 [routing]
-mode = "macOS"
+mode = "custom"
 
 [statusBar]
 showAppNames = false
@@ -154,6 +158,8 @@ systemStatsButton = false
 windowLevel = "popup"
 xOffset = 0.0
 yOffset = 10.0
+
+[workspaceBar.iconOverrides]
 
 [[appRules]]
 assignToWorkspace = "6"
@@ -575,63 +581,63 @@ id = "moveColumnToIndex.9"
 
 [[hotkeys]]
 binding = "Option+Period"
-id = "cycleColumnWidthForward"
+id = "cycleSizeForward"
 
 [[hotkeys]]
 binding = "Option+Comma"
-id = "cycleColumnWidthBackward"
+id = "cycleSizeBackward"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "cycleWindowWidthForward"
+id = "cycleWindowPrimarySpanForward"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "cycleWindowWidthBackward"
+id = "cycleWindowPrimarySpanBackward"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "cycleWindowHeightForward"
+id = "cycleWindowSecondarySpanForward"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "cycleWindowHeightBackward"
+id = "cycleWindowSecondarySpanBackward"
 
 [[hotkeys]]
-binding = "Control+Option+Return"
-id = "toggleColumnFullWidth"
+binding = "Option+Shift+F"
+id = "toggleContainerFullPrimarySpan"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "expandColumnToAvailableWidth"
+binding = "Control+Option+F"
+id = "expandContainerToAvailablePrimarySpan"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "resetWindowHeight"
+binding = "Control+Option+R"
+id = "resetWindowSecondarySpan"
 
 [[hotkeys]]
 binding = "Option+Minus"
-id = "setColumnWidth.decrease10Percent"
+id = "setContainerPrimarySpan.decrease10Percent"
 
 [[hotkeys]]
 binding = "Option+Equal"
-id = "setColumnWidth.increase10Percent"
+id = "setContainerPrimarySpan.increase10Percent"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "setWindowWidth.decrease10Percent"
+id = "setWindowPrimarySpan.decrease10Percent"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "setWindowWidth.increase10Percent"
+id = "setWindowPrimarySpan.increase10Percent"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "setWindowHeight.decrease10Percent"
+binding = "Option+Shift+Minus"
+id = "setWindowSecondarySpan.decrease10Percent"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "setWindowHeight.increase10Percent"
+binding = "Option+Shift+Equal"
+id = "setWindowSecondarySpan.increase10Percent"
 
 [[hotkeys]]
 binding = "Option+Shift+Equal"
@@ -770,7 +776,7 @@ id = "toggleSystemStats"
 [[monitorRoutingOverrides]]
 gridColumn = 1
 gridRow = 0
-monitorDisplayId = 5
+monitorDisplayUUID = "38EC4F8A-8F56-4DD3-A2B7-C17E2D3F6D06"
 monitorName = "DELL U4025QW"
 
 [[monitorRoutingOverrides]]
@@ -778,6 +784,12 @@ gridColumn = 0
 gridRow = 1
 monitorDisplayId = 5
 monitorName = "PL3272UH"
+
+[[monitorRoutingOverrides]]
+gridColumn = 0
+gridRow = 0
+monitorDisplayUUID = "2A8C4537-B89D-466F-9518-F9340990AA75"
+monitorName = "DELL S2725QS"
 
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
