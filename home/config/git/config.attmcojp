@@ -1,0 +1,7 @@
+; Work identity for github.com/attmcojp repositories. Pulled in from `config`
+; by includeIf, so nothing here applies to personal repositories. The matching
+; credentials are declared unconditionally in `config` instead: they are keyed
+; on the URL, so they need no condition and stay available to commands that run
+; outside a work checkout.
+[user]
+  email = lambdalisue@attm.co.jp

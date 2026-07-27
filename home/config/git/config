@@ -71,6 +71,31 @@
   helper =
   helper = "!f() { test \"$1\" = get || exit 0; echo username=lambdalisue; echo password=\"$(gh auth token -h github.com -u lambdalisue)\"; }; f"
 
+; Work repositories authenticate as the work account. This one is unconditional
+; on purpose: the URL already scopes it, so it cannot reach a personal
+; repository, and loading it always means it applies to bare `ls-remote`-style
+; commands run from outside a work checkout too.
+[credential "https://github.com/attmcojp"]
+  helper =
+  helper = "!f() { test \"$1\" = get || exit 0; echo username=lambdalisue-attmcojp; echo password=\"$(gh auth token -h github.com -u lambdalisue-attmcojp)\"; }; f"
+
+; The work identity, on the other hand, has to stay conditional — included
+; unconditionally it would override the address above for every repository.
+; Matched two ways so it survives clones outside the ghq tree: gitdir catches
+; the repository before `git clone` has written a remote, hasconfig catches
+; everything already cloned.
+[includeIf "gitdir:~/ghq/github.com/attmcojp/"]
+  path = config.attmcojp
+
+[includeIf "hasconfig:remote.*.url:https://github.com/attmcojp/**"]
+  path = config.attmcojp
+
+[includeIf "hasconfig:remote.*.url:git@github.com:attmcojp/**"]
+  path = config.attmcojp
+
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/attmcojp/**"]
+  path = config.attmcojp
+
 [wt]
   nocopy = dist/
   nocopy = target/
