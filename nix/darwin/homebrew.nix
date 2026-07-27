@@ -40,7 +40,7 @@
       "brave-browser"
       "chatgpt"
       "claude"
-      "claude-code"
+      "claude-code@latest"
       "cleanshot"
       "discord"
       "docker-desktop"
