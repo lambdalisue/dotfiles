@@ -628,11 +628,11 @@ binding = "Unassigned"
 id = "setWindowPrimarySpan.increase10Percent"
 
 [[hotkeys]]
-binding = "Option+Shift+Minus"
+binding = "Unassigned"
 id = "setWindowSecondarySpan.decrease10Percent"
 
 [[hotkeys]]
-binding = "Option+Shift+Equal"
+binding = "Unassigned"
 id = "setWindowSecondarySpan.increase10Percent"
 
 [[hotkeys]]
