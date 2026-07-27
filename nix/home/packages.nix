@@ -10,6 +10,7 @@
   # direnv, fzf: managed in shell.nix via programs.* modules
   home.packages = with pkgs; [
     bash
+    cachix  # pushes to / authenticates against the caches wired up in nix/darwin
     deno  # required by denops.vim
     ffmpeg
     fish
