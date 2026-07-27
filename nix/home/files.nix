@@ -26,6 +26,9 @@ in
     # Darwin entries (from .dotfiles_darwin.tsv)
     "karabiner".source = link "${dotfilesDir}/home/config/karabiner";
     "omniwm".source = link "${dotfilesDir}/home/config/omniwm";
+    # Symlinked out of the store because borders chmod +x's this file on every
+    # launch and silently skips a config it cannot make executable.
+    "borders/bordersrc".source = link "${dotfilesDir}/home/config/borders/bordersrc";
   };
 
   home.file = {

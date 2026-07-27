@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  isDarwin,
+  ...
+}:
 {
   # git, git-lfs: managed in git.nix
   # gh: managed in gh.nix via programs.gh
@@ -22,5 +27,9 @@
     vim
     wget
     zsh
+  ]
+  ++ lib.optionals isDarwin [
+    # Window border highlighter, drawn by a daemon started in launchd.nix.
+    jankyborders
   ];
 }

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # GUI login items, managed declaratively as per-user LaunchAgents under
   # ~/Library/LaunchAgents. macOS "Login Items" (Background Items / SMAppService)
@@ -34,6 +34,22 @@
           "OmniWM"
         ];
         RunAtLoad = true;
+      };
+    };
+
+    # Window border highlighter (JankyBorders). It is a plain long-running
+    # process rather than a GUI app, so it is exec'd directly instead of through
+    # `open` and KeepAlive restarts it if it exits. On launch it forks
+    # ~/.config/borders/bordersrc, which re-invokes bare `borders` to push the
+    # appearance options into this instance — hence PATH must reach the binary,
+    # or the fork dies unnoticed and the borders keep their default look.
+    borders = {
+      enable = true;
+      config = {
+        ProgramArguments = [ "${pkgs.jankyborders}/bin/borders" ];
+        EnvironmentVariables.PATH = "${pkgs.jankyborders}/bin:/usr/bin:/bin";
+        RunAtLoad = true;
+        KeepAlive = true;
       };
     };
 
