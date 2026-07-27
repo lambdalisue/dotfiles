@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   # GitHub CLI and its extensions, managed declaratively.
   #
@@ -16,4 +16,12 @@
       gh-poi # `gh poi`: safely clean up merged local branches
     ];
   };
+
+  # `gh` rewrites config.yml itself — `gh auth login` persists the chosen git
+  # protocol there — and fails with "permission denied" on the read-only store
+  # symlink programs.gh links in. Seed the very same generated file as a writable
+  # copy instead; see nix/home/mutable-files.nix.
+  xdg.configFile."gh/config.yml".enable = false;
+  home.mutableFile."${config.xdg.configHome}/gh/config.yml".source =
+    config.xdg.configFile."gh/config.yml".source;
 }
