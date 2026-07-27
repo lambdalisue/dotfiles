@@ -55,7 +55,8 @@
     "rust-analyzer-lsp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
-    "probitas@probitas-test": true
+    "probitas@probitas-test": true,
+    "swift-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "probitas-test": {
