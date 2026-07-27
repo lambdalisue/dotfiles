@@ -9,6 +9,7 @@
   imports = [
     ./packages.nix
     ./files.nix
+    ./mutable-files.nix
     ./shell.nix
     ./git.nix
     ./gh.nix
