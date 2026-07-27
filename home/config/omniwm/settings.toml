@@ -8,7 +8,7 @@ monitorOrientationOverrides = []
 mode = "automatic"
 
 [borders]
-enabled = true
+enabled = false
 width = 2.0
 
 [borders.color]
@@ -37,7 +37,7 @@ followsMouse = false
 followsWindowToMonitor = false
 lockModifier = "off"
 moveCrossesMonitorAtEdge = true
-moveMouseToFocusedWindow = true
+moveMouseToFocusedWindow = false
 
 [gaps]
 size = 4.0
