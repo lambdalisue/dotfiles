@@ -26,7 +26,6 @@ maxTotalBytes = 67108864
 [dwindle]
 defaultSplitRatio = 1.0
 moveToRootStable = false
-singleWindowAspectRatio = "fill"
 singleWindowFit = "fill"
 smartSplit = true
 splitWidthMultiplier = 1.0
@@ -83,12 +82,9 @@ margin = 1
 [niri]
 alwaysCenterSingleColumn = true
 centerFocusedColumn = "never"
-columnWidthPresets = [0.3333333333333333, 0.5, 0.6666666666666666]
 containerPrimarySpanPresets = [0.3333333333333333, 0.5, 0.6666666666666666]
-defaultColumnWidth = 0.5
+defaultContainerPrimarySpan = 0.5
 infiniteLoop = false
-maxVisibleColumns = 2
-singleWindowAspectRatio = "fill"
 singleWindowFit = "fill"
 visibleContainerCount = 2
 
