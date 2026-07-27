@@ -27,7 +27,9 @@ $ ./scripts/bootstrap.sh
 
 Each step does exactly one thing, is idempotent, and works standalone, so if a
 step fails you can fix it and re-run `bootstrap.sh`, or run just the step you
-need by hand:
+need by hand. A failing step does not stop the run: the remaining steps still
+execute, and `bootstrap.sh` lists everything that failed at the end and exits
+non-zero — so read that summary rather than assuming a clean finish.
 
 | Script                           | What it does                                        |
 | -------------------------------- | --------------------------------------------------- |

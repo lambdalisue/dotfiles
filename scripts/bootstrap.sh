@@ -7,7 +7,12 @@
 #     install Nix and activate home-manager. The numbered macOS steps (Homebrew,
 #     /etc prep, macSKK) do not apply.
 # Each step is standalone and idempotent, so re-running this after a fix is safe,
-# and you can still run any single step by hand when that is all you need.
+# and you can still run any single step by hand when that is all you need. For
+# the same reason a failing step does NOT abort the run: aborting let one broken
+# step (an activation whose `brew bundle` failed) silently skip every step after
+# it, so a machine looked bootstrapped while the tail steps had never run once.
+# Failures are collected and reported at the end instead, and the run exits
+# non-zero. Steps that depend on an earlier one simply fail too and are listed.
 #
 # The default (public-cache) activation path is used. For the private role and
 # its private binary cache, skip this and use ./scripts/activate-private.sh.
@@ -44,9 +49,19 @@ case "$(uname -s)" in
     ;;
 esac
 
+failed=()
 for step in "${steps[@]}"; do
   log "Running ${step#./}"
-  bash "$step"
+  if ! bash "$step"; then
+    failed+=("${step#./}")
+    log "FAILED: ${step#./} — continuing with the remaining steps"
+  fi
 done
+
+if [ ${#failed[@]} -gt 0 ]; then
+  log "Bootstrap finished with failures: ${failed[*]}"
+  log "Fix the cause and re-run this script; every step is idempotent."
+  exit 1
+fi
 
 log "$done_msg Open a new terminal to pick up the changes."
