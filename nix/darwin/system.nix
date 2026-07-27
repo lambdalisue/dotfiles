@@ -83,6 +83,20 @@
       TrackpadThreeFingerDrag = true;
     };
 
+    # Desktop & Stage Manager. All three exist because a tiling window manager
+    # owns the window layout here and macOS's own gestures fight it.
+    WindowManager = {
+      # Clicking the wallpaper must not sweep every window off-screen — with
+      # tiled windows the wallpaper is only ever hit by accident.
+      EnableStandardClickToShowDesktop = false;
+      # Keep desktop icons hidden; files are reached from Finder, not the
+      # wallpaper the tiling layout covers anyway.
+      HideDesktop = true;
+      # Drop the gaps macOS inserts around its own tiled windows, so window
+      # geometry is whatever the tiling manager computed.
+      EnableTiledWindowMargins = false;
+    };
+
     # Keyboard shortcuts (com.apple.symbolichotkeys). Managed declaratively so a
     # macOS update can't silently re-enable a shortcut disabled by hand (e.g.
     # ⌘Space Spotlight, hotkey 64). nix-darwin replaces the AppleSymbolicHotKeys
