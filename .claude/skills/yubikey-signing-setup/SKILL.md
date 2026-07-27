@@ -70,11 +70,14 @@ NEVER run these here: `ykman openpgp reset`, `keytocard`, `passwd`, card
        # GitHub (needs `gh auth login`)
        gpg --armor --export B11731DAB90A2400 > /tmp/gpg-pub.asc
        gh gpg-key add /tmp/gpg-pub.asc
-       # If GitHub already has this key (HTTP 422 "key_id already exists"),
-       # delete then re-add so the new subkey is included:
-       #   gh gpg-key list            # find the key id
-       #   gh gpg-key delete <id>
+       # GitHub rejects the add while it still holds the old copy (HTTP 422,
+       # "one or more subkeys already exist"), so delete then re-add:
+       #   gh gpg-key delete B11731DAB90A2400 --yes
        #   gh gpg-key add /tmp/gpg-pub.asc
+       # `delete` takes the GPG key id, NOT the numeric id from
+       # `gh api user/gpg_keys`; the numeric one fails with "not found or it is
+       # not owned by you". Keep the exported file until the re-add succeeds —
+       # between the two commands the account has no GPG key at all.
 
 ## Notes
 
