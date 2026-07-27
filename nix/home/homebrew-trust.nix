@@ -11,34 +11,47 @@
 #     `sudo --preserve-env=PATH --set-home`, which drops XDG_CONFIG_HOME, so brew
 #     falls back to ~/.homebrew/trust.json.
 #
-# brew ignores an explicit HOMEBREW_USER_CONFIG_HOME (it recomputes the path from
-# XDG_CONFIG_HOME), so the two locations cannot be unified by an env var. Instead
-# we generate one trust.json from the shared tap list and place it at both paths.
-# `brew bundle` only READS these (the nix-darwin Brewfile has no `trusted:`
-# entries that would trigger a write) and the read path does no ownership/symlink
-# checks, so a home-manager store symlink is read fine in both contexts.
+# brew recomputes that path from XDG_CONFIG_HOME on every startup and refuses to
+# let the environment override it, so the two locations cannot be unified by an
+# env var. Instead we generate one trust.json from the shared tap list and seed
+# it at both paths.
 #
-# Trust is declarative: add a tap to nix/homebrew-taps.nix and re-activate — do
-# NOT run `brew trust`. `brew trust`/`brew untrust` would try to rewrite these
-# files and fail (the store target lives under group-writable /nix/store), which
-# is the intended tamper-evident behavior.
+# The seed must be a real writable file, not a store symlink: installing a
+# fully-qualified item (`brew install k1low/tap/git-wt`, and every `<user>/<tap>/`
+# entry in the nix-darwin Brewfile) makes brew record that item in trust.json,
+# and it aborts the install rather than write a trust store it cannot verify as
+# user-owned. Hence home.mutableFile — see nix/home/mutable-files.nix.
+#
+# Trust stays declarative: the tap list is the source of truth and each
+# activation resets both files, discarding whatever brew recorded in between.
+# The per-item entries brew adds are pure bookkeeping; the tap-level trust seeded
+# here is what actually gates loading.
+#
+# The two files drift from each other by design: activation runs without
+# XDG_CONFIG_HOME, so brew's own additions land only in ~/.homebrew/trust.json.
 #
 # Because activation's `brew bundle` consumes this file, home-manager must
 # activate before the nix-darwin system layer (see scripts/06-activate.sh and the
 # `switch` recipe in justfile).
 {
+  config,
   lib,
+  pkgs,
   isDarwin,
   ...
 }:
 let
-  trustJson = builtins.toJSON {
-    trustedtaps = lib.sort (a: b: a < b) (import ../homebrew-taps.nix);
-  };
+  trustJson = pkgs.writeText "homebrew-trust.json" (
+    builtins.toJSON {
+      trustedtaps = lib.sort (a: b: a < b) (import ../homebrew-taps.nix);
+    }
+  );
 in
 lib.mkIf isDarwin {
-  # Read by nix-darwin activation (XDG_CONFIG_HOME dropped by sudo).
-  home.file.".homebrew/trust.json".text = trustJson;
-  # Read by interactive brew (XDG_CONFIG_HOME set).
-  xdg.configFile."homebrew/trust.json".text = trustJson;
+  home.mutableFile = {
+    # Read by nix-darwin activation (XDG_CONFIG_HOME dropped by sudo).
+    "${config.home.homeDirectory}/.homebrew/trust.json".source = trustJson;
+    # Read by interactive brew (XDG_CONFIG_HOME set).
+    "${config.xdg.configHome}/homebrew/trust.json".source = trustJson;
+  };
 }

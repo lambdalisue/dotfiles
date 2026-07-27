@@ -7,7 +7,12 @@
       autoUpdate = true;
       # NOTE: Change to "zap" once Nix-managed packages are confirmed working.
       # "none" is safest for first activation; switch to "zap" after verifying
-      # that all Nix-managed packages are working correctly.
+      # that all Nix-managed packages are working correctly. Two things to check
+      # first: "zap" makes nix-darwin pass `--cleanup --zap`, which Homebrew
+      # rejects without `--force`/`--force-cleanup`/`$HOMEBREW_ASK`, and once
+      # forced the cleanup rewrites trust.json from the Brewfile — which carries
+      # no `trusted:` entries, so it empties the store until home-manager
+      # re-seeds it (see nix/home/homebrew-trust.nix).
       cleanup = "none";
       upgrade = true;
       # Stream each formula/cask's install output (download progress,
