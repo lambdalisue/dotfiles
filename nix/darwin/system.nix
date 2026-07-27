@@ -15,15 +15,15 @@
       # the Dock's app section from it, so anything added by hand is dropped on
       # the next activation.
       persistent-apps = [
-        "/Applications/Ghostty.app"
-        "/Applications/Safari.app"
         "/Applications/Brave Browser.app"
         "/Applications/Google Chrome.app"
+        "/Applications/Safari.app"
         "/System/Applications/Messages.app"
         "/Applications/Spark Desktop.app"
-        "/Applications/Slack.app"
         "/Applications/Calendars.app"
+        "/Applications/Slack.app"
         "/Applications/Discord.app"
+        "/Applications/Ghostty.app"
         "/Applications/Arto.app"
         "/Applications/Obsidian.app"
         "/Applications/Claude.app"
@@ -31,7 +31,6 @@
         "/Applications/Ollama.app"
         "/System/Applications/Photos.app"
         "/Applications/Pixelmator Pro.app"
-        "/System/Applications/Contacts.app"
         "/Applications/Spotify.app"
         "/System/Applications/Music.app"
         "/System/Applications/App Store.app"
