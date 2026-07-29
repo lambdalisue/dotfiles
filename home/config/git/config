@@ -63,7 +63,16 @@
 ; `gh auth git-credential` is deliberately not used: it only ever answers for
 ; the account that happens to be active, and two accounts are logged in here.
 ; Asking for the token by name keeps the identity pinned to the URL instead.
+;
+; useHttpPath is what keeps the per-organization address below reachable from
+; git-lfs. Unless it is set, git-lfs asks the credential machinery for
+; protocol+host only, so a section scoped to a path can never match and the
+; personal token answers for a work repository -- the LFS batch API then 404s
+; ("batch response: Not Found") and checkout dies in the smudge filter. Plain
+; git is unaffected either way, because it always knows the full URL. The
+; helpers here ignore the extra path field, so turning it on costs nothing.
 [credential "https://github.com"]
+  useHttpPath = true
   helper =
   helper = "!f() { test \"$1\" = get || exit 0; echo username=lambdalisue; echo password=\"$(gh auth token -h github.com -u lambdalisue)\"; }; f"
 
