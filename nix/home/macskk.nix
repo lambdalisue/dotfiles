@@ -19,6 +19,9 @@
 # dictionary added from 設定 -> 辞書 is dropped on the next activation — add it
 # to `dictionaries` below instead. macSKK reads its settings at launch, so
 # restart it (or log out) for a change to take effect.
+#
+# The romaji conversion table is a file rather than a preference value, so it is
+# installed into the container alongside the settings — see `kanaRule` below.
 {
   config,
   lib,
@@ -27,7 +30,14 @@
 }:
 let
   domain = "net.mtgto.inputmethod.macSKK";
-  prefs = "${config.home.homeDirectory}/Library/Containers/${domain}/Data/Library/Preferences/${domain}.plist";
+  container = "${config.home.homeDirectory}/Library/Containers/${domain}";
+  prefs = "${container}/Data/Library/Preferences/${domain}.plist";
+  settingsDir = "${container}/Data/Documents/Settings";
+
+  # macSKK scans the Settings folder for names matching kana-rule*.conf and
+  # identifies each table by its file name, which is also what `kanaRule` stores.
+  kanaRuleName = "kana-rule.conf";
+  kanaRuleSource = ../../home/config/macskk/kana-rule.conf;
 
   # Key names and value shapes follow macSKK's UserDefaultsKeys and DictSetting.
   settings = {
@@ -46,6 +56,10 @@ let
 
     # Apps that start in direct (ASCII) input mode instead of kana.
     directModeBundleIdentifiers = [ "com.mitchellh.ghostty" ];
+
+    # Romaji conversion table, named by the file installed below. An empty
+    # string would select the table built into the app instead.
+    kanaRule = kanaRuleName;
   };
 in
 lib.mkIf isDarwin {
@@ -55,6 +69,15 @@ lib.mkIf isDarwin {
       # the domain falls back to ~/Library/Preferences, where macSKK never looks.
       warnEcho "macSKK preferences not found; launch macSKK once, then re-activate."
     else
+      # Copied rather than symlinked: macSKK is sandboxed with no file-access
+      # exception, so a link pointing out of the container reads back as
+      # unreadable. macSKK drops an unreadable table from its list and then
+      # resets `kanaRule` to the built-in one, silently undoing the write below.
+      # Install the table first so the name `kanaRule` refers to already exists.
+      # `install` rather than `cp` because the source is a read-only store file,
+      # which `cp` cannot overwrite on the second activation.
+      run mkdir -p ${lib.escapeShellArg settingsDir}
+      run /usr/bin/install -m 0644 ${kanaRuleSource} ${lib.escapeShellArg "${settingsDir}/${kanaRuleName}"}
       ${lib.concatStringsSep "\n      " (
         lib.mapAttrsToList (
           key: value:
