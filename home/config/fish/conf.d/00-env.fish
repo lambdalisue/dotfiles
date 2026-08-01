@@ -24,16 +24,20 @@ end
 #
 # nixpkgs' OpenSSL carries no CA bundle: it verifies against NIX_SSL_CERT_FILE,
 # falling back to /etc/ssl/certs/ca-certificates.crt. Distributions that keep
-# the bundle elsewhere (Fedora: /etc/pki) leave nix-provided git/curl with no
-# trust anchors at all, and a single-user Nix install only exports the variable
-# from the profile scripts bash reads — fish never sees it. Point it at the
-# first bundle that exists on this host.
+# the bundle elsewhere (Fedora 44 extracts it under /etc/pki/ca-trust and no
+# longer ships the legacy compat path) leave nix-provided git/curl with no trust
+# anchors at all, and a single-user Nix install only exports the variable from
+# the profile scripts bash reads — fish never sees it. Point it at the first
+# bundle that exists on this host, preferring the system store so locally added
+# CAs keep working, with the Nix-provided cacert as the last resort.
 if not set -q NIX_SSL_CERT_FILE
     for ca_bundle in \
         /etc/ssl/certs/ca-certificates.crt \
+        /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem \
         /etc/pki/tls/certs/ca-bundle.crt \
         /etc/ssl/ca-bundle.pem \
-        /etc/ssl/cert.pem
+        /etc/ssl/cert.pem \
+        $HOME/.nix-profile/etc/ssl/certs/ca-bundle.crt
         if test -e $ca_bundle
             set -gx NIX_SSL_CERT_FILE $ca_bundle
             set -q SSL_CERT_FILE; or set -gx SSL_CERT_FILE $ca_bundle

@@ -11,6 +11,7 @@
   home.packages = with pkgs; [
     _1password-cli  # the `op` command; the desktop app itself is a Homebrew cask
     bash
+    cacert  # CA bundle the shells fall back to when the distro keeps none where nixpkgs looks
     cachix  # pushes to / authenticates against the caches wired up in nix/darwin
     codex  # the `codex` coding agent; its ~/.codex config is symlinked in files.nix
     deno  # required by denops.vim
