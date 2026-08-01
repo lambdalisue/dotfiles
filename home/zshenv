@@ -5,3 +5,25 @@
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export ZDOTDIR=${XDG_CONFIG_HOME}/zsh
+
+# nixpkgs' OpenSSL carries no CA bundle: it verifies against
+# NIX_SSL_CERT_FILE, falling back to /etc/ssl/certs/ca-certificates.crt.
+# Distributions that keep the bundle elsewhere (Fedora: /etc/pki) leave
+# nix-provided git/curl with no trust anchors at all, and a single-user Nix
+# install only exports the variable from the profile scripts bash reads — zsh
+# never sees it. Point it at the first bundle that exists on this host.
+if [[ -z ${NIX_SSL_CERT_FILE:-} ]]; then
+  for _ca_bundle in \
+    /etc/ssl/certs/ca-certificates.crt \
+    /etc/pki/tls/certs/ca-bundle.crt \
+    /etc/ssl/ca-bundle.pem \
+    /etc/ssl/cert.pem
+  do
+    if [[ -e ${_ca_bundle} ]]; then
+      export NIX_SSL_CERT_FILE=${_ca_bundle}
+      export SSL_CERT_FILE=${SSL_CERT_FILE:-${_ca_bundle}}
+      break
+    fi
+  done
+  unset _ca_bundle
+fi
