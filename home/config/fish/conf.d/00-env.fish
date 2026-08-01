@@ -29,7 +29,8 @@ end
 # anchors at all, and a single-user Nix install only exports the variable from
 # the profile scripts bash reads — fish never sees it. Point it at the first
 # bundle that exists on this host, preferring the system store so locally added
-# CAs keep working, with the Nix-provided cacert as the last resort.
+# CAs keep working, with the profile's own nss-cacert (installed by the Nix
+# installer) as the last resort.
 if not set -q NIX_SSL_CERT_FILE
     for ca_bundle in \
         /etc/ssl/certs/ca-certificates.crt \

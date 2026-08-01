@@ -6,12 +6,16 @@
 }:
 {
   # git, git-lfs: managed in git.nix
+  # cacert: deliberately absent — the Nix installer already puts nss-cacert in
+  #   ~/.nix-profile, and home-manager-path installs into that same profile, so
+  #   adding it here makes the profile build fail on a conflicting
+  #   etc/ssl/certs/ca-bundle.crt. The shells fall back to the profile's own
+  #   bundle instead (see fish conf.d/00-env.fish).
   # gh: managed in gh.nix via programs.gh
   # direnv, fzf: managed in shell.nix via programs.* modules
   home.packages = with pkgs; [
     _1password-cli  # the `op` command; the desktop app itself is a Homebrew cask
     bash
-    cacert  # CA bundle the shells fall back to when the distro keeps none where nixpkgs looks
     cachix  # pushes to / authenticates against the caches wired up in nix/darwin
     codex  # the `codex` coding agent; its ~/.codex config is symlinked in files.nix
     deno  # required by denops.vim

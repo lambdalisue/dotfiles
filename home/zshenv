@@ -14,7 +14,7 @@ export ZDOTDIR=${XDG_CONFIG_HOME}/zsh
 # install only exports the variable from the profile scripts bash reads — zsh
 # never sees it. Point it at the first bundle that exists on this host,
 # preferring the system store so locally added CAs keep working, with the
-# Nix-provided cacert as the last resort.
+# profile's own nss-cacert (installed by the Nix installer) as the last resort.
 if [[ -z ${NIX_SSL_CERT_FILE:-} ]]; then
   for _ca_bundle in \
     /etc/ssl/certs/ca-certificates.crt \
