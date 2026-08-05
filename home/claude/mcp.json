@@ -1,52 +1,11 @@
 {
   "mcpServers": {
-    "context7": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp@latest"
-      ]
-    },
-    "grafana:unofficial-national-economy-production": {
-      "command": "uvx",
-      "args": [
-        "mcp-grafana"
-      ],
-      "env": {
-        "GRAFANA_URL": "https://lambdalisue.grafana.net",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${UNOFFICIAL_NATIONAL_ECONOMY_PRODUCTION_GRAFANA_SERVICE_ACCOUNT_TOKEN}"
-      }
-    },
-    "grafana:arrove-production": {
-      "command": "uvx",
-      "args": [
-        "mcp-grafana"
-      ],
-      "env": {
-        "GRAFANA_URL": "https://monitor.arrove.jp",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${ARROVE_PRODUCTION_GRAFANA_SERVICE_ACCOUNT_TOKEN}"
-      }
-    },
-    "grafana:arrove-staging": {
-      "command": "uvx",
-      "args": [
-        "mcp-grafana"
-      ],
-      "env": {
-        "GRAFANA_URL": "https://monitor.staging.arrove.jp",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${ARROVE_STAGING_GRAFANA_SERVICE_ACCOUNT_TOKEN}"
-      }
-    },
     "playwright": {
       "command": "npx",
       "args": [
         "-y",
         "@playwright/mcp@latest"
       ]
-    },
-    "deepwiki": {
-      "type": "http",
-      "url": "https://mcp.deepwiki.com/mcp"
     }
   }
 }

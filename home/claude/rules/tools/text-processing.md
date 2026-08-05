@@ -10,6 +10,12 @@ stripping quoted strings and comments and splitting on command separators — so
 mere mention (a `grep` pattern, a filename like `parsed`, a comment, a quoted
 string) is not blocked. Real invocations, including after a pipe or `xargs`, are.
 
+**Reading a line range is not text processing.** `sed -n '100,140p' file` is
+blocked by the hook, and rewriting it as a perl one-liner is the wrong fix —
+use the **Read tool with `offset` / `limit`** (it also gives line numbers).
+Reach for `perl -ne 'print if $. >= A && $. <= B'` only when the range must be
+produced *inside* a shell pipeline.
+
 | Instead of | Use |
 | --- | --- |
 | `sed 's/foo/bar/g' file` | `perl -pe 's/foo/bar/g' file` |

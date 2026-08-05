@@ -7,3 +7,7 @@ gh api -X PATCH repos/{owner}/{repo}/issues/{number} --field type={type}
 ```
 
 Determine the appropriate type (e.g., `Feature`, `Bug`) from the issue content and set it immediately after creation.
+
+If the API answers `Validation Failed` for the `type` field, that repository's
+organization has not defined the type — report it and move on. Do NOT retry
+with alternative type names.

@@ -34,3 +34,32 @@ Do NOT hand-roll `git worktree add`, pick ad-hoc paths, or `mkdir` a
 base directory yourself — `git wt` owns path layout, branch tracking,
 and configured file-copy behavior. This applies even when a skill or
 workflow proposes a raw `git worktree add`; prefer `git wt`.
+
+## Working in the Worktree — Switch the Session, Don't `cd` Every Call
+
+The shell cwd resets to the session directory after every Bash call — a `cd`
+does NOT carry over. Prefixing `cd <worktree> && …` onto every call is waste,
+and a *relative* `cd` (`cd apps/api-duo`) fails outright, because cwd is not
+where the previous call left it.
+
+After `git wt <branch>`, switch the session into it once:
+
+- `EnterWorktree` with **`path: <the .wt/<branch> path>`** — that worktree is
+  already in `git worktree list`, so it is accepted, and the cwd reset target
+  becomes the worktree. This rule is the explicit authorization the tool
+  requires.
+- NEVER pass `name:` — that creates a fresh worktree under
+  `.claude/worktrees/`, bypassing `git wt` and its path layout.
+- One switch per session: re-entering a different `.wt/` path later is
+  rejected (a second switch must target `.claude/worktrees/`). Leave with
+  `ExitWorktree(action: "keep")` — it never removes a `path:`-entered worktree.
+
+Until the session is switched, use **absolute paths** or a tool-native
+directory flag (`git -C`, `just --justfile`, `cargo --manifest-path`) — never
+a bare relative `cd`.
+
+## Waiting
+
+Foreground `sleep` is blocked by the harness. To wait for a condition, use
+`Bash(run_in_background)` with an `until` loop, or `Monitor` — whose deadline
+parameter is `timeout_ms`, not `timeout`.

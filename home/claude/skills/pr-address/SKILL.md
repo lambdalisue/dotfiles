@@ -61,9 +61,11 @@ there is nothing to address in Japanese and **STOP**.
 
 Skip this step if Step 1 found no unresolved comments.
 
-Invoke the Skill tool with `skill: deal-review`, passing this skill's
-`context` argument through as-is. This implements fixes, replies to
-threads, and resolves them.
+`deal-review` is user-invocation-only (`disable-model-invocation`), so the
+Skill tool cannot launch it — the call is rejected. Instead: Read
+`~/.claude/skills/deal-review/SKILL.md` and follow its procedure inline,
+treating this skill's `context` argument as its `context`. This implements
+fixes, replies to threads, and resolves them.
 
 ### Step 4: /git-commit
 

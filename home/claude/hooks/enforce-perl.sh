@@ -44,6 +44,10 @@ if CMD="$command" perl -e '
 
 Per ~/.claude/rules/tools/text-processing.md, batch text operations should use perl.
 
+Reading a line range? Do NOT reach for a perl one-liner — use the Read tool:
+  ❌ sed -n '100,140p' file.txt
+  ✅ Read(file_path="file.txt", offset=100, limit=41)   # no shell at all
+
 Examples:
   ❌ sed 's/foo/bar/g' file.txt
   ✅ perl -pe 's/foo/bar/g' file.txt
