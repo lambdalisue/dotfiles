@@ -7,7 +7,9 @@
       "Bash(git reset:*)",
       "Bash(git restore:*)",
       "Bash(git backup:*)",
-      "Bash(git branch backup/:*)"
+      "Bash(git branch backup/:*)",
+      "EnterWorktree",
+      "ExitWorktree"
     ],
     "defaultMode": "auto"
   },
@@ -56,7 +58,8 @@
     "frontend-design@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
     "probitas@probitas-test": true,
-    "swift-lsp@claude-plugins-official": true
+    "swift-lsp@claude-plugins-official": true,
+    "cclens@cclens": true
   },
   "extraKnownMarketplaces": {
     "probitas-test": {
@@ -67,9 +70,10 @@
     },
     "cclens": {
       "source": {
-        "source": "directory",
-        "path": "/Users/alisue/ghq/github.com/lambdalisue/cclens"
-      }
+        "source": "github",
+        "repo": "lambdalisue/cclens"
+      },
+      "autoUpdate": true
     }
   },
   "effortLevel": "high",
