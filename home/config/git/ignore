@@ -25,4 +25,5 @@ Desktop.ini
 # Git
 .worktrees
 .wt
+.claude/worktrees
 

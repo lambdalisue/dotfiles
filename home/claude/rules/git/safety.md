@@ -63,5 +63,6 @@ branch instead.
 
 ## Stay in Worktree Directory
 
-If starting in `.wt/{branch}/` (or any worktree path), ALL operations
-stay there. Use absolute paths to inspect root state without leaving.
+If starting in `.claude/worktrees/{branch}/` (or any worktree path), ALL
+operations stay there. Use absolute paths to inspect root state without
+leaving.

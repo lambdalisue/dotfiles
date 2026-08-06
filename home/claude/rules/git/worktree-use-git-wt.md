@@ -24,7 +24,10 @@ When creating a git worktree, ALWAYS use the `git wt` subcommand
 (the `git-wt` helper on PATH) rather than raw `git worktree add`.
 
 - Create/switch: `git wt <branch>` — creates the worktree and branch
-  under the configured `wt.basedir` (default `.wt/<branch>` in-repo).
+  under the configured `wt.basedir`. The global git config sets
+  `wt.basedir = .claude/worktrees`, so worktrees land at
+  `.claude/worktrees/<branch>` in-repo — the one location Claude Code's
+  `EnterWorktree` accepts without its hard-coded relocation prompt.
 - Different branch name: `git wt -b <branch> <worktree>`.
 - From a start-point: `git wt <branch> <start-point>` (e.g. `origin/main`).
 - Delete (safe): `git wt -d <branch|worktree|path>...`.
@@ -44,15 +47,15 @@ where the previous call left it.
 
 After `git wt <branch>`, switch the session into it once:
 
-- `EnterWorktree` with **`path: <the .wt/<branch> path>`** — that worktree is
-  already in `git worktree list`, so it is accepted, and the cwd reset target
-  becomes the worktree. This rule is the explicit authorization the tool
-  requires.
-- NEVER pass `name:` — that creates a fresh worktree under
-  `.claude/worktrees/`, bypassing `git wt` and its path layout.
-- One switch per session: re-entering a different `.wt/` path later is
-  rejected (a second switch must target `.claude/worktrees/`). Leave with
-  `ExitWorktree(action: "keep")` — it never removes a `path:`-entered worktree.
+- `EnterWorktree` with **`path: <the .claude/worktrees/<branch> path>`** —
+  that worktree is already in `git worktree list`, so it is accepted, and the
+  cwd reset target becomes the worktree. This rule is the explicit
+  authorization the tool requires.
+- NEVER pass `name:` — that creates a fresh worktree with a random-ish
+  branch, bypassing `git wt` (branch naming, file-copy behavior).
+- Leave with `ExitWorktree(action: "keep")` — it never removes a
+  `path:`-entered worktree. Switching to another `.claude/worktrees/` path
+  later is allowed.
 
 Until the session is switched, use **absolute paths** or a tool-native
 directory flag (`git -C`, `just --justfile`, `cargo --manifest-path`) — never

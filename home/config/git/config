@@ -106,6 +106,10 @@
   path = config.attmcojp
 
 [wt]
+  # Keep worktrees under .claude/worktrees so Claude Code's EnterWorktree
+  # accepts them without the hard-coded relocation prompt (paths outside
+  # .claude/worktrees/ always ask, regardless of permission rules).
+  basedir = .claude/worktrees
   nocopy = dist/
   nocopy = target/
   nocopy = node_modules/
