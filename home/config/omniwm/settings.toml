@@ -52,6 +52,7 @@ top = 0.0
 animationsEnabled = true
 defaultLayoutType = "niri"
 hotkeysEnabled = true
+hyperKeyModifiers = "Control+Option+Shift+Command"
 ipcEnabled = false
 preventSleepEnabled = false
 systemHyperTrigger = "None"
@@ -441,6 +442,22 @@ id = "moveWorkspaceToMonitor.up"
 [[hotkeys]]
 binding = "Unassigned"
 id = "moveWorkspaceToMonitor.down"
+
+[[hotkeys]]
+binding = "Option+Shift+Left Arrow"
+id = "moveWindowToMonitor.left"
+
+[[hotkeys]]
+binding = "Option+Shift+Right Arrow"
+id = "moveWindowToMonitor.right"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveWindowToMonitor.up"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveWindowToMonitor.down"
 
 [[hotkeys]]
 binding = "Option+Return"
