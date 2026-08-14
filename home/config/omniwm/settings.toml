@@ -416,7 +416,7 @@ binding = "Unassigned"
 id = "expelWindowFromColumn"
 
 [[hotkeys]]
-binding = "Option+Tab"
+binding = "Unassigned"
 id = "focusMonitorNext"
 
 [[hotkeys]]
@@ -794,7 +794,7 @@ binding = "Option+Grave"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]
-binding = "Option+Command+Delete"
+binding = "Option+Tab"
 id = "toggleWorkspaceLayout"
 
 [[hotkeys]]
@@ -866,7 +866,7 @@ type = "main"
 [[workspaces]]
 displayName = "🥈"
 id = "5953F2BF-A378-4266-91B2-287174C4FA4D"
-layoutType = "dwindle"
+layoutType = "niri"
 name = "6"
 
 [workspaces.monitorAssignment]
