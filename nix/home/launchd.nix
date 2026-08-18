@@ -19,10 +19,10 @@
       };
     };
 
-    # Tiling window manager. Unlike AeroSpace, OmniWM has no built-in
-    # start-at-login and does not self-register a login item, so it is started
-    # here. `open -g` launches it in the background without stealing focus (it
-    # runs as an accessory app with no Dock icon) and reads
+    # Tiling window manager. OmniWM has no built-in start-at-login and does
+    # not self-register a login item, so it is started here. `open -g`
+    # launches it in the background without stealing focus (it runs as an
+    # accessory app with no Dock icon) and reads
     # ~/.config/omniwm/settings.toml.
     omniwm = {
       enable = true;

@@ -89,8 +89,8 @@ The repository primarily manages configurations for:
 - **Shell**: Zsh configuration in `home/config/zsh/` and `home/zshenv`
 - **Claude Code**: Rules, skills, commands, and agents in `home/claude/`
 - **Karabiner** (macOS): Keyboard customization in `home/config/karabiner/`
-- **Window Managers**: AeroSpace and borders (macOS)
-- **Terminal Emulators**: Alacritty, Ghostty
+- **Window Managers**: OmniWM and borders (macOS)
+- **Terminal Emulators**: Ghostty
 
 ## Making Changes
 

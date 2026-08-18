@@ -14,6 +14,4 @@
   "barutsrb/tap"
   # Arto is distributed only from its author's tap, not homebrew/cask.
   "arto-app/tap"
-  # PortKiller (CedricEugeni's native menubar app) ships from its own tap.
-  "cedriceugeni/portkiller"
 ]
