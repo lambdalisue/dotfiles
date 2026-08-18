@@ -35,6 +35,7 @@
     uv
     vim
     wget
+    zat  # code outline viewer; the `zat` rule in home/claude/rules/tools tells agents to reach for it first
     zsh
   ]
   ++ lib.optionals isDarwin [
