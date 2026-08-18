@@ -8,8 +8,7 @@
       "Bash(git restore:*)",
       "Bash(git backup:*)",
       "Bash(git branch backup/:*)",
-      "EnterWorktree",
-      "ExitWorktree"
+      "EnterWorktree"
     ],
     "defaultMode": "auto"
   },
@@ -77,7 +76,6 @@
     }
   },
   "effortLevel": "high",
-  "advisorModel": "opus",
   "tui": "default",
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
