@@ -10,3 +10,8 @@ home/config/nix/netrc
 # .claude/skills/. CLAUDE.md is the source of truth; keep the copies out of git.
 /AGENTS.md
 /.agents/
+
+# OmniWM rescue copies: written next to settings.toml when the app cannot
+# decode it (.corrupt*) or before a schema migration (.pre-v*). Transient.
+home/config/omniwm/settings.toml.corrupt*
+home/config/omniwm/settings.toml.pre-v*
