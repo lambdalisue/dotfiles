@@ -8,10 +8,13 @@ counter-evidence.
 ## Two reasons a real command is missing from your view
 
 1. **`disable-model-invocation: true`** — these are excluded from the
-   model-facing listing so they only run on explicit user invocation.
-   Currently: `cc-add`, `code-review-codex-loop`, `deal-review`,
-   `doc-review-codex-loop`, `git-worktree`, `pr-address`, `pr-create`,
-   `pr-update`.
+   model-facing listing so they only run on explicit user invocation:
+   `code-review-codex-loop`, `deal-review`, `doc-review-codex-loop`,
+   `git-worktree`, `pr-address`, `pr-create`, `pr-update`.
+
+   That list lives in the frontmatter, not here, so re-derive it rather than
+   trusting this line: `grep -l 'disable-model-invocation: true'
+   ~/.claude/skills/*/SKILL.md`.
 2. **The command was typed inline** — the harness expands a slash command into
    a `<command-message>` block only when the message *is* the command. Written
    mid-sentence (`push & /pr-create`) it arrives as plain text, unexpanded.
