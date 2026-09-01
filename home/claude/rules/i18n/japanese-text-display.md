@@ -1,3 +1,6 @@
+---
+paths: "**/*.rs,**/*.ts,**/*.tsx,**/*.mts,**/*.cts,**/*.js,**/*.jsx,**/*.vue,**/*.svelte,**/*.css,**/*.scss,**/*.html,**/*.py,**/*.swift,**/*.kt"
+---
 # Displaying Japanese Text Correctly in UI
 
 When implementing UI that includes Japanese text, consult
