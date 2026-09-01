@@ -31,3 +31,24 @@ or restructure the sentence; use `<strong>` when a space is unacceptable.
 ## When editing existing files
 
 Fix violations you touch; do not reflow untouched lines just for this rule.
+
+## This rule governs what you WRITE, never what you MATCH
+
+It applies to `new_string`, to new file content, and to prose you compose. It
+does **not** apply to anything that has to match bytes already on disk:
+`old_string` in Edit, and every search pattern (Grep, `rg`, `perl -ne`).
+
+Copy those verbatim from the file as you read it. Never "fix" the emphasis
+while building one, and never write the form the rest of the repository
+prefers — write the form **this line actually has**:
+
+| On disk | `old_string` must be |
+| --- | --- |
+| `/// **暫定値である。**` | `/// **暫定値である。**` |
+| `## 何が言えないか <strong>…</strong>` | `## 何が言えないか <strong>…</strong>` |
+
+A repository often uses one form overwhelmingly and keeps a residue of the
+other — a file that is 94% `<strong>` still has `**` lines, and reconstructing
+`old_string` in the majority form is the single most common way an Edit fails
+with "String to replace not found". Convert the emphasis in `new_string` if the
+rule calls for it; leave `old_string` alone.
