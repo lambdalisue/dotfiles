@@ -40,11 +40,6 @@ workflow proposes a raw `git worktree add`; prefer `git wt`.
 
 ## Working in the Worktree — Switch the Session, Don't `cd` Every Call
 
-The shell cwd resets to the session directory after every Bash call — a `cd`
-does NOT carry over. Prefixing `cd <worktree> && …` onto every call is waste,
-and a *relative* `cd` (`cd apps/api-duo`) fails outright, because cwd is not
-where the previous call left it.
-
 After `git wt <branch>`, switch the session into it once:
 
 - `EnterWorktree` with **`path: <the .claude/worktrees/<branch> path>`** —
@@ -57,9 +52,41 @@ After `git wt <branch>`, switch the session into it once:
   `path:`-entered worktree. Switching to another `.claude/worktrees/` path
   later is allowed.
 
-Until the session is switched, use **absolute paths** or a tool-native
-directory flag (`git -C`, `just --justfile`, `cargo --manifest-path`) — never
-a bare relative `cd`.
+## The Shell cwd Resets Between Calls — Worktree or Not
+
+The shell cwd resets to the session directory after every Bash call. A `cd`
+does NOT carry over, in any session. Prefixing `cd <dir> && …` onto every call
+is waste, and a path relative to a *previous* call's `cd` either fails outright
+on a directory that exists —
+
+    (eval):cd:1: no such file or directory: references/knowtus
+
+— or silently doubles the prefix: `apps/api-duo/apps/api-duo/…`.
+
+- Address files by **absolute path**, or with a tool-native directory flag:
+  `git -C <dir>`, `cargo --manifest-path`, `just --justfile`, `rg <abs path>`.
+- Never a bare relative `cd`. If one is unavoidable, `cd` to an **absolute**
+  target in the same call as the command.
+
+## One Bash Call, One Simple Command — Inside an Entered Worktree
+
+A session that has entered a worktree refuses any Bash command it cannot prove
+statically stays inside that worktree:
+
+    This session is isolated in the worktree …, but this command is too
+    complex to verify that it stays inside the worktree
+
+The check runs *before* anything executes, so a rejected call buys nothing and
+costs the turn. It rejects heredocs, `$(…)`, `for` / `while` loops, and
+multi-statement chains. Inside an entered worktree:
+
+- **One command per call.** No `;` chains, no loops, no leading `VAR=… cmd`.
+- **No heredoc.** To run a script, Write it into the scratchpad first, then run
+  `python3 <absolute scratchpad path>/x.py` as its own call. Same for
+  `gh api --input -`: write the payload to a file and pass it by path.
+- **No command substitution.** Need a timestamp, a branch name, a git rev? Get
+  it in one call, use the literal value in the next.
+- **A directory flag, not `cd`** (`git -C`, `cargo --manifest-path`).
 
 ## Waiting
 

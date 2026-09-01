@@ -53,8 +53,15 @@ ALWAYS stage files explicitly by name.
 ALWAYS backup before: `git restore`, `git reset`, `git checkout` (with
 uncommitted changes), file deletion of uncommitted work.
 
-Prefer `git backup "<reason>"` (alias) when available; otherwise
-`git branch backup/$(date +%s) HEAD`.
+Use `git backup "<reason>"`. The `git-backup` helper is installed at
+`~/.local/bin/git-backup`, so it is available — call it **alone**.
+
+Never chain the defensive fallback `git backup … || git branch
+backup/$(date +%s) HEAD`. The `$(…)` makes the whole command unverifiable to
+the worktree isolation check, which rejects it before anything runs, so the
+"fallback" never executes — it only costs the turn. If `git backup` is ever
+genuinely missing, read the timestamp in one call and create
+`git branch backup/<literal timestamp> HEAD` in the next.
 
 ## Git Stash Forbidden
 
