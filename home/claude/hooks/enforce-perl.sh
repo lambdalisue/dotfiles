@@ -60,13 +60,16 @@ if CMD="$command" perl -e '
         my $rest = $1;
         my $script;
         if    ($rest =~ /^\x27([^\x27]*)\x27(.*)$/s)  { $script = $1; $rest = $2; }
-        elsif ($rest =~ /^\x22([^\x22\\]*)\x22(.*)$/s) { $script = $1; $rest = $2; }
+        elsif ($rest =~ /^\x22((?:\\.|[^\x22\\])*)\x22(.*)$/s) { $script = $1; $rest = $2; }
         elsif ($rest =~ /^(\S+)(.*)$/s)                { $script = $1; $rest = $2; }
         else { return 0; }
-        # only line addresses and the p command: 5p  1,80p  1,$p  10,20p;40,50p
-        return 0 unless $script =~ /^\s*\d+(?:,(?:\d+|\$))?p(?:\s*;\s*\d+(?:,(?:\d+|\$))?p)*\s*$/;
+        # only addresses and the p command. An address is a line number, $,
+        # or a /regex/:  5p  1,80p  1,$p  10,20p;40,50p  /start/,/end/p  /x/,$p
+        my $addr = qr{(?:\d+|\$|/(?:\\.|[^/\\])*/)};
+        return 0 unless $script =~ /^\s*$addr(?:,$addr)?p(?:\s*;\s*$addr(?:,$addr)?p)*\s*$/;
         return 0 if $rest =~ /(?:^|\s)-/;   # any further option (-i, -e, ...)
-        return 0 if $rest =~ /[`\$]/;       # substitution in the operands
+        # A $(...) or `...` operand needs no check here: the split above already
+        # made the inner command its own segment, so it is judged on its own.
         return 1;
     }
 
@@ -96,9 +99,14 @@ Examples:
   ❌ sed -i 's/old/new/g' *.txt
   ✅ perl -pi -e 's/old/new/g' *.txt
 
-Reading a line range is NOT text processing and is not blocked:
-  ✅ sed -n '100,140p' file.txt        # allowed
+Reading a range is NOT text processing and is not blocked:
+  ✅ sed -n '100,140p' file.txt              # allowed
+  ✅ sed -n '/^## Foo/,/^## Bar/p' file.md   # allowed - regex addresses too
   ✅ Read(file_path="file.txt", offset=100, limit=41)   # preferred - gives line numbers
+
+Field extraction / sums have a perl form with the same shape:
+  ❌ awk -F: '{print $NF}'           ✅ perl -F: -lane 'print $F[-1]'
+  ❌ awk '{s+=$2} END {print s}'     ✅ perl -lane '$s+=$F[1]; END {print $s}'
 
 Please reformulate your command using perl.
 EOF

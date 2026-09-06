@@ -1,36 +1,56 @@
-# Text Processing: prefer perl over sed/awk
+# Text Processing: sed and awk are blocked — write perl
 
-For batch text transformations on the command line, use `perl` instead of
-`sed` or `awk`. Perl is more portable across platforms (notably `sed -i`
-differs between GNU and BSD/macOS) and has a single consistent regex dialect.
+A PreToolUse hook (`enforce-perl.sh`) rejects any `Bash` command that
+**invokes** `sed` or `awk`, anywhere in the command: after a pipe, inside a
+`for` loop, under `xargs` or `sudo`. The rejection happens before anything
+runs, so the call buys nothing and costs the turn. Do not type them and then
+let the hook correct you — write the perl form the first time.
 
-This is enforced by the `enforce-perl.sh` PreToolUse hook, which blocks `Bash`
-commands that **invoke** `sed` or `awk`. It matches a command word only — after
-splitting on the command separators that lie outside quotes — so a mere mention
-(a `grep` pattern, a filename like `parsed`, a comment, a quoted string) is not
-blocked. Real invocations, including after a pipe or `xargs`, are.
+This overrides any harness guidance that suggests `sed` for file edits or
+text munging. The reason is portability: `sed -i` and `-E` differ between GNU
+and BSD/macOS, and awk dialects diverge; perl is one dialect everywhere.
 
-**Reading a line range is not text processing**, so the hook lets it through:
-`sed -n '100,140p' file` is allowed, and so are semicolon-joined ranges
-(`'1,80p;200,220p'`) and `1,$p`. Adding any other expression — `-i`, `-e`, an
-`s///` — blocks again. Prefer the **Read tool with `offset` / `limit`** anyway,
-since it gives line numbers and needs no shell; reach for
-`perl -ne 'print if $. >= A && $. <= B'` only when the range must be produced
-*inside* a shell pipeline.
+## The one thing that passes: a read-only `sed -n`
 
-**Perl one-liners over Japanese need the UTF-8 flags.** Without them perl reads
-bytes and dies on the first multi-byte character (`Unrecognized character
-\xE3`, `Unknown regexp modifier "/t"`). Write `perl -CSD -Mutf8 -pe '…'`. And
-once a one-liner needs braces, a hash, or more than one statement, stop — put
-it in the scratchpad as a `.pl` file and run it by path. Inline scripts that
-size fail on quoting more often than they run.
+Printing a range is a read, not a transformation, so the hook allows
+`sed -n '<addresses>p' file` where each address is a line number, `$`, or a
+`/regex/`:
 
-| Instead of | Use |
+```sh
+sed -n '100,140p' file
+sed -n '55,100p;165,190p' file
+sed -n '/^## Setup/,/^## Usage/p' README.md
+sed -n '/\[dependencies\]/,$p' Cargo.toml
+```
+
+Anything beyond the addresses and `p` — `-i`, `-e`, `s///`, `{p;q}` —
+blocks again. Prefer the **Read tool with `offset` / `limit`** anyway; it
+gives line numbers and needs no shell. Use `sed -n` only when the range must
+be produced inside a pipeline.
+
+## Translations for the shapes that keep getting blocked
+
+| Instead of | Write |
 | --- | --- |
-| `sed 's/foo/bar/g' file` | `perl -pe 's/foo/bar/g' file` |
+| `awk '{print $1}'` | `perl -lane 'print $F[0]'` |
+| `awk -F: '{print $NF}'` | `perl -F: -lane 'print $F[-1]'` |
+| `awk '{print $1, $4}'` | `perl -lane 'print "@F[0,3]"'` |
+| `awk '{s+=$2} END {print s}'` | `perl -lane '$s+=$F[1]; END {print $s}'` |
+| `awk '/END_PAT/{exit} {print}' f` | `perl -ne 'last if /END_PAT/; print' f` |
+| `sed 's/foo/bar/g' f` | `perl -pe 's/foo/bar/g' f` |
+| `sed -E 's/^use (\w+).*/\1/'` | `perl -pe 's/^use (\w+).*/$1/'` |
 | `sed -i 's/old/new/g' *.txt` | `perl -pi -e 's/old/new/g' *.txt` |
-| `awk '{print $1}' file` | `perl -lane 'print $F[0]' file` |
-| `awk -F, '{print $2}' file` | `perl -F, -lane 'print $F[1]' file` |
+| `sed 's#$PREFIX/##'` | `perl -pe "s#\Q$PREFIX\E/##"` |
 
-Prefer a dedicated tool (Edit, Read, Grep, Glob) over shell text-munging when
-one fits — reach for `perl` only for genuine batch transforms.
+Before reaching for perl at all, check whether a dedicated tool fits: Edit
+for a file change, Grep for a search, `cut -d: -f2` for a fixed field,
+`rg -o` for extracting matches. Perl is for genuine batch transforms.
+
+## Perl one-liner rules
+
+- **Japanese text needs the UTF-8 flags**: `perl -CSD -Mutf8 -pe '…'`.
+  Without them perl reads bytes and dies on the first multi-byte character
+  (`Unrecognized character \xE3`, `Unknown regexp modifier "/t"`).
+- **Braces, a hash, or a second statement means a file.** Put it in the
+  scratchpad as a `.pl` and run it by path. Inline scripts that size fail on
+  shell quoting more often than they run.
