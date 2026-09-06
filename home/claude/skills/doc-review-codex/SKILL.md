@@ -1,31 +1,67 @@
 ---
 name: doc-review-codex
-allowed-tools: Bash(codex exec:*), Bash(deno run:*), Bash(ls:*), Bash(wc:*), Read, Glob, Grep, AskUserQuestion
-argument-hint: "<path-or-keyword>"
-description: Documentation review using OpenAI Codex CLI — AI notes, Slite notes, plans, and specifications
+allowed-tools: Bash(codex exec:*), Bash(deno run:*), Bash(ls:*), Bash(wc:*), Read, Glob, Grep, Edit, Write, AskUserQuestion
+argument-hint: "<path-or-keyword> [--fix]"
+description: Documentation review using OpenAI Codex CLI — AI notes, Slite notes, plans, and specifications; --fix applies the findings to the document
 ---
 
 ## Arguments
 
-`$ARGUMENTS` = `{path-or-keyword}`
+`$ARGUMENTS` = `{path-or-keyword} [--fix]`
 
 - **File path**: Direct path to a document to review (e.g., `~/Compost/AI-Notes/2026-03/04-1200-design.md`)
-- **Keyword**: Search term to find documents to review (e.g., "認証設計", "proxy")
+- **Keyword**: Search term to find documents to review (e.g., "auth design", "proxy")
 - **"latest"**: Review the most recent AI note
+- `--fix` (optional flag): After reporting, verify and apply the findings to the
+  document (see Step 5). Without it the skill is read-only. Same meaning as the
+  bundled `/code-review --fix`.
+- Strip `--fix` first; whatever remains is `{path-or-keyword}`.
 
 ## Language
 
-- User-facing report: **Japanese**
+- All user-facing output is **Japanese**. The templates below are structural
+  skeletons: render every sentence in Japanese, keeping the shape.
 
 ## Principles
 
-- **Read-only**. Do NOT modify any documents.
+- **Read-only unless `--fix`.**
 - Focus on **substantive quality**: logical gaps, missing considerations, technical
   inaccuracies, feasibility issues.
 - Skip cosmetic issues (formatting, typos, Markdown lint) — those are handled by
   `/doc-check`.
 - Uses `codex exec` with a review prompt — codex reads the document and any
   referenced source files itself.
+- **Same output shape as the bundled `/code-review`**: a findings list ranked most
+  severe first, no headers, no severity markers. See "Output shape".
+- **Never commit or push**, even with `--fix`.
+
+## Output shape
+
+This is the shape the bundled `/code-review` reports in. Every report from this
+skill uses it, so code and document reviews read the same in a conversation.
+
+```
+Codex review. N findings, most severe first. Reviewed `{path}` ({document_type}).
+
+1. `{path}:line` — One sentence stating what is wrong or missing. [accuracy]
+   Scenario: what goes wrong for a reader or implementer who follows the document as written.
+   Fix: what to change.
+2. `{path}:88` — One sentence. [completeness]
+   Scenario: …
+   Fix: …
+```
+
+- `line` is the first line of the affected section or claim, from Read.
+- Categories are short kebab-case tags: `accuracy` (claim contradicts the
+  implementation), `consistency` (the document contradicts itself),
+  `completeness` (missing consideration, edge case, or step), `feasibility`,
+  `assumption` (unstated premise that could invalidate the document). One per
+  finding.
+- Rank by severity: `accuracy` and `consistency` first, then `feasibility` and
+  `assumption`, then `completeness`. Within a tier, the more consequential first.
+- With nothing to report, the whole report is one line: `Codex review. No
+  findings. Reviewed \`{path}\` ({document_type}).`
+- After `--fix`, each finding is reported again with an outcome suffix (see Step 5).
 
 ## codex exec CLI usage
 
@@ -68,10 +104,10 @@ inform the user and **STOP**.
 
 Read the document and classify it:
 
-- <strong>仕様書 (Specification)</strong>: Defines requirements and interfaces
-- <strong>設計書 (Design document)</strong>: Describes architecture and implementation approach
-- <strong>計画書 (Plan)</strong>: Step-by-step implementation plan
-- <strong>メモ (Note)</strong>: General notes, research, analysis
+- **Specification**: Defines requirements and interfaces
+- **Design document**: Describes architecture and implementation approach
+- **Plan**: Step-by-step implementation plan
+- **Note**: General notes, research, analysis
 
 ### Step 3: Run codex exec
 
@@ -89,49 +125,67 @@ For all types also check: technical accuracy (do code examples, API references a
 
 IGNORE: formatting, typos, Markdown syntax, writing-style preferences, minor wording improvements.
 
-Per finding: the section/heading it belongs to, a severity marker of exactly ★★★ (technical inaccuracy or logical gap that invalidates the document) or ★★☆ (missing consideration, unstated assumption, feasibility concern) or ★☆☆ (improvement that would strengthen it), what is missing or wrong and WHY, and a concrete suggested improvement. Sort by severity. Output findings in Japanese." 2>&1
+Per finding: the section heading and the line number of the affected claim, one of the categories accuracy / consistency / completeness / feasibility / assumption, one sentence stating what is missing or wrong, the concrete consequence for a reader who follows the document as written, and a suggested improvement. Order from most to least consequential. Output findings in Japanese." 2>&1
 ```
 
 Where `{criteria}` is chosen by `{document_type}`:
 
-- <strong>仕様書</strong>: Are requirements clear and unambiguous? Are edge cases and error
-  scenarios covered? Are interfaces and data formats fully defined? Is the scope
-  clearly bounded (what is NOT included)? Are acceptance criteria defined?
-- <strong>設計書</strong>: Is the architectural approach sound, and were obvious alternatives
-  considered? Are component interactions and data flows clearly described? Are
-  failure modes and error handling addressed? Does the design align with the
-  referenced code and existing architecture? Are assumptions and trade-offs stated?
-- <strong>計画書</strong>: Are the steps in a logical order? Are dependencies between steps
+- **Specification**: Are requirements clear and unambiguous? Are edge cases and
+  error scenarios covered? Are interfaces and data formats fully defined? Is the
+  scope clearly bounded (what is NOT included)? Are acceptance criteria defined?
+- **Design document**: Is the architectural approach sound, and were obvious
+  alternatives considered? Are component interactions and data flows clearly
+  described? Are failure modes and error handling addressed? Does the design align
+  with the referenced code and existing architecture? Are assumptions and
+  trade-offs stated?
+- **Plan**: Are the steps in a logical order? Are dependencies between steps
   identified? Are risks and mitigations realistic? Is the testing strategy
   sufficient for the scope of changes? Are there missing steps needed in practice?
-- <strong>メモ</strong>: Are the claims supported? Are the conclusions warranted by the
-  evidence presented? Are alternative explanations considered?
+- **Note**: Are the claims supported? Are the conclusions warranted by the evidence
+  presented? Are alternative explanations considered?
 
 **Do NOT**: retry with different invocations on failure. If the command fails,
 report the error as-is.
 
-### Step 4: Report (Japanese)
+### Step 4: Report
 
-Display-only. Do NOT modify the document.
+Codex's stdout carries the intermediate tool trace (grep hits, file reads) and then
+its final answer. Take the final answer only, and do not relay it verbatim —
+restate every finding in the "Output shape" above: one entry per finding with
+`{path}:line`, a one-sentence problem, a category tag, the scenario, and the fix.
+Drop anything cosmetic. Read the document yourself to fill in a line number codex
+omitted.
+
+Without `--fix`, **STOP here**.
+
+### Step 5: Apply the findings (`--fix` only)
+
+Codex findings are not automatically correct. Before touching the document:
+
+1. **Verify** each finding by reading the section and any code it references,
+   and mark it `CONFIRMED` (the problem is demonstrable from the document and its
+   references) or `PLAUSIBLE` (cannot be ruled out, but not demonstrated).
+2. **Apply** every `CONFIRMED` finding with Edit, keeping the document's existing
+   structure and voice. Leave `PLAUSIBLE` findings unapplied, the way the bundled
+   `/code-review --fix` applies only what it is confident in. Substance only —
+   leave formatting and wording to `/doc-check`.
+
+Then report the same list again, each entry carrying its verdict and outcome:
 
 ```
-## ドキュメントレビュー結果 (Codex)
+Codex review, fixes applied. Reviewed `{path}` ({document_type}).
 
-<strong>対象</strong>: `{path}` | <strong>種別</strong>: {document_type}
+1. `{path}:line` — One sentence. [accuracy] CONFIRMED → fixed
+   What changed: one sentence.
+2. `{path}:88` — One sentence. [completeness] PLAUSIBLE → skipped
+   Why: not demonstrated; left for the author.
+3. `{path}:120` — One sentence. [assumption] CONFIRMED → no change needed
+   Why: the premise is stated two sections earlier.
 
----
-
-{codex exec output}
+Updated `{path}`. Nothing was committed.
 ```
 
-`{codex exec output}` means codex's **final answer only**. Its stdout also carries
-the intermediate tool trace (grep hits, file reads) and then repeats the final
-answer verbatim at the end — relay the answer once and drop the trace.
-
-If codex found no substantive issues, report that clearly.
-
-The `## ドキュメントレビュー結果` header is what `/deal-review` matches on — keep it
-verbatim.
+Outcomes are exactly `fixed`, `skipped`, or `no change needed`.
 
 ## Anti-patterns
 
@@ -140,8 +194,8 @@ verbatim.
 - **Do not accept a preemptive "cannot read outside cwd"** from codex — the
   read-only sandbox permits reads anywhere. The prompt above already says so; if
   codex still refuses, report it rather than switching strategies.
-- **Do not modify the document** — that is `/deal-review`'s job.
-- **Do not report cosmetic findings** — `/doc-check` owns those.
+- **Do not modify the document without `--fix`.**
+- **Do not report or fix cosmetic findings** — `/doc-check` owns those.
 
 ## Begin
 

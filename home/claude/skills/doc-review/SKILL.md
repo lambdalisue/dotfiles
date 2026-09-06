@@ -1,28 +1,64 @@
 ---
 name: doc-review
-allowed-tools: Bash(deno run:*), Bash(ls:*), Read, Glob, Grep, Agent
-argument-hint: "<path-or-keyword>"
-description: Review documentation quality — AI notes, Slite notes, plans, and specifications
+allowed-tools: Bash(deno run:*), Bash(ls:*), Read, Glob, Grep, Agent, Edit, Write, AskUserQuestion
+argument-hint: "<path-or-keyword> [--fix]"
+description: Review documentation quality — AI notes, Slite notes, plans, and specifications; --fix applies the findings to the document
 ---
 
 ## Arguments
 
-`$ARGUMENTS` = `{path-or-keyword}`
+`$ARGUMENTS` = `{path-or-keyword} [--fix]`
 
 - **File path**: Direct path to a document to review (e.g., `~/Compost/AI-Notes/2026-03/04-1200-design.md`)
-- **Keyword**: Search term to find documents to review (e.g., "認証設計", "proxy")
+- **Keyword**: Search term to find documents to review (e.g., "auth design", "proxy")
 - **"latest"**: Review the most recent AI note
+- `--fix` (optional flag): After reporting, verify and apply the findings to the
+  document (see Step 6). Without it the skill is read-only. Same meaning as the
+  bundled `/code-review --fix`.
+- Strip `--fix` first; whatever remains is `{path-or-keyword}`.
 
 ## Language
 
 - Agent prompts: **English**
-- User-facing report: **Japanese**
+- All user-facing output is **Japanese**. The templates below are structural
+  skeletons: render every sentence in Japanese, keeping the shape.
 
 ## Principles
 
-- **Read-only**. Do NOT modify any documents.
+- **Read-only unless `--fix`.**
 - Focus on **substantive quality**: logical gaps, missing considerations, technical inaccuracies, feasibility issues.
 - Skip cosmetic issues (formatting, typos, Markdown lint) — those are handled by `/doc-check`.
+- **Same output shape as the bundled `/code-review`**: a findings list ranked most
+  severe first, no headers, no severity markers. See "Output shape".
+- **Never commit or push**, even with `--fix`.
+
+## Output shape
+
+This is the shape the bundled `/code-review` reports in. Every report from this
+skill uses it, so code and document reviews read the same in a conversation.
+
+```
+N findings, most severe first. Reviewed `{path}` ({document_type}).
+
+1. `{path}:line` — One sentence stating what is wrong or missing. [accuracy]
+   Scenario: what goes wrong for a reader or implementer who follows the document as written.
+   Fix: what to change.
+2. `{path}:88` — One sentence. [completeness]
+   Scenario: …
+   Fix: …
+```
+
+- `line` is the first line of the affected section or claim, from Read.
+- Categories are short kebab-case tags: `accuracy` (claim contradicts the
+  implementation), `consistency` (the document contradicts itself),
+  `completeness` (missing consideration, edge case, or step), `feasibility`,
+  `assumption` (unstated premise that could invalidate the document). One per
+  finding.
+- Rank by severity: `accuracy` and `consistency` first, then `feasibility` and
+  `assumption`, then `completeness`. Within a tier, the more consequential first.
+- With nothing to report, the whole report is one line: `No findings. Reviewed
+  \`{path}\` ({document_type}).`
+- After `--fix`, each finding is reported again with an outcome suffix (see Step 6).
 
 ## Workflow
 
@@ -36,16 +72,16 @@ Based on the argument:
    - Search AI notes: `deno run -A ~/.claude/skills/ai-notes/notes.ts list --limit 20` and filter, or use Grep across `~/Compost/AI-Notes/`
    - If multiple matches, list them and ask the user to choose (use AskUserQuestion)
 
-If the document cannot be found, inform the user and **STOP**.
+Resolve to an **absolute path** (expand `~`). If the document cannot be found, inform the user and **STOP**.
 
 ### Step 2: Understand the document type
 
 Determine the document type from content:
 
-- **仕様書 (Specification)**: Defines requirements and interfaces
-- **設計書 (Design document)**: Describes architecture and implementation approach
-- **計画書 (Plan)**: Step-by-step implementation plan
-- **メモ (Note)**: General notes, research, analysis
+- **Specification**: Defines requirements and interfaces
+- **Design document**: Describes architecture and implementation approach
+- **Plan**: Step-by-step implementation plan
+- **Note**: General notes, research, analysis
 
 ### Step 3: Gather context
 
@@ -76,14 +112,14 @@ You are a technical document reviewer. Review the following {document_type} for 
 
 ## Review criteria for {document_type}
 
-### For 仕様書 (Specification):
+### For a specification:
 - Are requirements clear and unambiguous?
 - Are edge cases and error scenarios covered?
 - Are interfaces and data formats fully defined?
 - Is the scope clearly bounded (what is NOT included)?
 - Are acceptance criteria defined?
 
-### For 設計書 (Design document):
+### For a design document:
 - Is the architectural approach sound? Are there obvious alternatives that weren't considered?
 - Are component interactions and data flows clearly described?
 - Are failure modes and error handling strategies addressed?
@@ -91,7 +127,7 @@ You are a technical document reviewer. Review the following {document_type} for 
 - Are assumptions explicitly stated?
 - Are trade-offs acknowledged?
 
-### For 計画書 (Plan):
+### For a plan:
 - Are implementation steps in a logical order?
 - Are dependencies between steps identified?
 - Are risks and mitigation strategies realistic?
@@ -115,42 +151,45 @@ Document content:
 
 {referenced code context if any}
 
-For each issue: section/heading where the issue is, Severity (Critical/Warning/Notice), what is missing or wrong, suggested improvement.
+For each issue: the section heading and the line number of the affected claim, one of the categories accuracy / consistency / completeness / feasibility / assumption, one sentence stating what is missing or wrong, the concrete consequence for a reader who follows the document as written, and a suggested improvement. Order from most to least consequential.
 ```
 
-### Step 5: Report in Japanese
+### Step 5: Report
 
-Display-only. Do NOT modify the document.
+Restate the agent's findings in the "Output shape" above — one entry per
+finding with `{path}:line`, a one-sentence problem, a category tag, the
+scenario, and the fix. Drop anything cosmetic.
 
-Severity:
-- Critical `(★★★)`: Technical inaccuracy, logical gap that invalidates the plan
-- Warning `(★★☆)`: Missing consideration, unstated assumption, feasibility concern
-- Notice `(★☆☆)`: Improvement suggestion that would strengthen the document
+Without `--fix`, **STOP here**.
+
+### Step 6: Apply the findings (`--fix` only)
+
+Reviewer findings are not automatically correct. Before touching the document:
+
+1. **Verify** each finding by re-reading the section and any code it references,
+   and mark it `CONFIRMED` (the problem is demonstrable from the document and its
+   references) or `PLAUSIBLE` (cannot be ruled out, but not demonstrated).
+2. **Apply** every `CONFIRMED` finding with Edit, keeping the document's existing
+   structure and voice. Leave `PLAUSIBLE` findings unapplied, the way the bundled
+   `/code-review --fix` applies only what it is confident in. Substance only —
+   leave formatting and wording to `/doc-check`.
+
+Then report the same list again, each entry carrying its verdict and outcome:
 
 ```
-## ドキュメントレビュー結果
+Fixes applied. Reviewed `{path}` ({document_type}).
 
-**対象**: `{path}` | **種別**: {document_type}
+1. `{path}:line` — One sentence. [accuracy] CONFIRMED → fixed
+   What changed: one sentence.
+2. `{path}:88` — One sentence. [completeness] PLAUSIBLE → skipped
+   Why: not demonstrated; left for the author.
+3. `{path}:120` — One sentence. [assumption] CONFIRMED → no change needed
+   Why: the premise is stated two sections earlier.
 
----
-
-### 1. タイトル (セクション名) (★★★)
-
-> 問題の要約。
-
-具体的な改善案。
-
----
-
-### 2. タイトル (セクション名) (★★☆)
-
-> 問題の要約。
-
-...
+Updated `{path}`. Nothing was committed.
 ```
 
-- Flat numbered list sorted by severity
-- If no substantive issues → report clean
+Outcomes are exactly `fixed`, `skipped`, or `no change needed`.
 
 ## Begin
 
