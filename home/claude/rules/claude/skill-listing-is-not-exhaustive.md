@@ -9,8 +9,8 @@ counter-evidence.
 
 1. **`disable-model-invocation: true`** — these are excluded from the
    model-facing listing so they only run on explicit user invocation:
-   `code-review-codex-loop`, `deal-review`, `doc-review-codex-loop`,
-   `git-worktree`, `pr-address`, `pr-create`, `pr-update`.
+   `code-review-codex-loop`, `code-review-loop`, `doc-review-codex-loop`,
+   `doc-review-loop`, `git-worktree`, `pr-create`, `pr-update`.
 
    That list lives in the frontmatter, not here, so re-derive it rather than
    trusting this line: `grep -l 'disable-model-invocation: true'
