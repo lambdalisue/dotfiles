@@ -1,4 +1,35 @@
 { config, pkgs, ... }:
+let
+  # gh-as: run a gh command as the account a repository belongs to, without
+  # `gh auth switch` rewriting the machine-wide active account. Fetched by tag
+  # rather than vendored so the copy here cannot drift from the published one.
+  gh-as = pkgs.stdenvNoCC.mkDerivation (finalAttrs: {
+    pname = "gh-as";
+    version = "0.1.0";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "lambdalisue";
+      repo = "gh-as";
+      tag = "v${finalAttrs.version}";
+      hash = "sha256-UZ0DsrIe9MfNvoOVsvfRbBHa9qz2I0P0WdJfUjQjHKg=";
+    };
+
+    dontBuild = true;
+
+    installPhase = ''
+      runHook preInstall
+      install -Dm755 gh-as $out/bin/gh-as
+      runHook postInstall
+    '';
+
+    meta = {
+      description = "Run a command as one of the GitHub accounts gh is logged in with";
+      homepage = "https://github.com/lambdalisue/gh-as";
+      license = pkgs.lib.licenses.mit;
+      mainProgram = "gh-as";
+    };
+  });
+in
 {
   # GitHub CLI and its extensions, managed declaratively.
   #
@@ -12,8 +43,9 @@
         co = "pr checkout";
       };
     };
-    extensions = with pkgs; [
-      gh-poi # `gh poi`: safely clean up merged local branches
+    extensions = [
+      pkgs.gh-poi # `gh poi`: safely clean up merged local branches
+      gh-as # `gh as`: run a command as a chosen account
     ];
   };
 
