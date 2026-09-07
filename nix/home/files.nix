@@ -37,6 +37,7 @@ in
     ".tmux.conf".source = link "${dotfilesDir}/home/tmux.conf";
     ".zshenv".source = link "${dotfilesDir}/home/zshenv";
     ".local/bin/git-backup".source = link "${dotfilesDir}/home/local/bin/git-backup";
+    ".local/bin/gh-as".source = link "${dotfilesDir}/home/local/bin/gh-as";
     ".claude".source = link "${dotfilesDir}/home/claude";
     ".codex".source = link "${dotfilesDir}/home/codex";
   }
