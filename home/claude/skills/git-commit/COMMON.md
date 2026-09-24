@@ -35,7 +35,7 @@ everything here applies to all of them unless the SKILL.md overrides it.
 ## Base branch detection
 
 1. `git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | perl -pe 's@^refs/remotes/origin/@@'`
-2. Fallback: `gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`
+2. Fallback: `gh as -q gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'`
 3. Fallback: `main`, then `master` (whichever exists locally)
 
 ## Execute procedure

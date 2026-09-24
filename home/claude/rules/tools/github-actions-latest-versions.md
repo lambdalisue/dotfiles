@@ -14,13 +14,13 @@ default — training data lags, and in-repo workflows rot silently.
 Before adding any `uses:` entry, resolve the current release:
 
 ```bash
-gh api repos/actions/checkout/releases/latest --jq .tag_name   # -> v5.0.0
+gh as -q gh api repos/actions/checkout/releases/latest --jq .tag_name   # -> v5.0.0
 ```
 
 For a quick survey of recent tags:
 
 ```bash
-gh release list -R actions/checkout -L 5
+gh as -q gh release list -R actions/checkout -L 5
 ```
 
 This applies to every `uses:` target — official `actions/*`, third-party

@@ -1,6 +1,6 @@
 ---
 name: pr-review
-allowed-tools: Bash(git branch:*), Bash(gh pr:*), Bash(gh api:*), Bash(gh repo:*), Bash(jq:*), Read, Glob, Grep, Edit, Write
+allowed-tools: Bash(git branch:*), Bash(gh as:*), Bash(jq:*), Read, Glob, Grep, Edit, Write
 argument-hint: "[PR_NUMBER] [--fix] [context]"
 description: Fetch unresolved PR review comments and display analysis; --fix applies the findings, replies to the threads, and resolves them
 ---
@@ -20,8 +20,8 @@ description: Fetch unresolved PR review comments and display analysis; --fix app
 ## Context
 
 !`git branch --show-current`
-!`gh repo view --json nameWithOwner --jq '.nameWithOwner'`
-!`gh pr view --json number --jq '.number' 2>/dev/null || echo 'NO_PR'`
+!`gh as -q gh repo view --json nameWithOwner --jq '.nameWithOwner'`
+!`gh as -q gh pr view --json number --jq '.number' 2>/dev/null || echo 'NO_PR'`
 
 ## Language
 
@@ -87,7 +87,7 @@ Build the query by replacing OWNER, REPO, PR_NUMBER with actual values.
 Embed values directly in the query. Do NOT use GraphQL variables.
 
 ```bash
-gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { pullRequest(number: PR_NUMBER) { reviewThreads(first: 100) { nodes { id isResolved comments(first: 10) { nodes { id body author { login } path line startLine diffHunk } } } } } } }'
+gh as -q gh api graphql -f query='{ repository(owner: "OWNER", name: "REPO") { pullRequest(number: PR_NUMBER) { reviewThreads(first: 100) { nodes { id isResolved comments(first: 10) { nodes { id body author { login } path line startLine diffHunk } } } } } } }'
 ```
 
 Pipe the result to filter unresolved threads:
@@ -129,7 +129,7 @@ change with Edit, and note what was changed. Leave everything uncommitted.
 reviewer's language, using the thread `id` from Step 2:
 
 ```bash
-gh api graphql --input - << 'GQLEOF'
+gh as -q gh api graphql --input - << 'GQLEOF'
 {"query":"mutation($body:String!){addPullRequestReviewThreadReply(input:{pullRequestReviewThreadId:\"THREAD_ID\",body:$body}){comment{id body}}}","variables":{"body":"MESSAGE"}}
 GQLEOF
 ```
@@ -141,7 +141,7 @@ GQLEOF
 **Resolve** each thread after replying:
 
 ```bash
-gh api graphql -f query='mutation { resolveReviewThread(input: { threadId: "THREAD_ID" }) { thread { isResolved } } }'
+gh as -q gh api graphql -f query='mutation { resolveReviewThread(input: { threadId: "THREAD_ID" }) { thread { isResolved } } }'
 ```
 
 ### Step 5: Summary (`--fix` only)

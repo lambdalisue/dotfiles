@@ -1,7 +1,7 @@
 ---
 name: pr-create
 disable-model-invocation: true
-allowed-tools: Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(git ls-remote:*), Bash(gh pr:*)
+allowed-tools: Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(git ls-remote:*), Bash(gh as:*)
 description: Create a pull request with title and body based on commits
 ---
 
@@ -9,14 +9,14 @@ description: Create a pull request with title and body based on commits
 
 The user invoking `/pr-create` IS the explicit intent to create the PR — do NOT ask for approval.
 
-**Self-contained**: this skill reads git and runs `gh pr create` directly from
+**Self-contained**: this skill reads git and runs `gh as -q gh pr create` directly from
 the top-level session. Do NOT spawn a subagent.
 
 ## Safety
 
 **ABSOLUTELY NEVER run `git push` or any git write command — not directly, not
 through Bash, not under any circumstances.** The branch is expected to be
-already pushed. NEVER use `gh pr create --push`.
+already pushed. NEVER use `gh as -q gh pr create --push`.
 
 ## Knowledge
 
@@ -52,4 +52,4 @@ already pushed. NEVER use `gh pr create --push`.
 2. **Verify remote branch** - `git ls-remote --exit-code origin refs/heads/<branch>`.
    - If the branch is NOT on the remote, inform the user in Japanese that the branch must be pushed first and **STOP immediately**. Do NOT push, do NOT suggest push workarounds.
 
-3. **Create** - Run `gh pr create` directly with the drafted title and body (pass the body via a HEREDOC to preserve formatting). Do NOT ask for approval — the `/pr-create` invocation is the explicit permission. NEVER pass `--push`. Present the PR URL to the user.
+3. **Create** - Run `gh as -q gh pr create` directly with the drafted title and body (pass the body via a HEREDOC to preserve formatting). Do NOT ask for approval — the `/pr-create` invocation is the explicit permission. NEVER pass `--push`. Present the PR URL to the user.

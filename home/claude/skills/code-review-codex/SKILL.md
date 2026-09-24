@@ -79,7 +79,7 @@ codex exec --sandbox read-only "PROMPT" 2>&1
 **If no `base`** → auto-detect:
 1. `git status --short` — any uncommitted changes?
 2. **Uncommitted** → set `{mode}` to `uncommitted`
-3. **All committed** → detect base: `gh pr view --json baseRefName -q .baseRefName 2>/dev/null` → fallback to default branch (`main`/`master`). Set `{base}` to detected branch and `{mode}` to `committed`.
+3. **All committed** → detect base: `gh as -q gh pr view --json baseRefName -q .baseRefName 2>/dev/null` → fallback to default branch (`main`/`master`). Set `{base}` to detected branch and `{mode}` to `committed`.
 
 If `{mode}` is `committed`, verify diff is non-empty:
 ```bash

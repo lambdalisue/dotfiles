@@ -1,7 +1,7 @@
 ---
 name: pr-update
 disable-model-invocation: true
-allowed-tools: Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(gh pr:*)
+allowed-tools: Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(gh as:*)
 argument-hint: "[PR_NUMBER] Optional PR number to update"
 description: Update the title and body of an existing pull request
 ---
@@ -13,13 +13,13 @@ The user invoking `/pr-update` IS the explicit intent to update the PR — do NO
 ## Context
 
 !`git branch --show-current`
-!`gh pr view --json number,title,body,baseRefName,headRefName --jq '"\(.number) \(.headRefName) -> \(.baseRefName)\nTitle: \(.title)\nBody:\n\(.body)"' 2>/dev/null || echo "No PR found for current branch"`
+!`gh as -q gh pr view --json number,title,body,baseRefName,headRefName --jq '"\(.number) \(.headRefName) -> \(.baseRefName)\nTitle: \(.title)\nBody:\n\(.body)"' 2>/dev/null || echo "No PR found for current branch"`
 
 ## Principles
 
 **Target PR**:
 - If PR number is provided as argument, use that PR
-- Otherwise, find PR associated with current branch via `gh pr view`
+- Otherwise, find PR associated with current branch via `gh as -q gh pr view`
 
 **Language**: Match the language of the existing PR title and body. Default to English if unclear.
 
@@ -35,12 +35,12 @@ The user invoking `/pr-update` IS the explicit intent to update the PR — do NO
 
 1. **Identify PR** - Determine target PR number:
    - If argument provided: use that PR number
-   - Otherwise: run `gh pr view --json number --jq '.number'` to get PR for current branch
+   - Otherwise: run `gh as -q gh pr view --json number --jq '.number'` to get PR for current branch
    - If no PR exists for the current branch, report it and **STOP immediately**.
 
 2. **Fetch Current PR** - Get current title, body, and base branch:
    ```bash
-   gh pr view <number> --json title,body,baseRefName,headRefName
+   gh as -q gh pr view <number> --json title,body,baseRefName,headRefName
    ```
 
 3. **Analyze Changes** - Review commits and diffs from base branch:
@@ -67,7 +67,7 @@ The user invoking `/pr-update` IS the explicit intent to update the PR — do NO
 
 6. **Update** - Execute immediately, without asking for approval (the `/pr-update` invocation is the explicit permission). Pass the body via a HEREDOC to preserve formatting:
    ```bash
-   gh pr edit <number> --title "<title>" --body "<body>"
+   gh as -q gh pr edit <number> --title "<title>" --body "<body>"
    ```
    Present the PR URL to the user.
 
