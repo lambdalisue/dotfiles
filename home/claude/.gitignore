@@ -11,6 +11,8 @@ rules/**/.DS_Store
 !skills/**/
 !skills/**/*
 skills/**/.DS_Store
+# Skills that Claude Code syncs down from claude.ai; the account owns them.
+skills/synced/
 !hooks/
 !hooks/**/
 !hooks/**/*
