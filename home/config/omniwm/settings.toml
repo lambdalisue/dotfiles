@@ -3,7 +3,7 @@ monitorDwindleOverrides = []
 monitorGapOverrides = []
 monitorNiriOverrides = []
 monitorOrientationOverrides = []
-schemaVersion = 2
+schemaVersion = 3
 
 [appearance]
 mode = "automatic"
@@ -90,7 +90,7 @@ centerFocusedColumn = "never"
 containerPrimarySpanPresets = [0.3333333333333333, 0.5, 0.6666666666666666]
 infiniteLoop = false
 singleWindowFit = "fill"
-visibleContainerCount = 3
+visibleContainerCount = 2
 
 [overview]
 zoom = 0.75
@@ -135,6 +135,27 @@ widthPercent = 50.0
 
 [routing]
 mode = "macOS"
+
+[[routing.arrangements]]
+id = "69E6D00A-C70A-4F54-9148-132641B2C649"
+
+[[routing.arrangements.monitors]]
+gridColumn = 1
+gridRow = 0
+monitorDisplayUUID = "38EC4F8A-8F56-4DD3-A2B7-C17E2D3F6D06"
+monitorName = "DELL U4025QW"
+
+[[routing.arrangements.monitors]]
+gridColumn = 0
+gridRow = 1
+monitorDisplayId = 5
+monitorName = "PL3272UH"
+
+[[routing.arrangements.monitors]]
+gridColumn = 0
+gridRow = 0
+monitorDisplayUUID = "2A8C4537-B89D-466F-9518-F9340990AA75"
+monitorName = "DELL S2725QS"
 
 [scratchpads]
 
@@ -930,24 +951,6 @@ id = "toggleOverview"
 [[hotkeys]]
 binding = "Unassigned"
 id = "toggleSystemStats"
-
-[[monitorRoutingOverrides]]
-gridColumn = 1
-gridRow = 0
-monitorDisplayUUID = "38EC4F8A-8F56-4DD3-A2B7-C17E2D3F6D06"
-monitorName = "DELL U4025QW"
-
-[[monitorRoutingOverrides]]
-gridColumn = 0
-gridRow = 1
-monitorDisplayId = 5
-monitorName = "PL3272UH"
-
-[[monitorRoutingOverrides]]
-gridColumn = 0
-gridRow = 0
-monitorDisplayUUID = "2A8C4537-B89D-466F-9518-F9340990AA75"
-monitorName = "DELL S2725QS"
 
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
