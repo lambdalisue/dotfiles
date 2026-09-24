@@ -5,12 +5,12 @@
       "action": "window.new"
     },
     {
-      "key": "Cmd+t",
-      "action": "tab.new"
+      "key": "Cmd+Shift+n",
+      "action": "window.duplicate"
     },
     {
-      "key": "Cmd+w",
-      "action": "tab.close"
+      "key": "Cmd+t",
+      "action": "window.new_document"
     },
     {
       "key": "Cmd+o",
@@ -25,7 +25,7 @@
       "action": "file.reveal_in_finder"
     },
     {
-      "key": "Cmd+Shift+w",
+      "key": "Cmd+w",
       "action": "window.close"
     },
     {
@@ -35,10 +35,6 @@
     {
       "key": "Cmd+b",
       "action": "window.toggle_sidebar"
-    },
-    {
-      "key": "Cmd+Shift+b",
-      "action": "window.toggle_right_sidebar"
     },
     {
       "key": "Cmd+0",
@@ -135,28 +131,20 @@
       "action": "search.prev"
     },
     {
-      "key": "g t",
-      "action": "tab.next"
-    },
-    {
-      "key": "g Shift+t",
-      "action": "tab.prev"
-    },
-    {
       "key": "g r",
       "action": "file.set_parent_as_root"
     },
     {
       "key": "Ctrl+w t",
-      "action": "tab.new"
+      "action": "window.new_document"
     },
     {
       "key": "Ctrl+w Ctrl+t",
-      "action": "tab.new"
+      "action": "window.new_document"
     },
     {
       "key": "Ctrl+w Shift+t",
-      "action": "tab.open_in_new_window"
+      "action": "window.new"
     },
     {
       "key": "Ctrl+w n",
@@ -175,26 +163,6 @@
       "action": "window.close"
     },
     {
-      "key": "Ctrl+w c",
-      "action": "tab.close"
-    },
-    {
-      "key": "Ctrl+w Ctrl+c",
-      "action": "tab.close"
-    },
-    {
-      "key": "Ctrl+w o",
-      "action": "tab.close_others"
-    },
-    {
-      "key": "Ctrl+w Ctrl+o",
-      "action": "tab.close_others"
-    },
-    {
-      "key": "Ctrl+w a",
-      "action": "tab.close_all"
-    },
-    {
       "key": "Ctrl+w Shift+c",
       "action": "window.close_all_child_windows"
     },
@@ -211,20 +179,12 @@
       "action": "window.reload"
     },
     {
-      "key": "Ctrl+w p",
-      "action": "tab.toggle_pin"
-    },
-    {
-      "key": "Ctrl+w Ctrl+p",
-      "action": "tab.toggle_pin"
-    },
-    {
       "key": "g f",
       "action": "file.open_link"
     },
     {
       "key": "Ctrl+w g f",
-      "action": "file.open_link_in_new_tab"
+      "action": "file.open_link_in_new_window"
     },
     {
       "key": "y y",
@@ -279,32 +239,52 @@
       "action": "zoom.reset"
     },
     {
-      "key": "Ctrl+w h",
-      "action": "focus.left_sidebar"
-    },
-    {
-      "key": "Ctrl+w Ctrl+h",
-      "action": "focus.left_sidebar"
-    },
-    {
-      "key": "Ctrl+w l",
-      "action": "focus.right_sidebar"
-    },
-    {
-      "key": "Ctrl+w Ctrl+l",
-      "action": "focus.right_sidebar"
-    },
-    {
-      "key": "Backslash q",
-      "action": "focus.quick_access"
-    },
-    {
       "key": "Escape",
       "action": "cancel"
     },
     {
       "key": "m m",
       "action": "file.toggle_bookmark"
+    },
+    {
+      "key": "Cmd+1",
+      "action": "sidebar.face_places"
+    },
+    {
+      "key": "Cmd+2",
+      "action": "sidebar.face_recent"
+    },
+    {
+      "key": "Cmd+3",
+      "action": "sidebar.face_starred"
+    },
+    {
+      "key": "Cmd+k",
+      "action": "palette.open"
+    },
+    {
+      "key": "g o",
+      "action": "contents.toggle"
+    },
+    {
+      "key": "Ctrl+w h",
+      "action": "focus.places"
+    },
+    {
+      "key": "Ctrl+w Ctrl+h",
+      "action": "focus.places"
+    },
+    {
+      "key": "Backslash p",
+      "action": "focus.places"
+    },
+    {
+      "key": "Backslash s",
+      "action": "focus.starred"
+    },
+    {
+      "key": "Backslash r",
+      "action": "focus.recent"
     }
   ],
   "content": [
@@ -367,22 +347,6 @@
       "action": "sidebar.toggle_show_all_files"
     },
     {
-      "key": "Shift+h",
-      "action": "directory.back"
-    },
-    {
-      "key": "Shift+l",
-      "action": "directory.forward"
-    },
-    {
-      "key": "Ctrl+w h",
-      "action": "focus.left_sidebar"
-    },
-    {
-      "key": "Ctrl+w Ctrl+h",
-      "action": "focus.left_sidebar"
-    },
-    {
       "key": "Ctrl+w l",
       "action": "focus.content"
     },
@@ -392,129 +356,149 @@
     },
     {
       "key": "Ctrl+w j",
-      "action": "focus.quick_access"
+      "action": "sidebar.face_next"
     },
     {
       "key": "Ctrl+w Ctrl+j",
-      "action": "focus.quick_access"
-    }
-  ],
-  "quickAccess": [
-    {
-      "key": "j",
-      "action": "cursor.down"
-    },
-    {
-      "key": "k",
-      "action": "cursor.up"
-    },
-    {
-      "key": "Ctrl+n",
-      "action": "cursor.down"
-    },
-    {
-      "key": "Ctrl+p",
-      "action": "cursor.up"
-    },
-    {
-      "key": "l",
-      "action": "cursor.open"
-    },
-    {
-      "key": "Enter",
-      "action": "cursor.open"
-    },
-    {
-      "key": "h",
-      "action": "cursor.collapse"
-    },
-    {
-      "key": "Ctrl+w h",
-      "action": "focus.left_sidebar"
-    },
-    {
-      "key": "Ctrl+w Ctrl+h",
-      "action": "focus.left_sidebar"
-    },
-    {
-      "key": "Ctrl+w l",
-      "action": "focus.content"
-    },
-    {
-      "key": "Ctrl+w Ctrl+l",
-      "action": "focus.content"
+      "action": "sidebar.face_next"
     },
     {
       "key": "Ctrl+w k",
-      "action": "focus.left_sidebar"
+      "action": "sidebar.face_prev"
     },
     {
       "key": "Ctrl+w Ctrl+k",
-      "action": "focus.left_sidebar"
-    }
-  ],
-  "rightSidebar": [
-    {
-      "key": "j",
-      "action": "cursor.down"
-    },
-    {
-      "key": "k",
-      "action": "cursor.up"
-    },
-    {
-      "key": "Ctrl+n",
-      "action": "cursor.down"
-    },
-    {
-      "key": "Ctrl+p",
-      "action": "cursor.up"
-    },
-    {
-      "key": "l",
-      "action": "cursor.open"
-    },
-    {
-      "key": "Enter",
-      "action": "cursor.open"
-    },
-    {
-      "key": "h",
-      "action": "cursor.collapse"
+      "action": "sidebar.face_prev"
     },
     {
       "key": "Ctrl+w h",
-      "action": "focus.content"
+      "action": "focus.places"
     },
     {
       "key": "Ctrl+w Ctrl+h",
-      "action": "focus.content"
-    },
-    {
-      "key": "Ctrl+w l",
-      "action": "focus.right_sidebar"
-    },
-    {
-      "key": "Ctrl+w Ctrl+l",
-      "action": "focus.right_sidebar"
+      "action": "focus.places"
     }
   ],
   "search": [
     {
-      "key": "Enter",
+      "key": "Tab",
       "action": "search.next"
     },
     {
-      "key": "Shift+Enter",
+      "key": "Shift+Tab",
       "action": "search.prev"
+    },
+    {
+      "key": "Ctrl+n",
+      "action": "search.next"
+    },
+    {
+      "key": "Ctrl+p",
+      "action": "search.prev"
+    },
+    {
+      "key": "Enter",
+      "action": "search.pin_current"
     },
     {
       "key": "Escape",
       "action": "search.clear"
     },
     {
-      "key": "Ctrl+Enter",
-      "action": "search.pin_current"
+      "key": "Ctrl+c",
+      "action": "search.clear"
+    }
+  ],
+  "palette": [
+    {
+      "key": "Ctrl+n",
+      "action": "palette.next"
+    },
+    {
+      "key": "Ctrl+p",
+      "action": "palette.prev"
+    },
+    {
+      "key": "Ctrl+j",
+      "action": "palette.next"
+    },
+    {
+      "key": "Ctrl+k",
+      "action": "palette.prev"
+    },
+    {
+      "key": "ArrowDown",
+      "action": "palette.next"
+    },
+    {
+      "key": "ArrowUp",
+      "action": "palette.prev"
+    },
+    {
+      "key": "Tab",
+      "action": "palette.next"
+    },
+    {
+      "key": "Shift+Tab",
+      "action": "palette.prev"
+    },
+    {
+      "key": "Enter",
+      "action": "palette.confirm"
+    },
+    {
+      "key": "Escape",
+      "action": "palette.close"
+    },
+    {
+      "key": "Ctrl+c",
+      "action": "palette.close"
+    }
+  ],
+  "contents": [
+    {
+      "key": "j",
+      "action": "contents.next"
+    },
+    {
+      "key": "k",
+      "action": "contents.prev"
+    },
+    {
+      "key": "Ctrl+n",
+      "action": "contents.next"
+    },
+    {
+      "key": "Ctrl+p",
+      "action": "contents.prev"
+    },
+    {
+      "key": "ArrowDown",
+      "action": "contents.next"
+    },
+    {
+      "key": "ArrowUp",
+      "action": "contents.prev"
+    },
+    {
+      "key": "Enter",
+      "action": "contents.confirm"
+    },
+    {
+      "key": "l",
+      "action": "contents.confirm"
+    },
+    {
+      "key": "Escape",
+      "action": "contents.close"
+    },
+    {
+      "key": "q",
+      "action": "contents.close"
+    },
+    {
+      "key": "Ctrl+c",
+      "action": "contents.close"
     }
   ]
 }

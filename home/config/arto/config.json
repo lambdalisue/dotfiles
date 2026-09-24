@@ -1,15 +1,26 @@
 {
   "directory": {
     "defaultDirectory": "/Users/alisue/Compost/AI-Notes",
-    "onStartup": "default",
-    "onNewWindow": "default"
+    "onStartup": "default"
   },
   "fileOpen": "last_focused",
   "markdown": {
-    "autoLinkUrls": true
+    "autoLinkUrls": true,
+    "math": true,
+    "wikiLinks": true,
+    "superscript": true,
+    "subscript": true,
+    "definitionLists": true,
+    "headingAttributes": true,
+    "smartPunctuation": true,
+    "cjkEmphasis": true,
+    "headingPermalinks": false,
+    "rawHtml": "filter"
   },
   "theme": {
     "defaultTheme": "auto",
+    "lightTheme": "light",
+    "darkTheme": "dark_dimmed",
     "onStartup": "default",
     "onNewWindow": "default"
   },
@@ -18,14 +29,10 @@
     "defaultWidth": 280.0,
     "defaultShowAllFiles": false,
     "defaultZoomLevel": 1.0,
-    "onStartup": "default",
-    "onNewWindow": "default"
-  },
-  "rightSidebar": {
-    "defaultPinned": false,
-    "defaultWidth": 220.0,
-    "defaultTab": "contents",
-    "defaultZoomLevel": 1.0,
+    "minContentWidth": 640.0,
+    "recentTrace": "hidden_when_sidebar",
+    "recentTraceCount": 6,
+    "onOpen": "keep_open",
     "onStartup": "default",
     "onNewWindow": "default"
   },
