@@ -13,6 +13,7 @@
     ./shell.nix
     ./git.nix
     ./gh.nix
+    ./felis.nix
     # Homebrew tap trust; self-gates to Darwin (no Homebrew off macOS).
     ./homebrew-trust.nix
     # macSKK settings; self-gates to Darwin (macOS-only input method).

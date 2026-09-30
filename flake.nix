@@ -13,6 +13,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Pinned to a release tag and nixpkgs NOT followed: only tagged builds of
+    # felis's own lock are in nix-cache.natsukium.com; anything else compiles
+    # the Rust workspace locally. Bump the tag to upgrade.
+    felis.url = "github:felis-terminal/felis/v0.1.1";
   };
 
   outputs =
@@ -20,6 +25,7 @@
       nixpkgs,
       nix-darwin,
       home-manager,
+      felis,
       ...
     }:
     let
@@ -89,7 +95,10 @@
           extraSpecialArgs = {
             inherit username dotfilesDir isDarwin;
           };
-          modules = [ ./nix/home ];
+          modules = [
+            felis.homeManagerModules.felis
+            ./nix/home
+          ];
         };
     in
     {
