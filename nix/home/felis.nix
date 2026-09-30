@@ -2,7 +2,45 @@
 # flake.nix); it also points TERMINFO_DIRS at the xterm-felis entry.
 #
 # Settings mirror home/config/ghostty/config so both terminals look alike.
+{ config, pkgs, ... }:
 let
+  felis = config.programs.felis.package;
+
+  # Bound to a `run` chord, so it runs in a transient session drawn over the
+  # window; `felis sessions switch` defaults to moving that window, and
+  # cancelling just exits back to the session the chord came from.
+  pickSession = pkgs.writeShellApplication {
+    name = "felis-pick-session";
+    runtimeInputs = [
+      felis
+      pkgs.fzf
+      pkgs.jq
+    ];
+    text = ''
+      # The transient session itself is listed too; leave it out.
+      felis sessions list --format json \
+        | jq -r --arg self "''${FELIS_SESSION_ID:-}" --arg home "$HOME" '
+            .sessions[]
+            | select(.id != $self)
+            | [
+                .short_id,
+                (.foreground // "-"),
+                (.title // "-"),
+                ((.cwd // "") | sub("^file://[^/]*"; "") | sub("^" + $home; "~"))
+              ]
+            | @tsv' \
+        | fzf \
+          --delimiter '\t' \
+          --with-nth 2.. \
+          --header 'Switch session' \
+          --preview 'felis sessions capture --ansi {1} 2>/dev/null' \
+          --preview-window 'down,70%' \
+        | cut -f1 \
+        | xargs -r felis sessions switch
+    '';
+  };
+
+
   nextSession = {
     kind = "switch_session";
     to = "next";
@@ -68,6 +106,10 @@ in
         "super+t".kind = "new_session";
         "super+]" = nextSession;
         "super+[" = previousSession;
+        "super+\\" = {
+          kind = "run";
+          command = [ "${pickSession}/bin/felis-pick-session" ];
+        };
         # Closing the window keeps the session alive, as the close button does.
         "super+w".kind = "detach";
         # Asks for confirmation before terminating the session's program.
