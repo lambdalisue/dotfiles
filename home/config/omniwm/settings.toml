@@ -194,6 +194,14 @@ assignToWorkspace = "6"
 bundleId = "com.hnc.Discord"
 id = "AF752D95-8497-4844-BE20-4C93E73BAEF2"
 
+[[appRules]]
+axRole = "AXWindow"
+axSubrole = "AXStandardWindow"
+bundleId = "com.lambdalisue.Arto"
+id = "459D2E76-C006-4E8B-B50B-BF51CE6774A9"
+layout = "float"
+titleSubstring = "Preferences"
+
 [[hotkeys]]
 binding = "Option+Space"
 id = "toggleScratchpad.1"
