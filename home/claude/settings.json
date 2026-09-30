@@ -58,7 +58,8 @@
     "lua-lsp@claude-plugins-official": true,
     "probitas@probitas-test": true,
     "swift-lsp@claude-plugins-official": true,
-    "cclens@cclens": true
+    "cclens@cclens": true,
+    "kuchiyose@kuchiyose": true
   },
   "extraKnownMarketplaces": {
     "gh-as": {
@@ -80,13 +81,28 @@
         "repo": "lambdalisue/cclens"
       },
       "autoUpdate": true
+    },
+    "kuchiyose": {
+      "source": {
+        "source": "github",
+        "repo": "lambdalisue/kuchiyose"
+      }
     }
   },
   "effortLevel": "high",
+  "pluginConfigs": {
+    "agents-md@builtin": {
+      "options": {
+        "instructionFiles": "claude-md-or-agents-md"
+      }
+    }
+  },
   "tui": "default",
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
-  "verbose": true,
+  "editorMode": "normal",
+  "verbose": false,
+  "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true
