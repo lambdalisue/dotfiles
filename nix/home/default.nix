@@ -31,6 +31,14 @@
     stateVersion = "25.05";
   };
 
+  # Copy .app bundles into ~/Applications/Home Manager Apps instead of
+  # symlinking them: Spotlight and Launch Services skip symlinks into the
+  # store, so linked apps (e.g. felis) cannot be launched from them.
+  targets.darwin = lib.mkIf isDarwin {
+    copyApps.enable = true;
+    linkApps.enable = false;
+  };
+
   # On Linux the install is single-user with no nix-darwin, so home-manager owns
   # the user nix.conf — enable the experimental features the flake workflow needs
   # (`nix`/`home-manager switch` would otherwise error). Generating nix.conf
