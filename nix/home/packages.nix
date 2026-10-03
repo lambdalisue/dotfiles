@@ -2,6 +2,7 @@
   pkgs,
   lib,
   isDarwin,
+  mmdr,
   ...
 }:
 {
@@ -37,6 +38,13 @@
     wget
     zat  # code outline viewer; the `zat` rule in home/claude/rules/tools tells agents to reach for it first
     zsh
+
+    # Renderers the figures Claude Code plugin draws diagrams with; a block
+    # whose renderer is missing stays as plain code.
+    d2
+    graphviz  # `dot`
+    mmdr  # mermaid; from the mermaid-rs-renderer flake input
+    resvg  # rasterizes SVG for dot/d2/svg/math and high-density mermaid
   ]
   ++ lib.optionals isDarwin [
     # Window border highlighter, drawn by a daemon started in launchd.nix.

@@ -59,7 +59,8 @@
     "probitas@probitas-test": true,
     "swift-lsp@claude-plugins-official": true,
     "cclens@cclens": true,
-    "kuchiyose@kuchiyose": true
+    "kuchiyose@kuchiyose": true,
+    "figures@figures": true
   },
   "extraKnownMarketplaces": {
     "gh-as": {
@@ -86,6 +87,12 @@
       "source": {
         "source": "github",
         "repo": "lambdalisue/kuchiyose"
+      }
+    },
+    "figures": {
+      "source": {
+        "source": "github",
+        "repo": "natsukium/claude-code-figures-plugin"
       }
     }
   },

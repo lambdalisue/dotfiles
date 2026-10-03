@@ -18,6 +18,13 @@
     # felis's own lock are in nix-cache.natsukium.com; anything else compiles
     # the Rust workspace locally. Bump the tag to upgrade.
     felis.url = "github:felis-terminal/felis/v0.1.1";
+
+    # `mmdr`, the mermaid renderer the figures Claude Code plugin tries first;
+    # it is not packaged in nixpkgs.
+    mermaid-rs-renderer = {
+      url = "github:1jehuang/mermaid-rs-renderer";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -26,6 +33,7 @@
       nix-darwin,
       home-manager,
       felis,
+      mermaid-rs-renderer,
       ...
     }:
     let
@@ -94,6 +102,7 @@
           };
           extraSpecialArgs = {
             inherit username dotfilesDir isDarwin;
+            mmdr = mermaid-rs-renderer.packages.${system}.default;
           };
           modules = [
             felis.homeManagerModules.felis
