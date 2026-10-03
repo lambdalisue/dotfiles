@@ -52,7 +52,7 @@ line.
 
 ## Round structure
 
-Repeat rounds until a convergence condition in Step E fires. Hard cap: **4 rounds**.
+Repeat rounds until a convergence condition in Step E fires. Hard cap: **20 rounds**.
 
 ### Step A: Review
 
@@ -116,7 +116,7 @@ Update the findings ledger, then stop if **any** condition holds:
 4. Some finding has survived **2** fix attempts — stop and escalate it to the user
    rather than trying a third time.
 5. Step C answered "this is nitpicking" (subject to its guard).
-6. The 4-round cap is reached.
+6. The 20-round cap is reached.
 
 Otherwise start the next round at Step A.
 
