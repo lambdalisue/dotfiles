@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/arto-app/Arto/main/schemas/config.schema.json",
+  "language": "ja",
   "directory": {
     "defaultDirectory": "/Users/alisue/Documents/Arto",
     "onStartup": "default"
@@ -87,7 +88,9 @@
     "showTime": true,
     "wordsPerMinute": 230,
     "charactersPerMinute": 500,
-    "minMinutes": 3
+    "minMinutes": 3,
+    "showChanges": true,
+    "ignoreWhitespaceChanges": true
   },
   "lenses": [
     {

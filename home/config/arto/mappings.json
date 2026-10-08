@@ -1,5 +1,4 @@
 {
-  "$schema": "./preset.schema.json",
   "menuShortcuts": [
     {
       "key": "Cmd+n",
