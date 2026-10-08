@@ -1,7 +1,5 @@
 {
   pkgs,
-  lib,
-  isDarwin,
   mmdr,
   ...
 }:
@@ -45,9 +43,5 @@
     graphviz  # `dot`
     mmdr  # mermaid; from the mermaid-rs-renderer flake input
     resvg  # rasterizes SVG for dot/d2/svg/math and high-density mermaid
-  ]
-  ++ lib.optionals isDarwin [
-    # Window border highlighter, drawn by a daemon started in launchd.nix.
-    jankyborders
   ];
 }

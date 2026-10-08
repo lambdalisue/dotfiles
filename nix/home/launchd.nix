@@ -37,22 +37,6 @@
       };
     };
 
-    # Window border highlighter (JankyBorders). It is a plain long-running
-    # process rather than a GUI app, so it is exec'd directly instead of through
-    # `open` and KeepAlive restarts it if it exits. On launch it forks
-    # ~/.config/borders/bordersrc, which re-invokes bare `borders` to push the
-    # appearance options into this instance — hence PATH must reach the binary,
-    # or the fork dies unnoticed and the borders keep their default look.
-    borders = {
-      enable = true;
-      config = {
-        ProgramArguments = [ "${pkgs.jankyborders}/bin/borders" ];
-        EnvironmentVariables.PATH = "${pkgs.jankyborders}/bin:/usr/bin:/bin";
-        RunAtLoad = true;
-        KeepAlive = true;
-      };
-    };
-
     # Karabiner's key-remapping engine already auto-starts via its own service;
     # this only ensures the app itself is up. `-g -j` launches it in the
     # background and hidden so its settings window does not appear at login.
