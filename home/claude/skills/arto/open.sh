@@ -46,5 +46,7 @@ done
 if pgrep -f "$APP_EXE" >/dev/null 2>&1; then
   exec "$APP_EXE" "$@"
 else
-  exec open -a Arto --args "$@"
+  # Name the bundle by path: `open -a Arto` lets LaunchServices pick any
+  # registered Arto.app, including development builds under target/.
+  exec open -a "${APP_EXE%/Contents/MacOS/arto}" --args "$@"
 fi
