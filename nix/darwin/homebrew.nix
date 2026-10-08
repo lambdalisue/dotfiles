@@ -76,7 +76,6 @@
       "spotify"
       "steam"
       "steermouse"
-      "tailscale-app"
       "thaw"
     ];
   };
