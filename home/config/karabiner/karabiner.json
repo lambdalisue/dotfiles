@@ -329,7 +329,6 @@
                 }
             ],
             "name": "HHKB (US)",
-            "selected": true,
             "simple_modifications": [
                 {
                     "from": { "key_code": "caps_lock" },
@@ -344,6 +343,7 @@
         },
         {
             "name": "Disabled",
+            "selected": true,
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
         {
