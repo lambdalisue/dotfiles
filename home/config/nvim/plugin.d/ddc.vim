@@ -1,3 +1,8 @@
+" ddc is only used as the completion UI for skkeleton
+if empty(globpath(&runtimepath, "autoload/skkeleton.vim"))
+  finish
+endif
+
 call ddc#custom#patch_global('ui', 'native')
 call ddc#custom#patch_global('sources', ['skkeleton'])
 call ddc#custom#patch_global('sourceOptions', #{

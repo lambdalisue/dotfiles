@@ -70,4 +70,4 @@ augroup skkeleton-coc
 augroup END
 
 " Enable Skkeleton only on Insert mode (not on Command/Terminal mode)
-imap <C-j> <Plug>(skkeleton-enable)
+"imap <C-j> <Plug>(skkeleton-enable)
