@@ -28,6 +28,8 @@
     # Formulae that are macOS-specific or not available in nixpkgs
     brews = [
       "ccusage"
+      # Fully qualified: cclens lives in lambdalisue/cclens, not homebrew/core.
+      "lambdalisue/cclens/cclens"
       # Kept on Homebrew (not Nix) for the g-prefixed GNU tools (gtimeout, etc.)
       # that scripts on this machine rely on; nixpkgs' coreutils ships unprefixed.
       "coreutils"
@@ -55,6 +57,8 @@
       "google-chrome"
       "gpg-suite"
       "istat-menus"
+      # Fully qualified: kanaemi lives in kanaemi-app/tap, not homebrew/cask.
+      "kanaemi-app/tap/kanaemi"
       "karabiner-elements"
       "macskk"
       "meetingbar"
@@ -71,6 +75,7 @@
       # (and Touch ID cannot reach that nested context), so the install aborts
       # with "a terminal is required to read the password". Install it by hand
       # instead: `brew install --cask parallels`.
+      "radix"
       "raycast"
       "slack"
       "spotify"

@@ -14,4 +14,8 @@
   "barutsrb/tap"
   # Arto is distributed only from its author's tap, not homebrew/cask.
   "arto-app/tap"
+  # Kanaemi (Japanese IME) is distributed only from its author's tap.
+  "kanaemi-app/tap"
+  # cclens is distributed only from its own tap, not homebrew/core.
+  "lambdalisue/cclens"
 ]
