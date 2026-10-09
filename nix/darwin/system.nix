@@ -108,6 +108,17 @@
     # editing shortcuts in System Settings:
     #   defaults export com.apple.symbolichotkeys - | plutil -convert json -o - -
     CustomUserPreferences = {
+      # Thaw (menu bar manager). Only its behaviour settings are declared: the
+      # rest of the domain is runtime state Thaw rewrites itself (item layout
+      # keyed by localized names, per-display blobs, window frames), and each
+      # key here is written individually, so that state is left intact.
+      "com.stonerl.Thaw" = {
+        SectionDividerStyle = 0;
+        UseDoubleClickToShowAlwaysHiddenSection = true;
+        UseOptionClickToShowAlwaysHiddenSection = true;
+        SUAutomaticallyUpdate = true;
+        SUEnableAutomaticChecks = true;
+      };
       "com.apple.symbolichotkeys" = {
         AppleSymbolicHotKeys = {
           "7" = { enabled = false; value = { type = "standard"; parameters = [ 65535 120 8650752 ]; }; };
