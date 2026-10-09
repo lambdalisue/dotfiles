@@ -82,5 +82,15 @@
       "steermouse"
       "thaw"
     ];
+
+    # Mac App Store apps, installed through `mas` (nix-darwin adds the `mas`
+    # formula itself). `mas` can only install apps already in this Apple
+    # Account's purchase history, so a new app must be "bought" once by hand.
+    # Calendars has no cask at all; Spark's cask (readdle-spark) is the direct
+    # download build, a different app from the App Store one installed here.
+    masApps = {
+      "Calendars" = 608834326;
+      "Spark Desktop" = 6445813049;
+    };
   };
 }
