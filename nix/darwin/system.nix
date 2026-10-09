@@ -24,6 +24,8 @@
         "/Applications/Slack.app"
         "/Applications/Discord.app"
         "/Applications/Ghostty.app"
+        # Copied in by home-manager (targets.darwin.copyApps), not Homebrew.
+        "/Users/${username}/Applications/Home Manager Apps/felis.app"
         "/Applications/Arto.app"
         "/Applications/Obsidian.app"
         "/Applications/Claude.app"
