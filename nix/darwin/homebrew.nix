@@ -40,7 +40,6 @@
     ];
 
     casks = [
-      "1password"
       "aqua-voice"
       # Fully qualified: arto lives in arto-app/tap, not homebrew/cask.
       "arto-app/tap/arto"
