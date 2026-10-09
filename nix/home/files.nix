@@ -48,5 +48,11 @@ in
       link "${dotfilesDir}/home/config/arto/config.json";
     "Library/Application Support/arto/mappings.json".source =
       link "${dotfilesDir}/home/config/arto/mappings.json";
+
+    # Kanaemi (Japanese IME) reads its config from Application Support. Only
+    # config.toml is linked: the user dictionary, learned selections and
+    # downloaded dictionaries next to it are app-written state.
+    "Library/Application Support/kanaemi/config.toml".source =
+      link "${dotfilesDir}/home/config/kanaemi/config.toml";
   };
 }

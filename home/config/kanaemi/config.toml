@@ -1,0 +1,99 @@
+# かなえみの設定
+#
+# 行頭の # を外すと、その設定が効く。書いていない設定は、ここに書いてある値になる。
+# パスは、絶対パスか、このファイルのあるフォルダからの相対パス。
+#
+# キーの書き方：修飾キー（ctrl・cmd・alt・shift）を + でつなぐ（"ctrl+h"、"shift+space"）。
+# キーは 1 文字（"a"・"0"・";"）か、space・enter・esc・backspace・delete・left・right・up・
+# down・home・end・f1〜f12・left-shift・right-shift。
+
+# 辞書の一覧。先の方が優先度が高い。"custom" はユーザーカスタム辞書の位置で、書かなければ先頭になる。
+# この行を書かなければ、ユーザーカスタム辞書のあとに、dictionaries フォルダの .tsv をファイル名の順に読む。
+dictionaries = ["custom", "kanaemi/base/kanaemi-base.kdic", "kanaemi/it/kanaemi-it.kdic", "kanaemi/games/kanaemi-games.kdic", "kanaemi/science/kanaemi-science.kdic", "kanaemi/place/kanaemi-place.kdic", "kanaemi/2026/kanaemi-2026.kdic", "kanaemi/emoji/kanaemi-emoji.kdic", "kanaemi/emoticon/kanaemi-emoticon.kdic", "kanaemi/symbol/kanaemi-symbol.kdic", "kanaemi/person/kanaemi-person.kdic", "builtin:date", "builtin:time", "builtin:year", "builtin:random"]
+
+# 未確定文字列の印。空でない文字列で、改行とタブを含まない。
+#[marks]
+#hold = ""
+#reading = "›"
+#candidate = "»"
+#okurigana = "*"
+#registration = " « "
+#cursor = "|"
+
+# 上から順に重ねるローマ字の表。用意された表の名前か、表のファイルのパス。
+# 用意された表：full-width・hepburn・kunrei・input-aids・z-symbols・azik。
+[romaji]
+keep_unfinished = true
+tables = ["full-width", "hepburn", "kunrei", "input-aids", "z-symbols"]
+
+# 入力中、割り当てのない Cmd・Ctrl・Option 付きのキーは何もしない。
+# ここに書いた修飾キー（"cmd"・"ctrl"・"alt"）のキーは、確定してからアプリに渡す。
+[keys]
+pass_while_composing = []
+
+# キーの割り当て。"押したキー" = "扱うキー"。既定の割り当てに足し、同じキーなら置き換え、"none" で外す。
+# 扱うキーには、ほかに "register"（登録モードへ）を書ける。
+
+# 読みモード
+[keys.reading]
+"space#hold" = "@begin"
+#"backspace" = "@backspace"
+#"space" = "@next"
+#"delete" = "@delete"
+#"ctrl+h" = "backspace"
+#"ctrl+g" = "esc"
+#"ctrl+j" = "enter"
+#"ctrl+m" = "enter"
+#"ctrl+b" = "left"
+#"ctrl+f" = "right"
+#"ctrl+a" = "home"
+#"ctrl+e" = "end"
+#"ctrl+d" = "delete"
+#"ctrl+n" = "@next"
+#"ctrl+p" = "@previous"
+
+# 候補モード
+[keys.candidates]
+"space#hold" = "@begin"
+#"backspace" = "@backspace"
+#"space" = "@next"
+#"ctrl+h" = "backspace"
+#"ctrl+g" = "esc"
+#"ctrl+j" = "enter"
+#"ctrl+m" = "enter"
+#"ctrl+n" = "space"
+#"ctrl+p" = "shift+space"
+#"0" = "@register"
+
+# 登録モード（登録する文字列を打っているとき）
+[keys.registration]
+"space#hold" = "@begin"
+#"ctrl+h" = "backspace"
+#"ctrl+g" = "esc"
+#"ctrl+j" = "enter"
+#"ctrl+m" = "enter"
+#"ctrl+b" = "left"
+#"ctrl+f" = "right"
+#"ctrl+a" = "home"
+#"ctrl+e" = "end"
+#"ctrl+d" = "delete"
+
+# 未確定文字列がないとき。押したキーを、扱うキーに置き換えてアプリに送る。
+#[keys.application]
+#"ctrl+h" = "backspace"
+#"ctrl+d" = "delete"
+#"ctrl+b" = "left"
+#"ctrl+f" = "right"
+#"ctrl+a" = "home"
+#"ctrl+e" = "end"
+#"ctrl+n" = "down"
+#"ctrl+p" = "up"
+#"ctrl+m" = "enter"
+
+[keys.kana]
+"space#hold" = "@begin"
+
+#[keys.abc]
+
+[control]
+port = 50123
