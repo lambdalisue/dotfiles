@@ -17,7 +17,7 @@
     # Pinned to a release tag and nixpkgs NOT followed: only tagged builds of
     # felis's own lock are in nix-cache.natsukium.com; anything else compiles
     # the Rust workspace locally. Bump the tag to upgrade.
-    felis.url = "github:felis-terminal/felis/v0.1.1";
+    felis.url = "github:felis-terminal/felis/v0.1.4";
 
     # `mmdr`, the mermaid renderer the figures Claude Code plugin tries first;
     # it is not packaged in nixpkgs.
