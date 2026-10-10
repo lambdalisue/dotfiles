@@ -1,0 +1,2 @@
+# Copy to .envrc and run `direnv allow` to enter the Nix dev shell automatically.
+use flake

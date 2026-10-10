@@ -1,0 +1,5 @@
+/target
+/.envrc
+.direnv/
+result
+/.claude/worktrees/

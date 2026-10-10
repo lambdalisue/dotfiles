@@ -1,0 +1,14 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+# A placeholder: the tag is the only record of the version, and the release
+# workflow stamps it here before building and publishing.
+version = "0.0.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/{{owner}}/{{project}}"
+
+[workspace.dependencies]
+{{project}}-core = { path = "crates/core", version = "0.0.0" }

@@ -1,0 +1,15 @@
+{
+  "name": "{{project}}",
+  "owner": {
+    "name": "Alisue",
+    "email": "lambdalisue@gmail.com"
+  },
+  "description": "{{description}}",
+  "plugins": [
+    {
+      "name": "{{project}}",
+      "source": "./plugins/{{project}}",
+      "description": "Use {{project}} from Claude Code."
+    }
+  ]
+}

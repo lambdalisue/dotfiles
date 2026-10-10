@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A pull request only needs its latest commit checked. A run on main waits
+# for the one before it instead of cancelling it, so each one finishes and
+# saves the caches that pull requests start from.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v31.11.1
+        if: runner.os != 'Windows'
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      # The store the development shell comes from. Only an exact match is
+      # restored, and only main saves, so pull requests cannot evict the
+      # caches each other start from.
+      - uses: nix-community/cache-nix-action@v7.0.2
+        if: runner.os != 'Windows'
+        with:
+          primary-key: nix-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.nix', 'flake.lock', 'rust-toolchain.toml') }}
+          save: ${{ github.ref == 'refs/heads/main' }}
+      # Load the development shell (flake.nix) into the job, so the steps
+      # below run the same commands on every OS.
+      - uses: nicknovitski/nix-develop@v1.2.1
+        if: runner.os != 'Windows'
+      # Nix does not run on Windows: rustup reads rust-toolchain.toml, and
+      # just runs the recipes with the runner's Git Bash.
+      - uses: taiki-e/install-action@v2.87.27
+        if: runner.os == 'Windows'
+        with:
+          tool: just
+      - uses: Swatinem/rust-cache@v2.9.2
+        with:
+          save-if: ${{ github.ref == 'refs/heads/main' }}
+      # The same gate as local development (justfile).
+      - run: just ci
+        env:
+          CI: "1"

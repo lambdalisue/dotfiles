@@ -1,0 +1,11 @@
+{
+  "name": "{{project}}",
+  "description": "Use {{project}} from Claude Code.",
+  "author": {
+    "name": "Alisue",
+    "email": "lambdalisue@gmail.com"
+  },
+  "homepage": "https://github.com/{{owner}}/{{project}}",
+  "repository": "https://github.com/{{owner}}/{{project}}",
+  "license": "MIT"
+}

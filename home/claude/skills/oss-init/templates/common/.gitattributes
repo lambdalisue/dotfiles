@@ -1,0 +1,3 @@
+# Check text out with LF on every OS, so a Windows checkout builds and tests
+# the same bytes as the others.
+* text=auto eol=lf
