@@ -267,6 +267,14 @@ bundleId = "com.apple.finder"
 id = "D731B7CC-E2CA-4DF2-AC1A-2771B4582556"
 layout = "float"
 
+[[appRules]]
+appNameSubstring = "kanaemi-settings"
+axRole = "AXWindow"
+axSubrole = "AXStandardWindow"
+bundleId = ""
+id = "B9C258E5-DA6D-45CB-8B7D-4567653DBAE2"
+layout = "float"
+
 [[hotkeys]]
 binding = "Option+Space"
 id = "toggleScratchpad.1"
