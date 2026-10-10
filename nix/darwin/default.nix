@@ -56,6 +56,23 @@
       netrc-file = "/Users/${username}/.config/nix/netrc";
     };
 
+  # sprout guests are NixOS (aarch64-linux) closures, and a Mac cannot build
+  # their derivations natively. This runs a small NixOS VM as a remote builder
+  # (launchd starts it on demand). `ephemeral` wipes its store on every boot,
+  # so it never grows into a second copy of the Nix store.
+  nix.linux-builder = {
+    enable = true;
+    ephemeral = true;
+    maxJobs = 4;
+    config.virtualisation = {
+      cores = 6;
+      darwin-builder = {
+        diskSize = 40 * 1024;
+        memorySize = 8 * 1024;
+      };
+    };
+  };
+
   system.primaryUser = username;
 
   # Use fish as the login shell. `programs.fish.enable` generates
