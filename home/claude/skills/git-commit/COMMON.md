@@ -13,6 +13,11 @@ everything here applies to all of them unless the SKILL.md overrides it.
 
 ## Conventions
 
+- **The repository's documented convention wins**: before writing any
+  message, check `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md` and
+  `.gitmessage` at the repo root for a commit-message convention. If one
+  exists, follow it in place of the defaults below, which apply only when
+  the repository documents nothing.
 - **Conventional Commits**: `<type>[scope]: <subject>` + body (the WHY) +
   footer; breaking changes use `feat!`/`fix!` only.
 - **Commit = WHY** (t-wada): the body explains why, not what. Message

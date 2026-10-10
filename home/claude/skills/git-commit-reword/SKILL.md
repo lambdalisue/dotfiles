@@ -27,9 +27,9 @@ code is never touched. Commits whose messages are already good are left
 untouched.
 
 **When a message needs reword**: it is uninformative (e.g., `Update`, `wip`,
-`fix`, bare filenames), does not follow Conventional Commits, mislabels the
-change type, or its body fails to explain WHY for a non-trivial change. Also
-reword when **the message no longer matches the commit's actual content** —
+`fix`, bare filenames), does not follow the repository's commit convention
+(per COMMON.md), mislabels the change, or its body fails to explain WHY for
+a non-trivial change. Also reword when **the message no longer matches the commit's actual content** —
 e.g., fixups squashed in grew or changed the diff so the original
 subject/body now under- or mis-describes what the commit really does. Always
 judge the message against the commit's **current** full diff, not its
@@ -51,7 +51,7 @@ clear** — avoid needless churn.
 4. **Judge & draft**: re-evaluate each message against the conventions,
    folding in the optional `context`. Decide per commit: keep as-is, or
    reword. For each commit needing reword, draft an improved message
-   (Conventional Commits, subject + blank line + WHY-focused body).
+   (the convention per COMMON.md, subject + blank line + WHY-focused body).
 
 5. **Execute** (directly via Bash) — only if at least one commit needs
    reword:
