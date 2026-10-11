@@ -9,7 +9,7 @@
 
 # 辞書の一覧。先の方が優先度が高い。"custom" はユーザーカスタム辞書の位置で、書かなければ先頭になる。
 # この行を書かなければ、ユーザーカスタム辞書のあとに、dictionaries フォルダの .tsv をファイル名の順に読む。
-dictionaries = ["custom", "kanaemi/base/kanaemi-base.kdic", "kanaemi/it/kanaemi-it.kdic", "kanaemi/games/kanaemi-games.kdic", "kanaemi/science/kanaemi-science.kdic", "kanaemi/place/kanaemi-place.kdic", "kanaemi/2026/kanaemi-2026.kdic", "kanaemi/emoji/kanaemi-emoji.kdic", "kanaemi/emoticon/kanaemi-emoticon.kdic", "kanaemi/symbol/kanaemi-symbol.kdic", "kanaemi/person/kanaemi-person.kdic", "builtin:date", "builtin:time", "builtin:year", "builtin:random"]
+dictionaries = ["custom", "kanaemi/base/kanaemi-base.kdic", "kanaemi/it/kanaemi-it.kdic", "kanaemi/games/kanaemi-games.kdic", "kanaemi/science/kanaemi-science.kdic", "kanaemi/place/kanaemi-place.kdic", "kanaemi/2026/kanaemi-2026.kdic", "kanaemi/emoji/kanaemi-emoji.kdic", "kanaemi/emoticon/kanaemi-emoticon.kdic", "kanaemi/symbol/kanaemi-symbol.kdic", "kanaemi/person/kanaemi-person.kdic", "macOS のユーザ辞書.kdic", "builtin:date", "builtin:time", "builtin:year", "builtin:random"]
 
 # 未確定文字列の印。空でない文字列で、改行とタブを含まない。
 #[marks]
