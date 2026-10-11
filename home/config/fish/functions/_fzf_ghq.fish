@@ -1,5 +1,5 @@
-# cd to a ghq-managed repository selected with fzf (Ctrl-x Ctrl-g).
-function _fzf_ghq
+# cd to a ghq-managed repository selected with fzf (Ctrl-o g).
+function _fzf_ghq --description 'cd to a ghq-managed repository selected with fzf'
     if not type -q ghq
         echo 'A "ghq" command is not found.'
         return 1

@@ -1,5 +1,5 @@
-# Insert a kubernetes pod name selected with fzf (Ctrl-x Ctrl-p).
-function _fzf_k8s_pods
+# Insert a kubernetes pod name selected with fzf (Ctrl-o p).
+function _fzf_k8s_pods --description 'Insert a kubernetes pod name selected with fzf'
     if not type -q kubectl
         echo 'A "kubectl" command is not found.'
         return 1

@@ -1,5 +1,5 @@
-# cd to a git worktree selected with fzf (Ctrl-x Ctrl-w).
-function _fzf_worktree
+# cd to a git worktree selected with fzf (Ctrl-o w).
+function _fzf_worktree --description 'cd to a git worktree selected with fzf'
     if not type -q git
         echo 'A "git" command is not found.'
         return 1

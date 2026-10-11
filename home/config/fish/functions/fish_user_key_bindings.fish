@@ -11,8 +11,8 @@ function fish_user_key_bindings
     bind ctrl-p history-prefix-search-backward
     bind ctrl-n history-prefix-search-forward
 
-    # Edit the command line in $EDITOR with Ctrl-x Ctrl-e (zsh: edit-command-line)
-    bind ctrl-x,ctrl-e edit_command_buffer
+    # Edit the command line in $EDITOR with Ctrl-o e (zsh: edit-command-line)
+    bind ctrl-o,e edit_command_buffer
 
     # Delete a path component with Ctrl-w (zsh: WORDCHARS excluded `/`)
     bind ctrl-w backward-kill-path-component
@@ -21,11 +21,19 @@ function fish_user_key_bindings
     bind ctrl-d delete-char
 
     # fzf widgets (zsh: abindkey ...)
+    #
+    # Chords live under Ctrl-o rather than Ctrl-x: with Caps Lock as Ctrl,
+    # Ctrl-x Ctrl-<key> keeps the left pinky down through two left-hand keys,
+    # while Ctrl-o splits the prefix across both hands and the second key is
+    # pressed without Ctrl. Ctrl-o is free in fish's emacs preset.
     bind ctrl-r _fzf_history
-    bind ctrl-x,ctrl-d _fzf_cdr
-    bind ctrl-x,ctrl-b _fzf_bindkey
-    bind ctrl-x,ctrl-k _fzf_kill
-    bind ctrl-x,ctrl-g _fzf_ghq
-    bind ctrl-x,ctrl-w _fzf_worktree
-    bind ctrl-x,ctrl-p _fzf_k8s_pods
+    bind ctrl-o,o _fzf_menu
+    bind ctrl-o,d _fzf_cdr
+    bind ctrl-o,k _fzf_kill
+    bind ctrl-o,g _fzf_ghq
+    bind ctrl-o,w _fzf_worktree
+    bind ctrl-o,p _fzf_k8s_pods
+
+    # Reload the configuration with Ctrl-o r
+    bind ctrl-o,r reload
 end

@@ -1,8 +1,8 @@
-# cd to a recently visited directory selected with fzf (Ctrl-x Ctrl-d).
+# cd to a recently visited directory selected with fzf (Ctrl-o d).
 #
 # fish has no zsh-style `cdr`, so this reads the recent-dirs list maintained
 # by conf.d/recent_dirs.fish.
-function _fzf_cdr
+function _fzf_cdr --description 'cd to a recently visited directory selected with fzf'
     set -l file "$XDG_CACHE_HOME/fish/recent-dirs"
     if not test -f $file
         echo 'No recent directories recorded yet.'
