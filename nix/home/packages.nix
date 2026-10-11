@@ -37,6 +37,13 @@
     zat  # code outline viewer; the `zat` rule in home/claude/rules/tools tells agents to reach for it first
     zsh
 
+    # Renderers the fish cd-style fzf widgets preview directories with: glow
+    # for a Markdown README, bat for any other README, eza for the tree shown
+    # when there is none.
+    bat
+    eza
+    glow
+
     # Renderers the figures Claude Code plugin draws diagrams with; a block
     # whose renderer is missing stays as plain code.
     d2
