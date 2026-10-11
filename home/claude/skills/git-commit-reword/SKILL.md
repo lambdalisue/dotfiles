@@ -55,23 +55,30 @@ clear** — avoid needless churn.
 
 5. **Execute** (directly via Bash) — only if at least one commit needs
    reword:
-   1. Backup: `git backup "before reword"` (or
-      `git branch backup/$(date +%s) HEAD` if the alias is unavailable).
-   2. For each commit needing reword, create a reword fixup commit
-      (Git 2.32+):
-      ```bash
-      git commit --allow-empty --fixup=reword:<sha> -m "$(cat <<'EOF'
-      <new-message>
-      EOF
-      )"
+   1. Backup: `git backup "before reword"`, called alone.
+   2. For each commit needing reword, write an explicit `amend!` message to
+      a file in the scratchpad with the Write tool. The first line is
+      `amend! ` followed by the target commit's **original subject, verbatim**
+      (autosquash matches on it), then a blank line, then the full new
+      message:
       ```
-      For older Git, use an explicit `amend!` commit:
-      ```bash
-      git commit --allow-empty -m "amend! $(git log -1 --format=%s <sha>)" -m "$(cat <<'EOF'
-      <new-message>
-      EOF
-      )"
+      amend! <original subject of <sha>>
+
+      <new subject>
+
+      <new body and trailers>
       ```
+   3. Commit it from the file:
+      ```bash
+      git commit --allow-empty --cleanup=whitespace -F <message-file>
+      ```
+
+   Always use this form. `--fixup=reword:<sha>` cannot be combined with
+   `-F` (git refuses: `options '-F' and '--fixup' cannot be used
+   together`), and its `-m "$(cat <<'EOF' …)"` alternative is rejected
+   inside an entered worktree, which refuses heredocs and command
+   substitution. `--cleanup=whitespace` keeps lines starting with `#` (such
+   as issue references) that the default cleanup would strip.
 
    **Forbidden**: `git commit --amend`, `git rebase`, `git stash`. Only
    create `--allow-empty` reword fixup commits; the user controls the rebase.
