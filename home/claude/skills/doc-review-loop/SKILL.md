@@ -30,8 +30,8 @@ For the codex-based reviewer instead, use `/doc-review-codex-loop`. For code, us
 - **Same output shape as the bundled `/code-review`.** Each round reports the
   findings list with verdicts and outcomes, exactly as `/doc-review --fix` would.
   The loop adds one line per round: the self-check answer.
-- **Never commit or push.** Commits belong to the `/git-commit` family on explicit
-  user request. End by reporting the document is ready.
+- **Never reshape changes or push.** Fixes land in the current change `@`;
+  splitting them out belongs to `/jj-commit` on explicit user request. End by reporting the document is ready.
 - **Diminishing returns is a stop condition, not a nuisance.** Every round must
   answer, in writing, whether it has degenerated into nitpicking — Step C.
 - **Carry findings forward in a ledger.** Convergence is judged against the ledger

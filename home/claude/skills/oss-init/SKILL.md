@@ -90,8 +90,8 @@ Then fill in what the templates leave open:
 
 ## 4. Commit order
 
-Lay the files down in this order and propose one commit per step. Commit only
-when the user asks, through the `/git-commit` family.
+Lay the files down in this order, one jj change per step: open each step's
+change with its description before writing its files (`~/.claude/rules/jj/workflow.md`).
 
 1. init (empty, or `.gitignore` only)
 2. LICENSE

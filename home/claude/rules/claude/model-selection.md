@@ -17,8 +17,8 @@ opts):
 | Ultra-hard investigation | `fable` | ONLY when the user explicitly asks for this tier, or when a lower-tier agent got stuck / made no progress |
 | Investigation / research | `opus` | Explore, Plan, general-purpose — codebase exploration, planning, root-cause analysis |
 | Implementation | `opus` | code-writer already pins `model: opus` in frontmatter |
-| Routine todo-style multi-step tasks | `sonnet` | Summaries, conflict resolution, checklist execution (git-resolve) |
-| Trivial mechanical tasks | `haiku` | Single-purpose mechanical work (git-rebase) |
+| Routine todo-style multi-step tasks | `sonnet` | Summaries, checklist execution, conflict resolution (jj-resolve) |
+| Trivial mechanical tasks | `haiku` | Single-purpose mechanical work |
 
 Custom agents in `~/.claude/agents/` pin their tier via `model:`
 frontmatter — keep new agent definitions consistent with this table.

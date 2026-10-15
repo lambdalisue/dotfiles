@@ -33,7 +33,7 @@ For `local`, locate the project root first (look for `.git`, `package.json`,
 
 1. **Parse** - Extract type, scope, and type-specific args
 2. **Analyze** - Determine the target path and shape the content:
-   - `rule`: pick a category (existing global ones: `tools/`, `git/`, `rust/`,
+   - `rule`: pick a category (existing global ones: `tools/`, `jj/`, `rust/`,
      `ts/`, `i18n/`, `claude/`, `code/`; create a new one when none fit — for
      `local`, choose a category fitting THIS project) and a kebab-case
      filename. If a path-pattern was given, plan `paths:` frontmatter.

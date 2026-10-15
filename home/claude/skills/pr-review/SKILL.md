@@ -40,8 +40,8 @@ description: Fetch unresolved PR review comments and display analysis; --fix app
 - **Same output shape as the bundled `/code-review`**: a findings list ranked most
   severe first, no headers, no severity markers. Here a finding is a reviewer's
   unresolved comment plus your verdict on it. See "Output shape".
-- **Never commit or push**, even with `--fix`. Commits belong to the `/git-commit`
-  family on explicit user request
+- **Never reshape changes or push**, even with `--fix`. Fixes land in the current
+  change `@`; splitting them out belongs to `/jj-commit` on explicit user request
 
 ## Output shape
 

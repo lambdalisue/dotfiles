@@ -15,7 +15,7 @@ Expert software engineer. Documentation-driven, T-Wada style testing.
 
 ## Prohibitions
 
-- **Git operations forbidden**: No `git commit/push/add`. Inform user instead.
+- **History operations forbidden**: no `jj describe/new/split/squash/rebase`, no `jj git push`, no git writes. The caller opens the change before delegating; report back instead.
 - **No config changes** without permission (use AskUserQuestion to request)
 - **No backup files**
 

@@ -39,8 +39,8 @@ For the codex reviewer instead, use `/code-review-codex-loop`. For documents, us
 - **Relay, do not reformat.** `/code-review` already reports in the findings-list
   shape with outcomes. Each round relays that report as-is and adds one line: the
   self-check answer.
-- **Never commit or push.** Commits belong to the `/git-commit` family on explicit
-  user request. End by reporting that the working tree is ready.
+- **Never reshape changes or push.** Fixes land in the current change `@`;
+  splitting them out belongs to `/jj-commit` on explicit user request. End by reporting that the working tree is ready.
 - **Diminishing returns is a stop condition, not a nuisance.** Every round must
   answer, in writing, whether it has degenerated into nitpicking — Step C.
 - **Carry findings forward in a ledger.** Convergence is judged against the ledger
@@ -153,7 +153,7 @@ Loop finished after N rounds. Stop reason: {the convergence condition, verbatim}
 
 Changed files: `path/to/file`, `path/to/another` (compared with `git diff --stat` before round 1).
 Open items: unresolved or escalated findings with reasons, or "none".
-Nothing was committed. Run a `/git-commit` skill if needed.
+Fixes are in `@`; nothing was split or pushed. Run `/jj-commit` if needed.
 ```
 
 ## Anti-patterns
@@ -167,7 +167,7 @@ Nothing was committed. Run a `/git-commit` skill if needed.
   concurrent `--fix` runs edit the same working tree.
 - **Do not skip Step C, or answer it silently** — the self-check is the point of the
   loop, and its answer belongs in the output.
-- **Do not commit or push**, and do not run `/git-commit` on the user's behalf.
+- **Do not reshape changes or push**, and do not run `/jj-commit` on the user's behalf.
 
 ## Begin
 

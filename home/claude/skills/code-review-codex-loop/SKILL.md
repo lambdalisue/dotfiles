@@ -30,8 +30,8 @@ reviewer instead of codex, use `/code-review-loop`.
 - **Same output shape as the bundled `/code-review`.** Each round reports the
   findings list with verdicts and outcomes, exactly as `/code-review-codex --fix`
   would. The loop adds one line per round: the self-check answer.
-- **Never commit or push.** Commits belong to the `/git-commit` family on explicit
-  user request. End by reporting that the working tree is ready.
+- **Never reshape changes or push.** Fixes land in the current change `@`;
+  splitting them out belongs to `/jj-commit` on explicit user request. End by reporting that the working tree is ready.
 - **Diminishing returns is a stop condition, not a nuisance.** Every round must
   answer, in writing, whether it has degenerated into nitpicking — Step C.
 - **Carry findings forward in a ledger.** Convergence is judged against the ledger
@@ -160,7 +160,7 @@ Loop finished after N rounds. Stop reason: {the convergence condition, verbatim}
 
 Changed files: `path/to/file`, `path/to/another`.
 Open items: unresolved or escalated findings with reasons, or "none".
-Nothing was committed. Run a `/git-commit` skill if needed.
+Fixes are in `@`; nothing was split or pushed. Run `/jj-commit` if needed.
 ```
 
 ## Anti-patterns
@@ -174,7 +174,7 @@ Nothing was committed. Run a `/git-commit` skill if needed.
   Step D.
 - **Do not skip Step C, or answer it silently** — the self-check is the point of the
   loop, and its answer belongs in the output.
-- **Do not commit or push**, and do not run `/git-commit` on the user's behalf.
+- **Do not reshape changes or push**, and do not run `/jj-commit` on the user's behalf.
 - **Do not re-litigate closed findings** — once marked wrong or no change needed
   with a reason, they stay closed for the rest of the loop.
 - **Do not apply a finding you could not confirm** — an unverified finding that

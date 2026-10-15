@@ -27,8 +27,8 @@ description: Code review using OpenAI Codex CLI with project context (rules, dif
   severe first, no headers, no severity markers. Each finding is one line of
   `` `path:line` — one-sentence defect `` plus a category tag, followed by the
   concrete failure scenario. See "Output shape".
-- **Never commit or push**, even with `--fix`. Commits belong to the `/git-commit`
-  family on explicit user request.
+- **Never reshape changes or push**, even with `--fix`. Fixes land in the current
+  change `@`; splitting them out belongs to `/jj-commit` on explicit user request.
 
 ## Output shape
 

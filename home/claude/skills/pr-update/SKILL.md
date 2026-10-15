@@ -1,7 +1,7 @@
 ---
 name: pr-update
 disable-model-invocation: true
-allowed-tools: Bash(git branch:*), Bash(git log:*), Bash(git diff:*), Bash(gh as:*)
+allowed-tools: Bash(jj log:*), Bash(jj diff:*), Bash(gh as:*)
 argument-hint: "[PR_NUMBER] Optional PR number to update"
 description: Update the title and body of an existing pull request
 ---
@@ -12,18 +12,18 @@ The user invoking `/pr-update` IS the explicit intent to update the PR — do NO
 
 ## Context
 
-!`git branch --show-current`
-!`gh as -q gh pr view --json number,title,body,baseRefName,headRefName --jq '"\(.number) \(.headRefName) -> \(.baseRefName)\nTitle: \(.title)\nBody:\n\(.body)"' 2>/dev/null || echo "No PR found for current branch"`
+!`jj log --no-graph -r 'heads(::@ & bookmarks())' -T '"Bookmark: " ++ local_bookmarks.map(|b| b.name()).join(" ") ++ "\n"'`
+!`gh as -q gh pr view "$(jj log --no-graph -r 'heads(::@ & bookmarks())' -T 'local_bookmarks.map(|b| b.name()).join(" ")')" --json number,title,body,baseRefName,headRefName --jq '"\(.number) \(.headRefName) -> \(.baseRefName)\nTitle: \(.title)\nBody:\n\(.body)"' 2>/dev/null || echo "No PR found for the current bookmark"`
 
 ## Principles
 
 **Target PR**:
 - If PR number is provided as argument, use that PR
-- Otherwise, find PR associated with current branch via `gh as -q gh pr view`
+- Otherwise, find the PR whose head is the nearest bookmark at or below `@` (`gh as -q gh pr view <bookmark>`) — a jj checkout has no current branch
 
 **Language**: Match the language of the existing PR title and body. Default to English if unclear.
 
-**Scope**: Use only `origin/<base>..HEAD` diff for analysis.
+**Scope**: Use only the `<base>@origin..<bookmark>` range for analysis.
 
 **Title**: Concise summary of all changes (imperative mood)
 
@@ -35,18 +35,18 @@ The user invoking `/pr-update` IS the explicit intent to update the PR — do NO
 
 1. **Identify PR** - Determine target PR number:
    - If argument provided: use that PR number
-   - Otherwise: run `gh as -q gh pr view --json number --jq '.number'` to get PR for current branch
-   - If no PR exists for the current branch, report it and **STOP immediately**.
+   - Otherwise: run `gh as -q gh pr view <bookmark> --json number --jq '.number'`, where `<bookmark>` is the nearest bookmark at or below `@` (see Context)
+   - If there is no bookmark or no PR for it, report it and **STOP immediately**.
 
 2. **Fetch Current PR** - Get current title, body, and base branch:
    ```bash
    gh as -q gh pr view <number> --json title,body,baseRefName,headRefName
    ```
 
-3. **Analyze Changes** - Review commits and diffs from base branch:
+3. **Analyze Changes** - Review the changes and diffs on top of the base branch:
    ```bash
-   git log --oneline origin/<base>..HEAD
-   git diff --stat origin/<base>..HEAD
+   jj log -r '<base>@origin..<bookmark>'
+   jj diff --stat -r '<base>@origin..<bookmark>'
    ```
 
 4. **Detect Language** - Check the language of the existing PR title/body
@@ -65,12 +65,12 @@ The user invoking `/pr-update` IS the explicit intent to update the PR — do NO
    - [ ] <test items>
    ```
 
-6. **Update** - Execute immediately, without asking for approval (the `/pr-update` invocation is the explicit permission). Pass the body via a HEREDOC to preserve formatting:
+6. **Update** - Execute immediately, without asking for approval (the `/pr-update` invocation is the explicit permission). Write the body to a scratchpad file with the Write tool to preserve formatting:
    ```bash
-   gh as -q gh pr edit <number> --title "<title>" --body "<body>"
+   gh as -q gh pr edit <number> --title "<title>" --body-file <file>
    ```
    Present the PR URL to the user.
 
 ## Begin
 
-Identify the target PR (from argument or current branch), fetch current title and body, analyze commits, draft updated content, and update the PR immediately. Do NOT ask for approval — the `/pr-update` invocation is the explicit permission.
+Identify the target PR (from argument or current branch), fetch current title and body, analyze the changes, draft updated content, and update the PR immediately. Do NOT ask for approval — the `/pr-update` invocation is the explicit permission.
