@@ -11,7 +11,7 @@ tabRailAppIcons = false
 
 [borders]
 enabled = true
-width = 4.0
+width = 2.0
 
 [borders.color]
 alpha = 1.0
@@ -19,13 +19,19 @@ blue = 0.979300037944676
 green = 1.0
 red = 0.08458520228437894
 
+[borders.darkColor]
+alpha = 1.0
+blue = 0.44859564304351807
+green = 0.9877288937568665
+red = 0.9129028916358948
+
 [borders.glow]
 enabled = true
 opacity = 0.6
 radius = 8.0
 
 [borders.gradient]
-direction = "topLeftToBottomRight"
+direction = "topRightToBottomLeft"
 enabled = true
 
 [borders.gradient.end]
@@ -36,9 +42,9 @@ red = 0.0
 
 [borders.gradient.start]
 alpha = 1.0
-blue = 1.0
-green = 0.4
-red = 0.0
+blue = 0.2049306333065033
+green = 0.8942689895629883
+red = 0.9782732129096985
 
 [clipboard]
 historyEnabled = false
@@ -128,9 +134,9 @@ visibleContainerCount = 2
 [overview]
 enabled = true
 invertScrollDirection = false
-matchFocusBorder = true
+matchFocusBorder = false
 mouseScrollSpeed = 1.0
-zoom = 0.75
+zoom = 0.8
 
 [overview.backdrop]
 alpha = 1.0
@@ -243,23 +249,23 @@ deduplicateAppIcons = false
 enabled = true
 excludedBundleIDs = []
 height = 28.0
-hideEmptyWorkspaces = false
-hideInNativeFullscreen = false
+hideEmptyWorkspaces = true
+hideInNativeFullscreen = true
 hoverPreviewsEnabled = true
 notchActiveZoneWidth = 180.0
 notchMode = "moveBelowMenuBar"
 notificationBadgeRefreshIntervalSeconds = 5.0
-notificationBadges = "off"
+notificationBadges = "dot"
 position = "overlappingMenuBar"
 reserveLayoutSpace = false
 revealHoldMilliseconds = 100.0
 revealModifier = "off"
 showAccentHighlights = true
-showFloatingWindows = false
+showFloatingWindows = true
 showItemBackgrounds = true
 showLabels = true
 solidBlackBackground = false
-systemStatsButton = false
+systemStatsButton = true
 transparentBackground = false
 windowLevel = "popup"
 xOffset = 0.0
@@ -278,7 +284,7 @@ axSubrole = "AXStandardWindow"
 bundleId = "com.lambdalisue.Arto"
 id = "459D2E76-C006-4E8B-B50B-BF51CE6774A9"
 layout = "float"
-titleSubstring = "Preferences"
+titleSubstring = "(設定|Preference)"
 
 [[appRules]]
 axRole = "AXWindow"
@@ -1018,16 +1024,22 @@ binding = "Unassigned"
 id = "openCommandPalette"
 
 [[hotkeys]]
-binding = "Option+Slash"
 id = "raiseAllFloatingWindows"
+
+[hotkeys.binding]
+keyCode = 114
+modifiers = 2048
 
 [[hotkeys]]
 binding = "Unassigned"
 id = "toggleFloatingFocus"
 
 [[hotkeys]]
-binding = "Option+Shift+Slash"
 id = "rescueOffscreenWindows"
+
+[hotkeys.binding]
+keyCode = 114
+modifiers = 2560
 
 [[hotkeys]]
 binding = "Option+F"
@@ -1066,7 +1078,7 @@ binding = "Option+Tab"
 id = "toggleWorkspaceLayout"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+Home"
 id = "toggleOverview"
 
 [[hotkeys]]
