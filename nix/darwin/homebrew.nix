@@ -90,6 +90,7 @@
     # download build, a different app from the App Store one installed here.
     masApps = {
       "Calendars" = 608834326;
+      "Pixelmator Pro" = 1289583905;
       "Spark Desktop" = 6445813049;
     };
   };

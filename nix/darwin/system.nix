@@ -1,5 +1,11 @@
-{ username, ... }:
+{ config, username, ... }:
 {
+  # nix-darwin writes user defaults before the Homebrew/mas step, so on a fresh
+  # machine the Dock is rebuilt while the pinned casks and App Store apps are
+  # still missing, and their tiles are dropped. Writing the defaults again once
+  # the apps exist makes a single switch produce the full Dock.
+  system.activationScripts.postActivation.text = config.system.activationScripts.userDefaults.text;
+
   # Touch ID for sudo
   security.pam.services.sudo_local.touchIdAuth = true;
 
