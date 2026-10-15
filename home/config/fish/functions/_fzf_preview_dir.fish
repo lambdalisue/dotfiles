@@ -19,12 +19,30 @@ function _fzf_preview_dir --argument-names dir --description 'Preview a director
     echo ' '(string replace -r "^\Q$HOME\E" '~' -- $dir)
     set_color normal
 
-    if git -C $dir rev-parse --is-inside-work-tree >/dev/null 2>&1
-        set -l branch (git -C $dir branch --show-current)
+    # A colocated jj repository is also a git work tree whose HEAD is always
+    # detached, so ask jj first. jj finds the workspace from the cwd (-R accepts
+    # only a workspace root), and the preview runs in its own fish process, so
+    # the cd leaks nowhere.
+    set -l branch
+    set -l changes
+    set -l last
+    cd $dir
+    if type -q jj; and _jj_in_workspace
+        set branch (_jj_prompt)
+        set changes (count (jj diff --quiet --summary 2>/dev/null))
+        # The newest change that says something: @ itself unless it is still
+        # empty and undescribed.
+        set last (jj log --quiet --no-graph --color=never \
+            -r 'heads(::@ ~ (empty() & description(exact:"")))' \
+            -T 'committer.timestamp().ago() ++ " · " ++ description.first_line()' 2>/dev/null)
+    else if git -C $dir rev-parse --is-inside-work-tree >/dev/null 2>&1
+        set branch (git -C $dir branch --show-current)
         test -n "$branch"; or set branch (git -C $dir rev-parse --short HEAD 2>/dev/null)
-        set -l changes (count (git -C $dir status --porcelain 2>/dev/null))
-        set -l last (git -C $dir log -1 --format='%cr · %s' 2>/dev/null)
+        set changes (count (git -C $dir status --porcelain 2>/dev/null))
+        set last (git -C $dir log -1 --format='%cr · %s' 2>/dev/null)
+    end
 
+    if test -n "$branch"
         set_color magenta
         echo -n "  $branch"
         if test $changes -eq 0
