@@ -177,7 +177,7 @@ untouched. (Determinate's installer is intentionally not used.)
 nix-darwin does on macOS); log out and back in for it to take effect.
 
 Afterwards `just switch` (home-only on Linux) handles day-to-day updates.
-macOS-only entries (Homebrew, Arto, karabiner, omniwm, ssh) are excluded
+macOS-only entries (Homebrew, Arto, omniwm, ssh) are excluded
 automatically. The home-manager target is picked from the host architecture; to
 run it directly instead of via `bootstrap.sh`/`just`:
 

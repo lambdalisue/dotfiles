@@ -36,22 +36,5 @@
         RunAtLoad = true;
       };
     };
-
-    # Karabiner's key-remapping engine already auto-starts via its own service;
-    # this only ensures the app itself is up. `-g -j` launches it in the
-    # background and hidden so its settings window does not appear at login.
-    karabiner = {
-      enable = true;
-      config = {
-        ProgramArguments = [
-          "/usr/bin/open"
-          "-g"
-          "-j"
-          "-a"
-          "Karabiner-Elements"
-        ];
-        RunAtLoad = true;
-      };
-    };
   };
 }

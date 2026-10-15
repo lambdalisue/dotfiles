@@ -43,7 +43,7 @@ home-manager switch --flake .#x86_64-linux     # Fedora etc.
 
 On **Linux** there is no nix-darwin (the distro owns the system); only the
 home-manager step runs. macOS-only pieces (Homebrew, system defaults, and the
-Darwin-gated home entries like Arto/karabiner/omniwm/ssh) are excluded
+Darwin-gated home entries like Arto/omniwm/ssh) are excluded
 automatically off macOS.
 
 ## Architecture
@@ -88,7 +88,6 @@ The repository primarily manages configurations for:
 - **Neovim**: Extensive Vim/Neovim configuration in `home/config/nvim/`
 - **Shell**: Zsh configuration in `home/config/zsh/` and `home/zshenv`
 - **Claude Code**: Rules, skills, commands, and agents in `home/claude/`
-- **Karabiner** (macOS): Keyboard customization in `home/config/karabiner/`
 - **Window Managers**: OmniWM (macOS)
 - **Terminal Emulators**: Ghostty
 

@@ -56,7 +56,6 @@
       "istat-menus"
       # Fully qualified: kanaemi lives in kanaemi-app/tap, not homebrew/cask.
       "kanaemi-app/tap/kanaemi"
-      "karabiner-elements"
       "macskk"
       "meetingbar"
       "monitorcontrol"

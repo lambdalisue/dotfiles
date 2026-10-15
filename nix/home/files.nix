@@ -26,7 +26,6 @@ in
   }
   // lib.optionalAttrs isDarwin {
     # Darwin entries (from .dotfiles_darwin.tsv)
-    "karabiner".source = link "${dotfilesDir}/home/config/karabiner";
     "omniwm".source = link "${dotfilesDir}/home/config/omniwm";
   };
 

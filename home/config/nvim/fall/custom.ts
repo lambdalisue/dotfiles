@@ -117,7 +117,6 @@ const myFilterDirectory = (path: string) => {
     ".coverage",
     `nvim${SEPARATOR}pack`,
     `zsh${SEPARATOR}.addons`,
-    `karabiner${SEPARATOR}automatic_backups`,
   ];
   for (const exclude of excludes) {
     if (path.endsWith(`${SEPARATOR}${exclude}`)) {
