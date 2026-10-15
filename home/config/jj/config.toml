@@ -1,0 +1,33 @@
+"$schema" = "https://docs.jj-vcs.dev/latest/config-schema.json"
+
+[user]
+name = "Alisue"
+email = "lambdalisue@gmail.com"
+
+[ui]
+# Git-style markers read the same in jj, in editors, and to anyone who learned
+# conflict resolution on Git.
+conflict-marker-style = "git"
+
+[git]
+# Colocate every repository and every extra workspace, so `git`, `gh`, and tools
+# that shell out to them keep working. Extra workspaces then become Git
+# worktrees, which Claude Code's EnterWorktree accepts.
+colocate = true
+
+# Work identity for github.com/attmcojp repositories, mirroring the includeIf in
+# ~/.config/git/config.
+[[--scope]]
+--when.repositories = ["~/ghq/github.com/attmcojp"]
+[--scope.user]
+email = "lambdalisue@attm.co.jp"
+
+# Inside Claude Code no one is at the keyboard to answer an editor. Make every
+# command that would open one fail at once instead of hanging the session.
+[[--scope]]
+--when.environments = ["CLAUDECODE=1"]
+[--scope.ui]
+editor = "false"
+diff-editor = "false"
+merge-editor = "false"
+paginate = "never"

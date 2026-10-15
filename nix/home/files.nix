@@ -12,6 +12,8 @@ in
   # Common platform entries (from .dotfiles.tsv)
   xdg.configFile = {
     "git".source = link "${dotfilesDir}/home/config/git";
+    # Only the file: jj keeps per-repository state in ~/.config/jj/repos/.
+    "jj/config.toml".source = link "${dotfilesDir}/home/config/jj/config.toml";
 
     # Unix-like entries (from .dotfiles_unixlike.tsv)
     "fish".source = link "${dotfilesDir}/home/config/fish";

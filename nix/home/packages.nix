@@ -4,7 +4,7 @@
   ...
 }:
 {
-  # git, git-lfs: managed in git.nix
+  # git, git-lfs, jujutsu: managed in git.nix
   # cacert: deliberately absent — the Nix installer already puts nss-cacert in
   #   ~/.nix-profile, and home-manager-path installs into that same profile, so
   #   adding it here makes the profile build fail on a conflicting
