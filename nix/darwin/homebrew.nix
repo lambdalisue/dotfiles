@@ -47,9 +47,7 @@
       "chatgpt"
       "claude"
       "claude-code@latest"
-      # cleanshot is deliberately absent: the license covers 4.x only, and the
-      # cask cannot pin a version (it always tracks the latest, 5.x). CleanShot
-      # X 4.x is installed by hand instead.
+      "cleanshot"
       "discord"
       "docker-desktop"
       "ghostty"
