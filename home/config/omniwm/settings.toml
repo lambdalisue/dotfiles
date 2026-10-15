@@ -92,7 +92,7 @@ mouseMoveModifierKey = "option"
 mouseResizeModifierKey = "option"
 overviewGestureEnabled = false
 overviewGestureFingerCount = 4
-scrollEnabled = false
+scrollEnabled = true
 scrollModifierKey = "optionShift"
 scrollSensitivity = 0.1
 trackpadScrollStyle = "momentum"
@@ -103,7 +103,7 @@ windowResizeEnabled = false
 windowResizeFingerCount = 3
 workspaceSwipeAxis = "vertical"
 workspaceSwipeEnabled = true
-workspaceSwipeFingerCount = 3
+workspaceSwipeFingerCount = 4
 
 [hiddenBar]
 enabled = true
@@ -171,7 +171,7 @@ position = "center"
 widthPercent = 50.0
 
 [routing]
-mode = "macOS"
+mode = "custom"
 
 [[routing.arrangements]]
 id = "69E6D00A-C70A-4F54-9148-132641B2C649"
@@ -192,6 +192,21 @@ monitorName = "PL3272UH"
 gridColumn = 0
 gridRow = 0
 monitorDisplayUUID = "2A8C4537-B89D-466F-9518-F9340990AA75"
+monitorName = "DELL S2725QS"
+
+[[routing.arrangements]]
+id = "853D614E-B856-460B-A023-3C982F400B1B"
+
+[[routing.arrangements.monitors]]
+gridColumn = 1
+gridRow = 0
+monitorDisplayUUID = "6201B067-0EA6-441F-82D2-94E3EC7FF310"
+monitorName = "DELL U4025QW"
+
+[[routing.arrangements.monitors]]
+gridColumn = 0
+gridRow = 0
+monitorDisplayUUID = "689CA75A-B8B1-4495-9BB5-F23F3C7AF25E"
 monitorName = "DELL S2725QS"
 
 [scratchpads]
@@ -984,18 +999,12 @@ binding = "Unassigned"
 id = "openCommandPalette"
 
 [[hotkeys]]
+binding = "Option+Slash"
 id = "raiseAllFloatingWindows"
 
-[hotkeys.binding]
-keyCode = 114
-modifiers = 2048
-
 [[hotkeys]]
+binding = "Option+Shift+Slash"
 id = "rescueOffscreenWindows"
-
-[hotkeys.binding]
-keyCode = 114
-modifiers = 2304
 
 [[hotkeys]]
 binding = "Option+F"
@@ -1026,7 +1035,7 @@ binding = "Unassigned"
 id = "toggleHiddenBarPanel"
 
 [[hotkeys]]
-binding = "Option+Grave"
+binding = "Unassigned"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]
