@@ -4,9 +4,10 @@
 # The bookmark is the nearest one at or below @, with `*` when it is out of
 # sync with its remote and `+N` for the changes stacked between it and @. Flags
 # mark @ with Nerd Font icons, colored by how urgent they are: conflicted
-# (fa-exclamation_triangle, red), divergent (oct-repo_forked, blue),
-# undescribed (fa-pencil, yellow: a message still has to be written) or empty
-# (fa-circle_o, gray).
+# (fa-exclamation_triangle, red), divergent (oct-repo_forked, blue) or
+# undescribed (fa-pencil, yellow: a message still has to be written). An empty
+# @ is the resting state after `jj new`, so it gets no flag, and its missing
+# message is not flagged either until it has content to describe.
 #
 # Colocated repositories keep Git's HEAD detached, so fish_git_prompt can only
 # show a commit hash there; this replaces it.
@@ -20,7 +21,7 @@ function _jj_prompt
         -T 'separate(" ", local_bookmarks.map(|b| b.name() ++ if(!b.synced(), "*"))) ++ "\t"
             ++ if(current_working_copy, change_id.shortest(4) ++ "\t" ++ separate(" ",
                 if(conflict, "conflict"), if(divergent, "divergent"),
-                if(description == "", "undescribed"), if(empty, "empty"))) ++ "\n"' 2>/dev/null)
+                if(description == "" && !empty, "undescribed"))) ++ "\n"' 2>/dev/null)
     or return
     test -n "$lines"; or return
 
@@ -45,8 +46,6 @@ function _jj_prompt
                 set -a out (set_color blue)(set_color normal)
             case undescribed
                 set -a out (set_color yellow)(set_color normal)
-            case empty
-                set -a out (set_color brblack)(set_color normal)
         end
     end
     echo -n (string join ' ' -- $out)
