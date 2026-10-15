@@ -34,6 +34,28 @@ editing — do them without asking. The message conventions (Conventional
 Commits, WHY in the body, the repository's language) are in
 `~/.claude/skills/jj-commit/SKILL.md`.
 
+## Reporting jj state
+
+`@` is a commit, not a staging area. Its content is recorded on every `jj`
+command, so there is no "uncommitted" or "not yet committed" state to report.
+Wording borrowed from Git misleads the user into thinking work is unsaved, and
+invites a pointless `jj new` to "commit" it.
+
+- **Never** say edits "remain in the working copy", "are left uncommitted", or
+  "still need committing". Say which change holds them: "recorded in `@`
+  (`<change id>`, `<description>`)".
+- Report state as the stack: `jj log -r 'trunk()..@'` with change ID and
+  description per line, marking `@`.
+- The states worth naming are jj's own: **described / no description**,
+  **empty / has content**, **pushed / not pushed** (bookmark position vs its
+  remote). Name the ones that apply; skip the rest.
+- Git's view (`git status` shows `@` as uncommitted because Git's `HEAD` is
+  `@-`) is a Git artifact. Mention it only when the user is looking at Git
+  output.
+- Do not run `jj new` just to "finish" a described change. It moves nothing
+  into history that was not already there; the next task's `jj new -m` does
+  the same job when it is actually needed.
+
 ## No interactive commands
 
 Inside Claude Code the jj config sets every editor to `false`, so a command
