@@ -209,16 +209,35 @@ gridRow = 0
 monitorDisplayUUID = "689CA75A-B8B1-4495-9BB5-F23F3C7AF25E"
 monitorName = "DELL S2725QS"
 
+[[routing.arrangements]]
+id = "5FEF59C9-0924-4A95-B868-64CA721CC41E"
+
+[[routing.arrangements.monitors]]
+gridColumn = 1
+gridRow = 0
+monitorDisplayUUID = "768C70DA-9517-4A25-BF2A-FDB0C35DB534"
+monitorName = "DELL U4025QW"
+
+[[routing.arrangements.monitors]]
+gridColumn = 0
+gridRow = 0
+monitorDisplayUUID = "7E820BD3-92FD-4BDE-A41B-28B330123478"
+monitorName = "DELL S2725QS"
+
 [scratchpads]
 
 [scratchpads.labels]
 
 [statusBar]
 showAppNames = false
+showIcon = true
 showWorkspaceName = false
 useWorkspaceId = false
 
 [workspaceBar]
+autoHide = false
+autoHideHideDelayMilliseconds = 0.0
+autoHideRevealDelayMilliseconds = 0.0
 backgroundOpacity = 0.05
 deduplicateAppIcons = false
 enabled = true
@@ -1001,6 +1020,10 @@ id = "openCommandPalette"
 [[hotkeys]]
 binding = "Option+Slash"
 id = "raiseAllFloatingWindows"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleFloatingFocus"
 
 [[hotkeys]]
 binding = "Option+Shift+Slash"
