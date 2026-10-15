@@ -13,7 +13,8 @@ that.
 
 1. **Make sure the repository is a jj repository.** `jj root` fails in a plain
    Git checkout; run `jj git init --colocate` there once. It adds `.jj/` (which
-   Git ignores) and touches nothing else.
+   Git ignores) and touches nothing else. Then track the default branch so it
+   can be pushed later: `jj bookmark track <default branch>@origin`.
 2. **Open the change with its message.** Look at `jj log -r @` first:
    - `@` is empty and has no description → `jj describe -m "<message>"`.
    - Otherwise → `jj new -m "<message>"`. Never overwrite the description of a
