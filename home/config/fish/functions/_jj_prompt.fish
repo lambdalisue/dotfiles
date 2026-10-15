@@ -3,7 +3,9 @@
 #   <bookmark>[*][+N] <change id> [flags]
 # The bookmark is the nearest one at or below @, with `*` when it is out of
 # sync with its remote and `+N` for the changes stacked between it and @. Flags
-# mark @ as conflicted (!), divergent (??), empty (∅) or undescribed (?).
+# mark @ with Nerd Font icons: conflicted (fa-exclamation_triangle), divergent
+# (oct-repo_forked), empty (fa-circle_o) or undescribed (fa-pencil: a message
+# still has to be written).
 #
 # Colocated repositories keep Git's HEAD detached, so fish_git_prompt can only
 # show a commit hash there; this replaces it.
@@ -15,9 +17,9 @@ function _jj_prompt
     set -l lines (jj log --quiet --no-graph --color=never \
         -r '@ | heads(::@ & bookmarks())::@' \
         -T 'separate(" ", local_bookmarks.map(|b| b.name() ++ if(!b.synced(), "*"))) ++ "\t"
-            ++ if(current_working_copy, change_id.shortest(4) ++ "\t" ++ separate("",
-                if(conflict, "!"), if(divergent, "??"), if(empty, "∅"),
-                if(description == "", "?"))) ++ "\n"' 2>/dev/null)
+            ++ if(current_working_copy, change_id.shortest(4) ++ "\t" ++ separate(" ",
+                if(conflict, ""), if(divergent, ""), if(empty, ""),
+                if(description == "", ""))) ++ "\n"' 2>/dev/null)
     or return
     test -n "$lines"; or return
 
