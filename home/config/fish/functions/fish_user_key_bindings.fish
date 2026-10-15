@@ -11,8 +11,15 @@ function fish_user_key_bindings
     bind ctrl-p history-prefix-search-backward
     bind ctrl-n history-prefix-search-forward
 
+    # Ctrl-o chords accept the second key with or without Ctrl held, so
+    # releasing Ctrl late after the prefix still hits the binding.
+    function __bind_ctrl_o --argument-names key
+        bind ctrl-o,$key $argv[2..]
+        bind ctrl-o,ctrl-$key $argv[2..]
+    end
+
     # Edit the command line in $EDITOR with Ctrl-o e (zsh: edit-command-line)
-    bind ctrl-o,e edit_command_buffer
+    __bind_ctrl_o e edit_command_buffer
 
     # Delete a path component with Ctrl-w (zsh: WORDCHARS excluded `/`)
     bind ctrl-w backward-kill-path-component
@@ -27,13 +34,15 @@ function fish_user_key_bindings
     # while Ctrl-o splits the prefix across both hands and the second key is
     # pressed without Ctrl. Ctrl-o is free in fish's emacs preset.
     bind ctrl-r _fzf_history
-    bind ctrl-o,o _fzf_menu
-    bind ctrl-o,d _fzf_cdr
-    bind ctrl-o,k _fzf_kill
-    bind ctrl-o,g _fzf_ghq
-    bind ctrl-o,w _fzf_worktree
-    bind ctrl-o,p _fzf_k8s_pods
+    __bind_ctrl_o o _fzf_menu
+    __bind_ctrl_o d _fzf_cdr
+    __bind_ctrl_o k _fzf_kill
+    __bind_ctrl_o g _fzf_ghq
+    __bind_ctrl_o w _fzf_worktree
+    __bind_ctrl_o p _fzf_k8s_pods
 
     # Reload the configuration with Ctrl-o r
-    bind ctrl-o,r reload
+    __bind_ctrl_o r reload
+
+    functions --erase __bind_ctrl_o
 end
