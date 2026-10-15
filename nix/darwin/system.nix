@@ -3,6 +3,15 @@
   # Touch ID for sudo
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  # Caps Lock → Control for every keyboard, via hidutil. System Settings'
+  # modifier-key remap is stored per host and per keyboard (ByHost), so it never
+  # reaches another machine; Karabiner does the same remap but only once its
+  # permissions are granted by hand. nix-darwin reapplies this at boot too.
+  system.keyboard = {
+    enableKeyMapping = true;
+    remapCapsLockToControl = true;
+  };
+
   system.defaults = {
     # Dock
     dock = {
