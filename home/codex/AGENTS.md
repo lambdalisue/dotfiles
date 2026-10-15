@@ -24,81 +24,77 @@
 - If the repository path contains `attmcojp`, write all comments, log messages, and error messages in **Japanese** unless otherwise instructed
 - For all other repositories, write all comments, log messages, and error messages in **English** unless otherwise instructed
 
-# Git Safety Rules
+# Version Control Is jj — Describe First, Then Implement
 
-## Commit Restriction
+Every repository is driven with **jj (Jujutsu)**, colocated on top of Git. Git
+remains the storage and the wire protocol; jj is the only tool that writes
+history. Never run a `git` command that writes history, the index, refs, or
+worktrees (`commit`, `add`, `rm`, `mv`, `reset`, `restore`, `checkout`,
+`switch`, `rebase`, `merge`, `cherry-pick`, `revert`, `stash`, `pull`, `push`,
+`am`, `tag`, `branch`, `worktree`). Read-only `git` (`log`, `diff`, `show`,
+`blame`, `ls-files`) and `git clone` are fine.
 
-**ABSOLUTELY NEVER COMMIT WITHOUT EXPLICIT USER PERMISSION.**
+## The loop: message first, code second
 
-- MUST use AskUserQuestion before ANY commit operation
-- Permission valid for ONE commit only
-- ONLY commit when user explicitly says "commit" in CURRENT message
-- Show what will be committed and ask final confirmation
+A change is described **before** a single file is edited. The description is
+the scope contract: write down what this change does and why, then implement
+exactly that.
 
-**NEVER run `git commit` directly via the Bash tool.** All commits MUST go through:
-- `/git:commit` — analyze working tree and create atomic commits
-- `/git:commit-staged` — commit already-staged changes
+1. **Make sure the repository is a jj repository.** If `jj root` fails, run
+   `jj git init --colocate` once, then `jj bookmark track <default branch>@origin`
+   so the default branch can be pushed later.
+2. **Open the change with its message.** Look at `jj log -r @` first:
+   - `@` is empty and has no description → `jj describe -m "<message>"`.
+   - Otherwise → `jj new -m "<message>"`. Never overwrite the description of a
+     change that already has content.
+3. **Implement.** jj snapshots the working copy into `@` on every `jj` command;
+   there is no staging and no commit step.
+4. **Keep the message true.** When the scope shifts, rewrite it with
+   `jj describe -m`.
+5. **A second intent gets a second change.** `jj new -m "<that message>"`
+   before editing for it, or, if the edits already landed in `@`,
+   `jj split -m "<message>" <paths>`.
 
-This applies to the main orchestrator AND any manual commit attempts.
-Direct `git add ... && git commit` or `git commit -m "..."` via Bash is **PROHIBITED**.
+Messages follow the repository's documented convention, else Conventional
+Commits (`<type>[scope]: <subject>`, the body explains WHY), in the
+repository's language. One `-m` per paragraph:
+`jj describe -m "<subject>" -m "<body>"`.
 
-## Backup Before Destructive Operations
+## No interactive commands
 
-ALWAYS backup before: `git restore`, `git reset`, `git checkout` (with uncommitted changes), file deletion of uncommitted work.
+Never run a jj command that opens an editor or a diff editor: always pass `-m`
+to `describe` / `new` / `commit` / `split`, select by path rather than `-i`,
+pass `-u` (keep the destination's message) to every `jj squash`, and resolve
+conflicts by editing the marker lines in the file, never with `jj resolve`.
 
-## Git Stash Forbidden
+## Safety
 
-**NEVER use `git stash`** (shared across worktrees → contamination). Use backup branch instead.
+- **Push only when the user asks** (`jj git push -b <bookmark>`). jj does not
+  advance bookmarks by itself: move one with `jj bookmark move <name> --to <rev>`.
+- **Rewriting changes other than `@`** (`jj squash --into`, `jj rebase`,
+  `jj describe -r`, `jj abandon`) only when the user asks.
+- Never pass `--ignore-immutable`; what a remote already holds stays as it is.
+- No backup step: `jj undo` reverts the last operation, and
+  `jj op log` / `jj op restore <op>` return the repository to any earlier point.
+- jj tracks new files automatically (honouring `.gitignore`). Before pushing,
+  check `jj st` / `jj diff --stat -r 'trunk()..@'` for credentials, `.env`
+  files, or large binaries.
+- jj does not run Git hooks. Run the checks a repository's `pre-commit`
+  configuration would run before reporting a change as done.
 
-## Stay in Worktree Directory
+## Git → jj
 
-If starting in `.worktrees/{branch}/`, ALL operations stay there. Use absolute paths to check root state.
-
-# Git Commit Safety Rules
-
-## Forbidden Staging Commands
-
-**ABSOLUTELY NEVER use these commands in ANY commit workflow:**
-
-- `git add -A` — stages ALL files including untracked (dangerous: may include .env, credentials, large binaries)
-- `git add .` — stages all in current directory (dangerous: same risks as `-A`)
-- `git commit -a` / `git commit --all` — auto-stages all modified files (dangerous: bypasses explicit staging)
-
-## Safe Staging Practice
-
-**ALWAYS stage files explicitly by name:**
-
-```bash
-# Good: Explicit file staging
-git add src/parser.ts
-git add tests/parser.test.ts
-
-# Bad: Bulk staging
-git add -A          # FORBIDDEN
-git add .           # FORBIDDEN
-git commit -a       # FORBIDDEN
-```
-
-## Why This Matters
-
-1. **Security**: Prevents accidental commit of `.env`, API keys, credentials
-2. **Intent**: Forces conscious decision about what to commit
-3. **Review**: Makes it easier to review staged changes before committing
-4. **Hygiene**: Prevents large binaries or build artifacts from entering git history
-
-## Enforcement
-
-- All git commit agents and skills MUST verify staging before committing
-- Agents MUST use `git commit -m "<message>"` (never `git commit -a`)
-- If nothing is staged, agents MUST report error and stop (never auto-stage)
-- Commands MUST validate staging status before invoking agents
-
-## Related Rules
-
-See also:
-- `rules/git/safety.md` — General git safety (backup, stash, destructive operations)
-- `agents/git-commit-staged.md` — Commit agent restrictions
-- `commands/git/commit-staged.md` — Commit command workflow
+| Git habit | jj |
+| --- | --- |
+| `git add` / `git commit` | `jj describe -m` / `jj new -m` |
+| `git commit --fixup` + autosquash | `jj squash --into <rev> -u <paths>` or `jj absorb` |
+| `git rebase origin/main` | `jj git fetch` then `jj rebase -b @ -o 'trunk()'` |
+| `git stash` | `jj new <base>` |
+| `git checkout <rev>` | `jj new <rev>` |
+| `git restore <paths>` | `jj restore <paths>` |
+| `git branch` | `jj bookmark` |
+| `git worktree add` | `jj workspace add --name <name> -r 'trunk()' <path>` |
+| `git status` / `log` / `diff` | `jj st` / `jj log` / `jj diff` |
 
 # Set Issue Type on GitHub Issue Creation
 
