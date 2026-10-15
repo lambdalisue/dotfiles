@@ -2,7 +2,7 @@
 # outside a jj repository.
 #   <bookmark>[*][+N] <change id> [flags]
 # The bookmark is the nearest one at or below @, with `*` when it is out of
-# sync with its remote and `+N` for the changes stacked on top of it. Flags
+# sync with its remote and `+N` for the changes stacked between it and @. Flags
 # mark @ as conflicted (!), divergent (??), empty (∅) or undescribed (?).
 #
 # Colocated repositories keep Git's HEAD detached, so fish_git_prompt can only
@@ -26,7 +26,9 @@ function _jj_prompt
     for i in (seq (count $lines))
         set -l bookmarks (string split -f 1 \t -- $lines[$i])
         test -n "$bookmarks"; or continue
-        set -l distance (math $i - 1)
+        # @ itself is not counted: it is always a change of its own, like
+        # git's working tree, and its state is already shown by the flags.
+        set -l distance (math "max($i - 2, 0)")
         test $distance -gt 0; and set bookmarks "$bookmarks+$distance"
         set -a out (set_color green)$bookmarks(set_color normal)
         break
