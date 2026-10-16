@@ -85,10 +85,14 @@
     # Account's purchase history, so a new app must be "bought" once by hand.
     # Calendars has no cask at all; Spark's cask (readdle-spark) is the direct
     # download build, a different app from the App Store one installed here.
+    # Xcode is here rather than relying on the Command Line Tools: from the
+    # macOS 27 SDK, SwiftUI's @State needs the SwiftUIMacros plugin, which only
+    # Xcode ships.
     masApps = {
       "Calendars" = 608834326;
       "Pixelmator Pro" = 1289583905;
       "Spark Desktop" = 6445813049;
+      "Xcode" = 497799835;
     };
   };
 }
