@@ -97,3 +97,8 @@ pass_while_composing = []
 
 [control]
 port = 50123
+
+# 打った語を含むファイルの場所。Mac では iCloud Drive に置き、ほかの Mac と同じ登録と選択を使う。
+[files.macos]
+custom = "~/Library/Mobile Documents/com~apple~CloudDocs/kanaemi/custom.tsv"
+selections = "~/Library/Mobile Documents/com~apple~CloudDocs/kanaemi/selections.tsv"
