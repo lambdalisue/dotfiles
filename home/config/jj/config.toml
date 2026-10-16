@@ -15,6 +15,12 @@ conflict-marker-style = "git"
 # worktrees, which Claude Code's EnterWorktree accepts.
 colocate = true
 
+[aliases]
+# jj has no pull. Fetch advances the tracked trunk bookmark, then rebase carries
+# the current line of work (or a fresh, empty @) onto it. Conflicts are recorded
+# in the rebased changes rather than stopping the command.
+pull = ["util", "exec", "--", "sh", "-c", "jj git fetch && jj rebase -b @ -o 'trunk()'"]
+
 # Work identity for github.com/attmcojp repositories, mirroring the includeIf in
 # ~/.config/git/config.
 [[--scope]]
