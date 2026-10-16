@@ -13,10 +13,6 @@
       "action": "window.new_document"
     },
     {
-      "key": "Cmd+w",
-      "action": "window.close"
-    },
-    {
       "key": "Cmd+o",
       "action": "file.open"
     },
@@ -29,32 +25,16 @@
       "action": "file.reveal_in_finder"
     },
     {
-      "key": "Cmd+p",
-      "action": "file.print"
-    },
-    {
-      "key": "Cmd+Comma",
-      "action": "file.preferences"
+      "key": "Cmd+w",
+      "action": "window.close"
     },
     {
       "key": "Cmd+f",
       "action": "search.open"
     },
     {
-      "key": "Cmd+g",
-      "action": "search.next"
-    },
-    {
-      "key": "Cmd+Shift+g",
-      "action": "search.prev"
-    },
-    {
       "key": "Cmd+b",
       "action": "window.toggle_sidebar"
-    },
-    {
-      "key": "Cmd+Shift+f",
-      "action": "window.toggle_focus_mode"
     },
     {
       "key": "Cmd+0",
@@ -75,28 +55,20 @@
     {
       "key": "Cmd+BracketRight",
       "action": "history.forward"
+    },
+    {
+      "key": "Cmd+p",
+      "action": "file.print"
+    },
+    {
+      "key": "Cmd+Comma",
+      "action": "file.preferences"
     }
   ],
   "global": [
     {
       "key": "Cmd+r",
       "action": "window.reload"
-    },
-    {
-      "key": "Cmd+Enter",
-      "action": "file.open_link"
-    },
-    {
-      "key": "Cmd+Shift+Enter",
-      "action": "file.open_link_in_new_window"
-    },
-    {
-      "key": "Cmd+Shift+Space",
-      "action": "file.preview_link"
-    },
-    {
-      "key": "Cmd+d",
-      "action": "file.toggle_bookmark"
     },
     {
       "key": "Cmd+Slash",
@@ -107,32 +79,180 @@
       "action": "help.show_keyboard_shortcuts"
     },
     {
-      "key": "ArrowDown",
+      "key": "j",
       "action": "scroll.down"
     },
     {
-      "key": "ArrowUp",
+      "key": "k",
       "action": "scroll.up"
     },
     {
-      "key": "PageDown",
+      "key": "Ctrl+d",
+      "action": "scroll.half_page_down"
+    },
+    {
+      "key": "Ctrl+u",
+      "action": "scroll.half_page_up"
+    },
+    {
+      "key": "Ctrl+f",
       "action": "scroll.page_down"
     },
     {
-      "key": "PageUp",
+      "key": "Ctrl+b",
       "action": "scroll.page_up"
     },
     {
-      "key": "Home",
+      "key": "g g",
       "action": "scroll.top"
     },
     {
-      "key": "End",
+      "key": "Shift+g",
       "action": "scroll.bottom"
+    },
+    {
+      "key": "Shift+h",
+      "action": "history.back"
+    },
+    {
+      "key": "Shift+l",
+      "action": "history.forward"
+    },
+    {
+      "key": "/",
+      "action": "search.open"
+    },
+    {
+      "key": "n",
+      "action": "search.next"
+    },
+    {
+      "key": "Shift+n",
+      "action": "search.prev"
+    },
+    {
+      "key": "g r",
+      "action": "file.set_parent_as_root"
+    },
+    {
+      "key": "Ctrl+w t",
+      "action": "window.new_document"
+    },
+    {
+      "key": "Ctrl+w Ctrl+t",
+      "action": "window.new_document"
+    },
+    {
+      "key": "Ctrl+w Shift+t",
+      "action": "window.new"
+    },
+    {
+      "key": "Ctrl+w n",
+      "action": "window.new"
+    },
+    {
+      "key": "Ctrl+w Ctrl+n",
+      "action": "window.new"
+    },
+    {
+      "key": "Ctrl+w q",
+      "action": "window.close"
+    },
+    {
+      "key": "Ctrl+w Ctrl+q",
+      "action": "window.close"
+    },
+    {
+      "key": "Ctrl+w Shift+c",
+      "action": "window.close_all_child_windows"
+    },
+    {
+      "key": "Ctrl+w Shift+q",
+      "action": "window.close_all_windows"
+    },
+    {
+      "key": "Ctrl+w r",
+      "action": "window.reload"
+    },
+    {
+      "key": "Ctrl+w Ctrl+r",
+      "action": "window.reload"
+    },
+    {
+      "key": "g f",
+      "action": "file.open_link"
+    },
+    {
+      "key": "Ctrl+w g f",
+      "action": "file.open_link_in_new_window"
+    },
+    {
+      "key": "Shift+k",
+      "action": "file.preview_link"
+    },
+    {
+      "key": "y y",
+      "action": "clipboard.copy_file_path_with_line"
+    },
+    {
+      "key": "y Shift+y",
+      "action": "clipboard.copy_file_path"
+    },
+    {
+      "key": "y m",
+      "action": "clipboard.copy_as_markdown"
+    },
+    {
+      "key": "y c",
+      "action": "clipboard.copy_code"
+    },
+    {
+      "key": "y Shift+c",
+      "action": "clipboard.copy_code_as_markdown"
+    },
+    {
+      "key": "y t",
+      "action": "clipboard.copy_table_as_tsv"
+    },
+    {
+      "key": "y Shift+t",
+      "action": "clipboard.copy_table_as_markdown"
+    },
+    {
+      "key": "y l",
+      "action": "clipboard.copy_link_path"
+    },
+    {
+      "key": "y i",
+      "action": "clipboard.copy_image"
+    },
+    {
+      "key": "y s",
+      "action": "file.save_image_as"
+    },
+    {
+      "key": "z i",
+      "action": "zoom.in"
+    },
+    {
+      "key": "z o",
+      "action": "zoom.out"
+    },
+    {
+      "key": "z z",
+      "action": "zoom.reset"
+    },
+    {
+      "key": "z f",
+      "action": "window.toggle_focus_mode"
     },
     {
       "key": "Escape",
       "action": "cancel"
+    },
+    {
+      "key": "m m",
+      "action": "file.toggle_bookmark"
     },
     {
       "key": "Cmd+1",
@@ -155,21 +275,41 @@
       "action": "palette.open"
     },
     {
-      "key": "Cmd+j",
+      "key": "g o",
       "action": "contents.toggle"
     },
     {
-      "key": "Ctrl+ArrowLeft",
+      "key": "Ctrl+w h",
       "action": "focus.places"
+    },
+    {
+      "key": "Ctrl+w Ctrl+h",
+      "action": "focus.places"
+    },
+    {
+      "key": "Backslash p",
+      "action": "focus.places"
+    },
+    {
+      "key": "Backslash s",
+      "action": "focus.starred"
+    },
+    {
+      "key": "Backslash r",
+      "action": "focus.recent"
+    },
+    {
+      "key": "Backslash l",
+      "action": "focus.links"
     }
   ],
   "content": [
     {
-      "key": "Cmd+Shift+h",
+      "key": "m h",
       "action": "highlight.add"
     },
     {
-      "key": "Cmd+Shift+m",
+      "key": "m n",
       "action": "highlight.note"
     },
     {
@@ -177,45 +317,49 @@
       "action": "content.open_viewer"
     },
     {
-      "key": "Alt+ArrowDown",
+      "key": "Ctrl+j",
       "action": "content.next"
     },
     {
-      "key": "Alt+ArrowUp",
+      "key": "Ctrl+k",
       "action": "content.prev"
     },
     {
-      "key": "Alt+Shift+ArrowDown",
+      "key": "] ]",
       "action": "content.next_heading"
     },
     {
-      "key": "Alt+Shift+ArrowUp",
+      "key": "[ [",
       "action": "content.prev_heading"
     },
     {
-      "key": "Ctrl+BracketRight",
+      "key": "] c",
       "action": "changes.next"
     },
     {
-      "key": "Ctrl+BracketLeft",
+      "key": "[ c",
       "action": "changes.prev"
-    },
-    {
-      "key": "Ctrl+ArrowLeft",
-      "action": "focus.places"
     }
   ],
   "sidebar": [
     {
-      "key": "ArrowDown",
+      "key": "j",
       "action": "cursor.down"
     },
     {
-      "key": "ArrowUp",
+      "key": "k",
       "action": "cursor.up"
     },
     {
-      "key": "ArrowRight",
+      "key": "Ctrl+n",
+      "action": "cursor.down"
+    },
+    {
+      "key": "Ctrl+p",
+      "action": "cursor.up"
+    },
+    {
+      "key": "l",
       "action": "cursor.open"
     },
     {
@@ -223,7 +367,7 @@
       "action": "cursor.enter"
     },
     {
-      "key": "ArrowLeft",
+      "key": "h",
       "action": "cursor.collapse"
     },
     {
@@ -231,19 +375,39 @@
       "action": "directory.parent"
     },
     {
-      "key": "Ctrl+ArrowRight",
+      "key": "z a",
+      "action": "sidebar.toggle_show_all_files"
+    },
+    {
+      "key": "Ctrl+w l",
       "action": "focus.content"
     },
     {
-      "key": "Ctrl+ArrowDown",
+      "key": "Ctrl+w Ctrl+l",
+      "action": "focus.content"
+    },
+    {
+      "key": "Ctrl+w j",
       "action": "sidebar.face_next"
     },
     {
-      "key": "Ctrl+ArrowUp",
+      "key": "Ctrl+w Ctrl+j",
+      "action": "sidebar.face_next"
+    },
+    {
+      "key": "Ctrl+w k",
       "action": "sidebar.face_prev"
     },
     {
-      "key": "Ctrl+ArrowLeft",
+      "key": "Ctrl+w Ctrl+k",
+      "action": "sidebar.face_prev"
+    },
+    {
+      "key": "Ctrl+w h",
+      "action": "focus.places"
+    },
+    {
+      "key": "Ctrl+w Ctrl+h",
       "action": "focus.places"
     }
   ],
@@ -257,15 +421,43 @@
       "action": "search.prev"
     },
     {
+      "key": "Ctrl+n",
+      "action": "search.next"
+    },
+    {
+      "key": "Ctrl+p",
+      "action": "search.prev"
+    },
+    {
       "key": "Enter",
       "action": "search.pin_current"
     },
     {
       "key": "Escape",
       "action": "search.clear"
+    },
+    {
+      "key": "Ctrl+c",
+      "action": "search.clear"
     }
   ],
   "palette": [
+    {
+      "key": "Ctrl+n",
+      "action": "palette.next"
+    },
+    {
+      "key": "Ctrl+p",
+      "action": "palette.prev"
+    },
+    {
+      "key": "Ctrl+j",
+      "action": "palette.next"
+    },
+    {
+      "key": "Ctrl+k",
+      "action": "palette.prev"
+    },
     {
       "key": "ArrowDown",
       "action": "palette.next"
@@ -289,9 +481,29 @@
     {
       "key": "Escape",
       "action": "palette.close"
+    },
+    {
+      "key": "Ctrl+c",
+      "action": "palette.close"
     }
   ],
   "contents": [
+    {
+      "key": "j",
+      "action": "contents.next"
+    },
+    {
+      "key": "k",
+      "action": "contents.prev"
+    },
+    {
+      "key": "Ctrl+n",
+      "action": "contents.next"
+    },
+    {
+      "key": "Ctrl+p",
+      "action": "contents.prev"
+    },
     {
       "key": "ArrowDown",
       "action": "contents.next"
@@ -301,19 +513,23 @@
       "action": "contents.prev"
     },
     {
-      "key": "Tab",
-      "action": "contents.next"
-    },
-    {
-      "key": "Shift+Tab",
-      "action": "contents.prev"
-    },
-    {
       "key": "Enter",
       "action": "contents.confirm"
     },
     {
+      "key": "l",
+      "action": "contents.confirm"
+    },
+    {
       "key": "Escape",
+      "action": "contents.close"
+    },
+    {
+      "key": "q",
+      "action": "contents.close"
+    },
+    {
+      "key": "Ctrl+c",
       "action": "contents.close"
     }
   ]

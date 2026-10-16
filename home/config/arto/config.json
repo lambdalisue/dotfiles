@@ -34,7 +34,9 @@
     "minContentWidth": 640.0,
     "recentTrace": "hidden_when_sidebar",
     "recentTraceCount": 6,
-    "onOpen": "keep_open",
+    "onOpen": "close_panel",
+    "peekOnHover": false,
+    "pinOn": "double_click",
     "onStartup": "default",
     "onNewWindow": "default"
   },
