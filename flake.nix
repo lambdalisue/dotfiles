@@ -1,6 +1,22 @@
 {
   description = "Alisue's dotfiles managed with nix-darwin and home-manager";
 
+  # The caches for the pinned vitro and felis builds, repeated from
+  # nix/darwin/default.nix. `just switch` activates home-manager before the
+  # system layer, so a cache added there is not yet in /etc/nix/nix.conf when
+  # home-manager first needs it; declaring it here lets the flake bring its own
+  # (accepted via `accept-flake-config`, honored because the user is trusted).
+  nixConfig = {
+    extra-substituters = [
+      "https://vitro.cachix.org"
+      "https://nix-cache.natsukium.com"
+    ];
+    extra-trusted-public-keys = [
+      "vitro.cachix.org-1:649aPpp2DJa0LqG49qsSUpoE50NavN5WGKwaLwyL+h8="
+      "niks3-1:SoIFTPtiPoCW3/OzUkIBKlLG5znMZfbihlr11XAOles="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
