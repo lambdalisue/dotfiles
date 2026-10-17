@@ -27,7 +27,14 @@ gh as -q gh api repos/lambdalisue/nix-github-release/releases/latest --jq .tag_n
   pinned to an exact version, never `stable`.
 - Nix packages are built with crane.
 - `Cargo.toml` holds version `0.0.0`; the release workflow stamps the tag's
-  version before it builds and publishes.
+  version before it builds and publishes, through `scripts/stamp-version.pl`
+  and nothing else. It stamps `Cargo.toml` and the workspace's own
+  `Cargo.lock` entries together (so `--locked` holds), accepts CRLF, and
+  fails when it finds no placeholder. `just ci` runs it on a copy
+  (`stamp-check`), so the stamp is proved on every OS before a release
+  depends on it. Never write a stamp inline in a workflow: an inline `perl`
+  that assumed LF matched nothing on a Windows checkout and broke both
+  Windows builds of a release, which CI had never run it on.
 - The flake builds as the tag it was fetched at through nix-github-release:
   `VERSION` holds its `git describe` placeholder and is marked
   `export-subst`, so GitHub fills it in when it serves an archive, and

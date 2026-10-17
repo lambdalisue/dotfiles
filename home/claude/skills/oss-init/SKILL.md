@@ -160,6 +160,10 @@ they do.
   record of the version; manifests hold a placeholder the workflow stamps.
   A flake fetched at the tag builds as the tag too, through
   `lambdalisue/nix-github-release` (the stack says how).
+- **CI runs what the release runs.** A step that only a release would run —
+  stamping the version, packaging — lives in a script that CI also runs with
+  a placeholder version, on every OS the release builds for. Otherwise its
+  first run is the release, and a mistake costs a published version.
 - **No long-lived tokens.** Registries are published to through OIDC trusted
   publishing.
 - **Each layer holds one thing.** ADR: one decision and why. Spec: the
