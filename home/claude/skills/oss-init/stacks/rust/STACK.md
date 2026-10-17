@@ -14,6 +14,13 @@ curl -s https://static.rust-lang.org/dist/channel-rust-stable.toml | perl -ne 'i
 
 Crate versions come from crates.io.
 
+The latest nix-github-release tag (placeholder `{{nix_github_release_version}}`),
+which the flake input and both workflows pin:
+
+```sh
+gh as -q gh api repos/lambdalisue/nix-github-release/releases/latest --jq .tag_name
+```
+
 ## Rules
 
 - The toolchain comes from rust-overlay reading `rust-toolchain.toml`,
@@ -21,6 +28,12 @@ Crate versions come from crates.io.
 - Nix packages are built with crane.
 - `Cargo.toml` holds version `0.0.0`; the release workflow stamps the tag's
   version before it builds and publishes.
+- The flake builds as the tag it was fetched at through nix-github-release:
+  `VERSION` holds its `git describe` placeholder and is marked
+  `export-subst`, so GitHub fills it in when it serves an archive, and
+  `lib.stampCargo` stamps the package build. CI and the release build the
+  flake through its reusable workflow, from the `github:` reference users
+  install, never from a checkout.
 - Release binaries are built with rustup, not Nix, so they never refer into
   `/nix/store`, and without caches a pull request could have written.
 - crates.io is published to through trusted publishing; register the release

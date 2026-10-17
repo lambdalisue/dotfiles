@@ -158,6 +158,8 @@ they do.
   written by hand) triggers the workflow, which attaches assets with
   `gh release upload --clobber` so a re-run is safe. The tag is the only
   record of the version; manifests hold a placeholder the workflow stamps.
+  A flake fetched at the tag builds as the tag too, through
+  `lambdalisue/nix-github-release` (the stack says how).
 - **No long-lived tokens.** Registries are published to through OIDC trusted
   publishing.
 - **Each layer holds one thing.** ADR: one decision and why. Spec: the

@@ -56,3 +56,9 @@ jobs:
       - run: just ci
         env:
           CI: "1"
+
+  # The package `nix profile install github:{{owner}}/{{project}}` installs,
+  # built on each system the flake lists from the archive GitHub serves — the
+  # source such an install fetches, and the only one with VERSION filled in.
+  nix:
+    uses: lambdalisue/nix-github-release/.github/workflows/build.yml@{{nix_github_release_version}}

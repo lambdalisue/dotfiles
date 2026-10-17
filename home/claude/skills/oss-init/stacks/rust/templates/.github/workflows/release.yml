@@ -1,11 +1,14 @@
 name: Release
 
 # Publishing a GitHub Release starts this: write the notes, publish, and the
-# binaries and the crates.io release follow. The release exists before its
-# assets do — expect a few minutes with the notes up and nothing attached.
+# binaries, the Nix build and the crates.io release follow. The release exists
+# before its assets do — expect a few minutes with the notes up and nothing
+# attached.
 #
 # The tag is the only record of the version. `version` in Cargo.toml is a
-# placeholder that each job stamps from the tag before it builds.
+# placeholder that each cargo job stamps from the tag before it builds. The
+# flake stamps its build the same way, from VERSION, which GitHub fills in with
+# the tag when it serves the tagged source.
 on:
   release:
     types: [published]
@@ -92,6 +95,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: gh release upload "$TAG" dist/* --clobber
+
+  # The flake as `nix profile install github:{{owner}}/{{project}}/vX.Y.Z` fetches
+  # it, from the archive GitHub serves for the tag. The run fails unless the
+  # package reports the release.
+  nix:
+    uses: lambdalisue/nix-github-release/.github/workflows/build.yml@{{nix_github_release_version}}
+    with:
+      ref: ${{ github.event.release.tag_name }}
 
   # Trusted publishing: crates.io trusts this workflow through OIDC, so no
   # token is stored. Register the workflow on crates.io before the first
