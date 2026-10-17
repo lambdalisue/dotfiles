@@ -464,10 +464,11 @@ noremap <C-f> <Right>
 noremap <C-b> <Left>
 
 " Better <C-n>/<C-p> in Command
-" The popup menu is open while typing, so close it first (<C-e>) to keep these
-" keys walking the history instead of the candidates; <Tab>/<S-Tab> walk those.
-cnoremap <expr> <C-p>  wildmenumode() ? "\<C-e>\<Up>"   : "\<Up>"
-cnoremap <expr> <C-n>  wildmenumode() ? "\<C-e>\<Down>" : "\<Down>"
+" Walk the candidates while the popup menu is open, as in Insert-mode
+" completion; otherwise walk the history filtered by the typed prefix.
+" <Up>/<Down> always close the popup first (<C-e>) and walk the history.
+cnoremap <expr> <C-p>  wildmenumode() ? "\<C-p>" : "\<Up>"
+cnoremap <expr> <C-n>  wildmenumode() ? "\<C-n>" : "\<Down>"
 cnoremap <expr> <Up>   wildmenumode() ? "\<C-e>\<C-p>"  : "\<C-p>"
 cnoremap <expr> <Down> wildmenumode() ? "\<C-e>\<C-n>"  : "\<C-n>"
 
