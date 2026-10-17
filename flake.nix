@@ -22,7 +22,7 @@
     # Pinned to a release tag and nixpkgs NOT followed, for the same reason as
     # felis: vitro.cachix.org holds builds of vitro's own lock, so anything
     # else compiles it locally. Bump the tag to upgrade.
-    vitro.url = "github:lambdalisue/vitro/v0.3.0";
+    vitro.url = "github:lambdalisue/vitro/v0.5.0";
 
     # `mmdr`, the mermaid renderer the figures Claude Code plugin tries first;
     # it is not packaged in nixpkgs.
