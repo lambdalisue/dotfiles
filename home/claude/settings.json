@@ -71,7 +71,8 @@
     "swift-lsp@claude-plugins-official": true,
     "cclens@cclens": true,
     "kuchiyose@kuchiyose": true,
-    "figures@figures": true
+    "figures@figures": true,
+    "vitro@vitro": true
   },
   "extraKnownMarketplaces": {
     "gh-as": {
@@ -105,6 +106,13 @@
         "source": "github",
         "repo": "natsukium/claude-code-figures-plugin"
       }
+    },
+    "vitro": {
+      "source": {
+        "source": "github",
+        "repo": "lambdalisue/vitro"
+      },
+      "autoUpdate": true
     }
   },
   "effortLevel": "high",
