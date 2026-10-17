@@ -116,7 +116,21 @@
           };
           extraSpecialArgs = {
             inherit username dotfilesDir isDarwin;
-            mmdr = mermaid-rs-renderer.packages.${system}.default;
+            # Upstream's buildInputs test the deprecated stdenv.isLinux /
+            # stdenv.isDarwin, which prints an evaluation warning on every
+            # switch. Replacing the attribute keeps that expression unforced;
+            # drop the override once upstream switches to stdenv.hostPlatform.
+            mmdr = mermaid-rs-renderer.packages.${system}.default.overrideAttrs (_: {
+              buildInputs =
+                let
+                  p = mermaid-rs-renderer.inputs.nixpkgs.legacyPackages.${system};
+                in
+                lib.optionals p.stdenv.hostPlatform.isLinux [
+                  p.fontconfig
+                  p.freetype
+                ]
+                ++ lib.optionals p.stdenv.hostPlatform.isDarwin [ p.libiconv ];
+            });
           };
           modules = [
             felis.homeManagerModules.felis
