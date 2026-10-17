@@ -78,7 +78,6 @@ function! s:init() abort
   call jetpack#add('mattn/webapi-vim')
   call jetpack#add('mbbill/undotree')
   call jetpack#add('neo4j-contrib/cypher-vim-syntax')
-  call jetpack#add('neoclide/coc.nvim', {'branch': 'release'})
   call jetpack#add('osyo-manga/vim-textobj-multiblock')
   call jetpack#add('previm/previm')
   call jetpack#add('rbtnn/vim-vimscript_lasterror')
@@ -109,6 +108,12 @@ function! s:init() abort
         \ 'opt': 1,
         \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
         \})
+    call jetpack#add('nvim-treesitter/nvim-treesitter-textobjects', {
+        \ 'opt': 1,
+        \ 'branch': 'main',
+        \})
+    call jetpack#add('neovim/nvim-lspconfig', {'opt': 1})
+    call jetpack#add('lewis6991/gitsigns.nvim', {'opt': 1})
     call jetpack#add('hrsh7th/nvim-insx', {'opt': 1})
     call jetpack#add('numToStr/Comment.nvim', {'opt': 1})
     call jetpack#add('MeanderingProgrammer/render-markdown.nvim', {'opt': 1})
@@ -141,6 +146,9 @@ function! s:configure() abort
   if has('nvim')
     silent! packadd plenary.nvim
     silent! packadd nvim-treesitter
+    silent! packadd nvim-treesitter-textobjects
+    silent! packadd nvim-lspconfig
+    silent! packadd gitsigns.nvim
     silent! packadd nvim-insx
     silent! packadd Comment.nvim
     silent! packadd render-markdown.nvim

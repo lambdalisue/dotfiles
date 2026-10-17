@@ -262,10 +262,11 @@ set complete&
       \ complete+=i
       \ complete+=d
       \ complete+=t
-set completeopt&
-      \ completeopt+=preview
-      \ completeopt+=menu
-      \ completeopt+=longest
+" Nothing is selected or inserted until asked, as the menu opens while typing
+set completeopt=menuone,noselect,popup
+if exists('+autocomplete')
+  set autocomplete
+endif
 set showfulltag         " show both the tag name and the search pattern
 set pumheight=20        " strict the item counts of completion
 
@@ -280,14 +281,6 @@ set nowrapscan
 " }}}
 
 " Functions {{{
-function! SafePumVisible() abort
-  try
-    return coc#pum#visible()
-  catch
-    return pumvisible()
-  endtry
-endfunction
-
 function! s:revise_colorscheme() abort
   if system('defaults read -g AppleInterfaceStyle') ==# "Dark\n"
     silent! colorscheme nordfox

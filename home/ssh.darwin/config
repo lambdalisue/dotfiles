@@ -1,3 +1,6 @@
+# vitro: an alias per VM (vitro-<name>), kept current by vitro itself
+Include ~/.config/vitro/ssh_config
+
 # https://h2ham.net/macos-sierra-use-keychain
 AddKeysToAgent yes
 #UseKeychain yes
