@@ -150,8 +150,18 @@ set matchpairs&         " reset matchparis
 
 " use rich completion system in command line
 set wildmenu
-set wildmode=list:longest,full
-set wildoptions=tagfile
+if exists('*wildtrigger')
+  " Show candidates in a popup menu as you type ':', '/', or '?'
+  set wildmode=noselect:lastused,full
+  set wildoptions=pum,tagfile
+  augroup my-cmdline-autocompletion
+    autocmd!
+    autocmd CmdlineChanged [:\/\?] call wildtrigger()
+  augroup END
+else
+  set wildmode=list:longest,full
+  set wildoptions=tagfile
+endif
 
 if has('nvim')
   silent! set laststatus=3
@@ -461,10 +471,12 @@ noremap <C-f> <Right>
 noremap <C-b> <Left>
 
 " Better <C-n>/<C-p> in Command
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
-cnoremap <Up>   <C-p>
-cnoremap <Down> <C-n>
+" The popup menu is open while typing, so close it first (<C-e>) to keep these
+" keys walking the history instead of the candidates; <Tab>/<S-Tab> walk those.
+cnoremap <expr> <C-p>  wildmenumode() ? "\<C-e>\<Up>"   : "\<Up>"
+cnoremap <expr> <C-n>  wildmenumode() ? "\<C-e>\<Down>" : "\<Down>"
+cnoremap <expr> <Up>   wildmenumode() ? "\<C-e>\<C-p>"  : "\<C-p>"
+cnoremap <expr> <Down> wildmenumode() ? "\<C-e>\<C-n>"  : "\<C-n>"
 
 " Fix unreasonable mappings by historical reason
 "nnoremap Y y$
