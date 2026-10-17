@@ -470,6 +470,14 @@ id = "moveToWorkspace.9"
 
 [[hotkeys]]
 binding = "Unassigned"
+id = "switchWorkspace.10"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveToWorkspace.10"
+
+[[hotkeys]]
+binding = "Unassigned"
 id = "switchWorkspaceSlot.1"
 
 [[hotkeys]]
@@ -667,6 +675,10 @@ id = "moveColumnToWorkspace.8"
 [[hotkeys]]
 binding = "Unassigned"
 id = "moveColumnToWorkspace.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToWorkspace.10"
 
 [[hotkeys]]
 binding = "Option+Shift+H"
