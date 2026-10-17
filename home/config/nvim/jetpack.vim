@@ -56,6 +56,7 @@ function! s:init() abort
   call jetpack#add('lambdalisue/vim-guise')
   call jetpack#add('lambdalisue/vim-http-protocol')
   call jetpack#add('lambdalisue/vim-improved-gf')
+  call jetpack#add('lambdalisue/vim-jin')
   call jetpack#add('lambdalisue/vim-mr')
   call jetpack#add('lambdalisue/vim-nerdfont')
   call jetpack#add('lambdalisue/vim-operator-breakline')
