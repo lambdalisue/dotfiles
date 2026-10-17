@@ -15,11 +15,6 @@ function! s:init() abort
   call jetpack#add('vim-denops/denops-startup-recorder.vim')
   call jetpack#add('vim-denops/denops.vim')
   call jetpack#add('vim-fall/fall.vim')
-  "call jetpack#add('vim-skk/skkeleton')
-  call jetpack#add('Shougo/ddc.vim')
-  call jetpack#add('Shougo/ddc-ui-native')
-  call jetpack#add('Shougo/ddc-matcher_head')
-  call jetpack#add('Shougo/ddc-sorter_rank')
 
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
@@ -117,7 +112,6 @@ function! s:init() abort
     call jetpack#add('hrsh7th/nvim-insx', {'opt': 1})
     call jetpack#add('numToStr/Comment.nvim', {'opt': 1})
     call jetpack#add('MeanderingProgrammer/render-markdown.nvim', {'opt': 1})
-    "call jetpack#add('delphinus/skkeleton_indicator.nvim', {'opt': 1})
     call jetpack#add('CopilotC-Nvim/CopilotChat.nvim', {'opt': 1})
     call jetpack#add("rcarriga/nvim-notify", {'opt': 1})
     "call jetpack#add("lambdalisue/nvim-aibo", {'opt': 1})
@@ -152,7 +146,6 @@ function! s:configure() abort
     silent! packadd nvim-insx
     silent! packadd Comment.nvim
     silent! packadd render-markdown.nvim
-    "silent! packadd skkeleton_indicator.nvim
     silent! packadd CopilotChat.nvim
     silent! packadd nvim-notify
     silent! packadd nvim-aibo
