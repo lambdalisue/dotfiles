@@ -21,8 +21,8 @@
   # therefore gated behind `privateCaches`, which is on only for the opt-in
   # `#private` role in flake.nix. The `#default` role leaves it off and builds
   # from the public caches; use `#private` once the netrc is in place.
-  # The public caches are always on: `arto`, `cclens` and `vitro.cachix.org`
-  # hold the Nix builds of the user's own tools (for `nix run`/`nix shell` of
+  # The public caches are always on: `arto`, `cclens`, `vitro`, `kanaemi` and
+  # `adroit.cachix.org` hold the Nix builds of the user's own tools (for `nix run`/`nix shell` of
   # them, even where this flake installs them from Homebrew), and
   # `nix-cache.natsukium.com` holds prebuilt felis.
   nix.settings =
@@ -42,6 +42,8 @@
         "https://arto.cachix.org"
         "https://cclens.cachix.org"
         "https://vitro.cachix.org"
+        "https://kanaemi.cachix.org"
+        "https://adroit.cachix.org"
         "https://nix-cache.natsukium.com"
       ]
       ++ lib.optionals privateCaches [
@@ -52,6 +54,8 @@
         "arto.cachix.org-1:yaH0JQomRJTosIcTh2xZPKBEny41D7h6QUePYQzWYqc="
         "cclens.cachix.org-1:0QUNU6PuVyf+yXOvg3n1rd3FksBoB3s3/Jty50iKRNQ="
         "vitro.cachix.org-1:649aPpp2DJa0LqG49qsSUpoE50NavN5WGKwaLwyL+h8="
+        "kanaemi.cachix.org-1:TIkDbHQ6HmPzHQBXdOVhLSTff2LiCWJOJhKdIUWC238="
+        "adroit.cachix.org-1:fWcTwjPH//igrya2gumlBcKRSzhRr3p4JqHAsFL8N9Y="
         "niks3-1:SoIFTPtiPoCW3/OzUkIBKlLG5znMZfbihlr11XAOles="
       ]
       ++ lib.optionals privateCaches [
