@@ -4,10 +4,8 @@ function! s:init() abort
   call jetpack#add('tani/vim-jetpack')
 
   " Denops
-  call jetpack#add('lambdalisue/vim-askpass')
   call jetpack#add('lambdalisue/vim-deno-cache')
   call jetpack#add('lambdalisue/vim-gin')
-  call jetpack#add('lambdalisue/vim-guise')
   call jetpack#add('lambdalisue/vim-initial')
   call jetpack#add('lambdalisue/vim-kensaku')
   call jetpack#add('skanehira/denops-silicon.vim')
@@ -55,6 +53,7 @@ function! s:init() abort
   call jetpack#add('lambdalisue/vim-findent')
   call jetpack#add('lambdalisue/vim-gina')
   call jetpack#add('lambdalisue/vim-glyph-palette')
+  call jetpack#add('lambdalisue/vim-guise')
   call jetpack#add('lambdalisue/vim-http-protocol')
   call jetpack#add('lambdalisue/vim-improved-gf')
   call jetpack#add('lambdalisue/vim-mr')
