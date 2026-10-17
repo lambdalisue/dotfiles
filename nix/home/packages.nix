@@ -28,7 +28,7 @@
     just
     mise
     neovim
-    nodejs  # required by coc.nvim
+    nodejs  # required by copilot.vim
     ripgrep
     sccache
     tmux
@@ -57,5 +57,22 @@
     graphviz  # `dot`
     mmdr  # mermaid; from the mermaid-rs-renderer flake input
     resvg  # rasterizes SVG for dot/d2/svg/math and high-density mermaid
+
+    # Language servers Neovim's built-in LSP client starts (see
+    # home/config/nvim/plugin.d/lsp.lua). Deno's own server comes with `deno`.
+    bash-language-server
+    gopls
+    lua-language-server
+    protols
+    pyright
+    ruff
+    rust-analyzer
+    shellcheck  # bash-language-server lints through it
+    tailwindcss-language-server
+    terraform-ls
+    typescript-language-server
+    vim-language-server
+    vscode-langservers-extracted  # eslint and json
+    yaml-language-server
   ];
 }
