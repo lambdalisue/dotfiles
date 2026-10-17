@@ -18,4 +18,6 @@
   "kanaemi-app/tap"
   # cclens is distributed only from its own tap, not homebrew/core.
   "lambdalisue/cclens"
+  # vitro is distributed only from its own tap, not homebrew/core.
+  "lambdalisue/vitro"
 ]

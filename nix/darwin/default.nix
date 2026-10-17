@@ -21,7 +21,7 @@
   # therefore gated behind `privateCaches`, which is on only for the opt-in
   # `#private` role in flake.nix. The `#default` role leaves it off and builds
   # from the public caches; use `#private` once the netrc is in place.
-  # `arto.cachix.org`, `vitro.cachix.org` and `nix-cache.natsukium.com`
+  # `arto.cachix.org` and `nix-cache.natsukium.com`
   # (prebuilt felis) are public and always on.
   nix.settings =
     {
@@ -38,7 +38,6 @@
       substituters = [
         "https://cache.nixos.org"
         "https://arto.cachix.org"
-        "https://vitro.cachix.org"
         "https://nix-cache.natsukium.com"
       ]
       ++ lib.optionals privateCaches [
@@ -47,7 +46,6 @@
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "arto.cachix.org-1:yaH0JQomRJTosIcTh2xZPKBEny41D7h6QUePYQzWYqc="
-        "vitro.cachix.org-1:649aPpp2DJa0LqG49qsSUpoE50NavN5WGKwaLwyL+h8="
         "niks3-1:SoIFTPtiPoCW3/OzUkIBKlLG5znMZfbihlr11XAOles="
       ]
       ++ lib.optionals privateCaches [

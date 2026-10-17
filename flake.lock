@@ -15,21 +15,6 @@
         "type": "github"
       }
     },
-    "crane_2": {
-      "locked": {
-        "lastModified": 1790899423,
-        "narHash": "sha256-THGtz65UGJU+sonZidRboyCMk+9DclpMF7pwL4uDV4M=",
-        "owner": "ipetkov",
-        "repo": "crane",
-        "rev": "47b6b27ed9a3a9181415e4367d0c30ab2a0e0250",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ipetkov",
-        "repo": "crane",
-        "type": "github"
-      }
-    },
     "felis": {
       "inputs": {
         "crane": "crane",
@@ -196,49 +181,13 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1791594108,
-        "narHash": "sha256-V0WmebqwEeAVZMqxfv7Dq7hpKkPPM19W50xQf3D1Kf4=",
-        "rev": "6510408d147d8c5e6d76043e899e9251756f6a75",
-        "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1089111.6510408d147d/nixexprs.tar.xz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
-      }
-    },
     "root": {
       "inputs": {
         "felis": "felis",
         "home-manager": "home-manager",
         "mermaid-rs-renderer": "mermaid-rs-renderer",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs_2",
-        "vitro": "vitro"
-      }
-    },
-    "rust-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "vitro",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1791707771,
-        "narHash": "sha256-w3m8HtAVCfGTHw+gcCTAy7jFHSdGbokm8NngbeFrkek=",
-        "ref": "refs/heads/master",
-        "rev": "c1cfa7a2c809d364ac1a7e9b3ec418afa3f19793",
-        "shallow": true,
-        "type": "git",
-        "url": "https://github.com/oxalica/rust-overlay"
-      },
-      "original": {
-        "shallow": true,
-        "type": "git",
-        "url": "https://github.com/oxalica/rust-overlay"
+        "nixpkgs": "nixpkgs_2"
       }
     },
     "systems": {
@@ -253,27 +202,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "vitro": {
-      "inputs": {
-        "crane": "crane_2",
-        "nixpkgs": "nixpkgs_3",
-        "rust-overlay": "rust-overlay"
-      },
-      "locked": {
-        "lastModified": 1792224195,
-        "narHash": "sha256-AjvQR2COkqOLIpwO3svmbeCU1X82njEymT3lw2mGP84=",
-        "owner": "lambdalisue",
-        "repo": "vitro",
-        "rev": "d7d46a081065dcf8e6d4d174da3d4baca4045518",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lambdalisue",
-        "ref": "v0.5.0",
-        "repo": "vitro",
         "type": "github"
       }
     }

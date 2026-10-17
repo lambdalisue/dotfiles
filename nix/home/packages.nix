@@ -1,7 +1,6 @@
 {
   pkgs,
   mmdr,
-  vitro,
   ...
 }:
 {
@@ -37,12 +36,6 @@
     wget
     zat  # code outline viewer; the `zat` rule in home/claude/rules/tools tells agents to reach for it first
     zsh
-
-    # Disposable development VMs; from the vitro flake input, which also
-    # installs its shell completions. It drives QEMU for every guest except
-    # macOS, and finds it on PATH.
-    vitro
-    qemu
 
     # Renderers the fish cd-style fzf widgets preview directories with: glow
     # for a Markdown README, bat for any other README, eza for the tree shown

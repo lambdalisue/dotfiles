@@ -1,18 +1,16 @@
 {
   description = "Alisue's dotfiles managed with nix-darwin and home-manager";
 
-  # The caches for the pinned vitro and felis builds, repeated from
-  # nix/darwin/default.nix. `just switch` activates home-manager before the
-  # system layer, so a cache added there is not yet in /etc/nix/nix.conf when
-  # home-manager first needs it; declaring it here lets the flake bring its own
-  # (accepted via `accept-flake-config`, honored because the user is trusted).
+  # The cache for the pinned felis build, repeated from nix/darwin/default.nix.
+  # `just switch` activates home-manager before the system layer, so a cache
+  # added there is not yet in /etc/nix/nix.conf when home-manager first needs
+  # it; declaring it here lets the flake bring its own (accepted via
+  # `accept-flake-config`, honored because the user is trusted).
   nixConfig = {
     extra-substituters = [
-      "https://vitro.cachix.org"
       "https://nix-cache.natsukium.com"
     ];
     extra-trusted-public-keys = [
-      "vitro.cachix.org-1:649aPpp2DJa0LqG49qsSUpoE50NavN5WGKwaLwyL+h8="
       "niks3-1:SoIFTPtiPoCW3/OzUkIBKlLG5znMZfbihlr11XAOles="
     ];
   };
@@ -35,11 +33,6 @@
     # the Rust workspace locally. Bump the tag to upgrade.
     felis.url = "github:felis-terminal/felis/v0.1.4";
 
-    # Pinned to a release tag and nixpkgs NOT followed, for the same reason as
-    # felis: vitro.cachix.org holds builds of vitro's own lock, so anything
-    # else compiles it locally. Bump the tag to upgrade.
-    vitro.url = "github:lambdalisue/vitro/v0.5.0";
-
     # `mmdr`, the mermaid renderer the figures Claude Code plugin tries first;
     # it is not packaged in nixpkgs.
     mermaid-rs-renderer = {
@@ -54,7 +47,6 @@
       nix-darwin,
       home-manager,
       felis,
-      vitro,
       mermaid-rs-renderer,
       ...
     }:
@@ -125,7 +117,6 @@
           extraSpecialArgs = {
             inherit username dotfilesDir isDarwin;
             mmdr = mermaid-rs-renderer.packages.${system}.default;
-            vitro = vitro.packages.${system}.default;
           };
           modules = [
             felis.homeManagerModules.felis
