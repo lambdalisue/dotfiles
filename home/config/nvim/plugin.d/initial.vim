@@ -1,1 +1,1 @@
-nnoremap <nowait><silent> <Leader>j <Cmd>Initial<CR>
+nnoremap <nowait><silent> <Leader><Leader> <Cmd>Initial<CR>
