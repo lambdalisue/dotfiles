@@ -1,0 +1,3 @@
+" Vim reads ~/.vim/vimrc, and ~/.vim links to this directory; share the
+" Neovim configuration, which guards its Neovim-only parts with has('nvim').
+source <sfile>:h/init.vim

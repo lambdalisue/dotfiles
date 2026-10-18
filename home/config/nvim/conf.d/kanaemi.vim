@@ -39,5 +39,8 @@ endfunction
 augroup kanaemi_abc_on_insert_leave
   autocmd!
   autocmd InsertLeave * call s:schedule()
-  autocmd InsertEnter,TermEnter * call s:cancel()
+  autocmd InsertEnter * call s:cancel()
+  if exists('##TermEnter')
+    autocmd TermEnter * call s:cancel()
+  endif
 augroup END
