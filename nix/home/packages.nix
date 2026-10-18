@@ -32,7 +32,12 @@
     sccache
     tmux
     uv
-    vim
+    # The plain `vim` is built without Lua, which vim-lese needs; LuaJIT keeps
+    # its matchers as fast as on Neovim.
+    (vim-full.override {
+      guiSupport = false;
+      lua5_5 = luajit;
+    })
     wget
     zat  # code outline viewer; the `zat` rule in home/claude/rules/tools tells agents to reach for it first
     zsh

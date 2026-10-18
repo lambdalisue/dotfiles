@@ -99,6 +99,13 @@ vim.lsp.config("gopls", {
 })
 
 vim.lsp.config("lua_ls", {
+  before_init = function(_, config)
+    local ok, luals = pcall(require, "lese.luals")
+    if ok then
+      local workspace = config.settings.Lua.workspace
+      workspace.library = luals.library(workspace.library)
+    end
+  end,
   settings = {
     Lua = {
       runtime = { version = "LuaJIT" },

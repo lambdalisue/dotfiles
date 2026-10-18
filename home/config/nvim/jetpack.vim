@@ -12,7 +12,6 @@ function! s:init() abort
   call jetpack#add('vim-denops/denops-shared-server.vim')
   call jetpack#add('vim-denops/denops-startup-recorder.vim')
   call jetpack#add('vim-denops/denops.vim')
-  call jetpack#add('vim-fall/fall.vim')
 
   call jetpack#add('AndrewRadev/linediff.vim')
   call jetpack#add('Bakudankun/BackAndForward.vim')
@@ -57,6 +56,8 @@ function! s:init() abort
   call jetpack#add('lambdalisue/vim-http-protocol')
   call jetpack#add('lambdalisue/vim-improved-gf')
   call jetpack#add('lambdalisue/vim-jin')
+  call jetpack#add('lambdalisue/vim-lese')
+  call jetpack#add('lambdalisue/vim-lese-mr')
   call jetpack#add('lambdalisue/vim-mr')
   call jetpack#add('lambdalisue/vim-nerdfont')
   call jetpack#add('lambdalisue/vim-operator-breakline')
