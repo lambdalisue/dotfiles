@@ -308,6 +308,14 @@ bundleId = ""
 id = "B9C258E5-DA6D-45CB-8B7D-4567653DBAE2"
 layout = "float"
 
+[[appRules]]
+appNameSubstring = "adroit"
+assignToWorkspace = "5"
+axRole = "AXWindow"
+axSubrole = "AXStandardWindow"
+bundleId = ""
+id = "9873FF72-E250-43E2-A743-7DA72D1D995C"
+
 [[hotkeys]]
 binding = "Option+Space"
 id = "toggleScratchpad.1"
@@ -459,22 +467,6 @@ id = "switchWorkspace.8"
 [[hotkeys]]
 binding = "Option+Shift+9"
 id = "moveToWorkspace.8"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "switchWorkspace.9"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveToWorkspace.9"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "switchWorkspace.10"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveToWorkspace.10"
 
 [[hotkeys]]
 binding = "Unassigned"
@@ -671,14 +663,6 @@ id = "moveColumnToWorkspace.7"
 [[hotkeys]]
 binding = "Unassigned"
 id = "moveColumnToWorkspace.8"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.9"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "moveColumnToWorkspace.10"
 
 [[hotkeys]]
 binding = "Option+Shift+H"
