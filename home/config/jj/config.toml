@@ -32,6 +32,15 @@ else
 fi
 ''']
 
+# jj has no current branch to push. Advance the closest bookmark to the latest
+# change (see revsets.bookmark-advance-to), then push it.
+push = ["util", "exec", "--", "sh", "-c", "jj bookmark advance && jj git push"]
+
+[revsets]
+# The latest change is @, except the empty, undescribed @ that `jj commit` and
+# `jj new` leave behind; then it is @-.
+bookmark-advance-to = 'heads((@ | @-) ~ (empty() & description(exact:"")))'
+
 # Work identity for github.com/attmcojp repositories, mirroring the includeIf in
 # ~/.config/git/config.
 [[--scope]]
