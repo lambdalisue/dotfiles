@@ -129,6 +129,7 @@
   "theme": "auto",
   "editorMode": "normal",
   "verbose": false,
+  "autoCompactEnabled": true,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
