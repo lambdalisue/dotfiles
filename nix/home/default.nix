@@ -50,6 +50,14 @@
       "nix-command"
       "flakes"
     ];
+    # Same schedule as nix-darwin's nix.gc on macOS. home-manager's launchd
+    # agent only accepts named intervals ("weekly" = Monday 00:00), so macOS
+    # leaves this to nix-darwin instead.
+    gc = {
+      automatic = true;
+      dates = "Sun 07:00";
+      options = "--delete-older-than 7d";
+    };
   };
 
   # Let home-manager manage itself

@@ -66,6 +66,20 @@
       netrc-file = "/Users/${username}/.config/nix/netrc";
     };
 
+  # Collect generations older than a week, and the store paths they held,
+  # every Sunday at 07:00. This runs as root, so it covers the system profile.
+  nix.gc = {
+    automatic = true;
+    interval = [
+      {
+        Weekday = 0;
+        Hour = 7;
+        Minute = 0;
+      }
+    ];
+    options = "--delete-older-than 7d";
+  };
+
   # sprout guests are NixOS (aarch64-linux) closures, and a Mac cannot build
   # their derivations natively. This runs a small NixOS VM as a remote builder
   # (launchd starts it on demand). `ephemeral` wipes its store on every boot,
