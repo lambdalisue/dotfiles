@@ -19,7 +19,18 @@ colocate = true
 # jj has no pull. Fetch advances the tracked trunk bookmark, then rebase carries
 # the current line of work (or a fresh, empty @) onto it. Conflicts are recorded
 # in the rebased changes rather than stopping the command.
-pull = ["util", "exec", "--", "sh", "-c", "jj git fetch && jj rebase -b @ -o 'trunk()'"]
+#
+# When trunk() is already an ancestor of @ there is nothing to carry. Rebasing
+# anyway would pull the side branches of a merge @ out from under it and replay
+# them onto trunk() without the resolution the merge held, so it is skipped.
+pull = ["util", "exec", "--", "sh", "-c", '''
+jj git fetch || exit
+if [ -n "$(jj log --no-graph -r 'trunk() & ::@' -T 'change_id')" ]; then
+  echo 'pull: @ already contains trunk(); nothing to rebase' >&2
+else
+  jj rebase -b @ -o 'trunk()'
+fi
+''']
 
 # Work identity for github.com/attmcojp repositories, mirroring the includeIf in
 # ~/.config/git/config.
