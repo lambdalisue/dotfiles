@@ -130,4 +130,13 @@
     };
   };
   remoteControlAtStartup = true;
+  agentPushNotifEnabled = true;
+  inputNeededNotifEnabled = true;
+  autoCompactEnabled = true;
+  editorMode = "normal";
+  theme = "auto";
+  tui = "default";
+  verbose = false;
+  skipAutoPermissionPrompt = true;
+  skipWorkflowUsageWarning = true;
 }

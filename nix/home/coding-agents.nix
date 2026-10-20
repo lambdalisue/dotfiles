@@ -91,6 +91,7 @@ in
       approval_policy = "on-request";
       approvals_reviewer = "auto_review";
       sandbox_mode = "workspace-write";
+      desktop.followUpQueueMode = "steer";
       features = {
         js_repl = false;
         memories = true;
