@@ -21,6 +21,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: test agent state migration
+        run: python3 -m unittest discover -s scripts/tests -v
+
       - uses: cachix/install-nix-action@v30
         with:
           extra_nix_config: |

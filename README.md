@@ -222,6 +222,18 @@ home/                        # Raw dotfiles (symlinked into ~ by home-manager)
 
 ## Adding dotfiles
 
+Claude and Codex are managed in `nix/home/coding-agents.nix`, with Claude's
+preferences in `nix/home/claude-settings.nix`. Both use `mutableSettings`: a
+`just home` merges declared preferences into writable configuration files,
+preserving application-owned values. Removing a declaration does not remove
+the corresponding local value; delete it locally when resetting a preference.
+
+Only instruction files, hooks, rules, and repository-owned skills are linked.
+Authentication, sessions, downloaded plugins, and other runtime state live in
+the real `~/.claude` and `~/.codex` directories. The first activation migrates
+legacy state without copying it and leaves compatibility links for old absolute
+paths. Codex keeps its workspace sandbox and uses automatic approval review.
+
 1. Place the file under `home/` (e.g. `home/config/foo/` for `~/.config/foo/`)
 2. Add a symlink entry in `nix/home/files.nix`:
 

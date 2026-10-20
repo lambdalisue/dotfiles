@@ -17,7 +17,6 @@
     awscli2  # the `aws` command
     bash
     cachix  # pushes to / authenticates against the caches wired up in nix/darwin
-    codex  # the `codex` coding agent; its ~/.codex config is symlinked in files.nix
     deno  # required by denops.vim
     ffmpeg
     fish

@@ -38,8 +38,6 @@ in
     ".tmux.conf".source = link "${dotfilesDir}/home/tmux.conf";
     ".zshenv".source = link "${dotfilesDir}/home/zshenv";
     ".local/bin/git-backup".source = link "${dotfilesDir}/home/local/bin/git-backup";
-    ".claude".source = link "${dotfilesDir}/home/claude";
-    ".codex".source = link "${dotfilesDir}/home/codex";
   }
   // lib.optionalAttrs isDarwin {
     # Darwin entries (from .dotfiles_darwin.tsv)

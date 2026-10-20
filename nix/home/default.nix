@@ -9,6 +9,7 @@
   imports = [
     ./packages.nix
     ./files.nix
+    ./coding-agents.nix
     ./mutable-files.nix
     ./shell.nix
     ./git.nix
