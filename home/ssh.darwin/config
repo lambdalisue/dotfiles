@@ -1,3 +1,5 @@
+Include /Users/alisue/.config/vitro/ssh_config
+
 # vitro: an alias per VM (vitro-<name>), kept current by vitro itself
 Include ~/.config/vitro/ssh_config
 
