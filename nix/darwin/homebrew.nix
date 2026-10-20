@@ -35,6 +35,8 @@
       # `vitro 0.0.0`. The tap ships the stamped release binaries and pulls in
       # the QEMU that vitro finds on PATH.
       "lambdalisue/vitro/vitro"
+      # vitro delegates macOS guests to lume; the formula only pulls in QEMU.
+      "lume"
       # Kept on Homebrew (not Nix) for the g-prefixed GNU tools (gtimeout, etc.)
       # that scripts on this machine rely on; nixpkgs' coreutils ships unprefixed.
       "coreutils"
