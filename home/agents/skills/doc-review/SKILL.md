@@ -67,9 +67,9 @@ N findings, most severe first. Reviewed `{path}` ({document_type}).
 Based on the argument:
 
 1. **File path**: Read the file directly
-2. **"latest"**: Run `deno run -A ~/.claude/skills/ai-notes/notes.ts list --limit 1` to get the most recent note, then read it
+2. **"latest"**: Run `deno run -A ~/.agents/skills/ai-notes/notes.ts list --limit 1` to get the most recent note, then read it
 3. **Keyword**: Search for matching documents:
-   - Search AI notes: `deno run -A ~/.claude/skills/ai-notes/notes.ts list --limit 20` and filter, or use Grep across `~/Compost/AI-Notes/`
+   - Search AI notes: `deno run -A ~/.agents/skills/ai-notes/notes.ts list --limit 20` and filter, or use Grep across `~/Compost/AI-Notes/`
    - If multiple matches, list them and ask the user to choose (use AskUserQuestion)
 
 Resolve to an **absolute path** (expand `~`). If the document cannot be found, inform the user and **STOP**.

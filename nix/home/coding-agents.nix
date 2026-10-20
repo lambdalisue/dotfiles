@@ -11,7 +11,7 @@ let
   # Flakes contain only tracked sources, so downloaded/synced skills are not
   # enrolled in Home Manager just because an application installed them.
   skills = lib.attrNames (
-    lib.filterAttrs (_: type: type == "directory") (builtins.readDir ../../home/claude/skills)
+    lib.filterAttrs (_: type: type == "directory") (builtins.readDir ../../home/agents/skills)
   );
   claudeAssets = [
     "CLAUDE.md"
@@ -19,8 +19,8 @@ let
     "hooks"
     "mcp.json"
     "rules"
-  ]
-  ++ map (name: "skills/${name}") skills;
+  ];
+  claudeManaged = claudeAssets ++ map (name: "skills/${name}") skills;
   codexAssets = [ "AGENTS.md" ];
   agents =
     map
@@ -32,7 +32,7 @@ let
       [
         {
           name = "claude";
-          assets = claudeAssets;
+          assets = claudeManaged;
         }
         {
           name = "codex";
@@ -40,6 +40,31 @@ let
         }
       ];
   migrationManifest = pkgs.writeText "coding-agent-directories.json" (builtins.toJSON agents);
+  skillMigrationManifest = pkgs.writeText "coding-agent-skills.json" (
+    builtins.toJSON {
+      source = "${dotfilesDir}/home/agents/skills";
+      roots = map (agent: "${config.home.homeDirectory}/.${agent}/skills") [ "agents" "codex" ];
+      managed = skills;
+      retired = [
+        "code-review"
+        "deal-review"
+        "git-commit"
+        "git-commit-fixup"
+        "git-commit-new"
+        "git-commit-reword"
+        "git-rebase"
+        "git-resolve"
+        "git-worktree"
+        "pr-address"
+      ];
+    }
+  );
+  skillFiles =
+    agent:
+    lib.genAttrs (map (name: ".${agent}/skills/${name}") skills) (path: {
+      source = link "${dotfilesDir}/home/agents/skills/${lib.last (lib.splitString "/" path)}";
+      force = true;
+    });
   assetFiles =
     agent: paths:
     lib.genAttrs (map (path: ".${agent}/${path}") paths) (path: {
@@ -99,7 +124,11 @@ in
     };
   };
 
-  home.file = assetFiles "claude" claudeAssets // assetFiles "codex" codexAssets;
+  home.file =
+    assetFiles "claude" claudeAssets
+    // assetFiles "codex" codexAssets
+    // skillFiles "claude"
+    // skillFiles "agents";
 
   # Move state by rename, preserving open files and old absolute plugin paths.
   # The latter become compatibility links back to the real home directories.
@@ -107,6 +136,13 @@ in
     lib.hm.dag.entryBetween [ "linkGeneration" ] [ "writeBoundary" ]
       ''
         run ${lib.getExe pkgs.python3} ${../../scripts/migrate-agent-state.py} ${migrationManifest} \
+          ''${DRY_RUN_CMD:+--dry-run}
+      '';
+
+  home.activation.migrateCodingAgentSkills =
+    lib.hm.dag.entryBetween [ "linkGeneration" ] [ "migrateCodingAgentState" ]
+      ''
+        run ${lib.getExe pkgs.python3} ${../../scripts/migrate-agent-skills.py} ${skillMigrationManifest} \
           ''${DRY_RUN_CMD:+--dry-run}
       '';
 }

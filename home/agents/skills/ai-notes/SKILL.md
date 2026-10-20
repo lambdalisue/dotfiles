@@ -9,7 +9,7 @@ description: Manage AI notes in ~/Compost/AI-Notes - read existing notes, list r
 
 ```bash
 # Script location
-~/.claude/skills/ai-notes/notes.ts
+~/.agents/skills/ai-notes/notes.ts
 ```
 
 ### Generate Output Path
@@ -18,11 +18,11 @@ Generate correct file paths for new notes:
 
 ```bash
 # Single document
-deno run -A ~/.claude/skills/ai-notes/notes.ts generate "<title>"
+deno run -A ~/.agents/skills/ai-notes/notes.ts generate "<title>"
 # => ~/Compost/AI-Notes/2025-12/24-0821-<title>.md
 
 # Multiple documents (returns directory path)
-deno run -A ~/.claude/skills/ai-notes/notes.ts generate "<title>" --multiple
+deno run -A ~/.agents/skills/ai-notes/notes.ts generate "<title>" --multiple
 # => ~/Compost/AI-Notes/2025-12/24-0821-<title>/
 ```
 
@@ -32,13 +32,13 @@ List notes ordered by file path (newest first) with H1 titles:
 
 ```bash
 # List all notes
-deno run -A ~/.claude/skills/ai-notes/notes.ts list
+deno run -A ~/.agents/skills/ai-notes/notes.ts list
 
 # List 10 most recent notes
-deno run -A ~/.claude/skills/ai-notes/notes.ts list --limit 10
+deno run -A ~/.agents/skills/ai-notes/notes.ts list --limit 10
 
 # Pagination: skip first 10, show next 10
-deno run -A ~/.claude/skills/ai-notes/notes.ts list --limit 10 --offset 10
+deno run -A ~/.agents/skills/ai-notes/notes.ts list --limit 10 --offset 10
 ```
 
 **Output format**: Each line shows the full path and the first H1 heading from the file:

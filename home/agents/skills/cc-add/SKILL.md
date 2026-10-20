@@ -2,7 +2,7 @@
 name: cc-add
 allowed-tools: Read, Write, Glob, AskUserQuestion, Bash(ls:*), Bash(mkdir:*), Bash(pwd:*)
 argument-hint: "<rule|skill|agent> [local] args..."
-description: Create a Claude Code rule, skill, or agent — global (~/.claude) or project-local (.claude)
+description: Create a shared personal skill or a Claude Code rule or agent
 ---
 
 ## Arguments
@@ -23,8 +23,13 @@ description: Create a Claude Code rule, skill, or agent — global (~/.claude) o
 | Type | Global | Local |
 | --- | --- | --- |
 | rule | `~/.claude/rules/{category}/{name}.md` | `{project-root}/.claude/rules/{category}/{name}.md` |
-| skill | `~/.claude/skills/{name}/SKILL.md` | `{project-root}/.claude/skills/{name}/SKILL.md` |
+| skill | `~/.agents/skills/{name}/SKILL.md` | `{project-root}/.claude/skills/{name}/SKILL.md` |
 | agent | `~/.claude/agents/{name}.md` | `{project-root}/.claude/agents/{name}.md` |
+
+For global skills managed by these dotfiles, edit the source in
+`~/ghq/github.com/lambdalisue/dotfiles/home/agents/skills/` and run `just home`
+to register a new skill with both Codex and Claude. Existing links expose edits
+immediately. Never replace a managed link with a copied directory.
 
 For `local`, locate the project root first (look for `.git`, `package.json`,
 `Cargo.toml`, `deno.json`, etc.).
@@ -111,7 +116,7 @@ color: { blue | green | yellow | red | purple | cyan | magenta | orange | white 
 - `/cc-add rule local src/**/*.tsx Use functional components only`
   → `{project-root}/.claude/rules/react/functional-components.md`
 - `/cc-add skill python Python idioms and best practices`
-  → `~/.claude/skills/python/SKILL.md`
+  → `~/.agents/skills/python/SKILL.md`
 - `/cc-add agent local api-designer Design RESTful APIs following best practices`
   → `{project-root}/.claude/agents/api-designer.md`
 

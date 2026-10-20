@@ -14,7 +14,7 @@ counter-evidence.
 
    That list lives in the frontmatter, not here, so re-derive it rather than
    trusting this line: `grep -l 'disable-model-invocation: true'
-   ~/.claude/skills/*/SKILL.md`.
+   ~/.agents/skills/*/SKILL.md`.
 2. **The command was typed inline** — the harness expands a slash command into
    a `<command-message>` block only when the message *is* the command. Written
    mid-sentence (`push & /pr-create`) it arrives as plain text, unexpanded.
@@ -22,7 +22,7 @@ counter-evidence.
 ## What to do
 
 1. Check the filesystem before saying anything:
-   `~/.claude/skills/<name>/SKILL.md`, then
+   `~/.agents/skills/<name>/SKILL.md`, then
    `<project>/.claude/skills/<name>/SKILL.md`.
 2. If it exists, invoke it with the Skill tool. If invocation is refused
    because model invocation is disabled, read its `SKILL.md` and follow it

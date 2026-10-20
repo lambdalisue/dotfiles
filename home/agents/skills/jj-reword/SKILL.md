@@ -6,7 +6,7 @@ argument-hint: "[context]"
 
 The invocation IS the explicit request to rewrite descriptions in `trunk()..@` —
 do NOT ask for approval. Run it from the top-level session; no subagent. Message
-conventions and language are those of `~/.claude/skills/jj-commit/SKILL.md`.
+conventions and language are those of `~/.agents/skills/jj-commit/SKILL.md`.
 
 ## Arguments
 

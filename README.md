@@ -228,6 +228,18 @@ preferences in `nix/home/claude-settings.nix`. Both use `mutableSettings`: a
 preserving application-owned values. Removing a declaration does not remove
 the corresponding local value; delete it locally when resetting a preference.
 
+Personal skills have one source of truth in `home/agents/skills/`. Home Manager
+links each skill into both `~/.agents/skills/` (Codex) and `~/.claude/skills/`
+(Claude); edits are immediately visible to both. Add a skill directory there,
+then run `just home` to register it with both applications. Do not copy skills
+between discovery directories. Application-bundled skills and downloaded plugins
+remain owned by their applications.
+
+Activation removes old personal copies and retired Git workflows from
+`~/.agents/skills/` and `~/.codex/skills/`. Unrelated locally installed skills
+remain in place. Restart existing Codex sessions after
+the first activation so their skill catalogs reflect the new links.
+
 Only instruction files, hooks, rules, and repository-owned skills are linked.
 Authentication, sessions, downloaded plugins, and other runtime state live in
 the real `~/.claude` and `~/.codex` directories. The first activation migrates

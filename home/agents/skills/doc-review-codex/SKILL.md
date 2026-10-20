@@ -91,9 +91,9 @@ codex exec --sandbox read-only "PROMPT" 2>&1
 Based on the argument:
 
 1. **File path**: use it directly
-2. **"latest"**: `deno run -A ~/.claude/skills/ai-notes/notes.ts list --limit 1` →
+2. **"latest"**: `deno run -A ~/.agents/skills/ai-notes/notes.ts list --limit 1` →
    take the most recent note
-3. **Keyword**: `deno run -A ~/.claude/skills/ai-notes/notes.ts list --limit 20`
+3. **Keyword**: `deno run -A ~/.agents/skills/ai-notes/notes.ts list --limit 20`
    and filter, or Grep across `~/Compost/AI-Notes/`. If multiple match, list them
    and ask the user to choose (AskUserQuestion)
 

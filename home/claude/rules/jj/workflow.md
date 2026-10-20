@@ -32,7 +32,7 @@ that.
 Opening, describing, and splitting the change you are working on are part of
 editing — do them without asking. The message conventions (Conventional
 Commits, WHY in the body, the repository's language) are in
-`~/.claude/skills/jj-commit/SKILL.md`.
+`~/.agents/skills/jj-commit/SKILL.md`.
 
 ## Reporting jj state
 

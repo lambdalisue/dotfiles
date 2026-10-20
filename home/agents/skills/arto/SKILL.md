@@ -1,7 +1,7 @@
 ---
 name: arto
 description: Open a Markdown file or directory in Arto.app, the user's GitHub-style Markdown reader. Auto-triggers on "Arto で開いて", "Arto で見せて", "open in Arto", or any request to view/preview a Markdown document in Arto.
-allowed-tools: Bash(~/.claude/skills/arto/open.sh:*), Bash(arto:*), Bash(open -a Arto:*)
+allowed-tools: Bash(~/.agents/skills/arto/open.sh:*), Bash(arto:*), Bash(open -a Arto:*)
 argument-hint: "[--open=new|screen] [--directory=DIR] [PATH ...]"
 ---
 
@@ -18,7 +18,7 @@ which forwards when Arto is running and otherwise launches a detached instance
 via LaunchServices:
 
 ```bash
-~/.claude/skills/arto/open.sh [ARTO OPTIONS] PATH...
+~/.agents/skills/arto/open.sh [ARTO OPTIONS] PATH...
 ```
 
 The wrapper makes positional paths and `--directory` values absolute, so
@@ -38,13 +38,13 @@ relative paths are fine.
 2. **Open it** with one Bash call:
 
    ```bash
-   ~/.claude/skills/arto/open.sh /abs/path/to/file.md
+   ~/.agents/skills/arto/open.sh /abs/path/to/file.md
    ```
 
    Several files open as tabs in one window:
 
    ```bash
-   ~/.claude/skills/arto/open.sh a.md b.md
+   ~/.agents/skills/arto/open.sh a.md b.md
    ```
 
 3. **Report** in one line which file was opened. Nothing else — the user is
