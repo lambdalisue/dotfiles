@@ -45,6 +45,11 @@
             command = "~/.claude/hooks/enforce-jj.sh";
             timeout = 5;
           }
+          {
+            type = "command";
+            command = "~/.claude/hooks/enforce-nix-path.sh";
+            timeout = 5;
+          }
         ];
       }
       {
