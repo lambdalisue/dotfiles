@@ -37,6 +37,11 @@
         "root"
         username
       ];
+      # The weekly nix.gc cannot catch a store that grows by hundreds of
+      # gigabytes within a week. Below min-free the daemon collects garbage
+      # mid-build until max-free is available again.
+      min-free = 50 * 1024 * 1024 * 1024;
+      max-free = 100 * 1024 * 1024 * 1024;
       substituters = [
         "https://cache.nixos.org"
         "https://arto.cachix.org"
