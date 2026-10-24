@@ -1,6 +1,8 @@
 #!/bin/bash
-# Hook to enforce perl usage instead of sed/awk
+# Hook to keep sed/awk usage portable between GNU and BSD/macOS
 # Reads tool call JSON from stdin and validates Bash commands
+#
+# Tests: bash home/claude/hooks/enforce-perl.test.sh
 
 set -euo pipefail
 
@@ -22,96 +24,146 @@ if [[ "$tool_name" != "Bash" ]] || [[ -z "$command" ]]; then
     exit 0
 fi
 
-# Block a real sed/awk *invocation* — not a mention inside a quoted string, a
-# comment, a grep pattern, or a filename. Split the command on separators that
-# lie outside quotes, then flag a segment only when its command word is
-# sed/awk.
+# Judge only real sed/awk *invocations* — not a mention inside a quoted string,
+# a comment, a grep pattern, or a filename. Split the command on separators
+# that lie outside quotes, then look at segments whose command word is
+# sed/awk/gawk. Prints the reason to block ("sed", "bre", "gawk"), or nothing.
 #
-# One exception passes: `sed -n '<line ranges>p' <file>`. That is a read, not a
-# text transformation — it has no GNU/BSD divergence to protect against, and
-# blocking it only costs a turn. Anything that edits (`-i`), substitutes
-# (`s///`), or takes another expression still blocks.
-if CMD="$command" perl -e '
-    my $c = $ENV{CMD};
-
-    # --- quote-aware split into command segments -------------------------
-    my (@seg, $cur, $q);
-    $cur = ""; $q = "";
-    my @ch = split //, $c;
-    for (my $i = 0; $i < @ch; $i++) {
-        my $ch = $ch[$i];
-        if ($q ne "") {
+# - sed passes only as a read-only range: `sed -n '<addresses>p' <file>`. It is
+#   blocked otherwise because -i, -E/-r and the s/// dialects diverge between
+#   GNU and BSD.
+# - A read-only range still blocks when a basic regex uses \| \+ \?: GNU
+#   extensions that BSD sed reads as literals, so the command silently prints
+#   nothing instead of failing.
+# - awk passes: POSIX awk behaves the same on both. Only gawk-only features
+#   block, because macOS awk errors on them or ignores them.
+reason=$(CMD="$command" perl -e '
+    sub segments {
+        my $c = shift;
+        my (@seg, $cur, $q);
+        $cur = ""; $q = "";
+        my @ch = split //, $c;
+        for (my $i = 0; $i < @ch; $i++) {
+            my $ch = $ch[$i];
+            if ($q ne "") {
+                $cur .= $ch;
+                if ($ch eq "\\" && $q eq chr(34)) { $cur .= ($ch[++$i] // ""); next; }
+                $q = "" if $ch eq $q;
+                next;
+            }
+            if ($ch eq chr(39) || $ch eq chr(34)) { $q = $ch; $cur .= $ch; next; }
+            last if $ch eq "#" && ($cur eq "" || $cur =~ /\s$/);   # comment
+            if ($ch =~ /[|&;()\n`]/) { push @seg, $cur; $cur = ""; next; }
             $cur .= $ch;
-            if ($ch eq "\\" && $q eq chr(34)) { $cur .= ($ch[++$i] // ""); next; }
-            $q = "" if $ch eq $q;
-            next;
         }
-        if ($ch eq chr(39) || $ch eq chr(34)) { $q = $ch; $cur .= $ch; next; }
-        last if $ch eq "#" && ($cur eq "" || $cur =~ /\s$/);   # comment
-        if ($ch =~ /[|&;()\n`]/) { push @seg, $cur; $cur = ""; next; }
-        $cur .= $ch;
+        push @seg, $cur;
+        return @seg;
     }
-    push @seg, $cur;
 
-    # --- a read-only line-range sed --------------------------------------
-    sub readonly_range {
+    # An address: a line number, $, a /regex/, or a shell expansion that
+    # yields a number ($l, ${l}, $((l+3)), "$(rg -n ... | cut -d: -f1)").
+    my $paren;
+    $paren = qr{\((?:[^()]++|(??{$paren}))*\)};
+    my $shell = qr{\$(?:\w+|\{\w+\}|$paren)};
+    my $regex = qr{/(?:\\.|[^/\\])*/};
+    my $addr  = qr{(?:\d+|\$|$regex|$shell)};
+    my $range = qr{$addr(?:,(?:\+\d+|$addr))?p};
+
+    sub sed_reason {
         my $s = shift;
-        return 0 unless $s =~ /^sed\s+-n\s+(.*)$/s;
-        my $rest = $1;
+        my ($opts, $rest) = $s =~ /^sed((?:\s+-[nE]+)+)\s+(.*)$/s or return "sed";
+        return "sed" unless $opts =~ /n/;
+        my $ere = $opts =~ /E/;
         my $script;
         if    ($rest =~ /^\x27([^\x27]*)\x27(.*)$/s)  { $script = $1; $rest = $2; }
         elsif ($rest =~ /^\x22((?:\\.|[^\x22\\])*)\x22(.*)$/s) { $script = $1; $rest = $2; }
         elsif ($rest =~ /^(\S+)(.*)$/s)                { $script = $1; $rest = $2; }
-        else { return 0; }
-        # only addresses and the p command. An address is a line number, $,
-        # or a /regex/:  5p  1,80p  1,$p  10,20p;40,50p  /start/,/end/p  /x/,$p
-        my $addr = qr{(?:\d+|\$|/(?:\\.|[^/\\])*/)};
-        return 0 unless $script =~ /^\s*$addr(?:,$addr)?p(?:\s*;\s*$addr(?:,$addr)?p)*\s*$/;
-        return 0 if $rest =~ /(?:^|\s)-/;   # any further option (-i, -e, ...)
-        # A $(...) or `...` operand needs no check here: the split above already
-        # made the inner command its own segment, so it is judged on its own.
-        return 1;
+        else { return "sed"; }
+        return "sed" unless $script =~ /^\s*$range(?:\s*;\s*$range)*\s*$/;
+        return "sed" if $rest =~ /(?:^|\s)-/;   # any further option (-i, -e, ...)
+        unless ($ere) {
+            for my $re ($script =~ /$regex/g) {
+                return "bre" if $re =~ /(?<!\\)(?:\\\\)*\\[|+?]/;
+            }
+        }
+        for my $sub ($script =~ /\$($paren)/g) {
+            my $r = judge(substr($sub, 1, -1));
+            return $r if $r ne "";
+        }
+        return "";
     }
 
-    for my $seg (@seg) {
-        $seg =~ s/^\s+//;
-        1 while $seg =~ s/^\w+=\S*\s+//;       # drop leading VAR=val assignments
-        $seg =~ s/^(?:sudo|env|time|nice|nohup|command|builtin|exec|xargs)\s+//;
-        next unless $seg =~ /^(sed|awk)\b/;
-        my $tool = $1;
-        next if $tool eq "sed" && readonly_range($seg);
-        exit 0;                                 # a real invocation -> block
+    sub awk_reason {
+        my $s = shift;
+        return "gawk" if $s =~ /^gawk\b/;
+        return "gawk" if $s =~ /\s-(?:i|-\w)/;   # -i inplace, --long-options
+        return "gawk" if $s =~ /\b(?:gensub|strftime|systime|mktime|asorti?|patsplit|isarray|typeof)\s*\(/;
+        return "gawk" if $s =~ /\b(?:BEGINFILE|ENDFILE|PROCINFO|FPAT|IGNORECASE)\b|\@include/;
+        return "";
     }
-    exit 1;
-'; then
+
+    sub judge {
+        for my $seg (segments(shift)) {
+            $seg =~ s/^\s+//;
+            1 while $seg =~ s/^\w+=\S*\s+//;   # drop leading VAR=val assignments
+            $seg =~ s/^(?:sudo|env|time|nice|nohup|command|builtin|exec|xargs|do|then|else)\s+//;
+            my $r = $seg =~ /^sed\b/       ? sed_reason($seg)
+                  : $seg =~ /^g?awk\b/     ? awk_reason($seg)
+                  : "";
+            return $r if $r ne "";
+        }
+        return "";
+    }
+
+    print judge($ENV{CMD});
+')
+
+case "$reason" in
+sed)
     cat >&2 <<'EOF'
-❌ sed/awk detected - Use perl instead
+❌ sed is allowed only as a read-only range - use perl to transform text
 
-Per ~/.claude/rules/tools/text-processing.md, batch text operations should use perl.
+Per ~/.claude/rules/tools/text-processing.md, -i, -E/-r and s/// differ between
+GNU and BSD sed; perl is one dialect everywhere.
 
-Examples:
-  ❌ sed 's/foo/bar/g' file.txt
-  ✅ perl -pe 's/foo/bar/g' file.txt
+  ❌ sed 's/foo/bar/g' file.txt      ✅ perl -pe 's/foo/bar/g' file.txt
+  ❌ sed -i 's/old/new/g' *.txt      ✅ perl -pi -e 's/old/new/g' *.txt
 
-  ❌ awk '{print $1}' file.txt
-  ✅ perl -lane 'print $F[0]' file.txt
-
-  ❌ sed -i 's/old/new/g' *.txt
-  ✅ perl -pi -e 's/old/new/g' *.txt
-
-Reading a range is NOT text processing and is not blocked:
-  ✅ sed -n '100,140p' file.txt              # allowed
-  ✅ sed -n '/^## Foo/,/^## Bar/p' file.md   # allowed - regex addresses too
+Reading a range passes:
+  ✅ sed -n '100,140p' file.txt
+  ✅ sed -n '/^## Foo/,/^## Bar/p' file.md
+  ✅ sed -n '/fn main/,+20p' main.rs
+  ✅ sed -n "$((l-3)),$((l+3))p" app.rs
   ✅ Read(file_path="file.txt", offset=100, limit=41)   # preferred - gives line numbers
-
-Field extraction / sums have a perl form with the same shape:
-  ❌ awk -F: '{print $NF}'           ✅ perl -F: -lane 'print $F[-1]'
-  ❌ awk '{s+=$2} END {print s}'     ✅ perl -lane '$s+=$F[1]; END {print $s}'
-
-Please reformulate your command using perl.
 EOF
-    exit 2  # Block the command
-fi
+    exit 2
+    ;;
+bre)
+    cat >&2 <<'EOF'
+❌ \| \+ \? in a basic sed regex are GNU-only
+
+macOS sed reads them as literal characters, so the command prints nothing
+instead of failing — an empty result that looks like a real answer.
+
+  ❌ sed -n '/fn a\|fn b/,+5p' f     ✅ sed -En '/fn a|fn b/,+5p' f
+  ❌ sed -n '/fo\+/p' f              ✅ sed -En '/fo+/p' f
+                                     ✅ rg -n -A5 'fn a|fn b' f
+EOF
+    exit 2
+    ;;
+gawk)
+    cat >&2 <<'EOF'
+❌ gawk-only feature detected - macOS awk does not support it
+
+POSIX awk passes; gawk, -i inplace, --long-options, gensub/strftime/asort,
+BEGINFILE/PROCINFO/FPAT/IGNORECASE and @include do not.
+
+  ❌ awk -i inplace '{...}' f        ✅ perl -pi -e '...' f
+  ❌ awk '{print gensub(/a/,"b","g")}'  ✅ perl -pe 's/a/b/g'
+EOF
+    exit 2
+    ;;
+esac
 
 # Command is valid
 exit 0

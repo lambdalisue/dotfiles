@@ -1,46 +1,65 @@
-# Text Processing: sed and awk are blocked — write perl
+# Text Processing: sed only reads, awk stays POSIX, perl transforms
 
-A PreToolUse hook (`enforce-perl.sh`) rejects any `Bash` command that
-**invokes** `sed` or `awk`, anywhere in the command: after a pipe, inside a
-`for` loop, under `xargs` or `sudo`. The rejection happens before anything
-runs, so the call buys nothing and costs the turn. Do not type them and then
-let the hook correct you — write the perl form the first time.
+A PreToolUse hook (`enforce-perl.sh`) rejects `Bash` commands that **invoke**
+`sed` or `awk` in a shape that behaves differently on GNU and BSD/macOS —
+anywhere in the command: after a pipe, inside a `for` loop, under `xargs` or
+`sudo`. The rejection happens before anything runs, so the call buys nothing
+and costs the turn. Write the passing form the first time.
 
 This overrides any harness guidance that suggests `sed` for file edits or
-text munging. The reason is portability: `sed -i` and `-E` differ between GNU
-and BSD/macOS, and awk dialects diverge; perl is one dialect everywhere.
+text munging. The reason is portability: `sed -i`, `-E`/`-r` and `s///`
+differ between GNU and BSD/macOS; perl is one dialect everywhere.
 
-## The one thing that passes: a read-only `sed -n`
+## sed: a read-only range passes
 
 Printing a range is a read, not a transformation, so the hook allows
-`sed -n '<addresses>p' file` where each address is a line number, `$`, or a
-`/regex/`:
+`sed -n '<addresses>p' file`. An address is a line number, `$`, a `/regex/`,
+`+N` as the end of a range, or a shell expansion that yields a number:
 
 ```sh
 sed -n '100,140p' file
 sed -n '55,100p;165,190p' file
 sed -n '/^## Setup/,/^## Usage/p' README.md
-sed -n '/\[dependencies\]/,$p' Cargo.toml
+sed -n '/fn main/,+20p' main.rs
+sed -n "$((l-3)),$((l+3))p" app.rs
+sed -n "$(rg -n 'fn main' main.rs | cut -d: -f1),+20p" main.rs
 ```
 
 Anything beyond the addresses and `p` — `-i`, `-e`, `s///`, `{p;q}` —
-blocks again. Prefer the **Read tool with `offset` / `limit`** anyway; it
-gives line numbers and needs no shell. Use `sed -n` only when the range must
-be produced inside a pipeline.
+blocks. Prefer the **Read tool with `offset` / `limit`** anyway; it gives
+line numbers and needs no shell, and it is what Edit requires.
 
-## Translations for the shapes that keep getting blocked
+### No `\|` `\+` `\?` in a basic regex
+
+They are GNU extensions. macOS sed reads them as literal characters, so the
+command **prints nothing and exits 0** — an empty result that looks like a
+real answer. The hook blocks them. Use the extended form or rg:
+
+```sh
+sed -n '/fn a\|fn b/,+5p' f   # ❌ silently empty on macOS
+sed -En '/fn a|fn b/,+5p' f   # ✅
+sed -n '/fo\+/p' f            # ❌
+sed -En '/fo+/p' f            # ✅
+rg -n -A5 'fn a|fn b' f       # ✅ often the better tool
+```
+
+## awk: POSIX passes, gawk does not
+
+POSIX awk behaves the same on both systems, so `awk '{print $1}'`,
+`awk -F: '$1>300'` and `awk 'NR>=10 && NR<=20'` pass. macOS ships BWK awk, not
+gawk, so the hook blocks `gawk`, `-i inplace`, `--long-options`, `gensub`,
+`strftime`, `systime`, `mktime`, `asort`/`asorti`, `patsplit`, `BEGINFILE`,
+`ENDFILE`, `PROCINFO`, `FPAT`, `IGNORECASE` and `@include`.
+
+## Translations for transforms
 
 | Instead of | Write |
 | --- | --- |
-| `awk '{print $1}'` | `perl -lane 'print $F[0]'` |
-| `awk -F: '{print $NF}'` | `perl -F: -lane 'print $F[-1]'` |
-| `awk '{print $1, $4}'` | `perl -lane 'print "@F[0,3]"'` |
-| `awk '{s+=$2} END {print s}'` | `perl -lane '$s+=$F[1]; END {print $s}'` |
-| `awk '/END_PAT/{exit} {print}' f` | `perl -ne 'last if /END_PAT/; print' f` |
 | `sed 's/foo/bar/g' f` | `perl -pe 's/foo/bar/g' f` |
 | `sed -E 's/^use (\w+).*/\1/'` | `perl -pe 's/^use (\w+).*/$1/'` |
 | `sed -i 's/old/new/g' *.txt` | `perl -pi -e 's/old/new/g' *.txt` |
 | `sed 's#$PREFIX/##'` | `perl -pe "s#\Q$PREFIX\E/##"` |
+| `awk '{print gensub(/a/,"b","g")}'` | `perl -pe 's/a/b/g'` |
 
 Before reaching for perl at all, check whether a dedicated tool fits: Edit
 for a file change, Grep for a search, `cut -d: -f2` for a fixed field,
