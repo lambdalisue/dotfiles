@@ -1,4 +1,4 @@
-let g:kanaemi_port = 50123
+let g:kanaemi_mode_port = 50123
 
 " Switch Kanaemi to ABC once Insert mode is over.
 "
@@ -33,10 +33,10 @@ function! s:switch() abort
   if mode() =~# '^[iRt]'
     return
   endif
-  silent! call kanaemi#set_mode('abc')
+  silent! call kanaemi_mode#set_mode('abc')
 endfunction
 
-augroup kanaemi_abc_on_insert_leave
+augroup kanaemi_mode_abc_on_insert_leave
   autocmd!
   autocmd InsertLeave * call s:schedule()
   autocmd InsertEnter * call s:cancel()
