@@ -56,7 +56,6 @@
       "claude-code@latest"
       "cleanshot"
       "discord"
-      "docker-desktop"
       "ghostty"
       "google-chrome"
       "gpg-suite"
@@ -82,7 +81,6 @@
       "raycast"
       "slack"
       "spotify"
-      "steam"
       "steermouse"
       "thaw"
     ];

@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/alisue/.docker/bin"
+# End of Docker Desktop section.
+
 # fish entry point (migrated from home/config/zsh).
 #
 # The configuration is split into modular drop-ins under conf.d/ — which fish
