@@ -42,9 +42,7 @@ non-zero — so read that summary rather than assuming a clean finish.
 | `scripts/06-activate.sh`         | macOS first activation: nix-darwin system + home-manager (`#default`, public caches) |
 | `scripts/activate-home.sh`       | Activate home-manager only (public caches) — both OS; the shared home step |
 | `scripts/set-login-shell.sh`     | Set fish as the login shell on Linux (nix-darwin does this on macOS) |
-| `scripts/07-macskk-dict.sh`      | Download the SKK dictionary macSKK needs (macOS)   |
 | `scripts/08-clear-zsh-cache.sh`  | Clear the stale zsh profile cache (macOS)          |
-| `scripts/09-macskk-input-source.sh` | Enable macSKK as a Japanese input source (macOS, opt-in) |
 
 On macOS, running the steps by hand instead of `bootstrap.sh`:
 
@@ -53,13 +51,11 @@ $ ./scripts/01-install-nix.sh
 $ ./scripts/02-install-homebrew.sh
 $ ./scripts/04-prepare-etc.sh
 $ ./scripts/06-activate.sh          # public; for the private cache see below
-$ ./scripts/07-macskk-dict.sh
 $ ./scripts/08-clear-zsh-cache.sh
 ```
 
 `bootstrap.sh` uses the default public-cache activation; for the private role
-use `scripts/activate-private.sh` instead (see below). Step 09 is opt-in and
-not run by `bootstrap.sh`.
+use `scripts/activate-private.sh` instead (see below).
 
 Open a new terminal when activation finishes. The private binary cache is fully
 opt-in — nothing on this default path touches it.
@@ -77,14 +73,6 @@ blocks every retry.
 Run `scripts/05-clean-backups.sh` to clear it: it deletes only backups that are
 themselves symlinks (they hold no data) and reports any real file or directory
 for you to resolve by hand. Then re-run `scripts/06-activate.sh`.
-
-**macSKK input source (opt-in).** The `macskk` cask installs the input method,
-but macOS offers no declarative way to enable an input source, so it is not
-turned on automatically. `scripts/09-macskk-input-source.sh` is a best-effort
-helper that registers macSKK in `AppleEnabledInputSources`; **log out and back
-in** for it to appear. If it still does not show up, add it by hand under System
-Settings -> Keyboard -> Text Input -> Input Sources -> Edit -> + -> macSKK,
-which always works.
 
 ### Before you run it
 
@@ -159,8 +147,8 @@ $ just switch
 
 On Linux the distro owns the system, so there is no nix-darwin — only
 home-manager runs. `scripts/bootstrap.sh` handles this: it installs Nix and
-activates home-manager, skipping the macOS-only steps (Homebrew, `/etc`
-preparation, macSKK).
+activates home-manager, skipping the macOS-only steps (Homebrew and `/etc`
+preparation).
 
 ```console
 $ ./scripts/bootstrap.sh

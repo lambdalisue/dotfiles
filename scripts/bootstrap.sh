@@ -5,7 +5,7 @@
 #     layer, home-manager, …).
 #   - Linux: the distro owns the system, so there is no nix-darwin — only
 #     install Nix and activate home-manager. The numbered macOS steps (Homebrew,
-#     /etc prep, macSKK) do not apply.
+#     /etc prep) do not apply.
 # Each step is standalone and idempotent, so re-running this after a fix is safe,
 # and you can still run any single step by hand when that is all you need. For
 # the same reason a failing step does NOT abort the run: aborting let one broken
@@ -16,7 +16,6 @@
 #
 # The default (public-cache) activation path is used. For the private role and
 # its private binary cache, skip this and use ./scripts/activate-private.sh.
-# Step 09 (macSKK input source) is opt-in and left out; run it by hand.
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 source ./_lib.sh

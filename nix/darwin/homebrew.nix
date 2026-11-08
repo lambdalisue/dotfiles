@@ -47,7 +47,6 @@
     ];
 
     casks = [
-      "aqua-voice"
       # Fully qualified: arto lives in arto-app/tap, not homebrew/cask.
       "arto-app/tap/arto"
       "brave-browser"
@@ -59,11 +58,8 @@
       "ghostty"
       "google-chrome"
       "gpg-suite"
-      "istat-menus"
       # Fully qualified: kanaemi lives in kanaemi-app/tap, not homebrew/cask.
       "kanaemi-app/tap/kanaemi"
-      "macskk"
-      "meetingbar"
       "monitorcontrol"
       "neovide-app"
       "obsidian"
@@ -77,7 +73,6 @@
       # (and Touch ID cannot reach that nested context), so the install aborts
       # with "a terminal is required to read the password". Install it by hand
       # instead: `brew install --cask parallels`.
-      "radix"
       "raycast"
       "slack"
       "spotify"

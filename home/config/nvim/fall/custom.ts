@@ -149,13 +149,6 @@ function pathToList(path: string) {
   };
 }
 
-const macSKKSource = builtin.source.list(
-  [
-    "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries",
-    "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries/skk-jisyo.utf8",
-  ].map(pathToList),
-);
-
 const claudeSource = builtin.source.list(
   [
     "./CLAUDE.md",
@@ -351,7 +344,6 @@ export const main: Entrypoint = ({
           }),
           ["~/ghq/github.com/lambdalisue/dotfiles"],
         ),
-        macSKKSource,
         claudeSource,
       ),
       builtin.refiner.relativePath,

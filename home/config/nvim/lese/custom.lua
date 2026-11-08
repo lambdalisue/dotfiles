@@ -89,11 +89,6 @@ local function path_list(paths)
   return builtin.source.list(items)
 end
 
-local mac_skk_source = path_list({
-  "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries",
-  "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries/skk-jisyo.utf8",
-})
-
 local claude_source = path_list({
   "./CLAUDE.md",
   "./claude/settings.json",
@@ -223,7 +218,6 @@ return function(x)
     std.refine_source(
       std.compose_sources(
         std.bind_source_args(project_file_source(), { "~/ghq/github.com/lambdalisue/dotfiles" }),
-        mac_skk_source,
         claude_source
       ),
       builtin.refiner.relative_path()
