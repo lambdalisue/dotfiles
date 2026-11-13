@@ -48,7 +48,7 @@ local EXCLUDED_DIRECTORIES = {
   "$RECYCLE.BIN", ".cache", ".git", ".hg", ".jj", ".ssh", ".svn",
   ".claude" .. SEPARATOR .. "worktrees", -- jj/git worktrees for Claude Code
   ".wt", -- git-wt worktrees
-  "__pycache__", -- Python
+  "__pycache__", ".ruff_cache", -- Python
   "build", -- C/C++
   "node_modules", -- Node.js
   "target", -- Rust
@@ -116,10 +116,22 @@ local function path_renderers()
   }
 end
 
-local function project_file_source()
+local function is_symlink(path)
+  local stat = vim.uv.fs_lstat(path)
+  return stat ~= nil and stat.type == "link"
+end
+
+---@param opts? { follow_symlinks?: boolean }
+local function project_file_source(opts)
+  local follow_symlinks = not opts or opts.follow_symlinks ~= false
   return builtin.source.file({
     filter_file = my_filter_file,
-    filter_directory = my_filter_directory,
+    filter_directory = function(path)
+      if not follow_symlinks and is_symlink(path) then
+        return false
+      end
+      return my_filter_directory(path)
+    end,
     relative_from_base = true,
   })
 end
@@ -219,7 +231,12 @@ return function(x)
     "config",
     std.refine_source(
       std.compose_sources(
-        std.bind_source_args(project_file_source(), { "~/ghq/github.com/lambdalisue/dotfiles" }),
+        -- The checkout links into the nix store and into ~/.claude / ~/.codex
+        -- runtime state; following those buries the actual configuration.
+        std.bind_source_args(
+          project_file_source({ follow_symlinks = false }),
+          { "~/ghq/github.com/lambdalisue/dotfiles" }
+        ),
         claude_source
       ),
       builtin.refiner.relative_path()
