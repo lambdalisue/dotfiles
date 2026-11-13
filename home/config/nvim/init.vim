@@ -157,6 +157,10 @@ if exists('*wildtrigger')
   augroup my-cmdline-autocompletion
     autocmd!
     autocmd CmdlineChanged [:\/\?] call wildtrigger()
+    " wildtrigger() does nothing in input(), so press 'wildchar' instead when
+    " the prompt has a completion and the menu is closed.
+    autocmd CmdlineChanged @ if !wildmenumode() && getcmdcompltype() !=# ''
+          \ | call feedkeys("\<Tab>", 'nt') | endif
   augroup END
 else
   set wildmode=list:longest,full
