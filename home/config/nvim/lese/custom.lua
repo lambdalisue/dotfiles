@@ -45,7 +45,9 @@ local EXCLUDED_FILES = {
 }
 
 local EXCLUDED_DIRECTORIES = {
-  "$RECYCLE.BIN", ".cache", ".git", ".hg", ".ssh", ".svn",
+  "$RECYCLE.BIN", ".cache", ".git", ".hg", ".jj", ".ssh", ".svn",
+  ".claude" .. SEPARATOR .. "worktrees", -- jj/git worktrees for Claude Code
+  ".wt", -- git-wt worktrees
   "__pycache__", -- Python
   "build", -- C/C++
   "node_modules", -- Node.js
