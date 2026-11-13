@@ -47,7 +47,6 @@ function! s:init() abort
         \ 'opt': 1,
         \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
         \})
-    call jetpack#add('hrsh7th/nvim-insx', {'opt': 1})
     call jetpack#add('numToStr/Comment.nvim', {'opt': 1})
     call jetpack#add("rcarriga/nvim-notify", {'opt': 1})
     call jetpack#add("lambdalisue/nvim-aibo", {'opt': 1})

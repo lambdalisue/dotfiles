@@ -1,0 +1,40 @@
+return {
+  cmd = { "tailwindcss-language-server", "--stdio" },
+  filetypes = {
+    "astro",
+    "css",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "less",
+    "markdown",
+    "mdx",
+    "postcss",
+    "sass",
+    "scss",
+    "svelte",
+    "typescript",
+    "typescriptreact",
+    "vue",
+  },
+  workspace_required = true,
+  root_markers = {
+    "tailwind.config.js",
+    "tailwind.config.cjs",
+    "tailwind.config.mjs",
+    "tailwind.config.ts",
+    "postcss.config.js",
+    "postcss.config.cjs",
+    "postcss.config.mjs",
+    "postcss.config.ts",
+  },
+  capabilities = {
+    workspace = { didChangeWatchedFiles = { dynamicRegistration = true } },
+  },
+  settings = {
+    tailwindCSS = {
+      validate = true,
+      classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+    },
+  },
+}
