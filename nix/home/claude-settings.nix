@@ -31,6 +31,12 @@
       "~/.agents/skills/arto/open.sh *"
       "${homeDirectory}/.agents/skills/arto/open.sh *"
     ];
+    # nix evaluates flakes through a SQLite cache under ~/.cache/nix; read-only
+    # there, every `nix develop` fails with "attempt to write a readonly
+    # database".
+    filesystem.allowWrite = [ "${homeDirectory}/.cache/nix" ];
+    # A multi-user install builds through the daemon, so nix needs its socket.
+    network.allowUnixSockets = [ "/nix/var/nix/daemon-socket/socket" ];
   };
   hooks = {
     PreToolUse = [
