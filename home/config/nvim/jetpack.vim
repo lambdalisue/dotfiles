@@ -3,41 +3,10 @@ function! s:init() abort
   call jetpack#begin()
   call jetpack#add('tani/vim-jetpack')
 
-  " Denops
-  call jetpack#add('lambdalisue/vim-deno-cache')
-  call jetpack#add('lambdalisue/vim-gin')
-  call jetpack#add('lambdalisue/vim-initial')
-  call jetpack#add('lambdalisue/vim-kensaku')
-  call jetpack#add('skanehira/denops-silicon.vim')
-  call jetpack#add('vim-denops/denops-shared-server.vim')
-  call jetpack#add('vim-denops/denops-startup-recorder.vim')
-  call jetpack#add('vim-denops/denops.vim')
-
   call jetpack#add('AndrewRadev/linediff.vim')
-  call jetpack#add('Bakudankun/BackAndForward.vim')
   call jetpack#add('EdenEast/nightfox.nvim')
   call jetpack#add('Makaze/AnsiEsc')
-  call jetpack#add('Shougo/context_filetype.vim')
-  call jetpack#add('Shougo/junkfile.vim')
   call jetpack#add('arto-app/vim-arto')
-  call jetpack#add('catppuccin/vim')
-  call jetpack#add('cocopon/colorswatch.vim')
-  call jetpack#add('cocopon/iceberg.vim')
-  call jetpack#add('dstein64/vim-startuptime')
-  call jetpack#add('github/copilot.vim')
-  call jetpack#add('haya14busa/vim-edgemotion')
-  call jetpack#add('hrsh7th/vim-eft')
-  call jetpack#add('itchyny/vim-parenmatch')
-  call jetpack#add('itchyny/vim-qfedit')
-  call jetpack#add('junegunn/goyo.vim')
-  call jetpack#add('kana/vim-operator-replace')
-  call jetpack#add('kana/vim-operator-user')
-  call jetpack#add('kana/vim-repeat')
-  call jetpack#add('kana/vim-textobj-indent')
-  call jetpack#add('kana/vim-textobj-line')
-  call jetpack#add('kana/vim-textobj-user')
-  call jetpack#add('lambdalisue/nvim-aibo')
-  call jetpack#add('lambdalisue/vim-backslash')
   call jetpack#add('lambdalisue/vim-battery')
   call jetpack#add('lambdalisue/vim-compl-local-filename')
   call jetpack#add('lambdalisue/vim-fern')
@@ -46,54 +15,28 @@ function! s:init() abort
   call jetpack#add('lambdalisue/vim-fern-mapping-git')
   call jetpack#add('lambdalisue/vim-fern-mapping-mark-children')
   call jetpack#add('lambdalisue/vim-fern-mapping-project-top')
-  call jetpack#add('lambdalisue/vim-fern-mapping-quickfix')
   call jetpack#add('lambdalisue/vim-fern-renderer-nerdfont')
   call jetpack#add('lambdalisue/vim-file-protocol')
-  call jetpack#add('lambdalisue/vim-findent')
-  call jetpack#add('lambdalisue/vim-gina')
   call jetpack#add('lambdalisue/vim-glyph-palette')
   call jetpack#add('lambdalisue/vim-guise')
   call jetpack#add('lambdalisue/vim-http-protocol')
   call jetpack#add('lambdalisue/vim-improved-gf')
-  call jetpack#add('lambdalisue/vim-jin')
   call jetpack#add('lambdalisue/vim-lese')
   call jetpack#add('lambdalisue/vim-lese-mr')
   call jetpack#add('lambdalisue/vim-mr')
   call jetpack#add('lambdalisue/vim-nerdfont')
-  call jetpack#add('lambdalisue/vim-operator-breakline')
-  call jetpack#add('lambdalisue/vim-quickrun-neovim-job')
   call jetpack#add('lambdalisue/vim-readablefold')
   call jetpack#add('lambdalisue/vim-suda')
   call jetpack#add('lambdalisue/vim-trimmer')
   call jetpack#add('lambdalisue/vim-wifi')
-  call jetpack#add('liuchengxu/vista.vim')
-  call jetpack#add('machakann/vim-sandwich')
-  call jetpack#add('machakann/vim-swap')
-  call jetpack#add('machakann/vim-textobj-delimited')
-  call jetpack#add('mattn/vim-textobj-url')
-  call jetpack#add('mattn/webapi-vim')
-  call jetpack#add('mbbill/undotree')
-  call jetpack#add('neo4j-contrib/cypher-vim-syntax')
-  call jetpack#add('osyo-manga/vim-textobj-multiblock')
-  call jetpack#add('previm/previm')
-  call jetpack#add('rbtnn/vim-vimscript_lasterror')
-  call jetpack#add('sgur/vim-textobj-parameter')
-  call jetpack#add('t9md/vim-quickhl')
-  call jetpack#add('tani/dmacro.nvim')
-  call jetpack#add('thinca/vim-qfreplace')
-  call jetpack#add('thinca/vim-quickrun')
-  call jetpack#add('thinca/vim-template')
   call jetpack#add('thinca/vim-themis')
   call jetpack#add('thinca/vim-zenspace')
-  call jetpack#add('tweekmonster/helpful.vim')
   call jetpack#add('tyru/capture.vim')
   call jetpack#add('tyru/open-browser.vim')
-  call jetpack#add('will133/vim-dirdiff')
 
   " Vim
   if !has('nvim')
     call jetpack#add('rhysd/vim-healthcheck', {'opt': 1 })
-    call jetpack#add('mattn/vim-lexiv', {'opt': 1})
     call jetpack#add('tyru/caw.vim', {'opt': 1})
   endif
 
@@ -104,18 +47,10 @@ function! s:init() abort
         \ 'opt': 1,
         \ 'do': { -> execute('silent! packadd nvim-treesitter | TSUpdate') },
         \})
-    call jetpack#add('nvim-treesitter/nvim-treesitter-textobjects', {
-        \ 'opt': 1,
-        \ 'branch': 'main',
-        \})
-    call jetpack#add('neovim/nvim-lspconfig', {'opt': 1})
-    call jetpack#add('lewis6991/gitsigns.nvim', {'opt': 1})
     call jetpack#add('hrsh7th/nvim-insx', {'opt': 1})
     call jetpack#add('numToStr/Comment.nvim', {'opt': 1})
-    call jetpack#add('MeanderingProgrammer/render-markdown.nvim', {'opt': 1})
-    call jetpack#add('CopilotC-Nvim/CopilotChat.nvim', {'opt': 1})
     call jetpack#add("rcarriga/nvim-notify", {'opt': 1})
-    "call jetpack#add("lambdalisue/nvim-aibo", {'opt': 1})
+    call jetpack#add("lambdalisue/nvim-aibo", {'opt': 1})
   endif
 
   call jetpack#end()
@@ -141,18 +76,11 @@ function! s:configure() abort
   if has('nvim')
     silent! packadd plenary.nvim
     silent! packadd nvim-treesitter
-    silent! packadd nvim-treesitter-textobjects
-    silent! packadd nvim-lspconfig
-    silent! packadd gitsigns.nvim
-    silent! packadd nvim-insx
     silent! packadd Comment.nvim
-    silent! packadd render-markdown.nvim
-    silent! packadd CopilotChat.nvim
     silent! packadd nvim-notify
     silent! packadd nvim-aibo
   else
     silent! packadd vim-healthcheck
-    silent! packadd vim-lexiv
   endif
 
   " Load plugin configurations
