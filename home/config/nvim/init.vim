@@ -524,6 +524,8 @@ nnoremap <silent> <C-w><C-7> <Cmd>silent! tabnext 7<CR>
 nnoremap <silent> <C-w><C-8> <Cmd>silent! tabnext 8<CR>
 nnoremap <silent> <C-w><C-9> <Cmd>silent! tabnext 9<CR>
 nnoremap <silent> <C-w><C-0> <Cmd>silent! tabnext 0<CR>
+nnoremap <silent> <C-w>g< <Cmd>execute 'silent! tabmove -' .. v:count1<CR>
+nnoremap <silent> <C-w>g> <Cmd>execute 'silent! tabmove +' .. v:count1<CR>
 
 " Window navigation
 " Allow `<C-w><C-h,j,k,l>` and `<C-w>+,-,<,>` without pressing `<C-w>` repeatedly
