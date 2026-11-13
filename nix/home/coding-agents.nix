@@ -79,7 +79,7 @@ in
     enable = true;
     package = if isDarwin then null else pkgs.claude-code;
     mutableSettings = true;
-    settings = import ./claude-settings.nix;
+    settings = import ./claude-settings.nix { inherit (config.home) homeDirectory; };
   };
 
   programs.codex = {
