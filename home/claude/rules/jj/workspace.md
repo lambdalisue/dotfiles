@@ -35,6 +35,13 @@ jj workspace add --name <name> -r 'trunk()' .claude/worktrees/<name>
 - `.claude/worktrees/` is the one location Claude Code's `EnterWorktree`
   accepts without a relocation prompt, and the global gitignore already
   excludes it, so the main checkout never snapshots a workspace's files.
+- **Run it outside the Bash sandbox from the first call**
+  (`dangerouslyDisableSandbox: true`). The Git worktree is written under
+  `.git/worktrees/`, which the sandbox keeps read-only, so a sandboxed call
+  always fails with `could not create directory of '…/.git/worktrees/<name>':
+  Operation not permitted` — after jj has already registered the workspace,
+  leaving a half-made one to `jj workspace forget` and delete before retrying.
+  The same holds for `jj workspace remove`.
 
 Then open the change in the new workspace per `jj/workflow.md`:
 `jj -R <workspace path> describe -m "<message>"`.
