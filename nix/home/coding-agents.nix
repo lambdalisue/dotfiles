@@ -80,6 +80,29 @@ in
     package = if isDarwin then null else pkgs.claude-code;
     mutableSettings = true;
     settings = import ./claude-settings.nix { inherit (config.home) homeDirectory; };
+    # Arto comes from Homebrew, so only macOS has the command, and it is named
+    # by path because a GUI-launched Claude Code may not have Homebrew on its
+    # PATH. `arto mcp`
+    # opens only paths under its --allow directories; given any, it no longer
+    # allows the directory it started in by default, so "." (resolved
+    # against the session's directory) keeps the project allowed. Claude
+    # Code's scratchpad lives under /private/tmp/claude-<uid>, and 501 is this
+    # account's uid. Paths are compared after links are followed, hence
+    # /private/tmp rather than /tmp.
+    mcpServers = lib.optionalAttrs isDarwin {
+      arto = {
+        command = "/opt/homebrew/bin/arto";
+        args = [
+          "mcp"
+          "--allow"
+          "."
+          "--allow"
+          "${config.home.homeDirectory}/Compost/AI-Notes"
+          "--allow"
+          "/private/tmp/claude-501"
+        ];
+      };
+    };
   };
 
   programs.codex = {
