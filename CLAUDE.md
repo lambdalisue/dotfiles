@@ -89,7 +89,6 @@ The repository primarily manages configurations for:
 - **Shell**: Zsh configuration in `home/config/zsh/` and `home/zshenv`
 - **Claude Code**: Rules, skills, commands, and agents in `home/claude/`
 - **Window Managers**: OmniWM (macOS)
-- **Terminal Emulators**: Ghostty
 
 ## Making Changes
 

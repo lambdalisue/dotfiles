@@ -47,15 +47,18 @@
     ];
 
     casks = [
+      # Fully qualified: adroit lives in adroit-app/tap, not homebrew/cask.
+      "adroit-app/tap/adroit"
       # Fully qualified: arto lives in arto-app/tap, not homebrew/cask.
       "arto-app/tap/arto"
       "brave-browser"
+      # Fully qualified: cattery lives in lambdalisue/cattery, not homebrew/cask.
+      "lambdalisue/cattery/cattery"
       "chatgpt"
       "claude"
       "claude-code@latest"
       "cleanshot"
       "discord"
-      "ghostty"
       "google-chrome"
       "gpg-suite"
       # Fully qualified: kanaemi lives in kanaemi-app/tap, not homebrew/cask.
