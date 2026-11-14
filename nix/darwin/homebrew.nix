@@ -47,6 +47,8 @@
     ];
 
     casks = [
+      # Fully qualified: adroit lives in adroit-app/tap, not homebrew/cask.
+      "adroit-app/tap/adroit"
       # Fully qualified: arto lives in arto-app/tap, not homebrew/cask.
       "arto-app/tap/arto"
       "brave-browser"

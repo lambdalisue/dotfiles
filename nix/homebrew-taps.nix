@@ -10,6 +10,8 @@
 # trusts it, in the activation and interactive `brew` contexts alike.
 [
   "k1low/tap"
+  # Adroit is distributed only from its author's tap, not homebrew/cask.
+  "adroit-app/tap"
   # Arto is distributed only from its author's tap, not homebrew/cask.
   "arto-app/tap"
   # Cattery is distributed only from its own tap, not homebrew/cask.
