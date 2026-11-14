@@ -285,12 +285,12 @@ set nowrapscan
 " }}}
 
 " Functions {{{
+" Pick the colorscheme from 'background' rather than setting 'background'
+" ourselves: Neovim fills it from the terminal's background colour (OSC 11)
+" and re-queries when the terminal announces a theme change (DEC mode 2031),
+" but only while the user config leaves the option alone.
 function! s:revise_colorscheme() abort
-  if system('defaults read -g AppleInterfaceStyle') ==# "Dark\n"
-    silent! colorscheme nordfox
-  else
-    silent! colorscheme dawnfox
-  endif
+  execute 'silent! colorscheme' &background ==# 'light' ? 'dawnfox' : 'nightfox'
 endfunction
 command! ReviseColorscheme call s:revise_colorscheme()
 " }}}
@@ -584,8 +584,8 @@ function! s:load_configurations() abort
 endfunction
 call s:load_configurations()
 
-set background=dark
-silent! colorscheme nightfox
+autocmd MyAutoCmd OptionSet background call s:revise_colorscheme()
+call s:revise_colorscheme()
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
