@@ -12,8 +12,6 @@
   "k1low/tap"
   # OmniWM ships only from its author's tap, not homebrew/cask.
   "barutsrb/tap"
-  # Adroit is distributed only from its author's tap, not homebrew/cask.
-  "adroit-app/tap"
   # Arto is distributed only from its author's tap, not homebrew/cask.
   "arto-app/tap"
   # Cattery is distributed only from its own tap, not homebrew/cask.
