@@ -1,20 +1,6 @@
 {
   description = "Alisue's dotfiles managed with nix-darwin and home-manager";
 
-  # The cache for the pinned felis build, repeated from nix/darwin/default.nix.
-  # `just switch` activates home-manager before the system layer, so a cache
-  # added there is not yet in /etc/nix/nix.conf when home-manager first needs
-  # it; declaring it here lets the flake bring its own (accepted via
-  # `accept-flake-config`, honored because the user is trusted).
-  nixConfig = {
-    extra-substituters = [
-      "https://nix-cache.natsukium.com"
-    ];
-    extra-trusted-public-keys = [
-      "niks3-1:SoIFTPtiPoCW3/OzUkIBKlLG5znMZfbihlr11XAOles="
-    ];
-  };
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
@@ -27,11 +13,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Pinned to a release tag and nixpkgs NOT followed: only tagged builds of
-    # felis's own lock are in nix-cache.natsukium.com; anything else compiles
-    # the Rust workspace locally. Bump the tag to upgrade.
-    felis.url = "github:felis-terminal/felis/v0.1.4";
 
     # `mmdr`, the mermaid renderer the figures Claude Code plugin tries first;
     # it is not packaged in nixpkgs.
@@ -46,7 +27,6 @@
       nixpkgs,
       nix-darwin,
       home-manager,
-      felis,
       mermaid-rs-renderer,
       ...
     }:
@@ -133,7 +113,6 @@
             });
           };
           modules = [
-            felis.homeManagerModules.felis
             ./nix/home
           ];
         };

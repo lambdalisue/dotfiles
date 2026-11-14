@@ -14,7 +14,6 @@
     ./shell.nix
     ./git.nix
     ./gh.nix
-    ./felis.nix
     # Homebrew tap trust; self-gates to Darwin (no Homebrew off macOS).
     ./homebrew-trust.nix
   ]
@@ -32,7 +31,7 @@
 
   # Copy .app bundles into ~/Applications/Home Manager Apps instead of
   # symlinking them: Spotlight and Launch Services skip symlinks into the
-  # store, so linked apps (e.g. felis) cannot be launched from them.
+  # store, so linked apps cannot be launched from them.
   targets.darwin = lib.mkIf isDarwin {
     copyApps.enable = true;
     linkApps.enable = false;
