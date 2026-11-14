@@ -14,10 +14,5 @@ __pycache__/
 /AGENTS.md
 /.agents/
 
-# OmniWM rescue copies: written next to settings.toml when the app cannot
-# decode it (.corrupt*) or before a schema migration (.pre-v*). Transient.
-home/config/omniwm/settings.toml.corrupt*
-home/config/omniwm/settings.toml.pre-v*
-
 # Neovim falls back to ./nvim.log when its state directory is not writable.
 /nvim.log

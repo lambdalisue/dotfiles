@@ -21,7 +21,6 @@
     # Dock
     dock = {
       autohide = true;
-      mru-spaces = false;
       show-recents = false;
       tilesize = 48;
 
@@ -98,20 +97,6 @@
       TrackpadThreeFingerDrag = true;
     };
 
-    # Desktop & Stage Manager. All three exist because a tiling window manager
-    # owns the window layout here and macOS's own gestures fight it.
-    WindowManager = {
-      # Clicking the wallpaper must not sweep every window off-screen — with
-      # tiled windows the wallpaper is only ever hit by accident.
-      EnableStandardClickToShowDesktop = false;
-      # Keep desktop icons hidden; files are reached from Finder, not the
-      # wallpaper the tiling layout covers anyway.
-      HideDesktop = true;
-      # Drop the gaps macOS inserts around its own tiled windows, so window
-      # geometry is whatever the tiling manager computed.
-      EnableTiledWindowMargins = false;
-    };
-
     # Keyboard shortcuts (com.apple.symbolichotkeys). Managed declaratively so a
     # macOS update can't silently re-enable a shortcut disabled by hand (e.g.
     # ⌘Space Spotlight, hotkey 64). nix-darwin replaces the AppleSymbolicHotKeys
@@ -158,12 +143,6 @@
           "29" = { enabled = false; value = { type = "standard"; parameters = [ 51 20 1441792 ]; }; };
           "30" = { enabled = false; value = { type = "standard"; parameters = [ 52 21 1179648 ]; }; };
           "31" = { enabled = false; value = { type = "standard"; parameters = [ 52 21 1441792 ]; }; };
-          "32" = { enabled = false; };
-          "33" = { enabled = false; };
-          "34" = { enabled = false; };
-          "35" = { enabled = true; value = { type = "standard"; parameters = [ 65535 125 2490368 ]; }; };
-          "36" = { enabled = false; };
-          "37" = { enabled = false; };
           "44" = { enabled = false; };
           "45" = { enabled = false; };
           "46" = { enabled = false; };
@@ -187,15 +166,7 @@
           "73" = { enabled = true; value = { type = "standard"; parameters = [ 65535 53 1048576 ]; }; };
           "75" = { enabled = false; value = { type = "standard"; parameters = [ 65535 100 0 ]; }; };
           "76" = { enabled = false; value = { type = "standard"; parameters = [ 65535 100 131072 ]; }; };
-          "79" = { enabled = false; value = { type = "standard"; parameters = [ 65535 123 8650752 ]; }; };
-          "80" = { enabled = true; };
-          "81" = { enabled = false; value = { type = "standard"; parameters = [ 65535 124 8650752 ]; }; };
-          "82" = { enabled = true; value = { type = "standard"; parameters = [ 65535 124 8781824 ]; }; };
           "98" = { enabled = false; value = { type = "standard"; parameters = [ 47 44 1179648 ]; }; };
-          "118" = { enabled = false; value = { type = "standard"; parameters = [ 65535 18 262144 ]; }; };
-          "119" = { enabled = false; value = { type = "standard"; parameters = [ 65535 19 262144 ]; }; };
-          "120" = { enabled = false; value = { type = "standard"; parameters = [ 65535 20 262144 ]; }; };
-          "121" = { enabled = false; value = { type = "standard"; parameters = [ 65535 21 262144 ]; }; };
           "156" = { enabled = true; value = { type = "standard"; parameters = [ 65535 49 393216 ]; }; };
           "159" = { enabled = false; value = { type = "standard"; parameters = [ 65535 36 262144 ]; }; };
           "162" = { enabled = false; value = { type = "standard"; parameters = [ 65535 96 9961472 ]; }; };
@@ -219,21 +190,6 @@
           "232" = { enabled = false; value = { type = "standard"; parameters = [ 65535 65535 0 ]; }; };
           "233" = { enabled = true; value = { type = "standard"; parameters = [ 109 46 1048576 ]; }; };
           "235" = { enabled = false; value = { type = "standard"; parameters = [ 65535 65535 0 ]; }; };
-          "237" = { enabled = false; value = { type = "standard"; parameters = [ 102 3 8650752 ]; }; };
-          "238" = { enabled = false; value = { type = "standard"; parameters = [ 99 8 8650752 ]; }; };
-          "239" = { enabled = false; value = { type = "standard"; parameters = [ 114 15 8650752 ]; }; };
-          "240" = { enabled = false; value = { type = "standard"; parameters = [ 65535 123 8650752 ]; }; };
-          "241" = { enabled = false; value = { type = "standard"; parameters = [ 65535 124 8650752 ]; }; };
-          "242" = { enabled = false; value = { type = "standard"; parameters = [ 65535 126 8650752 ]; }; };
-          "243" = { enabled = false; value = { type = "standard"; parameters = [ 65535 125 8650752 ]; }; };
-          "244" = { enabled = false; value = { type = "standard"; parameters = [ 65535 65535 0 ]; }; };
-          "245" = { enabled = false; value = { type = "standard"; parameters = [ 65535 65535 0 ]; }; };
-          "246" = { enabled = false; value = { type = "standard"; parameters = [ 65535 65535 0 ]; }; };
-          "247" = { enabled = false; value = { type = "standard"; parameters = [ 65535 65535 0 ]; }; };
-          "248" = { enabled = false; value = { type = "standard"; parameters = [ 65535 123 8781824 ]; }; };
-          "249" = { enabled = false; value = { type = "standard"; parameters = [ 65535 124 8781824 ]; }; };
-          "250" = { enabled = false; value = { type = "standard"; parameters = [ 65535 126 8781824 ]; }; };
-          "251" = { enabled = false; value = { type = "standard"; parameters = [ 65535 125 8781824 ]; }; };
           "256" = { enabled = false; value = { type = "standard"; parameters = [ 65535 65535 0 ]; }; };
           "260" = { enabled = false; value = { type = "standard"; parameters = [ 65535 53 1048576 ]; }; };
         };

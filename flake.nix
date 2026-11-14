@@ -67,7 +67,7 @@
       # environment is built the same way everywhere (`home-manager switch`).
       # Only ./nix/home is imported, so macOS-only pieces (Homebrew, system
       # defaults) live solely in nix-darwin and the Darwin-gated home entries
-      # (Arto/omniwm/ssh) are excluded off macOS.
+      # (Arto/ssh) are excluded off macOS.
       #
       # mkHome takes a per-machine override set:
       #   username     (default "alisue")

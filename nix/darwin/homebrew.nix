@@ -65,9 +65,6 @@
       "neovide-app"
       "obsidian"
       "ollama-app"
-      # Tiling window manager. Fully qualified: omniwm lives in barutsrb/tap,
-      # not homebrew/cask.
-      "barutsrb/tap/omniwm"
       # Parallels is intentionally NOT declared here: its cask postflight runs
       # `sudo inittool init`, which needs interactive authentication. During
       # nix-darwin activation `brew bundle` runs non-interactively with no tty

@@ -22,13 +22,6 @@ in
     # (~/.config/nix/netrc is a local-only credential file, not symlinked)
     "nvim".source = link "${dotfilesDir}/home/config/nvim";
     "zsh".source = link "${dotfilesDir}/home/config/zsh";
-  }
-  // lib.optionalAttrs isDarwin {
-    # Darwin entries (from .dotfiles_darwin.tsv)
-    # OmniWM rewrites settings.toml from its GUI on every change, so it is
-    # synced through iCloud Drive rather than tracked in this repository.
-    "omniwm".source =
-      link "${config.home.homeDirectory}/Library/Mobile Documents/com~apple~CloudDocs/OmniWM";
   };
 
   home.file = {
