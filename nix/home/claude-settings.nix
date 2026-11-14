@@ -23,14 +23,6 @@
   };
   sandbox = {
     enabled = true;
-    # Entries match the literal command text, so a tilde path and its
-    # expanded form are separate entries. The Arto opener has to leave the
-    # sandbox because it starts the app through LaunchServices, which the
-    # sandbox blocks.
-    excludedCommands = [
-      "~/.agents/skills/arto/open.sh *"
-      "${homeDirectory}/.agents/skills/arto/open.sh *"
-    ];
     # nix evaluates flakes through a SQLite cache under ~/.cache/nix; read-only
     # there, every `nix develop` fails with "attempt to write a readonly
     # database".
