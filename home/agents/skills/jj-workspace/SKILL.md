@@ -46,4 +46,13 @@ subagent.
    jj workspace add --name <name> -r 'trunk()' <repo root>/.claude/worktrees/<name>
    jj -R <repo root>/.claude/worktrees/<name> describe -m "<description>"
    ```
+   Run `jj workspace add` outside the sandbox. When `<repo root>/target`
+   exists, clone it before entering, inside the sandbox:
+   ```bash
+   cp -c -R <repo root>/target <repo root>/.claude/worktrees/<name>/target
+   ```
    Then enter it with `EnterWorktree` (`path:` the new directory) and confirm.
+
+4. **Finish** — when the work is done, `jj workspace remove <name>` (outside
+   the sandbox) deletes the directory and its `target/`. Never
+   `jj workspace forget`, which leaves both on disk.

@@ -43,12 +43,36 @@ jj workspace add --name <name> -r 'trunk()' .claude/worktrees/<name>
   leaving a half-made one to `jj workspace forget` and delete before retrying.
   The same holds for `jj workspace remove`.
 
+When the main checkout has a `target/` directory (Rust), clone it into the
+new workspace right after `jj workspace add`, before the first build:
+
+```sh
+cp -c -R <main checkout>/target <workspace path>/target
+```
+
+- `-c` makes an APFS clone (`clonefile(2)`): the copy shares blocks with the
+  original until cargo rewrites them, so dependency artifacts cost no extra
+  disk and the first build reuses them instead of compiling from scratch.
+  Without `-c` it is a full copy of tens of gigabytes — never drop the flag.
+- It stays inside the sandbox: the source is only read, and the destination
+  lies under the repository, which the sandbox lets the session write.
+- Skip it when the main checkout has no `target/`. Do not point the
+  workspace at a shared `CARGO_TARGET_DIR` instead: parallel workspaces
+  would wait on each other's build lock and keep rebuilding each other's
+  changes.
+
 Then open the change in the new workspace per `jj/workflow.md`:
 `jj -R <workspace path> describe -m "<message>"`.
 
-Remove a finished workspace with `jj workspace forget <name>` (keeps the
-directory) or `jj workspace remove <name>` (deletes it). Its changes stay in
-the repository either way.
+Finish a workspace with `jj workspace remove <name>`. It deletes the
+directory with everything in it, ignored files such as `target/` included,
+and removes the Git worktree. Its changes stay in the repository.
+
+Do not finish one with `jj workspace forget <name>`: that leaves the
+directory and its `target/` on disk, and forgotten workspaces are invisible to
+`jj workspace list`, so their build artifacts pile up unnoticed until the disk
+is full. If a forgotten directory is already there, delete it with `rm -rf`
+and run `git worktree prune` outside the sandbox.
 
 Do NOT use `git worktree add`, `git wt`, or `EnterWorktree` with `name:` — the
 first two make a worktree jj does not know about (jj commands fail inside it),
