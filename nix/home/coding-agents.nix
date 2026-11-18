@@ -17,7 +17,6 @@ let
     "CLAUDE.md"
     "agents"
     "hooks"
-    "mcp.json"
     "rules"
   ];
   claudeManaged = claudeAssets ++ map (name: "skills/${name}") skills;

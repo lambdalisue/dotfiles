@@ -22,10 +22,7 @@ aibo.setup({
   }
 })
 
-local claude = string.format(
-  "claude --mcp-config %s --permission-mode auto",
-  vim.fn.expand("~/.claude/mcp.json")
-)
+local claude = "claude --permission-mode auto"
 local codex = "codex --dangerously-bypass-approvals-and-sandbox"
 local ollama_claude = "ollama launch claude --model qwen3.6:latest --yes"
 
