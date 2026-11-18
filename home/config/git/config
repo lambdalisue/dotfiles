@@ -41,6 +41,8 @@
 
 [init]
   defaultBranch = main
+  ; hooks/post-checkout colocates jj into clones under a ghq root
+  templateDir = ~/.config/git/template
 
 [github]
   user = lambdalisue

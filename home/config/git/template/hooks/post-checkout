@@ -1,0 +1,51 @@
+#!/bin/sh
+# Colocate jj into every repository cloned under a ghq root.
+#
+# ghq has no post-clone hook and no jj backend, but `ghq get` runs
+# `git clone`, which copies this template and calls post-checkout once the
+# working tree is written. Doing it here instead of in a shell wrapper makes
+# it apply to every caller of ghq — any shell, scripts, agents.
+#
+# The hook is copied into each clone's .git/hooks, so it stays quiet on
+# everything but that first checkout.
+
+# A clone is the only checkout whose previous HEAD is the null object.
+case "$1" in
+*[!0]*) exit 0 ;;
+esac
+
+command -v jj >/dev/null 2>&1 || exit 0
+command -v ghq >/dev/null 2>&1 || exit 0
+
+# `git worktree add` also starts from the null object; a linked worktree is
+# not a repository of its own, so leave it to `jj workspace add`.
+git_dir=$(git rev-parse --absolute-git-dir) || exit 0
+common_dir=$(cd "$(git rev-parse --git-common-dir)" && pwd -P) || exit 0
+[ "$(cd "$git_dir" && pwd -P)" = "$common_dir" ] || exit 0
+
+top=$(git rev-parse --show-toplevel) || exit 0
+top=$(cd "$top" && pwd -P)
+[ -e "$top/.jj" ] && exit 0
+
+under_root=
+for root in $(ghq root --all 2>/dev/null); do
+	root=$(cd "$root" 2>/dev/null && pwd -P) || continue
+	case "$top/" in
+	"$root"/*) under_root=1 ;;
+	esac
+done
+[ -n "$under_root" ] || exit 0
+
+# git exports GIT_DIR and friends to hooks; jj must discover the repository
+# from the directory instead.
+unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_PREFIX
+
+jj git init --colocate "$top" || exit 0
+
+# init leaves the default branch untracked, so it could not be pushed or
+# updated by `jj git fetch` without this.
+remote=$(git -C "$top" remote | head -n 1)
+[ -n "$remote" ] || exit 0
+head=$(git -C "$top" symbolic-ref --short "refs/remotes/$remote/HEAD" 2>/dev/null) || exit 0
+jj -R "$top" bookmark track "${head#"$remote"/}@$remote" || true
+exit 0
