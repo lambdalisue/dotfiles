@@ -14,7 +14,8 @@ fail=0
 check() {
     local want="$1" cmd="$2" got
     printf '%s' "$cmd" |
-        jq -Rs --arg cwd "$here" '{tool_name: "Bash", cwd: $cwd, tool_input: {command: .}}' |
+        jq -Rs --arg cwd "$here" --argjson off "${SANDBOX_OFF:-false}" \
+            '{tool_name: "Bash", cwd: $cwd, tool_input: ({command: .} + if $off then {dangerouslyDisableSandbox: true} else {} end)}' |
         "$hook" >/dev/null 2>&1
     got=$?
     if [[ "$got" != "$want" ]]; then
@@ -32,8 +33,20 @@ check 0 "git worktree list"
 check 0 "git clone https://example.com/x.git /tmp/x"
 
 # --- prune only drops entries whose directories are gone --------------------
-check 0 "git worktree prune"
-check 0 "rm -rf .claude/worktrees/old && git worktree prune && jj workspace list"
+SANDBOX_OFF=true check 0 "git worktree prune"
+SANDBOX_OFF=true check 0 "rm -rf .claude/worktrees/old && git worktree prune && jj workspace list"
+
+# --- writes under .git/worktrees fail inside the sandbox ---------------------
+check 2 "git worktree prune"
+check 2 "jj workspace add --name x -r 'trunk()' .claude/worktrees/x"
+check 2 "cd /repo && jj workspace add --name x .claude/worktrees/x && jj -R .claude/worktrees/x describe -m y"
+check 2 "jj -R /repo --ignore-working-copy workspace remove x"
+check 2 "for w in a b; do jj workspace remove \"\$w\"; done"
+SANDBOX_OFF=true check 0 "jj workspace add --name x -r 'trunk()' .claude/worktrees/x"
+SANDBOX_OFF=true check 0 "jj -R /repo workspace remove x"
+check 0 "jj workspace list"
+check 0 "jj workspace forget x"
+check 0 "jj log -r 'workspace add'"
 
 # --- history, index and worktree writes block --------------------------------
 check 2 "git commit -m x"

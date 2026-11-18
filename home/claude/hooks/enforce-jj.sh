@@ -6,6 +6,9 @@
 # inside any Git repository. Read-only git (log, diff, show, blame, ...) and
 # `git clone` / `git init` pass. Whether the repository already has `.jj`
 # only changes the hint: a plain Git checkout is told to colocate jj first.
+#
+# `jj workspace add/remove` and `git worktree prune` must run with the sandbox
+# off, because they write under .git/worktrees.
 
 set -euo pipefail
 
@@ -18,12 +21,13 @@ fi
 tool_name=$(echo "$input" | jq -r '.tool_name // ""')
 command=$(echo "$input" | jq -r '.tool_input.command // ""')
 cwd=$(echo "$input" | jq -r '.cwd // ""')
+sandbox_off=$(echo "$input" | jq -r '.tool_input.dangerouslyDisableSandbox // false')
 
 if [[ "$tool_name" != "Bash" ]] || [[ -z "$command" ]]; then
     exit 0
 fi
 
-CMD="$command" CWD="${cwd:-$PWD}" exec perl -e '
+CMD="$command" CWD="${cwd:-$PWD}" SANDBOX_OFF="$sandbox_off" exec perl -e '
     use strict;
     use warnings;
     use File::Spec;
@@ -126,10 +130,35 @@ CMD="$command" CWD="${cwd:-$PWD}" exec perl -e '
         return 1;
     }
 
+    # The sandbox keeps .git/worktrees read-only, so these fail halfway inside
+    # it — jj has registered the workspace before Git refuses the worktree.
+    sub needs_sandbox_off {
+        my ($what) = @_;
+        return if $ENV{SANDBOX_OFF} eq "true";
+        print STDERR "❌ `$what` writes under .git/worktrees, which the Bash sandbox keeps read-only.\n\n";
+        print STDERR "Run this call with dangerouslyDisableSandbox: true. Inside the sandbox it fails\n";
+        print STDERR "after jj has already registered the workspace, leaving a half-made one behind.\n";
+        print STDERR "See ~/.claude/rules/jj/workspace.md.\n";
+        exit 2;
+    }
+
     for my $seg (@seg) {
         my @w = words($seg);
+        shift @w while @w && $w[0] =~ /^(?:do|then|else)$/;   # loop and if bodies
         shift @w while @w && $w[0] =~ /^\w+=/;          # VAR=val prefixes
         shift @w while @w && $w[0] =~ /^(?:sudo|env|time|nice|nohup|command|builtin|exec|xargs)$/;
+
+        if (@w && $w[0] eq "jj") {
+            my @j = @w[1 .. $#w];
+            while (@j && $j[0] =~ /^-/) {
+                my $o = shift @j;
+                shift @j if $o =~ /^(?:-R|--repository|--at-op|--at-operation|--config|--config-file|--color)$/;
+            }
+            needs_sandbox_off("jj workspace $j[1]")
+                if @j >= 2 && $j[0] eq "workspace" && $j[1] =~ /^(?:add|remove)$/;
+            next;
+        }
+
         next unless @w && $w[0] eq "git";
         shift @w;
 
@@ -141,6 +170,8 @@ CMD="$command" CWD="${cwd:-$PWD}" exec perl -e '
             elsif ($o =~ /^--(?:git-dir|work-tree|namespace|exec-path)$/) { shift @w; }
         }
         my $sub = shift @w // "";
+        needs_sandbox_off("git worktree prune")
+            if $sub eq "worktree" && ($w[0] // "") eq "prune";
         next unless blocked($sub, @w);
 
         my $kind = repo_kind($dir);

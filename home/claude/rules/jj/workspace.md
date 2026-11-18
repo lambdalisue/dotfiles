@@ -2,19 +2,15 @@
 
 ## When to Cut a Workspace
 
-Work that **modifies the repository** — implementing a feature, fixing a bug,
-refactoring, editing docs, bumping dependencies — starts in a dedicated jj
-workspace, and every step of that work happens inside it. This is the default,
-not an absolute: the exceptions below are real.
+Work that **modifies the repository** starts in a dedicated jj workspace, and
+every step of that work happens inside it.
 
-- **Investigation needs no workspace.** Reading code, Grep/Glob/Read, running
-  read-only commands, answering questions, and planning all stay in the current
-  checkout. Do not cut a workspace just to look around.
-- **Cut it before the first edit.** When investigation turns into modification,
-  create the workspace at that moment — not after the first file is already
-  changed in the wrong checkout.
-- **Already inside a workspace? Stay there.** Never leave it to work in the main
-  checkout; use absolute paths to inspect the main checkout's state.
+- **Investigation needs no workspace.** Reading, searching, read-only commands,
+  answering questions and planning stay in the current checkout.
+- **Cut it before the first edit**, not after a file is already changed in the
+  wrong checkout.
+- **Already inside a workspace? Stay there.** Inspect the main checkout by
+  absolute path.
 - **The user's explicit instruction wins**, and so does a project rule that
   says to work in the main checkout.
 
@@ -24,110 +20,65 @@ not an absolute: the exceptions below are real.
 jj workspace add --name <name> -r 'trunk()' .claude/worktrees/<name>
 ```
 
-- `<name>` is the planned change in kebab-case (`fix-login-timeout`). It is the
-  workspace name and the directory name, not a branch: the bookmark is created
-  at push time.
-- `-r 'trunk()'` starts from the remote default branch. Leave it out to start
-  from the current checkout's parent instead.
-- `git.colocate = true` makes jj create a **Git worktree** alongside the
-  workspace, so `git`, `gh`, and build tools that shell out to Git keep working
-  inside it, and the directory appears in `git worktree list`.
-- `.claude/worktrees/` is the one location Claude Code's `EnterWorktree`
-  accepts without a relocation prompt, and the global gitignore already
-  excludes it, so the main checkout never snapshots a workspace's files.
-- **Run it outside the Bash sandbox from the first call**
-  (`dangerouslyDisableSandbox: true`). The Git worktree is written under
-  `.git/worktrees/`, which the sandbox keeps read-only, so a sandboxed call
-  always fails with `could not create directory of '…/.git/worktrees/<name>':
-  Operation not permitted` — after jj has already registered the workspace,
-  leaving a half-made one to `jj workspace forget` and delete before retrying.
-  The same holds for `jj workspace remove`.
+- `<name>` is the planned change in kebab-case (`fix-login-timeout`): the
+  workspace and directory name, not a branch. The bookmark comes at push time.
+- `-r 'trunk()'` starts from the remote default branch; omit it to start from
+  the current checkout's parent.
+- `git.colocate = true` adds a Git worktree, so `git`, `gh` and build tools
+  keep working inside. `.claude/worktrees/` is gitignored globally and is the
+  one location `EnterWorktree` accepts without a prompt.
+- `jj workspace add` / `remove` and `git worktree prune` write under
+  `.git/worktrees/`, so they run with `dangerouslyDisableSandbox: true`.
+  `enforce-jj.sh` refuses them otherwise.
 
-When the main checkout has a `target/` directory (Rust), clone it into the
-new workspace right after `jj workspace add`, before the first build:
+When the main checkout has a Rust `target/`, clone it into the new workspace
+before the first build:
 
 ```sh
 cp -c -R <main checkout>/target <workspace path>/target
 ```
 
-- `-c` makes an APFS clone (`clonefile(2)`): the copy shares blocks with the
-  original until cargo rewrites them, so dependency artifacts cost no extra
-  disk and the first build reuses them instead of compiling from scratch.
-  Without `-c` it is a full copy of tens of gigabytes — never drop the flag.
-- It stays inside the sandbox: the source is only read, and the destination
-  lies under the repository, which the sandbox lets the session write.
-- Skip it when the main checkout has no `target/`. Do not point the
-  workspace at a shared `CARGO_TARGET_DIR` instead: parallel workspaces
-  would wait on each other's build lock and keep rebuilding each other's
-  changes.
+`-c` is an APFS clone that shares blocks until cargo rewrites them; without it
+the copy is tens of gigabytes. Do not share one `CARGO_TARGET_DIR` instead —
+parallel workspaces would fight over its build lock.
 
-Then open the change in the new workspace per `jj/workflow.md`:
-`jj -R <workspace path> describe -m "<message>"`.
+Then open the change: `jj -R <workspace path> describe -m "<message>"`.
 
-Finish a workspace with `jj workspace remove <name>`. It deletes the
-directory with everything in it, ignored files such as `target/` included,
-and removes the Git worktree. Its changes stay in the repository.
+Finish with `jj workspace remove <name>`: it deletes the directory, ignored
+files included, and the Git worktree; the changes stay in the repository.
+Never `jj workspace forget` — it leaves the directory and its `target/` on disk,
+invisible to `jj workspace list`, until the disk fills. A forgotten directory
+already there: `rm -rf` it, then `git worktree prune`.
 
-Do not finish one with `jj workspace forget <name>`: that leaves the
-directory and its `target/` on disk, and forgotten workspaces are invisible to
-`jj workspace list`, so their build artifacts pile up unnoticed until the disk
-is full. If a forgotten directory is already there, delete it with `rm -rf`
-and run `git worktree prune` outside the sandbox.
-
-Do NOT use `git worktree add`, `git wt`, or `EnterWorktree` with `name:` — the
-first two make a worktree jj does not know about (jj commands fail inside it),
-and the last creates a branch-named Git worktree outside jj.
+Do NOT use `git worktree add`, `git wt`, or `EnterWorktree` with `name:` — they
+make worktrees jj does not know about.
 
 ## Working in the Workspace — Switch the Session, Don't `cd` Every Call
 
-After `jj workspace add`, switch the session into it once:
-
-- `EnterWorktree` with **`path: <the .claude/worktrees/<name> path>`** — the
-  workspace is a Git worktree, so it is accepted, and the cwd reset target
-  becomes the workspace. This rule is the explicit authorization the tool
-  requires.
-- Leave with `ExitWorktree(action: "keep")` — it never removes a
-  `path:`-entered worktree.
+After `jj workspace add`, enter it once with `EnterWorktree` and
+**`path: <the .claude/worktrees/<name> path>`** — this rule is the explicit
+authorization the tool requires. Leave with `ExitWorktree(action: "keep")`.
 
 ## The Shell cwd Resets Between Calls — Workspace or Not
 
-The shell cwd resets to the session directory after every Bash call. A `cd`
-does NOT carry over, in any session. Prefixing `cd <dir> && …` onto every call
-is waste, and a path relative to a *previous* call's `cd` either fails outright
-on a directory that exists —
+A `cd` does NOT carry over to the next Bash call. A path relative to a previous
+call's `cd` fails, or silently doubles the prefix (`apps/api-duo/apps/api-duo/…`).
 
-    (eval):cd:1: no such file or directory: references/knowtus
-
-— or silently doubles the prefix: `apps/api-duo/apps/api-duo/…`.
-
-- Address files by **absolute path**, or with a tool-native directory flag:
-  `jj -R <dir>`, `git -C <dir>`, `cargo --manifest-path`, `just --justfile`,
-  `rg <abs path>`.
-- Never a bare relative `cd`. If one is unavoidable, `cd` to an **absolute**
-  target in the same call as the command.
+- Address files by **absolute path**, or a tool-native directory flag:
+  `jj -R`, `git -C`, `cargo --manifest-path`, `just --justfile`.
+- If a `cd` is unavoidable, `cd` to an **absolute** target in the same call.
 
 ## One Bash Call, One Simple Command — Inside an Entered Workspace
 
-A session that has entered a worktree refuses any Bash command it cannot prove
-statically stays inside that worktree:
+An entered worktree session refuses, before running it, any Bash command it
+cannot prove stays inside the worktree ("too complex to verify"). Inside one:
 
-    This session is isolated in the worktree …, but this command is too
-    complex to verify that it stays inside the worktree
-
-The check runs *before* anything executes, so a rejected call buys nothing and
-costs the turn. It rejects heredocs, `$(…)`, `for` / `while` loops, and
-multi-statement chains. Inside an entered workspace:
-
-- **One command per call.** No `;` chains, no loops, no leading `VAR=… cmd`.
-- **No heredoc.** A multi-paragraph description is one `-m` per paragraph. To
-  run a script or send a payload, Write it into the scratchpad first, then pass
-  it by path (`python3 <path>`, `gh api --input <path>`).
-- **No command substitution.** Need a change ID or a timestamp? Get it in one
-  call, use the literal value in the next.
-- **A directory flag, not `cd`** (`jj -R`, `git -C`, `cargo --manifest-path`).
+- **One command per call.** No `;` chains, loops, or leading `VAR=… cmd`.
+- **No heredoc.** One `-m` per paragraph; Write a script or payload to the
+  scratchpad and pass it by path.
+- **No command substitution.** Get a value in one call, use the literal next.
 
 ## Waiting
 
-Foreground `sleep` is blocked by the harness. To wait for a condition, use
-`Bash(run_in_background)` with an `until` loop, or `Monitor` — whose deadline
-parameter is `timeout_ms`, not `timeout`.
+Foreground `sleep` is blocked. Use `Bash(run_in_background)` with an `until`
+loop, or `Monitor` — whose deadline parameter is `timeout_ms`, not `timeout`.
