@@ -1,3 +1,7 @@
+---
+cclens-targets: [blocked-by-hook]
+---
+
 # Workspaces — When to Cut One, and Always via `jj workspace add`
 
 ## When to Cut a Workspace

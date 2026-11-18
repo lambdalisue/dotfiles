@@ -1,3 +1,7 @@
+---
+cclens-targets: [edit-precondition]
+---
+
 # Edit Needs a Read Tool Call, Not a Bash Read
 
 Edit and Write refuse a file the **Read tool** has not read in this session:

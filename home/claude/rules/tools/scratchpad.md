@@ -1,3 +1,7 @@
+---
+cclens-targets: [path-not-found]
+---
+
 # Scratchpad and `$TMPDIR` Are Different Directories
 
 The session scratchpad (`/private/tmp/claude-501/<project>/<session>/scratchpad`)

@@ -1,3 +1,7 @@
+---
+cclens-targets: [blocked-by-hook]
+---
+
 # Text Processing: sed only reads, awk stays POSIX, perl transforms
 
 A PreToolUse hook (`enforce-perl.sh`) rejects `Bash` commands that **invoke**
