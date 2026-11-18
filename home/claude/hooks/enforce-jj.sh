@@ -116,7 +116,9 @@ CMD="$command" CWD="${cwd:-$PWD}" exec perl -e '
             return scalar grep { !/^-/ } @args;
         }
         if ($sub eq "worktree") {
-            return (($args[0] // "") =~ /^(?:add|remove|move|prune|repair|lock|unlock)$/) ? 1 : 0;
+            # prune only drops entries whose directories are already gone,
+            # which is how a deleted jj workspace is cleaned out of Git.
+            return (($args[0] // "") =~ /^(?:add|remove|move|repair|lock|unlock)$/) ? 1 : 0;
         }
         if ($sub eq "stash") {
             return (($args[0] // "") =~ /^(?:list|show)$/) ? 0 : 1;
