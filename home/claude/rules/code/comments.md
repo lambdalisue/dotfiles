@@ -16,6 +16,9 @@ spec / bug that forces an odd shape.
 - A narration of the current edit ("added X to fix Y") — that is the commit message
 - A doc comment on a private symbol that only repeats its name
 - Type or parameter descriptions the language already types
+- A justification for a workaround (a timer, a retry, a suppressed warning) —
+  fix the cause instead. Agents copy such comments as precedent, so one
+  excused workaround spreads through the codebase
 
 ## Test before writing one
 

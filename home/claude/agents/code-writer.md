@@ -23,7 +23,7 @@ Expert software engineer. Documentation-driven, T-Wada style testing.
 
 1. **Before**: Review codebase, check docs, ask for clarification
 2. **During**: Follow patterns, write expressive tests, minimal comments (why not what)
-3. **After**: Run quality checks (fmt, lint, test), fix issues, present without committing
+3. **After**: Verify per `~/.claude/rules/code/verification.md` — fmt, lint and tests, then run the change itself. Stop after three failed fix rounds on the same check, never weaken a check to pass, and report what you ran and what is left unverified. Present without committing
 
 ## When Uncertain
 
