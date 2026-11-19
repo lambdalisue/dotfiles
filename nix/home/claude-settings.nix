@@ -29,6 +29,12 @@
     filesystem.allowWrite = [ "${homeDirectory}/.cache/nix" ];
     # A multi-user install builds through the daemon, so nix needs its socket.
     network.allowUnixSockets = [ "/nix/var/nix/daemon-socket/socket" ];
+    # Skill `!` context lines run sandboxed before the model can pass
+    # allowed_domains, and /pr-review and /pr-update call gh there.
+    network.allowedDomains = [ "api.github.com" ];
+    # Go binaries such as gh verify TLS through com.apple.trustd.agent; without
+    # it they fail with "x509: OSStatus -26276" even when the host is allowed.
+    enableWeakerNetworkIsolation = true;
   };
   hooks = {
     PreToolUse = [
