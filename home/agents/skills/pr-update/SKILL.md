@@ -12,8 +12,8 @@ The user invoking `/pr-update` IS the explicit intent to update the PR — do NO
 
 ## Context
 
-!`jj log --no-graph -r 'heads(::@ & bookmarks())' -T '"Bookmark: " ++ local_bookmarks.map(|b| b.name()).join(" ") ++ "\n"'`
-!`gh as -q gh pr view "$(jj log --no-graph -r 'heads(::@ & bookmarks())' -T 'local_bookmarks.map(|b| b.name()).join(" ")')" --json number,title,body,baseRefName,headRefName --jq '"\(.number) \(.headRefName) -> \(.baseRefName)\nTitle: \(.title)\nBody:\n\(.body)"' 2>/dev/null || echo "No PR found for the current bookmark"`
+!`jj log --ignore-working-copy --no-graph -r 'heads(::@ & bookmarks())' -T '"Bookmark: " ++ local_bookmarks.map(|b| b.name()).join(" ") ++ "\n"'`
+!`gh as -q gh pr view "$(jj log --ignore-working-copy --no-graph -r 'heads(::@ & bookmarks())' -T 'local_bookmarks.map(|b| b.name()).join(" ")')" --json number,title,body,baseRefName,headRefName --jq '"\(.number) \(.headRefName) -> \(.baseRefName)\nTitle: \(.title)\nBody:\n\(.body)"' 2>/dev/null || echo "No PR found for the current bookmark"`
 
 ## Principles
 
