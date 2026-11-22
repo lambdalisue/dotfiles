@@ -41,11 +41,11 @@
     linkApps.enable = false;
   };
 
-  # The distro's session does not know the Nix profile: without this the
-  # launcher misses the profile's .desktop entries, and GPU apps (Cattery's
-  # wgpu) find no driver because Nix's Mesa is looked up under
-  # /run/opengl-driver. That path needs a one-time `sudo non-nixos-gpu-setup`,
-  # which activation reminds of until it is done.
+  # The distro's session does not know the Nix profile: without this its
+  # share/ is not on XDG_DATA_DIRS, and GPU apps (Cattery's wgpu) find no
+  # driver because Nix's Mesa is looked up under /run/opengl-driver. That path
+  # needs a one-time `sudo non-nixos-gpu-setup`, which activation reminds of
+  # until it is done.
   targets.genericLinux.enable = !isDarwin;
 
   # On Linux the install is single-user with no nix-darwin, so home-manager owns

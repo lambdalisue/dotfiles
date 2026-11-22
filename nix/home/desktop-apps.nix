@@ -15,6 +15,7 @@ let
     name = "cattery-with-fontconfig";
     paths = [ (packageOf cattery) ];
     nativeBuildInputs = [ pkgs.makeWrapper ];
+    meta.mainProgram = "cattery";
     postBuild = ''
       wrapProgram "$out/bin/cattery" \
         --prefix LD_LIBRARY_PATH : "${
@@ -22,21 +23,18 @@ let
         }"
     '';
   };
-in
-{
-  home.packages = [
-    catteryWithFontconfig
-    (packageOf arto)
-    (packageOf adroit)
-  ];
-
+  packages = {
+    cattery = catteryWithFontconfig;
+    arto = packageOf arto;
+    adroit = packageOf adroit;
+  };
   # None of the packages ships a .desktop file, so the launcher would not
   # list them; the icons come from each app's source tree.
-  xdg.desktopEntries = {
+  desktopItems = {
     cattery = {
-      name = "Cattery";
+      desktopName = "Cattery";
       genericName = "Terminal";
-      exec = "cattery";
+      exec = pkgs.lib.getExe packages.cattery;
       icon = "${cattery}/assets/logo/cattery-icon-dark-512.png";
       categories = [
         "System"
@@ -44,22 +42,36 @@ in
       ];
     };
     arto = {
-      name = "Arto";
+      desktopName = "Arto";
       genericName = "Markdown Reader";
-      exec = "arto %F";
+      exec = "${pkgs.lib.getExe packages.arto} %F";
       icon = "${arto}/crates/arto/assets/Arto.png";
       categories = [
         "Office"
         "Viewer"
       ];
-      mimeType = [ "text/markdown" ];
+      mimeTypes = [ "text/markdown" ];
     };
     adroit = {
-      name = "Adroit";
+      desktopName = "Adroit";
       genericName = "Agent Workspace";
-      exec = "adroit";
+      exec = pkgs.lib.getExe packages.adroit;
       icon = "${adroit}/assets/logo/adroit-icon.svg";
       categories = [ "Development" ];
     };
   };
+in
+{
+  home.packages = builtins.attrValues packages;
+
+  # Placed in XDG_DATA_HOME rather than the profile (xdg.desktopEntries): GNOME
+  # always reads ~/.local/share/applications, whereas the profile's share/ is
+  # on its XDG_DATA_DIRS only once the systemd user manager restarts, which a
+  # logout does not guarantee.
+  xdg.dataFile = pkgs.lib.mapAttrs' (
+    name: item:
+    pkgs.lib.nameValuePair "applications/${name}.desktop" {
+      source = "${pkgs.makeDesktopItem ({ inherit name; } // item)}/share/applications/${name}.desktop";
+    }
+  ) desktopItems;
 }
