@@ -25,6 +25,7 @@
   # macOS installs these apps as Homebrew casks (nix/darwin/homebrew.nix).
   ++ lib.optionals (!isDarwin) [
     ./desktop-apps.nix
+    ./gnome.nix
   ];
 
   home = {
