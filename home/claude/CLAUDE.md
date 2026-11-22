@@ -3,6 +3,12 @@
 - Follow Kent Beck's TDD methodology
 - Document at the right layer: Code → How, Tests → What, Commits → Why, Comments → Why not
 
+## Standing Rules Learned About the User
+
+The `ai-memory` skill maintains this file; follow it in every task.
+
+@~/Compost/AI-Memory/記憶/心得.md
+
 ## Workflow
 
 - ALWAYS check for matching Skills before manual implementation

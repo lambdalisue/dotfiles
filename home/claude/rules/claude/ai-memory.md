@@ -1,31 +1,29 @@
-# Living Status Documents Live in ~/Compost/AI-Memory/
+# What the AI Knows About the User Lives in ~/Compost/AI-Memory/
 
-`~/Compost/AI-Memory/` holds documents describing the user's CURRENT state —
-hardware, desk setup, environment, tooling — facts that stay true until the
-world changes. It lives inside the Obsidian vault, so the user reads and
-edits these files directly.
+`~/Compost/AI-Memory/` is the user's standing knowledge base, kept in the
+Obsidian vault where the user reads and edits it. It has two halves:
 
-Distinct from its two neighbours:
+- `記憶/` (memory) — what the AI has learned about the user and keeps up to
+  date on its own judgment: standing rules (`心得.md`), preferences,
+  procedures, promises, a picture of the person.
+- `記録/` (records) — facts the user relies on: machines, network,
+  accounts, signing identities, prescriptions. Changed only from a fact the
+  user stated or a reliable source showed.
+
+The `ai-memory` skill holds the layout and the rules for writing each half.
+
+Distinct from its neighbours:
 
 - `~/Compost/AI-Notes/` (the `ai-notes` skill) — dated, point-in-time plans
-  and specifications. Written once, never revised.
+  and specifications.
 - `~/.claude/projects/<project>/memory/` (auto memory) — per-repository
-  notes Claude keeps for itself, machine-local.
+  notes, machine-local.
 
-AI-Memory documents are undated and rewritten in place.
+## When to use it
 
-## When to read
-
-Before answering anything about the user's machines, displays, peripherals,
-or desk environment, read the relevant document. Do not answer from auto
-memory or conversation history alone. Start from `INDEX.md`, which lists
-every document with a one-line summary.
-
-## When to write
-
-Update the matching document as soon as a fact changes — new hardware, a
-replaced display, a decommissioned machine. Rewrite in place rather than
-appending; there is no changelog. Keep `INDEX.md` in sync.
-
-Prefer updating an existing document over creating a new one. Write in
-Japanese; these are the user's own notes.
+- Before answering anything about the user's machines, environment,
+  preferences or ways of working — read through the `ai-memory` skill. Do
+  not answer from auto memory or conversation history alone.
+- When the user states a preference or corrects you in a way that holds
+  beyond this repository, or reports a fact that changed — write it through
+  the `ai-memory` skill in the same turn.
