@@ -20,6 +20,14 @@
       url = "github:1jehuang/mermaid-rs-renderer";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # The user's own desktop apps, installed from these flakes on Linux only
+    # (macOS takes the Homebrew casks). Pinned to release tags with their own
+    # nixpkgs, because only release builds are pushed to each app's Cachix
+    # cache; following this flake's nixpkgs or a branch would build from source.
+    cattery.url = "github:lambdalisue/cattery/v0.5.0";
+    arto.url = "github:arto-app/Arto/v0.47.1";
+    adroit.url = "github:adroit-app/Adroit/v0.5.0";
   };
 
   outputs =
@@ -28,6 +36,9 @@
       nix-darwin,
       home-manager,
       mermaid-rs-renderer,
+      cattery,
+      arto,
+      adroit,
       ...
     }:
     let
@@ -67,7 +78,7 @@
       # environment is built the same way everywhere (`home-manager switch`).
       # Only ./nix/home is imported, so macOS-only pieces (Homebrew, system
       # defaults) live solely in nix-darwin and the Darwin-gated home entries
-      # (Arto/ssh) are excluded off macOS.
+      # (ssh, Application Support configs) are excluded off macOS.
       #
       # mkHome takes a per-machine override set:
       #   username     (default "alisue")
@@ -96,6 +107,7 @@
           };
           extraSpecialArgs = {
             inherit username dotfilesDir isDarwin;
+            desktopApps = { inherit cattery arto adroit; };
             # Upstream's buildInputs test the deprecated stdenv.isLinux /
             # stdenv.isDarwin, which prints an evaluation warning on every
             # switch. Replacing the attribute keeps that expression unforced;

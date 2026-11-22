@@ -43,8 +43,10 @@ home-manager switch --flake .#x86_64-linux     # Fedora etc.
 
 On **Linux** there is no nix-darwin (the distro owns the system); only the
 home-manager step runs. macOS-only pieces (Homebrew, system defaults, and the
-Darwin-gated home entries like Arto/ssh) are excluded
-automatically off macOS.
+Darwin-gated home entries like ssh) are excluded
+automatically off macOS. The user's own desktop apps (Cattery, Arto, Adroit),
+Homebrew casks on macOS, come from their flakes on Linux instead
+(`nix/home/desktop-apps.nix`).
 
 ## Architecture
 
