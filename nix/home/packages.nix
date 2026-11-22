@@ -38,7 +38,11 @@
       lua5_5 = luajit;
     })
     wget
-    zat  # code outline viewer; the `zat` rule in home/claude/rules/tools tells agents to reach for it first
+    # code outline viewer; the `zat` rule in home/claude/rules/tools tells agents to reach for it first.
+    # Checks are skipped: zat 0.5.3's tests/outline_test.rs aborts with heap
+    # corruption ("corrupted size vs. prev_size", SIGABRT) on x86_64-linux,
+    # though the binary itself builds fine.
+    (zat.overrideAttrs { doCheck = false; })
     zsh
 
     # Renderers the fish cd-style fzf widgets preview directories with: glow
