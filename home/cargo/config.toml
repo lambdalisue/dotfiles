@@ -1,5 +1,5 @@
 [profile.dev]
-debug = "line-tables-only"
+debug = false
 
 [profile.dev.package."*"]
 debug = false
