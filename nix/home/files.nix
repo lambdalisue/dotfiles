@@ -58,6 +58,7 @@ in
     ".tmux.conf".source = link "${dotfilesDir}/home/tmux.conf";
     ".zshenv".source = link "${dotfilesDir}/home/zshenv";
     ".local/bin/git-backup".source = link "${dotfilesDir}/home/local/bin/git-backup";
+    ".local/bin/cargo-target-prune".source = link "${dotfilesDir}/home/local/bin/cargo-target-prune";
     # Only the file: ~/.cargo also holds the registry, installed binaries and
     # credentials.
     ".cargo/config.toml".source = link "${dotfilesDir}/home/cargo/config.toml";

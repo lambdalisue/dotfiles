@@ -1,0 +1,43 @@
+#!/bin/bash
+# Usage: cargo-target-prune [--dry-run] [ROOT]
+# Remove target/ from jj workspaces that are merged and idle.
+set -uo pipefail
+
+idle_days=7
+dry_run=
+if [ "${1:-}" = --dry-run ]; then
+  dry_run=1
+  shift
+fi
+root="${1:-$HOME/ghq}"
+
+# Every check fails closed: a command that errors keeps the directory.
+# Without --ignore-working-copy, so edits jj has not recorded yet count as work.
+is_merged() {
+  local out
+  out="$(jj -R "$1" log --no-graph -r '(trunk()..@) ~ empty()' -T '"x"')" || return 1
+  [ -z "$out" ]
+}
+
+is_idle() {
+  local out
+  out="$(find "$1" \( -name .git -o -name .jj \) -prune -o \
+    -mtime "-$idle_days" -print -quit)" || return 1
+  [ -z "$out" ]
+}
+
+is_unused() {
+  [ -z "$(lsof +D "$1" 2>/dev/null)" ]
+}
+
+for target in "$root"/*/*/*/.claude/worktrees/*/target; do
+  [ -d "$target" ] && [ ! -L "$target" ] && [ -f "$target/CACHEDIR.TAG" ] || continue
+  workspace="${target%/target}"
+  [ -e "$workspace/.jj" ] || continue
+  is_idle "$workspace" && is_merged "$workspace" && is_unused "$target" || continue
+  if [ -n "$dry_run" ]; then
+    echo "would remove $target"
+  else
+    rm -rf -- "$target" && echo "$(date '+%F %T') removed $target"
+  fi
+done
