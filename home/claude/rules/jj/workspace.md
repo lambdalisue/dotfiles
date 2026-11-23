@@ -39,7 +39,7 @@ When the main checkout has a Rust `target/`, clone it into the new workspace
 before the first build:
 
 ```sh
-cp -c -R <main checkout>/target <workspace path>/target
+/bin/cp -c -R <main checkout>/target <workspace path>/target
 ```
 
 `-c` is an APFS clone that shares blocks until cargo rewrites them; without it

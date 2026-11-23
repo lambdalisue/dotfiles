@@ -49,7 +49,7 @@ subagent.
    Run `jj workspace add` outside the sandbox. When `<repo root>/target`
    exists, clone it before entering, inside the sandbox:
    ```bash
-   cp -c -R <repo root>/target <repo root>/.claude/worktrees/<name>/target
+   /bin/cp -c -R <repo root>/target <repo root>/.claude/worktrees/<name>/target
    ```
    Then enter it with `EnterWorktree` (`path:` the new directory) and confirm.
 
