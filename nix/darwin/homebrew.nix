@@ -74,7 +74,8 @@
       # with "a terminal is required to read the password". Install it by hand
       # instead: `brew install --cask parallels`.
       "raycast"
-      "slack"
+      # Slack is intentionally NOT declared here: the MDM agent (Iru) installs
+      # it as a root-owned bundle, which Homebrew cannot manage alongside it.
       "spotify"
       "steermouse"
       "thaw"
