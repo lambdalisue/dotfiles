@@ -100,6 +100,8 @@ in
         "--allow"
         "."
         "--allow"
+        "${config.home.homeDirectory}/notebook"
+        "--allow"
         "${config.home.homeDirectory}/Compost/AI-Notes"
         "--allow"
         (if isDarwin then "/private/tmp/claude-501" else "/tmp/claude-1000")

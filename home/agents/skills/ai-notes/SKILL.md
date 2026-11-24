@@ -1,6 +1,6 @@
 ---
 name: ai-notes
-description: Manage AI notes in ~/Compost/AI-Notes - read existing notes, list recent documents, and write new dated documents such as specifications, implementation plans, design documents, reports and worklogs. Auto-triggers when reading from or writing to notes, specifications, or plans.
+description: Manage AI notes in the user's notebook (~/notebook, shared with Famulen) - read existing notes, list recent documents, and write new dated documents such as specifications, implementation plans, design documents, reports and worklogs. Auto-triggers when reading from or writing to notes, specifications, or plans.
 ---
 
 ## What a Note Is
@@ -11,39 +11,44 @@ brought up to date later; when the situation moves on, write a new note and
 link the old one.
 
 Facts about the user's current state (machines, environment) and what the AI
-has learned about the user belong in `~/Compost/AI-Memory/` — use the
+has learned about the user are kept elsewhere in the notebook — use the
 `ai-memory` skill for those.
 
-## Notes Management Script
+A note is a memo of the notebook: `~/notebook/records/memos/<id>.md`, with
+the label `ai-note`. Notes written before they moved there stay in
+`~/Compost/AI-Notes/`, read-only: never write there.
 
-Use the `notes.ts` script for all AI notes operations. It needs only
-`--allow-env=HOME --allow-read`; the shebang already grants that, so run it
-by path.
+## Writing a Note
 
-```bash
-~/.agents/skills/ai-notes/notes.ts --help
-```
+1. Take in what others wrote, and create the note:
 
-### Generate Output Path
+   ```bash
+   ~/.agents/skills/ai-memory/notebook.ts pull
+   ~/.agents/skills/ai-notes/notes.ts new "<title>" --label <kind> --workgroup <id>
+   # => ~/notebook/records/memos/01kat3v8q4zj6m2x9r5c7w1hbn.md
+   ```
 
-`generate` prints the path for a new note; it does not create the file.
+   `--label` and `--workgroup` may be repeated or left out. Workgroups are
+   in `~/notebook/records/workgroups.md`.
+2. Write the note under the `# ` title the file already has. Keep the
+   frontmatter and the one `# ` title.
+3. Send it, as the "Reading and sending" section of the `ai-memory` skill
+   says:
 
-```bash
-# Single document
-~/.agents/skills/ai-notes/notes.ts generate "<title>"
-# => ~/Compost/AI-Notes/2025-12/24-0821-<title>.md
+   ```bash
+   ~/.agents/skills/ai-memory/notebook.ts push -m "メモ「<title>」を足した" \
+     --author "<name> <address>" --agent "<agent>" --model "<model ID>" \
+     -- records/memos/<id>.md
+   ```
 
-# Several related documents (prints a directory path)
-~/.agents/skills/ai-notes/notes.ts generate "<title>" --multiple
-# => ~/Compost/AI-Notes/2025-12/24-0821-<title>/
-```
+A note is not yet written until it is pushed. A large set of documents is
+several notes: link them from the first with
+`[[records/memos/<id>|<title>]]`.
 
-The title becomes part of the file name, so it must not contain `/`.
+The notebook refuses a `[[…]]` that points at nothing outside code, and text
+that looks like a key or token.
 
-### List Existing Notes
-
-Dated notes come newest first; files outside a `YYYY-MM/` folder follow
-them.
+## Listing Notes
 
 ```bash
 ~/.agents/skills/ai-notes/notes.ts list
@@ -51,18 +56,12 @@ them.
 ~/.agents/skills/ai-notes/notes.ts list --limit 10 --offset 10
 ```
 
-Each line is the full path and the first H1 heading of the file:
+Notes in the notebook come newest first; those in `~/Compost/AI-Notes`
+follow. Each line is the full path and the title:
 
 ```
 /path/to/note.md: タイトル
 ```
-
-## Path Convention
-
-- Base directory: `~/Compost/AI-Notes/{year}-{month}/`
-- Single document: `{day}-{hour}{minutes}-{title}.md`
-- Several documents: `{day}-{hour}{minutes}-{title}/{number}-{title}.md`,
-  with `{number}` zero-padded to two digits (`01`, `02`, …)
 
 ## Content Requirements
 
@@ -125,9 +124,11 @@ not a replacement for it.
 
 ## Reading Notes
 
-1. **List recent notes**: `notes.ts list --limit 20`.
-2. **Search by file name**: Glob with `~/Compost/AI-Notes/**/*{keyword}*.md`.
-3. **Search by content**: Grep across `~/Compost/AI-Notes`.
+1. **Take in what others wrote**: `~/.agents/skills/ai-memory/notebook.ts pull`.
+2. **List recent notes**: `notes.ts list --limit 20`. File names are ids, so
+   find a title in this list.
+3. **Search by content**: Grep across `~/notebook/records/memos` and
+   `~/Compost/AI-Notes`.
 4. **Multi-step searches**: delegate to an Explore agent through the Agent
    tool.
 

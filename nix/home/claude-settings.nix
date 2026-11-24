@@ -17,16 +17,24 @@
       "Bash(jj git init:*)"
       "Bash(jj git fetch:*)"
       "Bash(jj workspace add:*)"
+      "Bash(~/.agents/skills/ai-memory/notebook.ts:*)"
       "EnterWorktree"
     ];
     defaultMode = "auto";
   };
   sandbox = {
     enabled = true;
+    # It talks to the user's own machine over the tailnet, which the sandbox's
+    # proxy refuses, and writes ~/notebook.
+    excludedCommands = [ "~/.agents/skills/ai-memory/notebook.ts *" ];
     # nix evaluates flakes through a SQLite cache under ~/.cache/nix; read-only
     # there, every `nix develop` fails with "attempt to write a readonly
     # database".
-    filesystem.allowWrite = [ "${homeDirectory}/.cache/nix" ];
+    filesystem.allowWrite = [
+      "${homeDirectory}/.cache/nix"
+      # notes.ts creates notes in the notebook.
+      "${homeDirectory}/notebook"
+    ];
     # A multi-user install builds through the daemon, so nix needs its socket.
     network.allowUnixSockets = [ "/nix/var/nix/daemon-socket/socket" ];
     # Skill `!` context lines run sandboxed before the model can pass

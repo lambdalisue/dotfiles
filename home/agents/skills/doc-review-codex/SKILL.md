@@ -9,7 +9,7 @@ description: Documentation review using OpenAI Codex CLI — AI notes, Slite not
 
 `$ARGUMENTS` = `{path-or-keyword} [--fix]`
 
-- **File path**: Direct path to a document to review (e.g., `~/Compost/AI-Notes/2026-03/04-1200-design.md`)
+- **File path**: Direct path to a document to review (e.g., `~/notebook/records/memos/<id>.md`)
 - **Keyword**: Search term to find documents to review (e.g., "auth design", "proxy")
 - **"latest"**: Review the most recent AI note
 - `--fix` (optional flag): After reporting, verify and apply the findings to the
@@ -91,10 +91,10 @@ codex exec --sandbox read-only "PROMPT" 2>&1
 Based on the argument:
 
 1. **File path**: use it directly
-2. **"latest"**: `deno run -A ~/.agents/skills/ai-notes/notes.ts list --limit 1` →
+2. **"latest"**: `~/.agents/skills/ai-notes/notes.ts list --limit 1` →
    take the most recent note
-3. **Keyword**: `deno run -A ~/.agents/skills/ai-notes/notes.ts list --limit 20`
-   and filter, or Grep across `~/Compost/AI-Notes/`. If multiple match, list them
+3. **Keyword**: `~/.agents/skills/ai-notes/notes.ts list --limit 20`
+   and filter, or Grep across `~/notebook/records/memos/` and `~/Compost/AI-Notes/`. If multiple match, list them
    and ask the user to choose (AskUserQuestion)
 
 Resolve to an **absolute path** (expand `~`). If the document cannot be found,

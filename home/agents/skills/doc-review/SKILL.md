@@ -9,7 +9,7 @@ description: Review documentation quality — AI notes, Slite notes, plans, and 
 
 `$ARGUMENTS` = `{path-or-keyword} [--fix]`
 
-- **File path**: Direct path to a document to review (e.g., `~/Compost/AI-Notes/2026-03/04-1200-design.md`)
+- **File path**: Direct path to a document to review (e.g., `~/notebook/records/memos/<id>.md`)
 - **Keyword**: Search term to find documents to review (e.g., "auth design", "proxy")
 - **"latest"**: Review the most recent AI note
 - `--fix` (optional flag): After reporting, verify and apply the findings to the
@@ -67,9 +67,9 @@ N findings, most severe first. Reviewed `{path}` ({document_type}).
 Based on the argument:
 
 1. **File path**: Read the file directly
-2. **"latest"**: Run `deno run -A ~/.agents/skills/ai-notes/notes.ts list --limit 1` to get the most recent note, then read it
+2. **"latest"**: Run `~/.agents/skills/ai-notes/notes.ts list --limit 1` to get the most recent note, then read it
 3. **Keyword**: Search for matching documents:
-   - Search AI notes: `deno run -A ~/.agents/skills/ai-notes/notes.ts list --limit 20` and filter, or use Grep across `~/Compost/AI-Notes/`
+   - Search AI notes: `~/.agents/skills/ai-notes/notes.ts list --limit 20` and filter, or use Grep across `~/notebook/records/memos/` and `~/Compost/AI-Notes/`
    - If multiple matches, list them and ask the user to choose (use AskUserQuestion)
 
 Resolve to an **absolute path** (expand `~`). If the document cannot be found, inform the user and **STOP**.

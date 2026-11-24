@@ -1,23 +1,25 @@
-# What the AI Knows About the User Lives in ~/Compost/AI-Memory/
+# What the AI Knows About the User Lives in ~/notebook
 
-`~/Compost/AI-Memory/` is the user's standing knowledge base, kept in the
-Obsidian vault where the user reads and edits it. It has two halves:
+`~/notebook` is a Git clone of the user's notebook, shared with Famulen and
+the user's other machines. It has two halves:
 
-- `記憶/` (memory) — what the AI has learned about the user and keeps up to
-  date on its own judgment: standing rules (`心得.md`), preferences,
-  procedures, promises, a picture of the person.
-- `記録/` (records) — facts the user relies on: machines, network,
-  accounts, signing identities, prescriptions. Changed only from a fact the
-  user stated or a reliable source showed.
+- `memory/` — what AIs have learned about the user: standing rules
+  (`core.md`), preferences, procedures, promises, a picture of the person.
+- `records/` — facts the user relies on: machines, network, contracts,
+  people, tasks, events, memos. Changed only from a fact the user stated or
+  a reliable source showed.
 
-The `ai-memory` skill holds the layout and the rules for writing each half.
+The `ai-memory` skill holds the layout, the rules for writing, and how to
+take in and send changes with Git.
 
 Distinct from its neighbours:
 
-- `~/Compost/AI-Notes/` (the `ai-notes` skill) — dated, point-in-time plans
-  and specifications.
+- `records/memos/` with the label `ai-note` (the `ai-notes` skill) — dated,
+  point-in-time plans and specifications.
 - `~/.claude/projects/<project>/memory/` (auto memory) — per-repository
   notes, machine-local.
+- `~/Compost/AI-Memory/` and `~/Compost/AI-Notes/` — where these were kept
+  before. Never write there; read the old notes in the latter only.
 
 ## When to use it
 
@@ -26,4 +28,4 @@ Distinct from its neighbours:
   not answer from auto memory or conversation history alone.
 - When the user states a preference or corrects you in a way that holds
   beyond this repository, or reports a fact that changed — write it through
-  the `ai-memory` skill in the same turn.
+  the `ai-memory` skill in the same turn, and push it.

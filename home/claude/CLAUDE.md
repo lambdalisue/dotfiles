@@ -7,7 +7,7 @@
 
 The `ai-memory` skill maintains this file; follow it in every task.
 
-@~/Compost/AI-Memory/記憶/心得.md
+@~/notebook/memory/core.md
 
 ## Workflow
 
