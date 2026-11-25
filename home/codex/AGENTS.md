@@ -6,6 +6,11 @@
 - Follow Kent Beck's TDD methodology
 - Document at the right layer: Code → How, Tests → What, Commits → Why, Comments → Why not
 
+## Standing Rules Learned About the User
+
+Before any other work, read `~/notebook/memory/core.md` and follow it in every
+task. The `ai-memory` skill maintains it.
+
 ## Workflow
 
 - ALWAYS check for matching Skills before manual implementation
