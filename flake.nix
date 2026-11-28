@@ -25,9 +25,9 @@
     # (macOS takes the Homebrew casks). Pinned to release tags with their own
     # nixpkgs, because only release builds are pushed to each app's Cachix
     # cache; following this flake's nixpkgs or a branch would build from source.
-    cattery.url = "github:lambdalisue/cattery/v0.5.0";
-    arto.url = "github:arto-app/Arto/v0.47.1";
-    adroit.url = "github:adroit-app/Adroit/v0.5.0";
+    cattery.url = "github:lambdalisue/cattery/v0.5.2";
+    arto.url = "github:arto-app/Arto/v0.47.2";
+    adroit.url = "github:adroit-app/Adroit/v0.8.0";
   };
 
   outputs =

@@ -8,16 +8,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1795264161,
-        "narHash": "sha256-J6p7rgOL8Llge1QXHWQlC64+ZZCz4KkJ8e9QLvtf764=",
+        "lastModified": 1795855196,
+        "narHash": "sha256-xD1w/hQw9IaltLaWxe+iQHS/in0qiGpCqz5dJzZ+5QI=",
         "owner": "adroit-app",
         "repo": "Adroit",
-        "rev": "37b2ac73002305082e722cf8459fbce602aa9558",
+        "rev": "adc7c37ecc1541b459483fdd734c071e7b20839b",
         "type": "github"
       },
       "original": {
         "owner": "adroit-app",
-        "ref": "v0.5.0",
+        "ref": "v0.8.0",
         "repo": "Adroit",
         "type": "github"
       }
@@ -30,16 +30,16 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1795330959,
-        "narHash": "sha256-C0JgZw0SCd9t9xJuJJxrDJulosjFRtVh/8SzzRNudJQ=",
+        "lastModified": 1795410180,
+        "narHash": "sha256-HHJ9Re+8yGHXJNATcWEWIVSgIFpU9RavswCZNzDO4zg=",
         "owner": "arto-app",
         "repo": "Arto",
-        "rev": "76cbc8d74033e268db3f6961ba44d2577fa9e289",
+        "rev": "9d20ac303c10971eb962bdfcbb60c060f9d47e74",
         "type": "github"
       },
       "original": {
         "owner": "arto-app",
-        "ref": "v0.47.1",
+        "ref": "v0.47.2",
         "repo": "Arto",
         "type": "github"
       }
@@ -52,16 +52,16 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1794788692,
-        "narHash": "sha256-OaEMYA9T4dAhr6yg0i+maiFcwlAi8nLe/NwBPzvWodc=",
+        "lastModified": 1795450032,
+        "narHash": "sha256-I8oWjYbPL6H0jdWXPsn0hzct/iZlRDMnxyf8XXLYc+E=",
         "owner": "lambdalisue",
         "repo": "cattery",
-        "rev": "bd09c36a940a00727fc83edd67bc141ccfd6e29c",
+        "rev": "7f4f9877f64caed53eade7a6743627d9851c4630",
         "type": "github"
       },
       "original": {
         "owner": "lambdalisue",
-        "ref": "v0.5.0",
+        "ref": "v0.5.2",
         "repo": "cattery",
         "type": "github"
       }
